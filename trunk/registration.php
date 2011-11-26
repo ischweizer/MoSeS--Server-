@@ -1,28 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<link href="./style/main.css" media="all" rel="stylesheet" type="text/css" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php
+  
+  include_once("./include/_top.php");
+  include_once("./include/_header.php");
+  
+?>
+  
 <title>Hauptseite von Boinc4Android - Registration</title>
-</head>
-<body>
 
-<div class="wrapper">
-
-<div class="LOGO_TOP"><h1>LOGO</h1></div>
-
-<div class="PROJECT_NAME"><h1>&lt;Name des PROJEKTES&gt;</h1></div>
-
-<div class="clear"></div>
-
-<ul class="menubar">
-    <li><a href="./index.html">HOME</a></li>
-    <li><a href="./download.php">DOWNLOAD</a></li>
-    <li><a href="./doc.php">DOCU</a></li>
-    <li><a href="about.php">ABOUT</a></li>
-</ul>
-
-<div class="clear"></div>
+<?php  
+  include_once("./include/_menu.php");  
+?>  
+  
 
 <div class="heading_text">Registration</div>
 
@@ -46,10 +34,6 @@
     </fieldset>
 </form>
 
-<div class="clear"></div>
-
-<div class="footer"><p>boinc4android (c) 2011</p></div>
-
-</div>
-</body>
-</html>
+<?php  
+  include_once("./include/_bottom.php");  
+?>

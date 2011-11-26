@@ -1,26 +1,46 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Cache-Control" content="no-cache">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Lang" content="en">
-<meta name="author" content="">
-<meta http-equiv="Reply-to" content="@.com">
-<meta name="generator" content="PhpED 5.8">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="creation-date" content="01/01/2009">
-<meta name="revisit-after" content="15 days">
-<title>Untitled</title>
-<link rel="stylesheet" type="text/css" href="my.css">
-</head>
-<body>
 <?php
-
- 
-
+  
+  include_once("./include/_top.php");
+  include_once("./include/_header.php");
+  
 ?>
-</body>
-</html>
+  
+<title>Hauptseite von Boinc4Android - Home</title>
+
+<?php  
+  include_once("./include/_menu.php");  
+?>  
+  
+<div class="heading_text">Welcome to our page</div>
+
+<form action="login.php" method="post" name="login_form" class="login_form_box">
+  <table width="100" border="0">
+    <tr>
+    <td>Login:</td>
+    <td><input name="login" type="text" size="15" maxlength="25" /></td>
+  </tr>
+  <tr>
+    <td>Password:</td>
+    <td><input name="password" type="password" size="15" maxlength="25" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="submit_button" id="submit_button" value="LOGIN" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><a href="./forgot.php">Forgot password ?</a></td>
+  </tr>
+  <tr>
+    <td><a href="./registration.php">Registration</a></td>
+  </tr>
+</table>
+
+</form>
+
+
+<?php  
+  include_once("./include/_bottom.php");  
+?>
