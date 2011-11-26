@@ -13,4 +13,19 @@
     <li><a href="./about.php">ABOUT</a></li>
 </ul>
 
+<?php
+
+if(isset($_SESSION["USER_LOGGED_IN"])){
+
+?>
+
+<ul class="greet">
+    <li>Hi du hure, <?php echo $_SESSION["FIRSTNAME"]. " ". $_SESSION["LASTNAME"]. "!"; ?></li>
+    <li><a href="./logout.php">LOGOUT</a></li>
+</ul>
+
+<?php
+}
+?>
+
 <div class="clear"></div>

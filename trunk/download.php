@@ -1,4 +1,5 @@
 <?php
+session_start();
   
   include_once("./include/_top.php");
   include_once("./include/_header.php");

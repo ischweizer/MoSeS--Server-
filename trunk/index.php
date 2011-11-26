@@ -1,4 +1,5 @@
 <?php
+session_start();
   
   include_once("./include/_top.php");
   include_once("./include/_header.php");
@@ -17,16 +18,36 @@
       $USER_LOGIN =  $_POST["login"];
       $USER_PASSWORD =  $_POST["password"];
       
-      $row = $db->query("SELECT * FROM user WHERE login = '". $USER_LOGIN ."' AND password = '". $USER_PASSWORD ."'");
-     
-      print_r($row);
+      $result = $db->query("SELECT * FROM user WHERE login = '". $USER_LOGIN ."' AND password = '". $USER_PASSWORD ."'");
+      
+      if(count($result) == 1){
+          
+          $row = $result->fetch();
+          
+          $_SESSION["USER_LOGGED_IN"] = 1;    
+          
+          $_SESSION["USER_ID"] =   $row["userid"];
+          $_SESSION["LOGIN"] =     $row["login"];    
+          $_SESSION["PASSWORD"] =  $row["password"];
+          $_SESSION["FIRSTNAME"] = $row["firstname"];
+          $_SESSION["LASTNAME"] =  $row["lastname"];
+          
+          header("Location: ./");
+      }
+  
       
   }  
 ?>  
   
 <div class="heading_text">Welcome to our page</div>
 
-<form action="./index.php" method="post" name="login_form" class="login_form_box">
+<?php
+
+if(!isset($_SESSION["USER_LOGGED_IN"])){
+
+?>
+    
+<form action="./" method="post" name="login_form" class="login_form_box">
   <table width="100" border="0">
     <tr>
     <td>Login:</td>
@@ -53,6 +74,11 @@
 <input type="hidden" name="submit" value="1">
 </form>
 
+<?php
+
+}
+
+?>
 
 <?php  
   include_once("./include/_bottom.php");  
