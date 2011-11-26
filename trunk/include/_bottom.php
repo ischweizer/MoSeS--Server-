@@ -5,3 +5,6 @@
 </div>
 </body>
 </html>
+<?php
+  $db = null;
+?>

@@ -7,7 +7,7 @@
 <div class="clear"></div>
 
 <ul class="menubar">
-    <li><a href="./index.html">HOME</a></li>
+    <li><a href="./">HOME</a></li>
     <li><a href="./download.php">DOWNLOAD</a></li>
     <li><a href="./docs.php">DOCU</a></li>
     <li><a href="./about.php">ABOUT</a></li>
