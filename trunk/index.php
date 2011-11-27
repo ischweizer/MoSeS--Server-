@@ -12,7 +12,7 @@ session_start();
   include_once("./include/_menu.php");
   
   if(isset($_POST["submit"]) && $_POST["submit"] == "1" ){
-      
+            
       include_once("./include/functions/dbconnect.php");   
       
       $USER_LOGIN =  $_POST["login"];
@@ -20,23 +20,30 @@ session_start();
       
       $result = $db->query("SELECT * FROM user WHERE login = '". $USER_LOGIN ."' AND password = '". $USER_PASSWORD ."'");
       
-      if(count($result) == 1){
+      $row = $result->fetch();    
+      
+      if(!empty($row)){
+                
+          if($row["confirmed"] == 1){
           
-          $row = $result->fetch();
+              $USER_CONFIRMED = 1;
+              $_SESSION["USER_LOGGED_IN"] = 1;    
+              
+              $_SESSION["USER_ID"] =   $row["userid"];
+              $_SESSION["LOGIN"] =     $row["login"];    
+              $_SESSION["PASSWORD"] =  $row["password"];
+              $_SESSION["FIRSTNAME"] = $row["firstname"];
+              $_SESSION["LASTNAME"] =  $row["lastname"];
+              
+              header("Location: ./");
           
-          $_SESSION["USER_LOGGED_IN"] = 1;    
-          
-          $_SESSION["USER_ID"] =   $row["userid"];
-          $_SESSION["LOGIN"] =     $row["login"];    
-          $_SESSION["PASSWORD"] =  $row["password"];
-          $_SESSION["FIRSTNAME"] = $row["firstname"];
-          $_SESSION["LASTNAME"] =  $row["lastname"];
-          
-          header("Location: ./");
+          }else{
+              $USER_CONFIRMED = 0;
+          }
       }
   
       
-  }  
+  }
 ?>  
   
 <div class="heading_text">Welcome to our page</div>
@@ -49,6 +56,25 @@ if(!isset($_SESSION["USER_LOGGED_IN"])){
     
 <form action="./" method="post" name="login_form" class="login_form_box">
   <table width="100" border="0">
+  <?php
+  
+    if(isset($row) && empty($row)){
+        ?>
+        
+        <div class="user_not_found">User not found!</div>
+                
+        <?php
+        
+    }else{
+        if(isset($USER_CONFIRMED) && $USER_CONFIRMED == 0){
+            ?>
+            
+        <div class="user_not_confirmed">User was not confirmed!</div>
+                    
+            <?php
+        }
+    }
+    ?>
     <tr>
     <td>Login:</td>
     <td><input name="login" type="text" size="15" maxlength="25" /></td>

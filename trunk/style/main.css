@@ -90,6 +90,12 @@
 	float: right;
 }
 
+.user_not_confirmed, .user_not_found{
+    position: relative;
+    float: right;
+    margin-right: 40px;
+}
+
 .registration_form, .forgot_pass_form{
 	position:relative;
 	float:left;
