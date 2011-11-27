@@ -20,12 +20,12 @@
 	clear: both;
 }
 
-.menubar {
+.menubar, .greet_user {
 	position: relative;
 	margin-top: 2em; 
 	margin-left:9em;
 }
-.menubar ul {
+.menubar ul, .greet_user ul {
 	margin: 0;  
 	padding: 0;
 }
@@ -42,6 +42,36 @@
   display: block;
   color: #000;
   text-decoration: none;
+  font-weight: bold;
+  margin: 0;
+  padding: 4px 00px 4px 0px;
+}
+
+.menubar li a:hover {
+    color:#4682B4;
+}
+
+#menu_selected a{
+    color:#4682B4;
+    text-decoration: none;
+}
+
+.greet_user{
+    margin: 0 0 0 30em;
+}
+
+.greet_user li{
+  float:left;
+  list-style-type:none;
+  margin: 0px 5px 0px 5px;
+  padding: 0px 0px 0px 0px;
+  white-space:nowrap;
+  font-size: 12px;
+}
+
+.greet_user li a {
+  display: block;
+  color: #000;
   font-weight: bold;
   margin: 0;
   padding: 4px 00px 4px 0px;

@@ -7,10 +7,27 @@
 <div class="clear"></div>
 
 <ul class="menubar">
-    <li><a href="./">HOME</a></li>
-    <li><a href="./download.php">DOWNLOAD</a></li>
-    <li><a href="./docs.php">DOCU</a></li>
-    <li><a href="./about.php">ABOUT</a></li>
+    <li<?php if(isset($_SERVER["SCRIPT_NAME"])){
+        
+        $SCRIPT = strtolower(basename($_SERVER["SCRIPT_NAME"]));
+        
+        if(strpos($SCRIPT, "index") !== false){
+            echo " id=\"menu_selected\"";
+        }
+          
+    } ?>><a href="./">HOME</a></li>
+    <li<?php 
+        if(strpos($SCRIPT, "download") !== false){
+            echo " id=\"menu_selected\"";
+        } ?>><a href="./download.php">DOWNLOAD</a></li>
+    <li<?php 
+        if(strpos($SCRIPT, "docs") !== false){
+            echo " id=\"menu_selected\"";
+        } ?>><a href="./docs.php">DOCU</a></li>
+    <li<?php 
+        if(strpos($SCRIPT, "about") !== false){
+            echo " id=\"menu_selected\"";
+        } ?>><a href="./about.php">ABOUT</a></li>
 </ul>
 
 <?php
@@ -18,9 +35,9 @@
 if(isset($_SESSION["USER_LOGGED_IN"])){
 
 ?>
-
-<ul class="greet">
-    <li>Hi du hure, <?php echo $_SESSION["FIRSTNAME"]. " ". $_SESSION["LASTNAME"]. "!"; ?></li>
+<div class="clear"></div>
+<ul class="greet_user">
+    <li>Hi, <?php echo $_SESSION["FIRSTNAME"]. " ". $_SESSION["LASTNAME"]. "!"; ?></li>
     <li><a href="./logout.php">LOGOUT</a></li>
 </ul>
 
