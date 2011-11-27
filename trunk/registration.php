@@ -1,8 +1,28 @@
 <?php
 session_start();
-  
+
   include_once("./include/_top.php");
   include_once("./include/_header.php");
+
+  if(isset($_GET["confirm"]) && strlen($_GET["confirm"]) == 32){
+      
+       include_once("./include/functions/dbconnect.php"); 
+       
+       $sql = "SELECT userid FROM user WHERE hash = '". $_GET["confirm"] ."'";
+       
+       $result = $db->query($sql);
+       
+       $row = $result->fetch();
+       
+       if(!empty($row)){
+          $sql = "UPDATE user SET confirmed=". 1 ." WHERE userid=". $row["userid"];
+          
+          $db->exec($sql);
+           
+       }else{
+           die("You provided wrong hash.");
+       }
+    }
   
   if(isset($_POST["submitted"])){
       
@@ -17,18 +37,35 @@ session_start();
       $PASSWORD = $_POST["password"];
       $USER_TITLE = $_POST["usertitle"];
       $CUR_TIME = time();
+      $CONFIRM_CODE = md5($EMAIL);
       
       $db->exec("INSERT INTO user (usergroupid, firstname, lastname, 
-                                              login, password, usertitle,
+                                              login, password, hash, usertitle,
                                               email, ipaddress, lastactivity, 
                                               joindate, passworddate)
                                               VALUES 
                                               (1, '". $FIRSTNAME ."', '". $LASTNAME ."',
-                                              '". $LOGIN ."', '". $PASSWORD ."', '". $USER_TITLE ."',
+                                              '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
                                               '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
                                               ". $CUR_TIME .", ". $CUR_TIME .")");
+        
                                               
+      $to = $EMAIL; 
+      $subject = "Our site - Please confirm the registration"; 
+      $from = "admin@localhost"; 
+          
+      $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
+      $message .= "Please follow this link: ";
+      $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
+       
+      $headers = "From: $from"; 
+      /*$sent = mail($to, $subject, $message, $headers); 
       
+      if($sent) {
+          echo("Your mail was sent successfully"); 
+      } else {
+          die("We encountered an error sending your mail"); 
+      }*/
       
   }
   
