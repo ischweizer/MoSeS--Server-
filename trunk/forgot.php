@@ -1,5 +1,4 @@
 <?php
-session_start();
   
   include_once("./include/_top.php");
   include_once("./include/_header.php");
@@ -19,7 +18,7 @@ session_start();
 
 <form class="forgot_pass_form" action="./forgot.php" method="post" accept-charset="UTF-8">
     <fieldset>
-        <legend>Forgot your password?</legend>
+        <legend>Forgot your password? You will receive new one via E-mail.</legend>
         <label for="email" >Fill your E-mail here: </label>
         <input type="text" name="email" id="email" maxlength="50" />
         <input type="hidden" name="submitted" id="submitted" value="1" />
