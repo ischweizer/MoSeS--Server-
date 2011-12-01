@@ -2,7 +2,7 @@
 <body>
 <div class="wrapper">
 <div class="LOGO_TOP"><h1>LOGO</h1></div>
-<div class="PROJECT_NAME"><h1>&lt;Name des PROJEKTES&gt;</h1></div>
+<div class="PROJECT_NAME"><h1>MoSeS</h1></div>
 
 <div class="clear"></div>
 

@@ -13,7 +13,7 @@
 .PROJECT_NAME{
 	float:left;
 	position:relative;
- 	margin: 0 0 0 5em;
+ 	margin: 0 0 0 10em;
 }
 
 .clear{
@@ -80,7 +80,7 @@
 .heading_text{
 	float:left;
 	position:relative;
-	margin: 6em 0 0 30em;
+	margin: 6em 0 0 20em;
 }
 
 .login_form_box {

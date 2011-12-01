@@ -47,6 +47,7 @@ session_start();
 ?>  
   
 <div class="heading_text">Welcome to our page</div>
+<div class="clear"></div>
 
 <?php
 

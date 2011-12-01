@@ -102,17 +102,29 @@ session_start();
     <fieldset>
         <legend>Registration of new user</legend>
         <label for="name" >Your salutation (*): </label>
+        <div class="clear"></div>
         <input type="text" name="usertitle" id="usertitle" maxlength="10" />
+        <div class="clear"></div>
         <label for="name" >Your first name (*): </label>
+        <div class="clear"></div>
         <input type="text" name="firstname" id="firstname" maxlength="50" />
+        <div class="clear"></div>
         <label for="name" >Your last name (*): </label>
+        <div class="clear"></div>
         <input type="text" name="lastname" id="lastname" maxlength="50" />
+        <div class="clear"></div>
         <label for="email" >E-mail address (*):</label>
+        <div class="clear"></div>
         <input type="text" name="email" id="email" maxlength="50" />
+        <div class="clear"></div>
         <label for="username" >Login (*):</label>
+        <div class="clear"></div>
         <input type="text" name="login" id="login" maxlength="50" />
+        <div class="clear"></div>
         <label for="password" >Password (*):</label>
+        <div class="clear"></div>
         <input type="password" name="password" id="password" maxlength="50" />
+        <div class="clear"></div>
         <input type="hidden" name="submitted" id="submitted" value="1" />
         <input type="submit" name="submit" value="Register" />
     </fieldset>

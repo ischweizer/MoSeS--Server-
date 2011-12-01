@@ -1,6 +1,6 @@
 <div class="clear"></div>
 
-<div class="footer"><p>boinc4android (c) 2011</p></div>
+<div class="footer"><p>MoSeS &copy; 2011</p></div>
 
 </div>
 </body>
