@@ -35,8 +35,10 @@ session_start();
               $_SESSION["FIRSTNAME"] = $row["firstname"];
               $_SESSION["LASTNAME"] =  $row["lastname"];
               
-              header("Location: ./");
-          
+              $REDIRECT = $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
+              
+              header("Refresh: 1; url=$REDIRECT");
+              //die();
           }else{
               $USER_CONFIRMED = 0;
           }
