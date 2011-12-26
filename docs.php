@@ -6,7 +6,7 @@ session_start();
   
 ?>
   
-<title>Hauptseite von Boinc4Android - Docs</title>
+<title>Hauptseite von MoSeS - Docs</title>
 
 <?php  
   include_once("./include/_menu.php");  

@@ -39,7 +39,7 @@ session_start();
       $CUR_TIME = time();
       $CONFIRM_CODE = md5($EMAIL);
       
-      $db->exec("INSERT INTO user (usergroupid, firstname, lastname, 
+      $sql = "INSERT INTO user (usergroupid, firstname, lastname, 
                                               login, password, hash, usertitle,
                                               email, ipaddress, lastactivity, 
                                               joindate, passworddate)
@@ -47,7 +47,9 @@ session_start();
                                               (1, '". $FIRSTNAME ."', '". $LASTNAME ."',
                                               '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
                                               '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
-                                              ". $CUR_TIME .", ". $CUR_TIME .")");
+                                              ". $CUR_TIME .", ". $CUR_TIME .")";
+      
+      $db->exec($sql);
         
                                               
       $to = $EMAIL; 
@@ -59,19 +61,19 @@ session_start();
       $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
        
       $headers = "From: $from"; 
-      /*$sent = mail($to, $subject, $message, $headers); 
+      $sent = mail($to, $subject, $message, $headers); 
       
       if($sent) {
           echo("Your mail was sent successfully"); 
       } else {
           die("We encountered an error sending your mail"); 
-      }*/
+      }
       
   }
   
 ?>
   
-<title>Hauptseite von Boinc4Android - Registration</title>
+<title>Hauptseite von MoSeS - Registration</title>
 
 <?php  
   include_once("./include/_menu.php");  
@@ -101,15 +103,15 @@ session_start();
 <form class="registration_form" action="./registration.php" method="post" accept-charset="UTF-8">
     <fieldset>
         <legend>Registration of new user</legend>
-        <label for="name" >Your salutation (*): </label>
+        <label for="usertitle" >Your salutation (*): </label>
         <div class="clear"></div>
         <input type="text" name="usertitle" id="usertitle" maxlength="10" />
         <div class="clear"></div>
-        <label for="name" >Your first name (*): </label>
+        <label for="firstname" >Your first name (*): </label>
         <div class="clear"></div>
         <input type="text" name="firstname" id="firstname" maxlength="50" />
         <div class="clear"></div>
-        <label for="name" >Your last name (*): </label>
+        <label for="lastname" >Your last name (*): </label>
         <div class="clear"></div>
         <input type="text" name="lastname" id="lastname" maxlength="50" />
         <div class="clear"></div>
@@ -117,7 +119,7 @@ session_start();
         <div class="clear"></div>
         <input type="text" name="email" id="email" maxlength="50" />
         <div class="clear"></div>
-        <label for="username" >Login (*):</label>
+        <label for="login" >Login (*):</label>
         <div class="clear"></div>
         <input type="text" name="login" id="login" maxlength="50" />
         <div class="clear"></div>

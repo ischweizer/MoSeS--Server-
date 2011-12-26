@@ -5,7 +5,7 @@
   
 ?>
   
-<title>Hauptseite von Boinc4Android - Registration</title>
+<title>Hauptseite von MoSeS - Registration</title>
 
 <?php  
   include_once("./include/_menu.php");  

@@ -37,7 +37,7 @@ if(isset($_SESSION["USER_LOGGED_IN"])){
 ?>
 <div class="clear"></div>
 <ul class="greet_user">
-    <li>Hi, <?php echo $_SESSION["FIRSTNAME"]. " ". $_SESSION["LASTNAME"]. "!"; ?></li>
+    <li>Hi, <a href="./ucp.php" title="User control panel"><?php echo $_SESSION["FIRSTNAME"]. " ". $_SESSION["LASTNAME"]. "</a>!"; ?></li>
     <li><a href="./logout.php">LOGOUT</a></li>
 </ul>
 

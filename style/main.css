@@ -1,33 +1,33 @@
 
 .wrapper{
-	margin: 0 auto;
-	width:780px;
+    margin: 0 auto;
+    width:780px;
 }
 
 .LOGO_TOP{
-	float:left;
-	position:relative;
- 	margin: 0 0 0 2em;
+    float:left;
+    position:relative;
+     margin: 0 0 0 2em;
 }
 
 .PROJECT_NAME{
-	float:left;
-	position:relative;
- 	margin: 0 0 0 10em;
+    float:left;
+    position:relative;
+     margin: 0 0 0 10em;
 }
 
 .clear{
-	clear: both;
+    clear: both;
 }
 
 .menubar, .greet_user {
-	position: relative;
-	margin-top: 2em; 
-	margin-left:9em;
+    position: relative;
+    margin-top: 2em; 
+    margin-left:9em;
 }
 .menubar ul, .greet_user ul {
-	margin: 0;  
-	padding: 0;
+    margin: 0;  
+    padding: 0;
 }
 
 .menubar li {
@@ -78,16 +78,26 @@
 }
 
 .heading_text{
-	float:left;
-	position:relative;
-	margin: 6em 0 0 20em;
+    float:left;
+    position:relative;
+    margin: 6em 0 0 20em;
 }
 
 .login_form_box {
-	position: relative;
-	margin-top: 3em;
-	margin-right: 40px;
-	float: right;
+    position: relative;
+    margin-top: 3em;
+    margin-right: 40px;
+    float: right;
+}
+
+.user_menu {
+    position:relative;
+    float:left;
+}
+
+.user_menu li {
+    display: block;
+    list-style-type:none;
 }
 
 .user_not_confirmed, .user_not_found{
@@ -96,10 +106,10 @@
     margin-right: 40px;
 }
 
-.registration_form, .forgot_pass_form{
-	position:relative;
-	float:left;
-	margin: 5em 20em 0 25em;
+.registration_form, .forgot_pass_form, .promo_form{
+    position:relative;
+    float:left;
+    margin: 5em 20em 0 25em;
 
 }
 
@@ -176,17 +186,17 @@ input[type="text"]:focus, textarea:focus
 }
 
 .main_container_text {
-	position:relative;
-	float:left;
-	margin: 0 auto;
+    position:relative;
+    float:left;
+    margin: 0 auto;
 
 }
 
 .footer{
-	position: relative;
-	margin-top: 200px;
-	margin-bottom:: -50px; 
-	float:right;
-	height: 50px;
-	clear:both;
+    position: relative;
+    margin-top: 200px;
+    margin-bottom:: -50px; 
+    float:right;
+    height: 50px;
+    clear:both;
 }

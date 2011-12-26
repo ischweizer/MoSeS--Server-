@@ -4,14 +4,18 @@ session_start();
   include_once("./include/_top.php");
   include_once("./include/_header.php");
   
+  if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
+      echo "<meta http-equiv='refresh' content='0;URL=./'>"; 
+  }
+  
 ?>
   
-<title>Hauptseite von Boinc4Android - Home</title>
+<title>Hauptseite von MoSeS - Home</title>
 
 <?php  
   include_once("./include/_menu.php");
   
-  if(isset($_POST["submit"]) && $_POST["submit"] == "1" ){
+  if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
             
       include_once("./include/functions/dbconnect.php");   
       
@@ -35,9 +39,9 @@ session_start();
               $_SESSION["FIRSTNAME"] = $row["firstname"];
               $_SESSION["LASTNAME"] =  $row["lastname"];
               
-              $REDIRECT = $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
+              //$REDIRECT = $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
               
-              header("Refresh: 1; url=$REDIRECT");
+              //header("Refresh: 1; url = ". $REDIRECT);
               //die();
           }else{
               $USER_CONFIRMED = 0;
