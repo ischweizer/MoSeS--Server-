@@ -198,8 +198,44 @@ if(isset($_GET['m'])){
                     
                     break;
                        
-        case 'PROFILE':
-                       $MODE = 'PROFILE'; 
+        case 'ADMIN':  
+                    if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
+                       
+                       $MODE = 'ADMIN';
+                       
+                       include_once("./include/functions/dbconnect.php");
+                       
+                       if(isset($_POST['pending_requests']) && is_array($_POST['pending_requests']) && count($_POST['pending_requests']) > 0){
+                                        
+                          foreach($_POST['pending_requests'] as $request){
+                              
+                              $sql = "UPDATE request
+                                        SET
+                                        pending = 0, accepted = 1 
+                                        WHERE
+                                        uid = (SELECT userid 
+                                                FROM user
+                                                WHERE hash = '". $request ."')";
+                                                    
+                               $db->exec($sql);
+                              
+                          }     
+                           
+                       }
+                       
+                       $USERS_SCIENTIST_LIST = array();
+                       
+                       $sql = "SELECT r.telephone, r.reason, u.hash, u.usergroupid, u.firstname, u.lastname 
+                               FROM request r, user u 
+                               WHERE r.pending = 1 AND r.uid = u.userid";
+                               
+                       $result = $db->query($sql);
+                       $array = $result->fetchAll(PDO::FETCH_ASSOC);
+                          
+                       if(!empty($array)){
+                          $USERS_SCIENTIST_LIST = $array;
+                       }
+                    }
                        break;
         
         default: 
@@ -218,12 +254,23 @@ if(isset($_GET['m'])){
 ?>  
 
 <div class="user_menu">  
-    <ul>
-        <li><a href="ucp.php">User page</a></li>
+    <ul><?php
+        
+            if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
+              ?>  
+              
+              <li><a href="ucp.php?m=admin">ADMIN PANEL</a></li>
+              <li>&nbsp;</li>  
+                
+              <?php
+            }
+    
+        ?>
+        <li><a href="ucp.php">Profile</a></li>
         <li><a href="ucp.php?m=upload">APK Upload</a></li>
-        <li></li>
+        <li>&nbsp;</li>
         <li><a href="ucp.php?m=list">Show all APKs</a></li>
-        <li></li>
+        <li>&nbsp;</li>
         <li><a href="ucp.php?m=promo">Scientist account request</a></li>
     </ul>
 </div>
@@ -235,6 +282,39 @@ if(isset($_GET['m'])){
 <div class="main_container_text">
 
 <?php 
+
+    if($MODE == 'ADMIN' && !isset($_POST['pending_requests'])){
+    ?>
+    <div class="users_wanting_scientist">
+        <form action="ucp.php?m=admin" method="post">
+            <table>
+              <tr><th>Users that wanting permission to be a scientiest:</th></tr>
+              <?php
+                
+                if(!empty($USERS_SCIENTIST_LIST)){
+              
+                    foreach($USERS_SCIENTIST_LIST as $user){
+                        
+                    ?>
+                        <tr><td><?php echo $user['firstname'] ." ". $user['lastname']; ?></td><td>Accept:<input type="checkbox" name="pending_requests[]" value="<?php echo $user['hash']; ?> " /></td></tr>        
+                    <?php
+                    }
+                 ?>
+                 
+                 <tr><td>&nbsp;</td><td><button>Give access</button></td></tr>
+                 
+                 <?php   
+                    
+                }else{
+                    echo "<tr><td>No requests.</td></tr>";
+                }
+              ?>
+              </table>
+         </form>
+    </div>
+    
+    <?php
+    }
     
     if($MODE == 'UPLOAD' && !isset($_GET['res'])){
 ?>
@@ -261,7 +341,6 @@ if(isset($_GET['m'])){
           <li><input type="checkbox" name="sensors[]" value="12" />Humidity sensor</li>
           <li><input type="checkbox" name="sensors[]" value="13" />Ambient temperature sensor</li>
           </ul>
-       <p>
     </form>
 <?php
     }

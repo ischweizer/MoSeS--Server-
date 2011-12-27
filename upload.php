@@ -80,7 +80,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     /**
     * Building sensors string in JSON-Array-Format
     */
-    if(isset($_POST['sensors']) && count($_POST['sensors']) > 0){
+    if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0){
         
         $RAW_SENSOR_LIST = $_POST['sensors'];
         $SENSOR_LIST_STRING = '[';

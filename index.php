@@ -34,15 +34,17 @@ session_start();
               $_SESSION["USER_LOGGED_IN"] = 1;    
               
               $_SESSION["USER_ID"] =   $row["userid"];
+              $_SESSION["GROUP_ID"] =  $row["usergroupid"];
               $_SESSION["LOGIN"] =     $row["login"];    
               $_SESSION["PASSWORD"] =  $row["password"];
               $_SESSION["FIRSTNAME"] = $row["firstname"];
               $_SESSION["LASTNAME"] =  $row["lastname"];
               
-              //$REDIRECT = $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
+              // we have an admin here logged in
+              if($row["usergroupid"] == 3){
+                  $_SESSION["ADMIN_ACCOUNT"] =  "YES";    
+              }
               
-              //header("Refresh: 1; url = ". $REDIRECT);
-              //die();
           }else{
               $USER_CONFIRMED = 0;
           }
