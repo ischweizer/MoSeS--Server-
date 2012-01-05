@@ -1,3 +1,14 @@
+body {
+    background-color: #AAAAAA;
+}
+
+a {
+    color: cornflowerblue;
+}
+
+a:visited {
+    color: #EEEEEE;
+}
 
 .wrapper{
     margin: 0 auto;
@@ -195,7 +206,7 @@ input[type="text"]:focus, textarea:focus
 .footer{
     position: relative;
     margin-top: 200px;
-    margin-bottom:: -50px; 
+    margin-bottom: -50px; 
     float:right;
     height: 50px;
     clear:both;

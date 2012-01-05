@@ -1,0 +1,176 @@
+2011-12-26 23:27:26 - INFO --> stdClass Object
+(
+    [PASSWORD] => 777
+    [LOGIN] => alex
+    [MESSAGE] => LOGIN_REQUEST
+    [SENSORS] => null
+)
+ 
+2011-12-26 23:27:27 - INFO --> stdClass Object
+(
+    [DEVICEID] => HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys
+    [MESSAGE] => SET_HARDWARE_PARAMS
+    [SENSORS] => [1,2,3,8,5,9,10,11]
+    [ANDVER] => 10
+    [SESSIONID] => 11d76e86007ee34f4e7038eefdb7e5df
+)
+ 
+2011-12-26 23:27:27 - INFO --> SET HARDWARE PARAMS ARRIVED 
+2011-12-26 23:27:27 - INFO --> ##################### SETTING HARDWARE PARAMS ################ USER FOUND 
+2011-12-26 23:27:27 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:27:27 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:27:27 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2011-12-26 23:27:27 - INFO --> UPDATE android_session
+                                SET
+                                lastactivity = 1324938447 
+                                WHERE
+                                session_id = '11d76e86007ee34f4e7038eefdb7e5df' 
+2011-12-26 23:27:27 - INFO --> SELECT deviceid FROM hardware WHERE uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:27:27 - INFO --> ROW IS: 1 
+2011-12-26 23:27:27 - INFO --> row update has to be commited 
+2011-12-26 23:27:27 - INFO --> ##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort 
+2011-12-26 23:27:27 - INFO --> UPDATE HARDWARE 
+2011-12-26 23:27:27 - INFO --> ##################### SETTING HARDWARE PARAMS ################UPDATE hardware
+                                            SET
+                                                androidversion = '10', sensors = '[1,2,3,8,5,9,10,11]' 
+                                                 WHERE
+                                                 uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:27:38 - INFO --> stdClass Object
+(
+    [DEVICEID] => HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys
+    [MESSAGE] => SET_HARDWARE_PARAMS
+    [SENSORS] => [1,2,3,8,5,9,10,11]
+    [ANDVER] => 10
+    [SESSIONID] => 11d76e86007ee34f4e7038eefdb7e5df
+)
+ 
+2011-12-26 23:27:38 - INFO --> SET HARDWARE PARAMS ARRIVED 
+2011-12-26 23:27:38 - INFO --> ##################### SETTING HARDWARE PARAMS ################ USER FOUND 
+2011-12-26 23:27:38 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:27:38 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:27:38 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2011-12-26 23:27:38 - INFO --> UPDATE android_session
+                                SET
+                                lastactivity = 1324938458 
+                                WHERE
+                                session_id = '11d76e86007ee34f4e7038eefdb7e5df' 
+2011-12-26 23:27:38 - INFO --> SELECT deviceid FROM hardware WHERE uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:27:38 - INFO --> ROW IS: 1 
+2011-12-26 23:27:38 - INFO --> row update has to be commited 
+2011-12-26 23:27:38 - INFO --> ##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort 
+2011-12-26 23:27:38 - INFO --> UPDATE HARDWARE 
+2011-12-26 23:27:38 - INFO --> ##################### SETTING HARDWARE PARAMS ################UPDATE hardware
+                                            SET
+                                                androidversion = '10', sensors = '[1,2,3,8,5,9,10,11]' 
+                                                 WHERE
+                                                 uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:27:40 - INFO --> stdClass Object
+(
+    [DEVICEID] => HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys
+    [MESSAGE] => GET_HARDWARE_PARAMS
+    [SESSIONID] => 11d76e86007ee34f4e7038eefdb7e5df
+    [SENSORS] => null
+)
+ 
+2011-12-26 23:33:17 - INFO --> stdClass Object
+(
+    [MESSAGE] => LOGOUT_REQUEST
+    [SESSIONID] => 11d76e86007ee34f4e7038eefdb7e5df
+    [SENSORS] => null
+)
+ 
+2011-12-26 23:33:18 - INFO --> stdClass Object
+(
+    [PASSWORD] => 777
+    [LOGIN] => alex
+    [MESSAGE] => LOGIN_REQUEST
+    [SENSORS] => null
+)
+ 
+2011-12-26 23:33:26 - INFO --> stdClass Object
+(
+    [DEVICEID] => HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys
+    [MESSAGE] => SET_HARDWARE_PARAMS
+    [SENSORS] => [1,2,3,8,5,9,10,11]
+    [ANDVER] => 10
+    [SESSIONID] => 3e5656389028a267a1cb9beb1ed96e0d
+)
+ 
+2011-12-26 23:33:26 - INFO --> SET HARDWARE PARAMS ARRIVED 
+2011-12-26 23:33:26 - INFO --> ##################### SETTING HARDWARE PARAMS ################ USER FOUND 
+2011-12-26 23:33:26 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:33:26 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:33:26 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2011-12-26 23:33:26 - INFO --> UPDATE android_session
+                                SET
+                                lastactivity = 1324938806 
+                                WHERE
+                                session_id = '3e5656389028a267a1cb9beb1ed96e0d' 
+2011-12-26 23:33:26 - INFO --> SELECT deviceid FROM hardware WHERE uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:33:26 - INFO --> ROW IS: 1 
+2011-12-26 23:33:26 - INFO --> row update has to be commited 
+2011-12-26 23:33:26 - INFO --> ##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort 
+2011-12-26 23:33:26 - INFO --> UPDATE HARDWARE 
+2011-12-26 23:33:26 - INFO --> ##################### SETTING HARDWARE PARAMS ################UPDATE hardware
+                                            SET
+                                                androidversion = '10', sensors = '[1,2,3,8,5,9,10,11]' 
+                                                 WHERE
+                                                 uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:33:30 - INFO --> stdClass Object
+(
+    [DEVICEID] => HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys
+    [MESSAGE] => SET_HARDWARE_PARAMS
+    [SENSORS] => [1,2,3,8,5,9,10,11]
+    [ANDVER] => 10
+    [SESSIONID] => 3e5656389028a267a1cb9beb1ed96e0d
+)
+ 
+2011-12-26 23:33:30 - INFO --> SET HARDWARE PARAMS ARRIVED 
+2011-12-26 23:33:30 - INFO --> ##################### SETTING HARDWARE PARAMS ################ USER FOUND 
+2011-12-26 23:33:30 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:33:30 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:33:30 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2011-12-26 23:33:30 - INFO --> UPDATE android_session
+                                SET
+                                lastactivity = 1324938810 
+                                WHERE
+                                session_id = '3e5656389028a267a1cb9beb1ed96e0d' 
+2011-12-26 23:33:30 - INFO --> SELECT deviceid FROM hardware WHERE uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:33:30 - INFO --> ROW IS: 1 
+2011-12-26 23:33:30 - INFO --> row update has to be commited 
+2011-12-26 23:33:30 - INFO --> ##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort 
+2011-12-26 23:33:30 - INFO --> UPDATE HARDWARE 
+2011-12-26 23:33:30 - INFO --> ##################### SETTING HARDWARE PARAMS ################UPDATE hardware
+                                            SET
+                                                androidversion = '10', sensors = '[1,2,3,8,5,9,10,11]' 
+                                                 WHERE
+                                                 uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:33:32 - INFO --> stdClass Object
+(
+    [DEVICEID] => HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys
+    [MESSAGE] => SET_HARDWARE_PARAMS
+    [SENSORS] => [1,2,3,8,5,9,10,11]
+    [ANDVER] => 10
+    [SESSIONID] => 3e5656389028a267a1cb9beb1ed96e0d
+)
+ 
+2011-12-26 23:33:32 - INFO --> SET HARDWARE PARAMS ARRIVED 
+2011-12-26 23:33:32 - INFO --> ##################### SETTING HARDWARE PARAMS ################ USER FOUND 
+2011-12-26 23:33:32 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:33:32 - INFO --> [1,2,3,8,5,9,10,11] 
+2011-12-26 23:33:32 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2011-12-26 23:33:32 - INFO --> UPDATE android_session
+                                SET
+                                lastactivity = 1324938812 
+                                WHERE
+                                session_id = '3e5656389028a267a1cb9beb1ed96e0d' 
+2011-12-26 23:33:32 - INFO --> SELECT deviceid FROM hardware WHERE uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 
+2011-12-26 23:33:32 - INFO --> ROW IS: 1 
+2011-12-26 23:33:32 - INFO --> row update has to be commited 
+2011-12-26 23:33:32 - INFO --> ##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort 
+2011-12-26 23:33:32 - INFO --> UPDATE HARDWARE 
+2011-12-26 23:33:32 - INFO --> ##################### SETTING HARDWARE PARAMS ################UPDATE hardware
+                                            SET
+                                                androidversion = '10', sensors = '[1,2,3,8,5,9,10,11]' 
+                                                 WHERE
+                                                 uid = 4 AND deviceid = 'HTC Nexus One google/passion/passion:2.3.6/GRK39F/189904:user/release-keys' 

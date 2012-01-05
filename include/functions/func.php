@@ -55,5 +55,21 @@ function get_sensor_name($sensor_ordinal){
     
     return $result;
 }
+
+/**
+* Compares two arrays to match content
+* 
+* @param mixed $filter_array
+* @param mixed $apk_sensors_array
+*/
+function isFilterMatch($filter_array, $apk_sensors_array){
+      $all_in = true;
+  
+      foreach($apk_sensors_array as $req){
+         $all_in = $all_in && in_array($req, $filter_array);
+      }
+      
+      return $all_in;
+}
   
 ?>

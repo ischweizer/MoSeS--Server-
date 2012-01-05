@@ -241,6 +241,26 @@ if(isset($_GET['m'])){
         default: 
                 $MODE = 'NONE';
     }
+}else{
+
+    /**
+    * Select all user devices
+    */
+
+    include_once("./include/functions/dbconnect.php");
+    
+    $USER_DEVICES = array();
+
+    $sql = 'SELECT * 
+           FROM hardware 
+           WHERE uid = '. $_SESSION['USER_ID'];
+                                   
+    $result = $db->query($sql);
+    $devices = $result->fetchAll(PDO::FETCH_ASSOC);
+      
+    if(!empty($devices)){
+      $USER_DEVICES = $devices;
+    }
 }
 
 ?>
@@ -282,7 +302,34 @@ if(isset($_GET['m'])){
 <div class="main_container_text">
 
 <?php 
+  if(isset($USER_DEVICES)){
+    if(!empty($USER_DEVICES)){
+      ?>
+        <div class="list_devices">
+         <table>
+         <tr><th>Your devices:</th></tr>
+         <?php
 
+          // user has got some devices
+          foreach($USER_DEVICES as $device){
+             echo '<tr><td>'. $device['deviceid'] .'</td><td>Android: '. $device['androidversion'] .'</td></tr>'; 
+          }
+          
+         ?>
+         </table>
+        </div>
+    <?php    
+    }else{
+        ?>
+        <div class="list_devices">
+         <table>
+         <tr><th>Devices:</th></tr>
+         <tr><td>Your device list is empty.</td></tr> 
+         </table>
+        </div> 
+        <?php
+    }
+  }
     if($MODE == 'ADMIN' && !isset($_POST['pending_requests'])){
     ?>
     <div class="users_wanting_scientist">
@@ -431,7 +478,7 @@ if(isset($_GET['m'])){
           if($LIST_APK == 1){
               foreach($apk_listing as $row){
                  $remove_url = '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'">Remove</a>';
-                 echo "<tr><td>". $row['apkname'] ."</td><td>". $remove_url ."</td></tr>"; 
+                 echo '<tr><td><a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">'. $row['apkname'] .'</a></td><td>'. $remove_url .'</td></tr>'; 
               }
           }else{
               echo "<tr><td>Nothing found :(</td></tr>"; 

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$session_interval = 200; // duration of a session in seconds
+
 //$logger->logInfo("FILE REQUESTED");
 /**
 * Accept only form data with "HTTP_JSON" veriable 
@@ -10,7 +12,14 @@ if(isset($_POST['HTTP_JSON'])){
     include_once("./include/functions/logger.php");
     
     $json = stripslashes($_POST['HTTP_JSON']);
+    
     $data = json_decode($json);
+    
+    $IS_VALID_JSON = (is_object($data)) ? true : false;
+    
+    $logger->logInfo("IS_VALID_JSON: ". $IS_VALID_JSON);
+    
+if($IS_VALID_JSON){
     
     $SENSORS = json_encode($data->SENSORS);
     $data->SENSORS = $SENSORS;
@@ -49,7 +58,6 @@ if(isset($_POST['HTTP_JSON'])){
                  // message to client that login was successful  
                  print(json_encode($return));
                  
-                 //error_log(print_r($return, true), 3, './log/android.log');
                 
             }else{
                 $return = array("MESSAGE" => "LOGIN_RESPONSE",
@@ -97,7 +105,9 @@ if(isset($_POST['HTTP_JSON'])){
                 
                 $logger->logInfo("SET HARDWARE PARAMS ARRIVED");
                 
-                $result = $db->query("SELECT userid, lastactivity FROM android_session WHERE session_id = '". $data->SESSIONID ."'");
+                $result = $db->query("SELECT userid, lastactivity 
+                                        FROM android_session 
+                                        WHERE session_id = '". $data->SESSIONID ."'");
                 $row = $result->fetch();
                 
                 if(!empty($row)){
@@ -109,18 +119,18 @@ if(isset($_POST['HTTP_JSON'])){
                    
                    // session timeout 200 sec
                    $TIME_NOW = time();
-                   $VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= 200) ? true : false;
+                   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
                     
-                   if($VALID_SESSION){
-                       
-                       $logger->logInfo($data->SENSORS);
+                   if($IS_VALID_SESSION){
+                                              
                        $logger->logInfo(print_r($data->SENSORS, true));
                        
                        $logger->logInfo("##################### SETTING HARDWARE PARAMS ################ Session update");
                         
                        $sql = "UPDATE android_session
                                 SET
-                                lastactivity = ". $TIME_NOW ." 
+                                lastactivity = ". $TIME_NOW .",
+                                deviceid = '". $data->DEVICEID ."' 
                                 WHERE
                                 session_id = '". $data->SESSIONID ."'";
                        
@@ -141,11 +151,10 @@ if(isset($_POST['HTTP_JSON'])){
                        
                            $logger->logInfo("row update has to be commited");
                            
-                           //while(!empty($row)){
                                
-                               $logger->logInfo("##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort");
+                           $logger->logInfo("##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort");
                            
-                            //  if($row["deviceid"] == $data->DEVICEID){
+
                             $logger->logInfo("UPDATE HARDWARE");
                                
                                 $sql = "UPDATE hardware
@@ -158,14 +167,7 @@ if(isset($_POST['HTTP_JSON'])){
                                                     
                                    $db->exec($sql);
                                    
-                          //         break;
-                                   
-                         //     }
 
-                           //     $row = $result->fetch();
-                                
-                               
-                           //}
                        }else{
                            // there is no such device in the DB, so insert new one
                                    
@@ -218,7 +220,10 @@ if(isset($_POST['HTTP_JSON'])){
                 
                 include_once("./include/functions/dbconnect.php");
                 
-                $sql = "SELECT userid, lastactivity FROM android_session WHERE session_id = '". $data->SESSIONID ."'";
+                $sql = "SELECT userid, lastactivity 
+                        FROM android_session 
+                        WHERE session_id = '". $data->SESSIONID ."'";
+                        
                 $result = $db->query($sql);
                 $row = $result->fetch();
                 
@@ -228,11 +233,11 @@ if(isset($_POST['HTTP_JSON'])){
                    $USERID = $row["userid"];
                    $LASTACTIVITY = $row["lastactivity"];
                    
-                   // session timeout 20 sec
+                   // session timeout
                    $TIME_NOW = time();
-                   $VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= 200) ? true : false;
+                   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
                     
-                   if($VALID_SESSION){
+                   if($IS_VALID_SESSION){
                         
                        $sql = "UPDATE android_session
                                 SET
@@ -315,7 +320,7 @@ if(isset($_POST['HTTP_JSON'])){
                 $result = $db->query("SELECT userid, lastactivity FROM android_session WHERE session_id = '". $data->SESSIONID ."'");
                 $row = $result->fetch();
                 
-                $return; // TO BE RETURNED TO THE USER
+                $return = array(); // TO BE RETURNED TO THE USER
                 
                 if(!empty($row)){
                     
@@ -326,9 +331,9 @@ if(isset($_POST['HTTP_JSON'])){
                    
                    // session timeout 200 sec
                    $TIME_NOW = time();
-                   $VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= 200) ? true : false;
+                   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
                     
-                   if($VALID_SESSION){
+                   if($IS_VALID_SESSION){
                        
                        $logger->logInfo("##################### SETTING HARDWARE PARAMS ################ Session update");
                        
@@ -379,7 +384,7 @@ if(isset($_POST['HTTP_JSON'])){
                           $logger->logInfo("TRYING TO SET FILTER FOR AN UNKNOWN DEVICE");
                           
                           $return = array("MESSAGE" => "SET_FILTER_RESPONSE",
-                                     "STATUS" => "FALIURE_USER HAS TO REGISTER THE DEVICE BEVORE SETTING FILTER FOR IT");
+                                     "STATUS" => "FAILURE - USER HAS TO REGISTER THE DEVICE BEVORE SETTING FILTER FOR IT");
                        }
                        
                     $return = array("MESSAGE" => "SET_FILTER_RESPONSE",
@@ -421,7 +426,7 @@ if(isset($_POST['HTTP_JSON'])){
                 $result = $db->query($sql);
                 $row = $result->fetch();
                 
-                $return; // Message to be delivered to the client
+                $return = array(); // Message to be delivered to the client
                 
                 
                 if(!empty($row)){
@@ -431,9 +436,9 @@ if(isset($_POST['HTTP_JSON'])){
                    
                    // session timeout 20 sec
                    $TIME_NOW = time();
-                   $VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= 200) ? true : false;
+                   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
                     
-                   if($VALID_SESSION){
+                   if($IS_VALID_SESSION){
                         
                        $sql = "UPDATE android_session
                                 SET
@@ -487,20 +492,268 @@ if(isset($_POST['HTTP_JSON'])){
                 $db = null;
                 
                 break;
+                
+                
+        /**
+        * PING HANDLING        
+        */
+        case "STILL_ALIVE":
+        
+            include_once("./include/functions/dbconnect.php");
+        
+            $sql = "SELECT userid, lastactivity FROM android_session WHERE session_id = '". $data->SESSIONID ."'";
+            $result = $db->query($sql);
+            $row = $result->fetch();
             
+            $return = array(); // JSON OBJECT TO BE RETURNED 
+        
+            if(!empty($row)){
+                   // the session-id is known, check if the session time is known
+                   $USERID = $row["userid"];
+                   $LASTACTIVITY = $row["lastactivity"];
+                   
+                   $TIME_NOW = time();
+                   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
+                    
+                   if($IS_VALID_SESSION){
+                       
+                       $logger->logInfo("##################### STILL_ALIVE ################ Session update");
+                        
+                       // update the existant session
+                       $sql = "UPDATE android_session
+                                SET
+                                lastactivity = ". $TIME_NOW ." 
+                                WHERE
+                                session_id = '". $data->SESSIONID ."'";
+                       
+                       $logger->logInfo($sql); // LOG THE QUERY
+                                            
+                       $db->exec($sql);
+                       
+                       // create the response
+                       $return = array("MESSAGE" => "HELLO_THERE", 
+                                       "STATUS" => "SUCCESS");
+                   }else{
+                       $return = array("MESSAGE" => "HELLO_THERE", 
+                                       "STATUS" => "FAILURE");
+                   }
+            }else{
+                $return = array("MESSAGE" => "HELLO_THERE", 
+                                "STATUS" => "FAILURE");
+            }
+            
+            print(json_encode($return));
+            
+            // close connection to DB
+            $db = null;
+            
+            break;
+            
+        /**
+        * GET LIST OF ALL APKs SUITED FILTER       
+        */
+        case "GET_APK_LIST_REQUEST":
+        
+            include_once("./include/functions/dbconnect.php");
+            include_once("./include/functions/func.php");
+        
+            // TODO: write the select valid session and update it in ONE query
+            
+            $sql = "SELECT userid, lastactivity, deviceid 
+                    FROM android_session 
+                    WHERE session_id = '". $data->SESSIONID ."'";
+                    
+            $result = $db->query($sql);
+            $row = $result->fetch();
+            
+            $return = array(); // JSON OBJECT TO BE RETURNED 
+        
+            if(!empty($row)){
+                
+                   // the session-id is known, check if the session time is known
+                   $USERID = $row["userid"];
+                   $DEVICEID = $row['deviceid'];
+                   $LASTACTIVITY = $row["lastactivity"];
+                   
+                   $TIME_NOW = time();
+                   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
+                    
+                   if($IS_VALID_SESSION){
+                       
+                       $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ Session update");
+                        
+                       // update the existant session
+                       $sql = "UPDATE android_session
+                                SET
+                                lastactivity = ". $TIME_NOW ." 
+                                WHERE
+                                session_id = '". $data->SESSIONID ."'";
+                                                                   
+                       $db->exec($sql);
+                       
+                       $logger->logInfo($sql); // LOG that QUERY
+                       
+                       $sql = "SELECT filter 
+                               FROM hardware 
+                               WHERE uid = ". $USERID ." AND deviceid = '". $DEVICEID ."'";
+                                
+                       $result = $db->query($sql);
+                       $row = $result->fetch();
+                       
+                       if(!empty($row)){
+                           
+                         $USER_FILTER = json_decode($row['filter']);
+                         $json_array_return = array();  
+                           
+                         $sql = "SELECT * 
+                                 FROM apk";
+                                
+                         $result = $db->query($sql);
+                         $array = $result->fetchAll(PDO::FETCH_ASSOC);
+                         
+                         foreach($array as $apk){
+
+                            // Some sensors from user filter were found in particular APK record
+                            //if(count(array_intersect($USER_FILTER, json_decode($apk['sensors']))) > 0){
+                            
+                            // filter fits exact to sensors in APK
+                            if(isFilterMatch($USER_FILTER, json_decode($apk['sensors']))){
+                             
+                                $APK_JSON = array("ID" => $apk['apkid'],
+                                                  "NAME" => $apk['apkname'],
+                                                  "DESCR" => $apk['description']);
+                                                  
+                                $json_array_return[] = $APK_JSON; 
+                            } 
+                         }
+                         
+                         $return = array("MESSAGE" => "GET_APK_LIST_RESPONSE",
+                                         "STATUS" => "SUCCESS",
+                                         "APK_LIST" => $json_array_return);
+                           
+                       }else{
+                       
+                           $logger->logInfo("######### No hardware found");
+                           
+                       $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
+                                       "STATUS" => "FAILURE");
+                                 
+                       }                                     
+                   }else{
+                       
+                       $logger->logInfo("######### No valid session");
+                       
+                       $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
+                                       "STATUS" => "FAILURE");
+                   }
+            }else{
+                
+                $logger->logInfo("######### No session found");
+                
+                $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
+                                       "STATUS" => "FAILURE");
+            }
+            
+            print(json_encode($return));
+
+            // close connection to DB
+            $db = null;
+            
+            break;
+            
+        case "DOWNLOAD_REQUEST":
+        
+            include_once("./include/functions/dbconnect.php");
+                
+                $logger->logInfo("DOWNLOAD REQUEST ARRIVED");   
+                
+                $sql = "SELECT userid, lastactivity FROM android_session WHERE session_id = '". $data->SESSIONID ."'";
+                $result = $db->query($sql);
+                $row = $result->fetch();
+                
+                // Message to be delivered to the client
+                $return = array();
+                
+                // session found on server
+                if(!empty($row)){
+                    
+                   $USERID = $row["userid"];
+                   $LASTACTIVITY = $row["lastactivity"];
+                   
+                   $TIME_NOW = time();
+                   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
+                    
+                   if($IS_VALID_SESSION){
+                        
+                       $sql = "UPDATE android_session
+                                SET
+                                lastactivity = ". $TIME_NOW ." 
+                                WHERE
+                                session_id = '". $data->SESSIONID ."'";
+                                            
+                       $db->exec($sql);
+                       
+                       $APKID = $data->APKID; 
+                       
+                       $sql = "SELECT userhash, apkhash, apkname  
+                               FROM apk 
+                               WHERE 
+                               userid = ". $USERID ." AND apkid = '". $APKID ."'";
+                                            
+                       $result = $db->query($sql);
+                       $row = $result->fetch();
+                       
+                       if(!empty($row)){
+                           
+                           $DOWNLOAD_URL = 'http://'. 
+                                            $_SERVER['SERVER_NAME'] . 
+                                            dirname($_SERVER['PHP_SELF']) . 
+                                            '/apk/'. 
+                                            $row['userhash'] .'/'. $row['apkhash'] .'.apk';
+                                            
+                           $APK_NAME = $row['apkname'];
+                       
+                           $return = array("MESSAGE" => "DOWNLOAD_RESPONSE",
+                                           "NAME" => $APK_NAME,
+                                           "URL" => $DOWNLOAD_URL);
+                           
+                       }else{
+                           
+                           $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                                           "STATUS" => "FAILURE");
+                       }
+                   }else{
+                       
+                    $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                                 "STATUS" => "FAILURE");
+                   }
+                    
+                }else{
+                    
+                  $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                                  "STATUS" => "FAILURE");
+                    
+                }
+                
+                // send the JSON FAILURE response
+                print(json_encode($return)); 
+        
+                // close connection to DB
+                $db = null;
+            break;
             
         default:
                 echo "Only specific messages are accepted.";
                 break;
-
     }
-     
-     
-// if no POST var HTTP_JSON was sent       
 }else{
-    
+    echo "Sorry, but your data ain't valid json instance";
+}          
+/**
+*  if no POST var HTTP_JSON was sent       
+*/
+}else{  
     echo "You didn't sent us HTTP_JSON post var.";
-    
 }
      
 ?>
