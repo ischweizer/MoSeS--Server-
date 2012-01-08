@@ -31,6 +31,12 @@ a:visited {
     clear: both;
 }
 
+.slidepanel{
+    background: #acae77;
+    height: 200px;
+    display: none;
+}
+
 .menubar, .greet_user {
     position: relative;
     margin-top: 2em; 

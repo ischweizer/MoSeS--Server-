@@ -307,12 +307,12 @@ if(isset($_GET['m'])){
       ?>
         <div class="list_devices">
          <table>
-         <tr><th>Your devices:</th></tr>
+         <tr><th>Your devices:</th><th>Android sdk:</th><th>Your filter:</th></tr>
          <?php
 
           // user has got some devices
           foreach($USER_DEVICES as $device){
-             echo '<tr><td>'. $device['deviceid'] .'</td><td>Android: '. $device['androidversion'] .'</td></tr>'; 
+             echo '<tr><td>'. $device['deviceid'] .'</td><td>'. $device['androidversion'] .'</td><td>'. $device['filter'] .'</td></tr>'; 
           }
           
          ?>
@@ -469,23 +469,39 @@ if(isset($_GET['m'])){
     if($MODE == 'LIST' && isset($LIST_APK)){
         
     ?>
-        <div class="list_apk">
-         <table>
-         <tr><th>Your uploaded files:</th></tr>
+        <script type="text/javascript">
+        $(document).ready(function(){
+
+            $(".btn-slide").click(function(){
+                $(".slidepanel").slideToggle("slow");
+                $(this).toggleClass("active"); return false;
+            });
+    
+        });
+        </script>
+        
+        <div class="apk_list">
+         <p>Your uploaded files:</p>
          <?php
 
           // we found some APKs
           if($LIST_APK == 1){
               foreach($apk_listing as $row){
                  $remove_url = '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'">Remove</a>';
-                 echo '<tr><td><a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">'. $row['apkname'] .'</a></td><td>'. $remove_url .'</td></tr>'; 
-              }
+                 //echo '<tr><td><a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">'. $row['apkname'] .'</a></td><td>'. $remove_url .'</td></tr>'; 
+                 echo '<span class="slide"><a href="#" title="More info" class="btn-slide">'. $row['apkname'] .'</a></span>';
+                 echo '<div class="slidepanel">';
+                 echo '<p>Information:</p>';
+                 echo '<p>'. $row['description'] .'</p>';
+                 echo '<p>Sensors:</p>';
+                 echo '<p>'. $row['sensors'] .'</p>';
+                 echo '</div>';
+              }   
           }else{
-              echo "<tr><td>Nothing found :(</td></tr>"; 
+              echo "<span>Nothing found :(</span>"; 
           }
 
          ?>
-         </table>
         </div>
     <?php     
     }
