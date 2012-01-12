@@ -370,6 +370,8 @@ if(isset($_GET['m'])){
        <p>
           <label for="file">Select a file:</label> 
           <input type="file" name="userfile" id="file"><button>Upload</button>
+          <p>Program name (title):</p>
+          <input type="text" name="apk_title" />
           <p>Program description:</p>
           <textarea cols="30" rows="6" name="apk_description"></textarea>
           <p>My program uses following sensors:</p>
@@ -472,30 +474,53 @@ if(isset($_GET['m'])){
         <script type="text/javascript">
         $(document).ready(function(){
 
-            $(".btn-slide").click(function(){
-                $(".slidepanel").slideToggle("slow");
-                $(this).toggleClass("active"); return false;
+            $('div.slidepanel').hide();
+            
+            $('.slidebtn').click(function(e){
+
+                $('div.slidepanel').stop(true, false).slideUp();
+                $(e.target).closest('span').next('.slidepanel').stop(true, false).slideDown();
+               /* $(this).find('#expose').siblings().each(function(){
+                    $(this).html('[+]');
+                }); */
+                //$(this).find('#expose').html('[-]');
+                //$('.slidepanel').slideToggle('slow');
+                //$(this).toggleClass('active'); return false;
             });
+            
+            /*     
+            $('.slidebtn').toggle(function() {
+                $(this).find('#expose').html('[-]');    
+            }, function() {
+                $(this).find('#expose').html('[+]');        
+            });*/
+            
+          /*  $('#expose').each(function(){
+                var value = $(this).html();
+                $(this).html((value == '[+]') ? '[+]' : '[-]');
+            });*/
+
     
         });
         </script>
         
         <div class="apk_list">
-         <p>Your uploaded files:</p>
+         <p>Your uploaded files (click to expose):</p>
          <?php
 
           // we found some APKs
           if($LIST_APK == 1){
               foreach($apk_listing as $row){
-                 $remove_url = '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'">Remove</a>';
                  //echo '<tr><td><a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">'. $row['apkname'] .'</a></td><td>'. $remove_url .'</td></tr>'; 
-                 echo '<span class="slide"><a href="#" title="More info" class="btn-slide">'. $row['apkname'] .'</a></span>';
+                 echo '<span class="slide"><a href="#" title="More info" class="slidebtn">'. $row['apkname'] .' <span id="expose">[+]</span></a></span>';
                  echo '<div class="slidepanel">';
                  echo '<p>Information:</p>';
                  echo '<p>'. $row['description'] .'</p>';
                  echo '<p>Sensors:</p>';
                  echo '<p>'. $row['sensors'] .'</p>';
+                 echo 'Download: <a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">'. $row['apkname'] .'</a>&nbsp;&nbsp;&nbsp;<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK">Remove</a>';
                  echo '</div>';
+                 echo '<br />';
               }   
           }else{
               echo "<span>Nothing found :(</span>"; 

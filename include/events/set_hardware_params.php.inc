@@ -49,24 +49,19 @@ if(!empty($row)){
        $logger->logInfo("ROW IS: ". !empty($row));
        
        if(!empty($row)){
-       
-           $logger->logInfo("row update has to be commited");
+           // just update, cause there is one in DB
            
-               
+           $logger->logInfo("row update has to be commited");   
            $logger->logInfo("##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort");
-           
-
-            $logger->logInfo("UPDATE HARDWARE");
+           $logger->logInfo("UPDATE HARDWARE");
                
-                $sql = "UPDATE hardware
-                            SET
-                                androidversion = '". $data->ANDVER ."', sensors = '". $data->SENSORS ."' 
-                                 WHERE
-                                 uid = ". $USERID. " AND deviceid = '".$data->DEVICEID."'";      // just update, cause there is one in DB
-                        
-                   $logger->logInfo("##################### SETTING HARDWARE PARAMS ################".$sql); // LOG THE QUERY 
-                                    
-                   $db->exec($sql);
+           $sql = "UPDATE hardware
+                        SET androidversion = '". $data->ANDVER ."', sensors = '". $data->SENSORS ."' 
+                        WHERE uid = ". $USERID. " AND deviceid = '".$data->DEVICEID."'";      
+                    
+           $logger->logInfo("##################### SETTING HARDWARE PARAMS ################".$sql); // LOG THE QUERY 
+                            
+           $db->exec($sql);
                    
 
        }else{

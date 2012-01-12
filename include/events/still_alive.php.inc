@@ -20,7 +20,7 @@ if(!empty($row)){
         
        if($IS_VALID_SESSION){
            
-           $logger->logInfo("##################### STILL_ALIVE ################ Session update");
+          // $logger->logInfo("##################### STILL_ALIVE ################ Session update");
             
            // update the existant session
            $sql = "UPDATE android_session
@@ -29,7 +29,7 @@ if(!empty($row)){
                     WHERE
                     session_id = '". $data->SESSIONID ."'";
            
-           $logger->logInfo($sql); // LOG THE QUERY
+           //$logger->logInfo($sql); 
                                 
            $db->exec($sql);
            

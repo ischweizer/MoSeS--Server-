@@ -34,7 +34,10 @@ a:visited {
 .slidepanel{
     background: #acae77;
     height: 200px;
-    display: none;
+}
+
+.slide{
+  width: 50px;
 }
 
 .menubar, .greet_user {

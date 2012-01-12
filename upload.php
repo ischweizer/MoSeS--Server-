@@ -110,14 +110,18 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         
     }
     
+    $APK_TITLE = trim($_POST['apk_title']);
+    
     /**
     * Store filename and hash in DB
     */
     $sql = "INSERT INTO apk (userid, userhash, apkname, 
-                             apkhash, sensors, description)
+                             apkhash, sensors, description,
+                             apktitle)
                               VALUES 
                               (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', 
-                              '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."')"; // hashed filename is WITHOUT .apk extention!
+                              '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
+                              '". $APK_TITLE ."')"; // hashed filename is WITHOUT .apk extention!
                               
     $db->exec($sql);
     

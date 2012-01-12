@@ -5,7 +5,6 @@ include_once("./include/functions/dbconnect.php");
 $sql = "DELETE FROM android_session 
                WHERE session_id='". $data->SESSIONID ."'";
 
-// destroy the session
 $db->exec($sql);
 
 //send the response

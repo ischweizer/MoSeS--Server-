@@ -1,7 +1,7 @@
 <?php
 
-include_once("./include/functions/dbconnect.php");
-include_once("./include/functions/func.php");
+include_once(MOSES_HOME . "/include/functions/dbconnect.php");
+include_once(MOSES_HOME . "/include/functions/func.php");
         
 // TODO: write the select valid session and update it in ONE query
 
@@ -18,7 +18,7 @@ if(!empty($row)){
     
        // the session-id is known, check if the session time is known
        $USERID = $row["userid"];
-       $DEVICEID = $row['deviceid'];
+       $DEVICEID = $data->DEVICEID;
        $LASTACTIVITY = $row["lastactivity"];
        
        $TIME_NOW = time();
@@ -66,7 +66,7 @@ if(!empty($row)){
                 if(isFilterMatch($USER_FILTER, json_decode($apk['sensors']))){
                  
                     $APK_JSON = array("ID" => $apk['apkid'],
-                                      "NAME" => $apk['apkname'],
+                                      "NAME" => $apk['apktitle'],
                                       "DESCR" => $apk['description']);
                                       
                     $json_array_return[] = $APK_JSON; 

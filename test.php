@@ -1,53 +1,85 @@
 <?php
 session_start();
 
-$session_interval = 200; // duration of a session in seconds
-
 /**
 * Accept only form data with "HTTP_JSON" veriable 
 */
 if(isset($_POST['HTTP_JSON'])){
-    
-    include_once("./include/functions/logger.php");
+        
+    $session_interval = 200; // duration of a session in seconds
     
     $json = stripslashes($_POST['HTTP_JSON']);
     $data = json_decode($json);
-    $IS_VALID_JSON = (is_object($data)) ? true : false;
-    
-    $logger->logInfo("IS_VALID_JSON: ". $IS_VALID_JSON);
+    $IS_VALID_JSON = (is_object($data)) ? true : false;    
     
     if($IS_VALID_JSON){
+        
+        include_once('./config.php');
+        include_once(MOSES_HOME . '/include/managers/LoginManager.php'); 
+        include_once(MOSES_HOME . '/include/managers/DBManager.php');
+        include_once(MOSES_HOME . '/include/functions/logger.php');
         
         $SENSORS = json_encode($data->SENSORS);
         $data->SENSORS = $SENSORS;
         
-        $logger->logInfo('Sensors: ' . print_r($data, true));
+        //$logger->logInfo('Sensors: ' . print_r($data, true));
         
         /**
         *  Here will be selected which MESSAGE type was sent
         *  from Android client to this script  
         */
+        $return = array();
+        $DBManager = null;
         switch($data->MESSAGE){
         
             case "LOGIN_REQUEST":
             
-                include_once("./include/events/login_request.php.inc");
+                $DBManager = new DBManager();
+                $DBManager->connect($CONFIG['DB']['HOST'], $CONFIG['DB']['DBNAME'], $CONFIG['DB']['USER'], $CONFIG['DB']['PASSWORD']);
                 
-                $db = null;
+                $LoginManager = new LoginManager($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $CONFIG['DB_TABLE']['USER']);
+                $sid = $LoginManager->loginUser($data->LOGIN, $data->PASSWORD);
+                
+                if($sid != null){
+                    $return = array("MESSAGE" => "LOGIN_RESPONSE",
+                                    "LOGIN" => $data->LOGIN,
+                                    "SESSIONID" => $sid);
+                }else{
+                    $return = array("MESSAGE" => "LOGIN_RESPONSE",
+                                     "SESSIONID" => "NULL");
+                }
+                    
+                print(json_encode($return));
+                
                 break;
             
             case "LOGOUT_REQUEST": 
                           
-                include_once("./include/events/logout_request.php.inc");
+                $DBManager = new DBManager();
+                $DBManager->connect($CONFIG['DB']['HOST'], $CONFIG['DB']['DBNAME'], $CONFIG['DB']['USER'], $CONFIG['DB']['PASSWORD']);
                 
-                $db = null;
+                $LoginManager = new LoginManager($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $CONFIG['DB_TABLE']['USER']);
+                $result = $LoginManager->logoutUser($data->SESSIONID);
+                
+                if($result === false){
+                    $return = array("MESSAGE" => "LOGOUT_RESPONSE",
+                                    "STATUS" => "FAILURE");
+                }else{
+                    $return = array("MESSAGE" => "LOGOUT_RESPONSE",
+                                    "STATUS" => "SUCCESS");
+                }
+                
+                print(json_encode($return));
+                
                 break;
                 
             case "SET_HARDWARE_PARAMS":
                     
                     include_once("./include/events/set_hardware_params.php.inc");
                     
-                    $db = null;
+                    
+                    
+
                     break;
                     
             case "GET_HARDWARE_PARAMS":
@@ -96,6 +128,10 @@ if(isset($_POST['HTTP_JSON'])){
                     echo "Only specific messages are accepted.";
                     break;
         }
+        
+        $DBManager = null;
+        $LoginManager = null;
+        
     }else{
         echo "Sorry, but your data ain't valid json instance";
     }          
@@ -104,6 +140,5 @@ if(isset($_POST['HTTP_JSON'])){
 */
 }else{  
     echo "You didn't sent us HTTP_JSON post var.";
-}
-     
+}    
 ?>
