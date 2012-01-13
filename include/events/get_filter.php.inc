@@ -1,74 +1,47 @@
 <?php
 
-include_once("./include/functions/dbconnect.php");
+$logger->logInfo("GET FILTER ARRIVED");
+                    
+$USER = LoginManager::getLoggedInUser($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $data->SESSIONID);
 
-$logger->logInfo("SET FILTER ARRIVED");   
-            
-$sql = "SELECT userid, lastactivity 
-        FROM android_session 
-        WHERE session_id = '". $data->SESSIONID ."'";
-$result = $db->query($sql);
-$row = $result->fetch();
-
-$return = array(); // Message to be delivered to the client
-
-if(!empty($row)){
+if(!empty($USER)){
     
-   $USERID = $row["userid"];
-   $LASTACTIVITY = $row["lastactivity"];
-   
-   // session timeout 20 sec
+   $logger->logInfo("##################### GETTING FILTER ################ USER FOUND");
+    
+   $USERID = $USER["userid"];
+   $LASTACTIVITY = $USER["lastactivity"];
    $TIME_NOW = time();
-   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
-    
+   
+   $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
+   
    if($IS_VALID_SESSION){
-        
-       $sql = "UPDATE android_session
-                SET
-                lastactivity = ". $TIME_NOW ." 
-                WHERE
-                session_id = '". $data->SESSIONID ."'";
-                            
-       $db->exec($sql);
        
-       // get filter params from DB
-       $sql = "SELECT * 
-               FROM hardware 
-               WHERE 
-               uid = ". $USERID ." AND deviceid = '". $data->DEVICEID ."'";
-                            
-       $result = $db->query($sql);
-       $row = $result->fetch();
-       
-       if(!empty($row)){
-           
-           $DEVICEID = $row["deviceid"];
-           $FILTER = json_decode($row["filter"]);
-       
-           $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
-                           "DEVICEID" => $DEVICEID,
-                           "FILTER" => $FILTER,
-                           "STATUS" => "SUCCESS");
-           
-       }else{
-           
-           $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
-                           "STATUS" => "FAILURE");
-       }
-   }else{
-       
-    $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
-                 "STATUS" => "FAILURE");
-   }
-    
-}else{
-    
-  $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
-                  "STATUS" => "FAILURE");
-    
-}
+      LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $data->DEVICEID, $data->SESSIONID);
 
-// send the JSON FAILURE response
+      $DEVICE = HardwareManager::selectDeviceForUser($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $data->DEVICEID);
+  
+      if(!empty($DEVICE)){
+           
+         $DEVICEID = $DEVICE["deviceid"];
+         $FILTER = json_decode($DEVICE["filter"]);
+       
+         $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
+                         "DEVICEID" => $DEVICEID,
+                         "FILTER" => $FILTER,
+                         "STATUS" => "SUCCESS");   
+      }else{
+          $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
+                          "STATUS" => "FAILURE");
+      }       
+   }else{
+       $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
+                       "STATUS" => "FAILURE");
+   }
+}else{
+    $return = array("MESSAGE" => "GET_FILTER_RESPONSE",
+                    "STATUS" => "FAILURE");
+}
+    
 print(json_encode($return));
 
 ?>

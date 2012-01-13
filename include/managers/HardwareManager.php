@@ -1,26 +1,11 @@
 <?php
     
 class HardwareManager{
-    private $db;
-    private $hardwareTable;
+
     private $logger;
     
-    /**
-    * Constructor
-    * 
-    * @param mixed $db
-    * @param mixed $hardwareTable
-    * @return HardwareManager
-    */
     public function __construct(){
-        
-        //include_once(MOSES_HOME."/include/functions/klogger.php");
-        //$this->logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO);        
-        
-        //$this->db = $db;
-        //$this->hardwareTable = $hardwareTable;
-        
-        //$this->logger->logInfo("MOSES HOME".MOSES_HOME);                              
+                                     
     }
     
     /**
@@ -30,19 +15,19 @@ class HardwareManager{
     * @param int $userID
     * @param string $deviceID
     */
-    public static function selectDeviceForUser($db, $userID, $deviceID){
+    public static function selectDeviceForUser(&$db, $hardwareTable, $userID, $deviceID){
       
-       $sql = "SELECT deviceid 
-               FROM ". $this->hardwareTable ." 
+       $sql = "SELECT * 
+               FROM ". $hardwareTable ." 
                WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";
                
        $result = $db->query($sql);
        
-       $this->logger->logInfo($sql); // LOG INFO
+       //$this->logger->logInfo($sql); // LOG INFO
        
        $row = $result->fetch();
        
-       $this->logger->logInfo("ROW IS: ". !empty($row));
+       //$this->logger->logInfo("ROW IS: ". !empty($row));
        
        if(!empty($row)){
            return $row;
@@ -59,19 +44,19 @@ class HardwareManager{
     * @param mixed $userID
     * @param mixed $deviceID
     */
-    public static function updateDevice($aVersion, $sensors, $userID, $deviceID){
+    public static function updateDevice($db, $hardwareTable, $aVersion, $sensors, $userID, $deviceID){
       
-       $this->logger->logInfo("row update has to be commited");   
-       $this->logger->logInfo("##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort");
-       $this->logger->logInfo("UPDATE HARDWARE");
+       //$this->logger->logInfo("row update has to be commited");   
+       //$this->logger->logInfo("##################### SETTING HARDWARE PARAMS ################ deviceid selected and uid jetzt sofort");
+       //$this->logger->logInfo("UPDATE HARDWARE");
            
-       $sql = "UPDATE ". $this->hardwareTable ."
+       $sql = "UPDATE ". $hardwareTable ."
                     SET androidversion = '". $aVersion ."', sensors = '". $sensors ."' 
                     WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";      
                 
-       $this->logger->logInfo("##################### SETTING HARDWARE PARAMS ################". $sql); // LOG THE QUERY 
+       //$this->logger->logInfo("##################### SETTING HARDWARE PARAMS ################". $sql); // LOG THE QUERY 
                         
-       $this->db->exec($sql);
+       $db->exec($sql);
     }
     
     /**
@@ -82,16 +67,62 @@ class HardwareManager{
     * @param mixed $userID
     * @param mixed $deviceID
     */
-    public static function insertDevice($aVersion, $sensors, $userID, $deviceID){
+    public static function insertDevice($db, $hardwareTable, $aVersion, $sensors, $userID, $deviceID){
        
-      $this->logger->logInfo("INSERT HARDWARE");
+      //$this->logger->logInfo("INSERT HARDWARE");
       
-      $sql = "INSERT INTO ". $this->hardwareTable ." 
+      $sql = "INSERT INTO ". $hardwareTable ." 
                 (uid, deviceid, androidversion, sensors) 
                 VALUES 
                 (". $userID .", '". $deviceID . "', '". $aVersion ."', '". $sensors ."')";
 
-      $this->db->exec($sql); 
+      $db->exec($sql); 
+    }
+    
+    /**
+    * Sets a filter for APK filter later on
+    * 
+    * @param mixed $db
+    * @param mixed $hardwareTable
+    * @param mixed $filter
+    * @param mixed $userID
+    * @param mixed $deviceID
+    */
+    public static function setFilter($db, $hardwareTable, $filter, $userID, $deviceID){
+        
+        $sql = "UPDATE ". $hardwareTable ."
+                SET filter = '". $filter ."' 
+                WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";      
+                
+       //$logger->logInfo("##################### SETTING FILTER ################".$sql); // LOG THE QUERY 
+                        
+       $res = $db->exec($sql);
+        
+       return $res;
+    }
+    
+    /**
+    * Returns a filter from user
+    * 
+    * @param mixed $db
+    * @param mixed $hardwareTable
+    * @param mixed $userID
+    * @param mixed $deviceID
+    */
+    public static function getFilter($db, $hardwareTable, $userID, $deviceID){
+        
+        $sql = "SELECT filter 
+                   FROM ". $hardwareTable ." 
+                   WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+                    
+       $result = $db->query($sql);
+       $row = $result->fetch();
+       
+       if(!empty($row)){
+           return $row;
+       }
+       
+       return null;
     }
 }
     

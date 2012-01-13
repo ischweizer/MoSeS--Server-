@@ -6,6 +6,10 @@ class DBManager
 {
     private $db=null; // the database
     
+    public function __construct(){
+                                     
+    }
+    
     /**
     * This function connects the manager to the database
     *     
@@ -23,7 +27,7 @@ class DBManager
         catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
-    }
+            }
     
     }
     

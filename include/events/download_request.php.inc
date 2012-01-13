@@ -1,77 +1,54 @@
 <?php
 
-include_once("./include/functions/dbconnect.php");
-
-$logger->logInfo("DOWNLOAD REQUEST ARRIVED");   
+$logger->logInfo("DOWNLOAD REQUEST ARRIVED");
                 
-$sql = "SELECT userid, lastactivity 
-        FROM android_session 
-        WHERE session_id = '". $data->SESSIONID ."'";
-$result = $db->query($sql);
-$row = $result->fetch();
+$USER = LoginManager::getLoggedInUser($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $data->SESSIONID);
 
-// Message to be delivered to the client
-$return = array();
-
-// session found on server
-if(!empty($row)){
+if(!empty($USER)){
     
-   $USERID = $row["userid"];
-   $LASTACTIVITY = $row["lastactivity"];
-   
+   $logger->logInfo("##################### DOWNLOAD REQUEST ################ USER FOUND");
+    
+   $USERID = $USER["userid"];
+   $LASTACTIVITY = $USER["lastactivity"];
    $TIME_NOW = time();
-   $IS_VALID_SESSION = ($TIME_NOW - $LASTACTIVITY <= $session_interval) ? true : false;
-    
+   
+   $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
+   
    if($IS_VALID_SESSION){
-        
-       $sql = "UPDATE android_session
-                SET
-                lastactivity = ". $TIME_NOW ." 
-                WHERE
-                session_id = '". $data->SESSIONID ."'";
-                            
-       $db->exec($sql);
        
-       $APKID = $data->APKID; 
+      $logger->logInfo("##################### DOWNLOAD REQUEST ################ Session update");
        
-       $sql = "SELECT userhash, apkhash, apkname  
-               FROM apk 
-               WHERE 
-               userid = ". $USERID ." AND apkid = '". $APKID ."'";
-                            
-       $result = $db->query($sql);
-       $row = $result->fetch();
-       
-       if(!empty($row)){
-           
+      LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $data->DEVICEID, $data->SESSIONID);
+      
+      $APKID = $data->APKID;
+      
+      $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $USERID, $APKID);
+      
+      if(!empty($APK)){
+
            $DOWNLOAD_URL = 'http://'. 
                             $_SERVER['SERVER_NAME'] . 
                             dirname($_SERVER['PHP_SELF']) . 
                             '/apk/'. 
-                            $row['userhash'] .'/'. $row['apkhash'] .'.apk';
+                            $APK['userhash'] .'/'. $APK['apkhash'] .'.apk';
                             
-           $APK_NAME = $row['apkname'];
+           $APK_NAME = $APK['apkname'];
        
            $return = array("MESSAGE" => "DOWNLOAD_RESPONSE",
                            "NAME" => $APK_NAME,
                            "URL" => $DOWNLOAD_URL);
-           
-       }else{
-           
-           $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
-                           "STATUS" => "FAILURE");
-       }
-   }else{
-       
-    $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
-                 "STATUS" => "FAILURE");
-   }
-    
+      
+      }else{
+          $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                          "STATUS" => "FAILURE");
+      }
+  }else{
+      $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                      "STATUS" => "FAILURE");
+  }
 }else{
-    
-  $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
-                  "STATUS" => "FAILURE");
-    
+    $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                    "STATUS" => "FAILURE");
 }
 
 print(json_encode($return));

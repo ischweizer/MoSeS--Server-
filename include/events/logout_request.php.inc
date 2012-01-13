@@ -1,17 +1,15 @@
 <?php
 
-include_once("./include/functions/dbconnect.php");
+$result = LoginManager::logoutUser($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $data->SESSIONID);
+                  
+if($result !== false){
+    $return = array("MESSAGE" => "LOGOUT_RESPONSE",
+                    "STATUS" => "SUCCESS");
+}else{
+    $return = array("MESSAGE" => "LOGOUT_RESPONSE",
+                    "STATUS" => "FAILURE");
+}
 
-$sql = "DELETE FROM android_session 
-               WHERE session_id='". $data->SESSIONID ."'";
-
-$db->exec($sql);
-
-//send the response
-// at the moment, success is always returned
-$return = array("MESSAGE" => "LOGOUT_RESPONSE",
-                "STATUS" => "SUCCESS");
-
-// send the JSON response
 print(json_encode($return));
+
 ?>
