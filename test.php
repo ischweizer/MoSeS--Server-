@@ -21,7 +21,9 @@ if(isset($_POST['HTTP_JSON'])){
         include_once(MOSES_HOME . '/include/managers/HardwareManager.php'); 
         include_once(MOSES_HOME . '/include/functions/logger.php');
     
-        $logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO); 
+        $logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO);
+        
+        $logger->logInfo("JSON OBJECT ARRIVED #########################"); 
         
         $SENSORS = json_encode($data->SENSORS);
         $data->SENSORS = $SENSORS;
@@ -54,21 +56,21 @@ if(isset($_POST['HTTP_JSON'])){
                 
             case "SET_HARDWARE_PARAMS":
                     
-                    include_once(MOSES_HOME . "/include/events/set_hardware_params.php.inc");
+                include_once(MOSES_HOME . "/include/events/set_hardware_params.php.inc");
 
-                    break;
+                break;
                     
             case "GET_HARDWARE_PARAMS":
             
-                    include_once(MOSES_HOME . "/include/events/get_hardware_params.php.inc");
-                    
-                    break;
+                include_once(MOSES_HOME . "/include/events/get_hardware_params.php.inc");
+                
+                break;
                     
             case "SET_FILTER":
                     
-                    include_once(MOSES_HOME . "/include/events/set_filter.php.inc");                    
-                    
-                    break;
+                include_once(MOSES_HOME . "/include/events/set_filter.php.inc");                    
+                
+                break;
                 
             case "GET_FILTER":
 
@@ -86,11 +88,29 @@ if(isset($_POST['HTTP_JSON'])){
             
                 include_once(MOSES_HOME . "/include/events/get_apk_list_request.php.inc");
                  
+                break;     
+                
+            case "GET_APK_INFO":
+            
+                include_once(MOSES_HOME . "/include/events/get_apk_info.php.inc");
+                 
                 break;
                 
             case "DOWNLOAD_REQUEST":
             
                 include_once(MOSES_HOME . "/include/events/download_request.php.inc");
+                
+                break;
+            
+            case "APK_INSTALLED":
+            
+                include_once(MOSES_HOME . "/include/events/apk_installed.php.inc");
+                
+                break;
+            
+            case "C2DM":
+            
+                include_once(MOSES_HOME . "/include/events/c2dm.php.inc");
                 
                 break;
                 

@@ -220,3 +220,11 @@ input[type="text"]:focus, textarea:focus
     height: 50px;
     clear:both;
 }
+
+.upload_form li {
+   list-style-type:none; 
+}
+
+.upload_form input[type="text"] {
+    width: 50px;
+}

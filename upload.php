@@ -4,6 +4,9 @@ session_start();
 if(!isset($_SESSION['USER_LOGGED_IN']))
     die('Only registered users may access that file!');
 
+//print_r($_POST);
+
+include_once("./config.php");
     
 /**
 *  SETTINGS FOR UPLOAD
@@ -18,7 +21,7 @@ $fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);
 /**
 * Connect to DB and get hashes for folder and file
 */
-include_once("./include/functions/dbconnect.php");
+include_once(MOSES_HOME. "/include/functions/dbconnect.php");
 
 $sql = "SELECT hash FROM user WHERE userid = ". $_SESSION["USER_ID"];
        
@@ -112,19 +115,93 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     
     $APK_TITLE = trim($_POST['apk_title']);
     
+    // TODO: add some security here
+    $APK_ANDROID_VERSION = '';
+    if(isset($_POST['apk_android_version'])){
+        $APK_ANDROID_VERSION = trim($_POST['apk_android_version']);    
+    }
+    
+    $RESTRICTION_USER_NUMBER = -1;
+    $SELECTED_USERS_LIST = '';
+    
+    if(isset($_POST['restrict_users_number']) && isset($_POST['number_restricted_users'])){
+        
+        $RESTRICTION_CHECHED = (preg_replace('/[^0-9]/', '', $_POST['restrict_users_number']) == '1') ? true : false;
+        
+        if($RESTRICTION_CHECHED){
+            $RESTRICTION_USER_NUMBER = preg_replace('/[^0-9]/', '', $_POST['number_restricted_users']);
+            
+            $sql = "SELECT userid
+                    FROM user
+                    WHERE userid != 1";
+                    
+            $result = $db->query($sql);
+            $row = $result->fetchAll(PDO::FETCH_COLUMN);
+            
+            if(!empty($row)){
+                
+                $user_count_to_generate = 1; // default value
+                $users_array = array();
+                
+                if(count($row) < $RESTRICTION_USER_NUMBER){
+                    $user_count_to_generate = count($row);    
+                }else{
+                    $user_count_to_generate = $RESTRICTION_USER_NUMBER;
+                }
+                
+                foreach($row as $id){
+                    $users_array[] = $id;
+                }
+                
+                shuffle($users_array);
+                $random_indexes = array_rand($users_array, $user_count_to_generate);
+                
+                // deep shit tho
+                for($i=0; $i < count($random_indexes); $i++){
+                   $random_users_array[] = $users_array[$random_indexes[$i]];
+                }
+                
+                $SELECTED_USERS_LIST = implode(',', $random_users_array);
+            }
+        }
+    }
+    
+    
     /**
     * Store filename and hash in DB
     */
     $sql = "INSERT INTO apk (userid, userhash, apkname, 
                              apkhash, sensors, description,
-                             apktitle)
+                             apktitle, restriction_user_number, selected_users_list,
+                             androidversion)
                               VALUES 
                               (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', 
                               '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
-                              '". $APK_TITLE ."')"; // hashed filename is WITHOUT .apk extention!
-                              
+                              '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $SELECTED_USERS_LIST ."',
+                              '". $APK_ANDROID_VERSION ."')"; 
+    // WARNING: hashed filename is WITHOUT .apk extention!
+                             
     $db->exec($sql);
     
+    $LAST_INSERTED_ID = $db->lastInsertId();
+    
+    include_once(MOSES_HOME ."/include/managers/GooglePushManager.php");
+                      
+    
+    // ##### TEMP ##############################
+    
+    $sql = "SELECT c2dm FROM hardware";
+    
+    $result = $db->query($sql);
+    $targetDevices = $result->fetchAll(PDO::FETCH_ASSOC);
+    
+    
+    //#########################################
+                      
+    
+    
+    GooglePushManager::googlePushSend($LAST_INSERTED_ID, $targetDevices);
+
     header("Location: ucp.php?m=upload&res=1");
     //echo 'Your file "'. $filename .'" was successfully uploaded.';
 }else{

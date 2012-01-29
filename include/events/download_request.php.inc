@@ -37,6 +37,8 @@ if(!empty($USER)){
            $return = array("MESSAGE" => "DOWNLOAD_RESPONSE",
                            "NAME" => $APK_NAME,
                            "URL" => $DOWNLOAD_URL);
+
+           
       
       }else{
           $return = array("MESSAGE" => "DOWNLOAD_REQUEST",

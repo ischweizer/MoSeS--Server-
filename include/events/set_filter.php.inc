@@ -20,6 +20,8 @@ if(!empty($USER)){
 
        $FILTER = json_encode($data->FILTER); // filter from the message
        
+       $FILTER = HardwareManager::sortSensors($FILTER);
+       
        $logger->logInfo("Filter set by the user: " . $FILTER);
        
        LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $data->DEVICEID, $data->SESSIONID);

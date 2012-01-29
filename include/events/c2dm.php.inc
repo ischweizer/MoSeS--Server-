@@ -4,7 +4,7 @@ $USER = LoginManager::getLoggedInUser($DBManager->getDB(), $CONFIG['DB_TABLE']['
                     
 if(!empty($USER)){
     
-   $logger->logInfo("##################### SETTING HARDWARE PARAMS ################ USER FOUND");
+   $logger->logInfo("##################### C2DM ARRIVED ################ USER FOUND");
     
    $USERID = $USER["userid"];
    $LASTACTIVITY = $USER["lastactivity"];
@@ -13,40 +13,44 @@ if(!empty($USER)){
    $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
    
    if($IS_VALID_SESSION){
-          
-       $logger->logInfo("##################### SETTING HARDWARE PARAMS ################ Session update");
+       
+       $logger->logInfo("##################### C2DM ################ Session update");
        
        LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $data->DEVICEID, $data->SESSIONID);
        
        $DEVICE = HardwareManager::selectDeviceForUser($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $data->DEVICEID);
        
-       $data->SENSORS = HardwareManager::sortSensors($data->SENSORS);
-       
        if(!empty($DEVICE)){
            // Just update existing device
            
-           HardwareManager::updateDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $data->ANDVER, $data->SENSORS, $USERID, $data->DEVICEID);
+           HardwareManager::addc2dm($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $data->DEVICEID, $data->C2DM);
+           
+           
+           $logger->logInfo("C2DM ARRIVED FROM CLIENT");
+           $logger->logInfo($data->C2DM);
+           
+           $return = array("MESSAGE" => "C2DM",
+                            "STATUS" => "SUCCESS");
            
        }else{
-           // Insert new device
            
-           HardwareManager::insertDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $data->ANDVER, $data->SENSORS, $USERID, $data->DEVICEID);
+           $return = array("MESSAGE" => "C2DM",
+                           "STATUS" => "FAILURE_NO_SUCH_DEVICE");
        }
        
-       $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-                       "STATUS" => "SUCCESS");
+       
 
    }else{
        //$logger->logInfo(" ##################### SETTING HARDWARE PARAMS ################ Session TIMEOUT");
 
         // session is timed out
-        $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+        $return = array("MESSAGE" => "C2DM",
                         "STATUS" => "FAILURE_SESSION_TIME_OUT");
    }
     
 }else{
 
-    $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+    $return = array("MESSAGE" => "C2DM",
                     "STATUS" => "FAILURE_NO_SUCH_USER");
 }
              

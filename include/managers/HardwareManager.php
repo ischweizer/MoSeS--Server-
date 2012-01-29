@@ -51,10 +51,26 @@ class HardwareManager{
        //$this->logger->logInfo("UPDATE HARDWARE");
            
        $sql = "UPDATE ". $hardwareTable ."
-                    SET androidversion = '". $aVersion ."', sensors = '". $sensors ."' 
+                    SET androidversion = '". $aVersion ."', sensors = '". $sensors ." 
                     WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";      
                 
        //$this->logger->logInfo("##################### SETTING HARDWARE PARAMS ################". $sql); // LOG THE QUERY 
+                        
+       $db->exec($sql);
+    }
+    
+    /**
+    * Adds c2dm for the specified device
+    * @param mixed $sensors
+    * @param mixed $userID
+    * @param mixed $deviceID
+    * @param string $csmd google id of the device
+    */
+    public static function addc2dm($db, $hardwareTable, $userID, $deviceID, $c2dm){
+           
+       $sql = "UPDATE ". $hardwareTable ."
+                    SET c2dm = '". $c2dm ."'
+                    WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";      
                         
        $db->exec($sql);
     }
@@ -123,6 +139,46 @@ class HardwareManager{
        }
        
        return null;
+    }
+    
+    /**
+    * Returns an android version for given user and device id
+    * 
+    * @param mixed $db
+    * @param mixed $hardwareTable
+    * @param mixed $userID
+    * @param mixed $deviceID
+    */
+    public static function getAndroidVersion($db, $hardwareTable, $userID, $deviceID){
+        
+        $sql = "SELECT androidversion 
+                   FROM ". $hardwareTable ." 
+                   WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+                    
+       $result = $db->query($sql);
+       $row = $result->fetch();
+       
+       if(!empty($row)){
+           return $row['androidversion'];
+       }
+       
+       return null;
+    }
+    
+    /**
+    * Just sorts sensors in asc order
+    * and removes duplicates
+    * 
+    * @param string $sensors
+    * @return string
+    */
+    public static function sortSensors($sensors){
+        
+        $array = array_unique(json_decode($sensors));
+        sort($array);
+        $sensors = json_encode($array);
+        
+        return $sensors;
     }
 }
     

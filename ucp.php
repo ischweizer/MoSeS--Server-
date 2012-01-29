@@ -218,6 +218,11 @@ if(isset($_GET['m'])){
                                                 WHERE hash = '". $request ."')";
                                                     
                                $db->exec($sql);
+                               
+                               // USER IS NOW IN SCIENTIST-GROUP
+                               $sql = "UPDATE user SET usergroupid= 2 WHERE hash = '". $request ."'";
+                               
+                               $db->exec($sql);
                               
                           }     
                            
@@ -367,15 +372,14 @@ if(isset($_GET['m'])){
 ?>
 
     <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
-       <p>
-          <label for="file">Select a file:</label> 
-          <input type="file" name="userfile" id="file"><button>Upload</button>
-          <p>Program name (title):</p>
-          <input type="text" name="apk_title" />
-          <p>Program description:</p>
-          <textarea cols="30" rows="6" name="apk_description"></textarea>
-          <p>My program uses following sensors:</p>
-          <ul>
+      <p>Program name (title):</p>
+      <input type="text" name="apk_title" />
+      <p>Program android version:</p>
+      <input type="text" name="apk_android_version" />
+      <p>Program description:</p>
+      <textarea cols="30" rows="6" name="apk_description"></textarea>
+      <p>My program uses following sensors:</p>
+      <ul>
           <li><input type="checkbox" name="sensors[]" value="1" />Accelerometer</li>
           <li><input type="checkbox" name="sensors[]" value="2" />Magnetic field sensor</li>
           <li><input type="checkbox" name="sensors[]" value="3" />Orientation sensor</li>
@@ -389,7 +393,34 @@ if(isset($_GET['m'])){
           <li><input type="checkbox" name="sensors[]" value="11" />Rotation sensor</li>
           <li><input type="checkbox" name="sensors[]" value="12" />Humidity sensor</li>
           <li><input type="checkbox" name="sensors[]" value="13" />Ambient temperature sensor</li>
-          </ul>
+      </ul>
+     
+     <script type="text/javascript">
+        $(document).ready(function(){
+            
+            $('.user_apk_restriction').find('input[name=number_restricted_users]').attr('maxlength', 6);
+            
+            $('.user_apk_restriction').find('input[name=restrict_users_number]').change(
+                function() {
+                    if ($(this).is(':checked')) {
+                        $('.user_apk_restriction').find('input[name=number_restricted_users]').removeAttr('disabled');
+                    } else {
+                        $('.user_apk_restriction').find('input[name=number_restricted_users]').attr('disabled', true);
+                        $('.user_apk_restriction').find('input[name=number_restricted_users]').val('');
+                    }
+            });   
+    
+        });
+        </script>
+      
+      <div class="user_apk_restriction">
+          <input type="checkbox" name="restrict_users_number" value="1" />Restrict number of users
+          <input type="text" name="number_restricted_users" disabled="disabled" />
+      </div>
+      
+      <label for="file">Select a file:</label> 
+      <input type="file" name="userfile" id="file">
+      <p>Click Upload button to upload your apk</p><button>Upload</button>
     </form>
 <?php
     }
