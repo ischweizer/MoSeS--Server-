@@ -32,15 +32,15 @@ if(!empty($USER)){
                       
       }else{
           $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 
-                          "STATUS" => "FAILURE");
+                          "STATUS" => "FAILURE_NO_SUCH_APK");
       }
    }else{
        $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 
-                       "STATUS" => "FAILURE");
+                       "STATUS" => "FAILURE_INVALID_SESSION");
    }
 }else{
     $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 
-                    "STATUS" => "FAILURE");
+                    "STATUS" => "FAILURE_NO_SUCH_USER");
 }
 
 print(json_encode($return));
