@@ -182,8 +182,8 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     */
     $sql = "INSERT INTO apk (userid, userhash, apkname, 
                              apkhash, sensors, description,
-                             apktitle, restriction_user_number, pending_users,
-                             candidates, notified_users, androidversion)
+                             apktitle, restriction_device_number, pending_devices,
+                             candidates, notified_devices, androidversion)
                               VALUES 
                               (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', 
                               '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
@@ -192,31 +192,35 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
+    //$db->close();
     
-    $LAST_INSERTED_ID = $db->lastInsertId();
+    //$LAST_INSERTED_ID = $db->lastInsertId();
     
-    include_once(MOSES_HOME ."/include/managers/GooglePushManager.php");
+  //  include_once(MOSES_HOME ."/include/managers/GooglePushManager.php");
                       
     
     // ##### TEMP ##############################
     
-    $temp = array();
+   // $temp = array();
         
-    foreach(json_decode($candidates) as $candidate){
-        $sql = "SELECT c2dm FROM hardware WHERE hwid=".$candidate;
-        $result = $db->query($sql);
-        $row = $result->fetch();
-        if(!empty($row)){
-            $temp[] = array("c2dm" => $row['c2dm']);
-        }
-    }
+   // foreach(json_decode($candidates) as $candidate){
+     //   $sql = "SELECT c2dm FROM hardware WHERE hwid=".$candidate;
+      //  $result = $db->query($sql);
+       // $row = $result->fetch();
+        //if(!empty($row)){
+        //    $temp[] = array("c2dm" => $row['c2dm']);
+        //}
+    //}
     
     
-    $logger->logInfo("PUSH SENT TO #########################");
-    $logger->logInfo(print_r($temp, true));
+   // $logger->logInfo("PUSH SENT TO #########################");
+    //$logger->logInfo(print_r($temp, true));
     
     
-   GooglePushManager::googlePushSend($LAST_INSERTED_ID, $temp, $logger); 
+   //GooglePushManager::googlePushSend($LAST_INSERTED_ID, $temp, $logger);
+   
+   include_once(MOSES_HOME."/ustudy.php");
+   
 
     header("Location: ucp.php?m=upload&res=1");
     //echo 'Your file "'. $filename .'" was successfully uploaded.';

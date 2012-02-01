@@ -1,6 +1,10 @@
 <?php
 
 $logger->logInfo("GET APK INFO");
+
+$logger->logInfo("JSON OBECT RECIVED");
+$logger->logInfo(print_r($data, true));
+
                     
 $USER = LoginManager::getLoggedInUser($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $data->SESSIONID);
 
@@ -20,7 +24,7 @@ if(!empty($USER)){
       
       $APK_ID = $data->ID;
       
-      $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $USERID, $APK_ID);
+      $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $USERID, $APK_ID, $logger);
       
       if(!empty($APK)){
           

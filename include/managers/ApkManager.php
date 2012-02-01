@@ -31,11 +31,15 @@ class ApkManager{
     * @param mixed $userID
     * @param mixed $apkID
     */
-    public static function getApk($db, $apkTable, $userID, $apkID){
+    public static function getApk($db, $apkTable, $userID, $apkID, $logger){
         
         $sql = "SELECT *  
                FROM ". $apkTable ." 
-               WHERE userid = ". $userID ." AND apkid = '". $apkID ."'";
+               WHERE apkid = ". intval($apkID);
+               //WHERE userid = ". $userID ." AND apkid = ". intval($apkID);
+               
+        $logger->logInfo("#########################getApk Function#######################"); 
+        $logger->logInfo($sql); 
                             
        $result = $db->query($sql);
        $row = $result->fetch();

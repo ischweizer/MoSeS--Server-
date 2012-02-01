@@ -12,6 +12,9 @@ class GooglePushManager
     * @param logger the Logger
     */
     public static function googlePushSend($apkid, $targetDevices, $logger){
+        
+        //$logger->logInfo("GOOGLE PUSH MANAGER TARGET DEVICES");
+        //$logger->logInfo(print_r($targetDevices, true));
     
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
         $account = "moses.tud@googlemail.com"; // Account
@@ -27,8 +30,8 @@ class GooglePushManager
         $data = curl_exec($req);
         
         
-        $logger->logInfo("ANSWER FROM GOOGLE REGARDING AUTHENTIFICATION: ");
-        $logger->logInfo(print_r($data, true));
+        //$logger->logInfo("ANSWER FROM GOOGLE REGARDING AUTHENTIFICATION: ");
+       // $logger->logInfo(print_r($data, true));
         
         
         curl_close($req);
@@ -45,7 +48,7 @@ class GooglePushManager
             $device_id = "1"; 
 
             $headers = array('Authorization: GoogleLogin auth=' . $authKey);
-            $data = array('registration_id' => $GOOGLE_C2DM_ID['c2dm'], 'collapse_key' => 'ck_' . $device_id, 'data.MESSAGE' => "USERSTUDY", 'data.APKID' => $apkid);
+            $data = array('registration_id' => $GOOGLE_C2DM_ID, 'collapse_key' => 'ck_' . $device_id, 'data.MESSAGE' => "USERSTUDY", 'data.APKID' => $apkid);
 
             $req = curl_init();
             curl_setopt($req, CURLOPT_URL, "https://android.apis.google.com/c2dm/send");
@@ -57,8 +60,8 @@ class GooglePushManager
 
             $response = curl_exec($req);
             
-            $logger->logInfo("ANSWER FROM GOOGLE REGARDING PUSH: ");
-            $logger->logInfo(print_r($response, true));
+           // $logger->logInfo("ANSWER FROM GOOGLE REGARDING PUSH: ");
+            //$logger->logInfo(print_r($response, true));
         
         }
       
