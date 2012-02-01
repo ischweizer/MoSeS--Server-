@@ -9,8 +9,9 @@ class GooglePushManager
     * 
     * @param String $apkid  the id for the user study
     * @param String $targetDevices array of String ids of target devices c2dm-ids
+    * @param logger the Logger
     */
-    public static function googlePushSend($apkid, $targetDevices){
+    public static function googlePushSend($apkid, $targetDevices, $logger){
     
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
         $account = "moses.tud@googlemail.com"; // Account
@@ -24,6 +25,12 @@ class GooglePushManager
         curl_setopt($req, CURLOPT_POSTFIELDS, $post_params);
         curl_setopt($req, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($req);
+        
+        
+        $logger->logInfo("ANSWER FROM GOOGLE REGARDING AUTHENTIFICATION: ");
+        $logger->logInfo(print_r($data, true));
+        
+        
         curl_close($req);
                         
         $data = trim($data);
@@ -49,6 +56,9 @@ class GooglePushManager
             curl_setopt($req, CURLOPT_POSTFIELDS, $data);
 
             $response = curl_exec($req);
+            
+            $logger->logInfo("ANSWER FROM GOOGLE REGARDING PUSH: ");
+            $logger->logInfo(print_r($response, true));
         
         }
       

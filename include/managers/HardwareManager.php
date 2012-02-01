@@ -165,6 +165,35 @@ class HardwareManager{
        return null;
     }
     
+    
+    
+    
+    /**
+    * Returns an array of all hardware-ids that can install an apk
+    * with required android version and required sensors
+    * 
+    * @param mixed $db the database
+    * @param String $hardwareTable the name of the hardware table to search in
+    * @param String $androidVersion the lowest android version required by the apk
+    */
+    public static function getCandidatesForAndroid($db, $hardwareTable, $androidVersion){
+        
+        // get for android version
+        $sql = "SELECT hwid, filter
+                    FROM " .$hardwareTable.
+                    " WHERE androidversion >=".$androidVersion;
+        
+        $result = $db->query($sql);
+        
+        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $rows;
+    }
+    
+    
+    
+    
+    
     /**
     * Just sorts sensors in asc order
     * and removes duplicates

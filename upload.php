@@ -7,6 +7,8 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
 //print_r($_POST);
 
 include_once("./config.php");
+include_once(MOSES_HOME."/include/functions/func.php");
+include_once(MOSES_HOME."/include/functions/logger.php");
     
 /**
 *  SETTINGS FOR UPLOAD
@@ -124,61 +126,69 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $RESTRICTION_USER_NUMBER = -1;
     $SELECTED_USERS_LIST = '';
     
+    // PREPARING VARIABLES FOR INSERTION TO DB
+    $candidates = array();
+    $pending_users = array();
+    $notified_users = array();
+    
     if(isset($_POST['restrict_users_number']) && isset($_POST['number_restricted_users'])){
         
         $RESTRICTION_CHECHED = (preg_replace('/[^0-9]/', '', $_POST['restrict_users_number']) == '1') ? true : false;
         
+        // USER STUDY REQUESTED
         if($RESTRICTION_CHECHED){
             $RESTRICTION_USER_NUMBER = preg_replace('/[^0-9]/', '', $_POST['number_restricted_users']);
             
-            $sql = "SELECT userid
-                    FROM user
-                    WHERE userid != 1";
-                    
-            $result = $db->query($sql);
-            $row = $result->fetchAll(PDO::FETCH_COLUMN);
+            include_once(MOSES_HOME."/include/managers/HardwareManager.php");
+            // get the list of candidates with the specified android version
+            $rows =  HardwareManager::getCandidatesForAndroid($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION);
             
-            if(!empty($row)){
+            // check the filters
+            if(!empty($rows)){
                 
-                $user_count_to_generate = 1; // default value
-                $users_array = array();
+                $logger->logInfo("ROWS i upload.php #########################");
+                $logger->logInfo(print_r($rows, true));
                 
-                if(count($row) < $RESTRICTION_USER_NUMBER){
-                    $user_count_to_generate = count($row);    
-                }else{
-                    $user_count_to_generate = $RESTRICTION_USER_NUMBER;
+                foreach($rows as $hardware){
+                    
+                    
+                    $hwFilter_array = json_decode($hardware['filter']);
+                    $apkSensors_array = json_decode($SENSOR_LIST_STRING);
+                    
+                    $logger->logInfo("hwFilter_array #########################");
+                    $logger->logInfo(print_r($hwFilter_array, true));
+                    
+                    if(isFilterMatch($hwFilter_array, $apkSensors_array)){
+                        $candidates[] = intval($hardware['hwid']);
                 }
-                
-                foreach($row as $id){
-                    $users_array[] = $id;
-                }
-                
-                shuffle($users_array);
-                $random_indexes = array_rand($users_array, $user_count_to_generate);
-                
-                // deep shit tho
-                for($i=0; $i < count($random_indexes); $i++){
-                   $random_users_array[] = $users_array[$random_indexes[$i]];
-                }
-                
-                $SELECTED_USERS_LIST = implode(',', $random_users_array);
+            }
+            
+            shuffle($candidates);
+            
             }
         }
     }
     
     
+    // WRITE APK TO DATABASE AND START USER STUDY IF NEEDED
+   
+    // convert to json 
+    $candidates = json_encode($candidates);
+    $pending_users = json_encode($pending_users);
+    $notified_users = json_encode($notified_users);
+    
     /**
-    * Store filename and hash in DB
+    * Store filename, hash in DB and other informations
     */
     $sql = "INSERT INTO apk (userid, userhash, apkname, 
                              apkhash, sensors, description,
-                             apktitle, restriction_user_number, selected_users_list,
-                             androidversion)
+                             apktitle, restriction_user_number, pending_users,
+                             candidates, notified_users, androidversion)
                               VALUES 
                               (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', 
                               '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
-                              '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $SELECTED_USERS_LIST ."',
-                              '". $APK_ANDROID_VERSION ."')"; 
+                              '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $pending_users ."',
+                              '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."')"; 
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
@@ -190,17 +200,23 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     
     // ##### TEMP ##############################
     
-    $sql = "SELECT c2dm FROM hardware";
+    $temp = array();
+        
+    foreach(json_decode($candidates) as $candidate){
+        $sql = "SELECT c2dm FROM hardware WHERE hwid=".$candidate;
+        $result = $db->query($sql);
+        $row = $result->fetch();
+        if(!empty($row)){
+            $temp[] = array("c2dm" => $row['c2dm']);
+        }
+    }
     
-    $result = $db->query($sql);
-    $targetDevices = $result->fetchAll(PDO::FETCH_ASSOC);
+    
+    $logger->logInfo("PUSH SENT TO #########################");
+    $logger->logInfo(print_r($temp, true));
     
     
-    //#########################################
-                      
-    
-    
-    GooglePushManager::googlePushSend($LAST_INSERTED_ID, $targetDevices);
+   GooglePushManager::googlePushSend($LAST_INSERTED_ID, $temp, $logger); 
 
     header("Location: ucp.php?m=upload&res=1");
     //echo 'Your file "'. $filename .'" was successfully uploaded.';
@@ -208,6 +224,5 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     header("Location: ucp.php?m=upload&res=0");
     //echo 'Some error occured while uploading a file. Please try again later.';
 }
-  
 
 ?>
