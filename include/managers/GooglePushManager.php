@@ -13,8 +13,6 @@ class GooglePushManager
     */
     public static function googlePushSend($apkid, $targetDevices, $logger){
         
-        //$logger->logInfo("GOOGLE PUSH MANAGER TARGET DEVICES");
-        //$logger->logInfo(print_r($targetDevices, true));
     
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
         $account = "moses.tud@googlemail.com"; // Account
@@ -28,10 +26,6 @@ class GooglePushManager
         curl_setopt($req, CURLOPT_POSTFIELDS, $post_params);
         curl_setopt($req, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($req);
-        
-        
-        //$logger->logInfo("ANSWER FROM GOOGLE REGARDING AUTHENTIFICATION: ");
-       // $logger->logInfo(print_r($data, true));
         
         
         curl_close($req);
@@ -60,8 +54,6 @@ class GooglePushManager
 
             $response = curl_exec($req);
             
-           // $logger->logInfo("ANSWER FROM GOOGLE REGARDING PUSH: ");
-            //$logger->logInfo(print_r($response, true));
         
         }
       

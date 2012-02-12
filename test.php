@@ -104,6 +104,8 @@ if(isset($_POST['HTTP_JSON'])){
             
             case "APK_INSTALLED":
             
+                $logger->logInfo("######################## APK_INSTALLED ARRIVED #########################");
+            
                 include_once(MOSES_HOME . "/include/events/apk_installed.php.inc");
                 
                 break;

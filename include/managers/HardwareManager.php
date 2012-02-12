@@ -167,6 +167,33 @@ class HardwareManager{
     
     
     
+    /**
+    * Returns the hardwareID
+    * 
+    * @param mixed $db
+    * @param mixed $hardwareTable
+    * @param mixed $userID
+    * @param mixed $deviceID
+    */
+    public static function getHardwareID($db, $hardwareTable, $userID, $deviceID){
+        
+        $sql = "SELECT hwid 
+                   FROM ". $hardwareTable ." 
+                   WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+                    
+       $result = $db->query($sql);
+       $row = $result->fetch();
+       
+       if(!empty($row)){
+           return $row['hwid'];
+       }
+       
+       return -1;
+    }
+    
+    
+    
+    
     
     /**
     * Returns an array of all hardware-ids that can install an apk

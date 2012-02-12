@@ -22,7 +22,7 @@ if(!empty($USER)){
       
       $APKID = $data->APKID;
       
-      $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $USERID, $APKID);
+      $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $USERID, $APKID, $logger);
       
       if(!empty($APK)){
 

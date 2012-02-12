@@ -130,6 +130,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $candidates = array();
     $pending_users = array();
     $notified_users = array();
+    $USTUDY_FINISHED = 1;
     
     if(isset($_POST['restrict_users_number']) && isset($_POST['number_restricted_users'])){
         
@@ -167,6 +168,9 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
             
             }
         }
+        
+        $USTUDY_FINISHED = 0; // a user study has to be done
+        
     }
     
     
@@ -183,12 +187,12 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $sql = "INSERT INTO apk (userid, userhash, apkname, 
                              apkhash, sensors, description,
                              apktitle, restriction_device_number, pending_devices,
-                             candidates, notified_devices, androidversion)
+                             candidates, notified_devices, androidversion, ustudy_finished)
                               VALUES 
                               (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', 
                               '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
                               '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $pending_users ."',
-                              '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."')"; 
+                              '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."', ". $USTUDY_FINISHED .")";
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
@@ -219,7 +223,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     
    //GooglePushManager::googlePushSend($LAST_INSERTED_ID, $temp, $logger);
    
-   include_once(MOSES_HOME."/ustudy.php");
+   //include_once(MOSES_HOME."/ustudy.php");
    
 
     header("Location: ucp.php?m=upload&res=1");

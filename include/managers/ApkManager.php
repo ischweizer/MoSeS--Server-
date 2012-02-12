@@ -86,23 +86,23 @@ class ApkManager{
     }
     
     /**
-    * returns true if the userID is in the list of selected users (for user study)
+    * returns true if the deviceID is in the list of pending devices (for user study)
     * 
     * @param mixed $db
     * @param mixed $apkTable
     * @param mixed $apkID
     * @param mixed $userID
     */
-    public static function isSelectedUser($db, $apkTable, $apkID, $userID){
+    public static function isSelectedDevice($db, $apkTable, $apkID, $hardwareID){
         
-        $sql = "SELECT selected_users_list FROM " .$apkTable. " WHERE apkid= ".$apkID;
+        $sql = "SELECT pending_devices FROM " .$apkTable. " WHERE apkid= ".$apkID;
         
         $result = $db->query($sql);
         $row = $result->fetch();
         
         if(!empty($row)){
-            $selectedUsers = explode(',', $row['selected_users_list']);
-            if(in_array($userID, $selectedUsers))
+            $selectedDevices = explode(',', $row['pending_devices']);
+            if(in_array($hardwareID, $selectedDevices))
                 return true;
         }
         

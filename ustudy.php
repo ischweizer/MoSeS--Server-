@@ -3,10 +3,13 @@
 // this is a cronjob used for user studies
 
 // get all apks
-include_once('./config.php');
-include_once(MOSES_HOME."/include/functions/logger.php");
-include_once(MOSES_HOME. "/include/functions/dbconnect.php"); 
-$sql = "SELECT * FROM " .$CONFIG['DB_TABLE']['APK']. " WHERE restriction_device_number > 0";
+include_once('/home/dasense/moses/config.php');
+include_once(MOSES_HOME."/include/functions/cronLogger.php");
+include_once(MOSES_HOME. "/include/functions/dbconnect.php");
+
+$logger->logInfo(" ###################### STARTED USER STUDY CRONJOB ############################## ");
+ 
+$sql = "SELECT * FROM " .$CONFIG['DB_TABLE']['APK']. " WHERE restriction_device_number > 0 AND ustudy_finished = 0";
         
 $result = $db->query($sql);
 $rows = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -41,6 +44,11 @@ foreach($rows as $row){
             $candidates = array_slice($candidates, count($pending_devices));
         }
         
+        $ustudyFinished = 0; // this value will be written back to apk database
+        if(count($pending_devices) == 0 && count($candidates) == 0){
+            $ustudyFinished = 1; // user study is finished when there are no devices pending for installation and no potentiall candidates to send the notification to
+        }
+        
         // extracting c2dms for google
         
         
@@ -67,7 +75,7 @@ foreach($rows as $row){
         
         $sql = "UPDATE " .$CONFIG['DB_TABLE']['APK']. "
         SET pending_devices='".$pending_devices."' , candidates='".$candidates."' , notified_devices='".$notified_devices."' , last_round_time=".time().
-            " WHERE apkid=".$row['apkid'];
+            ", ustudy_finished = ".$ustudyFinished. " WHERE apkid=".$row['apkid'];
         
         
         $logger->logInfo(print_r("QUERY IN ustudy", true));
@@ -85,6 +93,8 @@ foreach($rows as $row){
          
     }
 }
+
+$logger->logInfo(" ###################### USER STUDY CRONJOB FINISHED ############################## ");
 
 
 ?>

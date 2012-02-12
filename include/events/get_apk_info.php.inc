@@ -1,9 +1,8 @@
 <?php
 
-$logger->logInfo("GET APK INFO");
+$logger->logInfo("GET APK INFO ARRIVED");
 
-$logger->logInfo("JSON OBECT RECIVED");
-$logger->logInfo(print_r($data, true));
+$logger->logInfo("SESSIONID PROVIDED BY THE CLIENT: ".$data->SESSIONID);
 
                     
 $USER = LoginManager::getLoggedInUser($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $data->SESSIONID);
@@ -44,7 +43,7 @@ if(!empty($USER)){
    }
 }else{
     $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 
-                    "STATUS" => "FAILURE_NO_SUCH_USER");
+                    "STATUS" => "FAILURE_INVALID_SESSION");
 }
 
 print(json_encode($return));

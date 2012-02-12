@@ -27,11 +27,13 @@ if(!empty($USER)){
               // update the usage count
               ApkManager::incrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $APKID);   
          }
-         else
-            if(ApkManager::isSelectedUser($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $APKID, $USERID)){
+         else{
+             $hardwareID= HardwareManager::getHardwareID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $data->DEVICE_ID);
+            if(ApkManager::isSelectedDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $APKID, $hardwareID)){
                 // selected user: count the succesfull installation
                 ApkManager::incrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $APKID);    
             }
+         }
      }
      
       
