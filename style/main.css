@@ -18,7 +18,9 @@ a:visited {
 .LOGO_TOP{
     float:left;
     position:relative;
-     margin: 0 0 0 2em;
+    height: 200px;
+    width: 300px;
+    background: url("../images/moses_logo.png") no-repeat;
 }
 
 .PROJECT_NAME{
