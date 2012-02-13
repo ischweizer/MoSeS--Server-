@@ -20,7 +20,8 @@ foreach($rows as $row){
     $RESTRICTION_USER_NUMBER = $row['restriction_device_number'];
     $PARTICIPATED_COUNT = $row['participated_count'];
     $last_round_time = $row['last_round_time']; // the last time a round on this apk has been made
-    if($PARTICIPATED_COUNT < $RESTRICTION_USER_NUMBER && (empty($last_round_time) || ($last_round_time >= $CONFIG['CRON']['STUDY_TIMEOUT']))){
+    if($PARTICIPATED_COUNT < $RESTRICTION_USER_NUMBER){
+        if(empty($last_round_time) || ($last_round_time >= $CONFIG['CRON']['STUDY_TIMEOUT'])){
         $TO_CHOOSE = $RESTRICTION_USER_NUMBER - $PARTICIPATED_COUNT; // number of new devices to be selected
         $pending_devices = json_decode($row['pending_devices']); // users that have not installed the app
         $notified_devices = json_decode($row['notified_devices']); // notified users
@@ -92,6 +93,14 @@ foreach($rows as $row){
             GooglePushManager::googlePushSend($row['apkid'], $targetDevices, $logger);
          
     }
+    }
+    else{
+        // Enough devices have installed the APK. Just, mark the user study as finished
+        $sql = "UPDATE" .$CONFIG['DB_TABLE']['APK']. "SET ustudy_finished=1 WHERE apkid=".$row['apkid'];
+        $logger->logInfo(print_r($sql, true));
+        $db->exec($sql);
+    }
+    
 }
 
 $logger->logInfo(" ###################### USER STUDY CRONJOB FINISHED ############################## ");
