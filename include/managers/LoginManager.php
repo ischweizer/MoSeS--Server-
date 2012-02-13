@@ -2,18 +2,7 @@
 
 class LoginManager{
     
-    //private $db;
-    //private $logger;
     
-    public function __construct(){
-        
-        //include_once(MOSES_HOME."/include/functions/klogger.php");
-        //$this->logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO);
-        
-        //$this->logger->logInfo("MOSES HOME".MOSES_HOME);
-        
-        //$this->db = $db;
-    }
     
     /**
     * Updates user session
@@ -118,6 +107,24 @@ class LoginManager{
         }
         
         return null;
+    }
+    
+     /**
+    * Returns deviceID and lastactivity of the logged in device
+    * 
+    * @param string $sessionID
+    */
+    public static function getLoggedInDevice($db, $aSessionTable, $sessionID){
+      
+        $sql = "SELECT deviceid, lastactivity
+                                FROM ". $aSessionTable ." 
+                                WHERE session_id = '". $sessionID ."'"; 
+                
+        $result = $db->query($sql);
+        $row = $result->fetch();
+        
+        return $row;
+        
     }
     
     /**
