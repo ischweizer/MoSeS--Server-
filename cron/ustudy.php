@@ -96,7 +96,7 @@ foreach($rows as $row){
     }
     else{
         // Enough devices have installed the APK. Just, mark the user study as finished
-        $sql = "UPDATE" .$CONFIG['DB_TABLE']['APK']. "SET ustudy_finished=1 WHERE apkid=".$row['apkid'];
+        $sql = "UPDATE " .$CONFIG['DB_TABLE']['APK']. " SET ustudy_finished=1 WHERE apkid=".$row['apkid'];
         $logger->logInfo(print_r($sql, true));
         $db->exec($sql);
     }
