@@ -137,6 +137,10 @@ img.aligncenter {
 	background: url(../images/img10.jpg) no-repeat right top;
 }
 
+.current_page_item:hover{
+   background: #ddd; 
+}
+
 #menu a:hover {
 	text-decoration: none;
 }
