@@ -11,7 +11,7 @@ h1, h2, h3 {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
-	color: #FFFFFF;
+	color: #FF4500;
 }
 
 h1 {
@@ -72,13 +72,13 @@ img.aligncenter {
 #logo {
 	float: left;
 	width: 660px;
-	height: 63px;
+	height: 63px;    
 	background: url(../images/img03.jpg) no-repeat left top;
 }
 
 #logo h1 {
 	margin: 0;
-	padding: 5px 0px 0px 30px;
+	padding: 5px 0px 0px 95px;
 }
 
 #logo h1 {
@@ -129,20 +129,26 @@ img.aligncenter {
 	border: none;
 }
 
-#menu li.current_page_item {
-	background: url(../images/img09.jpg) no-repeat left top;
+#menu .current_page_item{
+	/*background: url(../images/img09.jpg) no-repeat left top;*/
+    
+    background-color: #dd5525;
+    
+    border-radius: 25px; 
+    -moz-border-radius: 25px; 
+    -webkit-border-radius: 25px; 
+    border: 0px solid #800000;
 }
 
-#menu .current_page_item a {
-	background: url(../images/img10.jpg) no-repeat right top;
-}
+#menu a:hover{
+	/*background: url(../images/img10.jpg) no-repeat right top;*/
 
-.current_page_item:hover{
-   background: #ddd; 
-}
-
-#menu a:hover {
-	text-decoration: none;
+    background-color: #dd5525;
+    
+    border-radius: 25px; 
+    -moz-border-radius: 25px; 
+    -webkit-border-radius: 25px; 
+    border: 0px solid #800000;
 }
 
 #splash {
