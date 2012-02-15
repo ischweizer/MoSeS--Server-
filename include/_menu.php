@@ -1,4 +1,3 @@
-</head>
 <body>
 <div class="wrapper">
 <div class="LOGO_TOP"></div>

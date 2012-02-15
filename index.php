@@ -1,7 +1,6 @@
 <?php
 session_start();
   
-  include_once("./include/_top.php");
   include_once("./include/_header.php");
   
   if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
@@ -116,5 +115,5 @@ if(!isset($_SESSION["USER_LOGGED_IN"])){
 ?>
 
 <?php  
-  include_once("./include/_bottom.php");  
+  include_once("./include/_footer.php");  
 ?>

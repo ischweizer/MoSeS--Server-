@@ -1,6 +1,5 @@
 <?php
   
-  include_once("./include/_top.php");
   include_once("./include/_header.php");
   
 ?>
@@ -27,5 +26,5 @@
 </form>
 
 <?php  
-  include_once("./include/_bottom.php");  
+  include_once("./include/_footer.php");  
 ?>

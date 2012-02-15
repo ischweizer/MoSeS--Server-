@@ -1,7 +1,6 @@
 <?php
 session_start();
   
-  include_once("./include/_top.php");
   include_once("./include/_header.php");
   
 ?>
@@ -22,5 +21,5 @@ Here will be some text about our project
 </div>
 
 <?php  
-  include_once("./include/_bottom.php");  
+  include_once("./include/_footer.php");  
 ?>

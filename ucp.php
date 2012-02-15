@@ -6,7 +6,6 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
     //die('Only registered users may access that file!');
     
 include_once("./include/functions/func.php");
-include_once("./include/_top.php");
 include_once("./include/_header.php");
 
 $apk_listing = '';  // just init
@@ -639,5 +638,5 @@ if(isset($_GET['m'])){
 ?>
 
 <?php  
-  include_once("./include/_bottom.php");  
+  include_once("./include/_footer.php");  
 ?>

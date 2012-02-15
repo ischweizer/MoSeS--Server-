@@ -1,75 +1,74 @@
 <?php
 session_start();
 
-  include_once("./include/_top.php");
-  include_once("./include/_header.php");
+include_once("./include/_header.php");
 
-  if(isset($_GET["confirm"]) && strlen($_GET["confirm"]) == 32){
-      
-       include_once("./include/functions/dbconnect.php"); 
-       
-       $sql = "SELECT userid FROM user WHERE hash = '". $_GET["confirm"] ."'";
-       
-       $result = $db->query($sql);
-       
-       $row = $result->fetch();
-       
-       if(!empty($row)){
-          $sql = "UPDATE user SET confirmed=". 1 ." WHERE userid=". $row["userid"];
-          
-          $db->exec($sql);
-           
-       }else{
-           die("You provided wrong hash.");
-       }
-    }
+if(isset($_GET["confirm"]) && strlen($_GET["confirm"]) == 32){
   
-  if(isset($_POST["submitted"])){
-      
-      include_once("./include/functions/dbconnect.php");
-      
-      $USER_CREATED = 1;
-      
-      $FIRSTNAME = $_POST["firstname"];
-      $LASTNAME = $_POST["lastname"];
-      $EMAIL = $_POST["email"];
-      $LOGIN = $_POST["login"];
-      $PASSWORD = $_POST["password"];
-      $USER_TITLE = $_POST["usertitle"];
-      $CUR_TIME = time();
-      $CONFIRM_CODE = md5($EMAIL);
-      
-      $sql = "INSERT INTO user (usergroupid, firstname, lastname, 
-                                              login, password, hash, usertitle,
-                                              email, ipaddress, lastactivity, 
-                                              joindate, passworddate)
-                                              VALUES 
-                                              (1, '". $FIRSTNAME ."', '". $LASTNAME ."',
-                                              '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
-                                              '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
-                                              ". $CUR_TIME .", ". $CUR_TIME .")";
+   include_once("./include/functions/dbconnect.php"); 
+   
+   $sql = "SELECT userid FROM user WHERE hash = '". $_GET["confirm"] ."'";
+   
+   $result = $db->query($sql);
+   
+   $row = $result->fetch();
+   
+   if(!empty($row)){
+      $sql = "UPDATE user SET confirmed=". 1 ." WHERE userid=". $row["userid"];
       
       $db->exec($sql);
-        
-                                              
-      $to = $EMAIL; 
-      $subject = "Our site - Please confirm the registration"; 
-      $from = "admin@localhost"; 
-          
-      $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
-      $message .= "Please follow this link: ";
-      $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
        
-      $headers = "From: $from"; 
-      $sent = mail($to, $subject, $message, $headers); 
+   }else{
+       die("You provided wrong hash.");
+   }
+}
+
+if(isset($_POST["submitted"])){
+  
+  include_once("./include/functions/dbconnect.php");
+  
+  $USER_CREATED = 1;
+  
+  $FIRSTNAME = $_POST["firstname"];
+  $LASTNAME = $_POST["lastname"];
+  $EMAIL = $_POST["email"];
+  $LOGIN = $_POST["login"];
+  $PASSWORD = $_POST["password"];
+  $USER_TITLE = $_POST["usertitle"];
+  $CUR_TIME = time();
+  $CONFIRM_CODE = md5($EMAIL);
+  
+  $sql = "INSERT INTO user (usergroupid, firstname, lastname, 
+                                          login, password, hash, usertitle,
+                                          email, ipaddress, lastactivity, 
+                                          joindate, passworddate)
+                                          VALUES 
+                                          (1, '". $FIRSTNAME ."', '". $LASTNAME ."',
+                                          '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
+                                          '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
+                                          ". $CUR_TIME .", ". $CUR_TIME .")";
+  
+  $db->exec($sql);
+    
+                                          
+  $to = $EMAIL; 
+  $subject = "Our site - Please confirm the registration"; 
+  $from = "admin@localhost"; 
       
-      if($sent) {
-          echo("Your mail was sent successfully"); 
-      } else {
-          die("We encountered an error sending your mail"); 
-      }
-      
+  $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
+  $message .= "Please follow this link: ";
+  $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
+   
+  $headers = "From: $from"; 
+  $sent = mail($to, $subject, $message, $headers); 
+  
+  if($sent) {
+      echo("Your mail was sent successfully"); 
+  } else {
+      die("We encountered an error sending your mail"); 
   }
+  
+}
   
 ?>
   
@@ -137,5 +136,5 @@ session_start();
 ?>
 
 <?php  
-  include_once("./include/_bottom.php");  
+  include_once("./include/_footer.php");  
 ?>
