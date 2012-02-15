@@ -1,38 +1,41 @@
+</head>
 <body>
-<div class="wrapper">
-<div class="LOGO_TOP"></div>
-<div class="PROJECT_NAME"><h1>MoSeS</h1></div>
-
-<div class="clear"></div>
-
-<ul class="menubar">
-    <li<?php if(isset($_SERVER["SCRIPT_NAME"])){
+<div id="wrapper">
+    <div id="menu">
+        <ul>
+        <li <?php 
         
-        $SCRIPT = strtolower(basename($_SERVER["SCRIPT_NAME"]));
+            if(isset($_SERVER["SCRIPT_NAME"])){
+            
+                $SCRIPT = strtolower(basename($_SERVER["SCRIPT_NAME"]));
+            
+            if(strpos($SCRIPT, "index") !== false){
+                echo "class=\"current_page_item\"";
+            }
+        } 
         
-        if(strpos($SCRIPT, "index") !== false){
-            echo " id=\"menu_selected\"";
-        }
-          
-    } ?>><a href="./">HOME</a></li>
-    <li<?php 
-        if(strpos($SCRIPT, "download") !== false){
-            echo " id=\"menu_selected\"";
-        } ?>><a href="./download.php">DOWNLOAD</a></li>
-    <li<?php 
-        if(strpos($SCRIPT, "docs") !== false){
-            echo " id=\"menu_selected\"";
-        } ?>><a href="./docs.php">DOCU</a></li>
-    <li<?php 
-        if(strpos($SCRIPT, "about") !== false){
-            echo " id=\"menu_selected\"";
-        } ?>><a href="./about.php">ABOUT</a></li>
+        ?>><span><a href="./index.php">Home</a></span></li>
+        <li <?php 
+            if(strpos($SCRIPT, "download") !== false){
+                echo "class=\"current_page_item\"";
+            } ?>><span><a href="./download.php">Download</a></span></li>
+        <li <?php 
+            if(strpos($SCRIPT, "docs") !== false){
+                echo "class=\"current_page_item\"";
+            } ?>><span><a href="./docs.php">Docs</a></span></li>
+        <li <?php 
+            if(strpos($SCRIPT, "about") !== false){
+                echo "class=\"current_page_item\"";
+            } ?>><span><a href="./about.php">About</a></span></li>
 </ul>
+</div>
+<!-- end #menu -->
 
 <?php
 
 if(isset($_SESSION["USER_LOGGED_IN"])){
-
+    
+/*
 ?>
 <div class="clear"></div>
 <ul class="greet_user">
@@ -41,7 +44,7 @@ if(isset($_SESSION["USER_LOGGED_IN"])){
 </ul>
 
 <?php
+*/
+
 }
 ?>
-
-<div class="clear"></div>

@@ -1,7 +1,8 @@
-<div class="clear"></div>
-
-<div class="footer"><p>MoSeS &copy; 2011</p></div>
-
+<div id="footer-wrapper">
+    <div id="footer">
+        <p>(c) MoSeS <br />2011-2012</p>
+    </div>
+    <!-- end #footer -->
 </div>
 </body>
 </html>
