@@ -23,12 +23,12 @@ if(isset($_POST['HTTP_JSON'])){
     
         $logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO);
         
-        $logger->logInfo("JSON OBJECT ARRIVED #########################"); 
-        
-        $SENSORS = json_encode($data->SENSORS);
-        $data->SENSORS = $SENSORS;
-        
-        //$logger->logInfo('Sensors: ' . print_r($data, true));
+        $logger->logInfo("###################### JSON OBJECT ARRIVED #########################");
+        if($data->SENSORS != null){
+            $SENSORS = json_encode($data->SENSORS);
+            $data->SENSORS = $SENSORS;  
+        }
+        $logger->logInfo(var_export($data, true));
         
         /**
         *  Here will be selected which MESSAGE type was sent

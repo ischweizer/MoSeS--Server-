@@ -116,9 +116,7 @@ class LoginManager{
     */
     public static function getLoggedInDevice($db, $aSessionTable, $sessionID){
       
-        $sql = "SELECT deviceid, lastactivity
-                                FROM ". $aSessionTable ." 
-                                WHERE session_id = '". $sessionID ."'"; 
+        $sql = "SELECT deviceid, lastactivity, userid FROM ". $aSessionTable ." WHERE session_id = '". $sessionID ."'"; 
                 
         $result = $db->query($sql);
         $row = $result->fetch();
