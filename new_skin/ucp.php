@@ -3,7 +3,6 @@ session_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']))
     header("Location: /moses/");
-    //die('Only registered users may access that file!');
     
 include_once("./include/functions/func.php");
 include_once("./include/_header.php");
