@@ -1,7 +1,6 @@
 <?php
   
-// SCRIPT USED FOR CLEANING OUTDATED SESSIONS
-// get all apks
+// SCRIPT USED FOR CLEANING OBSOLETE APKs from APK-Directory
 include_once('/home/dasense/moses/config.php');
 include_once(MOSES_HOME."/include/functions/cronLogger.php");
 include_once(MOSES_HOME. "/include/functions/dbconnect.php");

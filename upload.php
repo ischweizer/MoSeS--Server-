@@ -42,10 +42,13 @@ $uploadPath .= $HASH_DIR . "/";
 clearstatcache();
 
 if(!is_dir($uploadPath)){
-    if(!mkdir($uploadPath, 0775, true)){
+    $oldumask = umask(0);
+    if(!mkdir($uploadPath, 0777, true)){
         // folder failed to create
-        header("Location: ucp.php?m=upload&res=0");     
-    }    
+        umask($oldumask);
+        header("Location: ucp.php?m=upload&res=0");
+    }
+    umask($oldumask); 
 }
    
 }else{
@@ -69,7 +72,7 @@ if(!is_writable($uploadPath))
   header("Location: ucp.php?m=upload&res=4");
   //die("You don't have permission to upload.");
  
-chmod($_FILES['userfile']['tmp_name'], 0775);       
+chmod($_FILES['userfile']['tmp_name'], 0777);       
 
 /**
 * Moving file into its directory and storing that data in DB
@@ -78,7 +81,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     && move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt)){
     
     // fix file permission
-    if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0775)){
+    if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777)){
        header("Location: ucp.php?m=upload&res=4"); 
     }
      
