@@ -17,9 +17,10 @@ if(isset($_GET['m'])){
     
     switch($RAW_MODE){
         case 'UPLOAD':
-                       $MODE = 'UPLOAD';
                        
-                       if(isset($_GET['res'])){
+                       if(isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
+                           
+                           $MODE = 'UPLOAD';
                         
                            $RAW_UPLOAD_RESULT = strtoupper(trim($_GET['res']));
                            
@@ -52,6 +53,7 @@ if(isset($_GET['m'])){
                        break; 
         
         case 'LIST':
+            if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                    $MODE = 'LIST'; 
                    
                    include_once("./include/functions/dbconnect.php");
@@ -114,7 +116,8 @@ if(isset($_GET['m'])){
                        $LIST_APK = 1;
                    }else{
                        $LIST_APK = 0;
-                   }    
+                   }
+            }   
                    
                    break;
                    
@@ -296,11 +299,20 @@ if(isset($_GET['m'])){
     
         ?>
         <li><a href="ucp.php">Profile</a></li>
+        <?php
+         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
+             
+         
+         
+        ?>
         <li><a href="ucp.php?m=upload">APK Upload</a></li>
         <li>&nbsp;</li>
         <li><a href="ucp.php?m=list">Show all APKs</a></li>
+        <?php
+         }
+?>
         <li>&nbsp;</li>
-        <li><a href="ucp.php?m=promo">Scientist account request</a></li>
+        <li><a href="ucp.php?m=promo">Request scientist account</a></li>
     </ul>
 </div>
 

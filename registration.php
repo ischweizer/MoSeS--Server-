@@ -43,7 +43,7 @@ if(isset($_POST["submitted"])){
                                           email, ipaddress, lastactivity, 
                                           joindate, passworddate)
                                           VALUES 
-                                          (1, '". $FIRSTNAME ."', '". $LASTNAME ."',
+                                          (0, '". $FIRSTNAME ."', '". $LASTNAME ."',
                                           '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
                                           '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
                                           ". $CUR_TIME .", ". $CUR_TIME .")";
