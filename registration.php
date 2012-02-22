@@ -79,62 +79,87 @@ if(isset($_POST["submitted"])){
 ?>  
   
 
-<div class="heading_text">Registration</div>
-
-<div class="clear"></div>
-
-<?php
-    if(isset($USER_CREATED) && $USER_CREATED == 1){
-       ?>
-       
-<div class="registration_form">
-    <fieldset>
-        <legend>Registration of new user</legend>
-        <label for="name" >Your registration was successful.</label>
-        <label for="name" >You will receive an e-mail with confirmation of registration.</label>
-    </fieldset>
+<div id="header">
+    <div id="logo">
+        <h1><a href="./index.php">Mobile Sensing System</a></h1>
+    </div>
 </div>
-       
-       <?php       
-    }else{
-?>
+<!-- <div id="splash">&nbsp;</div> -->
+<!-- end #header -->
 
-<form class="registration_form" action="./registration.php" method="post" accept-charset="UTF-8">
-    <fieldset>
-        <legend>Registration of new user</legend>
-        <label for="usertitle" >Your salutation (*): </label>
-        <div class="clear"></div>
-        <input type="text" name="usertitle" id="usertitle" maxlength="10" />
-        <div class="clear"></div>
-        <label for="firstname" >Your first name (*): </label>
-        <div class="clear"></div>
-        <input type="text" name="firstname" id="firstname" maxlength="50" />
-        <div class="clear"></div>
-        <label for="lastname" >Your last name (*): </label>
-        <div class="clear"></div>
-        <input type="text" name="lastname" id="lastname" maxlength="50" />
-        <div class="clear"></div>
-        <label for="email" >E-mail address (*):</label>
-        <div class="clear"></div>
-        <input type="text" name="email" id="email" maxlength="50" />
-        <div class="clear"></div>
-        <label for="login" >Login (*):</label>
-        <div class="clear"></div>
-        <input type="text" name="login" id="login" maxlength="50" />
-        <div class="clear"></div>
-        <label for="password" >Password (*):</label>
-        <div class="clear"></div>
-        <input type="password" name="password" id="password" maxlength="50" />
-        <div class="clear"></div>
-        <input type="hidden" name="submitted" id="submitted" value="1" />
-        <input type="submit" name="submit" value="Register" />
-    </fieldset>
-</form>
+<div id="page">
+        <div id="page-bgtop">
+            <div id="page-bgbtm">
+                <div id="content">
+                    <div class="post">
+                        <h2 class="title">Registration</h2>
+                        <div class="entry">
+                           <?php
+                                if(isset($USER_CREATED) && $USER_CREATED == 1){
+                                   ?>
+                                   
+                            <div class="registration_form">
+                                <fieldset>
+                                    <legend>Registration of new user</legend>
+                                    <label for="name" >Your registration was successful.</label>
+                                    <label for="name" >You will receive an e-mail with confirmation of registration.</label>
+                                </fieldset>
+                            </div>
+                                   
+                                   <?php       
+                                }else{
+                            ?>
+
+                            <form class="registration_form" action="./registration.php" method="post" accept-charset="UTF-8">
+                                <fieldset>
+                                    <legend>Registration of new user</legend>
+                                    <label for="usertitle" >Your salutation (*): </label>
+                                    <div class="clear"></div>
+                                    <input type="text" name="usertitle" id="usertitle" maxlength="10" />
+                                    <div class="clear"></div>
+                                    <label for="firstname" >Your first name (*): </label>
+                                    <div class="clear"></div>
+                                    <input type="text" name="firstname" id="firstname" maxlength="50" />
+                                    <div class="clear"></div>
+                                    <label for="lastname" >Your last name (*): </label>
+                                    <div class="clear"></div>
+                                    <input type="text" name="lastname" id="lastname" maxlength="50" />
+                                    <div class="clear"></div>
+                                    <label for="email" >E-mail address (*):</label>
+                                    <div class="clear"></div>
+                                    <input type="text" name="email" id="email" maxlength="50" />
+                                    <div class="clear"></div>
+                                    <label for="login" >Login (*):</label>
+                                    <div class="clear"></div>
+                                    <input type="text" name="login" id="login" maxlength="50" />
+                                    <div class="clear"></div>
+                                    <label for="password" >Password (*):</label>
+                                    <div class="clear"></div>
+                                    <input type="password" name="password" id="password" maxlength="50" />
+                                    <div class="clear"></div>
+                                    <input type="hidden" name="submitted" id="submitted" value="1" />
+                                    <input type="submit" name="submit" value="Register" />
+                                </fieldset>
+                            </form>
+
+                            <?php
+                            }
+                        ?>
+                        </div>
+                        <div style="clear: both;">&nbsp;</div>
+                    </div>
+                    <div style="clear: both;">&nbsp;</div>
+                </div>
+                <!-- end #content -->
+                <div style="clear: both;">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <!-- end #page -->
+</div>
 
 <?php
-    }
-?>
-
-<?php  
+  include_once("./include/_login_slider.php");
+ 
   include_once("./include/_footer.php");  
 ?>
