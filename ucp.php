@@ -17,10 +17,10 @@ if(isset($_GET['m'])){
     
     switch($RAW_MODE){
         case 'UPLOAD':
+        
+                     $MODE = 'UPLOAD';
                        
                        if(isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
-                           
-                           $MODE = 'UPLOAD';
                         
                            $RAW_UPLOAD_RESULT = strtoupper(trim($_GET['res']));
                            
@@ -302,16 +302,14 @@ if(isset($_GET['m'])){
         <?php
          if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
              
-         
-         
         ?>
         <li><a href="ucp.php?m=upload">APK Upload</a></li>
         <li>&nbsp;</li>
         <li><a href="ucp.php?m=list">Show all APKs</a></li>
+        <li>&nbsp;</li>
         <?php
          }
-?>
-        <li>&nbsp;</li>
+         ?>
         <li><a href="ucp.php?m=promo">Request scientist account</a></li>
     </ul>
 </div>
@@ -386,7 +384,7 @@ if(isset($_GET['m'])){
                             <?php
                             }
                             
-                            if($MODE == 'UPLOAD' && !isset($_GET['res'])){
+                            if($MODE == 'UPLOAD' && !isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                         ?>
 
                             <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">

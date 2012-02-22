@@ -14,7 +14,7 @@ if(isset($_GET["confirm"]) && strlen($_GET["confirm"]) == 32){
    $row = $result->fetch();
    
    if(!empty($row)){
-      $sql = "UPDATE user SET confirmed=". 1 ." WHERE userid=". $row["userid"];
+      $sql = "UPDATE user SET confirmed=1, usergroupid=1 WHERE userid=". $row["userid"];
       
       $db->exec($sql);
        
