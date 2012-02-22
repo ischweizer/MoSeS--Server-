@@ -70,8 +70,9 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
                     <div class="post">
                         <h2 class="title">Welcome Friend!</h2>
                         <div class="entry">
-                            <p><img src="images/moses_logo.jpg" width="143" height="143" alt="" class="alignleft border" />This is der Moses. You must love him.</p>
-                            <p>This site is under construction!</p>
+                            <p><img src="images/moses_logo.jpg" width="143" height="143" alt="" class="alignleft border" />MoSeS helps scientists from all around the world to distribute their android apps and make the world a better place.</p>
+                            <p>Every person with an Android device can contribute.<br />Feel free to register and download moses client, it's easy!</p>
+                            <p>Be adwised: this site is under construction!</p>
                         </div>
                         <div style="clear: both;">&nbsp;</div>
                         <p class="meta">Posted by Admin on February 12, 2012</p>
