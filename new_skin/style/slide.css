@@ -124,10 +124,10 @@ body {
 }
 
 #panel {
-	width: 229px;
+	width: 235px;
 	height: 270px;
 	color: #999999;
-    margin-right: 9px;
+    margin-right: 3px;
     border-left: 1px solid white;
     border-right: 1px solid white;
 	background: #272727;
@@ -242,7 +242,7 @@ body {
 	background: transparent url(../images/bt_register.png) no-repeat 0 0;
 }
 
- .lost-pwd {
+#panel .lost-pwd {
 	display: block;
 	float:left;
 	clear: right;

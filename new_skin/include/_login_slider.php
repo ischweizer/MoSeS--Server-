@@ -70,8 +70,8 @@
             <li>Hello, Guest!</li>
             <li class="sep">|</li>
             <li id="toggle">
-                <a id="open" class="open" href="#">Log In | Register</a>
-                <a id="close" style="display: none;" class="close" href="#">Hide</a>            
+                <a id="open" class="open" href="#">Log In or Register</a>
+                <a id="close" style="display: none;" class="close" href="#">HIDE</a>            
             </li>
             <li class="right">&nbsp;</li>
         </ul> 

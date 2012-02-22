@@ -26,7 +26,7 @@ session_start();
                     <div class="post">
                         <h2 class="title">App download</h2>
                         <div class="entry">
-                            <p><img src="images/moses_logo2.png" width="143" height="143" alt="" class="alignleft border" />You can download our app <a href="#">here</a></p>
+                            <p><img src="images/moses_logo2.png" width="" alt="logo" class="alignleft border" />You can download our app <a href="#">here</a></p>
                         </div>
                         <div style="clear: both;">&nbsp;</div>
                         <p class="meta">Posted by Admin on February 15, 2012</p>
