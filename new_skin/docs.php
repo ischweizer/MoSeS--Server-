@@ -19,14 +19,11 @@ include_once("./include/_menu.php");
 <!-- <div id="splash">&nbsp;</div> -->
 <!-- end #header -->
 
-
 <script type="text/javascript">
 function slideLoginPanelDown(){
     
-    $("#open").click(function(){
-        $("div#panel").slideDown("slow");
+    $("div#panel").slideDown("slow");
     
-    });
 }
 </script>
 
