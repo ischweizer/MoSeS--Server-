@@ -19,14 +19,27 @@ include_once("./include/_menu.php");
 <!-- <div id="splash">&nbsp;</div> -->
 <!-- end #header -->
 
+
+<script type="text/javascript">
+function slideLoginPanelDown(){
+    
+    $("#open").click(function(){
+        $("div#panel").slideDown("slow");
+    
+    });
+}
+</script>
+
 <div id="page">
         <div id="page-bgtop">
             <div id="page-bgbtm">
                 <div id="content">
                     <div class="post">
-                        <h2 class="title">Docs</h2>
+                        <h2 class="title">How to contribute?</h2>
                         <div class="entry">
-                            <p>This is a place for some manuals, FAQs, etc...</p>
+                            <p>1. <a href="#" onclick="slideLoginPanelDown()">Register</a>.</p>
+                            <p>2. <a href="./download.php">Download</a> and install the client.</p>
+                            <p>3. That's it!</p>
                         </div>
                         <div style="clear: both;">&nbsp;</div>
                         <p class="meta">Posted by Admin on February 12, 2012</p>

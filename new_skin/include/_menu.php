@@ -22,7 +22,7 @@
         <li<?php 
             if(strpos($SCRIPT, "docs") !== false){
                 echo " class=\"current_page_item\"";
-            } ?>><span><a href="./docs.php">Docs</a></span></li>
+            } ?>><span><a href="./docs.php">Documentation</a></span></li>
         <li<?php 
             if(strpos($SCRIPT, "about") !== false){
                 echo " class=\"current_page_item\"";
