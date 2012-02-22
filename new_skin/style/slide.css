@@ -32,27 +32,23 @@ body {
 }
 
 #toppanel a img {
-  border: none;/*remove border for linked images*/
+  border: none;
 }
 
-#content {
-    width: 740px;
-    margin: 0 auto;/* center the page in Firefox */
-    text-align: right;
+.tab li {
+    display: block;
 }
 
 /* Panel Tab/button */
-
 .tab ul.login {
 	display: block;
 	position: relative;
-  	
   	clear: right;
   	height: 42px;
 	width: 280px;
   	font-weight: bold;
 	line-height: 42px;
-	margin: 0 0;
+	margin: 0;
 	right: 5px;
   	color: white;
   	font-size: 80%;
@@ -128,10 +124,12 @@ body {
 }
 
 #panel {
-	width: 230px;
+	width: 229px;
 	height: 270px;
 	color: #999999;
     margin-right: 9px;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
 	background: #272727;
 	overflow: hidden;
 	position: relative;
@@ -173,7 +171,7 @@ body {
 	float: left;
 }
 
-#panel .content {
+#panel .login_content {
 	width: 960px;
 	margin: 0 auto;
 	padding-top: 15px;
@@ -181,23 +179,22 @@ body {
 	font-size: 0.85em;
 }
 
-#panel .content .left {
+#panel .login_content .left {
 	width: 180px;
-    position: relative;
 	float: left;
 	padding: 0 15px;
 	border-left: 1px solid #333;
 }
 
-#panel .content .right {
+#panel .login_content .right {
 	border-right: 1px solid #333;
 }
 
-#panel .content form {
+#panel .login_content form {
 	margin: 0 0 10px 0;
 }
 
-#panel .content label {
+#panel .login_content label {
 	float: left;
 	padding-top: 8px;
 	clear: both;
@@ -205,7 +202,7 @@ body {
 	display: block;
 }
 
-#panel .content input.field {
+#panel .login_content input.field {
 	border: 1px #1A1A1A solid;
 	background: #414141;
 	margin-right: 5px;
@@ -215,14 +212,14 @@ body {
 	height: 16px;
 }
 
-#panel .content input:focus.field {
+#panel .login_content input:focus.field {
 	background: #545454;
 }
 
 /* BUTTONS */
 /* Login and Register buttons */
-#panel .content input.bt_login,
-#panel .content input.bt_register {
+#panel .login_content input.bt_login,
+#panel .login_content input.bt_register {
 	display: block;
 	float: left;
 	clear: left;
@@ -234,22 +231,37 @@ body {
 	margin: 10px 0;
 }
 
-#panel .content input.bt_login {
+#panel .login_content input.bt_login {
 	width: 74px;
 	background: transparent url(../images/bt_login.png) no-repeat 0 0;
 }
 
-#panel .content input.bt_register {
+#panel .login_content input.bt_register {
 	width: 94px;
 	color: white;
 	background: transparent url(../images/bt_register.png) no-repeat 0 0;
 }
 
-#panel .lost-pwd {
+ .lost-pwd {
 	display: block;
 	float:left;
 	clear: right;
 	padding: 15px 5px 0;
 	font-size: 0.95em;
 	text-decoration: underline;
+}
+
+#panel .bt_logout {
+    position: relative;
+    float: right;
+    margin: 30px auto;
+}
+
+#panel .slider_welcome_message {
+    display: block;
+    position: relative;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0 0 20px;
+    
 }

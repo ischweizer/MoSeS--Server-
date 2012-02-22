@@ -66,7 +66,7 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 <div id="page">
         <div id="page-bgtop">
             <div id="page-bgbtm">
-                <div id="content">
+                <div id="page_content">
                     <div class="post">
                         <h2 class="title">Welcome Friend!</h2>
                         <div class="entry">
@@ -86,27 +86,70 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
     <!-- end #page -->
 </div>
 
-<!-- Panel -->
+<!-- SLIDER -->
 <div id="toppanel">
     <div id="panel">
-        <div class="content clearfix">
+        <div class="login_content clearfix">
             <div class="left">
+            
+                <?php
+                if(isset($_SESSION['USER_LOGGED_IN'])){
+                ?>
+                
+                    <div class="slider_welcome_message">MoSeS welcomes you!</div>
+                    <div class="clear"></div>
+                    <a class="bt_logout" href="./logout.php">LOGOUT</a>
+                <?php
+                }else{
+                ?>
+            
                 <!-- Login Form -->
-                <form class="clearfix" action="#" method="post">
+                <form class="clearfix" action="./" method="post" name="login_form">
                     <h1>Member Login</h1>
                     <label class="grey" for="log">Username:</label>
-                    <input class="field" type="text" name="log" id="log" value="" size="23" />
+                    <input class="field" type="text" name="login" id="log" value="" size="23" />
                     <label class="grey" for="pwd">Password:</label>
-                    <input class="field" type="password" name="pwd" id="pwd" size="23" />
+                    <input class="field" type="password" name="password" id="pwd" size="23" />
                     <label><input name="rememberme" id="rememberme" type="checkbox" value="forever" /> &nbsp;Remember me</label>
                     <div class="clear"></div>
-                    <input type="submit" name="submit" value="Login" class="bt_login" />
+                    <input type="submit" name="submit_button" value="Login" class="bt_login" />
+                    <div class="clear"></div>
                     <a class="lost-pwd" href="./forgot.php">Lost your password?</a>
+                    <div class="clear"></div>
                     <a class="lost-pwd" href="./registration.php">New user? Register here.</a>
+                    <input type="hidden" name="submit" value="1">
                 </form>
+                
+                <?php
+                }
+                ?>
             </div>
         </div>
 </div> <!-- /login -->    
+
+    <?php
+    if(isset($_SESSION['USER_LOGGED_IN'])){
+        
+       ?>
+       
+        <!-- The tab on top -->    
+        <div class="tab">
+            <ul class="login">
+                <li class="left">&nbsp;</li>
+                <li>Hello, <?php echo $_SESSION['FIRSTNAME']; ?>!</li>
+                <li class="sep">|</li>
+                <li id="toggle">
+                    <a id="open" class="open" href="#">Menu</a>
+                    <a id="close" style="display: none;" class="close" href="#">Hide</a>            
+                </li>
+                <li class="right">&nbsp;</li>
+            </ul> 
+        </div> <!-- / top -->
+       
+       <?php
+        
+    }else{
+    ?>
 
     <!-- The tab on top -->    
     <div class="tab">
@@ -116,45 +159,18 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
             <li class="sep">|</li>
             <li id="toggle">
                 <a id="open" class="open" href="#">Log In | Register</a>
-                <a id="close" style="display: none;" class="close" href="#">Close</a>            
+                <a id="close" style="display: none;" class="close" href="#">Hide</a>            
             </li>
             <li class="right">&nbsp;</li>
         </ul> 
     </div> <!-- / top -->
-    
-</div> <!--panel -->
-
-<?php
-
-if(!isset($_SESSION["USER_LOGGED_IN"])){
-/*
-?>
-    
-<form action="./" method="post" name="login_form" class="login_form_box">
-  <table width="100" border="0">
-  <?php
-  
-    if(isset($row) && empty($row)){
-        ?>
-        
-        <div class="user_not_found">User not found!</div>
-                
-        <?php
-        
-    }else{
-        if(isset($USER_CONFIRMED) && $USER_CONFIRMED == 0){
-            ?>
-            
-        <div class="user_not_confirmed">User was not confirmed!</div>
-                    
-            <?php
-        }
+    <?php
     }
     ?>
+    
+</div> <!-- SLIDER -->
 
 <?php
-*/
-}
 
 include_once("./include/_footer.php");  
 ?>
