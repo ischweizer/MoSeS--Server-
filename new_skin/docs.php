@@ -41,6 +41,8 @@ include_once("./include/_menu.php");
     <!-- end #page -->
 </div>
 
-<?php  
+<?php 
+  include_once("./include/_login_slider.php");
+ 
   include_once("./include/_footer.php");  
 ?>

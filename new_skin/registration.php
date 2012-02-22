@@ -159,6 +159,7 @@ if(isset($_POST["submitted"])){
 </div>
 
 <?php
+  include_once("./include/_login_slider.php");
  
   include_once("./include/_footer.php");  
 ?>

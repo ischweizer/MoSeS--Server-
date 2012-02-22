@@ -35,8 +35,6 @@
                                 </fieldset>
                             </form>
                         </div>
-                        <div style="clear: both;">&nbsp;</div>
-                        <p class="meta">Posted by Admin on February 12, 2012</p>
                     </div>
                     <div style="clear: both;">&nbsp;</div>
                 </div>
@@ -48,6 +46,8 @@
     <!-- end #page -->
 </div>
 
-<?php  
+<?php 
+  include_once("./include/_login_slider.php");
+ 
   include_once("./include/_footer.php");  
 ?>

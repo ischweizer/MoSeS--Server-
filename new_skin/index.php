@@ -66,12 +66,13 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 <div id="page">
         <div id="page-bgtop">
             <div id="page-bgbtm">
-                <div id="content">
+                <div id="page_content">
                     <div class="post">
                         <h2 class="title">Welcome Friend!</h2>
                         <div class="entry">
-                            <p><img src="images/moses_logo.jpg" width="143" height="143" alt="" class="alignleft border" />This is der Moses. You must love him.</p>
-                            <p>This site is under construction!</p>
+                            <p><img src="images/moses_logo.jpg" width="143" height="143" alt="" class="alignleft border" />MoSeS helps scientists from all around the world to distribute their Android apps and make the world a better place.</p>
+                            <p>Every person with an Android device can contribute.<br />Feel free to register and download moses client, it's easy!</p>
+                            <p>Be adwised: this site is under construction!</p>
                         </div>
                         <div style="clear: both;">&nbsp;</div>
                         <p class="meta">Posted by Admin on February 12, 2012</p>
@@ -87,36 +88,7 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 </div>
 
 <?php
-
-if(!isset($_SESSION["USER_LOGGED_IN"])){
-/*
-?>
-    
-<form action="./" method="post" name="login_form" class="login_form_box">
-  <table width="100" border="0">
-  <?php
-  
-    if(isset($row) && empty($row)){
-        ?>
-        
-        <div class="user_not_found">User not found!</div>
-                
-        <?php
-        
-    }else{
-        if(isset($USER_CONFIRMED) && $USER_CONFIRMED == 0){
-            ?>
-            
-        <div class="user_not_confirmed">User was not confirmed!</div>
-                    
-            <?php
-        }
-    }
-    ?>
-
-<?php
-*/
-}
+include_once("./include/_login_slider.php");
 
 include_once("./include/_footer.php");  
 ?>
