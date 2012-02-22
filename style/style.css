@@ -57,6 +57,16 @@ img.aligncenter {
 	margin: 0px auto;
 }
 
+.user_menu {
+    position:relative;
+    float:left;
+}
+
+.user_menu li {
+    display: block;
+    list-style-type:none;
+}
+
 #wrapper {
 	background: url(../images/img01.jpg) repeat-x left top;
 }
@@ -165,7 +175,7 @@ img.aligncenter {
 
 #page-bgbtm {
 	margin: 0px;
-	padding: 20px 30px 0px 30px;
+	padding: 20px 30px 0px 120px;
 }
 
 /* Content */
