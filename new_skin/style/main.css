@@ -113,13 +113,13 @@ a:visited {
 }
 
 .user_menu {
-    position:relative;
-    float:left;
+    position: relative;
+    float: left;
 }
 
 .user_menu li {
     display: block;
-    list-style-type:none;
+    list-style-type: none;
 }
 
 .user_not_confirmed, .user_not_found{

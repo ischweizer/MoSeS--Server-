@@ -1,8 +1,10 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['USER_LOGGED_IN']))
-    header("Location: /moses/");
+if(!isset($_SESSION['USER_LOGGED_IN'])){
+    //include_once('./config.php');
+    header("Location: /moses/");   
+}
     
 include_once("./include/functions/func.php");
 include_once("./include/_header.php");
@@ -511,31 +513,31 @@ if(isset($_GET['m'])){
                                 <script type="text/javascript">
                                 $(document).ready(function(){
 
-                                    $('div.slidepanel').hide();
-                                    
-                                    $('.slidebtn').click(function(e){
+                                $('div.slidepanel').hide();
+                                
+                                $('.slidebtn').click(function(e){
 
-                                        $('div.slidepanel').stop(true, false).slideUp();
-                                        $(e.target).closest('span').next('.slidepanel').stop(true, false).slideDown();
-                                       /* $(this).find('#expose').siblings().each(function(){
-                                            $(this).html('[+]');
-                                        }); */
-                                        //$(this).find('#expose').html('[-]');
-                                        //$('.slidepanel').slideToggle('slow');
-                                        //$(this).toggleClass('active'); return false;
-                                    });
-                                    
-                                    /*     
-                                    $('.slidebtn').toggle(function() {
-                                        $(this).find('#expose').html('[-]');    
-                                    }, function() {
-                                        $(this).find('#expose').html('[+]');        
-                                    });*/
-                                    
-                                  /*  $('#expose').each(function(){
-                                        var value = $(this).html();
-                                        $(this).html((value == '[+]') ? '[+]' : '[-]');
-                                    });*/
+                                $('div.slidepanel').stop(true, false).slideUp();
+                                $(e.target).closest('span').next('.slidepanel').stop(true, false).slideDown();
+                               /* $(this).find('#expose').siblings().each(function(){
+                                    $(this).html('[+]');
+                                }); */
+                                //$(this).find('#expose').html('[-]');
+                                //$('.slidepanel').slideToggle('slow');
+                                //$(this).toggleClass('active'); return false;
+                                });
+                                
+                                /*     
+                                $('.slidebtn').toggle(function() {
+                                    $(this).find('#expose').html('[-]');    
+                                }, function() {
+                                    $(this).find('#expose').html('[+]');        
+                                });*/
+                                
+                              /*  $('#expose').each(function(){
+                                    var value = $(this).html();
+                                    $(this).html((value == '[+]') ? '[+]' : '[-]');
+                                });*/
 
                             
                                 });
