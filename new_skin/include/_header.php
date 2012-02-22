@@ -6,7 +6,7 @@
 <!--[if lte IE 6]>
 <script type="text/javascript" src="js/iepngfix/supersleight-min.js"></script>
 <![endif]-->
-<link href="./css/style.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="./style/style.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="./style/slide.css" media="screen" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 <meta name="keywords" content="" />
