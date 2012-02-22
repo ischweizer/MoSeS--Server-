@@ -21,9 +21,8 @@ include_once("./include/_menu.php");
 
 <script type="text/javascript">
 function slideLoginPanelDown(){
-    
     $("div#panel").slideDown("slow");
-    
+    $("#toggle a").toggle();   
 }
 </script>
 
