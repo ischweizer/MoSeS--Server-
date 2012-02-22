@@ -141,10 +141,7 @@ img.aligncenter {
 }
 
 #menu a:hover{
-	/*background: url(../images/img10.jpg) no-repeat right top;*/
-
     background-color: #dd5525;
-    
     border-radius: 25px; 
     -moz-border-radius: 25px; 
     -webkit-border-radius: 25px; 
