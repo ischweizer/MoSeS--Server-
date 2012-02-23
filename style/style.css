@@ -1,3 +1,11 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -69,6 +77,10 @@ img.aligncenter {
 
 #wrapper {
 	background: url(../images/img01.jpg) repeat-x left top;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -80px;
 }
 
 /* Header */
@@ -232,6 +244,11 @@ img.aligncenter {
 
 /* Footer */
 
+#footer-wrapper, .push-footer {
+    height: 80px;
+    clear: both;
+}
+
 #footer-wrapper {
 	overflow: hidden;
 	padding: 0px 0px 0px 0px;
@@ -241,8 +258,7 @@ img.aligncenter {
 #footer {
 	clear: both;
 	width: 980px;
-	height: 100px;
-	margin: 20px auto 0px auto;
+	margin: 8px auto 0px auto;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
