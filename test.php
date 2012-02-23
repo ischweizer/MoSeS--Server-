@@ -19,16 +19,18 @@ if(isset($_POST['HTTP_JSON'])){
         include_once(MOSES_HOME . '/include/managers/ApkManager.php');
         include_once(MOSES_HOME . '/include/managers/LoginManager.php'); 
         include_once(MOSES_HOME . '/include/managers/HardwareManager.php'); 
-        include_once(MOSES_HOME . '/include/functions/logger.php');
+        include_once(MOSES_HOME . '/include/functions/func.php');
+        include_once(MOSES_HOME . '/include/functions/klogger.php');
     
         $logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO);
         
         $logger->logInfo("###################### JSON OBJECT ARRIVED #########################");
+        
         if($data->SENSORS != null){
             $SENSORS = json_encode($data->SENSORS);
             $data->SENSORS = $SENSORS;  
         }
-        $logger->logInfo(var_export($data, true));
+        $logger->logInfo(var_dump($data));
         
         /**
         *  Here will be selected which MESSAGE type was sent
@@ -40,85 +42,76 @@ if(isset($_POST['HTTP_JSON'])){
         $DBManager = new DBManager();
         $DBManager->connect($CONFIG['DB']['HOST'], $CONFIG['DB']['DBNAME'], $CONFIG['DB']['USER'], $CONFIG['DB']['PASSWORD']);
         
-        switch($data->MESSAGE){
+        if($data->MESSAGE != null){
         
-            case "LOGIN_REQUEST":
+            switch($data->MESSAGE){
             
-                include_once(MOSES_HOME . "/include/events/login_request.php.inc");
-            
-                break;
-            
-            case "LOGOUT_REQUEST": 
+                case "LOGIN_REQUEST":
                 
-                include_once(MOSES_HOME . "/include/events/logout_request.php.inc");
-                          
-                break;
+                    include_once(MOSES_HOME . "/include/events/login_request.php.inc");
+                    break;
                 
-            case "SET_HARDWARE_PARAMS":
+                case "LOGOUT_REQUEST": 
                     
-                include_once(MOSES_HOME . "/include/events/set_hardware_params.php.inc");
+                    include_once(MOSES_HOME . "/include/events/logout_request.php.inc");
+                    break;
+                    
+                case "SET_HARDWARE_PARAMS":
+                        
+                    include_once(MOSES_HOME . "/include/events/set_hardware_params.php.inc");
+                    break;
+                        
+                case "GET_HARDWARE_PARAMS":
+                
+                    include_once(MOSES_HOME . "/include/events/get_hardware_params.php.inc");
+                    break;
+                        
+                case "SET_FILTER":
+                        
+                    include_once(MOSES_HOME . "/include/events/set_filter.php.inc");                    
+                    break;
+                    
+                case "GET_FILTER":
 
-                break;
+                    include_once(MOSES_HOME . "/include/events/get_filter.php.inc");
+                    break;
+                        
+                case "STILL_ALIVE":
+                
+                    include_once(MOSES_HOME . "/include/events/still_alive.php.inc");
+                    break;
                     
-            case "GET_HARDWARE_PARAMS":
-            
-                include_once(MOSES_HOME . "/include/events/get_hardware_params.php.inc");
+                case "GET_APK_LIST_REQUEST":
                 
-                break;
+                    include_once(MOSES_HOME . "/include/events/get_apk_list_request.php.inc");
+                    break;     
                     
-            case "SET_FILTER":
+                case "GET_APK_INFO":
+                
+                    include_once(MOSES_HOME . "/include/events/get_apk_info.php.inc");
+                    break;
                     
-                include_once(MOSES_HOME . "/include/events/set_filter.php.inc");                    
+                case "DOWNLOAD_REQUEST":
                 
-                break;
+                    include_once(MOSES_HOME . "/include/events/download_request.php.inc");
+                    break;
                 
-            case "GET_FILTER":
-
-                include_once(MOSES_HOME . "/include/events/get_filter.php.inc");
+                case "APK_INSTALLED":
                 
-                break;
+                    include_once(MOSES_HOME . "/include/events/apk_installed.php.inc");
+                    break;
+                
+                case "C2DM":
+                
+                    include_once(MOSES_HOME . "/include/events/c2dm.php.inc");
+                    break;
                     
-            case "STILL_ALIVE":
-            
-                include_once(MOSES_HOME . "/include/events/still_alive.php.inc");
-
-                break;
-                
-            case "GET_APK_LIST_REQUEST":
-            
-                include_once(MOSES_HOME . "/include/events/get_apk_list_request.php.inc");
-                 
-                break;     
-                
-            case "GET_APK_INFO":
-            
-                include_once(MOSES_HOME . "/include/events/get_apk_info.php.inc");
-                 
-                break;
-                
-            case "DOWNLOAD_REQUEST":
-            
-                include_once(MOSES_HOME . "/include/events/download_request.php.inc");
-                
-                break;
-            
-            case "APK_INSTALLED":
-            
-                $logger->logInfo("######################## APK_INSTALLED ARRIVED #########################");
-            
-                include_once(MOSES_HOME . "/include/events/apk_installed.php.inc");
-                
-                break;
-            
-            case "C2DM":
-            
-                include_once(MOSES_HOME . "/include/events/c2dm.php.inc");
-                
-                break;
-                
-            default:
-                echo "Only specific messages are accepted.";
-                break;
+                default:
+                    echo "Only specific messages are accepted.";
+                    break;
+            }
+        }else{
+            echo "MESSAGE string was null";
         }
         
     }else{
@@ -128,6 +121,6 @@ if(isset($_POST['HTTP_JSON'])){
 *  if no POST var HTTP_JSON was sent       
 */
 }else{  
-    echo "You didn't sent us HTTP_JSON post var.";
+    echo "You didn't sent us JSON.";
 }    
 ?>

@@ -34,9 +34,9 @@ function is_empty_dir($dir){
 * @param mixed $sensor_ordinal
 */
 function get_sensor_name($sensor_ordinal){
-    $result;
+    $result = '';
     
-    switch($sensor_ordinael){
+    switch($sensor_ordinal){
         case 1 : $result = "Accelerometer sensor"; break;
         case 2 : $result = "Magnetic field sensor"; break;
         case 3 : $result = "Orientation sensor"; break;

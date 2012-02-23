@@ -3,41 +3,82 @@
 $logger->logInfo("APK INSTALLED ARRIVED");
 $logger->logInfo(print_r($data, true));
 
-$return; // answer to be returned
-                    
-$row = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $data->SESSIONID);
+$return = ''; // answer to be returned
 
-if(empty($row)){
-    $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
-                    "STATUS" => "INVALID_SESSION");
-}
-else{
-    $deviceID = $row['deviceid'];
-    $lastactivity = $row['lastactivity'];
-    $apkid = $data->APKID;
-    
-    //###################
-    $IS_VALID_SESSION = LoginManager::isSessionTimedout($lastactivity, time(), $CONFIG['SESSION']['TIMEOUT']);
-   
-   if($IS_VALID_SESSION){
+$sessionID = '';
+
+/**
+*  SESSIONID check
+*/
+if($data->SESSIONID != null){
+    if(is_md5($data->SESSIONID)){
        
-      LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $data->DEVICEID, $data->SESSIONID);
-      
-      $result = ApkManager::incrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $apkid);
-      if($result){
-          $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
-                    "STATUS" => "SUCCESS");
-      }
-      else{
-          $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
-                    "STATUS" => "FALIURE_NO_SUCH_APK");
-      }
-   }
-   else{
-       $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
-                        "STATUS" => "INVALID_SESSION");
-   }
-}
+       $sessionID = $data->SESSIONID;  
+       $row = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
+
+        // session is found
+        if(!empty($row)){
+            
+            /**
+            *  if new DEVICEID found, set new DEVICEID
+            */
+            $deviceID = ($data->DEVICEID != null && strcmp($data->DEVICEID, $row['deviceid']) != 0) ? $data->DEVICEID : $row['deviceid'];
+            //$sessionID = () ? : ; 
+            $lastactivity = $row['lastactivity'];
+            $apkid = '';
+            
+            
+            /**
+            *  APKID check for right data
+            */
+            if($data->APKID != null){
+               $data->APKID = preg_replace("/\D/", "", $data->APKID);
+               
+               if(!empty($data->APKID))
+                  $apkid = $data->APKID;      
+            }
+            
+            if(!empty($apkid)){
+            
+                //###################
+               $IS_VALID_SESSION = LoginManager::isSessionTimedout($lastactivity, time(), $CONFIG['SESSION']['TIMEOUT']);
+           
+               if($IS_VALID_SESSION){
+                   
+                  LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $deviceID, $sessionID);
+                  
+                  $result = ApkManager::incrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $apkid);
+                  
+                  if($result){
+                      $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
+                                "STATUS" => "SUCCESS");
+                  }
+                  else{
+                      $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
+                                "STATUS" => "FALIURE_NO_SUCH_APK");
+                  }
+               }else{
+                   $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
+                                    "STATUS" => "INVALID_SESSION");
+               }
+            }else{
+                $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
+                                "STATUS" => "INVALID_APKID");
+               }              
+        }else{ 
+
+            $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
+                            "STATUS" => "INVALID_SESSION");
+        }
+               
+            }else{
+                $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
+                                "STATUS" => "INVALID_SESSION");
+            }
+        }else{
+            $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
+                            "STATUS" => "INVALID_SESSION");
+        } 
 
 print(json_encode($return));
 
