@@ -37,7 +37,6 @@ include_once("./include/_menu.php");
         </div>
     </div>
     <!-- end #page -->
-<div class="push-footer"></div>
 </div>
 
 <?php 
