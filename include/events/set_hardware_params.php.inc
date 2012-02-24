@@ -1,84 +1,129 @@
 <?php
 
-$device = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $data->SESSIONID);
+$sessionID = '';
 
-$return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-                    "STATUS" => "FAILURE_UNKNOWN_REASON");
+/**
+*  SESSIONID check
+*/
+if($data->SESSIONID != null){
+    if(is_md5($data->SESSIONID)){
+       
+        $sessionID = $data->SESSIONID;
+        
+        /**
+        *  DEVICEID check
+        */
+        if($data->DEVICEID != null && !empty($data->DEVICEID)){
+            
+            $deviceID = $data->DEVICEID;
+            
+            /**
+            *  FORCE flag check
+            */
+            if($data->FORCE != null && !empty($data->FORCE)){
+                
+                $FORCE = $data->FORCE;
+                $SENSORS = $data->SENSORS;
+                $androidVersion = $data->ANDVER;
+                $modelName = $data->MODEL_NAME;
+                $vendorName = $data->VENDOR_NAME;
+
+                $device = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
+                                    
+                if(!empty($device)){
                     
-if(!empty($device)){
-    
-   $logger->logInfo("##################### SETTING HARDWARE PARAMS, SESSION IS VALID ######################");
-    
-   $USERID = $device["userid"];
-   $LASTACTIVITY = $device["lastactivity"];
-   $TIME_NOW = time();
-   
-   $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
-   
-   if($IS_VALID_SESSION){
-          
-       $logger->logInfo("##################### SETTING HARDWARE PARAMS, UPDATING SESSION ################");
-       
-       LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $data->DEVICEID, $data->SESSIONID);
-       
-       $logger->logInfo("SESSION IS UPDATED");
-       
-       $row = HardwareManager::selectDeviceForUser($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $data->DEVICEID);
-       
-       $logger->logInfo("RETRIVED ROW FROM THE DATABASE");
-       
-       if(!empty($row)){
-           
-           // A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE
-           
-           $logger->logInfo("A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE");
-           
-           if($data->FORCE){
-               
-               $logger->logInfo("FORCE IS TRUE");
-               
-               $data->SENSORS = HardwareManager::sortSensors($data->SENSORS);
-               
-               HardwareManager::updateDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
-                        $data->ANDVER, $data->SENSORS, $data->MODEL_NAME, $data->VENDOR_NAME,  $USERID, $data->DEVICEID);
-               $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-                       "STATUS" => "SUCCESS");
-           }
-           else{
-               $logger->logInfo("the FORCE-flag is not set, inform the user about the duplication");
-               // the FORCE-flas is not set, inform the user about the duplication
-               $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-                       "STATUS" => "FAILURE_DEVICEID_DUPLICATED",
-                       "MODEL_NAME" => $row['modelname'],
-                       "VENDOR_NAME" => $row['vendorname'],
-                       "ANDVER" => $row['androidversion']);
-           }
+                   $logger->logInfo("##################### SETTING HARDWARE PARAMS, SESSION IS VALID ######################");
+                    
+                   $USERID = $device["userid"];
+                   $LASTACTIVITY = $device["lastactivity"];
+                   $TIME_NOW = time();
+                   
+                   $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
+                   
+                   if($IS_VALID_SESSION){
+                          
+                       $logger->logInfo("##################### SETTING HARDWARE PARAMS, UPDATING SESSION ################");
+                       
+                       LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $deviceID, $sessionID);
+                       
+                       $logger->logInfo("SESSION IS UPDATED");
+                       
+                       $row = HardwareManager::selectDeviceForUser($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
+                       
+                       $logger->logInfo("RETRIVED ROW FROM THE DATABASE");
+                       
+                       if(!empty($row)){
+                           
+                           // A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE
+                           
+                           $logger->logInfo("A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE");
+                           
+                           if($FORCE){
+                               
+                               $logger->logInfo("FORCE IS TRUE");
+                               
+                               $SENSORS = HardwareManager::sortSensors($SENSORS);
+                               
+                               HardwareManager::updateDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
+                                        $androidVersion, $SENSORS, $modelName, $vendorName,  $USERID, $deviceID);
+                                        
+                               $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+                                               "STATUS" => "SUCCESS");
+                           }else{
+                               
+                               $logger->logInfo("the FORCE-flag is not set, inform the user about the duplication");
+                               
+                               // the FORCE-flas is not set, inform the user about the duplication
+                               $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+                                               "STATUS" => "FAILURE_DEVICEID_DUPLICATED",
+                                               "MODEL_NAME" => $row['modelname'],
+                                               "VENDOR_NAME" => $row['vendorname'],
+                                               "ANDVER" => $row['androidversion']);
+                           }
+                       }else{
+                           
+                           $logger->logInfo("The user has a new deviceID");
+                           $logger->logInfo(var_dump($SENSORS));
+                           
+                           // The user has a new deviceID
+                           $SENSORS = HardwareManager::sortSensors($SENSORS);
+                           
+                           HardwareManager::insertDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
+                                $androidVersion, $SENSORS, $modelName, $vendorName, $USERID, $deviceID);
+                                
+                           $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+                                           "STATUS" => "SUCCESS");
+                       }
+                   }else{
+                        // session is timed out
+                        $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+                                        "STATUS" => "FAILURE_INVALID_SESSION");
+                   } 
+                }else{
+                    // session not in the database at all
+                    $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+                                    "STATUS" => "FAILURE_INVALID_SESSION");
+                }
+            }else{
+               $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE", 
+                               "STATUS" => "INVALID_FORCE"); 
+            }
        }else{
-           $logger->logInfo("The user has a new deviceID");
-           $logger->logInfo(var_export($data->SENSORS, true));
-           // The user has a new deviceID
-           $data->SENSORS = HardwareManager::sortSensors($data->SENSORS);
-           
-           HardwareManager::insertDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
-                $data->ANDVER, $data->SENSORS, $data->MODEL_NAME, $data->VENDOR_NAME, $USERID, $data->DEVICEID);
-           $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-                       "STATUS" => "SUCCESS");
-       }
-
-   }else{
-
-        // session is timed out
-        $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+            $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE", 
+                            "STATUS" => "INVALID_DEVICEID");
+            }
+    }else{
+        $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE", 
                         "STATUS" => "FAILURE_INVALID_SESSION");
-   }
-    
+    }
 }else{
-    // session not in the database at all
-    $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+    $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE", 
                     "STATUS" => "FAILURE_INVALID_SESSION");
-}
+} 
+
 $logger->logInfo("SET HARDWARE PARAMS ANSWERS WITH");
-$logger->logInfo(var_export($return, true));
+$logger->logInfo(var_dump($return));
+
 print(json_encode($return));
 
 ?>

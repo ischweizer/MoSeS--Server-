@@ -1,9 +1,7 @@
 <?php
     
 class HardwareManager{
-
-    private $logger;
-    
+ 
     public function __construct(){
                                      
     }
@@ -17,15 +15,13 @@ class HardwareManager{
     */
     public static function selectDeviceForUser($db, $hardwareTable, $userID, $deviceID){
       
-       $sql = "SELECT * FROM ". $hardwareTable ." WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";
+       $sql = "SELECT * 
+               FROM ". $hardwareTable ." 
+               WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";
 
        $result = $db->query($sql);
        
-       //$this->logger->logInfo($sql); // LOG INFO
-       
        $row = $result->fetch();
-       
-       //$this->logger->logInfo("ROW IS: ". !empty($row));
        
        return $row;
     }
@@ -44,7 +40,12 @@ class HardwareManager{
     */
     public static function updateDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID){
       
-       $sql = "UPDATE ". $hardwareTable ." SET androidversion = '". $aVersion ."', sensors = '". $sensors ."' , modelname = '".$modelname."' , vendorname = '".$vendorname."' WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
+       $sql = "UPDATE ". $hardwareTable ." 
+               SET androidversion = '". $aVersion ."', 
+                   sensors = '". $sensors ."' , 
+                   modelname = '".$modelname."' , 
+                   vendorname = '".$vendorname."' 
+               WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
                         
        $db->exec($sql);
     }
@@ -64,7 +65,12 @@ class HardwareManager{
     */
     public static function updateDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID){
            
-       $sql = "UPDATE ". $hardwareTable ." SET androidversion = '". $aVersion ."', sensors = '". $sensors ."' , modelname = '".$modelname."' , vendorname = '".$vendorname."' WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
+       $sql = "UPDATE ". $hardwareTable ." 
+               SET androidversion = '". $aVersion ."', 
+                   sensors = '". $sensors ."' , 
+                   modelname = '".$modelname."' , 
+                   vendorname = '".$vendorname."' 
+               WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
                         
        $db->exec($sql);
     }
@@ -79,8 +85,8 @@ class HardwareManager{
     public static function addc2dm($db, $hardwareTable, $userID, $deviceID, $c2dm){
            
        $sql = "UPDATE ". $hardwareTable ."
-                    SET c2dm = '". $c2dm ."'
-                    WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";      
+               SET c2dm = '". $c2dm ."'
+               WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";      
                         
        $db->exec($sql);
     }
@@ -107,8 +113,6 @@ class HardwareManager{
       $db->exec($sql); 
     }
     
-    
-
     /**
     * put your comment there...
     * 
@@ -167,8 +171,8 @@ class HardwareManager{
     public static function getFilter($db, $hardwareTable, $userID, $deviceID){
         
         $sql = "SELECT filter 
-                   FROM ". $hardwareTable ." 
-                   WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+                FROM ". $hardwareTable ." 
+                WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
                     
        $result = $db->query($sql);
        $row = $result->fetch();
@@ -191,8 +195,8 @@ class HardwareManager{
     public static function getAndroidVersion($db, $hardwareTable, $userID, $deviceID){
         
         $sql = "SELECT androidversion 
-                   FROM ". $hardwareTable ." 
-                   WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+                FROM ". $hardwareTable ." 
+                WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
                     
        $result = $db->query($sql);
        $row = $result->fetch();
@@ -203,8 +207,6 @@ class HardwareManager{
        
        return null;
     }
-    
-    
     
     /**
     * Returns the hardwareID
@@ -217,8 +219,8 @@ class HardwareManager{
     public static function getHardwareID($db, $hardwareTable, $userID, $deviceID){
         
         $sql = "SELECT hwid 
-                   FROM ". $hardwareTable ." 
-                   WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+                FROM ". $hardwareTable ." 
+                WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
                     
        $result = $db->query($sql);
        $row = $result->fetch();
@@ -229,10 +231,6 @@ class HardwareManager{
        
        return -1;
     }
-    
-    
-    
-    
     
     /**
     * Returns an array of all hardware-ids that can install an apk
@@ -246,19 +244,14 @@ class HardwareManager{
         
         // get for android version
         $sql = "SELECT hwid, filter
-                    FROM " .$hardwareTable.
-                    " WHERE androidversion >=".$androidVersion;
+                FROM " .$hardwareTable. " 
+                WHERE androidversion >=".$androidVersion;
         
         $result = $db->query($sql);
-        
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         
         return $rows;
     }
-    
-    
-    
-    
     
     /**
     * Just sorts sensors in asc order
