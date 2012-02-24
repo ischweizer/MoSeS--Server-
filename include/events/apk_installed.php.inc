@@ -27,7 +27,6 @@ if($data->SESSIONID != null){
             $lastactivity = $row['lastactivity'];
             $apkid = '';
             
-            
             /**
             *  APKID check for right data
             */
