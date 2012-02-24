@@ -66,7 +66,6 @@ if($data->SESSIONID != null){
                                 "STATUS" => "INVALID_APKID");
                }              
         }else{ 
-
             $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
                             "STATUS" => "INVALID_SESSION");
         }
