@@ -30,6 +30,7 @@ if(isset($_POST['HTTP_JSON'])){
             $SENSORS = json_encode($data->SENSORS);
             $data->SENSORS = $SENSORS;  
         }
+        
         $logger->logInfo(var_dump($data));
         
         /**
