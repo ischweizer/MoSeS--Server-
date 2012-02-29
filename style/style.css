@@ -152,10 +152,8 @@ img.aligncenter {
 }
 
 #menu .current_page_item{
-	/*background: url(../images/img09.jpg) no-repeat left top;*/
     
     background-color: #dd5525;
-    
     border-radius: 25px; 
     -moz-border-radius: 25px; 
     -webkit-border-radius: 25px; 
