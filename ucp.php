@@ -401,7 +401,7 @@ if(isset($_GET['m'])){
                                   <li><input type="checkbox" name="sensors[]" value="3" />Orientation sensor</li>
                                   <li><input type="checkbox" name="sensors[]" value="4" />Gyroscope</li>
                                   <li><input type="checkbox" name="sensors[]" value="5" />Light sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="6" />Preassure sensor</li>
+                                  <li><input type="checkbox" name="sensors[]" value="6" />Pressure sensor</li>
                                   <li><input type="checkbox" name="sensors[]" value="7" />Temperature sensor</li>
                                   <li><input type="checkbox" name="sensors[]" value="8" />Proximity sensor</li>
                                   <li><input type="checkbox" name="sensors[]" value="9" />Gravity sensor</li>
