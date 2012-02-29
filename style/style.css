@@ -9,10 +9,10 @@ html, body {
 body {
 	margin: 0;
 	padding: 0;
-	background: url(../images/img05.jpg) repeat left top;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	color: #7F7F81;
+	background-color: #d9cfb4;
+    color: #7F7F81;
 }
 
 h1, h2, h3 {
@@ -95,7 +95,7 @@ img.aligncenter {
 	float: left;
 	width: 660px;
 	height: 63px;    
-	background: url(../images/img03.jpg) no-repeat left top;
+	background: url(../images/img03.png) no-repeat left top;
 }
 
 #logo h1 {
