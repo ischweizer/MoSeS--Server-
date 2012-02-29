@@ -396,19 +396,19 @@ if(isset($_GET['m'])){
                               <textarea cols="30" rows="6" name="apk_description"></textarea>
                               <p>My program uses following sensors:</p>
                               <ul>
-                                  <li><input type="checkbox" name="sensors[]" value="1" />Accelerometer</li>
+                                  <li><input type="checkbox" name="sensors[]" value="1" /><img src="./images/sensors/medium/accelerometer_sensor_best_reduction.png" alt="Accelerometer" title="Accelerometer sensor"></li>
                                   <li><input type="checkbox" name="sensors[]" value="2" /><img src="./images/sensors/medium/magnetic_field_sensor_plus_minus_best_reduction.png" alt="Magnetic field" title="Magnetic field sensor"></li>
-                                  <li><input type="checkbox" name="sensors[]" value="3" />Orientation sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="4" />Gyroscope</li>
-                                  <li><input type="checkbox" name="sensors[]" value="5" />Light sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="6" />Pressure sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="7" />Temperature sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="8" />Proximity sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="9" />Gravity sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="10" />Linear acceleration sensor</li>
+                                  <li><input type="checkbox" name="sensors[]" value="3" /><img src="./images/sensors/medium/orientation_sensor_best_reduction.png" alt="Orientation" title="Orientation sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="4" /><img src="./images/sensors/medium/gyroscope_sensor_best_reduction.png" alt="Gyroscope" title="Gyroscope sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="5" /><img src="./images/sensors/medium/light_sensor_best_reduction.png" alt="Light" title="Light sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="6" /><img src="./images/sensors/medium/pressure_sensor_best_reduction.png" alt="Pressure" title="Pressure sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="7" /><img src="./images/sensors/medium/temperature_sensor_best_reduction.png" alt="Temperature" title="Temperature sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="8" /><img src="./images/sensors/medium/proximity_sensor_best_reduction.png" alt="Proximity" title="Proximity sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="9" /><img src="./images/sensors/medium/gravity_sensor_best_reduction.png" alt="Gravity" title="Gravity sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="10" /><img src="./images/sensors/medium/linear_acceleration_sensor_best_reduction.png" alt="Linear acceleration" title="Linear acceleration sensor"></li>
                                   <li><input type="checkbox" name="sensors[]" value="11" /><img src="./images/sensors/medium/rotation_sensor_best_reduction.png" alt="Rotation" title="Rotation sensor"></li>
                                   <li><input type="checkbox" name="sensors[]" value="12" /><img src="./images/sensors/medium/humidity_w_percent_sensor_best_reduction.png" alt="Humidity" title="Humidity sensor"></li>
-                                  <li><input type="checkbox" name="sensors[]" value="13" />Ambient temperature sensor</li>
+                                  <li><input type="checkbox" name="sensors[]" value="13" /><img src="./images/sensors/medium/ambient_temperature_sensor_best_reduction.png" alt="Ambient temperature" title="Ambient temperature sensor"></li>
                               </ul>
                              
                              <script type="text/javascript">
