@@ -231,6 +231,18 @@ img.aligncenter {
 	padding: 10px 0px 10px 0px;
 }
 
+.upload_form li {
+    display: inline;
+    list-style-type: none;
+}
+
+.upload_form input[type='checkbox'] {
+    
+    width: 20px;
+    opacity: 0;
+    float: left;
+}  
+
 .links {
 	display: block;
 	width: 96px;
