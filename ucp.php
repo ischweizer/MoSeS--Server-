@@ -397,7 +397,7 @@ if(isset($_GET['m'])){
                               <p>My program uses following sensors:</p>
                               <ul>
                                   <li><input type="checkbox" name="sensors[]" value="1" />Accelerometer</li>
-                                  <li><input type="checkbox" name="sensors[]" value="2" /><img src="./images/sensors/small/magnetic_field_sensor_s_n_best_reduction.png" alt="Magnetic field" title="Magnetic field sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="2" /><img src="./images/sensors/medium/magnetic_field_sensor_plus_minus_best_reduction.png" alt="Magnetic field" title="Magnetic field sensor"></li>
                                   <li><input type="checkbox" name="sensors[]" value="3" />Orientation sensor</li>
                                   <li><input type="checkbox" name="sensors[]" value="4" />Gyroscope</li>
                                   <li><input type="checkbox" name="sensors[]" value="5" />Light sensor</li>
@@ -406,8 +406,8 @@ if(isset($_GET['m'])){
                                   <li><input type="checkbox" name="sensors[]" value="8" />Proximity sensor</li>
                                   <li><input type="checkbox" name="sensors[]" value="9" />Gravity sensor</li>
                                   <li><input type="checkbox" name="sensors[]" value="10" />Linear acceleration sensor</li>
-                                  <li><input type="checkbox" name="sensors[]" value="11" /><img src="./images/sensors/small/rotation_sensor_best_reduction.png" alt="Rotation" title="Rotation sensor"></li>
-                                  <li><input type="checkbox" name="sensors[]" value="12" /><img src="./images/sensors/small/humidity_w_percent_sensor_best_reduction.png" alt="Humidity" title="Humidity sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="11" /><img src="./images/sensors/medium/rotation_sensor_best_reduction.png" alt="Rotation" title="Rotation sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="12" /><img src="./images/sensors/medium/humidity_w_percent_sensor_best_reduction.png" alt="Humidity" title="Humidity sensor"></li>
                                   <li><input type="checkbox" name="sensors[]" value="13" />Ambient temperature sensor</li>
                               </ul>
                              
