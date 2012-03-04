@@ -232,14 +232,31 @@ img.aligncenter {
 .upload_form li {
     display: inline;
     list-style-type: none;
+    
 }
 
 .upload_form input[type='checkbox'] {
     
     width: 20px;
-    opacity: 0;
+    opacity: 100;
     float: left;
-}  
+    margin-top: 35px;
+}
+
+.upload_form .accel {
+    background-image: url(../images/sensors/medium/accelerometer_sensor_best_reduction.png);
+}
+
+.upload_form .accel_pressed {
+    background-image: url(../images/sensors/medium/accelerometer_sensor_green_best_reduction.png);
+}
+
+.upload_form .sensors {
+    width: 80px;
+    height: 80px;
+    float: left;
+    cursor: pointer;
+}
 
 .links {
 	display: block;

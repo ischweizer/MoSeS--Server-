@@ -396,7 +396,7 @@ if(isset($_GET['m'])){
                               <textarea cols="30" rows="6" name="apk_description"></textarea>
                               <p>My program uses following sensors:</p>
                               <ul>
-                                  <li><input type="checkbox" name="sensors[]" value="1" /><img src="./images/sensors/medium/accelerometer_sensor_best_reduction.png" alt="Accelerometer" title="Accelerometer sensor"></li>
+                                  <li><input type="checkbox" name="sensors[]" value="1" /><div class="sensors accel" title="Accelerometer"></div><div class="sensors accel_pressed" title="Accelerometer" style="display: none;"></div></li>
                                   <li><input type="checkbox" name="sensors[]" value="2" /><img src="./images/sensors/medium/magnetic_field_sensor_plus_minus_best_reduction.png" alt="Magnetic field" title="Magnetic field sensor"></li>
                                   <li><input type="checkbox" name="sensors[]" value="3" /><img src="./images/sensors/medium/orientation_sensor_best_reduction.png" alt="Orientation" title="Orientation sensor"></li>
                                   <li><input type="checkbox" name="sensors[]" value="4" /><img src="./images/sensors/medium/gyroscope_sensor_best_reduction.png" alt="Gyroscope" title="Gyroscope sensor"></li>
@@ -413,6 +413,18 @@ if(isset($_GET['m'])){
                              
                              <script type="text/javascript">
                                 $(document).ready(function(){
+                                    
+                                    $('.accel').click(function(){
+                                        $('.accel').toggle();
+                                        $('.accel_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.accel_hide').click(function(){
+                                        $('.accel').toggle();
+                                        $('.accel_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
                                     
                                     $('.user_apk_restriction').find('input[name=number_restricted_users]').attr('maxlength', 6);
                                     
