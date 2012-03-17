@@ -298,14 +298,14 @@ if(isset($_GET['m'])){
         }
     
         ?>
-        <li><a href="ucp.php">Profile</a></li>
+        <li><a href="ucp.php">My Devices</a></li>
         <?php
          if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
              
         ?>
-        <li><a href="ucp.php?m=upload">APK Upload</a></li>
+        <li><a href="ucp.php?m=upload">Upload an App</a></li>
         <li>&nbsp;</li>
-        <li><a href="ucp.php?m=list">Show all APKs</a></li>
+        <li><a href="ucp.php?m=list">Show my Apps</a></li>
         <li>&nbsp;</li>
         <?php
          }
@@ -327,13 +327,13 @@ if(isset($_GET['m'])){
                             if(!empty($USER_DEVICES)){
                               ?>
                                 <div class="list_devices">
-                                 <table>
-                                 <tr><th>Your devices:</th><th>Android sdk:</th><th>Your filter:</th></tr>
+                                 <table border="4" >
+                                 <tr><th>Device</th><th>Android version</th><th>Sensors made available (filter)</th></tr>
                                  <?php
 
                                   // user has got some devices
                                   foreach($USER_DEVICES as $device){
-                                     echo '<tr><td>'. $device['deviceid'] .'</td><td>'. $device['androidversion'] .'</td><td>'. $device['filter'] .'</td></tr>'; 
+                                     echo '<tr><td>'. $device['deviceid'] .'</td><td>'. $device['androidversion'] .'</td><td>'. substr($device['filter'], 1,-1) .'</td></tr>'; 
                                   }
                                   
                                  ?>
