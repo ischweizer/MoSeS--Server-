@@ -198,13 +198,16 @@ img.aligncenter {
 
 .post {
 	padding-top: 20px;
-	padding-bottom: 10px;
+    margin-left: 10%;
+    margin-bottom: 9%;
+    /*border: thin red solid;*/
 }
 
 .post .title {
 	margin: 0px;
 	padding-bottom: 10px;
 	letter-spacing: -1px;
+    /*border: thin green solid;*/
 }
 
 .post .title a {
@@ -229,18 +232,25 @@ img.aligncenter {
 	padding: 10px 0px 10px 0px;
 }
 
+.upload_form ul {
+    padding: 0; 
+    margin-bottom: 3%;
+}
+
+
 .upload_form li {
-    display: inline;
+    padding:0;
+    display: inline-block;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 6%;
+    margin-bottom: 5%;
     list-style-type: none;
     
 }
 
-.upload_form input[type='checkbox'] {
-    
-    width: 20px;
-    opacity: 100;
-    float: left;
-    margin-top: 35px;
+.upload_form img {
+    display:block;
 }
 
 .upload_form .accel {
