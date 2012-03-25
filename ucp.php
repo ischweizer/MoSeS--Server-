@@ -9,7 +9,9 @@ include_once("./include/_header.php");
 include_once("./config.php");
 
 $apk_listing = '';  // just init
-$groupname = null; // name of the group the user is in
+$groupname = null; // name of the group the user is in OR name of the group the user wants to join
+$grouppwd = null; // password of the group the user wants to join
+$grouplogin = 0; // 1 only if the user has provided a valid uname and password for login
 
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m'])){
@@ -256,6 +258,24 @@ if(isset($_GET['m'])){
             $group_row = $group_result->fetch();
             if(!empty($group_row)){
                 $groupname = $group_row['rgroup'];
+            }
+            
+            break;
+        // ##############
+        
+        // ##### USER HAS CLICKED THE JOIN BUTTON ############
+        case 'JOIN':
+            if(isset($_POST["group_name"]) && isset($_POST["group_pwd"])){
+                $MODE = 'JOIN';
+                $groupname = trim($_POST["group_name"]);
+                $grouppwd = trim($_POST["group_pwd"]);
+                // check if the user has provided a valid name of the group and password
+                $sql_join = "SELECT * FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='".$groupname."' AND password='".$grouppwd."'";
+                include_once("./include/functions/dbconnect.php");
+                $rgroup_result = $db->query($sql_join);
+                $rgroup_row = $rgroup_result->fetch();
+                if(!empty($rgroup_row))
+                    $grouplogin = 1; // the user has provided valid rgroup-name and password
             }
             
             break;
@@ -550,13 +570,25 @@ if(isset($_GET['m'])){
                                 <?php
                                 }
                                 else{ ?>
-                                    <form enctype="multipart/form-data" class="join_group">
+                                    <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
                                         <p>Enter the name of the research group you want to join<p>
                                         <input type="text" name="group_name" />
                                         <p>Enter the password of the group<p>
                                         <input type="text" name="group_pwd" />
                                         <button>Join!</button>
                                     </form>
+                                    <?php
+                                }
+                            }
+                            // THE USER HAS CLICKED THE JOIN BUTTON
+                            if($MODE == 'JOIN'){
+                                // TODO HANDLING
+                                if($grouplogin == 1){ ?>
+                                    <p>Login succesfull!</p>
+                                <?php
+                                }
+                                else{ ?>
+                                    <p>group name or pwd false!</p>
                                     <?php
                                 }
                             }
