@@ -31,7 +31,6 @@ if(isset($_POST['HTTP_JSON'])){
             $data->SENSORS = $SENSORS;  
         }
         
-        $logger->logInfo(var_dump($data));
         
         /**
         *  Here will be selected which MESSAGE type was sent
