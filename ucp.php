@@ -304,6 +304,7 @@ if(isset($_GET['m'])){
              
         ?>
         <li><a href="ucp.php?m=upload">Upload an App</a></li>
+        <li><a href="ucp.php?m=group">My Group</a></li>
         <li>&nbsp;</li>
         <li><a href="ucp.php?m=list">Show my Apps</a></li>
         <li>&nbsp;</li>
