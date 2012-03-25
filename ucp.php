@@ -6,8 +6,10 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
     
 include_once("./include/functions/func.php");
 include_once("./include/_header.php");
+include_once("./config.php");
 
 $apk_listing = '';  // just init
+$groupname = null; // name of the group the user is in
 
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m'])){
@@ -243,6 +245,21 @@ if(isset($_GET['m'])){
                        }
                     }
                        break;
+        // ##### GROUP ############
+        case 'GROUP':
+            $MODE = 'GROUP';
+            // obtain the name of group the user is currently in (if any)
+            $RGROUP = null;
+            $group_sql = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $_SESSION['USER_ID'];
+            include_once("./include/functions/dbconnect.php");
+            $group_result = $db->query($group_sql);
+            $group_row = $group_result->fetch();
+            if(!empty($group_row)){
+                $groupname = $group_row['rgroup'];
+            }
+            
+            break;
+        // ##############
         
         default: 
                 $MODE = 'NONE';
