@@ -544,6 +544,23 @@ if(isset($_GET['m'])){
                                 }
                             }
                             
+                            if($MODE == 'GROUP'){
+                                if($groupname != null){ ?>
+                                    <p>User is a memeber of a group</p>
+                                <?php
+                                }
+                                else{ ?>
+                                    <form enctype="multipart/form-data" class="join_group">
+                                        <p>Enter the name of the research group you want to join<p>
+                                        <input type="text" name="group_name" />
+                                        <p>Enter the password of the group<p>
+                                        <input type="text" name="group_pwd" />
+                                        <button>Join!</button>
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            
                             // user wants a listing of APK files
                             if($MODE == 'LIST' && isset($LIST_APK)){
                                 
