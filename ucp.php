@@ -251,7 +251,6 @@ if(isset($_GET['m'])){
         case 'GROUP':
             $MODE = 'GROUP';
             // obtain the name of group the user is currently in (if any)
-            $RGROUP = null;
             $group_sql = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $_SESSION['USER_ID'];
             include_once("./include/functions/dbconnect.php");
             $group_result = $db->query($group_sql);
@@ -274,12 +273,34 @@ if(isset($_GET['m'])){
                 include_once("./include/functions/dbconnect.php");
                 $rgroup_result = $db->query($sql_join);
                 $rgroup_row = $rgroup_result->fetch();
-                if(!empty($rgroup_row))
+                if(!empty($rgroup_row)){
                     $grouplogin = 1; // the user has provided valid rgroup-name and password
+                    // update the tables
+                    $sql_update1 = "UPDATE ".$CONFIG['DB_TABLE']['USER']." SET rgroup='".$groupname."' WHERE userid=".$_SESSION['USER_ID'];
+                    $db->exec($sql_update1);
+                    
+                }
             }
             
             break;
         // ##############
+        
+        // ##### USER HAS CLICKED THE LEAVE BUTTON ############
+        case 'LEAVE':
+            $MODE = 'LEAVE';
+            include_once("./include/functions/dbconnect.php");
+            $sql_leave = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']." WHERE userid=".$_SESSION['USER_ID'];
+            $old_group_result =  $db->query($sql_leave);
+            $aRow = $old_group_result->fetch();
+            $groupname = " ";
+            if(!empty($aRow))
+                $groupname = $aRow['rgroup'];
+            // update the tables
+            $sql_update1 = "UPDATE ".$CONFIG['DB_TABLE']['USER']." SET rgroup='' WHERE userid=".$_SESSION['USER_ID'];
+            $db->exec($sql_update1);
+            break;
+        // ##############
+        
         
         default: 
                 $MODE = 'NONE';
@@ -357,7 +378,6 @@ if(isset($_GET['m'])){
             <div id="page-bgbtm">
                 <div id="page_content">
                     <div class="post">
-                        <h2 class="title">User control panel</h2>
                         <div class="entry">
                            
                         <?php 
@@ -565,9 +585,13 @@ if(isset($_GET['m'])){
                             }
                             
                             if($MODE == 'GROUP'){
-                                if($groupname != null){ ?>
-                                    <p>User is a memeber of a group</p>
-                                <?php
+                                if($groupname != null){
+                                    echo("<h3> You are currently member of ".$groupname."</h3>");
+                                    echo("<p>the group has xXx members</p>");
+                                    ?>
+                                    <form action=ucp.php?m=leave method="post" class="leave_group">
+                                        <button>Leave</button>
+                                        <?php
                                 }
                                 else{ ?>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
@@ -584,6 +608,7 @@ if(isset($_GET['m'])){
                             if($MODE == 'JOIN'){
                                 // TODO HANDLING
                                 if($grouplogin == 1){ ?>
+                                    
                                     <p>Login succesfull!</p>
                                 <?php
                                 }
