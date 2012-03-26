@@ -8,14 +8,16 @@ if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["
    include_once("./config.php");
    include_once("./include/functions/dbconnect.php"); 
    
-   $sql = "SELECT userid 
+   $sql = "SELECT userid, confirmed  
            FROM ". $CONFIG['DB_TABLE']['USER'] ." 
            WHERE hash = '". $_GET["confirm"] ."'";
    
    $result = $db->query($sql);
    $row = $result->fetch();
    
-   if(!empty($row)){
+   // only update if user is not confirmed yet
+   if(!empty($row) && $row['confirmed'] == 0){
+       
       $sql = "UPDATE ". $CONFIG['DB_TABLE']['USER'] ." 
               SET confirmed=1, usergroupid=1 
               WHERE userid=". $row["userid"];
@@ -25,7 +27,7 @@ if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["
       $USER_CONFIRMED = true;
        
    }else{
-       die("You provided wrong hash.");
+      $USER_CONFIRMED = false; 
    }
 }
 
@@ -134,43 +136,58 @@ if(isset($_POST["submitted"])){
           
       }else{
           
-          $LOGIN_EXISTS = 0;
+          $sql = "SELECT userid 
+                  FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+                  WHERE email = '". $EMAIL ."'";
           
-          // we have no duplicate logins
-          // so we safe to insert new entry
+          $result = $db->query($sql);
+          $row = $result->fetch();
 
-         $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['USER'] ." (usergroupid, firstname, lastname, 
-                                                  login, password, hash, usertitle,
-                                                  email, ipaddress, lastactivity, 
-                                                  joindate, passworddate)
-                                                  VALUES 
-                                                  (0, '". $FIRSTNAME ."', '". $LASTNAME ."',
-                                                  '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
-                                                  '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
-                                                  ". $CUR_TIME .", ". $CUR_TIME .")";
-          
-          $db->exec($sql);
-          
-          $USER_CREATED = 1;  
-             
-          // compose email to user                                        
-          $to = $EMAIL; 
-          $subject = "Our site - Please confirm the registration"; 
-          $from = "admin@moses"; 
+          if(!empty($row)){
               
-          $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
-          $message .= "Please follow this link: ";
-          $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
-           
-          $headers = "From: $from"; 
-          $sent = mail($to, $subject, $message, $headers); 
+              $USER_CREATED = 0;
+              $LOGIN_EXISTS = 1;
+              
+              $ERROR_REGFORM[] = "That E-mail already exists! Please choose another one.";
+              
+          }else{
+              
+            $LOGIN_EXISTS = 0;
           
-          // sending was successful?
-          if($sent) {
-              echo("Your mail was sent successfully"); 
-          } else {
-              die("We encountered an error sending your mail"); 
-          } 
+              // we have no duplicate logins
+              // so we safe to insert new entry
+
+             $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['USER'] ." (usergroupid, firstname, lastname, 
+                                                      login, password, hash, usertitle,
+                                                      email, ipaddress, lastactivity, 
+                                                      joindate, passworddate)
+                                                      VALUES 
+                                                      (0, '". $FIRSTNAME ."', '". $LASTNAME ."',
+                                                      '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
+                                                      '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
+                                                      ". $CUR_TIME .", ". $CUR_TIME .")";
+              
+              $db->exec($sql);
+              
+              $USER_CREATED = 1;  
+                 
+              // compose email to user                                        
+              $to = $EMAIL; 
+              $subject = "MoSeS: Please confirm your registration"; 
+              $from = "admin@moses"; 
+                  
+              $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
+              $message .= "Please follow this link: ";
+              $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
+               
+              $headers = "From: $from"; 
+              $sent = mail($to, $subject, $message, $headers); 
+              
+              // sending was successful?
+              if(!$sent) {
+                  die("We encountered an error sending your mail"); 
+              }      
+          }
       } 
   } 
 }
@@ -226,7 +243,9 @@ if(isset($_POST["submitted"])){
                             </div>
                                    
                                    <?php       
-                                }else{
+                                }
+                                
+                                if(!(isset($USER_CREATED) && $USER_CREATED == 1) && !(isset($USER_CONFIRMED) && $USER_CONFIRMED)){
                             ?>
 
                             <form class="registration_form" action="./registration.php" method="post" accept-charset="UTF-8">
