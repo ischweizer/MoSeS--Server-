@@ -594,14 +594,34 @@ if(isset($_GET['m'])){
                                         <?php
                                 }
                                 else{ ?>
+                                    <form method="get" class="radio_join_create" method="get">
+                                        <input type="radio" name="join_create" value="join" class="radio_join" />  Join<br>
+                                        <input type="radio" name="join_create" value="create" class="radio_create" /> Create
+                                    </form>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
                                         <h3>Join a research group or found one</h3>
                                         <p>Enter the name of the research group you want to join<p>
                                         <input type="text" name="group_name" />
                                         <p>Enter the password of the group<p>
                                         <input type="text" name="group_pwd" />
-                                        <button>Join!</button>
+                                        
+                                        <button></button>
                                     </form>
+                                    
+                                    <script type="text/javascript">
+                                $(document).ready(function(){
+                                    
+                                    $('.radio_join').click(function(){
+                                        $('.join_group').find('button').attr('value', 'Join!');
+                                    });
+                                    
+                                    $('.radio_create').click(function(){
+                                        $('.join_group').find('button').attr('value', 'Create!');
+                                    });
+                                       
+                            
+                                });
+                                </script>
                                     <?php
                                 }
                             }
