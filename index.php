@@ -28,13 +28,18 @@ include_once("./include/_menu.php");
 
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
         
+  include_once("./config.php");
   include_once("./include/functions/dbconnect.php");   
   
   $USER_LOGIN =  $_POST["login"];
   $USER_PASSWORD =  $_POST["password"];
   
-  $result = $db->query("SELECT * FROM user WHERE login = '". $USER_LOGIN ."' AND password = '". $USER_PASSWORD ."'");
+  $sql = "SELECT * 
+          FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+          WHERE login = '". $USER_LOGIN ."' 
+          AND password = '". $USER_PASSWORD ."'";
   
+  $result = $db->query($sql);
   $row = $result->fetch();    
   
   if(!empty($row)){

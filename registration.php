@@ -6,18 +6,17 @@ include_once("./include/_header.php");
 if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
   
    include_once("./config.php");
-   // TODO: make dynamic table from config
    include_once("./include/functions/dbconnect.php"); 
    
    $sql = "SELECT userid 
-           FROM user 
+           FROM ". $CONFIG['DB_TABLE']['USER'] ." 
            WHERE hash = '". $_GET["confirm"] ."'";
    
    $result = $db->query($sql);
    $row = $result->fetch();
    
    if(!empty($row)){
-      $sql = "UPDATE user 
+      $sql = "UPDATE ". $CONFIG['DB_TABLE']['USER'] ." 
               SET confirmed=1, usergroupid=1 
               WHERE userid=". $row["userid"];
       
@@ -30,6 +29,7 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
 
 if(isset($_POST["submitted"])){
   
+  include_once("./config.php");
   include_once("./include/functions/dbconnect.php");
   
   $USER_CREATED = 0;
@@ -37,14 +37,14 @@ if(isset($_POST["submitted"])){
   $ERROR_REGFORM = array();
   
   // init
-  $USER_TITLE = '';
+  //$USER_TITLE = '';
   $FIRSTNAME = '';
   $LASTNAME = '';
   $EMAIL = '';
   $LOGIN = '';
   $PASSWORD = '';
       
-  if(!isset($_POST["usertitle"])){
+  /*if(!isset($_POST["usertitle"])){
     $ERROR_REGFORM[] = "Please, enter your title!";
   }else{
       
@@ -52,7 +52,7 @@ if(isset($_POST["submitted"])){
      if(empty($_POST["usertitle"])){
         $ERROR_REGFORM[] = "Please, enter your title!";    
      }
-  }
+  }*/
   
   if(!isset($_POST["firstname"])){
       $ERROR_REGFORM[] = "Please, enter your firstname!";
@@ -118,7 +118,7 @@ if(isset($_POST["submitted"])){
       $CONFIRM_CODE = md5($EMAIL);
       
       $sql = "SELECT userid 
-              FROM user 
+              FROM ". $CONFIG['DB_TABLE']['USER'] ." 
               WHERE login = '". $LOGIN ."'";
       
       $result = $db->query($sql);
@@ -137,7 +137,7 @@ if(isset($_POST["submitted"])){
           // we have no duplicate logins
           // so we safe to insert new entry
 
-         $sql = "INSERT INTO user (usergroupid, firstname, lastname, 
+         $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['USER'] ." (usergroupid, firstname, lastname, 
                                                   login, password, hash, usertitle,
                                                   email, ipaddress, lastactivity, 
                                                   joindate, passworddate)
@@ -154,7 +154,7 @@ if(isset($_POST["submitted"])){
           // compose email to user                                        
           $to = $EMAIL; 
           $subject = "Our site - Please confirm the registration"; 
-          $from = "admin@localhost"; 
+          $from = "admin@moses"; 
               
           $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
           $message .= "Please follow this link: ";

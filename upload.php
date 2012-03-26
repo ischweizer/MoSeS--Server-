@@ -25,10 +25,11 @@ $fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);
 */
 include_once(MOSES_HOME. "/include/functions/dbconnect.php");
 
-$sql = "SELECT hash FROM user WHERE userid = ". $_SESSION["USER_ID"];
+$sql = "SELECT hash 
+        FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+        WHERE userid = ". $_SESSION["USER_ID"];
        
 $result = $db->query($sql);
-
 $row = $result->fetch();
 
 if(!empty($row)){
@@ -187,7 +188,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     /**
     * Store filename, hash in DB and other informations
     */
-    $sql = "INSERT INTO apk (userid, userhash, apkname, 
+    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, 
                              apkhash, sensors, description,
                              apktitle, restriction_device_number, pending_devices,
                              candidates, notified_devices, androidversion, ustudy_finished)
