@@ -595,6 +595,7 @@ if(isset($_GET['m'])){
                                 }
                                 else{ ?>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
+                                        <h3>Join a research group or found one</h3>
                                         <p>Enter the name of the research group you want to join<p>
                                         <input type="text" name="group_name" />
                                         <p>Enter the password of the group<p>
@@ -607,16 +608,21 @@ if(isset($_GET['m'])){
                             // THE USER HAS CLICKED THE JOIN BUTTON
                             if($MODE == 'JOIN'){
                                 // TODO HANDLING
-                                if($grouplogin == 1){ ?>
-                                    
-                                    <p>Login succesfull!</p>
-                                <?php
+                                if($grouplogin == 1){
+                                    echo("<h3>You joined ".$groupname."<h3>");
+                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"1;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
                                 }
                                 else{ ?>
                                     <p>group name or pwd false!</p>
                                     <?php
                                 }
                             }
+                            
+                            // THE USER HAS CLICKED THE LEAVE BUTTON
+                            if($MODE == 'LEAVE'){
+                                echo("<h3>You left ".$groupname."<h3>");
+                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"1;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
+                                }
                             
                             // user wants a listing of APK files
                             if($MODE == 'LIST' && isset($LIST_APK)){
