@@ -11,7 +11,19 @@ include_once("./config.php");
 $apk_listing = '';  // just init
 $groupname = null; // name of the group the user is in OR name of the group the user wants to join
 $grouppwd = null; // password of the group the user wants to join
-$grouplogin = 0; // 1 only if the user has provided a valid uname and password for login
+$groupsize = 0; // size of the group
+
+/*
+* join/create status
+* ON JOIN:
+* 0: invalid group-name/password
+* 1: valid group-name and password
+* ON CREATE
+* 2: group-name already given
+* 3: group-name not already given
+* 
+*/
+$jcstatsus = 0;
 
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m'])){
@@ -262,23 +274,54 @@ if(isset($_GET['m'])){
             break;
         // ##############
         
-        // ##### USER HAS CLICKED THE JOIN BUTTON ############
+        // ##### USER HAS CLICKED THE JOIN/CREATE BUTTON ############
         case 'JOIN':
             if(isset($_POST["group_name"]) && isset($_POST["group_pwd"])){
+                include_once("./include/functions/dbconnect.php");
                 $MODE = 'JOIN';
                 $groupname = trim($_POST["group_name"]);
                 $grouppwd = trim($_POST["group_pwd"]);
-                // check if the user has provided a valid name of the group and password
-                $sql_join = "SELECT * FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='".$groupname."' AND password='".$grouppwd."'";
-                include_once("./include/functions/dbconnect.php");
-                $rgroup_result = $db->query($sql_join);
-                $rgroup_row = $rgroup_result->fetch();
-                if(!empty($rgroup_row)){
-                    $grouplogin = 1; // the user has provided valid rgroup-name and password
-                    // update the tables
-                    $sql_update1 = "UPDATE ".$CONFIG['DB_TABLE']['USER']." SET rgroup='".$groupname."' WHERE userid=".$_SESSION['USER_ID'];
-                    $db->exec($sql_update1);
-                    
+                if(isset($_POST["join_create"]) && $_POST["join_create"] == "create" ){
+                    // the user wants to create a group, check if the group name is already given
+                    $sql_check = "SELECT * FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='".$groupname."'";
+                    $check_result = $db->query($sql_check);
+                    $check_row = $check_result->fetch();
+                    if(!empty($check_row)){
+                        // group-name is already given
+                        $jcstatsus = 2;
+                    }
+                    else{
+                        // update the databases
+                        $members = json_encode(array(intval($_SESSION['USER_ID'])));
+                        $sql_newgroup = "INSERT INTO ".$CONFIG['DB_TABLE']['RGROUP']." (name, password, members) VALUES 
+                        ('". $groupname ."', '". $grouppwd . "', '" . $members . "')";
+                        $sql_update2 = "UPDATE ".$CONFIG['DB_TABLE']['USER']." SET rgroup='".$groupname."' WHERE userid=".$_SESSION['USER_ID'];
+                        $db->exec($sql_newgroup);
+                        $db->exec($sql_update2);
+                        $jcstatsus = 3;
+                    }
+                }
+                else{
+                    // the user wants to join a group
+                    // check if the user has provided a valid name of the group and password
+                    $sql_join = "SELECT * FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='".$groupname."' AND password='".$grouppwd."'";
+                    $rgroup_result = $db->query($sql_join);
+                    $rgroup_row = $rgroup_result->fetch();
+                    if(!empty($rgroup_row)){
+                        $jcstatsus = 1; // the user has provided valid rgroup-name and password
+                        // update the tables
+                        $sql_update1 = "UPDATE ".$CONFIG['DB_TABLE']['USER']." SET rgroup='".$groupname."' WHERE userid=".$_SESSION['USER_ID'];
+                        $db->exec($sql_update1);
+                        $sql_members = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']." WHERE name='".$groupname."'";
+                        $members_result = $db->query($sql_members); 
+                        $members_row = $members_result->fetch();
+                        $members = json_decode($members_row['members']);
+                        $members[] = intval($_SESSION['USER_ID']);
+                        sort($members);
+                        $members = json_encode($members);
+                        $sql_update3 = "UPDATE ".$CONFIG['DB_TABLE']['RGROUP']." SET members='".$members."' WHERE name='".$groupname."'";
+                        $db->exec($sql_update3);
+                    }
                 }
             }
             
@@ -298,6 +341,21 @@ if(isset($_GET['m'])){
             // update the tables
             $sql_update1 = "UPDATE ".$CONFIG['DB_TABLE']['USER']." SET rgroup='' WHERE userid=".$_SESSION['USER_ID'];
             $db->exec($sql_update1);
+            // remove the user from the group
+            $sql_members = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']." WHERE name='".$groupname."'";
+            $members_result = $db->query($sql_members); 
+            $members_row = $members_result->fetch();
+            $members = json_decode($members_row['members']);
+            $members = array_diff($members, array($_SESSION['USER_ID']));
+            $sql_update4;
+            if(count($members) == 0)
+                $sql_update4 = "DELETE FROM ".$CONFIG['DB_TABLE']['RGROUP']." WHERE name='".$groupname."'";
+            else{
+                $members = json_encode($members);
+                $sql_update4 = "UPDATE ".$CONFIG['DB_TABLE']['RGROUP']." SET members='".$members."' WHERE name='".$groupname."'";
+            }
+            $db->exec($sql_update4);
+            
             break;
         // ##############
         
@@ -358,18 +416,24 @@ if(isset($_GET['m'])){
         ?>
         <li><a href="ucp.php">My Devices</a></li>
         <?php
-         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
+         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>0){
              
         ?>
-        <li><a href="ucp.php?m=upload">Upload an App</a></li>
         <li><a href="ucp.php?m=group">My Group</a></li>
-        <li>&nbsp;</li>
-        <li><a href="ucp.php?m=list">Show my Apps</a></li>
         <li>&nbsp;</li>
         <?php
          }
-         ?>
-        <li><a href="ucp.php?m=promo">Request scientist account</a></li>
+        if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
+            ?>
+            <li><a href="ucp.php?m=upload">Upload an App</a></li>
+            <li><a href="ucp.php?m=list">Show my Apps</a></li>
+        <?php }
+        if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2){
+            ?>
+            <li><a href="ucp.php?m=promo">Request scientist account</a></li>
+            <?php
+        }
+             ?>
     </ul>
 </div>
 
@@ -587,7 +651,6 @@ if(isset($_GET['m'])){
                             if($MODE == 'GROUP'){
                                 if($groupname != null){
                                     echo("<h3> You are currently member of ".$groupname."</h3>");
-                                    echo("<p>the group has xXx members</p>");
                                     ?>
                                     <form action=ucp.php?m=leave method="post" class="leave_group">
                                         <button>Leave</button>
@@ -595,13 +658,11 @@ if(isset($_GET['m'])){
                                 }
                                 else{ ?>
                                 
-
+                                    <h3>Join a research group or found one</h3>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
                                         <input type="radio" name="join_create" value="join" class="radio_join" />Join<br>
-                                        <input type="radio" name="join_create" value="create" class="radio_create" />Create
-                                        
-                                        <h3>Join a research group or found one</h3>
-                                        <p>Enter the name of the research group you want to join<p>
+                                        <input type="radio" name="join_create" value="create" class="radio_create" />Create                                        
+                                        <p>Enter the name of the research group<p>
                                         <input type="text" name="group_name" />
                                         <p>Enter the password of the group<p>
                                         <input type="text" name="group_pwd" />
@@ -630,21 +691,27 @@ if(isset($_GET['m'])){
                             }
                             // THE USER HAS CLICKED THE JOIN BUTTON
                             if($MODE == 'JOIN'){
-                                // TODO HANDLING
-                                if($grouplogin == 1){
-                                    echo("<h3>You joined ".$groupname."<h3>");
-                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"1;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
+                                // ###########
+                                switch($jcstatsus){
+                                    case 1 :
+                                        echo("<h3>You joined ".$groupname."<h3>");
+                                        break;
+                                    case 2 : 
+                                        echo("<h4>".$groupname." already exists! Specify another name for your research group<h4>");
+                                        break;
+                                    case 3 : 
+                                        echo("<h3>You created ".$groupname."<h3>");
+                                        break;
+                                    default:
+                                        echo("<h3>Invalid group-name and/or password ".$groupname."<h3>");
                                 }
-                                else{ ?>
-                                    <p>group name or pwd false!</p>
-                                    <?php
-                                }
+                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
                             }
                             
                             // THE USER HAS CLICKED THE LEAVE BUTTON
                             if($MODE == 'LEAVE'){
                                 echo("<h3>You left ".$groupname."<h3>");
-                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"1;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
+                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
                                 }
                             
                             // user wants a listing of APK files
