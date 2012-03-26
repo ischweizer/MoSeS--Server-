@@ -3,7 +3,7 @@ session_start();
 
 include_once("./include/_header.php");
 
-if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
+if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
   
    include_once("./config.php");
    include_once("./include/functions/dbconnect.php"); 
@@ -21,6 +21,8 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
               WHERE userid=". $row["userid"];
       
       $db->exec($sql);
+      
+      $USER_CONFIRMED = true;
        
    }else{
        die("You provided wrong hash.");
@@ -108,7 +110,7 @@ if(isset($_POST["submitted"])){
   
   if(count($ERROR_REGFORM) == 0){
       
-      $USER_TITLE = $_POST["usertitle"];
+      //$USER_TITLE = $_POST["usertitle"];
       $FIRSTNAME = $_POST["firstname"];
       $LASTNAME = $_POST["lastname"];
       $EMAIL = $_POST["email"];
@@ -198,6 +200,20 @@ if(isset($_POST["submitted"])){
                         <h2 class="title">Registration</h2>
                         <div class="entry">
                            <?php
+                           
+                                if(isset($USER_CONFIRMED) && $USER_CONFIRMED){
+                                   ?>
+                                    <div class="registration_form">
+                                        <fieldset>
+                                            <legend>Confirmed!</legend>
+                                            <label>Your registration was successful confirmed.</label>
+                                            <label>You may now log in into MoSeS.</label>
+                                        </fieldset>
+                                    </div>
+                                   
+                                   <?php 
+                                }
+                           
                                 if(isset($USER_CREATED) && $USER_CREATED == 1){
                                    ?>
                                    
