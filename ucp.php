@@ -317,6 +317,7 @@ if(isset($_GET['m'])){
                         $members_row = $members_result->fetch();
                         $members = json_decode($members_row['members']);
                         $members[] = intval($_SESSION['USER_ID']);
+                        $members = array_unique($members);
                         sort($members);
                         $members = json_encode($members);
                         $sql_update3 = "UPDATE ".$CONFIG['DB_TABLE']['RGROUP']." SET members='".$members."' WHERE name='".$groupname."'";
@@ -346,13 +347,17 @@ if(isset($_GET['m'])){
             $members_result = $db->query($sql_members); 
             $members_row = $members_result->fetch();
             $members = json_decode($members_row['members']);
-            $members = array_diff($members, array($_SESSION['USER_ID']));
+            $newMembers = array();
+            foreach($members as $mid)
+                if($mid != $_SESSION['USER_ID'])
+                    $newMembers[] = $mid;
+            //$members = array_diff($members, array($_SESSION['USER_ID'])); remove me
             $sql_update4;
-            if(count($members) == 0)
+            if(count($newMembers) == 0)
                 $sql_update4 = "DELETE FROM ".$CONFIG['DB_TABLE']['RGROUP']." WHERE name='".$groupname."'";
             else{
-                $members = json_encode($members);
-                $sql_update4 = "UPDATE ".$CONFIG['DB_TABLE']['RGROUP']." SET members='".$members."' WHERE name='".$groupname."'";
+                $newMembers = json_encode($newMembers);
+                $sql_update4 = "UPDATE ".$CONFIG['DB_TABLE']['RGROUP']." SET members='".$newMembers."' WHERE name='".$groupname."'";
             }
             $db->exec($sql_update4);
             
@@ -429,9 +434,64 @@ if(isset($_GET['m'])){
             <li><a href="ucp.php?m=list">Show my Apps</a></li>
         <?php }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2){
-            ?>
-            <li><a href="ucp.php?m=promo">Request scientist account</a></li>
+            /*
+            * Offer an instant upgrade to scientist account if the user is a member of a group and
+            * #devices-in-group - #scientist-in-group*5 >= 5
+            */
+            // determine if the user is a member of a group
+            $gr_sql = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $_SESSION['USER_ID'];
+            include_once("./include/functions/dbconnect.php");
+            $gr_result = $db->query($gr_sql);
+            $gr_row = $gr_result->fetch();
+            //echo("<p>".$gr_sql."<p>" );
+            if(!empty($gr_row) && $gr_row['rgroup']!=null){
+                $grname = $gr_row['rgroup'];
+               // echo("<p>hello<p>" );
+                //echo("<p>".$grname."<p>" );
+                // #### USER IS A MEMBER OF A GROUP###//
+                // determine number of devices and scientists
+                $nDevices = 0;
+                $mem_sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='" .$grname."'";
+                $mem_result = $db->query($mem_sql);
+               // echo("<p>".$mem_sql."<p>" );
+                $mem_row = $mem_result->fetch();
+                $mem = json_decode($mem_row['members']);
+                // determine number of scientists
+                $nScientists = 0;
+                foreach($mem as $id){
+                    $mbr_sql = "SELECT usergroupid FROM ".$CONFIG['DB_TABLE']['USER']." WHERE userid=".$id;
+                    $mbr_result = $db->query($mbr_sql);
+                    $mbr_row = $mbr_result->fetch();
+                    if(!empty($mbr_row))
+                        if($mbr_row['usergroupid']>=2)
+                            $nScientists++;
+                    // determine how many devices the user has
+                    $dev_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE uid=".$id;
+                  //  echo("<p>".$dev_sql."<p>" );
+                    $dev_result = $db->query($dev_sql);
+                    $dev_rows = $dev_result->fetchAll(PDO::FETCH_ASSOC);
+                    $nDevices+=count($dev_rows);
+                }
+                $control = $nDevices - $nScientists * $CONFIG['MISC']['SC_TRESHOLD'];
+             //   echo("<p>".$nDevices."<p>" );
+             //   echo("<p>".$nScientists."<p>" );
+             //   echo("<p>".$control."<p>" );
+                if($control >= $CONFIG['MISC']['SC_TRESHOLD']){
+                  ?>
+                  <li><h3>Get scientist credentials today!</h3></li>
+                  <?php
+                }
+                  else{
+                      ?>
+                      <li><a href="ucp.php?m=promo">Request scientist account</a></li>
             <?php
+                  }  
+                }
+                else{
+                    ?>
+                    <li><a href="ucp.php?m=promo">Request scientist account</a></li>
+                    <?php
+            }
         }
              ?>
     </ul>
