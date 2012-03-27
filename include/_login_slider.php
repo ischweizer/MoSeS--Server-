@@ -22,7 +22,7 @@
                     <input class="field" type="text" name="login" id="log" value="" size="23" />
                     <label class="grey" for="pwd">Password:</label>
                     <input class="field" type="password" name="password" id="pwd" size="23" />
-                    <label><input name="rememberme" id="rememberme" type="checkbox" value="forever" /> &nbsp;Remember me</label>
+                    <!--<label><input name="rememberme" id="rememberme" type="checkbox" value="forever" /> &nbsp;Remember me</label>-->
                     <div class="clear"></div>
                     <input type="submit" name="submit_button" value="Login" class="bt_login" />
                     <div class="clear"></div>
@@ -36,8 +36,8 @@
                 }
                 ?>
             </div>
-        </div>
-</div> <!-- /login -->    
+        </div> <!-- /login_content -->
+</div> <!-- /panel -->    
 
     <?php
     if(isset($_SESSION['USER_LOGGED_IN'])){
@@ -47,15 +47,16 @@
         <!-- The tab on top -->    
         <div class="tab">
             <ul class="login">
-                <li class="left">&nbsp;</li>
-                <li>Hello, <?php echo $_SESSION['FIRSTNAME']; ?>!</li>
+                <!--<li class="left">&nbsp;</li>-->
+                <li class="welcome">Hello, <?php echo $_SESSION['FIRSTNAME']; ?>!</li>
                 <li class="sep">|</li>
                 <li id="toggle">
                     <a id="open" class="open" href="#">Menu</a>
                     <a id="close" style="display: none;" class="close" href="#">Hide</a>            
                 </li>
-                <li class="right">&nbsp;</li>
+                <!--<li class="right">&nbsp;</li>-->
             </ul> 
+            </div> 
         </div> <!-- / top -->
        
        <?php
@@ -66,16 +67,17 @@
     <!-- The tab on top -->    
     <div class="tab">
         <ul class="login">
-            <li class="left">&nbsp;</li>
-            <li>Hello, Guest!</li>
+            <!--<li class="left">&nbsp;</li>-->
+            <li class="welcome">Hello, Guest!</li>
             <li class="sep">|</li>
             <li id="toggle">
-                <a id="open" class="open" href="#">Login or Register</a>
+                <a id="open" class="open" href="#">MENU</a>
                 <a id="close" style="display: none;" class="close" href="#">HIDE</a>            
             </li>
-            <li class="right">&nbsp;</li>
-        </ul> 
-    </div> <!-- / top -->
+            <!--<li class="right">&nbsp;</li>-->
+        </ul>                   
+        </div> 
+    </div> <!-- / topPanel -->
     <?php
     }
     ?>
