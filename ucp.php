@@ -25,6 +25,8 @@ $groupsize = 0; // size of the group
 */
 $jcstatsus = 0;
 
+$scientist_succses = 0; // 1 only if the user has gain instant scientist credentials, use to check if someone is trying something nasty
+
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m'])){
     
@@ -363,6 +365,54 @@ if(isset($_GET['m'])){
             
             break;
         // ##############
+        // USER WANTS TO BE A SCIENTIST (INSTANTLY)
+        case 'INSTANT':
+            $MODE ='INSTANT';
+            //#####
+            $gr_sql = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $_SESSION['USER_ID'];
+            include_once("./include/functions/dbconnect.php");
+            $gr_result = $db->query($gr_sql);
+            $gr_row = $gr_result->fetch();
+            //echo("<p>".$gr_sql."<p>" );
+            if(!empty($gr_row) && $gr_row['rgroup']!=null){
+                $grname = $gr_row['rgroup'];
+               // echo("<p>hello<p>" );
+                //echo("<p>".$grname."<p>" );
+                // #### USER IS A MEMBER OF A GROUP###//
+                // determine number of devices and scientists
+                $nDevices = 0;
+                $mem_sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='" .$grname."'";
+                $mem_result = $db->query($mem_sql);
+               // echo("<p>".$mem_sql."<p>" );
+                $mem_row = $mem_result->fetch();
+                $mem = json_decode($mem_row['members']);
+                // determine number of scientists
+                $nScientists = 0;
+                foreach($mem as $id){
+                    $mbr_sql = "SELECT usergroupid FROM ".$CONFIG['DB_TABLE']['USER']." WHERE userid=".$id;
+                    $mbr_result = $db->query($mbr_sql);
+                    $mbr_row = $mbr_result->fetch();
+                    if(!empty($mbr_row))
+                        if($mbr_row['usergroupid']>=2)
+                            $nScientists++;
+                    // determine how many devices the user has
+                    $dev_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE uid=".$id;
+                  //  echo("<p>".$dev_sql."<p>" );
+                    $dev_result = $db->query($dev_sql);
+                    $dev_rows = $dev_result->fetchAll(PDO::FETCH_ASSOC);
+                    $nDevices+=count($dev_rows);
+                }
+                $control = $nDevices - $nScientists * $CONFIG['MISC']['SC_TRESHOLD'];
+                if($control >= $CONFIG['MISC']['SC_TRESHOLD']){
+                    $sql_sci = "UPDATE ".$CONFIG['DB_TABLE']['USER']. " SET usergroupid=2 WHERE userid=".$_SESSION['USER_ID'];
+                    $db->exec($sql_sci);                    
+                    $scientist_succses = 1;
+                    $_SESSION["GROUP_ID"]=2;
+                }
+            }
+            break;
+            
+            //#####
         
         
         default: 
@@ -478,10 +528,11 @@ if(isset($_GET['m'])){
              //   echo("<p>".$control."<p>" );
                 if($control >= $CONFIG['MISC']['SC_TRESHOLD']){
                   ?>
-                  <li><h3>Get scientist credentials today!</h3></li>
+                  <li><a href="ucp.php?m=instant">Get scientist credentials today!</a></li>
                   <?php
                 }
                   else{
+                      
                       ?>
                       <li><a href="ucp.php?m=promo">Request scientist account</a></li>
             <?php
@@ -773,6 +824,18 @@ if(isset($_GET['m'])){
                                 echo("<h3>You left ".$groupname."<h3>");
                                 echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
                                 }
+                            
+                            // THE USER WANTS TO BE A SCIENTIST, INSTANTLY
+                            if($MODE == 'INSTANT'){
+                                if($scientist_succses == 1){
+                                    echo("<h3>Congrats! You have gained scientist credentials!<h3>");
+                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php\">");
+                                }
+                                else{
+                                    echo("<h3>Y U DO THIS? br0<h3>");
+                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php\">");
+                                }
+                            }
                             
                             // user wants a listing of APK files
                             if($MODE == 'LIST' && isset($LIST_APK)){
