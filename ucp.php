@@ -627,10 +627,10 @@ if(isset($_GET['m'])){
                               <input type="text" name="apk_android_version" />
                               <p>Program description:</p>
                               <textarea cols="30" rows="6" name="apk_description"></textarea>
-                              <p>My program uses following sensors:</p>
+                              <p style="margin: 20px 0;">My program uses following sensors:</p>
                               <ul>
                                   <li><img src="./images/sensors/medium/accelerometer_sensor_best_reduction.png" alt="Accelerometer" title="Accelerometer"><input type="checkbox" name="sensors[]" value="1" /></li>
-                                  <li><img src="./images/sensors/medium/magnetic_field_sensor_plus_minus_best_reduction.png" alt="Magnetic field" title="Magnetic field sensor"><input type="checkbox" name="sensors[]" value="2" /></li>
+                                  <li><img src="./images/sensors/medium/magnetic_field_sensor_s_n_best_reduction.png" alt="Magnetic field" title="Magnetic field sensor"><input type="checkbox" name="sensors[]" value="2" /></li>
                                   <li><img src="./images/sensors/medium/orientation_sensor_best_reduction.png" alt="Orientation" title="Orientation sensor"><input type="checkbox" name="sensors[]" value="3" /></li>
                                   <li><img src="./images/sensors/medium/gyroscope_sensor_best_reduction.png" alt="Gyroscope" title="Gyroscope sensor"><input type="checkbox" name="sensors[]" value="4" /></li>
                                   <li><img src="./images/sensors/medium/light_sensor_best_reduction.png" alt="Light" title="Light sensor"><input type="checkbox" name="sensors[]" value="5" /></li>
