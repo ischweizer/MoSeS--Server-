@@ -1,7 +1,7 @@
 .clear {clear: both;height: 0;line-height: 0;}
 .clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 .clearfix {display: inline-block;}
-/* Hides from IE-mac \*/
+/* Hides from IE-mac */
 * html .clearfix {height: 1%;}
 .clearfix {display: block;}
 /* End hide from IE-mac */
@@ -45,11 +45,6 @@ body {
     display: block;
 }
 
-/*.tab .welcome {
-    padding: 0;
-    margin-left: 20px;
-}*/
-
 /* Panel Tab/button */
 .tab .login {
 	display: block;
@@ -72,33 +67,12 @@ body {
     width: 195px;
 }
 
-/*.tab ul.login li.left {
-  	background: url(../images/tab_l.png) no-repeat left 0;
-  	height: 42px;
-	width: 30px;
-	padding: 0;
-	margin: 0;
-  	display: block;
-	float: left;
-}*/
-
-/*.tab ul.login li.right {
-  	background: url(../images/tab_r.png) no-repeat left 0;
-  	height: 42px;
-	width: 30px;
-	padding: 0;
-	margin: 0;
-  	display: block;
-	float: left;
-}*/
-
 .tab ul.login li {
  	text-align: left;
     margin-left: 1px;
 	display: block;
 	float: left;
 	height: 42px;
-  	/*background: url(../images/tab_m.png) repeat-x 0 0;*/
 }
 
 .tab ul.login li a {
