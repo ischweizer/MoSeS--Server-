@@ -629,35 +629,287 @@ if(isset($_GET['m'])){
                               <textarea cols="30" rows="6" name="apk_description"></textarea>
                               <p style="margin: 20px 0;">My program uses following sensors:</p>
                               <ul>
-                                  <li><img src="./images/sensors/medium/accelerometer_sensor_best_reduction.png" alt="Accelerometer" title="Accelerometer"><input type="checkbox" name="sensors[]" value="1" /></li>
-                                  <li><img src="./images/sensors/medium/magnetic_field_sensor_s_n_best_reduction.png" alt="Magnetic field" title="Magnetic field sensor"><input type="checkbox" name="sensors[]" value="2" /></li>
-                                  <li><img src="./images/sensors/medium/orientation_sensor_best_reduction.png" alt="Orientation" title="Orientation sensor"><input type="checkbox" name="sensors[]" value="3" /></li>
-                                  <li><img src="./images/sensors/medium/gyroscope_sensor_best_reduction.png" alt="Gyroscope" title="Gyroscope sensor"><input type="checkbox" name="sensors[]" value="4" /></li>
-                                  <li><img src="./images/sensors/medium/light_sensor_best_reduction.png" alt="Light" title="Light sensor"><input type="checkbox" name="sensors[]" value="5" /></li>
-                                  <li><img src="./images/sensors/medium/pressure_sensor_best_reduction.png" alt="Pressure" title="Pressure sensor"><input type="checkbox" name="sensors[]" value="6" /></li>
-                                  <li><img src="./images/sensors/medium/temperature_sensor_best_reduction.png" alt="Temperature" title="Temperature sensor"><input type="checkbox" name="sensors[]" value="7" /></li>
-                                  <li><img src="./images/sensors/medium/proximity_sensor_best_reduction.png" alt="Proximity" title="Proximity sensor"><input type="checkbox" name="sensors[]" value="8" /></li>
-                                  <li><img src="./images/sensors/medium/gravity_sensor_best_reduction.png" alt="Gravity" title="Gravity sensor"><input type="checkbox" name="sensors[]" value="9" /></li>
-                                  <li><img src="./images/sensors/medium/linear_acceleration_sensor_best_reduction.png" alt="Linear acceleration" title="Linear acceleration sensor"><input type="checkbox" name="sensors[]" value="10" /></li>
-                                  <li><img src="./images/sensors/medium/rotation_sensor_best_reduction.png" alt="Rotation" title="Rotation sensor"><input type="checkbox" name="sensors[]" value="11" /></li>
-                                  <li><img src="./images/sensors/medium/humidity_w_percent_sensor_best_reduction.png" alt="Humidity" title="Humidity sensor"><input type="checkbox" name="sensors[]" value="12" /></li>
-                                  <li><img src="./images/sensors/medium/ambient_temperature_sensor_best_reduction.png" alt="Ambient temperature" title="Ambient temperature sensor"><input type="checkbox" name="sensors[]" value="13" /></li>
+                                  <li>
+                                    <div class="accelerometer" title="Accelerometer"></div>
+                                    <div class="accelerometer_pressed" title="Accelerometer" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="1" />
+                                  </li>
+                                  <li>
+                                    <div class="magnetic_field" title="Magnetic field"></div>
+                                    <div class="magnetic_field_pressed" title="Magnetic field" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="2" />
+                                  </li>
+                                  <li>
+                                    <div class="orientation" title="Orientation sensor"></div>
+                                    <div class="orientation_pressed" title="Orientation sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="3" />
+                                  </li>
+                                  <li>
+                                    <div class="gyroscope" title="Gyroscope sensor"></div>
+                                    <div class="gyroscope_pressed" title="Gyroscope sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="4" />
+                                  </li>
+                                  <li>
+                                    <div class="light" title="Light sensor"></div>
+                                    <div class="light_pressed" title="Light sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="5" />
+                                  </li>
+                                  <li>
+                                    <div class="pressure" title="Pressure sensor"></div>
+                                    <div class="pressure_pressed" title="Pressure sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="6" />
+                                  </li>
+                                  <li>
+                                    <div class="temperature" title="Temperature sensor"></div>
+                                    <div class="temperature_pressed" title="Temperature sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="7" />
+                                  </li>
+                                  <li>
+                                    <div class="proximity" title="Proximity sensor"></div>
+                                    <div class="proximity_pressed" title="Proximity sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="8" />
+                                  </li>
+                                  <li>
+                                    <div class="gravity" title="Gravity sensor"></div>
+                                    <div class="gravity_pressed" title="Gravity sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="9" />
+                                  </li>
+                                  <li>
+                                    <div class="linear_acceleration" title="Linear acceleration"></div>
+                                    <div class="linear_acceleration_pressed" title="Linear acceleration" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="10" />
+                                  </li>
+                                  <li>
+                                    <div class="rotation" title="Rotation sensor"></div>
+                                    <div class="rotation_pressed" title="Rotation sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="11" />
+                                  </li>
+                                  <li>
+                                    <div class="humidity" title="Humidity sensor"></div>
+                                    <div class="humidity_pressed" title="Humidity sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="12" />
+                                  </li>
+                                  <li>
+                                    <div class="ambient_temperature" title="Ambient temperature"></div>
+                                    <div class="ambient_temperature_pressed" title="Ambient temperature" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="13" />
+                                  </li>
                               </ul>
                              
                              <script type="text/javascript">
                                 $(document).ready(function(){
                                     
-                                    $('.accel').click(function(){
-                                        $('.accel').toggle();
-                                        $('.accel_pressed').toggle();
+                                    /*
+                                    *  Accelerometer
+                                    */
+                                    
+                                    $('.accelerometer').click(function(){
+                                        $(this).toggle();
+                                        $('.accelerometer_pressed').toggle();
                                         $(this).parent().find(':checkbox').attr("checked", true);
                                     });
                                     
-                                    $('.accel_hide').click(function(){
-                                        $('.accel').toggle();
-                                        $('.accel_pressed').toggle();
+                                    $('.accelerometer_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.accelerometer').toggle();
                                         $(this).parent().find(':checkbox').attr("checked", false);
                                     });
+                                    
+                                    /*
+                                    *  Magnetic field
+                                    */
+                                    
+                                    $('.magnetic_field').click(function(){
+                                        $(this).toggle();
+                                        $('.magnetic_field_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.magnetic_field_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.magnetic_field').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Orientation
+                                    */
+                                    
+                                    $('.orientation').click(function(){
+                                        $(this).toggle();
+                                        $('.orientation_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.orientation_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.orientation').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Gyroscope
+                                    */
+                                    
+                                    $('.gyroscope').click(function(){
+                                        $(this).toggle();
+                                        $('.gyroscope_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.gyroscope_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.gyroscope').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Light
+                                    */
+                                    
+                                    $('.light').click(function(){
+                                        $(this).toggle();
+                                        $('.light_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.light_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.light').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Pressure
+                                    */
+                                    
+                                    $('.pressure').click(function(){
+                                        $(this).toggle();
+                                        $('.pressure_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.pressure_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.pressure').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Temperature
+                                    */
+                                    
+                                    $('.temperature').click(function(){
+                                        $(this).toggle();
+                                        $('.temperature_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.temperature_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.temperature').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Proximity
+                                    */
+                                    
+                                    $('.proximity').click(function(){
+                                        $(this).toggle();
+                                        $('.proximity_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.proximity_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.proximity').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Gravity
+                                    */
+                                    
+                                    $('.gravity').click(function(){
+                                        $(this).toggle();
+                                        $('.gravity_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.gravity_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.gravity').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Linear acceleration
+                                    */
+                                    
+                                    $('.linear_acceleration').click(function(){
+                                        $(this).toggle();
+                                        $('.linear_acceleration_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.linear_acceleration_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.linear_acceleration').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Rotation
+                                    */
+                                    
+                                    $('.rotation').click(function(){
+                                        $(this).toggle();
+                                        $('.rotation_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.rotation_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.rotation').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Humidity
+                                    */
+                                    
+                                    $('.humidity').click(function(){
+                                        $(this).toggle();
+                                        $('.humidity_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.humidity_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.humidity').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*
+                                    *  Ambient temperature
+                                    */
+                                    
+                                    $('.ambient_temperature').click(function(){
+                                        $(this).toggle();
+                                        $('.ambient_temperature_pressed').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", true);
+                                    });
+                                    
+                                    $('.ambient_temperature_pressed').click(function(){
+                                        $(this).toggle();
+                                        $('.ambient_temperature').toggle();
+                                        $(this).parent().find(':checkbox').attr("checked", false);
+                                    });
+                                    
+                                    /*$(':checkbox').click(function(){
+                                       $(this).attr('checked', true); 
+                                    });*/
                                     
                                     $('.user_apk_restriction').find('input[name=number_restricted_users]').attr('maxlength', 6);
                                     
