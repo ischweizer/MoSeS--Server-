@@ -244,10 +244,14 @@ img.aligncenter {
     display:block;
 }
 
+.upload_form input[type="checkbox"] {
+    /*opacity:0;*/
+    display: none;
+}
+
 .upload_form li > div {
     width: 80px;
     height: 80px;
-    /*float: left;*/
     cursor: pointer;
 }
 
