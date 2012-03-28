@@ -26,7 +26,7 @@ include_once("./include/_menu.php");
                     <div class="post">
                         <h2 class="title">About us/app</h2>
                         <div class="entry">
-                            <p>We are so cool man!</p>
+                            <p>Here is information about project!</p>
                         </div>
                     </div>
                     <div style="clear: both;">&nbsp;</div>
