@@ -65,6 +65,9 @@ body {
     border-left: 1px solid white;
     border-right: 1px solid white;
     border-bottom: 1px solid white;
+    border-radius: 0px 0px 10px 10px; 
+    -moz-border-radius: 0px 0px 10px 10px; 
+    -webkit-border-radius: 0px 0px 10px 10px;
     background: #272727;
     width: 195px;
 }
@@ -146,7 +149,7 @@ body {
 	color: #999999;
     margin-right: 3px;
     border-left: 1px solid white;
-    border-right: 1px solid white;
+    border-right: 1px solid white; 
 	background: #272727;
 	overflow: hidden;
 	position: relative;
