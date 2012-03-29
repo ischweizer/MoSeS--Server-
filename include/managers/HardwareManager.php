@@ -233,6 +233,22 @@ class HardwareManager{
     }
     
     /**
+    * Changes the deviceID of a device
+    *     
+    * @param mixed $db
+    * @param mixed $hardwareTable
+    * @param mixed $userID
+    * @param mixed $deviceID
+    * @param mixed $newDeviceID
+    */
+    public static function changeDeviceID($db, $hardwareTable, $userID, $deviceID, $newDeviceID){
+        $sql = "UPDATE ". $hardwareTable ." SET deviceid='". $newDeviceID ."' 
+                WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";
+        $db->exec($sql);
+    }
+    
+                                                
+    /**
     * Returns an array of all hardware-ids that can install an apk
     * with required android version and required sensors
     * 

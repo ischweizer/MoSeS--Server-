@@ -105,6 +105,11 @@ if(isset($_POST['HTTP_JSON'])){
                 
                     include_once(MOSES_HOME . "/include/events/c2dm.php.inc");
                     break;
+                
+                case "CHANGE_DEVICE_ID":
+                    
+                    include_once(MOSES_HOME . "/include/events/change_device_id.php.inc");
+                    break;
                     
                 default:
                     echo "Only specific messages are accepted.";
