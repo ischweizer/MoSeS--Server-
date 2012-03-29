@@ -223,6 +223,48 @@ img.aligncenter {
 	padding: 10px 0px 10px 0px;
 }
 
+.sensor_box {
+    position: relative;
+    border: 1px solid #000; 
+    background-color: #d9cfb4;
+    width: 250px;
+    /*padding-left: 5px;*/
+    margin: 2px 0;
+    display: block;
+}
+
+.sensor_box li {
+    display: inline;
+    list-style-type: none;
+}
+
+.sensor_box .sensor_info {
+    display:none;
+}
+
+.sensor_box:hover .sensor_info {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    left: 252px;
+    top: 4px;
+    width: 200px;
+    height: 80px;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #000;
+    background-color: #d9cfb4;
+}
+
+.sensor_info li {
+    display: inline;
+    list-style-type: none;
+}
+
+.sensor_info ul {
+    margin-left: -30px;
+    
+}
+
 .upload_form ul {
     padding: 0; 
     margin-bottom: 3%;
