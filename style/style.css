@@ -244,7 +244,7 @@ img.aligncenter {
     display:block;
 }
 
-.upload_form input[type="checkbox"] {
+.upload_form li > input[type="checkbox"] {
     /*opacity:0;*/
     display: none;
 }
