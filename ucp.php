@@ -623,6 +623,8 @@ if(isset($_GET['m'])){
                             <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
                               <p>Program name (title):</p>
                               <input type="text" name="apk_title" />
+                              <p>Program version:</p>
+                              <input type="text" name="apk_version" />                              
                               <p>Program android version:</p>
                               <input type="text" name="apk_android_version" />
                               <p>Program description:</p>

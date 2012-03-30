@@ -127,6 +127,11 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         $APK_ANDROID_VERSION = trim($_POST['apk_android_version']);    
     }
     
+    $APK_VERSION = '';
+    if(isset($_POST['apk_version'])){
+        $APK_VERSION = trim($_POST['apk_version']);    
+    }
+    
     $RESTRICTION_USER_NUMBER = -1;
     $SELECTED_USERS_LIST = '';
     
@@ -188,12 +193,12 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     /**
     * Store filename, hash in DB and other informations
     */
-    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, 
+    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, apk_version
                              apkhash, sensors, description,
                              apktitle, restriction_device_number, pending_devices,
                              candidates, notified_devices, androidversion, ustudy_finished)
                               VALUES 
-                              (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', 
+                              (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', '".$APK_VERSION."',
                               '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
                               '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $pending_users ."',
                               '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."', ". $USTUDY_FINISHED .")";
