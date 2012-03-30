@@ -250,7 +250,7 @@ class HardwareManager{
                                                 
     /**
     * Returns an array of all hardware-ids that can install an apk
-    * with required android version and required sensors
+    * with required android version
     * 
     * @param mixed $db the database
     * @param String $hardwareTable the name of the hardware table to search in
@@ -266,8 +266,44 @@ class HardwareManager{
         $result = $db->query($sql);
         $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         
+        
         return $rows;
     }
+    
+    
+    /**
+    * Returns an array of all hardware-ids that can install an apk
+    * with required android version
+    * Returned hardware-id belong to users from the
+    * specified rGroup
+    * 
+    * @param mixed $db the database
+    * @param String $hardwareTable the name of the hardware table to search in
+    * @param String $androidVersion the lowest android version required by the apk
+    * @param String §rGroup select only hardware from this group
+    */
+    public static function getCandidatesForAndroidFromGroup($db, $hardwareTable, $androidVersion, $rGroup){
+        
+        $return = array();
+        $sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name=".$rGroup;
+        $result_members = $db->query($sql);
+        $member_row = $result_members->fetch();
+        $members = json_decode($member_row);
+        foreach($members as $member){
+                // get for android version
+            $sql = "SELECT hwid, filter
+                    FROM " .$hardwareTable. " 
+                    WHERE androidversion >=".$androidVersion. " AND uid=".$member;    
+            
+            $result = $db->query($sql);
+            $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+            $return = array_merge_recursive($return, $rows);
+        }
+        
+        return $return;
+    }
+    
+    
     
     /**
     * Just sorts sensors in asc order
