@@ -678,10 +678,19 @@ if(isset($_GET['m'])){
                             <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
                               <p>Program name (title):</p>
                               <input type="text" name="apk_title" />
-                              <p>Program version:</p>
-                              <input type="text" name="apk_version" />                              
-                              <p>Program android version:</p>
-                              <input type="text" name="apk_android_version" />
+                              <p>Version of your program (can be any alphanumeric string):</p>
+                              <input type="text" name="apk_version" />
+                              <p>Lowest android version needed for my program to run:</p>
+                              <select name="apk_android_version">
+                                <option value="8">API 8: "Froyo" 2.2.x </option>
+                                <option value="9">API 9: "Gingerbread" 2.3.0 - 2.3.2</option>
+                                <option value="10">API 10: "Gingerbread" 2.3.3 - 2.3.7</option>
+                                <option value="11">API 11: "Honeycomb" 3.0</option>
+                                <option value="12">API 12: "Honeycomb" 3.1</option>
+                                <option value="13">API 13: "Honeycomb" 3.2.x</option>
+                                <option value="14">API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2</option>
+                                <option value="15">API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4</option>
+                              </select>                              
                               <p>Program description:</p>
                               <textarea cols="30" rows="6" name="apk_description"></textarea>
                               <p style="margin: 20px 0;">My program uses following sensors:</p>

@@ -193,7 +193,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     /**
     * Store filename, hash in DB and other informations
     */
-    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, apk_version
+    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, apk_version,
                              apkhash, sensors, description,
                              apktitle, restriction_device_number, pending_devices,
                              candidates, notified_devices, androidversion, ustudy_finished)
@@ -202,6 +202,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
                               '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
                               '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $pending_users ."',
                               '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."', ". $USTUDY_FINISHED .")";
+                              
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
