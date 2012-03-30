@@ -78,6 +78,7 @@ if(isset($_GET['m'])){
                        $row = $result->fetch();
                        
                        $groupname = $row['rgroup'];
+                       $_SESSION['RGROUP'] = $groupname;
                        
                        break; 
         

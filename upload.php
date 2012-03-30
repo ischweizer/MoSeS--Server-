@@ -150,8 +150,17 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
             $RESTRICTION_USER_NUMBER = preg_replace('/[^0-9]/', '', $_POST['number_restricted_users']);
             
             include_once(MOSES_HOME."/include/managers/HardwareManager.php");
+            
+            
             // get the list of candidates with the specified android version
-            $rows =  HardwareManager::getCandidatesForAndroid($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION);
+            // Check if the user wants only members from his group to take part on the user study
+            if(isset($_POST['send_only_to_my_group'])){
+                $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION, $_SESSION['RGROUP']);
+            }
+            else{
+                $rows =  HardwareManager::getCandidatesForAndroid($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION);    
+            }
+            
             
             // check the filters
             if(!empty($rows)){
