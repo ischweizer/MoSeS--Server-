@@ -68,6 +68,17 @@ if(isset($_GET['m'])){
                            }
                        }
                        
+                       include_once("./include/functions/dbconnect.php");
+                       
+                       $sql_upload = "SELECT rgroup 
+                                      FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+                                      WHERE userid=". $_SESSION['USER_ID'];
+                                      
+                       $result = $db->query($sql_upload);
+                       $row = $result->fetch();
+                       
+                       $groupname = $row['rgroup'];
+                       
                        break; 
         
         case 'LIST':
@@ -983,9 +994,12 @@ if(isset($_GET['m'])){
                                         function() {
                                             if ($(this).is(':checked')) {
                                                 $('.user_apk_restriction').find('input[name=number_restricted_users]').removeAttr('disabled');
+                                                $('.send_only_to_my_group').removeAttr('disabled');
                                             } else {
                                                 $('.user_apk_restriction').find('input[name=number_restricted_users]').attr('disabled', true);
                                                 $('.user_apk_restriction').find('input[name=number_restricted_users]').val('');
+                                                $('.send_only_to_my_group').attr('disabled', true);
+                                                $('.send_only_to_my_group').removeAttr('checked');
                                             }
                                     });   
                             
@@ -993,13 +1007,21 @@ if(isset($_GET['m'])){
                                 </script>
                               
                               <div class="user_apk_restriction">
-                                  <input type="checkbox" name="restrict_users_number" value="1" />Restrict number of users
-                                  <input type="text" name="number_restricted_users" disabled="disabled" />
+                                  <input type="checkbox" name="restrict_users_number" value="1" /><span style="padding-left: 5px;">Make user study</span><br /><br />
+                                  <span style="margin-right: 10px;">Restrict number of devices:</span><input type="text" name="number_restricted_users" disabled="disabled" />
+                                  <br /><br /><?php
+                                   if(!empty($groupname)){
+                                     ?>  
+                                   <div style="margin: 15px 0;"><span style="margin-right: 10px;">Send only to my group</span><input type="checkbox" name="send_only_to_my_group" value="1" disabled="disabled" class="send_only_to_my_group" /></div>
+                                   <?php
+                             
+                                   }
+                                   ?>
                               </div>
                               
                               <label for="file">Select a file:</label> 
-                              <input type="file" name="userfile" id="file">
-                              <p>Click Upload button to upload your apk</p><button>Upload</button>
+                              <input type="file" name="userfile" id="file" style="margin: 15px 0;">
+                              <p style="margin-bottom: 10px;">Click Upload button to upload your apk</p><button>Upload</button>
                             </form>
                         <?php
                             }
