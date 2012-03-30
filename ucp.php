@@ -27,6 +27,20 @@ $jcstatsus = 0;
 
 $scientist_succses = 0; // 1 only if the user has gain instant scientist credentials, use to check if someone is trying something nasty
 
+$sensors_ultrasmall_mapping = array(1 => array('accelerometer_sensor.png', 'Accelerometer sensor'),
+                                    array('magnetic_field_sensor.png', 'Magnetic field sensor'),
+                                    array('orientation_sensor.png', 'Orientation sensor'),
+                                    array('gyroscope_sensor.png', 'Gyroscope sensor'),
+                                    array('light_sensor.png', 'Light sensor'),
+                                    array('pressure_sensor.png', 'Pressure sensor'),
+                                    array('temp_sensor.png', 'Temperature sensor'),
+                                    array('proximity_sensor.png', 'Proximity sensor'),
+                                    array('gravity_sensor.png', 'Gravity sensor'),
+                                    array('linear_acceleration_sensor.png', 'Linear acceleration sensor'),
+                                    array('rotation_sensor.png', 'Rotation sensor'),
+                                    array('humidity_sensor.png', 'Humidity sensor'),
+                                    array('ambient_temp_sensor.png', 'Ambient temperature sensor'));
+
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m'])){
     
@@ -254,7 +268,7 @@ if(isset($_GET['m'])){
                                
                                $db->exec($sql);
                               
-                          }
+                          }                  
                           
                           echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>";     
                            
@@ -573,20 +587,6 @@ if(isset($_GET['m'])){
                           if(isset($USER_DEVICES)){
                             if(!empty($USER_DEVICES)){
                                 
-                                $sensors_ultrasmall_mapping = array(1 => array('accelerometer_sensor.png', 'Accelerometer sensor'),
-                                                                    array('magnetic_field_sensor.png', 'Magnetic field sensor'),
-                                                                    array('orientation_sensor.png', 'Orientation sensor'),
-                                                                    array('gyroscope_sensor.png', 'Gyroscope sensor'),
-                                                                    array('light_sensor.png', 'Light sensor'),
-                                                                    array('pressure_sensor.png', 'Pressure sensor'),
-                                                                    array('temp_sensor.png', 'Temperature sensor'),
-                                                                    array('proximity_sensor.png', 'Proximity sensor'),
-                                                                    array('gravity_sensor.png', 'Gravity sensor'),
-                                                                    array('linear_acceleration_sensor.png', 'Linear acceleration sensor'),
-                                                                    array('rotation_sensor.png', 'Rotation sensor'),
-                                                                    array('humidity_sensor.png', 'Humidity sensor'),
-                                                                    array('ambient_temp_sensor.png', 'Ambient temperature sensor'));
-                                
                                 // user has got some devices
                                 foreach($USER_DEVICES as $device){
                                     ?>
@@ -596,7 +596,7 @@ if(isset($_GET['m'])){
                                                 echo $device['deviceid'];                                       
                                             ?></div>
                                             </li>
-                                            <li><div>Android API ver.:</div><div style="font-weight: bold;"><?php
+                                            <li><div>Android API version:</div><div style="font-weight: bold;"><?php
                                                 echo $device['androidversion'];                                       
                                             ?></div>
                                             </li>
@@ -644,12 +644,13 @@ if(isset($_GET['m'])){
                                
                             }else{
                                 ?>
-                                <div class="list_devices">
-                                 <table>
-                                 <tr><th>Devices:</th></tr>
-                                 <tr><td>Your device list is empty.</td></tr> 
-                                 </table>
-                                </div> 
+                                <div class="sensor_box">
+                                    <ul>
+                                        <li>
+                                        <div>Your device list is empty.</div>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <?php
                             }
                           }
@@ -1184,65 +1185,60 @@ if(isset($_GET['m'])){
                             // user wants a listing of APK files
                             if($MODE == 'LIST' && isset($LIST_APK)){
                                 
-                            ?>
-                                <script type="text/javascript">
-                                $(document).ready(function(){
-
-                                    $('div.slidepanel').hide();
-                                    
-                                    $('.slidebtn').click(function(e){
-
-                                        $('div.slidepanel').stop(true, false).slideUp();
-                                        $(e.target).closest('span').next('.slidepanel').stop(true, false).slideDown();
-                                       /* $(this).find('#expose').siblings().each(function(){
-                                            $(this).html('[+]');
-                                        }); */
-                                        //$(this).find('#expose').html('[-]');
-                                        //$('.slidepanel').slideToggle('slow');
-                                        //$(this).toggleClass('active'); return false;
-                                    });
-                                    
-                                    /*     
-                                    $('.slidebtn').toggle(function() {
-                                        $(this).find('#expose').html('[-]');    
-                                    }, function() {
-                                        $(this).find('#expose').html('[+]');        
-                                    });*/
-                                    
-                                  /*  $('#expose').each(function(){
-                                        var value = $(this).html();
-                                        $(this).html((value == '[+]') ? '[+]' : '[-]');
-                                    });*/
-
-                            
-                                });
-                                </script>
-                                
-                                <div class="apk_list">
-                                 <p>Your uploaded files (click to expose):</p>
-                                 <?php
-
-                                  // we found some APKs
-                                  if($LIST_APK == 1){
-                                      foreach($apk_listing as $row){
-                                         //echo '<tr><td><a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">'. $row['apkname'] .'</a></td><td>'. $remove_url .'</td></tr>'; 
-                                         echo '<span class="slide"><a href="#" title="More info" class="slidebtn">'. $row['apkname'] .' <span id="expose">[+]</span></a></span>';
-                                         echo '<div class="slidepanel">';
-                                         echo '<p>Information:</p>';
-                                         echo '<p>'. $row['description'] .'</p>';
-                                         echo '<p>Sensors:</p>';
-                                         echo '<p>'. $row['sensors'] .'</p>';
-                                         echo 'Download: <a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">'. $row['apkname'] .'</a>&nbsp;&nbsp;&nbsp;<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK">Remove</a>';
-                                         echo '</div>';
-                                         echo '<br />';
-                                      }   
-                                  }else{
-                                      echo "<span>Nothing found :(</span>"; 
-                                  }
-
-                                 ?>
+                              // we found some APKs
+                              if($LIST_APK == 1){
+                                  
+                                  foreach($apk_listing as $row){
+                                   ?>   
+                                  <div class="sensor_box">
+                                    <ul>
+                                        <li><div>Name:</div><div style="font-weight: bold;"><?php
+                                            echo $row['apktitle'];                                       
+                                        ?></div>
+                                        </li>
+                                        <li><div><?php
+                                                echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">Download</a>';
+                                                 ?></div><div style="margin-left: 5px;"><?php
+                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK">Remove</a>';                                       
+                                        ?></div>
+                                        </li>
+                                    </ul>
+                                    <div class="sensor_info">
+                                        <p>Required sensors:</p>
+                                        <ul><?php
+                                           $sensor_array = json_decode($row['sensors']);
+                                           
+                                           foreach($sensor_array as $sensor_number){
+                                              echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                    $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+                                                    $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+                                                    $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
+                                           }
+                                           
+                                           if(count($sensor_array) == 0){
+                                               echo '<li><p>No sensors set.</p></li>';
+                                           }
+                                                                             
+                                      ?></ul>
+                                    </div>
+                                </div> 
+                                     <?php 
+                                      
+                                  }   
+                              }else{
+                                  ?>
+                                  
+                                  <div class="sensor_box">
+                                    <ul>
+                                        <li>
+                                            <div>You have no APKs.</div>
+                                        </li>
+                                    </ul>
                                 </div>
-                            <?php     
+                                
+                                <?php
+                              }
+
                             }
                             
                             if($MODE == 'PROMO' && !isset($_POST['promo_sent']) 
