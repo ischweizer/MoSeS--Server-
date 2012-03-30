@@ -24,6 +24,24 @@ class ApkManager{
     }
     
     /**
+    * Returns all APKs in DB that are not published in a user-study
+    * 
+    * @param mixed $db
+    * @param mixed $apkTable
+    */
+    public static function getNonStudyAllApk($db, $apkTable){
+        
+        $sql = "SELECT * 
+                FROM ". $apkTable ." WHERE restriction_device_number=-1";
+                
+        $result = $db->query($sql);
+        $array = $result->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $array;
+    }
+    
+    
+    /**
     * Returns particular APK that fits requirements
     * 
     * @param mixed $db

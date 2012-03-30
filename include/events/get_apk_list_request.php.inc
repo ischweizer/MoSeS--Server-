@@ -41,7 +41,7 @@ if($data->SESSIONID != null){
                      $USER_FILTER = json_decode($FILTER['filter']);
                      $json_array_return = array();
                      
-                     $APKs = ApkManager::getAllApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK']);
+                     $APKs = ApkManager::getNonStudyAllApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK']);
                      
                      foreach($APKs as $apk){
 
