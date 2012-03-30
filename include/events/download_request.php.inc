@@ -9,12 +9,15 @@ $sessionID = '';
 */
 if($data->SESSIONID != null){
     if(is_md5($data->SESSIONID)){
-       
+        
         $sessionID = $data->SESSIONID;
         
-        if($data->DEVICEID != null && !empty($data->DEVICEID)){
-            
-            $deviceID = $data->DEVICEID;
+        $row = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
+        $deviceID= $row['deviceid'];
+       // $logger->logInfo("#### data on download_request");
+       // $logger->logInfo(print_r($data));
+        
+        if(!empty($deviceID)){
             
             $APKID = '';
             
