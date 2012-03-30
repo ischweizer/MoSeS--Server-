@@ -558,21 +558,76 @@ if(isset($_GET['m'])){
                         <?php 
                           if(isset($USER_DEVICES)){
                             if(!empty($USER_DEVICES)){
-                              ?>
+                                
+                                $sensors_ultrasmall_mapping = array(1 => array('accelerometer_sensor.png', 'Accelerometer sensor'),
+                                                                    array('magnetic_field_sensor.png', 'Magnetic field sensor'),
+                                                                    array('orientation_sensor.png', 'Orientation sensor'),
+                                                                    array('gyroscope_sensor.png', 'Gyroscope sensor'),
+                                                                    array('light_sensor.png', 'Light sensor'),
+                                                                    array('pressure_sensor.png', 'Pressure sensor'),
+                                                                    array('temp_sensor.png', 'Temperature sensor'),
+                                                                    array('proximity_sensor.png', 'Proximity sensor'),
+                                                                    array('gravity_sensor.png', 'Gravity sensor'),
+                                                                    array('linear_acceleration_sensor.png', 'Linear acceleration sensor'),
+                                                                    array('rotation_sensor.png', 'Rotation sensor'),
+                                                                    array('humidity_sensor.png', 'Humidity sensor'),
+                                                                    array('ambient_temp_sensor.png', 'Ambient temperature sensor'));
+                                
+                                // user has got some devices
+                                foreach($USER_DEVICES as $device){
+                                    ?>
+                                    <div class="sensor_box">
+                                        <ul>
+                                            <li><div>Device name:</div><div style="font-weight: bold;"><?php
+                                                echo $device['deviceid'];                                       
+                                            ?></div>
+                                            </li>
+                                            <li><div>Android API ver.:</div><div style="font-weight: bold;"><?php
+                                                echo $device['androidversion'];                                       
+                                            ?></div>
+                                            </li>
+                                        </ul>
+                                        <div class="sensor_info">
+                                            <p>Selected sensors (filter):</p>
+                                            <ul><?php
+                                               $sensor_array = json_decode($device['filter']);
+                                               
+                                               foreach($sensor_array as $sensor_number){
+                                                  echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                        $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+                                                        $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+                                                        $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
+                                               }
+                                               
+                                               if(count($sensor_array) == 0){
+                                                   echo '<li><p>No filter set.</p></li>';
+                                               }
+                                                                                 
+                                          ?></ul>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                /*
+                                ?>
                                 <div class="list_devices">
                                  <table border="4" >
                                  <tr><th>Device</th><th>Android version</th><th>Sensors made available (filter)</th></tr>
                                  <?php
 
+                                  $i=1;
                                   // user has got some devices
                                   foreach($USER_DEVICES as $device){
                                      echo '<tr><td>'. $device['deviceid'] .'</td><td>'. $device['androidversion'] .'</td><td>'. substr($device['filter'], 1,-1) .'</td></tr>'; 
+                                     $i++;
                                   }
                                   
                                  ?>
                                  </table>
                                 </div>
-                            <?php    
+                            <?php 
+                            */
+                               
                             }else{
                                 ?>
                                 <div class="list_devices">
