@@ -255,7 +255,9 @@ if(isset($_GET['m'])){
                                
                                $db->exec($sql);
                               
-                          }     
+                          }
+                          
+                          echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>";     
                            
                        }
                        
@@ -272,7 +274,8 @@ if(isset($_GET['m'])){
                           $USERS_SCIENTIST_LIST = $array;
                        }
                     }
-                       break;
+                    
+                    break;
         // ##### GROUP ############
         case 'GROUP':
             $MODE = 'GROUP';
