@@ -1022,6 +1022,7 @@ if(isset($_GET['m'])){
                               <label for="file">Select a file:</label> 
                               <input type="file" name="userfile" id="file" style="margin: 15px 0;">
                               <p style="margin-bottom: 10px;">Click Upload button to upload your apk</p><button>Upload</button>
+                              <p style="margin-top: 50px;"></p>
                             </form>
                         <?php
                             }
