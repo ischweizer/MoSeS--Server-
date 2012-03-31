@@ -228,6 +228,7 @@ img.aligncenter {
     border: 1px solid #000; 
     background-color: #d9cfb4;
     width: 250px;
+    height: 100px;
     /*padding-left: 5px;*/
     margin: 2px 0;
     display: block;
@@ -238,7 +239,22 @@ img.aligncenter {
     list-style-type: none;
 }
 
-.sensor_box .sensor_info {
+.sensor_box .sensor_box_name {
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.sensor_box .down_remove_links div {
+    display: inline;
+    list-style-type: none;
+}
+
+.sensor_box .down_remove_links div > a {
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.sensor_box .sensor_info, .sensor_box .apk_description {
     display:none;
 }
 
@@ -247,9 +263,9 @@ img.aligncenter {
     position: absolute;
     z-index: 1;
     left: 252px;
-    top: 4px;
+    top: 0px;
     width: 200px;
-    height: 80px;
+    height: 120px;
     padding: 5px 5px 5px 10px;
     border: 1px solid #000;
     background-color: #d9cfb4;
@@ -261,7 +277,58 @@ img.aligncenter {
 }
 
 .sensor_info ul {
-    margin-left: -30px;
+    margin-left: -30px;   
+}
+
+.sensor_info #sensor_container_f {
+    position: absolute;
+    left: 5px;
+    top: 35px;
+}
+
+.sensor_info #sensor_container_s {
+    position: absolute;
+    left: 5px;
+    top: 55px;
+}
+
+.apk_description_trigger {
+    position: absolute;
+    font-size: small;
+    right: 10px;
+    bottom: 5px;
+
+    /*position: relative;
+    float: right;*/
+    /*height: 120px;
+    width: 100px;*/
+    /*padding-top: 18px;
+    padding-right: 5px;*/
+    
+}
+
+.apk_description_trigger #descr_arrow {
+    display: inline;
+    /*font-weight: bold;
+    font-size: 36px;
+    color: #000000;*/ 
+    padding: 0 5px;
+}
+
+.apk_description_trigger:hover .apk_description {
+    display: inline;
+    position: absolute;
+    z-index: 4;
+    left: 352px;
+    top: 1px;
+    width: 200px;
+    height: 150px;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #000;
+    background-color: #d9cfb4;
+}
+
+.apk_description #apk_descr_text {
     
 }
 

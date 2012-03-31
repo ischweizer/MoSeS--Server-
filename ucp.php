@@ -1193,34 +1193,75 @@ if(isset($_GET['m'])){
                                    ?>   
                                   <div class="sensor_box">
                                     <ul>
-                                        <li><div>Name:</div><div style="font-weight: bold;"><?php
+                                        <li><div>Name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
                                             echo $row['apktitle'];                                       
                                         ?></div>
                                         </li>
-                                        <li><div><?php
+                                        <li><div class="down_remove_links"><div><?php
                                                 echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">Download</a>';
                                                  ?></div><div style="margin-left: 5px;"><?php
                                             echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK">Remove</a>';                                       
-                                        ?></div>
+                                        ?></div></div>
                                         </li>
                                     </ul>
                                     <div class="sensor_info">
                                         <p>Required sensors:</p>
-                                        <ul><?php
+                                        <ul id="sensor_container_f"><?php
                                            $sensor_array = json_decode($row['sensors']);
                                            
-                                           foreach($sensor_array as $sensor_number){
-                                              echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                    $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
-                                                    $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
-                                                    $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
-                                           }
-                                           
-                                           if(count($sensor_array) == 0){
+                                           if(count($sensor_array) != 0){
+                                               
+                                               // we will make some lines of sensors
+                                               if(count($sensor_array) <= 7){
+                                               
+                                                   foreach($sensor_array as $sensor_number){
+                                                      echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                            $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
+                                                   }
+                                               }else{
+                                                   
+                                                   $once = true;
+                                                   for($i=0; $i < count($sensor_array); $i++){
+                                                      if($i < 7){ 
+                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>'; 
+                                                      }else{
+                                                          // execute only once ;)
+                                                          if($once){
+                                                              echo '</ul><ul id="sensor_container_s">';
+                                                              $once = false;
+                                                          }
+                                                          
+                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>';
+                                                      }
+                                                   }
+                                               }
+                                               
+                                           }else{
                                                echo '<li><p>No sensors set.</p></li>';
                                            }
-                                                                             
+                                     
                                       ?></ul>
+                                      <div class="apk_description_trigger">description <div id="descr_arrow">-></div></div>
+                                    </div>
+                                    <div class="apk_description">
+                                        <p>Information about app</p>
+                                        <ul><li><p id="apk_descr_text"><?php
+                                           
+                                           if(!empty($row['description'])){
+                                               echo $row['description'];
+                                           }else{
+                                               echo 'No description.';
+                                           }
+                                                                             
+                                      ?></p></li></ul>
                                     </div>
                                 </div> 
                                      <?php 
