@@ -75,7 +75,7 @@ if($data->SESSIONID != null){
                       $logger->logInfo("######### No hardware found");
 
                       $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
-                                      "STATUS" => "FAILURE");
+                                      "STATUS" => "FAILURE_UNKNOWN_HARDWARE");
                   }
                }else{
                    $logger->logInfo("######### No valid session");
@@ -87,7 +87,7 @@ if($data->SESSIONID != null){
                 $logger->logInfo("######### No session found");
 
                 $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
-                                "STATUS" => "FAILURE");
+                                "STATUS" => "FAILURE_NOT_LOGGED_IN");
             }
        }else{
             $return = array("MESSAGE" => "GET_APK_LIST_REQUEST", 
