@@ -24,6 +24,8 @@ $groupsize = 0; // size of the group
 * 
 */
 $jcstatsus = 0;
+$SHOW_UPDATE_PAGE = 0;
+$apk_to_update = array();
 
 $scientist_succses = 0; // 1 only if the user has gain instant scientist credentials, use to check if someone is trying something nasty
 
@@ -97,6 +99,7 @@ if(isset($_GET['m'])){
                        break; 
         
         case 'LIST':
+        
             if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                    $MODE = 'LIST'; 
                    
@@ -164,6 +167,34 @@ if(isset($_GET['m'])){
             }   
                    
                    break;
+                   
+        case 'UPDATE':
+        
+                    $MODE = 'UPLOAD';
+                    
+                    if(isset($_GET['id'])){
+                        
+                        $APK_ID = preg_replace("/\D/", "", $_GET['id']);
+                        
+                        if(preg_match('/^[0-9]+$/', $APK_ID)){
+                            
+                           $sql = "SELECT * 
+                                   FROM apk 
+                                   WHERE apkid = ". $APK_ID ." AND userid = ". $_SESSION["USER_ID"];
+                            
+                           $result = $db->query($sql);
+                           $apk_to_update = $result->fetch();
+                           
+                           if(!empty($apk_to_update)){
+                               $SHOW_UPDATE_PAGE = 1; 
+                           } 
+                        }
+                        
+                    }
+                    
+                    $SHOW_UPDATE_PAGE = 0;
+        
+                    break;
                    
         case 'PROMO':
                     $MODE = 'PROMO';
@@ -307,7 +338,8 @@ if(isset($_GET['m'])){
         
         // ##### USER HAS CLICKED THE JOIN/CREATE BUTTON ############
         case 'JOIN':
-            if(isset($_POST["group_name"]) && isset($_POST["group_pwd"])){
+            if(isset($_POST["group_name"]) && isset($_POST["group_pwd"])){ 
+                
                 include_once("./include/functions/dbconnect.php");
                 $MODE = 'JOIN';
                 $groupname = trim($_POST["group_name"]);
@@ -777,240 +809,7 @@ if(isset($_GET['m'])){
                                     <input type="checkbox" name="sensors[]" value="13" />
                                   </li>
                               </ul>
-                             
-                             <script type="text/javascript">
-                                $(document).ready(function(){
-                                    
-                                    /*
-                                    *  Accelerometer
-                                    */
-                                    
-                                    $('.accelerometer').click(function(){
-                                        $(this).toggle();
-                                        $('.accelerometer_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.accelerometer_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.accelerometer').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Magnetic field
-                                    */
-                                    
-                                    $('.magnetic_field').click(function(){
-                                        $(this).toggle();
-                                        $('.magnetic_field_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.magnetic_field_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.magnetic_field').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Orientation
-                                    */
-                                    
-                                    $('.orientation').click(function(){
-                                        $(this).toggle();
-                                        $('.orientation_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.orientation_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.orientation').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Gyroscope
-                                    */
-                                    
-                                    $('.gyroscope').click(function(){
-                                        $(this).toggle();
-                                        $('.gyroscope_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.gyroscope_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.gyroscope').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Light
-                                    */
-                                    
-                                    $('.light').click(function(){
-                                        $(this).toggle();
-                                        $('.light_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.light_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.light').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Pressure
-                                    */
-                                    
-                                    $('.pressure').click(function(){
-                                        $(this).toggle();
-                                        $('.pressure_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.pressure_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.pressure').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Temperature
-                                    */
-                                    
-                                    $('.temperature').click(function(){
-                                        $(this).toggle();
-                                        $('.temperature_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.temperature_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.temperature').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Proximity
-                                    */
-                                    
-                                    $('.proximity').click(function(){
-                                        $(this).toggle();
-                                        $('.proximity_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.proximity_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.proximity').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Gravity
-                                    */
-                                    
-                                    $('.gravity').click(function(){
-                                        $(this).toggle();
-                                        $('.gravity_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.gravity_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.gravity').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Linear acceleration
-                                    */
-                                    
-                                    $('.linear_acceleration').click(function(){
-                                        $(this).toggle();
-                                        $('.linear_acceleration_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.linear_acceleration_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.linear_acceleration').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Rotation
-                                    */
-                                    
-                                    $('.rotation').click(function(){
-                                        $(this).toggle();
-                                        $('.rotation_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.rotation_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.rotation').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Humidity
-                                    */
-                                    
-                                    $('.humidity').click(function(){
-                                        $(this).toggle();
-                                        $('.humidity_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.humidity_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.humidity').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*
-                                    *  Ambient temperature
-                                    */
-                                    
-                                    $('.ambient_temperature').click(function(){
-                                        $(this).toggle();
-                                        $('.ambient_temperature_pressed').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", true);
-                                    });
-                                    
-                                    $('.ambient_temperature_pressed').click(function(){
-                                        $(this).toggle();
-                                        $('.ambient_temperature').toggle();
-                                        $(this).parent().find(':checkbox').attr("checked", false);
-                                    });
-                                    
-                                    /*$(':checkbox').click(function(){
-                                       $(this).attr('checked', true); 
-                                    });*/
-                                    
-                                    $('.user_apk_restriction').find('input[name=number_restricted_users]').attr('maxlength', 6);
-                                    
-                                    $('.user_apk_restriction').find('input[name=restrict_users_number]').change(
-                                        function() {
-                                            if ($(this).is(':checked')) {
-                                                $('.user_apk_restriction').find('input[name=number_restricted_users]').removeAttr('disabled');
-                                                $('.send_only_to_my_group').removeAttr('disabled');
-                                            } else {
-                                                $('.user_apk_restriction').find('input[name=number_restricted_users]').attr('disabled', true);
-                                                $('.user_apk_restriction').find('input[name=number_restricted_users]').val('');
-                                                $('.send_only_to_my_group').attr('disabled', true);
-                                                $('.send_only_to_my_group').removeAttr('checked');
-                                            }
-                                    });   
-                            
-                                });
-                                </script>
-                              
+
                               <div class="user_apk_restriction">
                                   <input type="checkbox" name="restrict_users_number" value="1" /><span style="padding-left: 5px;">Make user study</span><br /><br />
                                   <span style="margin-right: 10px;">Restrict number of devices:</span><input type="text" name="number_restricted_users" disabled="disabled" />
@@ -1125,24 +924,6 @@ if(isset($_GET['m'])){
                                         <input type="text" name="group_pwd" />
                                         <button>OK</button>
                                     </form>
-                                    
-                                    <script type="text/javascript">
-                                $(document).ready(function(){
-                                    
-                                    $('.radio_join').attr('checked', true);
-                                    $('.join_group').find(':button').text('Join!');
-                                    
-                                    $('.radio_join').click(function(){
-                                        $('.join_group').find(':button').text('Join!');
-                                    });
-                                    
-                                    $('.radio_create').click(function(){
-                                        $('.join_group').find(':button').text('Create!');
-                                    });
-                                       
-                            
-                                });
-                                </script>
                                     <?php
                                 }
                             }
@@ -1193,7 +974,7 @@ if(isset($_GET['m'])){
                                    ?>   
                                   <div class="sensor_box">
                                     <ul>
-                                        <li><div>Name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
+                                        <li><div style="font-weight: bold">Name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
                                             echo $row['apktitle'];                                       
                                         ?></div>
                                         </li>
@@ -1201,11 +982,13 @@ if(isset($_GET['m'])){
                                                 echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">Download</a>';
                                                  ?></div><div style="margin-left: 5px;"><?php
                                             echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK">Remove</a>';                                       
+                                        ?></div><div style="margin-left: 5px;"><?php
+                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK">Update</a>';                                       
                                         ?></div></div>
                                         </li>
                                     </ul>
                                     <div class="sensor_info">
-                                        <p>Required sensors:</p>
+                                        <p style="font-weight: bold">Required sensors:</p>
                                         <ul id="sensor_container_f"><?php
                                            $sensor_array = json_decode($row['sensors']);
                                            
@@ -1250,20 +1033,21 @@ if(isset($_GET['m'])){
                                      
                                       ?></ul>
                                       <div class="apk_description_trigger">description <div id="descr_arrow">-></div></div>
+                                      <div id="apk_description">
+                                    <p style="font-weight: bold">App description</p>
+                                    <ul><li><p id="apk_descr_text"><?php
+                                       
+                                       if(!empty($row['description'])){
+                                           echo $row['description'];
+                                       }else{
+                                           echo 'No description.';
+                                       }
+                                                                         
+                                  ?></p></li></ul>
+                                </div>
                                     </div>
-                                    <div class="apk_description">
-                                        <p>Information about app</p>
-                                        <ul><li><p id="apk_descr_text"><?php
-                                           
-                                           if(!empty($row['description'])){
-                                               echo $row['description'];
-                                           }else{
-                                               echo 'No description.';
-                                           }
-                                                                             
-                                      ?></p></li></ul>
-                                    </div>
-                                </div> 
+                                  
+                                </div>
                                      <?php 
                                       
                                   }   
@@ -1273,7 +1057,7 @@ if(isset($_GET['m'])){
                                   <div class="sensor_box">
                                     <ul>
                                         <li>
-                                            <div>You have no APKs.</div>
+                                            <div>You have no apps.</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -1282,6 +1066,119 @@ if(isset($_GET['m'])){
                               }
 
                             }
+                            
+                            if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1){
+                                 ?>
+                                 
+                                 <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
+                              <p>Program name (title):</p>
+                              <input type="text" name="apk_title" />
+                              <p>Version of your program (can be any alphanumeric string):</p>
+                              <input type="text" name="apk_version" />
+                              <p>Lowest android version needed for my program to run:</p>
+                              <select name="apk_android_version">
+                                <option value="8">API 8: "Froyo" 2.2.x </option>
+                                <option value="9">API 9: "Gingerbread" 2.3.0 - 2.3.2</option>
+                                <option value="10">API 10: "Gingerbread" 2.3.3 - 2.3.7</option>
+                                <option value="11">API 11: "Honeycomb" 3.0</option>
+                                <option value="12">API 12: "Honeycomb" 3.1</option>
+                                <option value="13">API 13: "Honeycomb" 3.2.x</option>
+                                <option value="14">API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2</option>
+                                <option value="15">API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4</option>
+                              </select>                              
+                              <p>Program description:</p>
+                              <textarea cols="30" rows="6" name="apk_description"></textarea>
+                              <p style="margin: 20px 0;">My program uses following sensors:</p>
+                              <ul>
+                                  <li>
+                                    <div class="accelerometer" title="Accelerometer"></div>
+                                    <div class="accelerometer_pressed" title="Accelerometer" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="1" />
+                                  </li>
+                                  <li>
+                                    <div class="magnetic_field" title="Magnetic field"></div>
+                                    <div class="magnetic_field_pressed" title="Magnetic field" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="2" />
+                                  </li>
+                                  <li>
+                                    <div class="orientation" title="Orientation sensor"></div>
+                                    <div class="orientation_pressed" title="Orientation sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="3" />
+                                  </li>
+                                  <li>
+                                    <div class="gyroscope" title="Gyroscope sensor"></div>
+                                    <div class="gyroscope_pressed" title="Gyroscope sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="4" />
+                                  </li>
+                                  <li>
+                                    <div class="light" title="Light sensor"></div>
+                                    <div class="light_pressed" title="Light sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="5" />
+                                  </li>
+                                  <li>
+                                    <div class="pressure" title="Pressure sensor"></div>
+                                    <div class="pressure_pressed" title="Pressure sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="6" />
+                                  </li>
+                                  <li>
+                                    <div class="temperature" title="Temperature sensor"></div>
+                                    <div class="temperature_pressed" title="Temperature sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="7" />
+                                  </li>
+                                  <li>
+                                    <div class="proximity" title="Proximity sensor"></div>
+                                    <div class="proximity_pressed" title="Proximity sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="8" />
+                                  </li>
+                                  <li>
+                                    <div class="gravity" title="Gravity sensor"></div>
+                                    <div class="gravity_pressed" title="Gravity sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="9" />
+                                  </li>
+                                  <li>
+                                    <div class="linear_acceleration" title="Linear acceleration"></div>
+                                    <div class="linear_acceleration_pressed" title="Linear acceleration" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="10" />
+                                  </li>
+                                  <li>
+                                    <div class="rotation" title="Rotation sensor"></div>
+                                    <div class="rotation_pressed" title="Rotation sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="11" />
+                                  </li>
+                                  <li>
+                                    <div class="humidity" title="Humidity sensor"></div>
+                                    <div class="humidity_pressed" title="Humidity sensor" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="12" />
+                                  </li>
+                                  <li>
+                                    <div class="ambient_temperature" title="Ambient temperature"></div>
+                                    <div class="ambient_temperature_pressed" title="Ambient temperature" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="13" />
+                                  </li>
+                              </ul>
+  
+                              <div class="user_apk_restriction">
+                                  <input type="checkbox" name="restrict_users_number" value="1" /><span style="padding-left: 5px;">Make user study</span><br /><br />
+                                  <span style="margin-right: 10px;">Restrict number of devices:</span><input type="text" name="number_restricted_users" disabled="disabled" />
+                                  <br /><br /><?php
+                                   if(!empty($groupname)){
+                                     ?>  
+                                   <div style="margin: 15px 0;"><span style="margin-right: 10px;">Send only to my group</span><input type="checkbox" name="send_only_to_my_group" value="1" disabled="disabled" class="send_only_to_my_group" /></div>
+                                   <?php
+                             
+                                   }
+                                   ?>
+                              </div>
+                              
+                              <label for="file">Select a file:</label> 
+                              <input type="file" name="userfile" id="file" style="margin: 15px 0;">
+                              <p style="margin-bottom: 10px;">Click Upload button to upload your apk</p><button>Upload</button>
+                              <p style="margin-top: 50px;"></p>
+                            </form>
+                                 
+                                 <?php
+                            }
+                            
                             
                             if($MODE == 'PROMO' && !isset($_POST['promo_sent']) 
                                                 && (!isset($USER_ALREADY_ACCEPTED) || !isset($USER_PENDING))){    
