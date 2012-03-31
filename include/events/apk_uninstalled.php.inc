@@ -45,7 +45,20 @@ if($data->SESSIONID != null){
                    
                   LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $deviceID, $sessionID);
                   
-                  ApkManager::decrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $apkid);
+                  
+                  // get hw-id
+                  $userid = $row['userid'];
+                  $sql_hw = "SELECT hwid FROM ".$CONFIG['DB_TABLE']['HARDWARE']. " WHERE uid=".$userid." AND deviceid='".$deviceID."'";
+                  $db = $DBManager->getDB();
+                  $result_hw =$db->query($sql_hw);
+                  $logger->logInfo("sql on getting hwid");
+                  $logger->logInfo($sql_hw);
+                  $row_hw = $result_hw->fetch();
+                  $hwid = $row_hw['hwid'];
+                  
+                  
+                  
+                  ApkManager::decrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $apkid, $hwid, $logger);
                }
             }
         }

@@ -70,8 +70,8 @@ class ApkManager{
     * @param mixed $apkTable
     * @param mixed $apkID
     */
-      public static function incrementAPKUsage($db, $apkTable, $apkID){
-          
+      public static function incrementAPKUsage($db, $apkTable, $apkID, $hwid, $logger){
+          $logger->logInfo("incrementAPKUsage");
           // checking if the apk exists
           $sql = "SELECT * FROM ". $apkTable ." WHERE apkid = ". intval($apkID);
           $result = $db->query($sql);
@@ -80,12 +80,29 @@ class ApkManager{
               return false;
           }
           else{
-              $sql = "UPDATE " .$apkTable. " SET participated_count = participated_count + 1 WHERE apkid= ".$apkID;
-              $db->exec($sql);
+              $logger->logInfo("incrementAPKUsage else");
+              $devs = $row['installed_on'];
+              if(empty($devs)){
+                $devs = array();
+              }
+              else{
+                  $devs = json_decode($devs);
+              }
+              $devs[] = intval($hwid);
+              $devs = array_unique($devs);
+              sort($devs);
+              $part = count($devs);
+              $devs=json_encode($devs);
+              $sql1 = "UPDATE " .$apkTable. " SET participated_count=".$part." WHERE apkid= ".$apkID;
+              $sql2 = "UPDATE ".$apkTable . " SET installed_on='".$devs."' WHERE apkid=".$apkID;
+              $logger->logInfo("sql on increment apk usage");
+              $logger->logInfo($sql1);
+              $logger->logInfo($sql2);
+              $db->exec($sql1);
+              $db->exec($sql2);
+              }
               return true;
-          }
-        
-    }
+      }
     
     
     /**
@@ -96,22 +113,39 @@ class ApkManager{
     * @param mixed $apkTable
     * @param mixed $apkID
     */
-      public static function decrementAPKUsage($db, $apkTable, $apkID){
+      public static function decrementAPKUsage($db, $apkTable, $apkID, $hwid, $logger){
           
+          $logger->logInfo("decrementAPKUsage");
           // checking if the apk exists
+          
           $sql = "SELECT * FROM ". $apkTable ." WHERE apkid = ". intval($apkID);
           $result = $db->query($sql);
           $row = $result->fetch();
-          if(empty($row)){
-              return false;
+          $logger->logInfo("decrementAPKUsage else");
+          $devs = $row['installed_on'];
+          if(empty($devs)){
+            return;
           }
           else{
-              $sql = "UPDATE " .$apkTable. " SET participated_count = participated_count - 1 WHERE apkid= ".$apkID;
-              $db->exec($sql);
-              return true;
+              $devs = json_decode($devs);
           }
-        
-    }
+          $new_devs = array();
+          foreach($devs as $hw_old){
+              if($hw_old != $hwid)
+                $new_devs[] = $hw_old;
+          }
+          $new_devs = array_unique($new_devs);
+          sort($new_devs);
+          $part = count($new_devs);
+          $new_devs=json_encode($new_devs);
+          $sql1 = "UPDATE " .$apkTable. " SET participated_count=".$part." WHERE apkid= ".$apkID;
+          $sql2 = "UPDATE ".$apkTable . " SET installed_on='".$new_devs."' WHERE apkid=".$apkID;
+          $logger->logInfo("sql on decrement apk usage");
+          $logger->logInfo($sql1);
+          $logger->logInfo($sql2);
+          $db->exec($sql1);
+          $db->exec($sql2);
+      }        
     
     
     
