@@ -101,6 +101,11 @@ if(isset($_POST['HTTP_JSON'])){
                     include_once(MOSES_HOME . "/include/events/apk_installed.php.inc");
                     break;
                 
+                case "APK_UNINSTALLED":
+                
+                    include_once(MOSES_HOME . "/include/events/apk_uninstalled.php.inc");
+                    break;
+                
                 case "C2DM":
                 
                     include_once(MOSES_HOME . "/include/events/c2dm.php.inc");

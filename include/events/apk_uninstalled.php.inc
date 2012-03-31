@@ -1,0 +1,55 @@
+<?php
+
+$logger->logInfo("APK UNINSTALLED ARRIVED");
+$logger->logInfo(print_r($data, true));
+
+
+$sessionID = '';
+
+/**
+*  SESSIONID check
+*/
+if($data->SESSIONID != null){
+    if(is_md5($data->SESSIONID)){
+       
+       $sessionID = $data->SESSIONID;  
+       $row = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
+
+        // session is found
+        if(!empty($row)){
+            
+            /**
+            *  if new DEVICEID found, set new DEVICEID
+            */
+            $deviceID = ($data->DEVICEID != null && strcmp($data->DEVICEID, $row['deviceid']) != 0) ? $data->DEVICEID : $row['deviceid'];
+            //$sessionID = () ? : ; 
+            $lastactivity = $row['lastactivity'];
+            $apkid = '';
+            
+            /**
+            *  APKID check for right data
+            */
+            if($data->APKID != null){
+               $data->APKID = preg_replace("/\D/", "", $data->APKID);
+               
+               if(!empty($data->APKID))
+                  $apkid = $data->APKID;      
+            }
+            
+            if(!empty($apkid)){
+            
+                //###################
+               $IS_VALID_SESSION = LoginManager::isSessionTimedout($lastactivity, time(), $CONFIG['SESSION']['TIMEOUT']);
+           
+               if($IS_VALID_SESSION){
+                   
+                  LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $deviceID, $sessionID);
+                  
+                  ApkManager::decrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $apkid);
+               }
+            }
+        }
+    }
+}
+
+?>

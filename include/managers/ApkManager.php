@@ -87,6 +87,34 @@ class ApkManager{
         
     }
     
+    
+    /**
+    * Decrements the number that tells how many times the apk has been downloaded
+    * returns true if the apk with the provided id exists, false otherwise
+    * 
+    * @param mixed $db
+    * @param mixed $apkTable
+    * @param mixed $apkID
+    */
+      public static function decrementAPKUsage($db, $apkTable, $apkID){
+          
+          // checking if the apk exists
+          $sql = "SELECT * FROM ". $apkTable ." WHERE apkid = ". intval($apkID);
+          $result = $db->query($sql);
+          $row = $result->fetch();
+          if(empty($row)){
+              return false;
+          }
+          else{
+              $sql = "UPDATE " .$apkTable. " SET participated_count = participated_count - 1 WHERE apkid= ".$apkID;
+              $db->exec($sql);
+              return true;
+          }
+        
+    }
+    
+    
+    
     /**
     * retrives restriction number of the given apkID
     *     
