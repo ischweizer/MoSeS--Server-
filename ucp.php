@@ -42,7 +42,21 @@ $sensors_ultrasmall_mapping = array(1 => array('accelerometer_sensor.png', 'Acce
                                     array('rotation_sensor.png', 'Rotation sensor'),
                                     array('humidity_sensor.png', 'Humidity sensor'),
                                     array('ambient_temp_sensor.png', 'Ambient temperature sensor'));
-
+                                    
+$sensors_info = array(array('accelerometer', 'accelerometer_pressed', 'Accelerometer sensor'),
+                    array('magnetic_field', 'magnetic_field_pressed', 'Magnetic field sensor'),
+                    array('orientation', 'orientation_pressed', 'Orientation sensor'),
+                    array('gyroscope', 'gyroscope_pressed', 'Gyroscope sensor'),
+                    array('light', 'light_pressed', 'Light sensor'),
+                    array('pressure', 'pressure_pressed', 'Pressure sensor'),
+                    array('temperature', 'temperature_pressed', 'Temperature sensor'),
+                    array('proximity', 'proximity_pressed', 'Proximity sensor'),
+                    array('gravity', 'gravity_pressed', 'Gravity sensor'),
+                    array('linear_acceleration', 'linear_acceleration_pressed', 'Linear acceleration sensor'),
+                    array('rotation', 'rotation_pressed', 'Rotation sensor'),
+                    array('humidity', 'humidity_pressed', 'Humidity sensor'),
+                    array('ambient_temperature', 'ambient_temperature_pressed', 'Ambient temperature sensor'));
+                                    
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m'])){
     
@@ -747,72 +761,18 @@ if(isset($_GET['m'])){
                               <p>Program description:</p>
                               <textarea cols="30" rows="6" name="apk_description"></textarea>
                               <p style="margin: 20px 0;">My program uses following sensors:</p>
-                              <ul>
-                                  <li>
-                                    <div class="accelerometer" title="Accelerometer"></div>
-                                    <div class="accelerometer_pressed" title="Accelerometer" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="1" />
-                                  </li>
-                                  <li>
-                                    <div class="magnetic_field" title="Magnetic field"></div>
-                                    <div class="magnetic_field_pressed" title="Magnetic field" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="2" />
-                                  </li>
-                                  <li>
-                                    <div class="orientation" title="Orientation sensor"></div>
-                                    <div class="orientation_pressed" title="Orientation sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="3" />
-                                  </li>
-                                  <li>
-                                    <div class="gyroscope" title="Gyroscope sensor"></div>
-                                    <div class="gyroscope_pressed" title="Gyroscope sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="4" />
-                                  </li>
-                                  <li>
-                                    <div class="light" title="Light sensor"></div>
-                                    <div class="light_pressed" title="Light sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="5" />
-                                  </li>
-                                  <li>
-                                    <div class="pressure" title="Pressure sensor"></div>
-                                    <div class="pressure_pressed" title="Pressure sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="6" />
-                                  </li>
-                                  <li>
-                                    <div class="temperature" title="Temperature sensor"></div>
-                                    <div class="temperature_pressed" title="Temperature sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="7" />
-                                  </li>
-                                  <li>
-                                    <div class="proximity" title="Proximity sensor"></div>
-                                    <div class="proximity_pressed" title="Proximity sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="8" />
-                                  </li>
-                                  <li>
-                                    <div class="gravity" title="Gravity sensor"></div>
-                                    <div class="gravity_pressed" title="Gravity sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="9" />
-                                  </li>
-                                  <li>
-                                    <div class="linear_acceleration" title="Linear acceleration"></div>
-                                    <div class="linear_acceleration_pressed" title="Linear acceleration" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="10" />
-                                  </li>
-                                  <li>
-                                    <div class="rotation" title="Rotation sensor"></div>
-                                    <div class="rotation_pressed" title="Rotation sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="11" />
-                                  </li>
-                                  <li>
-                                    <div class="humidity" title="Humidity sensor"></div>
-                                    <div class="humidity_pressed" title="Humidity sensor" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="12" />
-                                  </li>
-                                  <li>
-                                    <div class="ambient_temperature" title="Ambient temperature"></div>
-                                    <div class="ambient_temperature_pressed" title="Ambient temperature" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="13" />
-                                  </li>
+                              <ul><?php
+                                                        
+                               for($i=0; $i < count($sensors_info); $i++){   
+                                  ?><li>
+                                    <div class="<?php echo $sensors_info[$i][0]; ?>" title="<?php echo $sensors_info[$i][2]; ?>"></div>
+                                    <div class="<?php echo $sensors_info[$i][1]; ?>" title="<?php echo $sensors_info[$i][2]; ?>" style="display: none;"></div>
+                                    <input type="checkbox" name="sensors[]" value="<?php echo $i+1; ?>" />
+                                   </li>
+                                   <?php
+                               }    
+                               
+                               ?>
                               </ul>
 
                               <div class="user_apk_restriction">
@@ -1072,98 +1032,87 @@ if(isset($_GET['m'])){
 
                             }
                             
+                            /********************************************
+                            *********** UPDATE MY APK PAGE **************
+                            *********************************************/
+                            
                             if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1){
                                  ?>
                                  
                                  <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
                                   <p>Program name (title):</p>
-                                  <h2><?php
+                                  <h4><?php
                                       
                                       echo $apk_to_update['apktitle'];         
                                       
-                                      ?></h2>
+                                      ?></h4>
                                   <p>Version of your program (can be any alphanumeric string):</p>
-                                  <input type="text" name="apk_version" />
+                                  <input type="text" name="apk_version" value="<?php
+                                    echo $apk_to_update['apk_version'];                                                    
+                                   ?>" />
                                   <p>Lowest android version needed for my program to run:</p>
                                   <select name="apk_android_version">
-                                    <option value="8">API 8: "Froyo" 2.2.x </option>
-                                    <option value="9">API 9: "Gingerbread" 2.3.0 - 2.3.2</option>
-                                    <option value="10">API 10: "Gingerbread" 2.3.3 - 2.3.7</option>
-                                    <option value="11">API 11: "Honeycomb" 3.0</option>
-                                    <option value="12">API 12: "Honeycomb" 3.1</option>
-                                    <option value="13">API 13: "Honeycomb" 3.2.x</option>
-                                    <option value="14">API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2</option>
-                                    <option value="15">API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4</option>
+                                    <option value="8"<?php
+                                       if($apk_to_update['androidversion'] == 8){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 8: "Froyo" 2.2.x</option>
+                                    <option value="9"<?php
+                                       if($apk_to_update['androidversion'] == 9){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 9: "Gingerbread" 2.3.0 - 2.3.2</option>
+                                    <option value="10"<?php
+                                       if($apk_to_update['androidversion'] == 10){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 10: "Gingerbread" 2.3.3 - 2.3.7</option>
+                                    <option value="11"<?php
+                                       if($apk_to_update['androidversion'] == 11){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 11: "Honeycomb" 3.0</option>
+                                    <option value="12"<?php
+                                       if($apk_to_update['androidversion'] == 12){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 12: "Honeycomb" 3.1</option>
+                                    <option value="13"<?php
+                                       if($apk_to_update['androidversion'] == 13){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 13: "Honeycomb" 3.2.x</option>
+                                    <option value="14"<?php
+                                       if($apk_to_update['androidversion'] == 14){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2</option>
+                                    <option value="15"<?php
+                                       if($apk_to_update['androidversion'] == 15){
+                                           echo ' selected="selected" ';
+                                       }                                                
+                                    ?>>API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4</option>
                                   </select>                              
                                   <p>Program description:</p>
-                                  <textarea cols="30" rows="6" name="apk_description"></textarea>
+                                  <textarea cols="30" rows="6" name="apk_description"><?php
+                                    echo $apk_to_update['description'];
+                                    
+                                    $apk_to_update_sensors = json_decode($apk_to_update['sensors']);
+                                                                                                       
+                                  ?></textarea>
                                   <p style="margin: 20px 0;">My program uses following sensors:</p>
-                                  <ul>
-                                      <li>
-                                        <div class="accelerometer" title="Accelerometer"></div>
-                                        <div class="accelerometer_pressed" title="Accelerometer" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="1" />
-                                      </li>
-                                      <li>
-                                        <div class="magnetic_field" title="Magnetic field"></div>
-                                        <div class="magnetic_field_pressed" title="Magnetic field" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="2" />
-                                      </li>
-                                      <li>
-                                        <div class="orientation" title="Orientation sensor"></div>
-                                        <div class="orientation_pressed" title="Orientation sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="3" />
-                                      </li>
-                                      <li>
-                                        <div class="gyroscope" title="Gyroscope sensor"></div>
-                                        <div class="gyroscope_pressed" title="Gyroscope sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="4" />
-                                      </li>
-                                      <li>
-                                        <div class="light" title="Light sensor"></div>
-                                        <div class="light_pressed" title="Light sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="5" />
-                                      </li>
-                                      <li>
-                                        <div class="pressure" title="Pressure sensor"></div>
-                                        <div class="pressure_pressed" title="Pressure sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="6" />
-                                      </li>
-                                      <li>
-                                        <div class="temperature" title="Temperature sensor"></div>
-                                        <div class="temperature_pressed" title="Temperature sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="7" />
-                                      </li>
-                                      <li>
-                                        <div class="proximity" title="Proximity sensor"></div>
-                                        <div class="proximity_pressed" title="Proximity sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="8" />
-                                      </li>
-                                      <li>
-                                        <div class="gravity" title="Gravity sensor"></div>
-                                        <div class="gravity_pressed" title="Gravity sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="9" />
-                                      </li>
-                                      <li>
-                                        <div class="linear_acceleration" title="Linear acceleration"></div>
-                                        <div class="linear_acceleration_pressed" title="Linear acceleration" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="10" />
-                                      </li>
-                                      <li>
-                                        <div class="rotation" title="Rotation sensor"></div>
-                                        <div class="rotation_pressed" title="Rotation sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="11" />
-                                      </li>
-                                      <li>
-                                        <div class="humidity" title="Humidity sensor"></div>
-                                        <div class="humidity_pressed" title="Humidity sensor" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="12" />
-                                      </li>
-                                      <li>
-                                        <div class="ambient_temperature" title="Ambient temperature"></div>
-                                        <div class="ambient_temperature_pressed" title="Ambient temperature" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="13" />
-                                      </li>
+                                  <ul><?php
+                                  
+                                  
+                                      for($i=0; $i < count($sensors_info); $i++){   
+                                      ?><li>
+                                        <div class="<?php echo $sensors_info[$i][0]; ?>" title="<?php echo $sensors_info[$i][2]; ?>"></div>
+                                        <div class="<?php echo $sensors_info[$i][1]; ?>" title="<?php echo $sensors_info[$i][2]; ?>" style="display: none;"></div>
+                                        <input type="checkbox" name="sensors[]" value="<?php echo $i+1; ?>" />
+                                       </li>
+                                       <?php
+                                       } 
+                                   ?>
                                   </ul>
       
                                   <label for="file">Select a file:</label> 
