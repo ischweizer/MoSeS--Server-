@@ -14,7 +14,7 @@ include_once(MOSES_HOME."/include/functions/logger.php");
 *  SETTINGS FOR UPLOAD
 */
 $allowedTypes = array('.apk');
-$maxFileSize = 3145728; // 3MB
+$maxFileSize = $CONFIG['UPLOAD']['FILESIZE']; // 20MB
 $uploadPath = './apk/'; // folder to save to
 
 $filename = $_FILES['userfile']['name']; // gets filename
