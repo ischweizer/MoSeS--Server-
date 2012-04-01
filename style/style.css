@@ -246,6 +246,17 @@ img.aligncenter {
 .sensor_box .sensor_box_name {
     margin-left: 10px;
     margin-bottom: 20px;
+}             
+
+.sensor_box .sensor_box_api div {
+    display: inline;
+    list-style-type: none;
+    margin-left: 5px;
+}
+
+.sensor_box .sensor_box_api div > a {
+    margin: 0 5px;
+    font-weight: bold;
 }
 
 .sensor_box .down_remove_links div {
@@ -270,7 +281,7 @@ img.aligncenter {
     left: 252px;
     top: 0px;
     width: 200px;
-    height: 120px;
+    height: 90px;
     padding: 5px 5px 5px 10px;
     border: 1px solid #000;
     background-color: #d9cfb4;
@@ -285,13 +296,13 @@ img.aligncenter {
     margin-left: -30px;   
 }
 
-.sensor_info #sensor_container_f {
+.sensor_info .sensor_container_f {
     position: absolute;
     left: 5px;
     top: 35px;
 }
 
-.sensor_info #sensor_container_s {
+.sensor_info .sensor_container_s {
     position: absolute;
     left: 5px;
     top: 55px;
