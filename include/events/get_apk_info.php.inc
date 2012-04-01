@@ -54,6 +54,7 @@ if($data->SESSIONID != null){
                           $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 
                                           "STATUS" => "SUCCESS",
                                           "ID" => $APK['apkid'],
+                                          "ANDVER" => json_decode($APK['androidversion']),
                                           "SENSORS" => json_decode($APK['sensors']),
                                           "NAME" => $APK['apktitle'],
                                           "DESCR" => $APK['description']);
