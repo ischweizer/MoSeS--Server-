@@ -246,6 +246,13 @@ img.aligncenter {
 .sensor_box .sensor_box_name {
     margin-left: 10px;
     margin-bottom: 20px;
+}
+
+.sensor_box .sensor_box_api {
+    display: block;
+    position: absolute;
+    top: 55px;
+    left: 15px;
 }             
 
 .sensor_box .sensor_box_api div {
@@ -257,6 +264,15 @@ img.aligncenter {
 .sensor_box .sensor_box_api div > a {
     margin: 0 5px;
     font-weight: bold;
+    
+}
+
+.sensor_box .sensor_box_api_remove {
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    /*background: url("../images/bt_close.png") 0 -20px no-repeat;*/
+    
 }
 
 .sensor_box .down_remove_links div {
@@ -498,7 +514,7 @@ img.aligncenter {
 }
 
 .group_stats li {
-    display: inline;
+    display: block;
     list-style-type: none;
 }
 

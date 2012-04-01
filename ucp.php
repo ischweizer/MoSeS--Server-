@@ -13,6 +13,7 @@ $groupname = null; // name of the group the user is in OR name of the group the 
 $grouppwd = null; // password of the group the user wants to join
 $groupsize = 0; // size of the group
 $group_members_count = 0;
+$group_device_count = 0;
 
 /*
 * join/create status
@@ -120,7 +121,36 @@ if(isset($_GET['m'])){
                        $groupname = $row['rgroup'];
                        $_SESSION['RGROUP'] = $groupname;
                        
-                       break; 
+                       break;
+                       
+        case 'DEVICE':
+        
+                    if(isset($_GET['remove'])){
+                        
+                        $DEVICE_ID = preg_replace("/\D/", "", $_GET['remove']);
+                        
+                        if(preg_match('/^[0-9]+$/', $DEVICE_ID)){
+                                  
+                           include_once("./include/functions/dbconnect.php");
+                           
+                           // remove entry from DB 
+                           $sql = "DELETE FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ."  
+                                          WHERE uid = ". $_SESSION['USER_ID'] . " 
+                                          AND hwid = '". $DEVICE_ID ."'";
+                              
+                           $db->exec($sql);
+                           
+                           echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>";
+                           
+                        }else{
+                            echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>"; 
+                        }
+                        
+                    }else{
+                       echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>"; 
+                    }
+        
+                    break; 
         
         case 'LIST':
         
@@ -379,6 +409,22 @@ if(isset($_GET['m'])){
                  $row = $result->fetch();
                  
                  $group_members_count = count(json_decode($row['members']));
+                 
+                 $user_array = json_decode($row['members']);
+                 
+                 foreach($user_array as $user){
+                     
+                     $sql = 'SELECT hwid 
+                             FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .' 
+                             WHERE uid = '. $user;
+                             
+                     $result = $db->query($sql);
+                     $row = $result->fetchAll();
+                     
+                     if(!empty($row)){
+                         $group_device_count += count($row);
+                     }
+                 }
             }
             
             break;
@@ -685,6 +731,9 @@ if(isset($_GET['m'])){
                                                 <div style="font-weight: bold;"><?php
                                                 echo $device['androidversion'];                                       
                                             ?></div></div>
+                                            <div class="sensor_box_api_remove"><?php
+                                            echo '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device">Remove</a>';                                       
+                                        ?></div>
                                             </li>
                                         </ul>
                                         <div class="sensor_info">
@@ -944,6 +993,13 @@ if(isset($_GET['m'])){
                                                   echo $group_members_count;                 
                                                 ?></div><?php
                                                   echo ($group_members_count == 1 ? 'member' : 'members');                           
+                                                ?>!</div>
+                                            </li>
+                                            <li>
+                                                <div>Your group has<div style="font-weight: bold;"><?php
+                                                  echo $group_device_count;                 
+                                                ?></div><?php
+                                                  echo ($group_device_count == 1 ? 'device' : 'devices');                           
                                                 ?>!</div>
                                             </li>
                                         </ul>
