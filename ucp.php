@@ -677,7 +677,7 @@ if(isset($_GET['m'])){
                                     ?>
                                     <div class="sensor_box">
                                         <ul>
-                                            <li><div style="font-weight: bold">Device name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
+                                            <li><div style="font-weight: bold;">Device name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
                                                 echo $device['deviceid'];                                       
                                             ?></div>
                                             </li>
@@ -1024,7 +1024,7 @@ if(isset($_GET['m'])){
                                    ?>   
                                   <div class="sensor_box">
                                     <ul>
-                                        <li><div style="font-weight: bold">Name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
+                                        <li><div style="font-weight: bold;">Name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
                                             echo $row['apktitle'];                                       
                                         ?></div>
                                         </li>

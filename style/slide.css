@@ -238,15 +238,24 @@ body {
     border: white 2px solid;
 }
 
-#panel .login_content input.bt_login {
-	width: 74px;
-	background: transparent url(../images/bt_login.png) no-repeat 0 0;
+#panel .bt_logout {
+	display: block;
+    float: right;
+    height: 15px;
+    width: 50px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    padding-top: 7px;
+    background-color: #336699;
+    color: #f0e68c;
+    border: white 2px solid;
 }
 
 #panel .login_content input.bt_register {
 	width: 94px;
 	color: white;
-	background: transparent url(../images/bt_register.png) no-repeat 0 0;
 }
 
 #panel .lost-pwd {
