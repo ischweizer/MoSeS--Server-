@@ -26,7 +26,7 @@ include_once("./include/_menu.php");
                     <div class="post">
                         <h2 class="title">About MoSeS</h2>
                         <div class="entry">
-                            <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/de/telecooperation-group/" title="Telecooperation Group">Telecooperation Group</a> by Zijad Maksuti, Wladimir Schmidt, Simon Leisching and Jaco Hofmann under supervision of <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer">Immanuel Schweizer</a> from <a href="http://www.tk.informatik.tu-darmstadt.de/de/research/smart-civil-security/" title="Smart Civil Security">Smart Civil Security</a>.</p>
+                            <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/de/telecooperation-group/" title="Telecooperation Group" target="_blank">Telecooperation Group</a> by <a href="mailto:youremailaddress">Zijad Maksuti</a>, <a href="mailto:youremailaddress">Wladimir Schmidt</a>, <a href="mailto:youremailaddress">Simon Leisching</a> and <a href="mailto:youremailaddress">Jaco Hofmann</a> under supervision of <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Immanuel Schweizer</a> from <a href="http://www.tk.informatik.tu-darmstadt.de/de/research/smart-civil-security/" title="Smart Civil Security" target="_blank">Smart Civil Security</a>.</p>
                         </div>
                     </div>
                     <div style="clear: both;">&nbsp;</div>
