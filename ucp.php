@@ -1103,21 +1103,32 @@ if(isset($_GET['m'])){
                                   <p>Program description:</p>
                                   <textarea cols="30" rows="6" name="apk_description"><?php
                                     echo $apk_to_update['description'];
-                                    
-                                    $apk_to_update_sensors = json_decode($apk_to_update['sensors']);
-                                                                                                       
+                                                                       
                                   ?></textarea>
                                   <p style="margin: 20px 0;">My program uses following sensors:</p>
                                   <ul><?php
                                   
+                                      $apk_to_update_sensors = json_decode($apk_to_update['sensors']);
                                   
-                                      for($i=0; $i < count($sensors_info); $i++){   
-                                      ?><li>
-                                        <div class="<?php echo $sensors_info[$i][0]; ?>" title="<?php echo $sensors_info[$i][2]; ?>"></div>
-                                        <div class="<?php echo $sensors_info[$i][1]; ?>" title="<?php echo $sensors_info[$i][2]; ?>" style="display: none;"></div>
-                                        <input type="checkbox" name="sensors[]" value="<?php echo $i+1; ?>" />
-                                       </li>
-                                       <?php
+                                      for($i=0; $i < count($sensors_info); $i++){
+                                           
+                                        echo '<li>';
+                                        if(in_array(($i+1), $apk_to_update_sensors)){
+                                            
+                                            // if sensor was selected, check and select it here
+                                            
+                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'"></div>';
+                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" checked="checked" />';
+                                        }else{
+                                           
+                                            // here is no selection of sensor
+                                            
+                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'"></div>';
+                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" />';
+                                            }
+                                        echo '</li>';
                                        } 
                                    ?>
                                   </ul>
