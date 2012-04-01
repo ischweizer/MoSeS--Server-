@@ -270,7 +270,7 @@ body {
 #panel .bt_logout {
     position: relative;
     float: right;
-    margin: 30px auto;
+    margin-top: 120px;
 }
 
 #panel .slider_welcome_message {
@@ -278,6 +278,5 @@ body {
     position: relative;
     font-size: 20px;
     text-align: center;
-    margin: 10px 0 0 20px;
-    
+    margin: 50px 0 0 20px;    
 }
