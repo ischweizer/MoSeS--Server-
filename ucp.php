@@ -12,6 +12,7 @@ $apk_listing = '';  // just init
 $groupname = null; // name of the group the user is in OR name of the group the user wants to join
 $grouppwd = null; // password of the group the user wants to join
 $groupsize = 0; // size of the group
+$group_members_count = 0;
 
 /*
 * join/create status
@@ -350,16 +351,34 @@ if(isset($_GET['m'])){
                     }
                     
                     break;
+        
         // ##### GROUP ############
         case 'GROUP':
+        
             $MODE = 'GROUP';
-            // obtain the name of group the user is currently in (if any)
-            $group_sql = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $_SESSION['USER_ID'];
+            
             include_once("./include/functions/dbconnect.php");
+            
+            // obtain the name of group the user is currently in (if any)
+            $group_sql = "SELECT rgroup 
+                          FROM ".$CONFIG['DB_TABLE']['USER']. " 
+                          WHERE userid=" . $_SESSION['USER_ID'];
+                          
             $group_result = $db->query($group_sql);
             $group_row = $group_result->fetch();
+            
             if(!empty($group_row)){
+                
                 $groupname = $group_row['rgroup'];
+                
+                $sql = "SELECT members 
+                        FROM ". $CONFIG['DB_TABLE']['RGROUP'] ." 
+                        WHERE name = '". $groupname ."'";
+                        
+                 $result = $db->query($sql);
+                 $row = $result->fetch();
+                 
+                 $group_members_count = count(json_decode($row['members']));
             }
             
             break;
@@ -908,14 +927,31 @@ if(isset($_GET['m'])){
                             }
                             
                             if($MODE == 'GROUP'){
-                                if($groupname != null){
-                                    echo("<h3> You are currently member of ".$groupname."</h3>");
+                                
+                                if(!empty($groupname)){ 
+                                    echo '<h3>You are currently member of research group</h3>';
+                                    echo '<div class="group_name">'. $groupname .'</div>';           
+                                    ?>
+                                    <div class="group_stats">
+                                     <p style="font-weight: bold; font-size: large; margin-bottom: 8px; margin-left: 20px;">Statistics</p>
+                                        <ul>
+                                            <li>
+                                                <div>Your group has<div style="font-weight: bold;"><?php
+                                                  echo $group_members_count;                 
+                                                ?></div><?php
+                                                  echo ($group_members_count == 1 ? 'member' : 'members');                           
+                                                ?>!</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <?php
                                     ?>
                                     <form action=ucp.php?m=leave method="post" class="leave_group">
                                         <button>Leave</button>
+                                    </form>
+                                    
                                         <?php
-                                }
-                                else{ ?>
+                                }else{ ?>
                                 
                                     <h3>Join a research group or found one</h3>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
@@ -930,28 +966,32 @@ if(isset($_GET['m'])){
                                     <?php
                                 }
                             }
+                            
                             // THE USER HAS CLICKED THE JOIN BUTTON
                             if($MODE == 'JOIN'){
                                 // ###########
                                 switch($jcstatsus){
                                     case 1 :
-                                        echo("<h3>You joined ".$groupname."<h3>");
+                                        echo("<h3>You joined research group<h3>");
+                                        echo '<div class="group_name">'. $groupname .'</div>';
                                         break;
                                     case 2 : 
-                                        echo("<h4>".$groupname." already exists! Specify another name for your research group<h4>");
+                                        echo("<h3>Group already exists! Specify another name for your research group<h3>");
                                         break;
                                     case 3 : 
-                                        echo("<h3>You created ".$groupname."<h3>");
+                                        echo '<h3>You successfully created research group<h3>';
+                                        echo '<div class="group_name">'. $groupname .'</div>';
                                         break;
                                     default:
-                                        echo("<h3>Invalid group-name and/or password ".$groupname."<h3>");
+                                        echo("<h3>Invalid group name and/or password!<h3>");
                                 }
                                 echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
                             }
                             
                             // THE USER HAS CLICKED THE LEAVE BUTTON
                             if($MODE == 'LEAVE'){
-                                echo("<h3>You left ".$groupname."<h3>");
+                                echo '<h3>You successfully left from research group</h3>';
+                                echo '<div class="group_name">'. $groupname .'</div>';
                                 echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
                                 }
                             
