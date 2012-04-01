@@ -56,6 +56,15 @@ $sensors_info = array(array('accelerometer', 'accelerometer_pressed', 'Accelerom
                     array('rotation', 'rotation_pressed', 'Rotation sensor'),
                     array('humidity', 'humidity_pressed', 'Humidity sensor'),
                     array('ambient_temperature', 'ambient_temperature_pressed', 'Ambient temperature sensor'));
+                    
+$API_VERSION = array(array(8, 'API 8: "Froyo" 2.2.x'),
+                     array(9, 'API 9: "Gingerbread" 2.3.0 - 2.3.2'),
+                     array(10, 'API 10: "Gingerbread" 2.3.3 - 2.3.7'),
+                     array(11, 'API 11: "Honeycomb" 3.0'),
+                     array(12, 'API 12: "Honeycomb" 3.1'),
+                     array(13, 'API 13: "Honeycomb" 3.2.x'),
+                     array(14, 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2'),
+                     array(15, 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4'));
                                     
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m'])){
@@ -129,9 +138,10 @@ if(isset($_GET['m'])){
                           $REMOVE_HASH = strtolower($RAW_REMOVE_HASH);
                            
                           // getting userhah for dir later
-                          $sql = "SELECT userhash FROM apk 
-                                                 WHERE userid = ". $_SESSION['USER_ID'] . " 
-                                                   AND apkhash = '". $REMOVE_HASH ."'";
+                          $sql = "SELECT userhash 
+                                  FROM apk 
+                                  WHERE userid = ". $_SESSION['USER_ID'] . " 
+                                  AND apkhash = '". $REMOVE_HASH ."'";
                           
                           $result = $db->query($sql);
                           $row = $result->fetch();
@@ -152,7 +162,7 @@ if(isset($_GET['m'])){
                           // remove entry from DB 
                           $sql = "DELETE FROM apk 
                                          WHERE userid = ". $_SESSION['USER_ID'] . " 
-                                           AND apkhash = '". $REMOVE_HASH ."'";
+                                         AND apkhash = '". $REMOVE_HASH ."'";
                           
                           $db->exec($sql);
                           
@@ -778,14 +788,13 @@ if(isset($_GET['m'])){
                               <input type="text" name="apk_version" />
                               <p>Lowest android version needed for my program to run:</p>
                               <select name="apk_android_version">
-                                <option value="8">API 8: "Froyo" 2.2.x </option>
-                                <option value="9">API 9: "Gingerbread" 2.3.0 - 2.3.2</option>
-                                <option value="10">API 10: "Gingerbread" 2.3.3 - 2.3.7</option>
-                                <option value="11">API 11: "Honeycomb" 3.0</option>
-                                <option value="12">API 12: "Honeycomb" 3.1</option>
-                                <option value="13">API 13: "Honeycomb" 3.2.x</option>
-                                <option value="14">API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2</option>
-                                <option value="15">API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4</option>
+                                <?php
+                                     
+                                for($i=0; $i<count($API_VERSION); $i++){
+                                    echo '<option value="'. $API_VERSION[$i][0] .'">'. $API_VERSION[$i][1] .'</option>';    
+                                } 
+                                
+                                ?>
                               </select>                              
                               <p>Program description:</p>
                               <textarea cols="30" rows="6" name="apk_description"></textarea>
@@ -1081,46 +1090,15 @@ if(isset($_GET['m'])){
                                    ?>" />
                                   <p>Lowest android version needed for my program to run:</p>
                                   <select name="apk_android_version">
-                                    <option value="8"<?php
-                                       if($apk_to_update['androidversion'] == 8){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 8: "Froyo" 2.2.x</option>
-                                    <option value="9"<?php
-                                       if($apk_to_update['androidversion'] == 9){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 9: "Gingerbread" 2.3.0 - 2.3.2</option>
-                                    <option value="10"<?php
-                                       if($apk_to_update['androidversion'] == 10){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 10: "Gingerbread" 2.3.3 - 2.3.7</option>
-                                    <option value="11"<?php
-                                       if($apk_to_update['androidversion'] == 11){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 11: "Honeycomb" 3.0</option>
-                                    <option value="12"<?php
-                                       if($apk_to_update['androidversion'] == 12){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 12: "Honeycomb" 3.1</option>
-                                    <option value="13"<?php
-                                       if($apk_to_update['androidversion'] == 13){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 13: "Honeycomb" 3.2.x</option>
-                                    <option value="14"<?php
-                                       if($apk_to_update['androidversion'] == 14){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2</option>
-                                    <option value="15"<?php
-                                       if($apk_to_update['androidversion'] == 15){
-                                           echo ' selected="selected" ';
-                                       }                                                
-                                    ?>>API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4</option>
+                                    <?php
+                                     
+                                    for($i=0; $i<count($API_VERSION); $i++){
+                                        echo '<option value="'. $API_VERSION[$i][0] .'"'. 
+                                        ($apk_to_update['androidversion'] == $API_VERSION[$i][0] ? ' selected="selected" ' : '') 
+                                        .'>'. $API_VERSION[$i][1] .'</option>';    
+                                    } 
+                                    
+                                    ?>
                                   </select>                              
                                   <p>Program description:</p>
                                   <textarea cols="30" rows="6" name="apk_description"><?php
@@ -1146,6 +1124,7 @@ if(isset($_GET['m'])){
       
                                   <label for="file">Select a file:</label> 
                                   <input type="file" name="userfile" id="file" style="margin: 15px 0;">
+                                  <br /><br />
                                   <button>Update</button>
                                   <p style="margin-top: 50px;"></p>
                                 </form>
