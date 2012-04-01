@@ -132,90 +132,37 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         $APK_VERSION = trim($_POST['apk_version']);    
     }
     
-    $RESTRICTION_USER_NUMBER = -1;
     $SELECTED_USERS_LIST = '';
     
     // PREPARING VARIABLES FOR INSERTION TO DB
-    $candidates = array();
     $pending_users = array();
     $notified_users = array();
-    $USTUDY_FINISHED = 1;
     
-    if(isset($_POST['restrict_users_number']) && isset($_POST['number_restricted_users'])){
-        
-        $RESTRICTION_CHECHED = (preg_replace('/[^0-9]/', '', $_POST['restrict_users_number']) == '1') ? true : false;
-        
-        // USER STUDY REQUESTED
-        if($RESTRICTION_CHECHED){
-            $RESTRICTION_USER_NUMBER = preg_replace('/[^0-9]/', '', $_POST['number_restricted_users']);
-            
-            include_once(MOSES_HOME."/include/managers/HardwareManager.php");
-            
-            
-            // get the list of candidates with the specified android version
-            // Check if the user wants only members from his group to take part on the user study
-            if(isset($_POST['send_only_to_my_group'])){
-                $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION, $_SESSION['RGROUP']);
-            }
-            else{
-                $rows =  HardwareManager::getCandidatesForAndroid($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION);    
-            }
-            
-            
-            // check the filters
-            if(!empty($rows)){
-                
-                $logger->logInfo("ROWS i upload.php #########################");
-                $logger->logInfo(print_r($rows, true));
-                
-                foreach($rows as $hardware){
-                    
-                    
-                    $hwFilter_array = json_decode($hardware['filter']);
-                    $apkSensors_array = json_decode($SENSOR_LIST_STRING);
-                    
-                    $logger->logInfo("hwFilter_array #########################");
-                    $logger->logInfo(print_r($hwFilter_array, true));
-                    
-                    if(isFilterMatch($hwFilter_array, $apkSensors_array)){
-                        $candidates[] = intval($hardware['hwid']);
-                }
-            }
-            
-            shuffle($candidates);
-            
-            }
-        }
-        
-        $USTUDY_FINISHED = 0; // a user study has to be done
-        
-    }
+    $sql_installed_on = "SELECT installed_on FROM ".$CONFIG['DB_TABLE']['APK']." WHERE apkid=".$_SESSION['APKID'];
+    $result_installed_on = $db->query($sql_installed_on);
+    $row_installed_on = $result_installed_on->fetch();
     
-    
-    // WRITE APK TO DATABASE AND START USER STUDY IF NEEDED
-   
-    // convert to json 
-    $candidates = json_encode($candidates);
+    $candidates = $row_installed_on['installed_on'];
+    $RESTRICTION_USER_NUMBER = count(json_decode($candidates))*10;
     $pending_users = json_encode($pending_users);
     $notified_users = json_encode($notified_users);
     
     /**
     * Store filename, hash in DB and other informations
     */
-    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, apk_version,
-                             apkhash, sensors, description,
-                             apktitle, restriction_device_number, pending_devices,
-                             candidates, notified_devices, androidversion, ustudy_finished)
-                              VALUES 
-                              (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', '".$APK_VERSION."',
-                              '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
-                              '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $pending_users ."',
-                              '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."', ". $USTUDY_FINISHED .")";
+    $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." SET apkname='". $filename."', apk_version='".$APK_VERSION."',
+                             apkhash='".$HASH_FILE ."', sensors='". $SENSOR_LIST_STRING ."', description='". $APK_DESCRIPTION ."',
+                             restriction_device_number=".$RESTRICTION_USER_NUMBER.",
+                             pending_devices='". $pending_users ."', candidates='". $candidates ."', 
+                             notified_devices='". $notified_users ."', androidversion=". $APK_ANDROID_VERSION .", 
+                             ustudy_finished=-1 WHERE apkid=".$_SESSION['APKID'];
+    
+    $logger->logInfo("SQL ON UPDATE");
+    $logger->logInfo($sql);
                               
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
-    //$db->close();
    
 
     header("Location: ucp.php?m=upload&res=1");

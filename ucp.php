@@ -1077,7 +1077,7 @@ if(isset($_GET['m'])){
                             if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1){
                                  ?>
                                  
-                                 <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
+                                 <form action="update.php" method="post" enctype="multipart/form-data" class="upload_form">
                                   <p>Program name (title):</p>
                                   <h4><?php
                                       
@@ -1091,6 +1091,8 @@ if(isset($_GET['m'])){
                                   <p>Lowest android version needed for my program to run:</p>
                                   <select name="apk_android_version">
                                     <?php
+                                     
+                                    $_SESSION['APKID'] = $apk_to_update['apkid'];
                                      
                                     for($i=0; $i<count($API_VERSION); $i++){
                                         echo '<option value="'. $API_VERSION[$i][0] .'"'. 
@@ -1149,7 +1151,7 @@ if(isset($_GET['m'])){
                             ?> 
 
                             <form action="ucp.php?m=promo" method="post" class="promo_form">
-                               <p>
+                               
                                  <fieldset>
                                     <legend>Become a scientist!</legend>
                                     <label for="telephone" >Telephone:</label>
@@ -1163,7 +1165,7 @@ if(isset($_GET['m'])){
                                     <input type="hidden" name="promo_sent" id="promo_sent" value="1" />
                                     <input type="submit" name="submit" value="Send" />
                                  </fieldset> 
-                               <p>
+                               
                             </form>   
                                 
                              <?php   

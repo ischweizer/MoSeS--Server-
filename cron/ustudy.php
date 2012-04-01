@@ -2,6 +2,12 @@
 
 // this is a cronjob used for user studies
 
+/* ustudy_finished encodings
+* -1  update
+* 0  user-study
+* 1  finished
+*/
+
 // get all apks
 include_once('/home/dasense/moses/config.php');
 include_once(MOSES_HOME."/include/functions/cronLogger.php");
@@ -9,7 +15,7 @@ include_once(MOSES_HOME. "/include/functions/dbconnect.php");
 
 $logger->logInfo(" ###################### STARTED USER STUDY CRONJOB ############################## ");
  
-$sql = "SELECT * FROM " .$CONFIG['DB_TABLE']['APK']. " WHERE restriction_device_number > 0 AND ustudy_finished = 0";
+$sql = "SELECT * FROM " .$CONFIG['DB_TABLE']['APK']. " WHERE restriction_device_number > 0 AND ustudy_finished < 1";
         
 $result = $db->query($sql);
 $rows = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -89,18 +95,21 @@ foreach($rows as $row){
         
         // PUSH
         include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
-        if(count($targetDevices) > 0)
-            GooglePushManager::googlePushSend($row['apkid'], $targetDevices, $logger);
-         
+        if(count($targetDevices) > 0){
+            // user-study or just an update
+            switch($row['ustudy_finished']){
+                case -1 : GooglePushManager::googlePushSendUpdate($row['apkid'], $targetDevices, $logger); break;
+                case 0 : GooglePushManager::googlePushSendUStudy($row['apkid'], $targetDevices, $logger); break;
+                default : {
+                    // Enough devices have installed the APK. Just, mark the user study as finished
+                    $sql = "UPDATE " .$CONFIG['DB_TABLE']['APK']. " SET ustudy_finished=1 WHERE apkid=".$row['apkid'];
+                    $logger->logInfo(print_r($sql, true));
+                    $db->exec($sql);
+                }
+            }
     }
+        }
     }
-    else{
-        // Enough devices have installed the APK. Just, mark the user study as finished
-        $sql = "UPDATE " .$CONFIG['DB_TABLE']['APK']. " SET ustudy_finished=1 WHERE apkid=".$row['apkid'];
-        $logger->logInfo(print_r($sql, true));
-        $db->exec($sql);
-    }
-    
 }
 
 $logger->logInfo(" ###################### USER STUDY CRONJOB FINISHED ############################## ");
