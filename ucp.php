@@ -644,30 +644,59 @@ if(isset($_GET['m'])){
                                     ?>
                                     <div class="sensor_box">
                                         <ul>
-                                            <li><div>Device name:</div><div style="font-weight: bold;"><?php
+                                            <li><div style="font-weight: bold">Device name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
                                                 echo $device['deviceid'];                                       
                                             ?></div>
                                             </li>
-                                            <li><div>Android API version:</div><div style="font-weight: bold;"><?php
+                                            <li><div class="sensor_box_api"><div style="font-weight: bold">Android API version:</div>
+                                                <div style="font-weight: bold;"><?php
                                                 echo $device['androidversion'];                                       
-                                            ?></div>
+                                            ?></div></div>
                                             </li>
                                         </ul>
                                         <div class="sensor_info">
-                                            <p>Selected sensors (filter):</p>
-                                            <ul><?php
-                                               $sensor_array = json_decode($device['filter']);
+                                            <p style="font-weight: bold">Selected sensors (filter):</p>
+                                            <ul class="sensor_container_f"><?php
+                                               $sensor_array = json_decode($device['sensors']);
+                                           
+                                           if(count($sensor_array) != 0){
                                                
-                                               foreach($sensor_array as $sensor_number){
-                                                  echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                        $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
-                                                        $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
-                                                        $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
+                                               // we will make some lines of sensors
+                                               if(count($sensor_array) <= 7){
+                                               
+                                                   foreach($sensor_array as $sensor_number){
+                                                      echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                            $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
+                                                   }
+                                               }else{
+                                                   
+                                                   $once = true;
+                                                   for($i=0; $i < count($sensor_array); $i++){
+                                                      if($i < 7){ 
+                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>'; 
+                                                      }else{
+                                                          // execute only once ;)
+                                                          if($once){
+                                                              echo '</ul><ul class="sensor_container_s">';
+                                                              $once = false;
+                                                          }
+                                                          
+                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
+                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>';
+                                                      }
+                                                   }
                                                }
                                                
-                                               if(count($sensor_array) == 0){
-                                                   echo '<li><p>No filter set.</p></li>';
-                                               }
+                                           }else{
+                                               echo '<li><p>No filter set.</p></li>';
+                                           }
                                                                                  
                                           ?></ul>
                                         </div>
@@ -954,7 +983,7 @@ if(isset($_GET['m'])){
                                     </ul>
                                     <div class="sensor_info">
                                         <p style="font-weight: bold">Required sensors:</p>
-                                        <ul id="sensor_container_f"><?php
+                                        <ul class="sensor_container_f"><?php
                                            $sensor_array = json_decode($row['sensors']);
                                            
                                            if(count($sensor_array) != 0){
@@ -980,7 +1009,7 @@ if(isset($_GET['m'])){
                                                       }else{
                                                           // execute only once ;)
                                                           if($once){
-                                                              echo '</ul><ul id="sensor_container_s">';
+                                                              echo '</ul><ul class="sensor_container_s">';
                                                               $once = false;
                                                           }
                                                           
@@ -1117,7 +1146,7 @@ if(isset($_GET['m'])){
       
                                   <label for="file">Select a file:</label> 
                                   <input type="file" name="userfile" id="file" style="margin: 15px 0;">
-                                  <p style="margin-bottom: 10px;">Click Upload button to upload your apk</p><button>Upload</button>
+                                  <button>Update</button>
                                   <p style="margin-top: 50px;"></p>
                                 </form>
                                  
