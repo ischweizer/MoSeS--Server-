@@ -303,6 +303,25 @@ class HardwareManager{
         return $return;
     }
     
+    /**
+    * Returns the row from hw-table containing specified deviceID and userID
+    */
+    public static function getHardware($db, $deviceID, $userID){
+        $sql="SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE uid=".$userID." AND deviceid='".$deviceID."'";
+        $result = $db->query($sql);
+        $row = $result->fetch();
+        return $row;
+    }
+    
+    
+    /**
+    * Removes the row from hw-table containing specified deviceID and userID
+    */
+    public static function removeHardware($db, $deviceID, $userID){
+        $sql="DELETE * FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE uid=".$userID." AND deviceid='".$deviceID."'";
+        $db->exec($sql);
+    }
+    
     
     
     /**

@@ -15,6 +15,7 @@ if($data->SESSIONID != null){
         
        $USERID = $device["userid"];
        $LASTACTIVITY = $device["lastactivity"];
+       $deviceID = $device['deviceid'];
        $TIME_NOW = time();
        
        $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
@@ -27,9 +28,30 @@ if($data->SESSIONID != null){
            
            $logger->logInfo("SESSION IS UPDATED");
            
-           HardwareManager::changeDeviceID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $newDeviceID);
+           //#########
+           $newDeviceID = $data->DEVICEID;
            
-           $return = array("MESSAGE" => "CHANGED_DEVICE_ID", "STATUS" => "SUCESS");
+           // check if the device with the device with the target id already exists
+           $existant = HardwareManager::getHardware($DBManager->getDB(), $newDeviceID, $userID);
+           
+           if(!$existant){
+               // just update the current device, device with equal deviceid does not exist
+               HardwareManager::changeDeviceID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $newDeviceID);
+               $return = array("MESSAGE" => "CHANGED_DEVICE_ID", "STATUS" => "SUCESS");
+           }
+           else{
+               // device with equal id exists
+               $force = $data->FORCE;
+               if($force){
+                   // FORCE-FLAG IS SET, DELTE THE PREVIOUS ENTRY
+                   HardwareManager::removeHardware($DBManager->getDB(), $newDeviceID, $userID);
+                   HardwareManager::changeDeviceID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $newDeviceID);
+                   $return = array("MESSAGE" => "CHANGED_DEVICE_ID", "STATUS" => "SUCESS");
+               }
+               else{
+                   $return = array("MESSAGE" => "CHANGED_DEVICE_ID", "STATUS" => "FAILURE_DEVICEID_IN_USE");
+               }
+           }
        }
     }
 }
