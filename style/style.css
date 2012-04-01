@@ -281,7 +281,7 @@ img.aligncenter {
     left: 252px;
     top: 0px;
     width: 200px;
-    height: 90px;
+    height: 130px;
     padding: 5px 5px 5px 10px;
     border: 1px solid #000;
     background-color: #d9cfb4;
@@ -306,6 +306,16 @@ img.aligncenter {
     position: absolute;
     left: 5px;
     top: 55px;
+}
+
+.sensor_info #apk_installed_on {
+    position: absolute;
+    left: 5px;
+    bottom: 35px;
+}
+
+.sensor_info #apk_installed_on div {
+    display: inline;
 }
 
 .apk_description_trigger {

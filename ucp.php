@@ -666,6 +666,10 @@ if(isset($_GET['m'])){
                            
                         <?php 
                           if(isset($USER_DEVICES)){
+                            
+                            echo '<h3>Your devices</h3>';
+                            echo '<br /><br />';  
+                              
                             if(!empty($USER_DEVICES)){
                                 
                                 // user has got some devices
@@ -1010,6 +1014,9 @@ if(isset($_GET['m'])){
                             // user wants a listing of APK files
                             if($MODE == 'LIST' && isset($LIST_APK)){
                                 
+                              echo '<h3>Your apps</h3>';  
+                              echo '<br /><br />';
+                                
                               // we found some APKs
                               if($LIST_APK == 1){
                                   
@@ -1075,6 +1082,11 @@ if(isset($_GET['m'])){
                                            }
                                      
                                       ?></ul>
+                                      <div id="apk_installed_on">App installed on<div style="font-weight: bold; padding: 0 5px;"><?php
+                                                  echo $row['participated_count'];                 
+                                                ?></div><?php
+                                                  echo ($row['participated_count'] == 1 ? 'device' : 'devices');                           
+                                                ?>!</div>
                                       <div class="apk_description_trigger">description <div id="descr_arrow">-></div></div>
                                       <div id="apk_description">
                                     <p style="font-weight: bold">App description</p>
