@@ -241,9 +241,11 @@ class HardwareManager{
     * @param mixed $deviceID
     * @param mixed $newDeviceID
     */
-    public static function changeDeviceID($db, $hardwareTable, $userID, $deviceID, $newDeviceID){
+    public static function changeDeviceID($db, $hardwareTable, $userID, $deviceID, $newDeviceID, $logger){
         $sql = "UPDATE ". $hardwareTable ." SET deviceid='". $newDeviceID ."' 
                 WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";
+        $logger->logInfo("SQL on changeDeviceID");
+        $logger->logInfo($sql);
         $db->exec($sql);
     }
     
@@ -319,8 +321,10 @@ class HardwareManager{
     /**
     * Removes the row from hw-table containing specified deviceID and userID
     */
-    public static function removeHardware($db, $hwTable, $deviceID, $userID){
-        $sql="DELETE * FROM ".$hwTable." WHERE uid=".$userID." AND deviceid='".$deviceID."'";
+    public static function removeHardware($db, $hwTable, $deviceID, $userID, $logger){
+        $sql="DELETE FROM ".$hwTable." WHERE uid=".$userID." AND deviceid='".$deviceID."'";
+        $logger->logInfo("SQL on removeHardware");
+        $logger->logInfo($sql);
         $db->exec($sql);
     }
     

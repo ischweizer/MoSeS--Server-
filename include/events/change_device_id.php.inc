@@ -42,7 +42,7 @@ if($data->SESSIONID != null){
                
                if(empty($existant)){
                    // just update the current device, device with equal deviceid does not exist
-                   HardwareManager::changeDeviceID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $newDeviceID);
+                   HardwareManager::changeDeviceID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $newDeviceID, $logger);
                    $return = array("MESSAGE" => "CHANGED_DEVICE_ID", "STATUS" => "SUCCESS");
                }
                else{
@@ -50,8 +50,8 @@ if($data->SESSIONID != null){
                    $force = $data->FORCE;
                    if($force){
                        // FORCE-FLAG IS SET, DELTE THE PREVIOUS ENTRY
-                       HardwareManager::removeHardware($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $newDeviceID, $USERID);
-                       HardwareManager::changeDeviceID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $newDeviceID);
+                       HardwareManager::removeHardware($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $newDeviceID, $USERID, $logger);
+                       HardwareManager::changeDeviceID($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $newDeviceID, $logger);
                        $return = array("MESSAGE" => "CHANGED_DEVICE_ID", "STATUS" => "SUCCESS");
                    }
                    else{
