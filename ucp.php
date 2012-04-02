@@ -1032,7 +1032,7 @@ if(isset($_GET['m'])){
                             
                             // THE USER HAS CLICKED THE LEAVE BUTTON
                             if($MODE == 'LEAVE'){
-                                echo '<h3>You successfully left from research group</h3>';
+                                echo '<h3>You left research group</h3>';
                                 echo '<div class="group_name">'. $groupname .'</div>';
                                 echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
                                 }
