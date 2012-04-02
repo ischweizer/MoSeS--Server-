@@ -99,10 +99,10 @@ body {
 	top: 11px;
 }
 
-.tab a.open {background: url(../images/bt_open.png) no-repeat left 0;}
-.tab a.close {background: url(../images/bt_close.png) no-repeat left 0;}
-.tab a:hover.open {background: url(../images/bt_open.png) no-repeat left -19px;}
-.tab a:hover.close {background: url(../images/bt_close.png) no-repeat left -19px;}
+.tab a.open {background: url(../images/sprites/bt_open.png) no-repeat left 0;}
+.tab a.close {background: url(../images/sprites/bt_close.png) no-repeat left 0;}
+.tab a:hover.open {background: url(../images/sprites/bt_open.png) no-repeat left -19px;}
+.tab a:hover.close {background: url(../images/sprites/bt_close.png) no-repeat left -19px;}
 
 /* sliding panel */
 #toppanel {

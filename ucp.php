@@ -1084,12 +1084,12 @@ if(isset($_GET['m'])){
                                             echo $row['apktitle'];                                       
                                         ?></div>
                                         </li>
-                                        <li><div class="down_remove_links"><div><?php
-                                                echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk">Download</a>';
-                                                 ?></div><div style="margin-left: 5px;"><?php
-                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK">Remove</a>';                                       
-                                        ?></div><div style="margin-left: 5px;"><?php
-                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK">Update</a>';                                       
+                                        <li><div class="down_remove_links"><div class="bt_download"><?php
+                                                echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk"><span>Dow</span></a>';
+                                                 ?></div><div class="bt_remove"><?php
+                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK"><span>Remove</span></a>';                                       
+                                        ?></div><div class="bt_upload"><?php
+                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK"><span>Up</span></a>';                                       
                                         ?></div></div>
                                         </li>
                                     </ul>
@@ -1142,7 +1142,10 @@ if(isset($_GET['m'])){
                                                   echo $row['participated_count'];                 
                                                 ?></div><?php
                                                   echo ($row['participated_count'] == 1 ? 'device' : 'devices');                           
-                                                ?>!</div>
+                                                  if($row['participated_count'] != 0){
+                                                     echo '!'; 
+                                                  }
+                                                ?></div>
                                       <div class="apk_description_trigger">description <div id="descr_arrow">-></div></div>
                                       <div id="apk_description">
                                     <p style="font-weight: bold">App description</p>
