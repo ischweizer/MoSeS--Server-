@@ -396,8 +396,9 @@ if(isset($_GET['m'])){
                           
             $group_result = $db->query($group_sql);
             $group_row = $group_result->fetch();
+            $groupname = $group_row['rgroup'];
             
-            if(!empty($group_row)){
+            if(!empty($group_row) && $groupname!=null){
                 
                 $groupname = $group_row['rgroup'];
                 
@@ -791,7 +792,7 @@ if(isset($_GET['m'])){
                                 <div class="sensor_box">
                                     <ul>
                                         <li>
-                                        <div>Your device list is empty.</div>
+                                        <div style="padding-top: 35px;">Your device list is empty.</div>
                                         </li>
                                     </ul>
                                 </div>
