@@ -347,8 +347,17 @@ img.aligncenter {
     width: 200px;
     height: 130px;
     padding: 5px 5px 5px 10px;
-    border: 1px solid #000;
     background-color: #d9cfb4;
+    
+    border-width: 1px;
+    border-style: solid;
+    border-bottom-color: #aaa;
+    border-right-color: #aaa;
+    border-top-color: #ddd;
+    border-left-color: #ddd;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
 }
 
 .sensor_info li {
@@ -399,8 +408,17 @@ img.aligncenter {
     width: 200px;
     height: auto;
     padding: 5px 5px 5px 10px;
-    border: 1px solid #000;
-    background-color: #d9cfb4; 
+    background-color: #d9cfb4;
+    
+    border-width: 1px;
+    border-style: solid;
+    border-bottom-color: #aaa;
+    border-right-color: #aaa;
+    border-top-color: #ddd;
+    border-left-color: #ddd;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px; 
 }
 
 .apk_description:hover .sensor_info {
