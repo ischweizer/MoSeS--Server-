@@ -727,9 +727,9 @@ if(isset($_GET['m'])){
                                                 echo $device['deviceid'];                                       
                                             ?></div>
                                             </li>
-                                            <li><div class="sensor_box_api_remove"><?php
-                                            echo '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device"><span>rem</span></a>';                                       
-                                        ?></div>
+                                            <li><?php
+                                            echo '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device" class="sensor_box_api_remove"></a>';                                       
+                                        ?>
                                             </li>
                                         </ul>
                                         <div class="sensor_info">
@@ -785,25 +785,6 @@ if(isset($_GET['m'])){
                                     </div>
                                     <?php
                                 }
-                                /*
-                                ?>
-                                <div class="list_devices">
-                                 <table border="4" >
-                                 <tr><th>Device</th><th>Android version</th><th>Sensors made available (filter)</th></tr>
-                                 <?php
-
-                                  $i=1;
-                                  // user has got some devices
-                                  foreach($USER_DEVICES as $device){
-                                     echo '<tr><td>'. $device['deviceid'] .'</td><td>'. $device['androidversion'] .'</td><td>'. substr($device['filter'], 1,-1) .'</td></tr>'; 
-                                     $i++;
-                                  }
-                                  
-                                 ?>
-                                 </table>
-                                </div>
-                            <?php 
-                            */
                                
                             }else{
                                 ?>
@@ -1084,13 +1065,11 @@ if(isset($_GET['m'])){
                                             echo $row['apktitle'];                                       
                                         ?></div>
                                         </li>
-                                        <li><div class="down_remove_links"><div class="bt_download"><?php
-                                                echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk"><span>Dow</span></a>';
-                                                 ?></div><div class="bt_remove"><?php
-                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK"><span>Remove</span></a>';                                       
-                                        ?></div><div class="bt_upload"><?php
-                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK"><span>Upd</span></a>';                                       
-                                        ?></div></div>
+                                        <li><div class="down_remove_links"><?php
+                                            echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk" class="bt_download"></a>';
+                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK" class="bt_upload"></a>';
+                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK" class="bt_remove"></a>';                                       
+                                        ?></div>
                                         </li>
                                     </ul>
                                     <div class="sensor_info">

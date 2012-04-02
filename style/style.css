@@ -277,51 +277,40 @@ img.aligncenter {
     display: block;
 }
 
-.sensor_box .sensor_box_api_remove a,
-.sensor_box .down_remove_links .bt_download a,
-.sensor_box .down_remove_links .bt_upload a {
-   width: 20px;
-   height: 20px;
-   /*text-indent: -9999px;*/
-}
-
-.sensor_box .sensor_box_api_remove a span,
-.sensor_box .down_remove_links .bt_download a span,
-.sensor_box .down_remove_links .bt_upload a span {
-   visibility: hidden;
-}
-
 .sensor_box .down_remove_links {
     position: absolute;
     bottom: 10px;
-    right: 20px;
+    right: 30px;
 }
 
 .sensor_box .down_remove_links .bt_download {
     position: absolute;
-    right: 80px;
+    right: 50px;
     bottom: 5px;
     background: url("../images/sprites/bt_up_down.png") 0 0 no-repeat; 
     width: 20px; 
     height: 20px;
-    margin-left: 10px;         
-}
-
-.sensor_box .down_remove_links .bt_remove {
-    position: absolute;
-    right: 53px;
-    bottom: 5px;
-    width: 20px; 
-    height: 20px; 
+    /*margin-left: 10px;*/         
 }
  
 .sensor_box .down_remove_links .bt_upload {
     position: absolute;
-    right: -10px;
+    right: 25px;
     bottom: 5px;
     background: url("../images/sprites/bt_up_down.png") 0 -20px no-repeat; 
     width: 20px; 
+    height: 20px;
+    /*margin-left: 10px; */
+}
+
+.sensor_box .down_remove_links .bt_remove {
+    position: absolute;
+    right: -10px;
+    bottom: 3.5px;
+    background: url("../images/sprites/bt_close.png") 0 -20px no-repeat; 
+    width: 20px; 
     height: 20px; 
+    /*margin-left: 10px;*/
 }
 
 .sensor_box .down_remove_links div {
