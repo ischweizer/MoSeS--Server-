@@ -63,9 +63,6 @@ if($data->SESSIONID != null){
                       ApkManager::decrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $apkid, $hwid, $logger);
                    }
                 }
-        }else{
-            $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
-                            "STATUS" => "FAILURE_INVALID_DEVICEID");
         }
         }
     }
