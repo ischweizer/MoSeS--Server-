@@ -727,11 +727,7 @@ if(isset($_GET['m'])){
                                                 echo $device['deviceid'];                                       
                                             ?></div>
                                             </li>
-                                            <li><div class="sensor_box_api"><div style="font-weight: bold">Android API version:</div>
-                                                <div style="font-weight: bold;"><?php
-                                                echo $device['androidversion'];                                       
-                                            ?></div></div>
-                                            <div class="sensor_box_api_remove"><?php
+                                            <li><div class="sensor_box_api_remove"><?php
                                             echo '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device">Remove</a>';                                       
                                         ?></div>
                                             </li>
@@ -781,6 +777,10 @@ if(isset($_GET['m'])){
                                            }
                                                                                  
                                           ?></ul>
+                                          <div class="sensor_box_api"><div style="font-weight: bold">Android API version:</div>
+                                                <div style="font-weight: bold;"><?php
+                                                echo $device['androidversion'];                                       
+                                            ?></div></div>
                                         </div>
                                     </div>
                                     <?php
