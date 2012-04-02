@@ -228,15 +228,11 @@ img.aligncenter {
 	padding: 10px 0px 10px 0px;
 }
 
-.sensor_box {
-    position: relative;
+.sensor_box,
+.sensor_box:hover .sensor_info,
+.apk_description_trigger:hover + .apk_description {
     background-color: #d9cfb4;
-    width: 250px;
-    height: auto;
-    /*padding-left: 5px;*/
-    margin: 2px 0;
     display: block;
-    
     border-width: 1px;
     border-style: solid;
     border-bottom-color: #aaa;
@@ -246,6 +242,14 @@ img.aligncenter {
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+}
+
+.sensor_box {
+    position: relative;
+    width: 250px;
+    height: auto;
+    /*padding-left: 5px;*/
+    margin: 2px 0;
 }
 
 .sensor_box li {
@@ -277,14 +281,19 @@ img.aligncenter {
     
 }
 
+.sensor_box .sensor_box_api_remove,
+.sensor_box .down_remove_links .bt_download,
+.sensor_box .down_remove_links .bt_upload,
+.sensor_box .down_remove_links .bt_remove {
+    position: absolute; 
+    width: 20px;
+    height: 20px; 
+}
+
 .sensor_box .sensor_box_api_remove {
-    position: absolute;
     right: 20px;
     bottom: 10px;
     background: url("../images/sprites/bt_close.png") 0 -20px no-repeat;
-    width: 20px;
-    height: 20px;
-    display: block;
 }
 
 .sensor_box .down_remove_links {
@@ -294,33 +303,21 @@ img.aligncenter {
 }
 
 .sensor_box .down_remove_links .bt_download {
-    position: absolute;
     right: 50px;
     bottom: 5px;
     background: url("../images/sprites/bt_up_down.png") 0 0 no-repeat; 
-    width: 20px; 
-    height: 20px;
-    /*margin-left: 10px;*/         
 }
  
 .sensor_box .down_remove_links .bt_upload {
-    position: absolute;
     right: 25px;
     bottom: 5px;
     background: url("../images/sprites/bt_up_down.png") 0 -21px no-repeat; 
-    width: 20px; 
-    height: 20px;
-    /*margin-left: 10px; */
 }
 
 .sensor_box .down_remove_links .bt_remove {
-    position: absolute;
     right: -10px;
     bottom: 3.5px;
     background: url("../images/sprites/bt_close.png") 0 -20px no-repeat; 
-    width: 20px; 
-    height: 20px; 
-    /*margin-left: 10px;*/
 }
 
 .sensor_box .down_remove_links div {
@@ -334,12 +331,12 @@ img.aligncenter {
     font-weight: bold;
 }
 
-.sensor_box .sensor_info, .sensor_box .apk_description {
+.sensor_box .sensor_info, 
+.sensor_box .apk_description {
     display:none;
 }
 
 .sensor_box:hover .sensor_info {
-    display: block;
     position: absolute;
     z-index: 1;
     left: 252px;
@@ -347,17 +344,6 @@ img.aligncenter {
     width: 200px;
     height: 130px;
     padding: 5px 5px 5px 10px;
-    background-color: #d9cfb4;
-    
-    border-width: 1px;
-    border-style: solid;
-    border-bottom-color: #aaa;
-    border-right-color: #aaa;
-    border-top-color: #ddd;
-    border-left-color: #ddd;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
 }
 
 .sensor_info li {
@@ -400,7 +386,6 @@ img.aligncenter {
 }
 
 .apk_description_trigger:hover + .apk_description {
-    display: block;
     position: absolute;
     z-index: 1;
     left: 217px;
@@ -408,17 +393,6 @@ img.aligncenter {
     width: 200px;
     height: auto;
     padding: 5px 5px 5px 10px;
-    background-color: #d9cfb4;
-    
-    border-width: 1px;
-    border-style: solid;
-    border-bottom-color: #aaa;
-    border-right-color: #aaa;
-    border-top-color: #ddd;
-    border-left-color: #ddd;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px; 
 }
 
 .apk_description:hover .sensor_info {
@@ -460,11 +434,10 @@ img.aligncenter {
 }
 
 .upload_form img {
-    display:block;
+    display: block;
 }
 
 .upload_form li > input[type="checkbox"] {
-    /*opacity:0;*/
     display: none;
 }
 
@@ -607,8 +580,6 @@ img.aligncenter {
 	font-size: 10px;
 	color: #FFFFFF;
 }
-
-/* Footer */
 
 #footer-wrapper, .push-footer {
     height: 80px;
