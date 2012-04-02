@@ -233,7 +233,7 @@ img.aligncenter {
     border: 1px solid #000; 
     background-color: #d9cfb4;
     width: 250px;
-    height: 100px;
+    height: auto;
     /*padding-left: 5px;*/
     margin: 2px 0;
     display: block;

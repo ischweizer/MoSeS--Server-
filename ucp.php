@@ -412,22 +412,22 @@ if(isset($_GET['m'])){
                  $group_members_count = count(json_decode($row['members']));
                  
                  $user_array = json_decode($row['members']);
-                 
-                 foreach($user_array as $user){
-                     
-                     $sql = 'SELECT hwid 
-                             FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .' 
-                             WHERE uid = '. $user;
-                             
-                     $result = $db->query($sql);
-                     $row = $result->fetchAll();
-                     
-                     if(!empty($row)){
-                         $group_device_count += count($row);
+                 if($user_array != null){
+                     foreach($user_array as $user){
+                         
+                         $sql = 'SELECT hwid 
+                                 FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .' 
+                                 WHERE uid = '. $user;
+                                 
+                         $result = $db->query($sql);
+                         $row = $result->fetchAll();
+                         
+                         if(!empty($row)){
+                             $group_device_count += count($row);
+                         }
                      }
                  }
             }
-            
             break;
         // ##############
         
@@ -792,7 +792,7 @@ if(isset($_GET['m'])){
                                 <div class="sensor_box">
                                     <ul>
                                         <li>
-                                        <div style="padding-top: 35px;">Your device list is empty.</div>
+                                        <div style="padding-top: 10px; padding-bottom: 10px;">Your device list is empty.</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -1151,7 +1151,7 @@ if(isset($_GET['m'])){
                                   <div class="sensor_box">
                                     <ul>
                                         <li>
-                                            <div>You have no apps.</div>
+                                            <div style="padding-top: 10px; padding-bottom: 10px;">You have no apps.</div>
                                         </li>
                                     </ul>
                                 </div>
