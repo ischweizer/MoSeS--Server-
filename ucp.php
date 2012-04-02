@@ -1089,7 +1089,7 @@ if(isset($_GET['m'])){
                                                  ?></div><div class="bt_remove"><?php
                                             echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK"><span>Remove</span></a>';                                       
                                         ?></div><div class="bt_upload"><?php
-                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK"><span>Up</span></a>';                                       
+                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK"><span>Upd</span></a>';                                       
                                         ?></div></div>
                                         </li>
                                     </ul>

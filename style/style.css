@@ -282,7 +282,7 @@ img.aligncenter {
 .sensor_box .down_remove_links .bt_upload a {
    width: 20px;
    height: 20px;
-   text-indent: -9999px;
+   /*text-indent: -9999px;*/
 }
 
 .sensor_box .sensor_box_api_remove a span,
