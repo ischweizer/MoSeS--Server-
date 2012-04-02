@@ -26,7 +26,10 @@ include_once("./include/_menu.php");
                     <div class="post">
                         <h2 class="title">About MoSeS</h2>
                         <div class="entry">
-                            <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/de/telecooperation-group/" title="Telecooperation Group" target="_blank">Telecooperation Group</a> by <a href="mailto:youremailaddress">Zijad Maksuti</a>, <a href="mailto:youremailaddress">Wladimir Schmidt</a>, <a href="mailto:youremailaddress">Simon Leisching</a> and <a href="mailto:youremailaddress">Jaco Hofmann</a> under supervision of <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Immanuel Schweizer</a> from <a href="http://www.tk.informatik.tu-darmstadt.de/de/research/smart-civil-security/" title="Smart Civil Security" target="_blank">Smart Civil Security</a>.</p>
+                            <p>MoSeS offers researchers a platform for distribution of non-comercial Android apps, that are used for research purposes.</p>
+                            <br />
+                            <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/de/telecooperation-group/" title="Telecooperation Group" target="_blank">Telecooperation Group</a> by <a href="https://github.com/maksuti" target="_blank">Zijad Maksuti</a>, <a href="https://github.com/wlsch" target="_blank">Wladimir Schmidt</a>, 
+                            <a href="https://github.com/simlei" target="_blank">Simon Leisching</a> and <a href="https://github.com/jahofmann" target="_blank">Jaco Hofmann</a> under supervision of <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Immanuel Schweizer</a>.</p>
                         </div>
                     </div>
                     <div style="clear: both;">&nbsp;</div>

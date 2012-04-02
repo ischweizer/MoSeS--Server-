@@ -155,7 +155,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
                              restriction_device_number=".$RESTRICTION_USER_NUMBER.",
                              pending_devices='". $pending_users ."', candidates='". $candidates ."', 
                              notified_devices='". $notified_users ."', androidversion=". $APK_ANDROID_VERSION .", 
-                             ustudy_finished=-1 WHERE apkid=".$_SESSION['APKID'];
+                             ustudy_finished=-1, locked=0 WHERE apkid=".$_SESSION['APKID'];
     
     $logger->logInfo("SQL ON UPDATE");
     $logger->logInfo($sql);

@@ -32,7 +32,7 @@ class ApkManager{
     public static function getNonStudyAllApk($db, $apkTable){
         
         $sql = "SELECT * 
-                FROM ". $apkTable ." WHERE restriction_device_number<=0";
+                FROM ". $apkTable ." WHERE locked=0";
                 
         $result = $db->query($sql);
         $array = $result->fetchAll(PDO::FETCH_ASSOC);

@@ -174,10 +174,10 @@ if(isset($_POST["submitted"])){
               // compose email to user                                        
               $to = $EMAIL; 
               $subject = "MoSeS: Please confirm your registration"; 
-              $from = "admin@moses"; 
+              $from = "admin@moses.tk.informatik.tu-darmstadt.de"; 
                   
               $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
-              $message .= "Please follow this link: ";
+              $message .= "Please follow this link to confirm your registration: ";
               $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
                
               $headers = "From: $from"; 
