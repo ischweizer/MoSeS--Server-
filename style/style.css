@@ -269,10 +269,22 @@ img.aligncenter {
 
 .sensor_box .sensor_box_api_remove {
     position: absolute;
-    right: 10px;
-    bottom: 0px;
-    /*background: url("../images/bt_close.png") 0 -20px no-repeat;*/
-    
+    right: 20px;
+    bottom: 10px;
+    background: url("../images/bt_close.png") 0 -20px no-repeat;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.sensor_box .sensor_box_api_remove a {
+   width: 20px;
+   height: 20px;
+   text-indent: -9999px;
+}
+
+.sensor_box .sensor_box_api_remove a span {
+   visibility: hidden;
 }
 
 .sensor_box .down_remove_links div {

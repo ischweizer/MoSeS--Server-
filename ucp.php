@@ -728,7 +728,7 @@ if(isset($_GET['m'])){
                                             ?></div>
                                             </li>
                                             <li><div class="sensor_box_api_remove"><?php
-                                            echo '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device">Remove</a>';                                       
+                                            echo '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device"><span>rem</span></a>';                                       
                                         ?></div>
                                             </li>
                                         </ul>
