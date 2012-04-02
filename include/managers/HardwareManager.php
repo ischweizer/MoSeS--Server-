@@ -287,7 +287,7 @@ class HardwareManager{
     public static function getCandidatesForAndroidFromGroup($db, $hardwareTable, $androidVersion, $rGroup){
         
         $return = array();
-        $sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name=".$rGroup;
+        $sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='".$rGroup."'";
         $result_members = $db->query($sql);
         $member_row = $result_members->fetch();
         $members = json_decode($member_row);
