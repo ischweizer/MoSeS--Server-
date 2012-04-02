@@ -13,6 +13,7 @@ body {
 	font-size: 14px;
 	background-color: #d9cfb4;
     color: #7F7F81;
+    overflow: scroll;
 }
 
 h1, h2, h3, h4 {
