@@ -51,7 +51,7 @@
                 <li class="welcome">Hello, <?php echo $_SESSION['FIRSTNAME']; ?>!</li>
                 <li class="sep">|</li>
                 <li id="toggle">
-                    <a id="open" class="open" href="#">Menu</a>
+                    <a id="open" class="open" href="#">Login</a>
                     <a id="close" style="display: none;" class="close" href="#">Hide</a>            
                 </li>
                 <!--<li class="right">&nbsp;</li>-->
@@ -71,7 +71,7 @@
             <li class="welcome">Hello, Guest!</li>
             <li class="sep">|</li>
             <li id="toggle">
-                <a id="open" class="open" href="#">MENU</a>
+                <a id="open" class="open" href="#">Login</a>
                 <a id="close" style="display: none;" class="close" href="#">HIDE</a>            
             </li>
             <!--<li class="right">&nbsp;</li>-->

@@ -275,7 +275,7 @@ if(isset($_POST["submitted"])){
                                         }                                                                         
                                     ?>/>
                                     <div class="clear"></div>
-                                    <label for="login" >Login (*):</label>
+                                    <label for="login" >Username (*):</label>
                                     <div class="clear"></div>
                                     <input type="text" name="login" id="login" maxlength="50" <?php
                                         if(isset($_POST["login"])){
