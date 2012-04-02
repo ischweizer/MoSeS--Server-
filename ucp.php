@@ -1117,7 +1117,7 @@ if(isset($_GET['m'])){
                                            }
                                      
                                       ?></ul>
-                                      <div id="apk_installed_on">App installed on<div style="font-weight: bold; padding: 0 5px;"><?php
+                                      <div class="apk_installed_on">App installed on<div style="font-weight: bold; padding: 0 5px;"><?php
                                                   echo $row['participated_count'];                 
                                                 ?></div><?php
                                                   echo ($row['participated_count'] == 1 ? 'device' : 'devices');                           
@@ -1125,10 +1125,10 @@ if(isset($_GET['m'])){
                                                      echo '!'; 
                                                   }
                                                 ?></div>
-                                      <div class="apk_description_trigger">description <div id="descr_arrow">-></div></div>
-                                      <div id="apk_description">
+                                      <div class="apk_description_trigger">description <div class="descr_arrow">-></div></div>
+                                      <div class="apk_description">
                                     <p style="font-weight: bold">App description</p>
-                                    <ul><li><p id="apk_descr_text"><?php
+                                    <ul><li><p class="apk_descr_text"><?php
                                        
                                        if(!empty($row['description'])){
                                            echo $row['description'];
