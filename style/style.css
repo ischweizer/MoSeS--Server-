@@ -230,13 +230,22 @@ img.aligncenter {
 
 .sensor_box {
     position: relative;
-    border: 1px solid #000; 
     background-color: #d9cfb4;
     width: 250px;
     height: auto;
     /*padding-left: 5px;*/
     margin: 2px 0;
     display: block;
+    
+    border-width: 1px;
+    border-style: solid;
+    border-bottom-color: #aaa;
+    border-right-color: #aaa;
+    border-top-color: #ddd;
+    border-left-color: #ddd;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
 }
 
 .sensor_box li {
@@ -246,7 +255,7 @@ img.aligncenter {
 
 .sensor_box .sensor_box_name {
     margin-left: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .sensor_box .sensor_box_api {
@@ -298,7 +307,7 @@ img.aligncenter {
     position: absolute;
     right: 25px;
     bottom: 5px;
-    background: url("../images/sprites/bt_up_down.png") 0 -20px no-repeat; 
+    background: url("../images/sprites/bt_up_down.png") 0 -21px no-repeat; 
     width: 20px; 
     height: 20px;
     /*margin-left: 10px; */

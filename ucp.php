@@ -1002,7 +1002,7 @@ if(isset($_GET['m'])){
                                         <p>Enter the name of the research group<p>
                                         <input type="text" name="group_name" />
                                         <p>Enter the password of the group<p>
-                                        <input type="text" name="group_pwd" />
+                                        <input type="password" name="group_pwd" />
                                         <button>OK</button>
                                     </form>
                                     <?php

@@ -51,7 +51,7 @@
                 <li class="welcome">Hello, <?php echo $_SESSION['FIRSTNAME']; ?>!</li>
                 <li class="sep">|</li>
                 <li id="toggle">
-                    <a id="open" class="open" href="#">Login</a>
+                    <a id="open" class="open" href="#">Logout</a>
                     <a id="close" style="display: none;" class="close" href="#">Hide</a>            
                 </li>
                 <!--<li class="right">&nbsp;</li>-->
