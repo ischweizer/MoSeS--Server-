@@ -13,6 +13,7 @@ body {
 	font-size: 14px;
 	background-color: #d9cfb4;
     color: #7F7F81;
+    overflow: scroll;
 }
 
 h1, h2, h3, h4 {
@@ -324,7 +325,7 @@ img.aligncenter {
     font-weight: bold;
 }
 
-.sensor_box .sensor_info, .sensor_box #apk_description {
+.sensor_box .sensor_info, .sensor_box .apk_description {
     display:none;
 }
 
@@ -362,13 +363,13 @@ img.aligncenter {
     top: 55px;
 }
 
-.sensor_info #apk_installed_on {
+.sensor_info .apk_installed_on {
     position: absolute;
     left: 10px;
     bottom: 35px;
 }
 
-.sensor_info #apk_installed_on div {
+.sensor_info .apk_installed_on div {
     display: inline;
 }
 
@@ -380,34 +381,38 @@ img.aligncenter {
     cursor: pointer;
 }
 
-.apk_description_trigger:hover + #apk_description {
+.apk_description_trigger:hover + .apk_description {
     display: block;
     position: absolute;
     z-index: 1;
     left: 217px;
     top: 0px;
     width: 200px;
-    height: 120px;
+    height: auto;
     padding: 5px 5px 5px 10px;
     border: 1px solid #000;
     background-color: #d9cfb4; 
 }
 
-#apk_description:hover .sensor_info {
+.apk_description:hover .sensor_info {
     display: block;
 }
 
-#apk_description li {
+.apk_description li {
     list-style-type: none;
 }
 
-.apk_description_trigger #descr_arrow {
+.apk_description_trigger .descr_arrow {
     display: inline;
     padding: 0 5px;
 }
 
-#apk_description #apk_descr_text {
-    
+.apk_description .apk_descr_text {
+    width: 180px;
+    line-height: 1.2;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .upload_form ul {
