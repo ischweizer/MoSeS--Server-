@@ -19,6 +19,7 @@ $uploadPath = './apk/'; // folder to save to
 
 $filename = $_FILES['userfile']['name']; // gets filename
 $fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);
+
     
 /**
 * Connect to DB and get hashes for folder and file
@@ -134,6 +135,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     
     $RESTRICTION_USER_NUMBER = -1;
     $SELECTED_USERS_LIST = '';
+    $locked = 0;
     
     // PREPARING VARIABLES FOR INSERTION TO DB
     $candidates = array();
@@ -148,6 +150,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         // USER STUDY REQUESTED
         if($RESTRICTION_CHECHED){
             $RESTRICTION_USER_NUMBER = preg_replace('/[^0-9]/', '', $_POST['number_restricted_users']);
+            $locked = 1;
             
             include_once(MOSES_HOME."/include/managers/HardwareManager.php");
             
@@ -210,7 +213,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
                               (". $_SESSION["USER_ID"] .", '". $HASH_DIR ."', '". $filename ."', '".$APK_VERSION."',
                               '". $HASH_FILE ."', '". $SENSOR_LIST_STRING ."', '". $APK_DESCRIPTION ."',
                               '". $APK_TITLE ."', ". $RESTRICTION_USER_NUMBER .", '". $pending_users ."',
-                              '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."', ". $USTUDY_FINISHED .", 1)";
+                              '". $candidates ."', '". $notified_users ."', '". $APK_ANDROID_VERSION ."', ". $USTUDY_FINISHED .", ".$locked.")";
                               
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
