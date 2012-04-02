@@ -22,8 +22,13 @@ if($data->SESSIONID != null){
             /**
             *  if new DEVICEID found, set new DEVICEID
             */
-            $deviceID = ($data->DEVICEID != null && strcmp($data->DEVICEID, $row['deviceid']) != 0) ? $data->DEVICEID : $row['deviceid'];
-            //$sessionID = () ? : ; 
+            
+            if($data->DEVICEID != null){
+                $deviceID = ((strcmp($data->DEVICEID, $row['deviceid']) != 0) ? $data->DEVICEID : $row['deviceid']);
+            }else{
+                $deviceID = $row['deviceid'];
+            }
+            
             $lastactivity = $row['lastactivity'];
             $apkid = '';
             
