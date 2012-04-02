@@ -284,13 +284,15 @@ class HardwareManager{
     * @param String $androidVersion the lowest android version required by the apk
     * @param String §rGroup select only hardware from this group
     */
-    public static function getCandidatesForAndroidFromGroup($db, $hardwareTable, $androidVersion, $rGroup){
+    public static function getCandidatesForAndroidFromGroup($db, $hardwareTable, $rgroupTable, $androidVersion, $rGroup, $logger){
         
         $return = array();
-        $sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='".$rGroup."'";
+        $sql = "SELECT members FROM ".$rgroupTable. " WHERE name='".$rGroup."'";
+        $logger->logInfo("SQL on getCandidatesForAndroidFromGroup");
+        $logger->logInfo($sql);
         $result_members = $db->query($sql);
         $member_row = $result_members->fetch();
-        $members = json_decode($member_row);
+        $members = json_decode($member_row['members']);
         foreach($members as $member){
                 // get for android version
             $sql = "SELECT hwid, filter

@@ -155,7 +155,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
             // get the list of candidates with the specified android version
             // Check if the user wants only members from his group to take part on the user study
             if(isset($_POST['send_only_to_my_group'])){
-                $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION, $_SESSION['RGROUP']);
+                $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $CONFIG['DB_TABLE']['RGROUP'], $APK_ANDROID_VERSION, $_SESSION['RGROUP'],$logger);
             }
             else{
                 $rows =  HardwareManager::getCandidatesForAndroid($db, $CONFIG['DB_TABLE']['HARDWARE'], $APK_ANDROID_VERSION);    
