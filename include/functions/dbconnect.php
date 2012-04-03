@@ -1,11 +1,12 @@
 <?php
+include_once("config.php");
 
-$user = "moses";    
-$pass = "mosespassworddasense";    
+$user = $CONFIG['DB']['USER'];    
+$pass = $CONFIG['DB']['PASSWORD'];    
 $db = "";
 
 try {
-$db = new PDO("mysql:host=212.72.183.108;dbname=moses", $user, $pass);
+$db = new PDO("mysql:host=".$CONFIG['DB']['HOST'].";dbname=". $CONFIG['DB']['DBNAME'], $user, $pass);
 
 
 } catch (PDOException $e) {
