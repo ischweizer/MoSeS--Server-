@@ -25,7 +25,7 @@ include_once("./include/_menu.php");
                     <div class="post">
                         <h2 class="title">How to contribute?</h2>
                         <div class="entry">
-                            <p>1. <a href="#" onclick="slideLoginPanelDown()">Register</a>.</p>
+                            <p>1. <a href="./registration.php">Register</a>.</p>
                             <p>2. <a href="./download.php">Download</a> and install the client.</p>
                             <p>3. That's it!</p>
                         </div>

@@ -260,7 +260,7 @@ $(document).ready(function(){
 
 });
 
-function slideLoginPanelDown(){
+/*function slideLoginPanelDown(){
     $("div#panel").slideDown("slow");
     $("#toggle a").toggle();   
-}
+}*/
