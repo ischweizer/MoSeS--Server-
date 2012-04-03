@@ -715,7 +715,7 @@ if(isset($_GET['m'])){
                           if(isset($USER_DEVICES)){
                             
                             echo '<h3>Your devices</h3>';
-                            echo '<br /><br />';  
+                            echo '<div class="your_stuff"></div>';
                               
                             if(!empty($USER_DEVICES)){
                                 
@@ -985,8 +985,14 @@ if(isset($_GET['m'])){
                                                 <div>Your group has<div style="font-weight: bold;"><?php
                                                   echo $group_device_count;                 
                                                 ?></div><?php
-                                                  echo ($group_device_count == 1 ? 'device' : 'devices');                           
-                                                ?>!</div>
+                                                   
+                                                  echo ($group_device_count == 1 ? 'device' : 'devices');
+                                                  
+                                                  if($group_device_count != 0){
+                                                     echo '!'; 
+                                                  }
+                                                  
+                                                ?></div>
                                             </li>
                                         </ul>
                                     </div>
@@ -1057,7 +1063,7 @@ if(isset($_GET['m'])){
                             if($MODE == 'LIST' && isset($LIST_APK)){
                                 
                               echo '<h3>Your apps</h3>';
-                              echo '<div class="your_apps"></div>';  
+                              echo '<div class="your_stuff"></div>';  
                                 
                               // we found some APKs
                               if($LIST_APK == 1){
