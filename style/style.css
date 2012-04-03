@@ -542,7 +542,9 @@ img.aligncenter {
 .promo_form,
 .users_wanting_scientist,
 .upload_form,
-.your_stuff {
+.your_stuff,
+.upload_successful,
+.upload_failed {
     margin-top: 20px;
 }
 

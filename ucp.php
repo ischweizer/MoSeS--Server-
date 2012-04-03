@@ -867,6 +867,8 @@ if(isset($_GET['m'])){
                             // there WAS some upload
                             if($MODE == 'UPLOAD' && isset($_GET['res']) && !empty($_GET['res'])){
                                 
+                                echo '<h3>Finished uploading the file</h3>';
+                                
                                 switch($UPLOAD_RESULT){
                                     
                                     // successful upload
