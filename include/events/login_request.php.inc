@@ -15,6 +15,8 @@ if($data->LOGIN != null && !empty($data->LOGIN) && preg_match('/^[A-Za-z][A-Za-z
     if($data->PASSWORD != null && !empty($data->PASSWORD)){
     
         $PASSWORD = $data->PASSWORD;
+        
+        $logger->logInfo("########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION ".session_id());
 
         $result = LoginManager::loginUser($DBManager->getDB(), $CONFIG['DB_TABLE']['USER'], $CONFIG['DB_TABLE']['ANDROID_SESSION'], 
                                                           $LOGIN, $PASSWORD, session_id());

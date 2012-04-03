@@ -2,25 +2,37 @@
 
 $sessionID = '';
 
+$logger->logInfo("##################### GET_APK_LIST_REQUEST ARRIVED ##########");
+$logger->logInfo("##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT");
+$logger->logInfo(print_r($data, true));
+
 /**
 *  SESSIONID check
 */
 if($data->SESSIONID != null){
+    $logger->logInfo("##################### GET_APK_LIST_REQUEST SESSIONID IS".$data->SESSIONID);
     if(is_md5($data->SESSIONID)){
+        $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE");
        
         $sessionID = $data->SESSIONID;
+        $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ DEVICEID IS".$data->DEVICEID);
         
         if($data->DEVICEID != null && !empty($data->DEVICEID)){
+            $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET");
             
             $deviceID = $data->DEVICEID;
 
             $USER = LoginManager::getLoggedInUser($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
+            
+            $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ LOGGED IN USER".print_r($USER,true));
 
             if(!empty($USER)){
+                $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY");
                 
                $USERID = $USER["userid"];
                $LASTACTIVITY = $USER["lastactivity"];
                $TIME_NOW = time();
+               $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ USERID FOUND".$USERID);
                
                $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
                

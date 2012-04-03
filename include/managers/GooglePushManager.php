@@ -14,7 +14,7 @@ class GooglePushManager
     */
     public static function googlePushSendUStudy($apkid, $targetDevices, $logger){
         
-        include_once("config.php");
+        include_once("/home/dasense/moses/config.php");
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
         $account = $CONFIG['GPUSH']['ACCOUNT']; // Account
         $pass = $CONFIG['GPUSH']['PASSWORD']; // Password
@@ -71,7 +71,7 @@ class GooglePushManager
     public static function googlePushSendUpdate($apkid, $targetDevices, $logger){
         
     
-        include_once("config.php");
+        include_once("/home/dasense/moses/config.php");
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
         $account = $CONFIG['GPUSH']['ACCOUNT']; // Account
         $pass = $CONFIG['GPUSH']['PASSWORD']; // Password
