@@ -636,7 +636,7 @@ if(isset($_GET['m'])){
          }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
             ?>
-            <li><a href="ucp.php?m=upload">Upload an App</a></li>
+            <li><a href="ucp.php?m=upload">App upload</a></li>
             <li><a href="ucp.php?m=list">Show my Apps</a></li>
         <?php }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2){
@@ -801,6 +801,9 @@ if(isset($_GET['m'])){
                           }
                             if($MODE == 'ADMIN' && !isset($_POST['pending_requests'])){
                             ?>
+                            
+                            <h3>Admin control panel</h3>
+                            
                             <div class="users_wanting_scientist">
                                 <form action="ucp.php?m=admin" method="post">
                                     <table>
@@ -834,7 +837,8 @@ if(isset($_GET['m'])){
                             
                             if($SHOW_UPDATE_PAGE != 1 && $MODE == 'UPLOAD' && !isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                         ?>
-
+                            <h3>Application upload form</h3>
+                        
                             <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
                               <p>Program name (title):</p>
                               <input type="text" name="apk_title" />
