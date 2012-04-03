@@ -1056,8 +1056,8 @@ if(isset($_GET['m'])){
                             // user wants a listing of APK files
                             if($MODE == 'LIST' && isset($LIST_APK)){
                                 
-                              echo '<h3>Your apps</h3>';  
-                              echo '<br /><br />';
+                              echo '<h3>Your apps</h3>';
+                              echo '<div class="your_apps"></div>';  
                                 
                               // we found some APKs
                               if($LIST_APK == 1){

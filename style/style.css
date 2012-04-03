@@ -539,7 +539,10 @@ img.aligncenter {
 }
 
 .join_group,
-.promo_form {
+.promo_form,
+.users_wanting_scientist,
+.upload_form,
+.your_apps {
     margin-top: 20px;
 }
 
