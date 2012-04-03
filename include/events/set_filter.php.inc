@@ -1,6 +1,6 @@
 <?php
 
-$logger->logInfo("SET FILTER ARRIVED");
+$logger->logInfo("############# SET FILTER ARRIVED ###############");
 
 $sessionID = '';
 
@@ -47,10 +47,6 @@ if($data->SESSIONID != null){
                    $DEVICE = HardwareManager::selectDeviceForUser($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
               
                    if(!empty($DEVICE)){
-                       
-                       $logger->logInfo("row update has to be commited");
-                       $logger->logInfo("##################### SETTING FILTER ################ deviceid selected and uid jetzt sofort");
-                       $logger->logInfo("UPDATE hardware");
                        
                        HardwareManager::setFilter($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $FILTER, $USERID, $deviceID);
                        

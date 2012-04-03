@@ -44,7 +44,7 @@ if($data->SESSIONID != null){
                            HardwareManager::addc2dm($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID, $c2dmID);
                            
                            
-                           $logger->logInfo("C2DM ARRIVED FROM CLIENT");
+                           $logger->logInfo("############# C2DM ARRIVED FROM CLIENT ##############");
                            $logger->logInfo($c2dmID);
                            
                            $return = array("MESSAGE" => "C2DM",

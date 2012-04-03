@@ -18,8 +18,6 @@ if($data->SESSIONID != null){
 
             if(!empty($USER)){
                 
-               $logger->logInfo("##################### STILL ALIVE ################ USER FOUND");
-                
                $USERID = $USER["userid"];
                $LASTACTIVITY = $USER["lastactivity"];
                $TIME_NOW = time();
@@ -44,21 +42,13 @@ if($data->SESSIONID != null){
                      $APKs = ApkManager::getNonStudyAllApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK']);
                      
                      foreach($APKs as $apk){
-
-                        // Some sensors from user filter were found in particular APK record
-                        //if(count(array_intersect($USER_FILTER, json_decode($apk['sensors']))) > 0){
                         
-                        $logger->logInfo("Android version from APK: ". $apk['androidversion']);
-                        $logger->logInfo("Android version from DEVICE: ". $ANDROID_VERSION);
-                        $logger->logInfo("intval shit ". intval($apk['androidversion']). " und so: ".intval($ANDROID_VERSION));
-                        
-                        // filter fits exact to sensors in APK
+                        // filter fits to sensors in APK
                         if(isFilterMatch($USER_FILTER, json_decode($apk['sensors'])) 
                             && !empty($apk['androidversion']) 
                             && is_numeric($apk['androidversion'])
                             && intval($apk['androidversion']) <= intval($ANDROID_VERSION)){
-                            
-                            // check for androic version in apk file to be <= android version in device  
+                             
                          
                             $APK_JSON = array("ID" => $apk['apkid'],
                                               "NAME" => $apk['apktitle'],
@@ -74,19 +64,16 @@ if($data->SESSIONID != null){
                                      "STATUS" => "SUCCESS",
                                      "APK_LIST" => $json_array_return);
                   }else{
-                      $logger->logInfo("######### No hardware found");
 
                       $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
                                       "STATUS" => "FAILURE_UNKNOWN_HARDWARE");
                   }
                }else{
-                   $logger->logInfo("######### No valid session");
 
                    $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
                                    "STATUS" => "FAILURE");
                }
             }else{
-                $logger->logInfo("######### No session found");
 
                 $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
                                 "STATUS" => "FAILURE_NOT_LOGGED_IN");

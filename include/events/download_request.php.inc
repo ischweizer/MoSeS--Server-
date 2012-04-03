@@ -1,6 +1,6 @@
 <?php
 
-$logger->logInfo("DOWNLOAD REQUEST ARRIVED");
+$logger->logInfo("########### DOWNLOAD REQUEST ARRIVED ##############");
 
 $sessionID = '';
 
@@ -14,8 +14,6 @@ if($data->SESSIONID != null){
         
         $row = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
         $deviceID= $row['deviceid'];
-       // $logger->logInfo("#### data on download_request");
-       // $logger->logInfo(print_r($data));
         
         if(!empty($deviceID)){
             

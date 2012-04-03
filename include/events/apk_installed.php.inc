@@ -1,6 +1,6 @@
 <?php
 
-$logger->logInfo("APK INSTALLED ARRIVED");
+$logger->logInfo("################# APK INSTALLED ARRIVED #############");
 $logger->logInfo(print_r($data, true));
 
 $return = ''; // answer to be returned
@@ -18,10 +18,6 @@ if($data->SESSIONID != null){
 
         // session is found
         if(!empty($row)){
-            
-            /**
-            *  if new DEVICEID found, set new DEVICEID
-            */
             
             if($data->DEVICEID != null){
             
@@ -42,7 +38,6 @@ if($data->SESSIONID != null){
                 
                 if(!empty($apkid)){
                 
-                    //###################
                    $IS_VALID_SESSION = LoginManager::isSessionTimedout($lastactivity, time(), $CONFIG['SESSION']['TIMEOUT']);
                
                    if($IS_VALID_SESSION){
@@ -54,8 +49,6 @@ if($data->SESSIONID != null){
                       $sql_hw = "SELECT hwid FROM ".$CONFIG['DB_TABLE']['HARDWARE']. " WHERE uid=".$userid." AND deviceid='".$deviceID."'";
                       $db = $DBManager->getDB();
                       $result_hw =$db->query($sql_hw);
-                      $logger->logInfo("sql on getting hwid");
-                      $logger->logInfo($sql_hw);
                       $row_hw = $result_hw->fetch();
                       $hwid = $row_hw['hwid'];
                       

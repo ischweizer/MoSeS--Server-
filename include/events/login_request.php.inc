@@ -1,6 +1,6 @@
 <?php
 
-$logger->logInfo("LOGIN ARRIVED");
+$logger->logInfo("########### LOGIN ARRIVED ##############");
 
 /**
 * Check LOGIN for right data
@@ -10,7 +10,7 @@ if($data->LOGIN != null && !empty($data->LOGIN) && preg_match('/^[A-Za-z][A-Za-z
     $LOGIN = $data->LOGIN;
     
     /**
-    * Check PASSWORD for right data
+    * Check PASSWORD
     */
     if($data->PASSWORD != null && !empty($data->PASSWORD)){
     

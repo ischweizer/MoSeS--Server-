@@ -50,8 +50,6 @@ if($data->SESSIONID != null){
                        
                        $row = HardwareManager::selectDeviceForUser($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
                        
-                       $logger->logInfo("RETRIVED ROW FROM THE DATABASE");
-                       
                        if(!empty($row)){
                            
                            // A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE
@@ -83,7 +81,6 @@ if($data->SESSIONID != null){
                        }else{
                            
                            $logger->logInfo("The user has a new deviceID");
-                           $logger->logInfo(var_dump($SENSORS));
                            
                            // The user has a new deviceID
                            $SENSORS = HardwareManager::sortSensors($SENSORS);
@@ -119,10 +116,7 @@ if($data->SESSIONID != null){
 }else{
     $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE", 
                     "STATUS" => "FAILURE_INVALID_SESSION");
-} 
-
-$logger->logInfo("SET HARDWARE PARAMS ANSWERS WITH");
-$logger->logInfo(var_dump($return));
+}
 
 print(json_encode($return));
 

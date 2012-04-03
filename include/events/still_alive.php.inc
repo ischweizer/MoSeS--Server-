@@ -1,6 +1,6 @@
 <?php
 
-$logger->logInfo("STILL ALIVE ARRIVED");
+$logger->logInfo("######## STILL ALIVE ARRIVED #############");
 
 $sessionID = '';
 

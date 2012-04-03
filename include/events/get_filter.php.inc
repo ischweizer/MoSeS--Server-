@@ -1,6 +1,6 @@
 <?php
 
-$logger->logInfo("GET FILTER ARRIVED");
+$logger->logInfo("############# GET FILTER ARRIVED ####################");
   
 $sessionID = '';
 

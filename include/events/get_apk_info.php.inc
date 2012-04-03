@@ -1,6 +1,6 @@
 <?php
 
-$logger->logInfo("GET APK INFO ARRIVED");
+$logger->logInfo("############## GET APK INFO ARRIVED ###############");
 $logger->logInfo("SESSIONID PROVIDED BY THE CLIENT: ".$data->SESSIONID);
 
 $sessionID = '';
