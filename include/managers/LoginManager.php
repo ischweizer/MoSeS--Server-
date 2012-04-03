@@ -34,7 +34,7 @@ class LoginManager{
          
         $sql =   "SELECT * 
                       FROM ". $userTable ." 
-                      WHERE login = '". $login ."' AND password = '". $password ."'";
+                      WHERE login = '". $login ."' AND password = '". $password ."' AND confirmed=1";
 
         // check if the user is in the table
         $result = $db->query($sql);
