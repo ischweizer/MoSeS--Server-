@@ -13,7 +13,7 @@ if($data->SESSIONID != null){
         $sessionID = $data->SESSIONID;
         
         $row = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
-        $deviceID= $row['deviceid'];
+        $deviceID= $data->DEVICEID;
         
         if(!empty($deviceID)){
             

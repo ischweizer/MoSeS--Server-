@@ -15,7 +15,7 @@ if($data->SESSIONID != null){
         
        $USERID = $device["userid"];
        $LASTACTIVITY = $device["lastactivity"];
-       $deviceID = $device['deviceid'];
+       $deviceID = $data->OLD_DEVICEID;
        $TIME_NOW = time();
        
        $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
