@@ -1037,25 +1037,25 @@ if(isset($_GET['m'])){
                                     default:
                                         echo("<h3>Invalid group name and/or password!<h3>");
                                 }
-                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
+                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=". $_SERVER['HTTP_REFERER'] ."\">");
                             }
                             
                             // THE USER HAS CLICKED THE LEAVE BUTTON
                             if($MODE == 'LEAVE'){
                                 echo '<h3>You left research group</h3>';
                                 echo '<div class="group_name">'. $groupname .'</div>';
-                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php?m=group\">");
+                                echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=". $_SERVER['HTTP_REFERER'] ."\">");
                                 }
                             
                             // THE USER WANTS TO BE A SCIENTIST, INSTANTLY
                             if($MODE == 'INSTANT'){
                                 if($scientist_succses == 1){
                                     echo("<h3>Congrats! You have gained scientist credentials!<h3>");
-                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php\">");
+                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=". $_SERVER['HTTP_REFERER'] ."\">");
                                 }
                                 else{
                                     echo("<h3>Y U DO THIS? br0<h3>");
-                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=".$CONFIG['PROJECT']['MOSES_URL']."ucp.php\">");
+                                    echo("<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL=". $_SERVER['HTTP_REFERER'] ."\">");
                                 }
                             }
                             
