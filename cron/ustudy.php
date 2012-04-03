@@ -71,8 +71,6 @@ foreach($rows as $row){
              }
         }
         
-        //// ##########
-        
         
         // UPDATE THE DATABASE
         $pending_devices = json_encode($pending_devices);
