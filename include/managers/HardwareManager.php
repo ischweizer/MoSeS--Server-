@@ -132,8 +132,6 @@ class HardwareManager{
                 (uid, deviceid, modelname, vendorname, androidversion, sensors) 
                 VALUES 
                 (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."')";
-      
-      $logger->logInfo($sql);
 
       $db->exec($sql); 
     }
@@ -152,8 +150,6 @@ class HardwareManager{
         $sql = "UPDATE ". $hardwareTable ."
                 SET filter = '". $filter ."' 
                 WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";      
-                
-       //$logger->logInfo("##################### SETTING FILTER ################".$sql); // LOG THE QUERY 
                         
        $res = $db->exec($sql);
         
@@ -288,8 +284,6 @@ class HardwareManager{
         
         $return = array();
         $sql = "SELECT members FROM ".$rgroupTable. " WHERE name='".$rGroup."'";
-        $logger->logInfo("SQL on getCandidatesForAndroidFromGroup");
-        $logger->logInfo($sql);
         $result_members = $db->query($sql);
         $member_row = $result_members->fetch();
         $members = json_decode($member_row['members']);
@@ -311,9 +305,7 @@ class HardwareManager{
     * Returns the row from hw-table containing specified deviceID and userID
     */
     public static function getHardware($db, $hwTable, $deviceID, $userID, $logger){
-        $sql="SELECT * FROM ".$hwTable." WHERE uid=".$userID." AND deviceid='".$deviceID."'";
-        $logger->logInfo("SQL on getHardware");
-        $logger->logInfo($sql); 
+        $sql="SELECT * FROM ".$hwTable." WHERE uid=".$userID." AND deviceid='".$deviceID."'"; 
         $result = $db->query($sql);
         $row = $result->fetch();
         return $row;
@@ -325,8 +317,6 @@ class HardwareManager{
     */
     public static function removeHardware($db, $hwTable, $deviceID, $userID, $logger){
         $sql="DELETE FROM ".$hwTable." WHERE uid=".$userID." AND deviceid='".$deviceID."'";
-        $logger->logInfo("SQL on removeHardware");
-        $logger->logInfo($sql);
         $db->exec($sql);
     }
     

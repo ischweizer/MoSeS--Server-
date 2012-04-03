@@ -16,8 +16,6 @@ class LoginManager{
        $sql = "UPDATE ". $aSessionTable ."
                 SET lastactivity = ". $lastActivity .", deviceid = '". $deviceID ."' 
                 WHERE session_id = '". $sessionID ."'";
-       
-       //$this->logger->logInfo($sql); // LOG THE QUERY
                             
        $res = $db->exec($sql);
        
@@ -37,26 +35,19 @@ class LoginManager{
         $sql =   "SELECT * 
                       FROM ". $userTable ." 
                       WHERE login = '". $login ."' AND password = '". $password ."'";
-                
-        //$this->logger->logInfo("LoginManager: ".$sql);
 
         // check if the user is in the table
         $result = $db->query($sql);
         $row = $result->fetch();
-        
-        //$this->logger->logInfo(print_r($row, true));
 
         if(!empty($row)){
             
             $userID = intval($row["userid"]);
-            //$this->logger->logInfo($uid);
             
             $sql = "INSERT INTO " . $aSessionTable . 
                         " (session_id, userid, lastactivity) 
                         VALUES 
                         ('". $sessionID ."', ". $userID . ", " . time() . ")";
-            
-            //$this->logger->logInfo("INSERT SESSION: ".$sql);
             
             $db->exec($sql);
                         
@@ -92,8 +83,6 @@ class LoginManager{
     * @param string $sessionID
     */
     public static function getLoggedInUser($db, $aSessionTable, $sessionID){
-        
-        //$this->logger->logInfo("SET HARDWARE PARAMS ARRIVED");
       
         $sql = "SELECT userid, lastactivity 
                                 FROM ". $aSessionTable ." 

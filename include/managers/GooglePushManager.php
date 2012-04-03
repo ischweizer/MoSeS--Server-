@@ -1,4 +1,5 @@
 <?php
+
 /**
 * This class manages the creation and dropping of tables
 */
@@ -13,11 +14,11 @@ class GooglePushManager
     */
     public static function googlePushSendUStudy($apkid, $targetDevices, $logger){
         
-    
+        include_once("config.php");
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
-        $account = "moses.tud@googlemail.com"; // Account
-        $pass = "mittwoch"; // Password
-        $src = "moses service"; // Project Name
+        $account = $CONFIG['GPUSH']['ACCOUNT']; // Account
+        $pass = $CONFIG['GPUSH']['PASSWORD']; // Password
+        $src = $CONFIG['GPUSH']['PROJECT']; // Project Name
 
         $post_params = array("Email" => $account, "Passwd" => $pass, "accountType" => "HOSTED_OR_GOOGLE", "source" => $src, "service" => "ac2dm");
         $req = curl_init("https://www.google.com/accounts/ClientLogin");
@@ -70,10 +71,11 @@ class GooglePushManager
     public static function googlePushSendUpdate($apkid, $targetDevices, $logger){
         
     
+        include_once("config.php");
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
-        $account = "moses.tud@googlemail.com"; // Account
-        $pass = "mittwoch"; // Password
-        $src = "moses service"; // Project Name
+        $account = $CONFIG['GPUSH']['ACCOUNT']; // Account
+        $pass = $CONFIG['GPUSH']['PASSWORD']; // Password
+        $src = $CONFIG['GPUSH']['PROJECT']; // Project Name
 
         $post_params = array("Email" => $account, "Passwd" => $pass, "accountType" => "HOSTED_OR_GOOGLE", "source" => $src, "service" => "ac2dm");
         $req = curl_init("https://www.google.com/accounts/ClientLogin");

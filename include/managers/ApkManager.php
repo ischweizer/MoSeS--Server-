@@ -54,7 +54,6 @@ class ApkManager{
         $sql = "SELECT *  
                FROM ". $apkTable ." 
                WHERE apkid = ". intval($apkID);
-               //WHERE userid = ". $userID ." AND apkid = ". intval($apkID);
                             
        $result = $db->query($sql);
        $row = $result->fetch();
@@ -80,7 +79,6 @@ class ApkManager{
               return false;
           }
           else{
-              $logger->logInfo("incrementAPKUsage else");
               $devs = $row['installed_on'];
               if(empty($devs)){
                 $devs = array();
@@ -95,9 +93,6 @@ class ApkManager{
               $devs=json_encode($devs);
               $sql1 = "UPDATE " .$apkTable. " SET participated_count=".$part." WHERE apkid= ".$apkID;
               $sql2 = "UPDATE ".$apkTable . " SET installed_on='".$devs."' WHERE apkid=".$apkID;
-              $logger->logInfo("sql on increment apk usage");
-              $logger->logInfo($sql1);
-              $logger->logInfo($sql2);
               $db->exec($sql1);
               $db->exec($sql2);
               }
@@ -121,7 +116,6 @@ class ApkManager{
           $sql = "SELECT * FROM ". $apkTable ." WHERE apkid = ". intval($apkID);
           $result = $db->query($sql);
           $row = $result->fetch();
-          $logger->logInfo("decrementAPKUsage else");
           $devs = $row['installed_on'];
           if(empty($devs)){
             return;
@@ -140,9 +134,6 @@ class ApkManager{
           $new_devs=json_encode($new_devs);
           $sql1 = "UPDATE " .$apkTable. " SET participated_count=".$part." WHERE apkid= ".$apkID;
           $sql2 = "UPDATE ".$apkTable . " SET installed_on='".$new_devs."' WHERE apkid=".$apkID;
-          $logger->logInfo("sql on decrement apk usage");
-          $logger->logInfo($sql1);
-          $logger->logInfo($sql2);
           $db->exec($sql1);
           $db->exec($sql2);
       }        
