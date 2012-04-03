@@ -207,7 +207,7 @@ body {
 
 #panel .login_content input.field {
 	border: 1px #1A1A1A solid;
-	background: #414141;
+	background-color: #414141;
 	margin-right: 5px;
 	margin-top: 4px;
 	width: 200px;
@@ -216,7 +216,8 @@ body {
 }
 
 #panel .login_content input:focus.field {
-	background: #545454;
+	background-color: #EEEEEE;
+    color: #000;
 }
 
 /* BUTTONS */
