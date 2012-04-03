@@ -1,7 +1,3 @@
-/*
-moses database
-*/
-
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -12,6 +8,8 @@ moses database
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`moses` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
+USE `moses`;
+
 /*Table structure for table `android_session` */
 
 DROP TABLE IF EXISTS `android_session`;
@@ -20,7 +18,6 @@ CREATE TABLE `android_session` (
   `session_id` char(32) CHARACTER SET utf8 NOT NULL,
   `userid` int(10) unsigned NOT NULL DEFAULT '0',
   `lastactivity` int(10) unsigned NOT NULL DEFAULT '0',
-  `deviceid` varchar(255) NOT NULL,
   PRIMARY KEY (`session_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -47,8 +44,9 @@ CREATE TABLE `apk` (
   `last_round_time` int(10) DEFAULT '0' COMMENT 'the last time the cron-job has started',
   `ustudy_finished` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'TRUE only when user study for an uploaded apk is finished, otherwise FALSE',
   `installed_on` mediumtext COMMENT 'list of devices having the app currently installed',
+  `locked` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1 only when the app should be shown to clients in a user-study, else 0',
   PRIMARY KEY (`apkid`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `hardware` */
 
@@ -66,7 +64,7 @@ CREATE TABLE `hardware` (
   `c2dm` varchar(1024) DEFAULT NULL COMMENT 'c2dm id of the device',
   PRIMARY KEY (`uid`,`deviceid`),
   KEY `hwid` (`hwid`)
-) ENGINE=MyISAM AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=115 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `request` */
 
@@ -113,7 +111,7 @@ CREATE TABLE `user` (
   `passworddate` int(10) unsigned NOT NULL,
   `confirmed` int(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`userid`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
