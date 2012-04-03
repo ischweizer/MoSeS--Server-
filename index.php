@@ -41,13 +41,13 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
                   if($row["usergroupid"] == 3){
                       $_SESSION["ADMIN_ACCOUNT"] =  "YES";    
                   }
-                  
+               
+              echo "<meta http-equiv='refresh' content='0;URL=./'>";   
+              
               }else{
                   $USER_CONFIRMED = 0;
+                  echo "<meta http-equiv='refresh' content='3;URL=./'>";
               }
-              
-          echo "<meta http-equiv='refresh' content='0;URL=./'>";
-              
           }else{
               $LOGIN_FAIL = 1;
               echo "<meta http-equiv='refresh' content='3;URL=./'>";
@@ -87,18 +87,25 @@ include_once("./include/_menu.php");
                        <h3>You provided wrong data for login or password!</h3>
                      <?php
                        }else{
-                     ?>
-                        <h2 class="title">Welcome Friend!</h2>
-                        <div class="entry">
-                            
-                            <p>MoSeS helps scientists from all around the world to distribute their Android apps and make the world a better place.</p>
-                            <p>Every person with an Android device can contribute.<br />Feel free to register and download moses client, it's easy!</p>
-                            <p>Be adwised: this site is under construction!</p>
-                            
-                        </div>
-                        <div style="clear: both;">&nbsp;</div>
-                        <p class="meta">Posted by Admin on February 12, 2012</p>
-                        <?php
+                           if(isset($USER_CONFIRMED) && $USER_CONFIRMED == 0){
+                               ?>
+                                <h3>You have not confirmed your registration.</h3>
+                                <p>Please, check your mailbox and confirm the registration.</p>
+                               <?php  
+                           }else{
+                         ?>
+                            <h2 class="title">Welcome Friend!</h2>
+                            <div class="entry">
+                                
+                                <p>MoSeS helps scientists from all around the world to distribute their Android apps and make the world a better place.</p>
+                                <p>Every person with an Android device can contribute.<br />Feel free to register and download moses client, it's easy!</p>
+                                <p>Be adwised: this site is under construction!</p>
+                                
+                            </div>
+                            <div style="clear: both;">&nbsp;</div>
+                            <p class="meta">Posted by Admin on February 12, 2012</p>
+                            <?php
+                           }
                        }
                         ?>
                     </div>
