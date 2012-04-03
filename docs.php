@@ -16,15 +16,7 @@ include_once("./include/_menu.php");
         <h1><a href="./index.php">Mobile Sensing System</a></h1>
     </div>
 </div>
-<!-- <div id="splash">&nbsp;</div> -->
 <!-- end #header -->
-
-<script type="text/javascript">
-function slideLoginPanelDown(){
-    $("div#panel").slideDown("slow");
-    $("#toggle a").toggle();   
-}
-</script>
 
 <div id="page">
         <div id="page-bgtop">

@@ -75,8 +75,7 @@ include_once("./include/_menu.php");
     <div id="logo">
         <h1><a href="./index.php">Mobile Sensing System</a></h1>
     </div>
-</div>
-<!-- end #header --> 
+</div> 
 
 <div id="page">
         <div id="page-bgtop">

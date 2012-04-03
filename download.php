@@ -15,9 +15,7 @@ session_start();
     <div id="logo">
         <h1><a href="./index.php">Mobile Sensing System</a></h1>
     </div>
-</div>
-<!-- <div id="splash">&nbsp;</div> -->
-<!-- end #header --> 
+</div> 
 
 <div id="page">
         <div id="page-bgtop">

@@ -206,8 +206,6 @@ if(isset($_POST["submitted"])){
         <h1><a href="./index.php">Mobile Sensing System</a></h1>
     </div>
 </div>
-<!-- <div id="splash">&nbsp;</div> -->
-<!-- end #header -->
 
 <div id="page">
         <div id="page-bgtop">
