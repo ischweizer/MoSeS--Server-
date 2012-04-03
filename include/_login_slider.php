@@ -10,6 +10,8 @@
                 
                     <div class="slider_welcome_message">MoSeS welcomes you!</div>
                     <div class="clear"></div>
+                    <div class="slider_hint"><span>Hint:</span> check your control panel to manage your apps and devices.</div>
+                    <div class="clear"></div>
                     <a class="bt_logout" href="./logout.php">LOGOUT</a>
                 <?php
                 }else{
@@ -51,7 +53,7 @@
                 <li class="welcome">Hello, <?php echo $_SESSION['FIRSTNAME']; ?>!</li>
                 <li class="sep">|</li>
                 <li id="toggle">
-                    <a id="open" class="open" href="#">Logout</a>
+                    <a id="open" class="open" href="#">LOGOUT</a>
                     <a id="close" style="display: none;" class="close" href="#">Hide</a>            
                 </li>
                 <!--<li class="right">&nbsp;</li>-->
@@ -71,7 +73,7 @@
             <li class="welcome">Hello, Guest!</li>
             <li class="sep">|</li>
             <li id="toggle">
-                <a id="open" class="open" href="#">Login</a>
+                <a id="open" class="open" href="#">LOGIN</a>
                 <a id="close" style="display: none;" class="close" href="#">HIDE</a>            
             </li>
             <!--<li class="right">&nbsp;</li>-->
