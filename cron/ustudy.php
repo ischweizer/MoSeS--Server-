@@ -96,8 +96,8 @@ foreach($rows as $row){
         if(count($targetDevices) > 0){
             // user-study or just an update
             switch($row['ustudy_finished']){
-                case -1 : GooglePushManager::googlePushSendUpdate($row['apkid'], $targetDevices, $logger); break;
-                case 0 : GooglePushManager::googlePushSendUStudy($row['apkid'], $targetDevices, $logger); break;
+                case -1 : GooglePushManager::googlePushSendUpdate($row['apkid'], $targetDevices, $logger, $CONFIG); break;
+                case 0 : GooglePushManager::googlePushSendUStudy($row['apkid'], $targetDevices, $logger, $CONFIG); break;
                 default : {
                     // Enough devices have installed the APK. Just, mark the user study as finished
                     $sql = "UPDATE " .$CONFIG['DB_TABLE']['APK']. " SET ustudy_finished=1 WHERE apkid=".$row['apkid'];

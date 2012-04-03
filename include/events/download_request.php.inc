@@ -71,11 +71,11 @@ if($data->SESSIONID != null){
                       }
                   }else{
                       $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
-                                      "STATUS" => "FAILURE");
+                                      "STATUS" => "INVALID_SESSION");
                   }
                 }else{
                     $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
-                                    "STATUS" => "FAILURE");
+                                    "STATUS" => "INVALID_SESSION");
                 }
             }else{
                 $return = array("MESSAGE" => "DOWNLOAD_REQUEST", 

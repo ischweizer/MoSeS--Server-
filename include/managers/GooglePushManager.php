@@ -12,13 +12,20 @@ class GooglePushManager
     * @param String $targetDevices array of String ids of target devices c2dm-ids
     * @param logger the Logger
     */
-    public static function googlePushSendUStudy($apkid, $targetDevices, $logger){
+    public static function googlePushSendUStudy($apkid, $targetDevices, $logger, $CONFIG){
         
-        include_once("/home/dasense/moses/config.php");
+        $logger->logInfo("###########################googlePushSendUStudy##########################");
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
         $account = $CONFIG['GPUSH']['ACCOUNT']; // Account
         $pass = $CONFIG['GPUSH']['PASSWORD']; // Password
         $src = $CONFIG['GPUSH']['PROJECT']; // Project Name
+        
+        $logger->logInfo("account us");
+        $logger->logInfo($account);
+        $logger->logInfo("pass is");
+        $logger->logInfo($pass);
+        $logger->logInfo("src is");
+        $logger->logInfo($src);
 
         $post_params = array("Email" => $account, "Passwd" => $pass, "accountType" => "HOSTED_OR_GOOGLE", "source" => $src, "service" => "ac2dm");
         $req = curl_init("https://www.google.com/accounts/ClientLogin");
@@ -54,6 +61,8 @@ class GooglePushManager
             curl_setopt($req, CURLOPT_POSTFIELDS, $data);
 
             $response = curl_exec($req);
+            $logger->logInfo("RESPONSE");
+            $logger->logInfo($response);
             
         
         }
@@ -68,14 +77,21 @@ class GooglePushManager
     * @param String $targetDevices array of String ids of target devices c2dm-ids
     * @param logger the Logger
     */
-    public static function googlePushSendUpdate($apkid, $targetDevices, $logger){
+    public static function googlePushSendUpdate($apkid, $targetDevices, $logger, $CONFIG){
         
     
-        include_once("/home/dasense/moses/config.php");
+        $logger->logInfo("###########################googlePushSendUpdate##########################");
         // LOGIN AT GOOGLE AUTHENTIFICATION SERVER
         $account = $CONFIG['GPUSH']['ACCOUNT']; // Account
         $pass = $CONFIG['GPUSH']['PASSWORD']; // Password
         $src = $CONFIG['GPUSH']['PROJECT']; // Project Name
+        
+        $logger->logInfo("account us");
+        $logger->logInfo($account);
+        $logger->logInfo("pass is");
+        $logger->logInfo($pass);
+        $logger->logInfo("src is");
+        $logger->logInfo($src);
 
         $post_params = array("Email" => $account, "Passwd" => $pass, "accountType" => "HOSTED_OR_GOOGLE", "source" => $src, "service" => "ac2dm");
         $req = curl_init("https://www.google.com/accounts/ClientLogin");
@@ -111,6 +127,9 @@ class GooglePushManager
             curl_setopt($req, CURLOPT_POSTFIELDS, $data);
 
             $response = curl_exec($req);
+            
+            $logger->logInfo("RESPONSE");
+            $logger->logInfo($response);
             
         
         }
