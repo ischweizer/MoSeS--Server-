@@ -245,22 +245,6 @@ $(document).ready(function(){
     $('.radio_create').click(function(){
         $('.join_group').find(':button').text('Create!');
     });
-    
-    /*
-    * APK description fix
-    */
-    
-    /*$('.apk_description_trigger').click(function(){
-        if($('.apk_description').attr('display') == 'block'){
-            $(this).next().css('display', 'none');
-        }else{
-            $(this).next().css('display', 'block');   
-        }
-    }); */  
+      
 
 });
-
-/*function slideLoginPanelDown(){
-    $("div#panel").slideDown("slow");
-    $("#toggle a").toggle();   
-}*/
