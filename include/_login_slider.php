@@ -28,7 +28,7 @@
                     <div class="clear"></div>
                     <a class="lost-pwd" href="./forgot.php">Lost your password?</a>
                     <div class="clear"></div>
-                    <a class="lost-pwd" href="./registration.php">New user? Register here.</a>
+                    <a class="lost-pwd" href="./registration.php">New user? Register here!</a>
                     <input type="hidden" name="submit" value="1">
                 </form>
                 

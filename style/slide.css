@@ -263,7 +263,8 @@ body {
 	float:left;
 	clear: right;
 	padding: 15px 5px 0;
-	font-size: 0.95em;
+    font-family: Arial;
+	font-size: 1.2em;
 	text-decoration: underline;
 }
 
