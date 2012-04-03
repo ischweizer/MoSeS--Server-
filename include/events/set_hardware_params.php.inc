@@ -47,7 +47,7 @@ if($data->SESSIONID != null){
                       
                    $logger->logInfo("##################### SETTING HARDWARE PARAMS, UPDATING SESSION ################");
                    
-                   LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $deviceID, $sessionID);
+                   LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $sessionID);
                    
                    $logger->logInfo("SESSION IS UPDATED");
                    

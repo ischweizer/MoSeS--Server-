@@ -24,7 +24,7 @@ if($data->SESSIONID != null){
               
            $logger->logInfo("##################### CHANGE_DEVICE_ID, UPDATING SESSION ################");
            
-           LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $deviceID, $sessionID);
+           LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $sessionID);
            
            $logger->logInfo("SESSION IS UPDATED");
            

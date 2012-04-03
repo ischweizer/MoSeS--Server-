@@ -2,8 +2,6 @@
 
 class LoginManager{
     
-    
-    
     /**
     * Updates user session
     * 
@@ -11,10 +9,10 @@ class LoginManager{
     * @param string $deviceID
     * @param md5 string $sessionID
     */
-    public static function updateSession($db, $aSessionTable, $lastActivity, $deviceID, $sessionID){
+    public static function updateSession($db, $aSessionTable, $lastActivity, $sessionID){
         
        $sql = "UPDATE ". $aSessionTable ."
-                SET lastactivity = ". $lastActivity .", deviceid = '". $deviceID ."' 
+                SET lastactivity = ". $lastActivity ."  
                 WHERE session_id = '". $sessionID ."'";
                             
        $res = $db->exec($sql);
@@ -105,7 +103,9 @@ class LoginManager{
     */
     public static function getLoggedInDevice($db, $aSessionTable, $sessionID){
       
-        $sql = "SELECT deviceid, lastactivity, userid FROM ". $aSessionTable ." WHERE session_id = '". $sessionID ."'"; 
+        $sql = "SELECT lastactivity, userid 
+                FROM ". $aSessionTable ." 
+                WHERE session_id = '". $sessionID ."'"; 
                 
         $result = $db->query($sql);
         $row = $result->fetch();
