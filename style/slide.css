@@ -85,7 +85,7 @@ body {
 
 .tab .sep {
     color: grey;
-    margin: 0 5px;
+    padding: 0 5px;
 }
 
 .tab a.open, .tab a.close {
