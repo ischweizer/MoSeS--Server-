@@ -1240,6 +1240,8 @@ if(isset($_GET['m'])){
                             if($MODE == 'PROMO' && !isset($_POST['promo_sent']) 
                                                 && (!isset($USER_ALREADY_ACCEPTED) || !isset($USER_PENDING))){    
                             ?> 
+                            
+                            <h3>Application for scientist credentials</h3>
 
                             <form action="ucp.php?m=promo" method="post" class="promo_form">
                                
