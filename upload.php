@@ -4,8 +4,6 @@ session_start();
 if(!isset($_SESSION['USER_LOGGED_IN']))
     die('Only registered users may access that file!');
 
-//print_r($_POST);
-
 include_once("./config.php");
 include_once(MOSES_HOME."/include/functions/func.php");
 include_once(MOSES_HOME."/include/functions/logger.php");
@@ -14,7 +12,7 @@ include_once(MOSES_HOME."/include/functions/logger.php");
 *  SETTINGS FOR UPLOAD
 */
 $allowedTypes = array('.apk');
-$maxFileSize = $CONFIG['UPLOAD']['FILESIZE']; // 20MB
+$maxFileSize = $CONFIG['UPLOAD']['FILESIZE'];
 $uploadPath = './apk/'; // folder to save to
 
 $filename = $_FILES['userfile']['name']; // gets filename
@@ -46,7 +44,7 @@ clearstatcache();
 if(!is_dir($uploadPath)){
     $oldumask = umask(0);
     if(!mkdir($uploadPath, 0777, true)){
-        // folder failed to create
+        // failed to create folder
         umask($oldumask);
         header("Location: ucp.php?m=upload&res=0");
     }
@@ -63,16 +61,12 @@ if(!is_dir($uploadPath)){
 */
 if(!in_array($fileExt, $allowedTypes))
   header("Location: ucp.php?m=upload&res=2");
-  //die('That filetype not allowed. Sorry.');
-  //print_r($_FILES);
- //print_r(fileperms($_FILES['userfile']['tmp_name'])); 
+ 
 if(filesize($_FILES['userfile']['tmp_name']) > $maxFileSize)
   header("Location: ucp.php?m=upload&res=3");
-  //die('This file is too large. Sorry.');
        
 if(!is_writable($uploadPath))
   header("Location: ucp.php?m=upload&res=4");
-  //die("You don't have permission to upload.");
  
 chmod($_FILES['userfile']['tmp_name'], 0777);       
 
@@ -114,15 +108,12 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         
        $RAW_APK_DESCRIPTION = trim($_POST['apk_description']);
        
-       // TODO: make some SQL-Injection security here
-       
        $APK_DESCRIPTION = $RAW_APK_DESCRIPTION;
         
     }
     
     $APK_TITLE = trim($_POST['apk_title']);
     
-    // TODO: add some security here
     $APK_ANDROID_VERSION = '';
     if(isset($_POST['apk_android_version'])){
         $APK_ANDROID_VERSION = trim($_POST['apk_android_version']);    
@@ -168,17 +159,11 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
             // check the filters
             if(!empty($rows)){
                 
-                $logger->logInfo("ROWS i upload.php #########################");
-                $logger->logInfo(print_r($rows, true));
-                
                 foreach($rows as $hardware){
                     
                     
                     $hwFilter_array = json_decode($hardware['filter']);
                     $apkSensors_array = json_decode($SENSOR_LIST_STRING);
-                    
-                    $logger->logInfo("hwFilter_array #########################");
-                    $logger->logInfo(print_r($hwFilter_array, true));
                     
                     if(isFilterMatch($hwFilter_array, $apkSensors_array)){
                         $candidates[] = intval($hardware['hwid']);
@@ -218,14 +203,10 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
-    //$db->close();
-   
 
     header("Location: ucp.php?m=upload&res=1");
-    //echo 'Your file "'. $filename .'" was successfully uploaded.';
 }else{
     header("Location: ucp.php?m=upload&res=0");
-    //echo 'Some error occured while uploading a file. Please try again later.';
 }
 
 ?>

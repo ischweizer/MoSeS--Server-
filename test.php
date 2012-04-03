@@ -2,11 +2,9 @@
 session_start();
 
 /**
-* Accept only form data with "HTTP_JSON" veriable 
+* Accept only form data with "HTTP_JSON" variable 
 */
 if(isset($_POST['HTTP_JSON'])){
-            
-    $session_interval = 200; // duration of a session in seconds
     
     $json = stripslashes($_POST['HTTP_JSON']);
     $data = json_decode($json);

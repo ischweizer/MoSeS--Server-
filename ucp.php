@@ -196,10 +196,7 @@ if(isset($_GET['m'])){
                                          AND apkhash = '". $REMOVE_HASH ."'";
                           
                           $db->exec($sql);
-                          
-                          // remove file itself from the system
-                          
-                             
+                           
                        }else{
                            $APK_REMOVED = 0;
                        }  
@@ -265,8 +262,6 @@ if(isset($_GET['m'])){
                         
                         $RAW_TELEPHONE = $_POST['telephone'];
                         $RAW_REASON = $_POST['reason'];
-                        
-                        // TODO: Add some security later
                         
                         $TELEPHONE  = trim($RAW_TELEPHONE);
                         $REASON  = trim($RAW_REASON);
@@ -355,7 +350,7 @@ if(isset($_GET['m'])){
                                                     
                                $db->exec($sql);
                                
-                               // USER IS NOW IN SCIENTIST-GROUP
+                               // USER IS NOW IN A SCIENTIST GROUP
                                $sql = "UPDATE user SET usergroupid= 2 WHERE hash = '". $request ."'";
                                
                                $db->exec($sql);
@@ -382,7 +377,6 @@ if(isset($_GET['m'])){
                     
                     break;
         
-        // ##### GROUP ############
         case 'GROUP':
         
             $MODE = 'GROUP';
@@ -429,9 +423,7 @@ if(isset($_GET['m'])){
                  }
             }
             break;
-        // ##############
-        
-        // ##### USER HAS CLICKED THE JOIN/CREATE BUTTON ############
+    
         case 'JOIN':
             if(isset($_POST["group_name"]) && isset($_POST["group_pwd"])){ 
                 
@@ -485,9 +477,7 @@ if(isset($_GET['m'])){
             }
             
             break;
-        // ##############
-        
-        // ##### USER HAS CLICKED THE LEAVE BUTTON ############
+
         case 'LEAVE':
             $MODE = 'LEAVE';
             include_once("./include/functions/dbconnect.php");
@@ -509,7 +499,6 @@ if(isset($_GET['m'])){
             foreach($members as $mid)
                 if($mid != $_SESSION['USER_ID'])
                     $newMembers[] = $mid;
-            //$members = array_diff($members, array($_SESSION['USER_ID'])); remove me
             $sql_update4;
             if(count($newMembers) == 0)
                 $sql_update4 = "DELETE FROM ".$CONFIG['DB_TABLE']['RGROUP']." WHERE name='".$groupname."'";
@@ -520,26 +509,21 @@ if(isset($_GET['m'])){
             $db->exec($sql_update4);
             
             break;
-        // ##############
-        // USER WANTS TO BE A SCIENTIST (INSTANTLY)
+
         case 'INSTANT':
             $MODE ='INSTANT';
-            //#####
             $gr_sql = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $_SESSION['USER_ID'];
             include_once("./include/functions/dbconnect.php");
             $gr_result = $db->query($gr_sql);
             $gr_row = $gr_result->fetch();
-            //echo("<p>".$gr_sql."<p>" );
             if(!empty($gr_row) && $gr_row['rgroup']!=null){
                 $grname = $gr_row['rgroup'];
-               // echo("<p>hello<p>" );
-                //echo("<p>".$grname."<p>" );
+                
                 // #### USER IS A MEMBER OF A GROUP###//
                 // determine number of devices and scientists
                 $nDevices = 0;
                 $mem_sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='" .$grname."'";
                 $mem_result = $db->query($mem_sql);
-               // echo("<p>".$mem_sql."<p>" );
                 $mem_row = $mem_result->fetch();
                 $mem = json_decode($mem_row['members']);
                 // determine number of scientists
@@ -553,7 +537,6 @@ if(isset($_GET['m'])){
                             $nScientists++;
                     // determine how many devices the user has
                     $dev_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE uid=".$id;
-                  //  echo("<p>".$dev_sql."<p>" );
                     $dev_result = $db->query($dev_sql);
                     $dev_rows = $dev_result->fetchAll(PDO::FETCH_ASSOC);
                     $nDevices+=count($dev_rows);
@@ -567,9 +550,6 @@ if(isset($_GET['m'])){
                 }
             }
             break;
-            
-            //#####
-        
         
         default: 
                 $MODE = 'NONE';
@@ -649,17 +629,13 @@ if(isset($_GET['m'])){
             include_once("./include/functions/dbconnect.php");
             $gr_result = $db->query($gr_sql);
             $gr_row = $gr_result->fetch();
-            //echo("<p>".$gr_sql."<p>" );
             if(!empty($gr_row) && $gr_row['rgroup']!=null){
                 $grname = $gr_row['rgroup'];
-               // echo("<p>hello<p>" );
-                //echo("<p>".$grname."<p>" );
                 // #### USER IS A MEMBER OF A GROUP###//
                 // determine number of devices and scientists
                 $nDevices = 0;
                 $mem_sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='" .$grname."'";
                 $mem_result = $db->query($mem_sql);
-               // echo("<p>".$mem_sql."<p>" );
                 $mem_row = $mem_result->fetch();
                 $mem = json_decode($mem_row['members']);
                 // determine number of scientists
@@ -673,15 +649,11 @@ if(isset($_GET['m'])){
                             $nScientists++;
                     // determine how many devices the user has
                     $dev_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE uid=".$id;
-                  //  echo("<p>".$dev_sql."<p>" );
                     $dev_result = $db->query($dev_sql);
                     $dev_rows = $dev_result->fetchAll(PDO::FETCH_ASSOC);
                     $nDevices+=count($dev_rows);
                 }
                 $control = $nDevices - $nScientists * $CONFIG['MISC']['SC_TRESHOLD'];
-             //   echo("<p>".$nDevices."<p>" );
-             //   echo("<p>".$nScientists."<p>" );
-             //   echo("<p>".$control."<p>" );
                 if($control >= $CONFIG['MISC']['SC_TRESHOLD']){
                   ?>
                   <li><a href="ucp.php?m=instant">Get scientist credentials today!</a></li>
@@ -1021,7 +993,6 @@ if(isset($_GET['m'])){
                             
                             // THE USER HAS CLICKED THE JOIN BUTTON
                             if($MODE == 'JOIN'){
-                                // ###########
                                 switch($jcstatsus){
                                     case 1 :
                                         echo("<h3>You joined research group<h3>");

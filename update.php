@@ -4,8 +4,6 @@ session_start();
 if(!isset($_SESSION['USER_LOGGED_IN']))
     die('Only registered users may access that file!');
 
-//print_r($_POST);
-
 include_once("./config.php");
 include_once(MOSES_HOME."/include/functions/func.php");
 include_once(MOSES_HOME."/include/functions/logger.php");
@@ -14,7 +12,7 @@ include_once(MOSES_HOME."/include/functions/logger.php");
 *  SETTINGS FOR UPLOAD
 */
 $allowedTypes = array('.apk');
-$maxFileSize = $CONFIG['UPLOAD']['FILESIZE']; // 20MB
+$maxFileSize = $CONFIG['UPLOAD']['FILESIZE'];
 $uploadPath = './apk/'; // folder to save to
 
 $filename = $_FILES['userfile']['name']; // gets filename
@@ -62,16 +60,12 @@ if(!is_dir($uploadPath)){
 */
 if(!in_array($fileExt, $allowedTypes))
   header("Location: ucp.php?m=upload&res=2");
-  //die('That filetype not allowed. Sorry.');
-  //print_r($_FILES);
- //print_r(fileperms($_FILES['userfile']['tmp_name'])); 
+
 if(filesize($_FILES['userfile']['tmp_name']) > $maxFileSize)
   header("Location: ucp.php?m=upload&res=3");
-  //die('This file is too large. Sorry.');
        
 if(!is_writable($uploadPath))
   header("Location: ucp.php?m=upload&res=4");
-  //die("You don't have permission to upload.");
  
 chmod($_FILES['userfile']['tmp_name'], 0777);       
 
@@ -113,15 +107,12 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         
        $RAW_APK_DESCRIPTION = trim($_POST['apk_description']);
        
-       // TODO: make some SQL-Injection security here
-       
        $APK_DESCRIPTION = $RAW_APK_DESCRIPTION;
         
     }
     
     $APK_TITLE = trim($_POST['apk_title']);
     
-    // TODO: add some security here
     $APK_ANDROID_VERSION = '';
     if(isset($_POST['apk_android_version'])){
         $APK_ANDROID_VERSION = trim($_POST['apk_android_version']);    
@@ -156,20 +147,14 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
                              pending_devices='". $pending_users ."', candidates='". $candidates ."', 
                              notified_devices='". $notified_users ."', androidversion=". $APK_ANDROID_VERSION .", 
                              ustudy_finished=-1, locked=0 WHERE apkid=".$_SESSION['APKID'];
-    
-    $logger->logInfo("SQL ON UPDATE");
-    $logger->logInfo($sql);
                               
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
    
-
     header("Location: ucp.php?m=upload&res=1");
-    //echo 'Your file "'. $filename .'" was successfully uploaded.';
 }else{
     header("Location: ucp.php?m=upload&res=0");
-    //echo 'Some error occured while uploading a file. Please try again later.';
 }
 
 ?>

@@ -41,22 +41,11 @@ if(isset($_POST["submitted"])){
   $ERROR_REGFORM = array();
   
   // init
-  //$USER_TITLE = '';
   $FIRSTNAME = '';
   $LASTNAME = '';
   $EMAIL = '';
   $LOGIN = '';
   $PASSWORD = '';
-      
-  /*if(!isset($_POST["usertitle"])){
-    $ERROR_REGFORM[] = "Please, enter your title!";
-  }else{
-      
-     $_POST["usertitle"] = trim($_POST["usertitle"]);
-     if(empty($_POST["usertitle"])){
-        $ERROR_REGFORM[] = "Please, enter your title!";    
-     }
-  }*/
   
   if(!isset($_POST["firstname"])){
       $ERROR_REGFORM[] = "Please, enter your firstname!";
@@ -112,7 +101,6 @@ if(isset($_POST["submitted"])){
   
   if(count($ERROR_REGFORM) == 0){
       
-      //$USER_TITLE = $_POST["usertitle"];
       $FIRSTNAME = $_POST["firstname"];
       $LASTNAME = $_POST["lastname"];
       $EMAIL = $_POST["email"];
@@ -155,17 +143,17 @@ if(isset($_POST["submitted"])){
             $LOGIN_EXISTS = 0;
           
               // we have no duplicate logins
-              // so we safe to insert new entry
+              // so we can insert new entry
 
              $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['USER'] ." (usergroupid, firstname, lastname, 
                                                       login, password, hash, usertitle,
                                                       email, ipaddress, lastactivity, 
                                                       joindate, passworddate)
-                                                      VALUES 
-                                                      (0, '". $FIRSTNAME ."', '". $LASTNAME ."',
-                                                      '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
-                                                      '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
-                                                      ". $CUR_TIME .", ". $CUR_TIME .")";
+                          VALUES 
+                          (0, '". $FIRSTNAME ."', '". $LASTNAME ."',
+                          '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
+                          '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
+                          ". $CUR_TIME .", ". $CUR_TIME .")";
               
               $db->exec($sql);
               

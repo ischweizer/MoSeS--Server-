@@ -26,7 +26,7 @@ include_once("./include/_menu.php");
                         <div class="entry">
                             <p>MoSeS offers researchers a platform for distribution of non-comercial Android apps, that are used for research purposes.</p>
                             <br />
-                            <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/de/telecooperation-group/" title="Telecooperation Group" target="_blank">Telecooperation Group</a> by <a href="https://github.com/maksuti" target="_blank">Zijad Maksuti</a>, <a href="https://github.com/wlsch" target="_blank">Wladimir Schmidt</a>, 
+                            <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/" title="Telecooperation Group" target="_blank">Telecooperation Group</a> by <a href="https://github.com/maksuti" target="_blank">Zijad Maksuti</a>, <a href="https://github.com/wlsch" target="_blank">Wladimir Schmidt</a>, 
                             <a href="https://github.com/simlei" target="_blank">Simon Leisching</a> and <a href="https://github.com/jahofmann" target="_blank">Jaco Hofmann</a> under supervision of <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Immanuel Schweizer</a>.</p>
                         </div>
                     </div>
