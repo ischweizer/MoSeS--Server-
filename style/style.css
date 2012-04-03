@@ -538,7 +538,11 @@ img.aligncenter {
     background: url("../images/sensors/medium/sprites/ambient_temperature_sensor.png") 0 -81px no-repeat;
 }
 
-.join_group {
+.join_group,
+.promo_form,
+.users_wanting_scientist,
+.upload_form,
+.your_apps {
     margin-top: 20px;
 }
 

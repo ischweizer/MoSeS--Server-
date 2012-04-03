@@ -636,7 +636,7 @@ if(isset($_GET['m'])){
          }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
             ?>
-            <li><a href="ucp.php?m=upload">Upload an App</a></li>
+            <li><a href="ucp.php?m=upload">App upload</a></li>
             <li><a href="ucp.php?m=list">Show my Apps</a></li>
         <?php }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2){
@@ -801,6 +801,9 @@ if(isset($_GET['m'])){
                           }
                             if($MODE == 'ADMIN' && !isset($_POST['pending_requests'])){
                             ?>
+                            
+                            <h3>Admin control panel</h3>
+                            
                             <div class="users_wanting_scientist">
                                 <form action="ucp.php?m=admin" method="post">
                                     <table>
@@ -834,7 +837,8 @@ if(isset($_GET['m'])){
                             
                             if($SHOW_UPDATE_PAGE != 1 && $MODE == 'UPLOAD' && !isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                         ?>
-
+                            <h3>Application upload form</h3>
+                        
                             <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
                               <p>Program name (title):</p>
                               <input type="text" name="apk_title" />
@@ -1052,8 +1056,8 @@ if(isset($_GET['m'])){
                             // user wants a listing of APK files
                             if($MODE == 'LIST' && isset($LIST_APK)){
                                 
-                              echo '<h3>Your apps</h3>';  
-                              echo '<br /><br />';
+                              echo '<h3>Your apps</h3>';
+                              echo '<div class="your_apps"></div>';  
                                 
                               // we found some APKs
                               if($LIST_APK == 1){
@@ -1240,6 +1244,8 @@ if(isset($_GET['m'])){
                             if($MODE == 'PROMO' && !isset($_POST['promo_sent']) 
                                                 && (!isset($USER_ALREADY_ACCEPTED) || !isset($USER_PENDING))){    
                             ?> 
+                            
+                            <h3>Application for scientist credentials</h3>
 
                             <form action="ucp.php?m=promo" method="post" class="promo_form">
                                
