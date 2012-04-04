@@ -708,7 +708,7 @@ if(isset($_GET['m'])){
                                         <div class="sensor_info">
                                             <p style="font-weight: bold">Selected sensors (filter):</p>
                                             <ul class="sensor_container_f"><?php
-                                               $sensor_array = json_decode($device['sensors']);
+                                               $sensor_array = json_decode($device['filter']);
                                            
                                            if(count($sensor_array) != 0){
                                                
