@@ -47,7 +47,7 @@
        ?>
        
         <!-- The tab on top -->    
-        <div class="tab">
+        <div class="tab" >
             <ul class="login">
                 <!--<li class="left">&nbsp;</li>-->
                 <li class="welcome">Hello, <?php echo $_SESSION['FIRSTNAME']; ?>!</li>

@@ -47,7 +47,7 @@ if($data->SESSIONID != null){
                        
                       $logger->logInfo("##################### DOWNLOAD REQUEST ################ Session update");
                        
-                      LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $sessionID);
+                      LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $deviceID, $sessionID);
                       
                       $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $USERID, $APKID, $logger);
                       

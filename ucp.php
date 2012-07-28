@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']))
     header("Location: /moses/");
@@ -15,6 +16,8 @@ $groupsize = 0; // size of the group
 $group_members_count = 0;
 $group_device_count = 0;
 
+
+
 /*
 * join/create status
 * ON JOIN:
@@ -27,7 +30,13 @@ $group_device_count = 0;
 */
 $jcstatsus = 0;
 $SHOW_UPDATE_PAGE = 0;
+
+$show_add_quest = false;
 $apk_to_update = array();
+$quest_db = array();
+$quest_selected = array();
+$num_sel_quest = 0;
+$all_devices = array(); 
 
 $scientist_succses = 0; // 1 only if the user has gain instant scientist credentials, use to check if someone is trying something nasty
 
@@ -67,61 +76,220 @@ $API_VERSION = array(array(8, 'API 8: "Froyo" 2.2.x'),
                      array(13, 'API 13: "Honeycomb" 3.2.x'),
                      array(14, 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2'),
                      array(15, 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4'));
-                                    
+
+if(isset($_GET['selqst']))
+{
+  echo " JA !! ";
+}                                  
 // SWITCH USER CONTORL PANEL MODE
-if(isset($_GET['m'])){
+if(isset($_GET['m']))
+{
     
     $RAW_MODE = strtoupper(trim($_GET['m']));
     $MODE = '';
     
-    switch($RAW_MODE){
+    switch($RAW_MODE)
+    {
+
+        case 'ADDQUEST';
+          if(isset($_GET['id']))
+          {
+            $apkid = preg_replace("/\D/", "", $_GET['id']);
+            $show_add_quest = true;
+            include_once("./include/functions/dbconnect.php");
+            $sql = "SELECT * FROM apk_quest WHERE apkid=$apkid";
+            $req = $db->query($sql);
+            $quest_selected = $req->fetchAll();
+            include_once("./include/functions/dbconnect.php");
+            $sql = "SELECT * FROM questionnaire";
+            $req = $db->query($sql);
+            $quest_all = $req->fetchAll();
+            $quest_db = array();
+            foreach($quest_all as $quall)
+            {
+            	$add = 1;	
+            	foreach($quest_selected as $selqu)
+            		if($quall['questid'] == $selqu['questid'])
+            			$add = 0;
+            	if($add == 1)
+            	{
+            		$quest_db[] = $quall;
+            	}
+            }
+            $num_sel_quest = 0;
+          }
+          break;
+
         case 'UPLOAD':
-        
-                     $MODE = 'UPLOAD';
-                       
-                       if(isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
-                        
-                           $RAW_UPLOAD_RESULT = strtoupper(trim($_GET['res']));
-                           
-                           switch($RAW_UPLOAD_RESULT){
-                               case "1":
-                                        $UPLOAD_RESULT = 1;  // file successfully uploaded
-                                        break;
-                                        
-                               case "0":
-                                        $UPLOAD_RESULT = 0;  // file failed to upload
-                                        break;
-                                        
-                               case "2":
-                                        $UPLOAD_RESULT = 2;  // filetype not allowed
-                                        break;
-                                        
-                               case "3":
-                                        $UPLOAD_RESULT = 3;  // file too large
-                                        break;
-                                        
-                               case "4":
-                                        $UPLOAD_RESULT = 4;  // no permissions to write into dir
-                                        break;
-                                        
-                               default:
-                                        $UPLOAD_RESULT = 999;  // someone is trying to hax?
-                           }
-                       }
-                       
-                       include_once("./include/functions/dbconnect.php");
-                       
-                       $sql_upload = "SELECT rgroup 
-                                      FROM ". $CONFIG['DB_TABLE']['USER'] ." 
-                                      WHERE userid=". $_SESSION['USER_ID'];
-                                      
-                       $result = $db->query($sql_upload);
-                       $row = $result->fetch();
-                       
-                       $groupname = $row['rgroup'];
-                       $_SESSION['RGROUP'] = $groupname;
-                       
-                       break;
+          if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2'])
+            || isset($_REQUEST['back3']) || isset($_REQUEST['create']))
+          {
+            $page1 = false;
+            $page2 = false;
+            $page3 = false;
+            if(isset($_REQUEST['back2']))
+            {
+              $page1 = true;
+              include_once("./include/functions/dbconnect.php");
+              $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
+              ."', startdate = '". ((isset($_POST['start_1_a']) && $_POST['start_1_a'] != 'yyyy-mm-dd') ? $_POST['start_1_a'] : null)
+              ."', startcriterion = '". ((isset($_POST['start_2_a'])) ? $_POST['start_2_a'] : "0")
+              ."', radioButton1 = '". ((isset($_POST['radioButton1'])) ? $_POST['radioButton1'] : "1")
+              ."', enddate = '". ((isset($_POST['end_1_b']) && $_POST['end_1_b'] != 'yyyy-mm-dd') ? $_POST['end_1_b'] : null)
+              ."', runningtime = '". ((isset($_POST['end_2_b']) && $_POST['end_2_b'] != 'yyyy-mm-dd') ? $_POST['end_2_b'] : null)
+              ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
+              ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
+              ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
+              ."' WHERE userid = ".$_SESSION['USER_ID'];
+              $db->exec($sql);
+            }
+            elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
+            {
+              $page2 = true;
+              if(isset($_REQUEST['next1']))
+              {
+                include_once("./include/functions/dbconnect.php");
+                $sql = "UPDATE temp set apk_title = '".((isset($_POST['apk_title'])) ? $_POST['apk_title'] : "''")
+                ."', description = '". ((isset($_POST['apk_description'])) ? $_POST['apk_description'] : "''")
+                ."' WHERE userid = ".$_SESSION['USER_ID'];
+                $db->exec($sql);
+              }
+              else
+              {
+                if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
+                {
+                    $RAW_SENSOR_LIST = $_POST['sensors'];
+                    $SENSOR_LIST_STRING = '[';
+                    foreach($RAW_SENSOR_LIST as $sensor)
+                    {
+                      $SENSOR_LIST_STRING .= $sensor .','; 
+                    }
+                    $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
+                    
+                }
+                else
+                {
+                    $SENSOR_LIST_STRING = '[]';
+                }
+
+                include_once("./include/functions/dbconnect.php");
+                $sql = "UPDATE temp set androidversion = '". ((isset($_POST['apk_android_version'])) ? $_POST['apk_android_version'] : '')
+                ."' WHERE userid = ".$_SESSION['USER_ID'];
+                $db->exec($sql);
+
+                // there is a problem if nothing changes on sensors' selecting
+                $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
+                $db->exec($sql);
+              }
+            }
+            elseif(isset($_REQUEST['next2']))
+            {
+              $page3 = true;
+              include_once("./include/functions/dbconnect.php");
+              $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
+              ."', startdate = '". ((isset($_POST['start_1_a']) && $_POST['start_1_a'] != '') ? $_POST['start_1_a'] : null)
+              ."', startcriterion = '". ((isset($_POST['start_2_a'])) ? $_POST['start_2_a'] : "0")
+              ."', radioButton1 = '". ((isset($_POST['radioButton1'])) ? $_POST['radioButton1'] : "1")
+              ."', enddate = '". ((isset($_POST['end_1_b']) && $_POST['end_1_b'] != '') ? $_POST['end_1_b'] : null)
+              ."', runningtime = '". ((isset($_POST['end_2_b']) && $_POST['end_2_b'] != 'yyyy-mm-dd') ? $_POST['end_2_b'] : null)
+              ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
+              ."', locked = '". (!(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
+              ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
+              ."' WHERE userid = ".$_SESSION['USER_ID'];
+              $db->exec($sql);
+            }
+            elseif(isset($_REQUEST['create']))
+            {
+              if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
+              {
+                $RAW_SENSOR_LIST = $_POST['sensors'];
+                $SENSOR_LIST_STRING = '[';
+                foreach($RAW_SENSOR_LIST as $sensor)
+                {
+                  $SENSOR_LIST_STRING .= $sensor .','; 
+                }
+                $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
+                    
+              }
+              else
+              {
+                $SENSOR_LIST_STRING = '[]';
+              }
+
+              include_once("./include/functions/dbconnect.php");
+              $sql = "UPDATE temp set androidversion = '". ((isset($_POST['apk_android_version'])) ? $_POST['apk_android_version'] : '')
+              ."' WHERE userid = ".$_SESSION['USER_ID'];
+              $db->exec($sql);
+
+              // there is a problem if nothing changes on sensors' selecting
+              $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
+              $db->exec($sql);
+
+              include_once("./upload.php");
+            }   
+          }
+          else
+          {
+            $page1 = true;
+            $page2 = false;
+            $page3 = false;
+            include_once("./include/functions/dbconnect.php");
+            $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
+            $req = $db->query($sql);
+            $row = $req->fetch();
+            if(empty($row))
+            {
+              $sql = "INSERT INTO temp (userid) VALUE(".$_SESSION['USER_ID'].")";
+              $db->exec($sql);
+            }
+          }
+
+          $MODE = 'UPLOAD';
+          
+           if(isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1)
+           {
+            
+               $RAW_UPLOAD_RESULT = strtoupper(trim($_GET['res']));
+               
+               switch($RAW_UPLOAD_RESULT){
+                   case "0":
+                            $UPLOAD_RESULT = 0;  // file failed to upload
+                            break;
+                            
+                   case "1":
+                            $UPLOAD_RESULT = 1;  // file successfully uploaded
+                            break;
+                   
+                   case "2":
+                            $UPLOAD_RESULT = 2;  // filetype not allowed
+                            break;
+                            
+                   case "3":
+                            $UPLOAD_RESULT = 3;  // file too large
+                            break;
+                            
+                   case "4":
+                            $UPLOAD_RESULT = 4;  // no permissions to write into dir
+                            break;
+                            
+                   default:
+                            $UPLOAD_RESULT = 999;  // someone is trying to hax?
+               }
+           }
+           
+           include_once("./include/functions/dbconnect.php");
+           
+           $sql_upload = "SELECT rgroup 
+                          FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+                          WHERE userid=". $_SESSION['USER_ID'];
+                          
+           $result = $db->query($sql_upload);
+           $row = $result->fetch();
+           
+           $groupname = $row['rgroup'];
+           $_SESSION['RGROUP'] = $groupname;
+           
+           break;
                        
         case 'DEVICE':
         
@@ -159,7 +327,8 @@ if(isset($_GET['m'])){
                    
                    include_once("./include/functions/dbconnect.php");
                    
-                   if(isset($_GET['remove'])){
+                   if(isset($_GET['remove']))
+                   {
                     
                        $RAW_REMOVE_HASH = trim($_GET['remove']);
                        
@@ -405,9 +574,9 @@ if(isset($_GET['m'])){
                  
                  $group_members_count = count(json_decode($row['members']));
                  
-                 $user_array = json_decode($row['members']);
-                 if($user_array != null){
-                     foreach($user_array as $user){
+                 $group_members_array = json_decode($row['members']);
+                 if($group_members_array != null){
+                     foreach($group_members_array as $user){
                          
                          $sql = 'SELECT hwid 
                                  FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .' 
@@ -577,47 +746,65 @@ if(isset($_GET['m'])){
 }
 
 ?>
-  
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <script src="js/jquery.js"></script>
 <title>Hauptseite von MoSeS - User control panel</title>
 
 <?php  
   include_once("./include/_menu.php");
 ?>  
 
-<div id="header">
+<!--<div id="header">
     <div id="logo">
         <h1><a href="./index.php">Mobile Sensing System</a></h1>
     </div>
-</div>
+</div>-->
 <!-- <div id="splash">&nbsp;</div> -->
 <!-- end #header -->
 
-<div class="user_menu">  
+<div  id="menu_vertical">  
     <ul><?php
         
         if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
           ?>  
           
-          <li><a href="ucp.php?m=admin">ADMIN PANEL</a></li>
-          <li>&nbsp;</li>  
+          <li<?php 
+            if(isset($_GET['m'])&& $_GET['m'] == 'admin'){
+                echo " id=\"current_page_menu\"";
+            } ?>
+          ><a href="ucp.php?m=admin" title="Admin">ADMIN PANEL</a></li>
+           
             
           <?php
         }
     
         ?>
-        <li><a href="ucp.php">My Devices</a></li>
+        <li<?php 
+            if(!isset($_GET['m'])){
+                echo " id=\"current_page_menu\"";
+            } ?>><a href="ucp.php" title="My Devices">My Devices</a></li>
         <?php
          if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>0){
              
         ?>
-        <li><a href="ucp.php?m=group">My Group</a></li>
-        <li>&nbsp;</li>
+        <li<?php 
+            if(isset($_GET['m'])&& $_GET['m'] == 'group'){
+                echo " id=\"current_page_menu\"";
+            } ?>><a href="ucp.php?m=group" title="My Group">My Group</a></li>
+        
         <?php
          }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
             ?>
-            <li><a href="ucp.php?m=upload">App upload</a></li>
-            <li><a href="ucp.php?m=list">Show my Apps</a></li>
+            <li<?php 
+            if(isset($_GET['m'])&& $_GET['m'] == 'list'){
+                echo " id=\"current_page_menu\"";
+            } ?>><a href="ucp.php?m=list" title="Show my App">My user studies</a></li>
+            <li<?php 
+            if(isset($_GET['m'])&& $_GET['m'] == 'upload'){
+                echo " id=\"current_page_menu\"";
+            } ?>><a href="ucp.php?m=upload" title="User Study create">Create a user study</a></li>
+            </ul>
         <?php }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2){
             /*
@@ -683,96 +870,81 @@ if(isset($_GET['m'])){
                     <div class="post">
                         <div class="entry">
                            
-                        <?php 
-                          if(isset($USER_DEVICES)){
-                            
-                            echo '<h3>Your devices</h3>';
-                            echo '<div class="your_stuff"></div>';
-                              
-                            if(!empty($USER_DEVICES)){
-                                
-                                // user has got some devices
-                                foreach($USER_DEVICES as $device){
-                                    ?>
-                                    <div class="sensor_box">
-                                        <ul>
-                                            <li><div style="font-weight: bold; padding-top: 5px;">Device name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
-                                                echo $device['deviceid'];                                       
-                                            ?></div>
-                                            </li>
-                                            <li><?php
-                                            echo '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device" class="sensor_box_api_remove"></a>';                                       
-                                        ?>
-                                            </li>
-                                        </ul>
-                                        <div class="sensor_info">
-                                            <p style="font-weight: bold">Selected sensors (filter):</p>
-                                            <ul class="sensor_container_f"><?php
-                                               $sensor_array = json_decode($device['filter']);
-                                           
-                                           if(count($sensor_array) != 0){
-                                               
-                                               // we will make some lines of sensors
-                                               if(count($sensor_array) <= 7){
-                                               
-                                                   foreach($sensor_array as $sensor_number){
-                                                      echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                            $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
-                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
-                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
-                                                   }
-                                               }else{
-                                                   
-                                                   $once = true;
-                                                   for($i=0; $i < count($sensor_array); $i++){
-                                                      if($i < 7){ 
-                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>'; 
-                                                      }else{
-                                                          // execute only once ;)
-                                                          if($once){
-                                                              echo '</ul><ul class="sensor_container_s">';
-                                                              $once = false;
-                                                          }
-                                                          
-                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>';
-                                                      }
-                                                   }
-                                               }
-                                               
-                                           }else{
-                                               echo '<li><p>No filter set.</p></li>';
-                                           }
-                                                                                 
-                                          ?></ul>
-                                          <div class="sensor_box_api"><div style="font-weight: bold">Android API version:</div>
-                                                <div style="font-weight: bold;"><?php
-                                                echo $device['androidversion'];                                       
-                                            ?></div></div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                }
-                               
-                            }else{
-                                ?>
-                                <div class="sensor_box">
-                                    <ul>
-                                        <li>
-                                        <div style="padding-top: 10px; padding-bottom: 10px;">Your device list is empty.</div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <?php
-                            }
-                          }
+<?php 
+                          if(isset($USER_DEVICES))
+                          {
+?>
+                            <h3>Your devices</h3>
+                            <br>
+                            <div id="list_devices">
+                            	<ul>
+	                            	<script>
+	                            	    function changeClass(element)
+	                            	    {
+	                            	    	if(element.className=='clicked')
+	                            	    	{
+	                            	       	 	element.className='notclicked';
+	                            	       	}
+	                            	       	else
+	                            	       	{
+	                            	       		element.className='clicked';	
+	                            	       	}
+	                            	   	}
+	                            	</script>
+<?php  
+		                            if(!empty($USER_DEVICES))
+		                            {
+		                                // user has got some devices
+		                                foreach($USER_DEVICES as $device)
+		                                {
+?>
+		                                    <li onclick="changeClass(this);">
+		                                        <p><b>Device name: </b><?php echo $device['deviceid'];?></p>
+		                                        <ul>      
+<?php
+                                            	echo
+                                            	'<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device" class="sensor_box_api_remove"></a>';                                       
+?>
+		                                        
+		                                        <b>Selected sensors (filter):</b>
+		                                        
+<?php
+		                                        	$sensor_array = json_decode($device['filter']);
+			                                        if(count($sensor_array) != 0)
+			                                        {
+			                                        	echo "<br>";
+			                                        	foreach($sensor_array as $sensor_number)
+			                                        	{
+		                                                      echo '<img src="images/sensors/ultrasmall/'. 
+		                                                            $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+		                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+		                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
+		                                                }
+		                                             }
+		                                             else
+		                                             {
+		                                             	echo ' Nothing';
+		                                           	 }
+?>
+		                                        <br>
+		                                        <b>Android API version:</b><?php echo $device['androidversion']; ?>
+		                                    </ul></li><!-- device_element -->
+<?php
+		                                } // end of foreach($USER_DEVICES as $device)s 
+		                           	} // end of if(!empty($USER_DEVICES))
+		                            else
+		                            {
+?>
+		                                <b>Your device list is empty.</b> 
+<?php
+		                            }
+?>
+								</ul>
+							</div>
+<?php
+		                   }// if(isset($USER_DEVICES))
                             if($MODE == 'ADMIN' && !isset($_POST['pending_requests'])){
-                            ?>
+?>
                             
                             <h3>Admin control panel</h3>
                             
@@ -807,89 +979,244 @@ if(isset($_GET['m'])){
                             <?php
                             }
                             
-                            if($SHOW_UPDATE_PAGE != 1 && $MODE == 'UPLOAD' && !isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
+                            if($SHOW_UPDATE_PAGE != 1 && $MODE == 'UPLOAD' && !isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1)
+                            {
                         ?>
-                            <h3>Application upload form</h3>
-                        
-                            <form action="upload.php" method="post" enctype="multipart/form-data" class="upload_form">
-                              <p>Program name (title):</p>
-                              <input type="text" name="apk_title" />
-                              <p>Version of your program (can be any alphanumeric string):</p>
-                              <input type="text" name="apk_version" />
-                              <p>Lowest android version needed for my program to run:</p>
-                              <select name="apk_android_version">
+                            
+                            <h3>User study create form</h3>
+                                <!-- by Ibrahim -->
                                 <?php
-                                     
-                                for($i=0; $i<count($API_VERSION); $i++){
-                                    echo '<option value="'. $API_VERSION[$i][0] .'">'. $API_VERSION[$i][1] .'</option>';    
-                                } 
-                                
+                                  include_once("./include/functions/dbconnect.php");
+                                  // Initlization the contents of the pages for US creation form
+                                  $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
+                                  $req = $db->query($sql);
+                                  $row = $req->fetch();
+                                  if(!empty($row))
+                                  {
+                                    $apk_title_value = $row['apk_title'];
+                                    $description_value = $row['description'];
+                                    $radioButton_value = $row['radioButton'];
+                                    $startdate_value = $row['startdate'];
+                                    $startcriterion_value = $row['startcriterion'];
+                                    $radioButton1_value = $row['radioButton1'];
+                                    $enddate_value = $row['enddate'];
+                                    $runningtime_value = $row['runningtime'];
+                                    $maxdevice_value = $row['maxdevice'];
+                                    $locked_value = $row['locked'];
+                                    $inviteinstall_value = $row['inviteinstall'];
+                                    $androidversion_value = $row['androidversion'];
+                                    $sensors_value = $row['sensors'];
+                                  }
                                 ?>
-                              </select>                              
-                              <p>Program description:</p>
-                              <textarea cols="30" rows="6" name="apk_description"></textarea>
-                              <p style="margin: 20px 0;">My program uses following sensors:</p>
-                              <ul><?php
-                                                        
-                               for($i=0; $i < count($sensors_info); $i++){   
-                                  ?><li>
-                                    <div class="<?php echo $sensors_info[$i][0]; ?>" title="<?php echo $sensors_info[$i][2]; ?>"></div>
-                                    <div class="<?php echo $sensors_info[$i][1]; ?>" title="<?php echo $sensors_info[$i][2]; ?>" style="display: none;"></div>
-                                    <input type="checkbox" name="sensors[]" value="<?php echo $i+1; ?>" />
-                                   </li>
-                                   <?php
-                               }    
-                               
-                               ?>
-                              </ul>
+                                
 
-                              <div class="user_apk_restriction">
-                                  <input type="checkbox" name="restrict_users_number" value="1" /><span style="padding-left: 5px;">Make user study</span><br /><br />
-                                  <span style="margin-right: 10px;">Restrict number of devices:</span><input type="text" name="number_restricted_users" disabled="disabled" />
-                                  <br /><br /><?php
-                                   if(!empty($groupname)){
-                                     ?>  
-                                   <div style="margin: 15px 0;"><span style="margin-right: 10px;">Send only to my group</span><input type="checkbox" name="send_only_to_my_group" value="1" disabled="disabled" class="send_only_to_my_group" /></div>
-                                   <?php
-                             
-                                   }
-                                   ?>
-                              </div>
-                              
-                              <label for="file">Select a file:</label> 
-                              <input type="file" name="userfile" id="file" style="margin: 15px 0;">
-                              <p style="margin-bottom: 10px;">Click Upload button to upload your apk</p><button>Upload</button>
-                              <p style="margin-top: 50px;"></p>
-                            </form>
+                                                              
+                                <form action="ucp.php?m=upload" method="post" enctype="multipart/form-data" class="upload_form"> 
+                                
+<?php
+                                    if($page1 == true)
+                                    {
+?>
+                                   		<!-- first page -->
+                                      <p>Userstudy name:</p1>
+                                      <input type="text" name="apk_title" value = "<?php echo $apk_title_value; ?>">
+                                      <br>
+                                      <p>Program description:</p>
+                                      <textarea cols="30" rows="6" name="apk_description"><?php echo $description_value; ?></textarea>
+                                      <br>
+                                      <input type="submit" name="next1" value="next"/>
+                                  
+<?php
+                                      
+                                    }
+                                    elseif($page2 == true)
+                                    {
+?>    
+										<!-- second page -->
+                                      Start of the user study is
+                                      <br>
+                                      <!--<script language="JavaScript">
+                                        var currentFields = "";
+                                        var current="";
+                                        function enableText(elementId)
+                                        {
+                                          if (currentFields != "")
+                                          {
+                                            eval("document.forms[0].start_" + currentFields + "_a.disabled=true;");
+                                          }
+                                          eval("status = document.forms[0].start_" + elementId + "_a.disabled");
+                                          if (String(status) == String("true"))
+                                          {
+                                            eval("document.forms[0].start_" + elementId + "_a.disabled=false;");
+                                          }
+                                          currentFields = elementId;
+                                        }
+                                        function enabledate(element)
+                                        {
+                                          if (current != "")
+                                          {
+                                           eval("document.forms[0].end_" + current + "_b.disabled=true;");
+                                          }
+                                          eval("status = document.forms[0].end_" + element + "_b.disabled");
+                                          if (String(status) == String("true"))
+                                          {
+                                           eval("document.forms[0].end_" + element + "_b.disabled=false;");
+                                          }
+                                          current = element;
+                                        }
+                                      </script>-->
+                                      <input type="radio"
+                                        <?php echo (($radioButton_value == "1" || $radioButton_value == null)?'checked="checked"':''); ?>
+                                        name="radioButton" value = "1" onclick="javascript:enableText('1');">
+                                     on date:<input type="text" class="tcal" name="start_1_a"
+	                                    	<?php //echo (($radioButton_value == "2")? 'disabled':''); ?>
+	                                     value="<?php echo ($startdate_value == NULL)? '' : $startdate_value ; ?>"/>
+                                      <br>
+                                      <input type="radio"
+                                      	<?php echo (($radioButton_value == "2")?'checked="checked"':''); ?>
+                                      	name="radioButton" value = "2" onclick="javascript:enableText('2');">
+                                         after this number of installing:<input type="text" name="start_2_a"
+	                                         <?php //echo (($radioButton_value == "1" || $radioButton_value == null)?'disabled':''); ?>
+	                                         value="<?php echo ($startcriterion_value == NULL)? '0' : $startcriterion_value ; ?>"/>
+                                      <br>  
+                                      <br>
+                                      End of the user study is
+                                      <br>
+                                      <input type="radio"
+                                        <?php echo (($radioButton1_value == "1" || $radioButton1_value == null)?'checked="checked"':''); ?>
+                                        name="radioButton1" value = "1" onclick="javascript:enabledate('1');">
+                                         on date:<input type="text" class="tcal" name="end_1_b"
+                                         <?php //echo (($radioButton1_value == "2")? 'disabled':''); ?>
+                                         value="<?php echo ($enddate_value == NULL)? '' : $enddate_value ; ?>"/>
+                                      <br><input type="radio" <?php echo (($radioButton1_value == "2")?'checked="checked"':''); ?> name="radioButton1" value = "2" onclick="javascript:enabledate('2');">
+                                         after running time:<input type="text" name="end_2_b"
+                                          <?php //echo (($radioButton1_value == "1" || $radioButton1_value == null)?'disabled':''); ?>
+                                         value="<?php echo ($runningtime_value == NULL)? 'yyyy-mm-dd' : $runningtime_value ; ?>"/>
+                                      <br>
+                                      <br>
+                                      Max number of Devices:
+                                      <input type="text" name="maxdevice" value="<?php echo $maxdevice_value; ?>"/>
+                                      <br>
+                                      <br>
+                                      <?php
+                                        if(!empty($groupname))
+                                        {
+                                      ?>  
+	                                      <input type=radio
+	                                        <?php  
+	                                        echo
+	                                        	($inviteinstall_value == "0"|| $inviteinstall_value == null)?'checked="checked"':''; ?>
+	                                        name="invite" value="0"/>Send only to my group<br>
+                                      <?php
+                                        }
+                                      ?>
+                                      <INPUT TYPE=RADIO
+                                        <?php echo (($inviteinstall_value == "1")?'checked="checked"':''); ?>
+                                        NAME="invite" VALUE="1">Invite only<br>
+                                      <INPUT TYPE=RADIO
+                                        <?php echo (($inviteinstall_value == "2")?'checked="checked"':''); ?>
+                                        NAME="invite" VALUE="2">Invite & Install<br>
+                                      <INPUT TYPE=RADIO
+                                        <?php echo (($inviteinstall_value == "3")?'checked="checked"':''); ?>
+                                        NAME="invite" VALUE="3">Install only<P>
+                                      <br>
+                                      <input type="submit" name="back2" value="back"/>
+                                      <input type="submit" name="next2" value="next"/>
+                                      <!--<button>next</button>
+                                    </form>-->
+<?php
+                                    }
+                                    elseif($page3 == true)
+                                    {
+?>
+
+                                      <!-- third page -->
+                                      <label for="file">Select a file:</label> 
+                                      <input type="file" name="userfile" id="file" style="margin: 15px 0;">
+                                      <br>
+                                      <p>The lowest supported android version for your user study:</p>
+                                      <select name="apk_android_version">
+                                        <?php   
+                                        for($i=0; $i<count($API_VERSION); $i++){
+                                            echo
+                                            '<option value="'.$API_VERSION[$i][0].'" '
+                                            .(($androidversion_value==$API_VERSION[$i][0]) ? 'selected="selected"' : '')
+                                            .' >'. $API_VERSION[$i][1].'</option>';    
+                                        }
+                                        ?>
+                                      </select>
+                                      <br>
+                                      <p style="margin: 20px 0;">Your user study requires the following sensors:</p>
+                                      <ul>
+                                        <?php
+                                          $sensors_value = ($sensors_value != null) ? $sensors_value : '[]';      
+                                          $apk_to_update_sensors = json_decode($sensors_value);
+                                      
+                                          for($i=0; $i < count($sensors_info); $i++)
+                                          {
+                                               
+                                            echo '<li>';
+                                            if(in_array(($i+1), $apk_to_update_sensors))
+                                            {
+                                                
+                                                // if sensor was selected, check and select it here
+                                                
+                                                echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+                                                echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'"></div>';
+                                                echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" checked="checked" />';
+                                            }
+                                            else
+                                            {
+                                               
+                                                // here is no selection of sensor
+                                                
+                                                echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'"></div>';
+                                                echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+                                                echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" />';
+                                            }
+                                            echo '</li>';
+                                          }  
+                                       ?>
+                                      </ul>
+                                      
+                                      <input type="submit" name="back3" value="back"/>
+                                      <input type="submit" name="create" value="create" onClick = "docuemnt.location = 'http://da-sense.de/moses/upload.php' "/>
+                                      <!--<button>create</button>-->
+                                    </form>
+                                  <?php
+                                    }
+                                  ?>
+                                
+
                         <?php
                             }
                             
                             // there WAS some upload
-                            if($MODE == 'UPLOAD' && isset($_GET['res']) && !empty($_GET['res'])){
+                            
+                            if($MODE == 'UPLOAD' && isset($_GET['res']) && $_GET['res'] >= 0){
                                 
                                 echo '<h3>Finished uploading the file</h3>';
                                 
                                 switch($UPLOAD_RESULT){
-                                    
-                                    // successful upload
-                                    case 1:
-                                        ?>
-                                        
-                                        <div class="upload_successful">
-                                            <p>Your file was successfully uploaded!</p>
-                                        </div>
-
-                                        <?php
-                                        break;
-                                        
                                     // failed upload.
                                     case 0:
-                                        ?>
-                                        
+                                    ?>
                                         <div class="upload_failed">
                                             <p>That filetype not allowed. Sorry.</p>
                                         </div>
                                             
+                                        <?php
+                                        break;
+                                    // successful upload
+                                    case 1:
+                                        ?>
+                                        <div class="upload_successful">
+                                            <?php
+                                            // by Ibrahim
+                                            include("./upload_successful.php");
+                                            ?>
+                                        </div>
+
                                         <?php
                                         break;
                                     
@@ -939,45 +1266,181 @@ if(isset($_GET['m'])){
                                 }
                             }
                             
-                            if($MODE == 'GROUP'){
-                                
-                                if(!empty($groupname)){ 
+                            if($MODE == 'GROUP')
+                            {
+                            	if(!empty($groupname))
+                                { 
                                     echo '<h3>You are currently member of research group</h3>';
-                                    echo '<div class="group_name">'. $groupname .'</div>';           
-                                    ?>
-                                    <div class="group_stats">
-                                     <p style="font-weight: bold; font-size: large; margin-bottom: 8px; margin-left: 20px;">Statistics</p>
-                                        <ul>
-                                            <li>
-                                                <div>Your group has<div style="font-weight: bold;"><?php
-                                                  echo $group_members_count;                 
-                                                ?></div><?php
-                                                  echo ($group_members_count == 1 ? 'member' : 'members');                           
-                                                ?>!</div>
-                                            </li>
-                                            <li>
-                                                <div>Your group has<div style="font-weight: bold;"><?php
-                                                  echo $group_device_count;                 
-                                                ?></div><?php
-                                                   
-                                                  echo ($group_device_count == 1 ? 'device' : 'devices');
-                                                  
-                                                  if($group_device_count != 0){
-                                                     echo '!'; 
-                                                  }
-                                                  
-                                                ?></div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <?php
-                                    ?>
-                                    <form action=ucp.php?m=leave method="post" class="leave_group">
-                                        <button>Leave</button>
-                                    </form>
+                                    echo '<div class="group_name">'. $groupname .'</div>';
+                                    $apk_lists = "";
+                                    $num_apks = 0;         
                                     
-                                        <?php
-                                }else{ ?>
+                                    if(count($group_members_array) > 0)
+                                    {
+                                    	// By Ibrahim
+?>
+	                                    <br>Your group has <b><?php
+                                    	echo
+                                    	((count($group_members_array) > 1) ? count($group_members_array)
+                                    	.'</b> members:': 'a</b>'
+                                    	.'member:');
+?>
+                                    	<div id="group_users">
+                                    		<ul>
+	                                    		<script>
+	                                    		    function changeClass(element)
+	                                    		    {
+	                                    		    	if(element.className=='clicked')
+	                                    		    	{
+	                                    		       	 	element.className='notclicked';
+	                                    		       	}
+	                                    		       	else
+	                                    		       	{
+	                                    		       		element.className='clicked';	
+	                                    		       	}
+	                                    		   	}
+	                                    		</script>
+<?php
+		                                    	foreach ($group_members_array as $member)
+		                                    	{
+		                                    		include_once("./include/functions/dbconnect.php");
+		                                    		
+		                                    		// 
+		                                    		$user_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $member;    
+		                                    		$req = $db->query($user_sql);
+		                                    		$user = $req->fetch();
+		                                    		
+		                                    		$hw_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']. " WHERE uid=" . $member;
+		                                    		$req_hw = $db->query($hw_sql);
+		                                    		$hw_rows = $req_hw->fetchAll();
+		                                    		
+		                                    		$apk_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['APK']. " WHERE locked=1 AND userid=" . $member;
+		                                    		$req_apk = $db->query($apk_sql);
+		                                    		$apk_rows = $req_apk->fetchAll();
+?>
+		                                    		<li onclick="changeClass(this);">
+			                                    		<p><b> Name:</b> <?php echo $user['firstname']." ".$user['lastname']; ?></p>
+			                                    		<ul>
+			                                    		<b> Account level: </b>
+			                                    		<?php  
+			                                    			echo 
+			                                    			(($user['usergroupid'] == 1) ?
+			                                    			"normal"
+			                                    			: (($user['usergroupid'] == 2) ?
+			                                    			"scientist"
+			                                    			: "admin"));
+			                                    		?>
+			                                    		<br><b> Email: </b><?php echo $user['email']; ?>
+			                                    		<br><b> Number of devices: </b><?php echo count($hw_rows); ?>
+			                                    		<br>
+<?php
+		                                    			if(count($hw_rows) > 0)
+		                                    			{
+		                                    				foreach($hw_rows as $row)
+		                                    					$all_devices[] = $row;
+				                                    	} // end of if(count($hw_rows) > 0)
+				                                    	
+				                                    	for($i = 0 ; $i < count($apk_rows) ;$i++)
+		                                				{
+		                                					$apk_lists.=($num_apks > 0)?", " : "";
+		                                					$apk_lists.=$apk_rows[$i]['apktitle'];
+		                                					$num_apks++;
+		                                				}
+?>
+		                                   		</ul></li><!-- group_user -->
+		                                   		
+<?php
+		                                    	} // end of foreach ($group_members_array as $member)
+?>											</ul> <!-- list of users -->
+		                       			</div> <!-- group_users -->
+		                       			<br>              		
+<?php
+                                    } // end of if(count($group_members_array) > 0)
+?>
+									List of unique devices of this group:
+									<div id="group_devices">
+									
+<?php
+	                                    // list of all unique devices
+	                                    if(count($all_devices) > 0)
+	                                    {
+	                                    	$unique_array = array();
+?>
+	                                    	<ul>
+	                                    		<script>
+	                                    		    function changeClass(element)
+	                                    		    {
+	                                    		    	if(element.className=='clicked')
+	                                    		    	{
+	                                    		       	 	element.className='notclicked';
+	                                    		       	}
+	                                    		       	else
+	                                    		       	{
+	                                    		       		element.className='clicked';	
+	                                    		       	}
+	                                    		   	}
+	                                    		</script>
+	                                    		
+<?php
+	                            				for($h = 0 ; $h < count($all_devices) ; $h++)
+	                            				{
+	                            					if(!in_array($all_devices[$h]['android_id'],$unique_array))
+	                            					{
+	                            						$unique_array[] = $all_devices[$h]['android_id'];
+?>
+		                                				<li onclick="changeClass(this);">
+		                                					<p><b>Device's model name: </b><?php echo $all_devices[$h]['modelname']; ?></p>
+		                                					<ul><b>  Android version number: </b>
+		                                    				<?php echo $hw_rows[$h]['androidversion']; ?>
+		                                    				<br><b>   Availabe sensors: </b>
+		                                    				<br>
+<?php
+		                                					$sensor_array = json_decode($all_devices[$h]['filter']);
+		                                					
+		                                					if(count($sensor_array) != 0)
+		                                					{
+		                                					   foreach($sensor_array as $sensor_number)
+		                                					   {
+		                            					           echo '<img src="images/sensors/ultrasmall/'. 
+		                            					                 $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+		                            					                 $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+		                            					                 $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
+		                                					        
+		                                					    }
+		                                					}
+		                                					else
+		                                					{
+		                                						echo "no sensor selected";
+		                                					}
+		                                					echo "<br>";
+		                                					echo "<b>C2DM</b> is ".(($all_devices[$h]['c2dm'] != null)?"" : "not ")."availabe";
+?>	                                    						
+														</ul></li><!-- group_device -->
+<?php
+	                                    			}// end of if()
+	                                    		}
+?>
+	                                 		</ul><!-- list of devices -->
+<?php
+	                                    } // end of if(count($all_devices) > 0)
+?>
+									</div><!-- group_devices -->
+									<br>
+<?php
+                                	echo (($num_apks == 0)?
+                        				"This group has <b>no</b> private apk"
+                        				: (($num_apks == 1 && $apk_lists != "")?
+                        				"This group has <b>a</b> private apk: ".$apk_lists
+                        				: "This group has <b>$num_apks</b> private apks:<br>".$apk_lists));
+?>
+                            		<form action=ucp.php?m=leave method="post" class="leave_group">
+                            		    <button>Leave this group</button>
+                            		</form>
+<?php
+                               	} // end of if(!empty($groupname)) 
+	                            else
+	                            {
+?>
                                 
                                     <h3>Join a research group or found one</h3>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
@@ -989,9 +1452,9 @@ if(isset($_GET['m'])){
                                         <input type="password" name="group_pwd" />
                                         <button>OK</button>
                                     </form>
-                                    <?php
-                                }
-                            }
+<?php
+                              }
+                         	} // end of if($MODE == 'GROUP')
                             
                             // THE USER HAS CLICKED THE JOIN BUTTON
                             if($MODE == 'JOIN'){
@@ -1033,115 +1496,394 @@ if(isset($_GET['m'])){
                             }
                             
                             // user wants a listing of APK files
-                            if($MODE == 'LIST' && isset($LIST_APK)){
-                                
-                              echo '<h3>Your apps</h3>';
-                              echo '<div class="your_stuff"></div>';  
-                                
-                              // we found some APKs
-                              if($LIST_APK == 1){
-                                  
-                                  foreach($apk_listing as $row){
-                                   ?>   
-                                  <div class="sensor_box">
-                                    <ul>
-                                        <li><div style="font-weight: bold; padding-top: 5px;">Name:</div><div style="font-weight: bold;" class="sensor_box_name"><?php
-                                            echo $row['apktitle'];                                       
-                                        ?></div>
-                                        </li>
-                                        <li><div class="down_remove_links"><?php
+                            if($MODE == 'LIST' && isset($LIST_APK))
+                            {
+?>
+                              <h3>Your User Studies</h3>
+                              <br>
+                              <div id="list_us"> 
+<?php                         // we found some APKs
+                              if($LIST_APK == 1)
+                              {
+?>
+                              	<ul>
+	                              	<script>
+	                              	    function changeClass(element)
+	                              	    {
+	                              	    	if(element.className=='clicked')
+	                              	    	{
+	                              	       	 	element.className='notclicked';
+	                              	       	}
+	                              	       	else
+	                              	       	{
+	                              	       		element.className='clicked';	
+	                              	       	}
+	                              	   	}
+	                              	</script>
+<?php
+	                                foreach($apk_listing as $row)
+	                                {
+?>   
+	                             		<li onclick="changeClass(this);">
+	                                   		<p><b>Name: </b><?php echo $row['apktitle']; ?></p>
+<?php
                                             echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk" class="bt_download"></a>';
+                                            echo '<a href="ucp.php?m=addquest&id='. $row['apkid'] .'" title="Add Questionnaire" class="bt_quest"></a>';
                                             echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK" class="bt_upload"></a>';
-                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK" class="bt_remove"></a>';                                       
-                                        ?></div>
-                                        </li>
-                                    </ul>
-                                    <div class="sensor_info">
-                                        <p style="font-weight: bold">Required sensors:</p>
-                                        <ul class="sensor_container_f"><?php
-                                           $sensor_array = json_decode($row['sensors']);
-                                           
-                                           if(count($sensor_array) != 0){
-                                               
-                                               // we will make some lines of sensors
-                                               if(count($sensor_array) <= 7){
-                                               
-                                                   foreach($sensor_array as $sensor_number){
-                                                      echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                            $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
-                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
-                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" /></li>'; 
-                                                   }
-                                               }else{
-                                                   
-                                                   $once = true;
-                                                   for($i=0; $i < count($sensor_array); $i++){
-                                                      if($i < 7){ 
-                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>'; 
-                                                      }else{
-                                                          // execute only once ;)
-                                                          if($once){
-                                                              echo '</ul><ul class="sensor_container_s">';
-                                                              $once = false;
-                                                          }
-                                                          
-                                                          echo '<li><img src="images/sensors/ultrasmall/'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][0] .'" alt="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" title="'. 
-                                                                $sensors_ultrasmall_mapping[$sensor_array[$i]][1] .'" /></li>';
-                                                      }
-                                                   }
-                                               }
-                                               
-                                           }else{
-                                               echo '<li><p>No sensors set.</p></li>';
-                                           }
-                                     
-                                      ?></ul>
-                                      <div class="apk_installed_on">App installed on<div style="font-weight: bold; padding: 0 5px;"><?php
-                                                  echo $row['participated_count'];                 
-                                                ?></div><?php
-                                                  echo ($row['participated_count'] == 1 ? 'device' : 'devices');                           
-                                                  if($row['participated_count'] != 0){
-                                                     echo '!'; 
-                                                  }
-                                                ?></div>
-                                      <div class="apk_description_trigger">description <div class="descr_arrow">-></div></div>
-                                      <div class="apk_description">
-                                    <p style="font-weight: bold">App description</p>
-                                    <ul><li><p class="apk_descr_text"><?php
-                                       
-                                       if(!empty($row['description'])){
-                                           echo $row['description'];
-                                       }else{
-                                           echo 'No description.';
-                                       }
-                                                                         
-                                  ?></p></li></ul>
-                                </div>
-                                    </div>
-                                  
-                                </div>
-                                     <?php 
-                                      
-                                  }   
-                              }else{
-                                  ?>
-                                  
-                                  <div class="sensor_box">
-                                    <ul>
-                                        <li>
-                                            <div style="padding-top: 10px; padding-bottom: 10px;">You have no apps.</div>
-                                        </li>
-                                    </ul>
+                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK" class="sensor_box_api_remove"></a>';
+		                                   	$android_version = $row['androidversion'];
+		                            		$startdate = $row['startdate'];
+	                                    	$startcriterion = $row['startcriterion']; 
+	                                  	    $enddate = $row['enddate'];
+	                                      	$runningtime = $row['runningtime'];
+	                                      	$description = $row['description'];
+	                                      	$onlymygroup = $row['locked'];
+	                                      	$invite = $row['inviteinstall'];
+	                                      	$maxdevice = $row['maxdevice'];
+	                                      	$apkname = $row['apkname'];
+?>
+		                                   	<ul>
+		                                   	The lowest supported android version: <?php echo $android_version; ?>
+		                                    <br>
+<?php
+		                                        if($startdate != null)
+		                                          echo "The start date: ".$startdate;
+		                                        elseif($startcriterion != null)
+		                                            echo "Commencement after ".$startcriterion." users join.";
+		                                        else
+		                                          echo "Commenced while creating ".$row['apktitle'].".";
+?>
+		                                      <br>
+<?php
+		                                        if($enddate != null)
+		                                          echo "The end date: ".$enddate;
+		                                        elseif($runningtime != null)
+		                                          echo "The termination after ".$runningtime." from start date.";
+		                                        else
+		                                          echo "Terminated immediately after creating ".$row['apktitle'].".";
+?>
+		                                      <br>
+		                                      Description:
+		                                      <?php
+		                                        echo $description;
+		                                      ?>
+		                                      <br>
+		                                      <?php
+		                                        if($onlymygroup)
+		                                          echo $row['apktitle']." is private for your group.";
+		                                        else
+		                                          echo $row['apktitle']." is public.";
+		                                      ?>
+		                                      <br> 
+		                                      <?php
+		                                        if($invite == 1)
+		                                          echo "Joining is allowed for invited users.";
+		                                        elseif($invite == 2)
+		                                          echo "Joining is allowd from all invited users that installed ".$row['apktitle'].".";
+		                                        elseif($invite == 3)
+		                                          echo "Joining is allowed from all users that installed ".$row['apktitle'].".";
+		                                      ?>
+		                                      <br>
+		                                      Max number of Devices: <?php echo $maxdevice; ?>
+		                                      <br>
+		<?php
+		                                      $sensor_array = json_decode($row['sensors']);
+		                                      if(count($sensor_array) != 0)
+		                                      {
+		                                      	
+		                                        echo "Required sensors:<br>";
+		                                        // we will make some lines of sensors
+		                                        foreach($sensor_array as $sensor_number)
+		                                         {
+		                                            echo 
+		                                              '<img src="images/sensors/ultrasmall/'. 
+		                                              $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+		                                              $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+		                                              $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
+		                                          }
+		                                      }
+		                                      else
+		                                      {
+		                                        echo 'No sensors set.';
+		                                      }
+?>                                    
+		                                      <br>
+		                                      There 
+		                                        <?php
+		                                          echo ($row['participated_count'] < 2 ? 'is ' : 'are ');
+		                                          echo ($row['participated_count'] == 0) ? "no" : $row['participated_count'];
+		                                          echo ($row['participated_count'] < 2 ? ' device' : ' devices');                           
+		                                          echo " currently joined to ".$row['apktitle'].".";
+		                                        ?>
+		                                       <br>
+		                                       
+
+<?php
+												$sql ="SELECT questid FROM `apk_quest` WHERE apkid=".$row['apkid'];
+												$req=$db->query($sql);
+												$rows = $req->fetchAll();
+												if(count($rows) > 0)
+												{
+?>
+													The selected questionnaires:<br>
+<?php
+													for($qi = 0; $qi < count($rows); $qi++)
+													{
+														$sql ="SELECT name FROM `questionnaire` WHERE questid=".$rows[$qi]['questid'];
+														$req=$db->query($sql);
+														$us_quest = $req->fetch();
+														echo $us_quest['name'].(($qi+1 < count($rows))? " - ":"");
+													}
+												}
+												else
+												{
+?>
+													There is no questionnaire selected
+<?php	
+												}
+													
+												
+?>
+		                                  </ul></li>
+<?php 
+                                	}
+?>
+								</ul>
+								</div>
+							
+<?php   
+                              }
+                              else
+                              {
+                          ?>
+                                <div class="sensor_box">
+                                  <ul>
+                                      <li>
+                                          <div style="padding-top: 10px; padding-bottom: 10px;">You have no user studies.</div>
+                                      </li>
+                                  </ul>
                                 </div>
                                 
-                                <?php
+<?php
                               }
 
+                            }
+
+                           
+                            if($show_add_quest == true)
+                            {
+?>
+								List of all availabes questionnaires: <br>
+<?php	
+								include_once("./include/functions/dbconnect.php");
+								$sql ="SELECT * FROM `questionnaire`";
+								$req=$db->query($sql);
+								$quests = $req->fetchAll();
+?>
+								<div id="quests_list">
+									<ul>
+										<script>
+										    function changeClass(element)
+										    {
+										    	if(element.className=='clicked')
+										    	{
+										       	 	element.className='notclicked';
+										       	}
+										       	else
+										       	{
+										       		element.className='clicked';	
+										       	}
+										   	}
+										</script>
+<?php										
+											foreach($quests as $quest)
+											{
+?>
+												<li onclick="changeClass(this);">
+													<p><b>Name: </b><?php echo $quest['name']; ?></p>
+													It containes the following questions:<br><ul>
+													
+<?php
+													$sql ="SELECT * FROM `question` WHERE questid=".$quest['questid'];
+													$req=$db->query($sql);
+													$qust = $req->fetchAll();
+													$i = 1;
+													foreach($qust as $q)
+													{
+														echo "q".$i.": ";
+														if($q['type']==1) // multiple choices
+														{
+															echo substr($q['content'],0,strrpos($q['content'],"{"))."<br>";
+														}
+														else
+														{
+															echo $q['content']."<br>";
+														}
+														$i++;
+													}
+?>
+												</ul></li>
+<?php										
+											}
+?>
+									</ul>
+								</div>
+								<br>
+<?php
+								
+								if (isset($_POST['submit']))
+	                              {
+	                              	include_once("./include/functions/dbconnect.php");
+	                              /*	
+                              for ($i=0; $i<count($_POST['questbox']);$i++) {
+		
+										$idtodo=$_POST['questbox'][$i];
+										$sql="insert into apk_quest values('$apkid','$idtodo')";
+									    $req=$db->query($sql) ;
+									    echo "Ok";
+									    
+						    	}
+						    	*/
+                              	
+                              	/*
+                              	foreach($_POST as $key => $value){
+                              		if(substr($key,0,9)=="standard_"){
+                              			$idtodo=substr($key, 9);
+                              			
+										$sql="INSERT INTO `apk_quest`  VALUES ($apkid,$idtodo);";
+										echo "<br>".$sql;
+									    $req=$db->query($sql) ;
+                              		}
+                              	}*/
+                              	
+                              	
+                              
+                              	
+                              	if(isset($_POST['questionnaire']) && is_array($_POST['questionnaire']))
+	                              	foreach($_POST['questionnaire'] as $questBox)
+	                              	{
+	                              		//echo "($questBox) ";
+	                              		
+	                              			$sql ="SELECT * FROM `apk_quest` WHERE apkid=$apkid AND questid = $questBox";
+	                              			$req=$db->query($sql);
+	                              			$rows = $req->fetch();
+	                              			if(empty($rows))
+	                              			{
+												$sql="INSERT INTO `apk_quest`  VALUES ($apkid,$questBox);";
+												//echo "<br>".$sql;
+											    $db->exec($sql);
+											    
+											    
+	                              			}
+	                              			else
+	                              				echo "$apkid and $questBox exist already!<br>";
+	                              	}
+	                             echo "Your selecting was done successfully!";
+						   		
+                              }	
+                              else 
+                              {   
+                              ?>
+                              <fieldset id="questionnaireFieldset">
+                              <label>Select your Questionnaire:</label>
+                              <form action="" method="POST">
+                                <input type="hidden" id = "apkid" name="apkid" value="<?php echo $apkid; ?>" />
+                               
+                               <div id="quests_selected" style="padding:10px;"></div>
+                               
+                                <select id="quests" name="quests" >
+                                  <option value="null">Select a questionnaire:</option>
+                                  <?php
+                                  //<br><input type = checkbox name= questbox[]/>
+                                    if(!empty($quest_db))
+                                    {
+                                      for ($i = 0; $i < count($quest_db); $i++)
+                                      {
+                                        echo '<option value="'.$quest_db[$i]['questid'].'">'.$quest_db[$i]['name'].'</option>';
+                                      }
+
+                                    }
+                              //XXX By Fehmi JQUERY      
+                                  ?>
+                                </select>
+							
+                             
+                              
+                              <script type="text/javascript">
+                              $("#quests").change(function(){
+
+                                  if($("#quests option:selected").val() != "null"){
+                                  $.ajax({
+                                	  type: "POST",
+                                	  url: "getquest.php",
+                                	  data: { id: $("#quests option:selected").val()}
+                                	}).done(function( msg ) {
+                                	  $("div#quests_selected").append(msg);
+                                	  $("#quests option:selected").remove();
+                                	  
+                                	});
+                                  }
+                                  });
+                              </script>
+                              <script type="text/javascript">
+                              function showUser()
+                              { 
+	                              if (window.XMLHttpRequest)
+	                                {// code for IE7+, Firefox, Chrome, Opera, Safari
+	                                xmlhttp=new XMLHttpRequest();
+	                                }
+	                              else
+	                                {// code for IE6, IE5
+	                                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	                                }
+	                              xmlhttp.onreadystatechange=function()
+	                                {
+	                                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	                                  {
+	                                  document.getElementById("setText").innerHTML="Your selecting was done successfully!";
+	                                  }
+	                                }
+	                              xmlhttp.open("GET","ucp.php",true);
+	                              xmlhttp.send();
+                              }
+                              </script>
+                              <input type="submit" name = "submit" onclick="showUser();" >
+                             
+	  							
+                              
+                              </form>
+                              <span id="setText">
+                              <?php
+	  								if(empty($quest_selected))
+	  									echo "<br>There is no questionnaire been added to this user study.<br>";
+	  								else
+	  								{
+	  									echo "<br>You added already these questionnaires:";
+?>
+										<ul>
+<?php	  	                            
+		  		                            foreach($quest_selected as $qessel)
+		  		                            {
+		  		                            	include_once("./include/functions/dbconnect.php");
+		  		                            	$sql = "SELECT * FROM questionnaire WHERE questid=".$qessel['questid'];
+		  		                            	$req = $db->query($sql);
+		  		                            	$qs = $req->fetch();
+		  		                            	echo "<li>".$qs['name']."</li>";
+		  		                            }
+?>
+										</ul>
+<?php
+	  		                        }
+?>
+	  							</span>
+                              </fieldset>
+                              
+							
+<?php							}
+                                                            
+                              
+                              
+                              
                             }
                             
                             /********************************************
@@ -1158,10 +1900,6 @@ if(isset($_GET['m'])){
                                       echo $apk_to_update['apktitle'];         
                                       
                                       ?></h4>
-                                  <p>Version of your program (can be any alphanumeric string):</p>
-                                  <input type="text" name="apk_version" value="<?php
-                                    echo $apk_to_update['apk_version'];                                                    
-                                   ?>" />
                                   <p>Lowest android version needed for my program to run:</p>
                                   <select name="apk_android_version">
                                     <?php
@@ -1258,7 +1996,8 @@ if(isset($_GET['m'])){
                             }
                             
                             if($MODE == 'PROMO' && isset($USER_PENDING) && $USER_PENDING == 1
-                                                && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED != 1){
+                                                && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED != 1)
+                            {
                                 ?>
                                 
                                 <div class="promo_sent_text">
@@ -1307,5 +2046,6 @@ if(isset($_GET['m'])){
 <?php  
   include_once("./include/_login_slider.php");
     
-  include_once("./include/_footer.php");  
+  include_once("./include/_footer.php");
+  ob_end_flush();  
 ?>

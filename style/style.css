@@ -11,7 +11,7 @@ body {
 	padding: 0;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	background-color: #d9cfb4;
+	background-color: #999999;//#d9cfb4; F2F2F2
     color: #7F7F81;
     overflow: scroll;
 }
@@ -20,7 +20,7 @@ h1, h2, h3, h4 {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
-	color: #FF4500;
+	color: #0066FF;
 }
 
 h1 {
@@ -70,32 +70,68 @@ img.aligncenter {
 	margin: 0px auto;
 }
 
-.user_menu {
-    position:relative;
-    float:left;
+
+/*menu vertical new*/
+
+#menu_vertical{
+	width: auto;
+	position:fixed;
 }
 
-.user_menu li {
-    display: block;
-    list-style-type:none;
+#menu_vertical ul {
+	margin:0;
+	padding:0;
+	list-style-type:none;
 }
+
+
+
+#menu_vertical ul li {
+	display: inline; /*IE 6*/
+}
+
+
+
+#menu_vertical ul li a {
+	display:block;
+	background:url("../images/nav_vertical.jpg") repeat-x top left;
+	/*background: #d9cfb4;*/
+	width:200px;
+	text-decoration:none;
+	padding:4px/*padding for top, bottom*/ 7px /*padding for left, right*/;
+	border-bottom:1px solid #eeeeee;
+	border-top:1px solid #cccccc;
+	border-left:5px solid #484949;/*#333333;*/
+	color: #484949; //#333333;
+}
+
+
+#menu_vertical ul li a:hover {
+	border-left-color:#0099FF;
+	color:#0066FF;
+	background:#c4c4c4;
+}
+
+#menu_vertical ul  #current_page_menu a{
+	border-left-color:#0099FF;
+	color:#0066FF;
+	background:#c4c4c4;
+}
+
+
+/*fin menu vertical*/
 
 #wrapper {
-	background: url(../images/img01.jpg) repeat-x left top;
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -80px;
-}
-
-#header {
-	width: 980px;
-	height: 63px;
-	margin: 0 auto;
+    margin: 0 auto -55px;
 }
 
 #logo {
-	float: left;
+	z-index:1;
+	position: absolute;
+	//float: left;
 	width: 660px;
 	height: 63px;    
 	background: url(../images/img03.png) no-repeat left top;
@@ -119,55 +155,163 @@ img.aligncenter {
 	text-decoration: none;
 	color: #2D2722;
 }
+/* CSS Document */
 
-#menu {
-	width: 980px;
-	height: 46px;
-	margin: 0 auto;
-	padding: 15px 0px 0px 0px;
+
+ul#menu{
+
+	margin:0;
+	padding:0;
+		
+	list-style-type:none;
+		
+	position:relative;
+		
+	display:block;
+		
+	height:100px;
+		
+	font-size:14px;
+		
+	font-weight:bold;
+		
+	background:url("../images/nav_up.jpg") repeat-x top left;
+
 }
 
-#menu ul {
-	margin: 0;
-	padding: 0px 0px 0px 4px;
-	list-style: none;
-	line-height: normal;
+
+
+#menu li{
+
+	display:block;
+		
+	float:left;
+		
+	margin:0;
+		
+	padding:0;
+	
+}
+	
+	
+
+#menu li a{
+
+	display:block;
+		
+	float:left;
+	
+	color:#888888;
+		
+	text-decoration:none;
+		
+	font-weight:bold;
+		
+	padding:60px 40px 0 40px;
+		
+	height:40px;
+		
+	margin:0;
+		
+
+}
+	
+	
+
+#menu li a:hover{
+
+background: url("../images/down.jpg") no-repeat top center;
+
+color:#484949;	
+	
 }
 
-#menu li {
-	float: left;
+
+.current_page_item{
+
+background: url("../images/down.jpg") no-repeat top center;	
+
+color:#484949;
+	
 }
 
-#menu a {
-	display: block;
-	float: left;
-	height: 24px;
-	padding: 4px 30px 0px 30px;
-	text-decoration: none;
-	text-shadow: #8A5608 0px 1px 1px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	font-weight: normal;
-	color: #FFFFFF;
-	border: none;
+/* Ende Menu horizental*/
+
+// begin of lists
+#group_users>ul, #list_devices>ul, #list_us>ul,
+#group_devices>ul, #quests_list>ul {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+   	width: 500px;
 }
 
-#menu .current_page_item{
-    
-    background-color: #dd5525;
-    border-radius: 25px; 
-    -moz-border-radius: 25px; 
-    -webkit-border-radius: 25px; 
-    border: 0px solid #800000;
+#group_users>ul>li, #list_devices>ul>li, #list_us>ul>li,
+#group_devices>ul>li, #quests_list>ul>li {
+    display:block;
+	overflow: hidden;
+    margin: 0;
+    padding: 0px;
+    list-style:none;
+	height:40px; 
+	width: 600px;
+	
+
+    /* Decorative CSS */
+    background-color:#f0f0f0;
+
+    /* CSS3 Transition Effect */
+    /*transition: height 0.3s ease-out;
+    -moz-transition: height 0.2s ease-out;
+    -webkit-transition: height 0.2s ease-out;
+    -o-transition: height 0.3s ease-out;*/
+
 }
 
-#menu a:hover{
-    background-color: #dd5525;
-    border-radius: 25px; 
-    -moz-border-radius: 25px; 
-    -webkit-border-radius: 25px; 
-    border: 0px solid #800000;
+#group_users>ul>li>p, #list_devices>ul>li>p, #list_us>ul>li>p,
+#group_devices>ul>li>p, #quests_list>ul>li>p {
+    display:block;
+    margin: 0;
+    padding:10px;
+    height:19px;
+
+    /* Decorative CSS */
+    border-top:#f0f0f0 1px solid;
+    text-decoration:none;
+    color: #000;
+    background: #cccccc;
+
+    /* CSS3 Gradient Effect */
+    background: -moz-linear-gradient( top, #999999, #cccccc);
+    background: -webkit-gradient(linear, left top, left bottom, from(#999999), to(#cccccc));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff999999, endColorstr=#ffcccccc); /* IE 7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff999999, endColorstr=#ffcccccc)";   /* IE 8 */
 }
+
+#group_users ul li.clicked, #list_devices>ul>li.clicked, #list_us>ul>li.clicked,
+#group_devices ul li.clicked, #quests_list ul li.clicked {
+	height: auto;
+}
+
+#group_users>ul>li:hover>p, #list_devices>ul>li:hover>p, #list_us>ul>li:hover>p,
+#group_devices>ul>li:hover>p, #quests_list>ul>li:hover>p {
+    /* Decorative CSS */
+    color:#fff;
+    background: #000000;
+   
+
+    /* CSS3 Gradient Effect */
+    background: -moz-linear-gradient( top, #454545, #000000); /* FF, Flock */
+    background: -webkit-gradient(linear, left top, left bottom, from(#454545), to(#000000)); /* Safari, Chrome */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff454545, endColorstr=#ff000000); /* IE 5.5 - IE 7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff454545, endColorstr=#ff000000)";   /* IE 8 */
+}
+
+#group_users>ul>li>p:hover, #list_devices>ul>li>p:hover, #list_us>ul>li>p:hover,
+#group_devices>ul>li>p:hover, #quests_list>ul>li>p:hover {
+    cursor:pointer;
+}
+// end of lists
 
 #splash {
 	width: 980px;
@@ -176,25 +320,19 @@ img.aligncenter {
 }
 
 #page {
-	width: 1000px;
-	margin: 0 auto; 
-	padding: 0;
+	width: 700px;
+	padding: 60px 80px 50px 250px;
 }
 
 #page-bgbtm {
 	margin: 0px;
-	padding: 20px 30px 0px 120px;
 }
 
 #page_content {
-	float: left;
-	width: 540px;
 	padding: 0px 20px 0px 0px;
 }
 
 .post {
-	padding-top: 20px;
-    margin-left: 10%;
     margin-bottom: 9%;
     /*border: thin red solid;*/
 }
@@ -233,7 +371,7 @@ img.aligncenter {
 .apk_description_trigger:hover + .apk_description {
     background-color: #d9cfb4;
     display: block;
-    border-width: 1px;
+    border-width: 0px;
     border-style: solid;
     border-bottom-color: #aaa;
     border-right-color: #aaa;
@@ -249,7 +387,7 @@ img.aligncenter {
     width: 250px;
     height: auto;
     /*padding-left: 5px;*/
-    margin: 2px 0;
+    //margin: 2px 0;
 }
 
 .sensor_box li {
@@ -290,34 +428,50 @@ img.aligncenter {
     height: 20px; 
 }
 
-.sensor_box .sensor_box_api_remove {
-    right: 20px;
-    bottom: 10px;
-    background: url("../images/sprites/bt_close.png") 0 -20px no-repeat;
+
+#list_devices .clicked .sensor_box_api_remove
+{
+	position: absolute;
+	margin-left: 540px;
+	width: 20px;
+	height: 20px; 
+	background: url("../images/sprites/bt_close.png") 0 -20px no-repeat;
 }
 
-.sensor_box .down_remove_links {
-    position: absolute;
-    bottom: 10px;
-    right: 30px;
+
+#list_us .clicked .sensor_box_api_remove
+{
+	position: absolute;
+	margin-left: 580px;
+	width: 20px;
+	height: 20px; 
+	background: url("../images/sprites/bt_close.png") 0 -20px no-repeat;
 }
 
-.sensor_box .down_remove_links .bt_download {
-    right: 50px;
-    bottom: 5px;
-    background: url("../images/sprites/bt_up_down.png") 0 0 no-repeat; 
+.clicked .bt_upload
+{
+	position: absolute;
+	margin-left: 560px;
+	width: 20px;
+	height: 20px; 
+	background: url("../images/sprites/bt_up_down.png") 0 -21px no-repeat; 
 }
- 
-.sensor_box .down_remove_links .bt_upload {
-    right: 25px;
-    bottom: 5px;
-    background: url("../images/sprites/bt_up_down.png") 0 -21px no-repeat; 
+.clicked .bt_download
+{
+	position: absolute;
+	margin-left: 540px;
+	width: 20px;
+	height: 20px;
+	background: url("../images/sprites/bt_up_down.png") 0 0 no-repeat;
 }
-
-.sensor_box .down_remove_links .bt_remove {
-    right: -10px;
-    bottom: 3.5px;
-    background: url("../images/sprites/bt_close.png") 0 -20px no-repeat; 
+.clicked .bt_quest
+{
+	position: absolute;
+	margin-left: 515px;
+	margin-bottom: 5px;
+	width: 30px;
+	height: 30px; 
+	background: url("../images/bt_quest.png") 0 0 no-repeat;
 }
 
 .sensor_box .down_remove_links div {
@@ -341,8 +495,8 @@ img.aligncenter {
     z-index: 1;
     left: 252px;
     top: 0px;
-    width: 200px;
-    height: 130px;
+    width: 500px;/*200px;*/
+    height: auto;/*130px;*/
     padding: 5px 5px 5px 10px;
 }
 
@@ -355,11 +509,18 @@ img.aligncenter {
     margin-left: -30px;   
 }
 
-.sensor_info .sensor_container_f {
+/*.sensor_info .sensor_container_f {
     position: absolute;
     left: 5px;
     top: 35px;
-}
+}*/
+
+/*.sensor_container_f {
+    position: absolute;
+    left: 5px;
+    top: 35px;
+}*/
+
 
 .sensor_info .sensor_container_s {
     position: absolute;
@@ -553,8 +714,7 @@ img.aligncenter {
     margin-top: 6px;
     margin-left: 15px;
     font-size: 2.5em;
-    color: teal;
-    text-decoration: underline;
+    color: #333333;
 }
 
 .leave_group button {
@@ -588,14 +748,15 @@ img.aligncenter {
 }
 
 #footer-wrapper, .push-footer {
-    height: 80px;
+    height: 45px;
     clear: both;
 }
 
 #footer-wrapper {
 	overflow: hidden;
-	padding: 0px 0px 0px 0px;
-	background: #3b3b3b url(../images/img02.jpg) repeat-x left top;
+	bottom: 5px;
+	width: 100%;
+	background: #3b3b3b ;
 }
 
 #footer {
@@ -607,14 +768,111 @@ img.aligncenter {
 
 #footer p {
 	margin: 0;
-	padding: 30px 0px 0px 0px;
+	padding: 5px 0px 20px 0px;
 	line-height: normal;
 	font-size: 10px;
 	text-transform: uppercase;
 	text-align: center;
-	color: #61544B;
+	color: #000000;
 }
 
 #footer a {
-	color: #61544B;
+	color: #0000CD;
 }
+
+
+
+ /**
+ This stylesheet is part of the java script calendar tcal
+  **/
+
+
+/* input box in default state */ 
+.tcalInput {
+	background: #FFFFFF url('../images/cal.gif') 100% 50% no-repeat;
+	cursor: pointer;
+}
+
+/* additional properties for input boxe in activated state, above still applies unless in conflict */
+.tcalActive {
+	background-image: url('../images/no_cal.gif');
+}
+/* container of calendar's pop-up */
+#tcal {
+	position: absolute;
+	visibility: hidden;
+	z-index: 100;
+	width: 170px;
+	background-color: white;
+	margin-top: 2px;
+	padding: 0 2px 2px 2px;
+	border: 1px solid silver;
+
+	-moz-box-shadow: 3px 3px 4px silver;
+	-webkit-box-shadow: 3px 3px 4px silver;
+	box-shadow: 3px 3px 4px silver;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='silver')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='silver');
+}
+
+/* table containing navigation and current month */
+#tcalControls {
+	border-collapse: collapse;
+	border: 0;
+	width: 100%;
+}
+#tcalControls td {
+	border-collapse: collapse;
+	border: 0;
+	padding: 0;
+	width: 16px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+#tcalControls th {
+	border-collapse: collapse;
+	border: 0;
+	padding: 0;
+	line-height: 25px;
+	font-size: 10px;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-weight: bold;
+	white-space: nowrap;
+}
+#tcalPrevYear { background-image: url('../imgages/prev_year.gif'); }
+#tcalPrevMonth { background-image: url('../images/prev_mon.gif'); }
+#tcalNextMonth { background-image: url('../images/next_mon.gif'); }
+#tcalNextYear { background-image: url('../images/next_year.gif'); }
+
+/* table containing week days header and calendar grid */
+#tcalGrid {
+	border-collapse: collapse;
+	border: 1px solid silver;
+	width: 100%;
+}
+#tcalGrid th {
+	border: 1px solid silver;
+	border-collapse: collapse;
+	padding: 3px 0;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 10px;
+	background-color: gray;
+	color: white;
+}
+#tcalGrid td {
+	border: 0;
+	border-collapse: collapse;
+	padding: 2px 0;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	width: 14%;
+	font-size: 11px;
+	cursor: pointer;
+}		
+#tcalGrid td.tcalOtherMonth { color: silver; }
+#tcalGrid td.tcalWeekend { background-color: #ACD6F5; }
+#tcalGrid td.tcalToday { border: 1px solid red; }
+#tcalGrid td.tcalSelected { background-color: #FFB3BE; }		

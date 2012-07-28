@@ -118,39 +118,42 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         $APK_ANDROID_VERSION = trim($_POST['apk_android_version']);    
     }
     
-    $APK_VERSION = '';
-    if(isset($_POST['apk_version'])){
-        $APK_VERSION = trim($_POST['apk_version']);    
-    }
-    
-    $SELECTED_USERS_LIST = '';
-    
-    // PREPARING VARIABLES FOR INSERTION TO DB
-    $pending_users = array();
-    $notified_users = array();
-    
     $sql_installed_on = "SELECT installed_on FROM ".$CONFIG['DB_TABLE']['APK']." WHERE apkid=".$_SESSION['APKID'];
     $result_installed_on = $db->query($sql_installed_on);
     $row_installed_on = $result_installed_on->fetch();
+    $row_installed_on =  $row_installed_on[0];
     
-    $candidates = $row_installed_on['installed_on'];
-    $RESTRICTION_USER_NUMBER = count(json_decode($candidates))*10;
-    $pending_users = json_encode($pending_users);
-    $notified_users = json_encode($notified_users);
+    $sql="SELECT * FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE apkid=".$_SESSION['APKID'];
+    $req=$db->query($sql);
+    $row=$req->fetch();
     
+    $APK_VERSION = $row['apk_version'] + 1;
+
     /**
     * Store filename, hash in DB and other informations
     */
     $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." SET apkname='". $filename."', apk_version='".$APK_VERSION."',
                              apkhash='".$HASH_FILE ."', sensors='". $SENSOR_LIST_STRING ."', description='". $APK_DESCRIPTION ."',
-                             restriction_device_number=".$RESTRICTION_USER_NUMBER.",
-                             pending_devices='". $pending_users ."', candidates='". $candidates ."', 
-                             notified_devices='". $notified_users ."', androidversion=". $APK_ANDROID_VERSION .", 
-                             ustudy_finished=-1, locked=0 WHERE apkid=".$_SESSION['APKID'];
-                              
+                             androidversion=". $APK_ANDROID_VERSION .", 
+                             ustudy_finished=-1 WHERE apkid=".$_SESSION['APKID'];
+    
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
+
+    include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
+    $targetDevices = array();
+    $row_installed_on = substr($row_installed_on, 1);
+    $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
+    $row_installed_on = explode(",", $row_installed_on);
+
+    foreach($row_installed_on as $hardware_id){
+         $sql="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
+         $req=$db->query($sql);
+         $row=$req->fetch();
+         $targetDevices[] = $row['c2dm'];
+    }
+    GooglePushManager::googlePushSendUpdate($_SESSION['APKID'], $row_installed_on, $logger, $CONFIG);
    
     header("Location: ucp.php?m=upload&res=1");
 }else{

@@ -11,11 +11,11 @@ include_once("./include/_header.php");
 include_once("./include/_menu.php");  
 ?>  
   
-<div id="header">
+<!--<div id="header">
     <div id="logo">
         <h1><a href="./index.php">Mobile Sensing System</a></h1>
     </div>
-</div>
+</div>-->
 <!-- end #header -->
 
 <div id="page">
