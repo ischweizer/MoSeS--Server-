@@ -30,7 +30,9 @@ if($data->SESSIONID != null){
             $androidVersion = $data->ANDVER;
             $modelName = $data->MODEL_NAME;
             $vendorName = $data->VENDOR_NAME;
-
+            $uniqueid = $data->UNIQUEID;
+            $logger->logInfo("##################### SETTING HARDWARE PARAMS, UNIQUEID IS ".$uniqueid);
+      
             $device = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
                                 
             if(!empty($device)){
@@ -66,7 +68,7 @@ if($data->SESSIONID != null){
                            $SENSORS = HardwareManager::sortSensors($SENSORS);
                            
                            HardwareManager::updateDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
-                                    $androidVersion, $SENSORS, $modelName, $vendorName,  $USERID, $deviceID);
+                                    $androidVersion, $SENSORS, $modelName, $vendorName,  $USERID, $deviceID, $uniqueid);
                                     
                            $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
                                            "STATUS" => "SUCCESS");
@@ -89,7 +91,7 @@ if($data->SESSIONID != null){
                        $SENSORS = HardwareManager::sortSensors($SENSORS);
                        
                        HardwareManager::insertDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
-                            $androidVersion, $SENSORS, $modelName, $vendorName, $USERID, $deviceID);
+                            $androidVersion, $SENSORS, $modelName, $vendorName, $USERID, $deviceID, $uniqueid);
                             
                        $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
                                        "STATUS" => "SUCCESS");

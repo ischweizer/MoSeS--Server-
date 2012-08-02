@@ -38,13 +38,14 @@ class HardwareManager{
     * @param mixed $userID
     * @param mixed $deviceID
     */
-    public static function updateDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID){
+    public static function updateDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
       
        $sql = "UPDATE ". $hardwareTable ." 
                SET androidversion = '". $aVersion ."', 
                    sensors = '". $sensors ."' , 
                    modelname = '".$modelname."' , 
-                   vendorname = '".$vendorname."' 
+                   vendorname = '".$vendorname."' ,
+                   uniqueid = '".$uniqueid."'  
                WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
                         
        $db->exec($sql);
@@ -63,13 +64,14 @@ class HardwareManager{
     * @param mixed $userID
     * @param mixed $deviceID
     */
-    public static function updateDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID){
+    public static function updateDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
            
        $sql = "UPDATE ". $hardwareTable ." 
                SET androidversion = '". $aVersion ."', 
                    sensors = '". $sensors ."' , 
                    modelname = '".$modelname."' , 
-                   vendorname = '".$vendorname."' 
+                   vendorname = '".$vendorname."',
+                   uniqueid = '".$uniqueid."'  
                WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
                         
        $db->exec($sql);
@@ -103,12 +105,12 @@ class HardwareManager{
     * @param mixed $userID
     * @param mixed $deviceID
     */
-    public static function insertDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID){
+    public static function insertDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
       
       $sql = "INSERT INTO ". $hardwareTable ." 
-                (uid, deviceid, modelname, vendorname, androidversion, sensors) 
+                (uid, deviceid, modelname, vendorname, androidversion, sensors, uniqueid) 
                 VALUES 
-                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."')";
+                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."', '". $uniqueid ."')";
 
       $db->exec($sql); 
     }
@@ -126,12 +128,12 @@ class HardwareManager{
     * @param mixed $userID
     * @param mixed $deviceID
     */
-    public static function insertDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID){
+    public static function insertDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
       
       $sql = "INSERT INTO ". $hardwareTable ." 
-                (uid, deviceid, modelname, vendorname, androidversion, sensors) 
+                (uid, deviceid, modelname, vendorname, androidversion, sensors, uniqueid) 
                 VALUES 
-                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."')";
+                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."', '". $uniqueid ."')";
 
       $db->exec($sql); 
     }
