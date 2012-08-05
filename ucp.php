@@ -1384,14 +1384,14 @@ if(isset($_GET['m']))
 <?php
 	                            				for($h = 0 ; $h < count($all_devices) ; $h++)
 	                            				{
-	                            					if(!in_array($all_devices[$h]['uniqueid'],$unique_array))
+	                            					if(($all_devices[$h]['uniqueid'] != NULL) && !in_array($all_devices[$h]['uniqueid'],$unique_array))
 	                            					{
 	                            						$unique_array[] = $all_devices[$h]['uniqueid'];
 ?>
 		                                				<li onclick="changeClass(this);">
 		                                					<p><b>Device's model name: </b><?php echo $all_devices[$h]['modelname']; ?></p>
 		                                					<ul><b>  Android version number: </b>
-		                                    				<?php echo $hw_rows[$h]['androidversion']; ?>
+		                                    				<?php echo $all_devices[$h]['androidversion']; ?>
 		                                    				<br><b>   Availabe sensors: </b>
 		                                    				<br>
 <?php
