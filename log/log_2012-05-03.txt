@@ -1,0 +1,90 @@
+2012-05-03 15:43:37 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 15:43:37 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 15:43:37 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 5e1ece32c8eda83652d9ba9e2eb0bfbb 
+2012-05-03 15:43:37 - INFO --> USER_NOT_FOUND 
+2012-05-03 15:44:01 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 15:44:01 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 16:41:42 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 16:41:42 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 16:41:42 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION cd540aeeb0a2ec2a0bc553840962b1b1 
+2012-05-03 16:41:42 - INFO --> USER_NOT_FOUND 
+2012-05-03 16:41:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 16:41:52 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 16:41:52 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 3573efdb0b46c7d7efb8e9f5b983bc71 
+2012-05-03 16:41:52 - INFO --> USER_NOT_FOUND 
+2012-05-03 16:42:34 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 16:42:34 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 16:42:34 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 986521091a0bc5514bdb21ab06bf8719 
+2012-05-03 16:42:34 - INFO --> USER_NOT_FOUND 
+2012-05-03 16:55:23 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 16:55:23 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 16:55:23 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 1c68b1d998891d65f7423293f8cbd1e4 
+2012-05-03 16:55:23 - INFO --> USER_NOT_FOUND 
+2012-05-03 16:56:48 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 16:56:48 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 16:56:48 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 97e9ea76d347ad64978074ed0ac99f4e 
+2012-05-03 16:56:48 - INFO --> USER_NOT_FOUND 
+2012-05-03 16:57:25 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 16:57:25 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 16:57:25 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION c6246a1a788a3c0079cefb6a5ce6fa41 
+2012-05-03 16:57:25 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:00:27 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:00:27 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:00:27 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION cb5f440a370a96719093a54d7ced778c 
+2012-05-03 17:00:27 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:05:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:05:26 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:05:26 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 9a243b2fe924a1a4582557c98c06c8be 
+2012-05-03 17:05:26 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:24:22 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:24:22 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:24:22 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION f682e014b29df6481aa09151b0a6e000 
+2012-05-03 17:24:22 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:25:22 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:25:22 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:25:22 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 53be895a7965dee6d3e8670b853f8b3b 
+2012-05-03 17:25:22 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:25:22 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:25:22 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:25:22 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 3c5493f224841556d3f11010d0de3f3d 
+2012-05-03 17:25:22 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:26:47 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:26:47 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:26:47 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION b0c63054e10cbfa3d32e45c4778d73d0 
+2012-05-03 17:26:47 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:27:00 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:27:00 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:27:00 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION e62e07308ebf9b2fa66d617cfc9dc33b 
+2012-05-03 17:27:00 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:27:47 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:27:47 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:27:47 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 1cc27b2e1b75d0fa081a722655cfa72e 
+2012-05-03 17:27:47 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:28:12 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:28:12 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:28:12 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 390631338bfdf3a898564c459fcd237f 
+2012-05-03 17:28:12 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:29:20 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:29:20 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:29:20 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION d670ee2c9e47fac31d3663207c80673c 
+2012-05-03 17:29:20 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:29:21 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:29:21 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:29:21 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION fb67a11912bd3c07879c0ad7e09f76e0 
+2012-05-03 17:29:21 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:31:13 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:31:13 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:31:13 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 1bf0168e44488dc352a32eb55f8e6c4b 
+2012-05-03 17:31:13 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:40:53 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:40:53 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:40:53 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 09f47f20cef0d738f628aeccaa5e5814 
+2012-05-03 17:40:53 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:42:57 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:42:57 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:42:57 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION fe1f47333c90e4241e912d4619d3c9f7 
+2012-05-03 17:42:57 - INFO --> USER_NOT_FOUND 
+2012-05-03 17:50:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-05-03 17:50:24 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-05-03 17:50:24 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 54c538ca1bb7243eeb6cdf30c75a95ce 
+2012-05-03 17:50:24 - INFO --> USER_NOT_FOUND 

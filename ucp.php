@@ -10,12 +10,11 @@ include_once("./include/_header.php");
 include_once("./config.php");
 
 $apk_listing = '';  // just init
-$groupname = null; // name of the group the user is in OR name of the group the user wants to join
-$grouppwd = null; // password of the group the user wants to join
+$groupname = NULL; // name of the group the user is in OR name of the group the user wants to join
+$grouppwd = NULL; // password of the group the user wants to join
 $groupsize = 0; // size of the group
 $group_members_count = 0;
 $group_device_count = 0;
-
 
 
 /*
@@ -31,11 +30,12 @@ $group_device_count = 0;
 $jcstatsus = 0;
 $SHOW_UPDATE_PAGE = 0;
 
+/* show_add_quest will be true only if the user want to add questionnaires to an user study */
 $show_add_quest = false;
+/* show_us_quest will be true only if the user want see chosen questionnaires and their results for an user study */
+$show_us_quest = false;
+
 $apk_to_update = array();
-$quest_db = array();
-$quest_selected = array();
-$num_sel_quest = 0;
 $all_devices = array(); 
 
 $scientist_succses = 0; // 1 only if the user has gain instant scientist credentials, use to check if someone is trying something nasty
@@ -76,11 +76,7 @@ $API_VERSION = array(array(8, 'API 8: "Froyo" 2.2.x'),
                      array(13, 'API 13: "Honeycomb" 3.2.x'),
                      array(14, 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2'),
                      array(15, 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4'));
-
-if(isset($_GET['selqst']))
-{
-  echo " JA !! ";
-}                                  
+                                  
 // SWITCH USER CONTORL PANEL MODE
 if(isset($_GET['m']))
 {
@@ -92,159 +88,179 @@ if(isset($_GET['m']))
     {
 
         case 'ADDQUEST';
-          if(isset($_GET['id']))
-          {
-            $apkid = preg_replace("/\D/", "", $_GET['id']);
-            $show_add_quest = true;
-            include_once("./include/functions/dbconnect.php");
-            $sql = "SELECT * FROM apk_quest WHERE apkid=$apkid";
-            $req = $db->query($sql);
-            $quest_selected = $req->fetchAll();
-            include_once("./include/functions/dbconnect.php");
-            $sql = "SELECT * FROM questionnaire";
-            $req = $db->query($sql);
-            $quest_all = $req->fetchAll();
-            $quest_db = array();
-            foreach($quest_all as $quall)
-            {
-            	$add = 1;	
-            	foreach($quest_selected as $selqu)
-            		if($quall['questid'] == $selqu['questid'])
-            			$add = 0;
-            	if($add == 1)
-            	{
-            		$quest_db[] = $quall;
-            	}
+        	// user want to add  questionnaires to a user study
+        	if(isset($_GET['id']))
+        	{
+            	$apkid = preg_replace("/\D/", "", $_GET['id']);
+	            $show_add_quest = true;
+	            include_once("./include/functions/dbconnect.php");
+	            $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
+	            $req = $db->query($sql);
+    			$row = $req->fetch();
+	            $apkname = $row['apktitle'];
+				include_once("./include/managers/QuestionnaireManager.php");
+				$notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
+					$db,
+					$CONFIG['DB_TABLE']['QUEST'],
+					$CONFIG['DB_TABLE']['APK_QUEST'],
+					$apkid);
+				$chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
+					$db,
+					$CONFIG['DB_TABLE']['QUEST'],
+					$CONFIG['DB_TABLE']['APK_QUEST'],
+					$apkid);
             }
-            $num_sel_quest = 0;
-          }
-          break;
+            break;
+
+         case 'USQUEST';
+        	// user want to see the result of the questionnaires to a user study
+        	if(isset($_GET['id']))
+        	{
+            	$apkid = preg_replace("/\D/", "", $_GET['id']);
+	            $show_us_quest = true;
+	            include_once("./include/functions/dbconnect.php");
+	            $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
+	            $req = $db->query($sql);
+    			$row = $req->fetch();
+	            $apkname = $row['apktitle'];
+				include_once("./include/managers/QuestionnaireManager.php");
+				$notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
+					$db,
+					$CONFIG['DB_TABLE']['QUEST'],
+					$CONFIG['DB_TABLE']['APK_QUEST'],
+					$apkid);
+				$chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
+					$db,
+					$CONFIG['DB_TABLE']['QUEST'],
+					$CONFIG['DB_TABLE']['APK_QUEST'],
+					$apkid);
+            }
+            break;
 
         case 'UPLOAD':
-          if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2'])
+        	// user want to create a user study 
+        	if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2'])
             || isset($_REQUEST['back3']) || isset($_REQUEST['create']))
-          {
-            $page1 = false;
-            $page2 = false;
-            $page3 = false;
-            if(isset($_REQUEST['back2']))
             {
-              $page1 = true;
-              include_once("./include/functions/dbconnect.php");
-              $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
-              ."', startdate = '". ((isset($_POST['start_1_a']) && $_POST['start_1_a'] != 'yyyy-mm-dd') ? $_POST['start_1_a'] : null)
-              ."', startcriterion = '". ((isset($_POST['start_2_a'])) ? $_POST['start_2_a'] : "0")
-              ."', radioButton1 = '". ((isset($_POST['radioButton1'])) ? $_POST['radioButton1'] : "1")
-              ."', enddate = '". ((isset($_POST['end_1_b']) && $_POST['end_1_b'] != 'yyyy-mm-dd') ? $_POST['end_1_b'] : null)
-              ."', runningtime = '". ((isset($_POST['end_2_b']) && $_POST['end_2_b'] != 'yyyy-mm-dd') ? $_POST['end_2_b'] : null)
-              ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
-              ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
-              ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
-              ."' WHERE userid = ".$_SESSION['USER_ID'];
-              $db->exec($sql);
-            }
-            elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
-            {
-              $page2 = true;
-              if(isset($_REQUEST['next1']))
-              {
-                include_once("./include/functions/dbconnect.php");
-                $sql = "UPDATE temp set apk_title = '".((isset($_POST['apk_title'])) ? $_POST['apk_title'] : "''")
-                ."', description = '". ((isset($_POST['apk_description'])) ? $_POST['apk_description'] : "''")
-                ."' WHERE userid = ".$_SESSION['USER_ID'];
-                $db->exec($sql);
-              }
-              else
-              {
-                if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
-                {
-                    $RAW_SENSOR_LIST = $_POST['sensors'];
-                    $SENSOR_LIST_STRING = '[';
-                    foreach($RAW_SENSOR_LIST as $sensor)
-                    {
-                      $SENSOR_LIST_STRING .= $sensor .','; 
-                    }
-                    $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
+	            $page1 = false;
+	            $page2 = false;
+	            $page3 = false;
+	            if(isset($_REQUEST['back2']))
+	            {
+	            	$page1 = true;
+		            include_once("./include/functions/dbconnect.php");
+		            $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
+		            ."', startdate = '". ((isset($_POST['start_d'])) ? $_POST['start_d'] : NULL)
+		            ."', enddate = '". ((isset($_POST['end_d'])) ? $_POST['end_d'] : NULL)
+		            ."', startcriterion = '". ((isset($_POST['start_n'])) ? $_POST['start_n'] : "0")
+		            ."', runningtime = '". ((isset($_POST['end_n']) && $_POST['end_n'] != 'yyyy-mm-dd') ? $_POST['end_n'] : NULL)
+		            ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
+		            ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
+		            ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
+		            ."' WHERE userid = ".$_SESSION['USER_ID'];
+		            $db->exec($sql);
+	            }
+	            elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
+	            {
+	            	$page2 = true;
+		            if(isset($_REQUEST['next1']))
+		            {
+		                include_once("./include/functions/dbconnect.php");
+		                $sql = "UPDATE temp set apk_title = '".((isset($_POST['apk_title'])) ? $_POST['apk_title'] : "''")
+		                ."', description = '". ((isset($_POST['apk_description'])) ? $_POST['apk_description'] : "''")
+		                ."' WHERE userid = ".$_SESSION['USER_ID'];
+		                $db->exec($sql);
+		            }
+		            else
+		            {
+		                if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
+		                {
+		                    $RAW_SENSOR_LIST = $_POST['sensors'];
+		                    $SENSOR_LIST_STRING = '[';
+		                    foreach($RAW_SENSOR_LIST as $sensor)
+		                    {
+		                      $SENSOR_LIST_STRING .= $sensor .','; 
+		                    }
+		                    $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
+		                    
+		                }
+		                else
+		                {
+		                    $SENSOR_LIST_STRING = '[]';
+		                }
+
+		                include_once("./include/functions/dbconnect.php");
+		                $sql = "UPDATE temp set androidversion = '".((isset($_POST['apk_android_version']))?$_POST['apk_android_version']:'')
+		                ."' WHERE userid = ".$_SESSION['USER_ID'];
+		                $db->exec($sql);
+		
+		                // there is a problem if nothing changes on sensors' selecting
+		                $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
+		                $db->exec($sql);
+		            } // end of else : if(isset($_REQUEST['next1']))
+	            } // end of elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
+	            elseif(isset($_REQUEST['next2']))
+	            {
+	            	$page3 = true;
+	            	include_once("./include/functions/dbconnect.php");
+	            	$sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
+		            ."', startdate = '". ((isset($_POST['start_d'])) ? $_POST['start_d'] : NULL)
+		            ."', enddate = '". ((isset($_POST['end_d'])) ? $_POST['end_d'] : NULL)
+		            ."', startcriterion = '". ((isset($_POST['start_n'])) ? $_POST['start_n'] : "0")
+		            ."', runningtime = '". ((isset($_POST['end_n']) && $_POST['end_n'] != 'yyyy-mm-dd') ? $_POST['end_n'] : NULL)
+		            ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
+		            ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
+		            ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
+		            ."' WHERE userid = ".$_SESSION['USER_ID'];
+	            	$db->exec($sql);
+	            }
+	            elseif(isset($_REQUEST['create']))
+	            {
+	            	if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
+	            	{
+		            	$RAW_SENSOR_LIST = $_POST['sensors'];
+		                $SENSOR_LIST_STRING = '[';
+		                foreach($RAW_SENSOR_LIST as $sensor)
+		                {
+		                  $SENSOR_LIST_STRING .= $sensor .','; 
+		                }
+		                $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
                     
-                }
-                else
-                {
-                    $SENSOR_LIST_STRING = '[]';
-                }
+		            }
+		            else
+		            {
+		            	$SENSOR_LIST_STRING = '[]';
+		            }
 
-                include_once("./include/functions/dbconnect.php");
-                $sql = "UPDATE temp set androidversion = '". ((isset($_POST['apk_android_version'])) ? $_POST['apk_android_version'] : '')
-                ."' WHERE userid = ".$_SESSION['USER_ID'];
-                $db->exec($sql);
-
-                // there is a problem if nothing changes on sensors' selecting
-                $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
-                $db->exec($sql);
-              }
+		            include_once("./include/functions/dbconnect.php");
+		            $sql = "UPDATE temp set androidversion = '". ((isset($_POST['apk_android_version'])) ? $_POST['apk_android_version'] : '')
+		            ."' WHERE userid = ".$_SESSION['USER_ID'];
+		            $db->exec($sql);
+	
+		            // there is a problem if nothing changes on sensors' selecting
+		            $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
+		            $db->exec($sql);
+	
+		            include_once("./upload.php");
+		        }// end of elseif(isset($_REQUEST['create']))  
+		    } // end of if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2']) || isset($_REQUEST['back3']) || isset($_REQUEST['create']))
+		    else
+		    {
+            	$page1 = true;
+	            $page2 = false;
+	            $page3 = false;
+	            include_once("./include/functions/dbconnect.php");
+	            $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
+	            $req = $db->query($sql);
+	            $row = $req->fetch();
+	            if(empty($row))
+	            {
+	            	$sql = "INSERT INTO temp (userid) VALUE(".$_SESSION['USER_ID'].")";
+	            	$db->exec($sql);
+              	}
             }
-            elseif(isset($_REQUEST['next2']))
-            {
-              $page3 = true;
-              include_once("./include/functions/dbconnect.php");
-              $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
-              ."', startdate = '". ((isset($_POST['start_1_a']) && $_POST['start_1_a'] != '') ? $_POST['start_1_a'] : null)
-              ."', startcriterion = '". ((isset($_POST['start_2_a'])) ? $_POST['start_2_a'] : "0")
-              ."', radioButton1 = '". ((isset($_POST['radioButton1'])) ? $_POST['radioButton1'] : "1")
-              ."', enddate = '". ((isset($_POST['end_1_b']) && $_POST['end_1_b'] != '') ? $_POST['end_1_b'] : null)
-              ."', runningtime = '". ((isset($_POST['end_2_b']) && $_POST['end_2_b'] != 'yyyy-mm-dd') ? $_POST['end_2_b'] : null)
-              ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
-              ."', locked = '". (!(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
-              ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
-              ."' WHERE userid = ".$_SESSION['USER_ID'];
-              $db->exec($sql);
-            }
-            elseif(isset($_REQUEST['create']))
-            {
-              if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
-              {
-                $RAW_SENSOR_LIST = $_POST['sensors'];
-                $SENSOR_LIST_STRING = '[';
-                foreach($RAW_SENSOR_LIST as $sensor)
-                {
-                  $SENSOR_LIST_STRING .= $sensor .','; 
-                }
-                $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
-                    
-              }
-              else
-              {
-                $SENSOR_LIST_STRING = '[]';
-              }
 
-              include_once("./include/functions/dbconnect.php");
-              $sql = "UPDATE temp set androidversion = '". ((isset($_POST['apk_android_version'])) ? $_POST['apk_android_version'] : '')
-              ."' WHERE userid = ".$_SESSION['USER_ID'];
-              $db->exec($sql);
-
-              // there is a problem if nothing changes on sensors' selecting
-              $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
-              $db->exec($sql);
-
-              include_once("./upload.php");
-            }   
-          }
-          else
-          {
-            $page1 = true;
-            $page2 = false;
-            $page3 = false;
-            include_once("./include/functions/dbconnect.php");
-            $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
-            $req = $db->query($sql);
-            $row = $req->fetch();
-            if(empty($row))
-            {
-              $sql = "INSERT INTO temp (userid) VALUE(".$_SESSION['USER_ID'].")";
-              $db->exec($sql);
-            }
-          }
-
-          $MODE = 'UPLOAD';
+        $MODE = 'UPLOAD';
           
            if(isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1)
            {
@@ -425,25 +441,22 @@ if(isset($_GET['m']))
         case 'PROMO':
                     $MODE = 'PROMO';
                     
-                    if(isset($_POST['promo_sent']) && trim($_POST['promo_sent']) == "1"){
-                        
+                    if(isset($_POST['promo_sent']) && trim($_POST['promo_sent']) == "1")
+                    {
                         include_once("./include/functions/dbconnect.php");
-                        
                         $RAW_TELEPHONE = $_POST['telephone'];
                         $RAW_REASON = $_POST['reason'];
-                        
                         $TELEPHONE  = trim($RAW_TELEPHONE);
                         $REASON  = trim($RAW_REASON);
-                        
                         $sql = "SELECT accepted, pending 
                                 FROM request 
                                 WHERE uid = ". $_SESSION['USER_ID'];
-                                
                         $result = $db->query($sql);
                         $row = $result->fetch();    
       
                         // user has sent scientist request
-                        if(!empty($row)){
+                        if(!empty($row))
+                        {
                             if($row['pending'] == 1){
                                 $USER_PENDING = 1;  
                             }else{
@@ -451,8 +464,9 @@ if(isset($_GET['m']))
                                     $USER_PENDING = 0;
                                     $USER_ALREADY_ACCEPTED = 1;  
                             }
-                        }else{
-                            
+                        }
+                        else
+                        {
                             // User hasn't sent us scientist request yet
                              $sql = "INSERT INTO request 
                                     (uid, telephone, reason) 
@@ -561,7 +575,7 @@ if(isset($_GET['m']))
             $group_row = $group_result->fetch();
             $groupname = $group_row['rgroup'];
             
-            if(!empty($group_row) && $groupname!=null){
+            if(!empty($group_row) && $groupname!=NULL){
                 
                 $groupname = $group_row['rgroup'];
                 
@@ -575,7 +589,7 @@ if(isset($_GET['m']))
                  $group_members_count = count(json_decode($row['members']));
                  
                  $group_members_array = json_decode($row['members']);
-                 if($group_members_array != null){
+                 if($group_members_array != NULL){
                      foreach($group_members_array as $user){
                          
                          $sql = 'SELECT hwid 
@@ -685,7 +699,7 @@ if(isset($_GET['m']))
             include_once("./include/functions/dbconnect.php");
             $gr_result = $db->query($gr_sql);
             $gr_row = $gr_result->fetch();
-            if(!empty($gr_row) && $gr_row['rgroup']!=null){
+            if(!empty($gr_row) && $gr_row['rgroup']!=NULL){
                 $grname = $gr_row['rgroup'];
                 
                 // #### USER IS A MEMBER OF A GROUP###//
@@ -710,6 +724,7 @@ if(isset($_GET['m']))
                     $dev_rows = $dev_result->fetchAll(PDO::FETCH_ASSOC);
                     $nDevices+=count($dev_rows);
                 }
+                // HERE GROUP
                 $control = $nDevices - $nScientists * $CONFIG['MISC']['SC_TRESHOLD'];
                 if($control >= $CONFIG['MISC']['SC_TRESHOLD']){
                     $sql_sci = "UPDATE ".$CONFIG['DB_TABLE']['USER']. " SET usergroupid=2 WHERE userid=".$_SESSION['USER_ID'];
@@ -765,7 +780,8 @@ if(isset($_GET['m']))
 <div  id="menu_vertical">  
     <ul><?php
         
-        if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
+        if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES")
+        {
           ?>  
           
           <li<?php 
@@ -784,43 +800,51 @@ if(isset($_GET['m']))
                 echo " id=\"current_page_menu\"";
             } ?>><a href="ucp.php" title="My Devices">My Devices</a></li>
         <?php
-         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>0){
+         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>0)
+         {
              
-        ?>
-        <li<?php 
-            if(isset($_GET['m'])&& $_GET['m'] == 'group'){
-                echo " id=\"current_page_menu\"";
-            } ?>><a href="ucp.php?m=group" title="My Group">My Group</a></li>
-        
-        <?php
+	        ?>
+	        <li<?php 
+	            if(isset($_GET['m'])&& $_GET['m'] == 'group')
+	            {
+	                echo " id=\"current_page_menu\"";
+	            } ?>><a href="ucp.php?m=group" title="My Group">My Group</a></li>
+	        
+	        <?php
          }
-        if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1){
+        if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1)
+        {
             ?>
             <li<?php 
             if(isset($_GET['m'])&& $_GET['m'] == 'list'){
                 echo " id=\"current_page_menu\"";
-            } ?>><a href="ucp.php?m=list" title="Show my App">My user studies</a></li>
+            } ?>><a href="ucp.php?m=list" title="Show my App">My User Studies</a></li>
             <li<?php 
             if(isset($_GET['m'])&& $_GET['m'] == 'upload'){
                 echo " id=\"current_page_menu\"";
-            } ?>><a href="ucp.php?m=upload" title="User Study create">Create a user study</a></li>
+            } ?>><a href="ucp.php?m=upload" title="User Study create">Create a User Study</a></li>
             </ul>
-        <?php }
-        if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2){
+        <?php
+        }
+        if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2)
+        {
             /*
             * Offer an instant upgrade to scientist account if the user is a member of a group and
-            * #devices-in-group - #scientist-in-group*5 >= 5
+            * #unique-devices-in-group - #scientist-in-group*5 >= 5
             */
             // determine if the user is a member of a group
             $gr_sql = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $_SESSION['USER_ID'];
             include_once("./include/functions/dbconnect.php");
             $gr_result = $db->query($gr_sql);
             $gr_row = $gr_result->fetch();
-            if(!empty($gr_row) && $gr_row['rgroup']!=null){
+            if(!empty($gr_row) && $gr_row['rgroup']!=NULL)
+            {
                 $grname = $gr_row['rgroup'];
                 // #### USER IS A MEMBER OF A GROUP###//
-                // determine number of devices and scientists
+                // determine number of unique devices and scientists
                 $nDevices = 0;
+                $all_devices = array();
+                $unique_array = array();
                 $mem_sql = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']. " WHERE name='" .$grname."'";
                 $mem_result = $db->query($mem_sql);
                 $mem_row = $mem_result->fetch();
@@ -834,32 +858,45 @@ if(isset($_GET['m']))
                     if(!empty($mbr_row))
                         if($mbr_row['usergroupid']>=2)
                             $nScientists++;
-                    // determine how many devices the user has
+                    // get all devices the user has
                     $dev_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE uid=".$id;
                     $dev_result = $db->query($dev_sql);
                     $dev_rows = $dev_result->fetchAll(PDO::FETCH_ASSOC);
-                    $nDevices+=count($dev_rows);
+                    foreach($dev_rows as $row)
+                    	$all_devices[] = $row;
                 }
-                $control = $nDevices - $nScientists * $CONFIG['MISC']['SC_TRESHOLD'];
-                if($control >= $CONFIG['MISC']['SC_TRESHOLD']){
-                  ?>
+                // check for unique devices
+                for($h = 0 ; $h < count($all_devices) ; $h++)
+				{
+					if(($all_devices[$h]['uniqueid'] != NULL) && !in_array($all_devices[$h]['uniqueid'],$unique_array))
+					{
+						$unique_array[] = $all_devices[$h]['uniqueid'];
+						$nDevices++;
+					}
+				}
+				// The rule to get scientist credentials
+                $control = $nDevices - ($nScientists * $CONFIG['MISC']['SC_TRESHOLD']);
+                if($control >= $CONFIG['MISC']['SC_TRESHOLD'])
+                {
+?>
                   <li><a href="ucp.php?m=instant">Get scientist credentials today!</a></li>
-                  <?php
+<?php
                 }
-                  else{
-                      
-                      ?>
-                      <li><a href="ucp.php?m=promo">Request scientist account</a></li>
-            <?php
-                  }  
-                }
-                else{
-                    ?>
+                else
+                {
+?>
                     <li><a href="ucp.php?m=promo">Request scientist account</a></li>
-                    <?php
+<?php
+                }  
+            } // end of if(!empty($gr_row) && $gr_row['rgroup']!=NULL)
+            else
+            {
+?>
+                <li><a href="ucp.php?m=promo">Request scientist account</a></li>
+<?php
             }
-        }
-             ?>
+        } // end of if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]<2)
+?>
     </ul>
 </div>
 
@@ -871,10 +908,14 @@ if(isset($_GET['m']))
                         <div class="entry">
                            
 <?php 
+							/********************************************
+                            **************** My Devices *****************
+                            *********************************************/
                           if(isset($USER_DEVICES))
                           {
 ?>
-                            <h3>Your devices</h3>
+                            <fieldset>
+							<legend><h3><em><b>My Devices</b></em></h3></legend>
                             <br>
                             <div id="list_devices">
                             	<ul>
@@ -940,7 +981,8 @@ if(isset($_GET['m']))
 		                            }
 ?>
 								</ul>
-							</div>
+							</div><br>
+							</fieldset>
 <?php
 		                   }// if(isset($USER_DEVICES))
                             if($MODE == 'ADMIN' && !isset($_POST['pending_requests'])){
@@ -976,16 +1018,15 @@ if(isset($_GET['m']))
                                  </form>
                             </div>
                             
-                            <?php
+<?php
                             }
+                            
+                            /********************************************
+                            ************* Create a User Study ***************
+                            *********************************************/
                             
                             if($SHOW_UPDATE_PAGE != 1 && $MODE == 'UPLOAD' && !isset($_GET['res']) && isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1)
                             {
-                        ?>
-                            
-                            <h3>User study create form</h3>
-                                <!-- by Ibrahim -->
-                                <?php
                                   include_once("./include/functions/dbconnect.php");
                                   // Initlization the contents of the pages for US creation form
                                   $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
@@ -997,9 +1038,8 @@ if(isset($_GET['m']))
                                     $description_value = $row['description'];
                                     $radioButton_value = $row['radioButton'];
                                     $startdate_value = $row['startdate'];
-                                    $startcriterion_value = $row['startcriterion'];
-                                    $radioButton1_value = $row['radioButton1'];
                                     $enddate_value = $row['enddate'];
+                                    $startcriterion_value = $row['startcriterion'];
                                     $runningtime_value = $row['runningtime'];
                                     $maxdevice_value = $row['maxdevice'];
                                     $locked_value = $row['locked'];
@@ -1007,10 +1047,7 @@ if(isset($_GET['m']))
                                     $androidversion_value = $row['androidversion'];
                                     $sensors_value = $row['sensors'];
                                   }
-                                ?>
-                                
-
-                                                              
+?>
                                 <form action="ucp.php?m=upload" method="post" enctype="multipart/form-data" class="upload_form"> 
                                 
 <?php
@@ -1018,122 +1055,87 @@ if(isset($_GET['m']))
                                     {
 ?>
                                    		<!-- first page -->
-                                      <p>Userstudy name:</p1>
-                                      <input type="text" name="apk_title" value = "<?php echo $apk_title_value; ?>">
-                                      <br>
-                                      <p>Program description:</p>
-                                      <textarea cols="30" rows="6" name="apk_description"><?php echo $description_value; ?></textarea>
-                                      <br>
-                                      <input type="submit" name="next1" value="next"/>
-                                  
+										<fieldset><legend> <h3><em><b>Create a User Study (1/3)</b></em></h3> </legend>
+	                                    <p>Userstudy name:</p>
+	                                    <input type="text" name="apk_title" value="<?php echo $apk_title_value; ?>">
+	                                    <br><br>
+	                                    <p>Program description:</p>
+	                                    <textarea cols="30" rows="6" name="apk_description"><?php echo $description_value; ?></textarea>
+	                                    <br>
+	                                    <input type="submit" name="next1" value="next" style="height: 25px; width: 90px"/>
+                                        </fieldset>
 <?php
                                       
                                     }
                                     elseif($page2 == true)
                                     {
-?>    
-										<!-- second page -->
-                                      Start of the user study is
-                                      <br>
-                                      <!--<script language="JavaScript">
-                                        var currentFields = "";
-                                        var current="";
-                                        function enableText(elementId)
-                                        {
-                                          if (currentFields != "")
-                                          {
-                                            eval("document.forms[0].start_" + currentFields + "_a.disabled=true;");
-                                          }
-                                          eval("status = document.forms[0].start_" + elementId + "_a.disabled");
-                                          if (String(status) == String("true"))
-                                          {
-                                            eval("document.forms[0].start_" + elementId + "_a.disabled=false;");
-                                          }
-                                          currentFields = elementId;
-                                        }
-                                        function enabledate(element)
-                                        {
-                                          if (current != "")
-                                          {
-                                           eval("document.forms[0].end_" + current + "_b.disabled=true;");
-                                          }
-                                          eval("status = document.forms[0].end_" + element + "_b.disabled");
-                                          if (String(status) == String("true"))
-                                          {
-                                           eval("document.forms[0].end_" + element + "_b.disabled=false;");
-                                          }
-                                          current = element;
-                                        }
-                                      </script>-->
+                                    	
+?>    								<fieldset><legend><h3><em><b>Create a User Study (2/3)</b></em></h3></legend>
+	                                    	
+									 This user study:<br><br>
+									 
                                       <input type="radio"
                                         <?php echo (($radioButton_value == "1" || $radioButton_value == null)?'checked="checked"':''); ?>
                                         name="radioButton" value = "1" onclick="javascript:enableText('1');">
-                                     on date:<input type="text" class="tcal" name="start_1_a"
-	                                    	<?php //echo (($radioButton_value == "2")? 'disabled':''); ?>
-	                                     value="<?php echo ($startdate_value == NULL)? '' : $startdate_value ; ?>"/>
-                                      <br>
-                                      <input type="radio"
-                                      	<?php echo (($radioButton_value == "2")?'checked="checked"':''); ?>
-                                      	name="radioButton" value = "2" onclick="javascript:enableText('2');">
-                                         after this number of installing:<input type="text" name="start_2_a"
-	                                         <?php //echo (($radioButton_value == "1" || $radioButton_value == null)?'disabled':''); ?>
-	                                         value="<?php echo ($startcriterion_value == NULL)? '0' : $startcriterion_value ; ?>"/>
-                                      <br>  
-                                      <br>
-                                      End of the user study is
-                                      <br>
-                                      <input type="radio"
-                                        <?php echo (($radioButton1_value == "1" || $radioButton1_value == null)?'checked="checked"':''); ?>
-                                        name="radioButton1" value = "1" onclick="javascript:enabledate('1');">
-                                         on date:<input type="text" class="tcal" name="end_1_b"
-                                         <?php //echo (($radioButton1_value == "2")? 'disabled':''); ?>
-                                         value="<?php echo ($enddate_value == NULL)? '' : $enddate_value ; ?>"/>
-                                      <br><input type="radio" <?php echo (($radioButton1_value == "2")?'checked="checked"':''); ?> name="radioButton1" value = "2" onclick="javascript:enabledate('2');">
-                                         after running time:<input type="text" name="end_2_b"
-                                          <?php //echo (($radioButton1_value == "1" || $radioButton1_value == null)?'disabled':''); ?>
-                                         value="<?php echo ($runningtime_value == NULL)? 'yyyy-mm-dd' : $runningtime_value ; ?>"/>
-                                      <br>
-                                      <br>
-                                      Max number of Devices:
-                                      <input type="text" name="maxdevice" value="<?php echo $maxdevice_value; ?>"/>
-                                      <br>
-                                      <br>
-                                      <?php
-                                        if(!empty($groupname))
-                                        {
-                                      ?>  
-	                                      <input type=radio
+                                     starts on:
+                                     <input type="text" class="tcal" name="start_d"
+                                     	value="<?php echo ($startdate_value == NULL)? '' : $startdate_value ; ?>"/>
+                                     and ends on:
+                                     <input type="text" class="tcal" name="end_d"
+                                     	value="<?php echo ($enddate_value == NULL)? '' : $enddate_value ; ?>"/><br><br>
+	                                 <input type="radio"
+	                                 	<?php echo (($radioButton_value == "2")?'checked="checked"':''); ?>
+	                                 	name="radioButton" value = "2" onclick="javascript:enabledate('1');"/>
+	                                 starts after number of installing:
+	                                 <input type="text" name="start_n"
+                                     	value="<?php echo ($startcriterion_value == NULL)? '0' : $startcriterion_value ; ?>"/>
+                                     and ends after running time:
+                                     <input type="text" name="end_n"
+                                     	value="<?php echo ($runningtime_value == NULL)? 'yyyy-mm-dd' : $runningtime_value ; ?>"/>
+                                     <br>
+                                     <br><br><hr><br>
+                                     Max number of Devices:
+                                     <input type="text" name="maxdevice" value="<?php echo $maxdevice_value; ?>"/>
+                                     <br><br><hr>
+                                     <br><br>
+<?php
+                                     if(!empty($groupname))
+                                     {
+?>  								Who can run my userstudy?
+	                                     <br><br>  <input type=radio
 	                                        <?php  
 	                                        echo
 	                                        	($inviteinstall_value == "0"|| $inviteinstall_value == null)?'checked="checked"':''; ?>
-	                                        name="invite" value="0"/>Send only to my group<br>
+	                                        name="invite" value="0"/> only my group<br>
                                       <?php
                                         }
                                       ?>
                                       <INPUT TYPE=RADIO
                                         <?php echo (($inviteinstall_value == "1")?'checked="checked"':''); ?>
-                                        NAME="invite" VALUE="1">Invite only<br>
+                                        NAME="invite" VALUE="1"> Invite only<br>
                                       <INPUT TYPE=RADIO
                                         <?php echo (($inviteinstall_value == "2")?'checked="checked"':''); ?>
-                                        NAME="invite" VALUE="2">Invite & Install<br>
+                                        NAME="invite" VALUE="2"> Invite & Install<br>
                                       <INPUT TYPE=RADIO
                                         <?php echo (($inviteinstall_value == "3")?'checked="checked"':''); ?>
-                                        NAME="invite" VALUE="3">Install only<P>
+                                        NAME="invite" VALUE="3"> Install only<P>
                                       <br>
-                                      <input type="submit" name="back2" value="back"/>
-                                      <input type="submit" name="next2" value="next"/>
-                                      <!--<button>next</button>
+                                      <input type="submit" name="back2" value="back" style="height: 25px; width: 90px"/>
+                                      <input type="submit" name="next2" value="next"style="height: 25px; width: 90px"/>
+                                      </fieldset>
+									  <!--<button>next</button>
                                     </form>-->
 <?php
                                     }
                                     elseif($page3 == true)
                                     {
 ?>
-
+									<fieldset><legend><h3><em><b>Create a User Study (3/3)</b></em></h3></legend>
+	                                    	
                                       <!-- third page -->
-                                      <label for="file">Select a file:</label> 
+                                      <label for="file">Select a file:</label>
                                       <input type="file" name="userfile" id="file" style="margin: 15px 0;">
-                                      <br>
+                                      <br><hr><br>
                                       <p>The lowest supported android version for your user study:</p>
                                       <select name="apk_android_version">
                                         <?php   
@@ -1145,7 +1147,7 @@ if(isset($_GET['m']))
                                         }
                                         ?>
                                       </select>
-                                      <br>
+                                      <br><br><hr>
                                       <p style="margin: 20px 0;">Your user study requires the following sensors:</p>
                                       <ul>
                                         <?php
@@ -1179,10 +1181,13 @@ if(isset($_GET['m']))
                                        ?>
                                       </ul>
                                       
-                                      <input type="submit" name="back3" value="back"/>
-                                      <input type="submit" name="create" value="create" onClick = "docuemnt.location = 'http://da-sense.de/moses/upload.php' "/>
-                                      <!--<button>create</button>-->
+                                      <input type="submit" name="back3" value="back" style="height: 25px; width: 90px"/>
+                                      <input type="submit" name="create" value="create" style="height: 25px; width: 90px" onClick = "docuemnt.location = 'http://da-sense.de/moses/upload.php' "/>
+                                      
+									  <!--<button>create</button>-->
                                     </form>
+                                    <br>
+                                    </fieldset>
                                   <?php
                                     }
                                   ?>
@@ -1266,12 +1271,23 @@ if(isset($_GET['m']))
                                 }
                             }
                             
+                            /********************************************
+                            ***************** My Group ******************
+                            *********************************************/
+                            
                             if($MODE == 'GROUP')
                             {
+                            	// number of unique devices in this group
+                            	$numOfUniq = 0;
+                            	// list of devices
+                            	$all_devices = array();
+                            	// number of scientest useres in this group
+                            	$numOfSient = 0;
+
                             	if(!empty($groupname))
                                 { 
-                                    echo '<h3>You are currently member of research group</h3>';
-                                    echo '<div class="group_name">'. $groupname .'</div>';
+                                    echo '<fieldset><legend><h3><b><em>My Group: '.$groupname.'</em></b></h3></legend>';
+                                   // echo '<div class="group_name">'. $groupname .'</div>';
                                     $apk_lists = "";
                                     $num_apks = 0;         
                                     
@@ -1281,9 +1297,9 @@ if(isset($_GET['m']))
 ?>
 	                                    <br>Your group has <b><?php
                                     	echo
-                                    	((count($group_members_array) > 1) ? count($group_members_array)
-                                    	.'</b> members:': 'a</b>'
-                                    	.'member:');
+                                    		((count($group_members_array) > 1) ? count($group_members_array)
+                                    		.'</b> members:': 'a</b>'
+                                    		.'member:');
 ?>
                                     	<div id="group_users">
                                     		<ul>
@@ -1322,14 +1338,22 @@ if(isset($_GET['m']))
 			                                    		<p><b> Name:</b> <?php echo $user['firstname']." ".$user['lastname']; ?></p>
 			                                    		<ul>
 			                                    		<b> Account level: </b>
-			                                    		<?php  
-			                                    			echo 
-			                                    			(($user['usergroupid'] == 1) ?
-			                                    			"normal"
-			                                    			: (($user['usergroupid'] == 2) ?
-			                                    			"scientist"
-			                                    			: "admin"));
-			                                    		?>
+<?php
+														if($user['usergroupid'] == 1)
+														{
+															echo "normal";
+														}
+			                                    		elseif($user['usergroupid'] == 2)
+			                                    		{
+			                                    			echo "scientist";
+			                                    			$numOfSient++;
+			                                    		}
+			                                    		elseif ($user['usergroupid'] == 3)
+			                                    		{
+			                                    			echo "admin";
+			                                    			$numOfSient++;
+			                                    		}
+?>
 			                                    		<br><b> Email: </b><?php echo $user['email']; ?>
 			                                    		<br><b> Number of devices: </b><?php echo count($hw_rows); ?>
 			                                    		<br>
@@ -1359,7 +1383,6 @@ if(isset($_GET['m']))
 ?>
 									List of unique devices of this group:
 									<div id="group_devices">
-									
 <?php
 	                                    // list of all unique devices
 	                                    if(count($all_devices) > 0)
@@ -1387,6 +1410,7 @@ if(isset($_GET['m']))
 	                            					if(($all_devices[$h]['uniqueid'] != NULL) && !in_array($all_devices[$h]['uniqueid'],$unique_array))
 	                            					{
 	                            						$unique_array[] = $all_devices[$h]['uniqueid'];
+	                            						$numOfUniq++;
 ?>
 		                                				<li onclick="changeClass(this);">
 		                                					<p><b>Device's model name: </b><?php echo $all_devices[$h]['modelname']; ?></p>
@@ -1433,16 +1457,19 @@ if(isset($_GET['m']))
                         				"This group has <b>a</b> private apk: ".$apk_lists
                         				: "This group has <b>$num_apks</b> private apks:<br>".$apk_lists));
 ?>
-                            		<form action=ucp.php?m=leave method="post" class="leave_group">
+                            		<br>
+                            		<br>
+                            		<form action=ucp.php?m=leave method="post" >
                             		    <button>Leave this group</button>
                             		</form>
+                            		<br>
+                            		</fieldset>
 <?php
-                               	} // end of if(!empty($groupname)) 
+	                            } // end of if(!empty($groupname)) 
 	                            else
 	                            {
 ?>
-                                
-                                    <h3>Join a research group or found one</h3>
+                                	<h3>Join a research group or found one</h3>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
                                         <input type="radio" name="join_create" value="join" class="radio_join" />Join<br>
                                         <input type="radio" name="join_create" value="create" class="radio_create" />Create                                        
@@ -1495,11 +1522,16 @@ if(isset($_GET['m']))
                                 }
                             }
                             
-                            // user wants a listing of APK files
+                            
+                            /********************************************
+                            ************* My user studies ***************
+                            *********************************************/
+                            
                             if($MODE == 'LIST' && isset($LIST_APK))
                             {
 ?>
-                              <h3>Your User Studies</h3>
+                              <fieldset>
+                              <legend><h3><b><em>My User Studies</em></b></h3></legend>
                               <br>
                               <div id="list_us"> 
 <?php                         // we found some APKs
@@ -1508,15 +1540,15 @@ if(isset($_GET['m']))
 ?>
                               	<ul>
 	                              	<script>
-	                              	    function changeClass(element)
+	                              	    function changeParentClass(element)
 	                              	    {
-	                              	    	if(element.className=='clicked')
+	                              	    	if(element.parentNode.className=='clicked')
 	                              	    	{
-	                              	       	 	element.className='notclicked';
+	                              	       	 	element.parentNode.className='notclicked';
 	                              	       	}
 	                              	       	else
 	                              	       	{
-	                              	       		element.className='clicked';	
+	                              	       		element.parentNode.className='clicked';	
 	                              	       	}
 	                              	   	}
 	                              	</script>
@@ -1524,40 +1556,52 @@ if(isset($_GET['m']))
 	                                foreach($apk_listing as $row)
 	                                {
 ?>   
-	                             		<li onclick="changeClass(this);">
-	                                   		<p><b>Name: </b><?php echo $row['apktitle']; ?></p>
+	                             		<li>
+	                                   		<p onclick="changeParentClass(this);"><b>Name: </b><?php echo $row['apktitle']; ?></p>
 <?php
-                                            echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk" class="bt_download"></a>';
-                                            echo '<a href="ucp.php?m=addquest&id='. $row['apkid'] .'" title="Add Questionnaire" class="bt_quest"></a>';
-                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK" class="bt_upload"></a>';
-                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK" class="sensor_box_api_remove"></a>';
-		                                   	$android_version = $row['androidversion'];
+                                            $android_version = $row['androidversion'];
 		                            		$startdate = $row['startdate'];
 	                                    	$startcriterion = $row['startcriterion']; 
 	                                  	    $enddate = $row['enddate'];
 	                                      	$runningtime = $row['runningtime'];
 	                                      	$description = $row['description'];
+	                                      	$ustudy_finished = $row['ustudy_finished'];
 	                                      	$onlymygroup = $row['locked'];
 	                                      	$invite = $row['inviteinstall'];
 	                                      	$maxdevice = $row['maxdevice'];
 	                                      	$apkname = $row['apkname'];
+	                                      	
+	                                      	echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk" class="bt_download"></a>';
+                                            echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK" class="bt_upload"></a>';
+                                            echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK" class="sensor_box_api_remove"></a>';
+                                            if($ustudy_finished == 1)
+                                            {
+                                            	echo '<a href="ucp.php?m=usquest&id='. $row['apkid'] .'" title="Result Of Questionnaire" class="bt_usquest"></a>';
+                                            }
+                                            else
+                                            {
+                                        		echo '<a href="ucp.php?m=addquest&id='. $row['apkid'] .'" title="Add Questionnaire" class="bt_addquest"></a>';
+                                            }
+                                            
+                                            
+		                                   	
 ?>
 		                                   	<ul>
-		                                   	The lowest supported android version: <?php echo $android_version; ?>
-		                                    <br>
+			                                   	The lowest supported android version: <?php echo $android_version; ?>
+			                                    <br>
 <?php
-		                                        if($startdate != null)
+		                                        if($startdate != NULL)
 		                                          echo "The start date: ".$startdate;
-		                                        elseif($startcriterion != null)
+		                                        elseif($startcriterion != NULL)
 		                                            echo "Commencement after ".$startcriterion." users join.";
 		                                        else
 		                                          echo "Commenced while creating ".$row['apktitle'].".";
 ?>
 		                                      <br>
 <?php
-		                                        if($enddate != null)
+		                                        if($enddate != NULL)
 		                                          echo "The end date: ".$enddate;
-		                                        elseif($runningtime != null)
+		                                        elseif($runningtime != NULL)
 		                                          echo "The termination after ".$runningtime." from start date.";
 		                                        else
 		                                          echo "Terminated immediately after creating ".$row['apktitle'].".";
@@ -1649,7 +1693,7 @@ if(isset($_GET['m']))
                                 	}
 ?>
 								</ul>
-								</div>
+								</div><br></fieldset>
 							
 <?php   
                               }
@@ -1668,368 +1712,832 @@ if(isset($_GET['m']))
                               }
 
                             }
+                            
+                            /********************************************
+                            ************* SEE QUESTs FOR US ***************
+                            *********************************************/
+                            if($show_us_quest == true)
+                            {
+                                
+                                
+  								// check if there is any questionnaire are chosen for this US
+  								if(empty($chosen_quests))
+  								{
+  									// no questionnaire found
+?>
+  									<h4>There is no questionnaire been added to <?php echo $apkname; ?>.</h4><br>
+<?php
+  								}
+  								else
+  								{
+?>
+									<fieldset>
+                                    	<legend><h3><em><b>The result of chosen questionnaires for this user study: <?php echo $apkname; ?></b></em></h3></legend>
+										<div id="quests_list">
+											<ul>
+												<script>
+						                    	   	/*
+						                    	   	* to switch the class name of the parent of this element between clicked and notclicked
+						                    	   	*/
+						                    	    function changeParentClass(element)
+						                    	    {
+						                    	    	if(element.parentNode.className=='clicked')
+						                    	    	{
+						                    	       	 	element.parentNode.className='notclicked';
+						                    	       	}
+						                    	       	else
+						                    	       	{
+						                    	       		element.parentNode.className='clicked';	
+						                    	       	}
+						                    	   	}
+						                    	   	/*
+						                    	   	* to switch the class name of this element between clicked and notclicked
+						                    	   	*/
+						                    	    function changeChildrenClass(element, id)
+						                    	    {
+						                    	    	var parent = element.parentNode;
+						                    	    	for (var i = 0; i < parent.childNodes.length; i++)
+						                    	    	{
+													      var child = parent.childNodes[i];
+													      if (child.id == id)
+													      {
+													      	if(child.className=='notclicked')
+							                    	    	{
+							                    	       	 	child.className='clicked';
+							                    	       	}
+							                    	       	else
+							                    	       	{
+						                    	       			child.className='notclicked';
+						                    	       		}	
+													      }
+													      else if(child.id > id && child.id < (id + 1))
+													      {
+													      	child.className='notclicked';
+													      }
+													    }
+						                    	   	}
+						                    	</script>
+<?php	  	                            
+							                    // loop for each chosen questionnaire
+							                    foreach($chosen_quests as $quest)
+						                        {
 
-                           
+					                              	// max number of answers
+				                                  	$maxAnswer = 0;
+?>
+						                      		<li >
+														<p onclick="changeParentClass(this);" id="<?php echo $quest['name']; ?>">
+															<b>Name: </b>
+		 													<a href="./CSVs/<?php echo $quest['name'].'_'.$apkname; ?>.csv" title="Download as CSV" class="bt_downloadCSV"></a>	
+<?php														
+															echo $quest['name'];
+?>
+														</p>
+
+<?php
+								                        include_once("./include/managers/QuestionnaireManager.php");
+								                        // get all questions in this questionnaire
+								                        $qust = QuestionnaireManager::getQuestionsForQuestid(
+								                        	$db,
+								                            $CONFIG['DB_TABLE']['QUESTION'],
+								                            $quest['questid']);
+								                        // the content of csv as string. Write the head of the table
+								                        $csvContent = "#;Question;Question ID;Type of Question;User ID;Answer;Answer ID\n";
+?>
+							                          	<table class="questTable">
+							                          		<!-- the header of the table -->
+								                            <thead>
+									                            <!-- Column 1 -->
+									                            <th>#</th>
+									                            <!-- Column 2 -->
+								                              	<th>Question</th>
+								                              	<!-- Column 3 -->
+								                              	<th>Qst.ID</th>
+								                              	<!-- Column 4 -->
+								                             	<th>Type of Question</th>
+								                             	<!-- Column 5 -->
+								                              	<th>User ID</th>
+								                              	<!-- Column 6 -->
+									                            <th>Answer</th>
+									                            <!-- Column 7 -->
+									                            <th>Ans.ID</th>
+									                            <!-- end of the header of the table -->
+								                            </thead>
+								                            <!-- the body of the table -->
+								                            <tbody>
+<?php                         
+								                              	// $i represents the index of a question
+								                              	$i = 1;
+								                              	// loop for each question in this questionnaire
+								                              	foreach($qust as $q)
+								                              	{
+									                                include_once("./include/managers/QuestionnaireManager.php");
+									                                // get all answers of this question
+									                                $answers = QuestionnaireManager::getAnswersForQidAndApkid(
+									                                  $db,
+									                                  $CONFIG['DB_TABLE']['ANSWER'],
+									                                  $q['qid'],
+									                                  $apkid);
+?>
+								                                	<tr title="one click to collapse/expand more information" onclick="changeChildrenClass(this,<?php echo $i; ?>);"> <!-- make a new row for this question -->
+								                                 	 	<td><?php echo $i; ?></td>
+<?php
+								                                		if($q['type'] == 1) // multiple choices
+								                                  		{
+?>
+										                                    <td><?php echo trim(substr($q['content'],0,strrpos($q['content'],"["))); ?></td>
+										                                    <td><?php echo $q['qid']; ?></td>
+										                                    <td>Multiple Choices</td>
+<?php                               
+																			// adding index, question, question id and its type
+																			$csvContent.=
+																				$i
+																				.";".trim(substr($q['content'],0,strrpos($q['content'],"[")))
+																				.";".$q['qid'].
+																				";Multiple Choices;";
+									                                  	}
+									                                  	elseif($q['type'] == 2) // single choice
+									                                  	{
+?>
+										                                    <td><?php echo trim(substr($q['content'],0,strrpos($q['content'],"["))); ?></td>
+										                                    <td><?php echo $q['qid']; ?></td>
+										                                    <td>Single Choice</td>
+<?php                               
+										                                  	// adding index, question, question id and its type
+																			$csvContent.=
+																				$i
+																				.";".trim(substr($q['content'],0,strrpos($q['content'],"[")))
+																				.";".$q['qid']
+																				.";Single Choice;";
+									                                  	}
+									                                  	else // open question
+									                                  	{
+?>
+										                                    <td><?php echo trim($q['content']); ?></td>
+										                                    <td><?php echo $q['qid']; ?></td>
+										                                    <td>Open Question</td>
+<?php                               
+										                                  	// adding index, question, question id and its type
+																			$csvContent.=
+																				$i
+																				.";".trim($q['content'])
+																				.";".$q['qid']
+																				.";Open Question;";
+								                                  		}
+									                                  	$csvString = "";
+
+									                                  	// number of answers for this question
+									                                  	$numOfAnswer = 0;
+
+									                                  	// to calculate the average answer
+									                                  	$answers_array = array();
+									                                  	
+									                                  	// to pair each answer as a key and how many times as a value
+									                                  	$answers_counter = array();
+									                                  	
+									                                  	// to pair each answer as a key with its html code as a value
+									                                  	$answers_rows = array();
+
+									                                  	// to pair each answer as a key with its table row id as a value
+									                                  	$answers_itr = array();
+
+									                                  	// to create id for each table row
+									                                  	$iTr = 0; 
+									                                  	// loop for each answer of this question
+									                                  	foreach($answers as $ans)
+									                                  	{
+										                                  	// for each answer found for this question
+									                                  		$numOfAnswer++;
+
+									                                  		// check if this answer comes early
+									                                  		if($answers_counter[$ans['content']] == 0)
+									                                  		{
+										                                  		// increase id for tr
+										                                  		$iTr++;
+
+										                                  		// the complate id for a table row
+										                                  		$onclick_id = $i.".".$iTr;
+
+										                                  		// put a new iTr key to these answers
+										                                  		$answers_itr[$ans['content']] = $iTr;
+
+									                                  			// and make a row for this answer
+											                                    // make a new row and skip the first 4 fields (index, question, question id, type)
+									                                  			$answers_rows[$ans['content']] =
+										                                  			'</tr>
+										                                      		<tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
+										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.');">'
+										                                      		.'<td/><td/><td/><td/>'
+										                                      		."<td>".$ans['userid']."</td>"
+											                                    	."<td>".$ans['content']."</td>"
+											                                    	."<td>".$ans['aid']."</td>";
+									                                  		}
+									                                  		else
+									                                  		{
+									                                  			// the complate id for a table row
+									                                  			$onclick_id = $i.".".$answers_itr[$ans['content']];
+									                                  			
+									                                  			// make a new row and skip the first 4 fields (index, question, question id, type)
+									                                  			$answers_rows[$ans['content']].=
+										                                  			'</tr>
+										                                      		<tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
+										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.');">'
+										                                      		.'<td/><td/><td/><td/>'
+										                                      		."<td>".$ans['userid']."</td>"
+											                                    	."<td>".$ans['content']."</td>"
+											                                    	."<td>".$ans['aid']."</td>";
+									                                  		}
+
+									                                  		// add this answer in the array of answers
+										                                    $answers_array[] = $ans['content'];
+										                                    
+										                                    // incremtent the number of users who answered with this answer
+										                                    $answers_counter[$ans['content']]++;
+
+										                                    // csv content
+										                                    $csvString.="\n;;;;".$ans['userid'].";".$ans['content'].";".$ans['aid'];
+
+								                                  		} // end of foreach($answers as $ans)
+								                                  		
+								                                  		$sortedAnswers = $q['sortedAnswers'];
+								                                  		$average = NULL;
+								                                  		$polpular = NULL;
+
+								                                  		// get the average/popular answer of this question
+								                                  		include_once("./include/managers/QuestionnaireManager.php");
+								                                  		
+								                                  		if($sortedAnswers != NULL && $sortedAnswers == 1)
+								                                  		{ 	
+								                                  			// Get the sorted answers
+								                                  			$sortedAnswersArray = json_decode(trim(substr($q['content'],(strrpos($q['content'],"[")-1),(strrpos($q['content'],"]")+1))));
+								                                  			$average = QuestionnaireManager::getAverageAnswerOfArray($answers_array,$sortedAnswersArray);
+								                                  			// set the average answer of this question in html
+									                                  		$trWithaverage = "<td>average</td><td>";
+									                                  		$trWithaverage .=$average."</td><td></td>";
+									                                  		// as well in csv
+									                                  		$csvContent .= "average;".$average.";".$csvString."\n";	
+								                                  		}
+								                                  		else
+								                                  		{
+								                                  			$popular = QuestionnaireManager::getPopularAnswerOfArray($answers_array);
+								                                  			// set the polpular answer of this question in html
+									                                  		$trWithaverage = "<td>popular</td><td>";
+									                                  		$trWithaverage .=$popular."</td><td></td>";
+									                                  		// as well in csv
+									                                  		$csvContent .= "popular;".$popular.";".$csvString."\n";
+								                                  		}
+
+								                                  		// get all strings of table rows of these answers
+								                                  		foreach ($answers_rows as $key => $value)
+								                                  		{
+								                                  			$onclick_id = $i.".".$answers_itr[$key];
+								                                  			$answers_rows[$key] = 
+									                                  				'</tr>
+										                                      		<tr title="one click to collapse/expand more information" id="'.$i.'" class="notclicked"'
+										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.');">'
+										                                      		.'<td/><td/><td/><td/>'
+										                                      		."<td>"
+										                                      		. $answers_counter[$key]
+										                                      		." users</td>"
+											                                    	."<td>".$key."</td>"
+											                                    	."<td></td>"
+											                                    	.$value;
+								                                  		
+								                                  			$trWithaverage.=$answers_rows[$key];
+								                                  			$iTr++;
+								                                  		}
+								                                  		// finaly print the html code
+								                                  		echo $trWithaverage;
+
+
+																		// set max number of answers
+																		if($maxAnswer < $numOfAnswer)
+																		{
+																			$maxAnswer = $numOfAnswer;
+																		}
+
+																		// increment the index of this table
+									                                  	$i++;
+?>
+						                      	         		 	</tr>
+<?php
+						                     	         		} // end of foreach($qust as $q)
+?>
+							                            	<!-- end of the body of the table -->
+							                            	</tbody>
+							                            </table>
+							                            There are <?php echo $maxAnswer; ?> users answer this questionnaire.
+<?php
+							                            // make a csv file for this questionnaire
+														
+								                        $csvFilePath = './CSVs/'.$quest['name'].'_'.$apkname.'.csv';
+								                        $csvF = fopen($csvFilePath, 'w');
+								                        fwrite($csvF, $csvContent);
+								                        fclose($csvF);
+?>
+					                      		  	</li>
+<?php
+							  		   			} // end of foreach($chosen_quests as $quest)
+?>
+											</ul>
+										</div>
+									</fieldset>
+<?php
+  		                        } // end of else : if(empty($chosen_quests))
+?>
+
+<?php
+							} // end of if($show_us_quest == true)
+
+                            /********************************************
+                            ************* ADD QUEST TO US ***************
+                            *********************************************/
+                            
                             if($show_add_quest == true)
                             {
 ?>
-								List of all availabes questionnaires: <br>
-<?php	
-								include_once("./include/functions/dbconnect.php");
-								$sql ="SELECT * FROM `questionnaire`";
-								$req=$db->query($sql);
-								$quests = $req->fetchAll();
-?>
-								<div id="quests_list">
-									<ul>
-										<script>
-										    function changeClass(element)
-										    {
-										    	if(element.className=='clicked')
-										    	{
-										       	 	element.className='notclicked';
-										       	}
-										       	else
-										       	{
-										       		element.className='clicked';	
-										       	}
-										   	}
-										</script>
+								
+                                <fieldset><legend><h3><b><em>Adding questionnaires for: <?php echo $apkname; ?></h3></b></em></legend>
+                                <h4>List of all available not chosen questionnaires:</h4>
+                                    <form action="" method="POST">
+									<div id="quests_list_top">
+										<ul>
+											<script>
+												/* 
+												* To change the class name of its parent between (clicked..) and (notclicked..)
+												* It helps to determine which element as been clicked to be opened
+												*/
+											    function changeClicked(element)
+											    {
+											    	if(element.parentNode.className=='clickedMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedMarked';
+											       	}
+											       	else if(element.parentNode.className=='notclickedMarked')
+											    	{
+											       	 	element.parentNode.className='clickedMarked';
+											       	}
+											       	else if(element.parentNode.className=='clickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedNotMarked';
+											       	}
+											       	else if(element.parentNode.className=='notclickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='clickedNotMarked';
+											       	}
+											       	else
+											       		element.parentNode.className='clickedNotMarked';
+											   	}
+											   	/* 
+												* To change the class name of its parent between (..Marked) and (..NotMarked)
+												* It helps to determine which element as been marked
+												*/
+											   	function changeMark(element,id)
+											   	{
+											   		if(element.parentNode.className=='clickedMarked')
+											    	{
+											       	 	element.parentNode.className='clickedNotMarked';
+											       	 	document.getElementById(id).value = "notchosen";
+											       	}
+											       	else if(element.parentNode.className=='notclickedMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedNotMarked';
+											       	 	document.getElementById(id).value = "notchosen";
+											       	}
+											       	else if(element.parentNode.className=='clickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='clickedMarked';
+											       	 	document.getElementById(id).value = "chosen";
+											       	}
+											       	else if(element.parentNode.className=='notclickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedMarked';
+											       	 	document.getElementById(id).value = "chosen";
+											       	}
+											       	else
+											       	{
+											       		element.parentNode.className='notclickedMarked';
+											       		document.getElementById(id).value = "chosen";
+											       	}
+											   	}
+											</script>
 <?php										
-											foreach($quests as $quest)
+											// check if there is any not already chosen questionnaire
+											if(!empty($notchosen_quests))
+											{
+												echo "(one click to select & double click to show/hide more information)";
+											}
+											else
+											{
+												echo "There is no more available questionnaires";
+											}
+
+											// loop for each not already chosen questionnaires
+											foreach($notchosen_quests as $quest)
 											{
 ?>
-												<li onclick="changeClass(this);">
-													<p><b>Name: </b><?php echo $quest['name']; ?></p>
-													It containes the following questions:<br><ul>
-													
+												<li>
+													<!-- title -->
+													<p
+														onclick="changeMark(this,<?php echo $quest['questid']; ?>);"
+														ondblclick="changeClicked(this);">
+														<b>Name: </b><?php echo $quest['name']; ?>
+													</p>
+													<!-- hidden input is used to know if the element been chosen -->
+													<input type="hidden" name="<?php echo $quest['questid']; ?>" id="<?php echo $quest['questid']; ?>" value="notchosen"/>
 <?php
-													$sql ="SELECT * FROM `question` WHERE questid=".$quest['questid'];
-													$req=$db->query($sql);
-													$qust = $req->fetchAll();
-													$i = 1;
-													foreach($qust as $q)
-													{
-														echo "q".$i.": ";
-														if($q['type']==1) // multiple choices
-														{
-															echo substr($q['content'],0,strrpos($q['content'],"{"))."<br>";
-														}
-														else
-														{
-															echo $q['content']."<br>";
-														}
-														$i++;
-													}
+							                        include_once("./include/managers/QuestionnaireManager.php");
+							                        // get all questions of this questionnaire
+							                        $qust = QuestionnaireManager::getQuestionsForQuestid(
+						                                $db,
+						                                $CONFIG['DB_TABLE']['QUESTION'],
+						                                $quest['questid']);
 ?>
-												</ul></li>
+													<table class="questTable">
+							                            <thead>
+							                              <th>#</th>
+							                              <th>Question</th>
+							                              <th>Type of Question</th>
+							                            </thead>
+							                            <tbody>
+<?php													
+								                            // index of the question in the table
+								                            $i = 1;
+								                            // loop for each question in this questionnaire
+							                                foreach($qust as $q)
+								                            {
+								                            	include_once("./include/managers/QuestionnaireManager.php");
+								                                $answers = QuestionnaireManager::getAnswersForQidAndApkid(
+								                                  $db,
+								                                  $CONFIG['DB_TABLE']['ANSWER'],
+								                                  $q['qid'],
+								                                  $apkid);
+?>
+								                                <tr>
+								                                	<!-- print the index of this question -->
+							                                  		<td><?php echo $i; ?></td>
+<?php
+									                                if($q['type'] == 1) // multiple choices
+								                                    {
+?>
+									                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+									                                    <td>Multiple Choices</td>
+<?php                               
+							                                  		}
+									                                elseif($q['type'] == 2) // single choices
+									                                {
+?>
+									                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+									                                    <td>Single Choices</td>
+<?php                               
+							                                  		}
+							                                  		else // open question
+							                                  		{
+?>
+									                                    <td><?php echo $q['content']; ?></td>
+									                                    <td>Open Question</td>
+<?php                               
+							                                  		}
+							                                  		$i++; 
+?>
+						                                		</tr>
+<?php
+						                              		} // end of foreach($qust as $q)
+?>
+												    	</tbody>
+						                          	</table>
+						                        </li>
 <?php										
-											}
-?>
-									</ul>
-								</div>
-								<br>
-<?php
-								
-								if (isset($_POST['submit']))
-	                              {
-	                              	include_once("./include/functions/dbconnect.php");
-	                              /*	
-                              for ($i=0; $i<count($_POST['questbox']);$i++) {
-		
-										$idtodo=$_POST['questbox'][$i];
-										$sql="insert into apk_quest values('$apkid','$idtodo')";
-									    $req=$db->query($sql) ;
-									    echo "Ok";
-									    
-						    	}
-						    	*/
-                              	
-                              	/*
-                              	foreach($_POST as $key => $value){
-                              		if(substr($key,0,9)=="standard_"){
-                              			$idtodo=substr($key, 9);
-                              			
-										$sql="INSERT INTO `apk_quest`  VALUES ($apkid,$idtodo);";
-										echo "<br>".$sql;
-									    $req=$db->query($sql) ;
-                              		}
-                              	}*/
-                              	
-                              	
-                              
-                              	
-                              	if(isset($_POST['questionnaire']) && is_array($_POST['questionnaire']))
-	                              	foreach($_POST['questionnaire'] as $questBox)
-	                              	{
-	                              		//echo "($questBox) ";
-	                              		
-	                              			$sql ="SELECT * FROM `apk_quest` WHERE apkid=$apkid AND questid = $questBox";
-	                              			$req=$db->query($sql);
-	                              			$rows = $req->fetch();
-	                              			if(empty($rows))
-	                              			{
-												$sql="INSERT INTO `apk_quest`  VALUES ($apkid,$questBox);";
-												//echo "<br>".$sql;
-											    $db->exec($sql);
-											    
-											    
-	                              			}
-	                              			else
-	                              				echo "$apkid and $questBox exist already!<br>";
-	                              	}
-	                             echo "Your selecting was done successfully!";
-						   		
-                              }	
-                              else 
-                              {   
-                              ?>
-                              <fieldset id="questionnaireFieldset">
-                              <label>Select your Questionnaire:</label>
-                              <form action="" method="POST">
-                                <input type="hidden" id = "apkid" name="apkid" value="<?php echo $apkid; ?>" />
-                               
-                               <div id="quests_selected" style="padding:10px;"></div>
-                               
-                                <select id="quests" name="quests" >
-                                  <option value="null">Select a questionnaire:</option>
-                                  <?php
-                                  //<br><input type = checkbox name= questbox[]/>
-                                    if(!empty($quest_db))
-                                    {
-                                      for ($i = 0; $i < count($quest_db); $i++)
-                                      {
-                                        echo '<option value="'.$quest_db[$i]['questid'].'">'.$quest_db[$i]['name'].'</option>';
-                                      }
+											} // end of foreach($notchosen_quests as $quest)
 
-                                    }
-                              //XXX By Fehmi JQUERY      
-                                  ?>
-                                </select>
-							
-                             
-                              
-                              <script type="text/javascript">
-                              $("#quests").change(function(){
-
-                                  if($("#quests option:selected").val() != "null"){
-                                  $.ajax({
-                                	  type: "POST",
-                                	  url: "getquest.php",
-                                	  data: { id: $("#quests option:selected").val()}
-                                	}).done(function( msg ) {
-                                	  $("div#quests_selected").append(msg);
-                                	  $("#quests option:selected").remove();
-                                	  
-                                	});
-                                  }
-                                  });
-                              </script>
-                              <script type="text/javascript">
-                              function showUser()
-                              { 
-	                              if (window.XMLHttpRequest)
-	                                {// code for IE7+, Firefox, Chrome, Opera, Safari
-	                                xmlhttp=new XMLHttpRequest();
-	                                }
-	                              else
-	                                {// code for IE6, IE5
-	                                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	                                }
-	                              xmlhttp.onreadystatechange=function()
-	                                {
-	                                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	                                  {
-	                                  document.getElementById("setText").innerHTML="Your selecting was done successfully!";
-	                                  }
-	                                }
-	                              xmlhttp.open("GET","ucp.php",true);
-	                              xmlhttp.send();
-                              }
-                              </script>
-                              <input type="submit" name = "submit" onclick="showUser();" >
-                             
-	  							
-                              
-                              </form>
-                              <span id="setText">
-                              <?php
-	  								if(empty($quest_selected))
-	  									echo "<br>There is no questionnaire been added to this user study.<br>";
-	  								else
-	  								{
-	  									echo "<br>You added already these questionnaires:";
-?>
-										<ul>
-<?php	  	                            
-		  		                            foreach($quest_selected as $qessel)
-		  		                            {
-		  		                            	include_once("./include/functions/dbconnect.php");
-		  		                            	$sql = "SELECT * FROM questionnaire WHERE questid=".$qessel['questid'];
-		  		                            	$req = $db->query($sql);
-		  		                            	$qs = $req->fetch();
-		  		                            	echo "<li>".$qs['name']."</li>";
-		  		                            }
 ?>
 										</ul>
+									</div>
+									<br>
+									<div id="quests_list_btm">
+										<ul>
+											<script>
+					                    	    /* 
+												* To change the class name of its parent between (clicked..) and (notclicked..)
+												* It helps to determine which element as been clicked to be opened
+												*/
+											    function changeClicked(element)
+											    {
+											    	if(element.parentNode.className=='clickedMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedMarked';
+											       	}
+											       	else if(element.parentNode.className=='notclickedMarked')
+											    	{
+											       	 	element.parentNode.className='clickedMarked';
+											       	}
+											       	else if(element.parentNode.className=='clickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedNotMarked';
+											       	}
+											       	else if(element.parentNode.className=='notclickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='clickedNotMarked';
+											       	}
+											       	else
+											       		element.parentNode.className='clickedNotMarked';
+											   	}
+											   	/* 
+												* To change the class name of its parent between (..Marked) and (..NotMarked)
+												* It helps to determine which element as been marked
+												*/
+											   	function changeMark(element,id)
+											   	{
+											   		if(element.parentNode.className=='clickedMarked')
+											    	{
+											       	 	element.parentNode.className='clickedNotMarked';
+											       	 	document.getElementById(id).value = "notchosen";
+											       	}
+											       	else if(element.parentNode.className=='notclickedMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedNotMarked';
+											       	 	document.getElementById(id).value = "notchosen";
+											       	}
+											       	else if(element.parentNode.className=='clickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='clickedMarked';
+											       	 	document.getElementById(id).value = "chosen";
+											       	}
+											       	else if(element.parentNode.className=='notclickedNotMarked')
+											    	{
+											       	 	element.parentNode.className='notclickedMarked';
+											       	 	document.getElementById(id).value = "chosen";
+											       	}
+											       	else
+											       	{
+											       		element.parentNode.className='notclickedMarked';
+											       		document.getElementById(id).value = "chosen";
+											       	}
+											   	}
+					                    	</script>
 <?php
-	  		                        }
+											if(empty($chosen_quests))
+		  									{
 ?>
-	  							</span>
-                              </fieldset>
-                              
-							
-<?php							}
-                                                            
-                              
-                              
-                              
-                            }
+  												<br><h4>There is no questionnaire been added to this user study.</h4><br>
+<?php
+			  								}
+			  								else
+			  								{
+?>									
+												<br><h4>You added already these questionnaires:</h4>
+									
+<?php	  	                            
+							                    foreach($chosen_quests as $quest)
+						                        {
+?>
+	                      							<li>
+														<p 
+															onclick="changeMark(this,<?php echo $quest['questid']; ?>);"
+															ondblclick="changeClicked(this);">
+															<b>Name: </b><?php echo $quest['name']; ?>
+														</p>
+														<!-- hidden input is used to know if the element been chosen -->
+														<input type="hidden" name="<?php echo $quest['questid']; ?>" id="<?php echo $quest['questid']; ?>" value="notchosen"/>
+<?php
+							                            include_once("./include/managers/QuestionnaireManager.php");
+							                          	$qust = QuestionnaireManager::getQuestionsForQuestid(
+							                            	$db,
+							                            	$CONFIG['DB_TABLE']['QUESTION'],
+							                            	$quest['questid']);
+?>
+						                          		<table class="questTable">
+								                            <thead>
+								                              <th>#</th>
+								                              <th>Question</th>
+								                              <th>Type of Question</th>
+								                            </thead>
+						                            		<tbody>
+<?php                         
+	                              								$i = 1;
+								                              	foreach($qust as $q)
+								                              	{
+									                                include_once("./include/managers/QuestionnaireManager.php");
+									                                $answers = QuestionnaireManager::getAnswersForQidAndApkid(
+									                                  $db,
+									                                  $CONFIG['DB_TABLE']['ANSWER'],
+									                                  $q['qid'],
+									                                  $apkid);
+?>
+									                                <tr>
+									                                  	<td><?php echo $i; ?></td>
+<?php
+									                                  	if($q['type'] == 1) // multiple choices
+									                                  	{
+?>
+										                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+										                                    <td>multiple Choices</td>
+<?php                               
+									                                  	}
+									                                  	elseif($q['type'] == 2) // single choices
+									                                  	{
+?>
+										                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+										                                    <td>Single Choices</td>
+<?php                               
+									                                  	}
+									                                  	else // open question
+									                                  	{
+?>
+										                                    <td><?php echo $q['content']; ?></td>
+										                                    <td>Open Question</td>
+<?php                               
+	                                  									}
+	                                  									$i++;
+?>
+                                									</tr>
+<?php
+                              									} // end of foreach($qust as $q)
+?>
+                            								</tbody>
+                          								</table>
+                          							</li>
+<?php
+		  		                           		} // end of foreach($chosen_quests as $quest)
+	  		                           		} // end of else : if(empty($chosen_quests))
+?>
+										</ul>
+									</div>
+									<br>
+									<input type="submit" value="update" name="update" style="height: 25px; width: 100px"/>
+								</form></fieldset>
+<?php
+								if(isset($_POST['update']))
+								{
+									
+									$numOfSelected = 0;
+									foreach($notchosen_quests as $quest)
+									{
+										if(isset($_POST[$quest['questid']]) && $_POST[$quest['questid']] == "chosen")
+										{
+											$numOfSelected++;
+											QuestionnaireManager::pairQuestionnireWithApk($db, $CONFIG['DB_TABLE']['APK_QUEST'], $apkid, $quest['questid']);
+										}
+									}
+
+									foreach($chosen_quests as $quest)
+									{
+										if(isset($_POST[$quest['questid']]) && $_POST[$quest['questid']] == "chosen")
+										{
+											$numOfSelected++;
+											QuestionnaireManager::unpairQuestionnireWithApk($db, $CONFIG['DB_TABLE']['APK_QUEST'], $apkid, $quest['questid']);
+										}
+									}
+
+									if($numOfSelected > 0)
+									{
+										header("Location: ucp.php?m=addquest&id=".$apkid);
+									}
+									else
+									{
+?>
+										You did not select any questionnaire to update on this user study!
+										<br>
+										You may want to select a questionnaire by one click on it and then click on update button.
+										<br>
+<?php
+									} 
+								} // end of if(isset($_POST['update']))							
+                            } // end of if($show_add_quest == true)
                             
                             /********************************************
                             *********** UPDATE MY APK PAGE **************
                             *********************************************/
                             
-                            if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1){
-                                 ?>
-                                 
-                                 <form action="update.php" method="post" enctype="multipart/form-data" class="upload_form">
-                                  <p>Program name (title):</p>
-                                  <h4><?php
-                                      
-                                      echo $apk_to_update['apktitle'];         
-                                      
-                                      ?></h4>
-                                  <p>Lowest android version needed for my program to run:</p>
-                                  <select name="apk_android_version">
-                                    <?php
-                                     
-                                    $_SESSION['APKID'] = $apk_to_update['apkid'];
-                                     
-                                    for($i=0; $i<count($API_VERSION); $i++){
-                                        echo '<option value="'. $API_VERSION[$i][0] .'"'. 
-                                        ($apk_to_update['androidversion'] == $API_VERSION[$i][0] ? ' selected="selected" ' : '') 
-                                        .'>'. $API_VERSION[$i][1] .'</option>';    
-                                    } 
-                                    
-                                    ?>
-                                  </select>                              
-                                  <p>Program description:</p>
-                                  <textarea cols="30" rows="6" name="apk_description"><?php
-                                    echo $apk_to_update['description'];
-                                                                       
-                                  ?></textarea>
-                                  <p style="margin: 20px 0;">My program uses following sensors:</p>
-                                  <ul><?php
-                                  
-                                      $apk_to_update_sensors = json_decode($apk_to_update['sensors']);
-                                  
-                                      for($i=0; $i < count($sensors_info); $i++){
-                                           
-                                        echo '<li>';
-                                        if(in_array(($i+1), $apk_to_update_sensors)){
-                                            
-                                            // if sensor was selected, check and select it here
-                                            
-                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
-                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'"></div>';
-                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" checked="checked" />';
-                                        }else{
-                                           
-                                            // here is no selection of sensor
-                                            
-                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'"></div>';
-                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
-                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" />';
-                                            }
-                                        echo '</li>';
-                                       } 
-                                   ?>
-                                  </ul>
-      
-                                  <label for="file">Select a file:</label> 
-                                  <input type="file" name="userfile" id="file" style="margin: 15px 0;">
-                                  <br /><br />
-                                  <button>Update</button>
-                                  <p style="margin-top: 50px;"></p>
-                                </form>
-                                 
-                                 <?php
-                            }
-                            
-                            
-                            if($MODE == 'PROMO' && !isset($_POST['promo_sent']) 
-                                                && (!isset($USER_ALREADY_ACCEPTED) || !isset($USER_PENDING))){    
-                            ?> 
-                            
-                            <h3>Application for scientist credentials</h3>
+                            if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1)
+                            {
+?>                              <fieldset><legend><h3><em>Update</em></h3></legend>
+                            	<form action="update.php" method="post" enctype="multipart/form-data" class="upload_form">
+	                                <p>Program name (title):</p>
+	                                <h4><?php echo $apk_to_update['apktitle']; ?></h4><br>
+                                        <p>Program description:</p>
+	                                <textarea cols="30" rows="6" name="apk_description">
+	                                	<?php echo $apk_to_update['description']; ?>
+	                                </textarea><br><br><hr><br>
+	                                <p>Lowest android version needed for my program to run:</p>
+	                                <select name="apk_android_version">
+<?php
+	                                    $_SESSION['APKID'] = $apk_to_update['apkid'];
+	                                    for($i=0; $i<count($API_VERSION); $i++)
+	                                    {
+	                                        echo
+	                                        	'<option value="'. $API_VERSION[$i][0] .'"'. 
+	                                        	($apk_to_update['androidversion'] == $API_VERSION[$i][0] ? ' selected="selected" ' : '') 
+	                                        	.'>'. $API_VERSION[$i][1] .'</option>';    
+	                                    }
+?>
+	                                </select>                              
+	                                
+	                                <p style="margin: 20px 0;">My program uses following sensors:</p>
+	                                <ul>
+<?php
+	                                  	$apk_to_update_sensors = json_decode($apk_to_update['sensors']);
+		                                for($i=0; $i < count($sensors_info); $i++)
+	                                    {
+	                                        echo '<li>';
+	                                        if(in_array(($i+1), $apk_to_update_sensors))
+	                                        {
+	                                            // if sensor was selected, check and select it here
+	                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+	                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'"></div>';
+	                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" checked="checked" />';
+	                                        }
+	                                        else
+	                                        {
+	                                           	// here is no selection of sensor
+	                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'"></div>';
+	                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+	                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" />';
+	                                        }
+	                                        echo '</li>';
+	                                    } 
+?>
+                                	</ul>
+                                        <hr>
+                                        <label for="file">Select a file:</label> 
+	                                <input type="file" name="userfile" id="file" style="margin: 15px 0;">
+	                                <br /><br />
+	                                <button>Update</button>
+	                                <p style="margin-top: 50px;"></p>
+                                </form></fieldset>
+<?php
+                            } // end of if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1)
 
-                            <form action="ucp.php?m=promo" method="post" class="promo_form">
-                               
-                                 <fieldset>
-                                    <legend>Become a scientist!</legend>
-                                    <label for="telephone" >Telephone:</label>
-                                    <div class="clear"></div>
-                                    <input type="text" name="telephone" id="telephone" maxlength="10" />
-                                    <div class="clear"></div>
-                                    <label for="reason" >Reason? Tell us why, pls (*):</label>
-                                    <div class="clear"></div>
-                                    <textarea cols="30" rows="10" name="reason" id="reason"></textarea>
-                                    <div class="clear"></div>
-                                    <input type="hidden" name="promo_sent" id="promo_sent" value="1" />
-                                    <input type="submit" name="submit" value="Send" />
-                                 </fieldset> 
-                               
-                            </form>   
-                                
-                             <?php   
-                            }
                             
-                            if($MODE == 'PROMO' && isset($_POST['promo_sent'])){
-                                ?>
-                                
+                            /********************************************
+                            ******* SCIENTIST CREDINTIAL REQUEST ********
+                            *********************************************/
+                            if(
+                            	$MODE == 'PROMO' && !isset($_POST['promo_sent'])
+                            	&& (!isset($USER_ALREADY_ACCEPTED) || !isset($USER_PENDING)))
+                            {    
+?> 
+	                            <h3>Application for scientist credentials</h3>
+	                            <form action="ucp.php?m=promo" method="post" class="promo_form">
+	                                 <fieldset>
+	                                    <legend>Become a scientist!</legend>
+	                                    <label for="telephone" >Telephone:</label>
+	                                    <div class="clear"></div>
+	                                    <input type="text" name="telephone" id="telephone" maxlength="10" />
+	                                    <div class="clear"></div>
+	                                    <label for="reason" >Reason? Tell us why, pls (*):</label>
+	                                    <div class="clear"></div>
+	                                    <textarea cols="30" rows="10" name="reason" id="reason"></textarea>
+	                                    <div class="clear"></div>
+	                                    <input type="hidden" name="promo_sent" id="promo_sent" value="1" />
+	                                    <input type="submit" name="submit" value="Send" />
+	                                 </fieldset>
+	                            </form>   
+<?php   
+                            }
+
+                            if($MODE == 'PROMO' && isset($_POST['promo_sent']))
+                            {
+?>
                                 <div class="promo_sent_text">
                                     <p>Your scientist application was sent. Thank you for interesting in that!</p>
                                 </div>
-                                
-                                <?php
+<?php
                             }
                             
-                            if($MODE == 'PROMO' && isset($USER_PENDING) && $USER_PENDING == 1
-                                                && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED != 1)
+                            if(
+                            	$MODE == 'PROMO' && isset($USER_PENDING) && $USER_PENDING == 1
+                                && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED != 1)
                             {
-                                ?>
+?>
                                 
                                 <div class="promo_sent_text">
                                     <p>Your application to become a scientist was already sent to us.</p>
                                 </div>
-                                
-                                <?php
+<?php
                             }
                             
-                            if($MODE == 'PROMO' && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED == 1){
-                                ?>
-                                
+                            if($MODE == 'PROMO' && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED == 1)
+                            {
+?>
                                 <div class="promo_sent_text">
                                     <p>You are already a scientist!</p>
                                 </div>
-                                
-                                <?php
+<?php
                             }
                             
                             // nobody wants you as scientist
-                            if($MODE == 'PROMO' && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED == 0 
-                                                && isset($USER_PENDING) && $USER_PENDING == 0){
-                                ?>
-                                
+                            if(
+                            	$MODE == 'PROMO' && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED == 0 
+                                && isset($USER_PENDING) && $USER_PENDING == 0)
+                            {
+?>
                                 <div class="promo_sent_text">
                                     <p>Sorry, but admin won't you as scientist and rejected your application. :(</p>
                                 </div>
-                                
-                                <?php
+<?php
                             }
-                            
-                        ?>
+?>
                            
                         </div>
                     </div>

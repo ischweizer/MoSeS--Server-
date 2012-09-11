@@ -1,0 +1,120 @@
+2012-06-19 0:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 0:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 0:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 0:00:01 - INFO --> DELETE FROM android_session WHERE 1340056801- lastactivity > 120 
+2012-06-19 0:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 1:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 1:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 1:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 1:00:01 - INFO --> DELETE FROM android_session WHERE 1340060401- lastactivity > 120 
+2012-06-19 1:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 2:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 2:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 2:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 2:00:01 - INFO --> DELETE FROM android_session WHERE 1340064001- lastactivity > 120 
+2012-06-19 2:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 3:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 3:00:01 - INFO --> DELETE FROM android_session WHERE 1340067601- lastactivity > 120 
+2012-06-19 3:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 3:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 3:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 4:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 4:00:01 - INFO --> DELETE FROM android_session WHERE 1340071201- lastactivity > 120 
+2012-06-19 4:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 4:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 4:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 5:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 5:00:01 - INFO --> DELETE FROM android_session WHERE 1340074801- lastactivity > 120 
+2012-06-19 5:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 5:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 5:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 6:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 6:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 6:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 6:00:01 - INFO --> DELETE FROM android_session WHERE 1340078401- lastactivity > 120 
+2012-06-19 6:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 7:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 7:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 7:00:01 - INFO --> DELETE FROM android_session WHERE 1340082001- lastactivity > 120 
+2012-06-19 7:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 7:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 8:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 8:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 8:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 8:00:01 - INFO --> DELETE FROM android_session WHERE 1340085601- lastactivity > 120 
+2012-06-19 8:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 9:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 9:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 9:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 9:00:01 - INFO --> DELETE FROM android_session WHERE 1340089201- lastactivity > 120 
+2012-06-19 9:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 10:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 10:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 10:00:01 - INFO --> DELETE FROM android_session WHERE 1340092801- lastactivity > 120 
+2012-06-19 10:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 10:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 11:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 11:00:01 - INFO --> DELETE FROM android_session WHERE 1340096401- lastactivity > 120 
+2012-06-19 11:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 11:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 11:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 12:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 12:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 12:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 12:00:01 - INFO --> DELETE FROM android_session WHERE 1340100001- lastactivity > 120 
+2012-06-19 12:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 13:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 13:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 13:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 13:00:01 - INFO --> DELETE FROM android_session WHERE 1340103601- lastactivity > 120 
+2012-06-19 13:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 14:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 14:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 14:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 14:00:01 - INFO --> DELETE FROM android_session WHERE 1340107201- lastactivity > 120 
+2012-06-19 14:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 15:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 15:00:01 - INFO --> DELETE FROM android_session WHERE 1340110801- lastactivity > 120 
+2012-06-19 15:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 15:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 15:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 16:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 16:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 16:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 16:00:01 - INFO --> DELETE FROM android_session WHERE 1340114401- lastactivity > 120 
+2012-06-19 16:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 17:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 17:00:01 - INFO --> DELETE FROM android_session WHERE 1340118001- lastactivity > 120 
+2012-06-19 17:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 17:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 17:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 18:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 18:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 18:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 18:00:01 - INFO --> DELETE FROM android_session WHERE 1340121601- lastactivity > 120 
+2012-06-19 18:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 19:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 19:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 19:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 19:00:01 - INFO --> DELETE FROM android_session WHERE 1340125201- lastactivity > 120 
+2012-06-19 19:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 20:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 20:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 20:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 20:00:01 - INFO --> DELETE FROM android_session WHERE 1340128801- lastactivity > 120 
+2012-06-19 20:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 21:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 21:00:01 - INFO --> DELETE FROM android_session WHERE 1340132401- lastactivity > 120 
+2012-06-19 21:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 21:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 21:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 22:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 22:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 22:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 22:00:01 - INFO --> DELETE FROM android_session WHERE 1340136001- lastactivity > 120 
+2012-06-19 22:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  
+2012-06-19 23:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB ##############################  
+2012-06-19 23:00:01 - INFO -->  ###################### CLEAN OBSOLETE APKs CRONJOB DONE ##############################  
+2012-06-19 23:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB ##############################  
+2012-06-19 23:00:01 - INFO --> DELETE FROM android_session WHERE 1340139601- lastactivity > 120 
+2012-06-19 23:00:01 - INFO -->  ###################### CLEAN OUTDATED ANDROID SESSIONS CRONJOB DONE ##############################  

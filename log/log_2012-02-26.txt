@@ -1,0 +1,26 @@
+2012-02-26 17:51:11 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-02-26 17:51:11 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-02-26 17:51:11 - INFO --> LOGIN ARRIVED 
+2012-02-26 17:51:11 - INFO --> USER_FOUND 
+2012-02-26 17:51:11 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-02-26 17:51:11 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'xoom',
+   'ID' => '54',
+   'MESSAGE' => 'GET_APK_INFO',
+   'SESSIONID' => '4bccd35d5a7452affab63857f350f4bd',
+)) 
+2012-02-26 17:51:11 - INFO --> GET APK INFO ARRIVED 
+2012-02-26 17:51:11 - INFO --> SESSIONID PROVIDED BY THE CLIENT: 4bccd35d5a7452affab63857f350f4bd 
+2012-02-26 17:51:11 - INFO --> ##################### GET APK INFO ################ USER FOUND 
+2012-02-26 17:51:11 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-02-26 17:51:11 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'xoom',
+   'MESSAGE' => 'GET_FILTER',
+   'SESSIONID' => '4bccd35d5a7452affab63857f350f4bd',
+)) 
+2012-02-26 17:51:11 - INFO --> GET FILTER ARRIVED 
+2012-02-26 17:51:11 - INFO --> ##################### GETTING FILTER ################ USER FOUND 

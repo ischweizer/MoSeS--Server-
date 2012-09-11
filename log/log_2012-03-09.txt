@@ -1,0 +1,28 @@
+2012-03-09 0:02:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-09 0:02:52 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'abc',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '5ec9307195515a44ccd8de538584e0ec',
+)) 
+2012-03-09 0:02:52 - INFO --> ######### No session found 
+2012-03-09 14:25:29 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-09 14:25:29 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'abc',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '5ec9307195515a44ccd8de538584e0ec',
+)) 
+2012-03-09 14:25:29 - INFO --> ######### No session found 
+2012-03-09 20:24:54 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-09 20:24:54 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'abc',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '5ec9307195515a44ccd8de538584e0ec',
+)) 
+2012-03-09 20:24:54 - INFO --> ######### No session found 
+2012-03-09 20:24:54 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-09 20:24:54 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'abc',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '5ec9307195515a44ccd8de538584e0ec',
+)) 
+2012-03-09 20:24:54 - INFO --> ######### No session found 

@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+//test if the user is registered
 if(!isset($_SESSION['USER_LOGGED_IN']))
     die('Only registered users may access that file!');
 
@@ -105,6 +106,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     
     if(isset($_POST['apk_description'])){
         
+		//Affecting the APK with examinating the space 
        $RAW_APK_DESCRIPTION = trim($_POST['apk_description']);
        
        $APK_DESCRIPTION = $RAW_APK_DESCRIPTION;
@@ -146,7 +148,8 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $row_installed_on = substr($row_installed_on, 1);
     $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
     $row_installed_on = explode(",", $row_installed_on);
-
+	
+	//Selecting all different apk in a hardware
     foreach($row_installed_on as $hardware_id){
          $sql="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
          $req=$db->query($sql);

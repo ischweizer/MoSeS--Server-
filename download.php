@@ -1,6 +1,7 @@
 <?php
+//Starting a new session
 session_start();
-  
+  //Import of the header
   include_once("./include/_header.php");
   
 ?>
@@ -8,6 +9,7 @@ session_start();
 <title>Hauptseite von MoSeS - Download</title>
 
 <?php  
+  //Import of menu
   include_once("./include/_menu.php");  
 ?>  
  
@@ -41,7 +43,8 @@ session_start();
 </div>
 
 <?php 
+//Import a slider
   include_once("./include/_login_slider.php");
- 
+//Import a footer 
   include_once("./include/_footer.php");  
 ?>

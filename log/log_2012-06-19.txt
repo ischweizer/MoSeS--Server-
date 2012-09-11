@@ -1,0 +1,45 @@
+2012-06-19 0:33:17 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-06-19 0:33:17 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-06-19 0:33:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-06-19 0:33:17 - INFO --> stdClass Object
+(
+    [DEVICEID] => 100
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 44a38b2f9b5d3e17c02d841b8f081928
+)
+ 
+2012-06-19 0:33:17 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS44a38b2f9b5d3e17c02d841b8f081928 
+2012-06-19 0:33:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-06-19 0:33:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS100 
+2012-06-19 0:33:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-06-19 0:33:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USER 
+2012-06-19 13:33:38 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-06-19 13:33:38 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-06-19 13:33:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-06-19 13:33:38 - INFO --> stdClass Object
+(
+    [DEVICEID] => 100
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 44a38b2f9b5d3e17c02d841b8f081928
+)
+ 
+2012-06-19 13:33:38 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS44a38b2f9b5d3e17c02d841b8f081928 
+2012-06-19 13:33:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-06-19 13:33:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS100 
+2012-06-19 13:33:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-06-19 13:33:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USER 
+2012-06-19 13:54:54 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-06-19 13:54:54 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-06-19 13:54:54 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-06-19 13:54:54 - INFO --> stdClass Object
+(
+    [DEVICEID] => 100
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 44a38b2f9b5d3e17c02d841b8f081928
+)
+ 
+2012-06-19 13:54:54 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS44a38b2f9b5d3e17c02d841b8f081928 
+2012-06-19 13:54:54 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-06-19 13:54:54 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS100 
+2012-06-19 13:54:54 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-06-19 13:54:54 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USER 

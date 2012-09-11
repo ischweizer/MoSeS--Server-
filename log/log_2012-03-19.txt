@@ -1,0 +1,1184 @@
+2012-03-19 16:47:32 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 16:47:32 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 16:47:32 - INFO --> LOGIN ARRIVED 
+2012-03-19 16:47:32 - INFO --> USER_FOUND 
+2012-03-19 16:47:32 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 16:47:32 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'someid',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => 'ce56d48d69d4f5351e1ade8454531518',
+)) 
+2012-03-19 16:47:32 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 16:47:32 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 16:47:32 - INFO --> ######### No hardware found 
+2012-03-19 17:00:33 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:00:33 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 17:00:33 - INFO --> LOGIN ARRIVED 
+2012-03-19 17:00:33 - INFO --> USER_FOUND 
+2012-03-19 17:00:33 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:00:33 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '9f09cc35adc02aa6a3a5260f7cf51f47',
+)) 
+2012-03-19 17:00:33 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:00:33 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:00:33 - INFO --> ######### No hardware found 
+2012-03-19 17:00:33 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:00:33 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '9f09cc35adc02aa6a3a5260f7cf51f47',
+)) 
+2012-03-19 17:00:33 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:00:33 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:00:33 - INFO --> ######### No hardware found 
+2012-03-19 17:00:33 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:00:33 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'SET_HARDWARE_PARAMS',
+   'VENDOR_NAME' => 'unknown',
+   'SENSORS' => 
+  array (
+  ),
+   'ANDVER' => '10',
+   'FORCE' => false,
+   'MODEL_NAME' => 'sdk',
+   'SESSIONID' => '9f09cc35adc02aa6a3a5260f7cf51f47',
+)) 
+2012-03-19 17:00:33 - INFO --> ##################### SETTING HARDWARE PARAMS, SESSION IS VALID ###################### 
+2012-03-19 17:00:33 - INFO --> ##################### SETTING HARDWARE PARAMS, UPDATING SESSION ################ 
+2012-03-19 17:00:33 - INFO --> SESSION IS UPDATED 
+2012-03-19 17:00:33 - INFO --> RETRIVED ROW FROM THE DATABASE 
+2012-03-19 17:00:33 - INFO --> The user has a new deviceID 
+2012-03-19 17:00:33 - INFO --> array (
+) 
+2012-03-19 17:00:33 - INFO --> INSERT INTO hardware 
+                (uid, deviceid, modelname, vendorname, androidversion, sensors) 
+                VALUES 
+                (4, 'jacos emulator' , 'sdk' , 'unknown' , '10', 'null') 
+2012-03-19 17:00:33 - INFO --> SET HARDWARE PARAMS ANSWERS WITH 
+2012-03-19 17:00:33 - INFO --> array (
+  'MESSAGE' => 'HARDWARE_CHANGE_RESPONSE',
+  'STATUS' => 'SUCCESS',
+) 
+2012-03-19 17:00:44 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:00:44 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '9f09cc35adc02aa6a3a5260f7cf51f47',
+)) 
+2012-03-19 17:00:44 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:00:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 3 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 3 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 8 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:44 - INFO --> Android version from APK: 10 
+2012-03-19 17:00:44 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:00:44 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:00:51 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:00:51 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'SET_FILTER',
+   'FILTER' => 
+  array (
+  ),
+   'SESSIONID' => '9f09cc35adc02aa6a3a5260f7cf51f47',
+)) 
+2012-03-19 17:00:51 - INFO --> SET FILTER ARRIVED 
+2012-03-19 17:00:51 - INFO --> ##################### SETTING FILTER ################ USER FOUND 
+2012-03-19 17:00:51 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2012-03-19 17:00:51 - INFO --> Filter set by the user: [] 
+2012-03-19 17:00:51 - INFO --> row update has to be commited 
+2012-03-19 17:00:51 - INFO --> ##################### SETTING FILTER ################ deviceid selected and uid jetzt sofort 
+2012-03-19 17:00:51 - INFO --> UPDATE hardware 
+2012-03-19 17:03:51 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:03:51 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 17:03:51 - INFO --> LOGIN ARRIVED 
+2012-03-19 17:03:51 - INFO --> USER_FOUND 
+2012-03-19 17:03:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:03:52 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '1a1d26bdd974f046d19bf3894e88e510',
+)) 
+2012-03-19 17:03:52 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:03:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 3 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 3 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 8 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:03:52 - INFO --> Android version from APK: 10 
+2012-03-19 17:03:52 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:03:52 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:04:01 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '1a1d26bdd974f046d19bf3894e88e510',
+)) 
+2012-03-19 17:04:01 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:04:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 3 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 3 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 8 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:04:01 - INFO --> Android version from APK: 10 
+2012-03-19 17:04:01 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:04:01 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:05:03 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '1a1d26bdd974f046d19bf3894e88e510',
+)) 
+2012-03-19 17:05:03 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:05:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 3 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 3 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 8 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:03 - INFO --> Android version from APK: 10 
+2012-03-19 17:05:03 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:05:03 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:05:51 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:05:51 - INFO --> stdClass::__set_state(array(
+   'MESSAGE' => 'LOGOUT_REQUEST',
+   'SESSIONID' => '',
+)) 
+2012-03-19 17:10:38 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:10:38 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 17:10:38 - INFO --> LOGIN ARRIVED 
+2012-03-19 17:10:38 - INFO --> USER_FOUND 
+2012-03-19 17:10:40 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:10:40 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => 'bbdf3fd2d6584c064b3d8e5510b4e74a',
+)) 
+2012-03-19 17:10:40 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:10:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 3 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 3 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 8 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:40 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:40 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:40 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:42 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:10:42 - INFO --> stdClass::__set_state(array(
+   'MESSAGE' => 'LOGOUT_REQUEST',
+   'SESSIONID' => 'bbdf3fd2d6584c064b3d8e5510b4e74a',
+)) 
+2012-03-19 17:10:46 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:10:46 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 17:10:46 - INFO --> LOGIN ARRIVED 
+2012-03-19 17:10:46 - INFO --> USER_FOUND 
+2012-03-19 17:10:47 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:10:47 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '203ea2f1914d557e2457808234e4541c',
+)) 
+2012-03-19 17:10:47 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:10:47 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 3 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 3 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 8 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:47 - INFO --> Android version from APK: 10 
+2012-03-19 17:10:47 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:10:47 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:10:49 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:10:49 - INFO --> stdClass::__set_state(array(
+   'MESSAGE' => 'LOGOUT_REQUEST',
+   'SESSIONID' => '203ea2f1914d557e2457808234e4541c',
+)) 
+2012-03-19 17:11:02 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:02 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 17:11:02 - INFO --> LOGIN ARRIVED 
+2012-03-19 17:11:02 - INFO --> USER_FOUND 
+2012-03-19 17:11:02 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:02 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '6ade5153f8ea2bddd9cdbbd1f1118f5e',
+)) 
+2012-03-19 17:11:02 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:11:02 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 8 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:02 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:02 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:02 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:07 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '6ade5153f8ea2bddd9cdbbd1f1118f5e',
+)) 
+2012-03-19 17:11:07 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:11:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 8 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:07 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:07 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:07 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:14 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:14 - INFO --> stdClass::__set_state(array(
+   'MESSAGE' => 'LOGOUT_REQUEST',
+   'SESSIONID' => '6ade5153f8ea2bddd9cdbbd1f1118f5e',
+)) 
+2012-03-19 17:11:14 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:14 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '6ade5153f8ea2bddd9cdbbd1f1118f5e',
+)) 
+2012-03-19 17:11:14 - INFO --> ######### No session found 
+2012-03-19 17:11:20 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:20 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 17:11:20 - INFO --> LOGIN ARRIVED 
+2012-03-19 17:11:20 - INFO --> USER_FOUND 
+2012-03-19 17:11:20 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:20 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => 'ec2c80c45b3eb9b4f88bafeebb4ac7a4',
+)) 
+2012-03-19 17:11:20 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:11:20 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 8 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:20 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:20 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:20 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:26 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_HARDWARE_PARAMS',
+   'SESSIONID' => 'ec2c80c45b3eb9b4f88bafeebb4ac7a4',
+)) 
+2012-03-19 17:11:26 - INFO -->  
+2012-03-19 17:11:26 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-03-19 17:11:26 - INFO --> jacos emulator 
+2012-03-19 17:11:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:11:26 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => 'ec2c80c45b3eb9b4f88bafeebb4ac7a4',
+)) 
+2012-03-19 17:11:26 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:11:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 3 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 8 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:11:26 - INFO --> Android version from APK: 10 
+2012-03-19 17:11:26 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:11:26 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:18:36 - INFO --> stdClass::__set_state(array(
+   'PASSWORD' => '777',
+   'LOGIN' => 'alex',
+   'MESSAGE' => 'LOGIN_REQUEST',
+)) 
+2012-03-19 17:18:36 - INFO --> LOGIN ARRIVED 
+2012-03-19 17:18:36 - INFO --> USER_FOUND 
+2012-03-19 17:18:36 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-03-19 17:18:36 - INFO --> stdClass::__set_state(array(
+   'DEVICEID' => 'jacos emulator',
+   'MESSAGE' => 'GET_APK_LIST_REQUEST',
+   'SESSIONID' => '86c015eaba882d69691d8d79baeacc6c',
+)) 
+2012-03-19 17:18:36 - INFO --> ##################### STILL ALIVE ################ USER FOUND 
+2012-03-19 17:18:36 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 3 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 3 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 3 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 8 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 8 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 
+2012-03-19 17:18:36 - INFO --> Android version from APK: 10 
+2012-03-19 17:18:36 - INFO --> Android version from DEVICE: 10 
+2012-03-19 17:18:36 - INFO --> intval shit 10 und so: 10 

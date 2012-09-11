@@ -1,11 +1,14 @@
 <?php
+// start the session
 session_start();
-
+// include header
 include_once("./include/_header.php");
 
+//If the formular is sent
 if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
-  
+    //Import of configuration´s file
    include_once("./config.php");
+   //Import of connection´s file to database
    include_once("./include/functions/dbconnect.php"); 
    
    $sql = "SELECT userid, confirmed  
@@ -184,7 +187,7 @@ if(isset($_POST["submitted"])){
   
 <title>Hauptseite von MoSeS - Registration</title>
 
-<?php  
+<?php  //Import of the menu
   include_once("./include/_menu.php");  
 ?>  
   
@@ -311,8 +314,9 @@ if(isset($_POST["submitted"])){
     <!-- end #page -->
 </div>
 
-<?php
+<?php 
+//Import of the slider to login
   include_once("./include/_login_slider.php");
- 
+//IMport of the footer 
   include_once("./include/_footer.php");  
 ?>

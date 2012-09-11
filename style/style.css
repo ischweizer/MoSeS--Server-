@@ -75,6 +75,7 @@ img.aligncenter {
 
 #menu_vertical{
 	width: auto;
+	padding-top: 100px;
 	position:fixed;
 }
 
@@ -129,8 +130,8 @@ img.aligncenter {
 }
 
 #logo {
-	z-index:1;
-	position: absolute;
+	z-index:2;
+	position: fixed;//absolute;
 	//float: left;
 	width: 660px;
 	height: 63px;    
@@ -158,6 +159,12 @@ img.aligncenter {
 /* CSS Document */
 
 
+#navigation {
+	position: fixed;
+	width:100%;
+	z-index:1;
+}
+
 ul#menu{
 
 	margin:0;
@@ -165,11 +172,10 @@ ul#menu{
 		
 	list-style-type:none;
 		
-	position:relative;
-		
 	display:block;
 		
 	height:100px;
+	width:100%;
 		
 	font-size:14px;
 		
@@ -239,15 +245,22 @@ color:#484949;
 
 // begin of lists
 #group_users>ul, #list_devices>ul, #list_us>ul,
-#group_devices>ul, #quests_list>ul {
+#group_devices>ul {
     margin: 0;
     padding: 0;
     list-style:none;
    	width: 500px;
 }
 
+#quests_list>ul, #quests_list_top>ul, #quests_list_btm>ul {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+    width: 750px;
+}
+
 #group_users>ul>li, #list_devices>ul>li, #list_us>ul>li,
-#group_devices>ul>li, #quests_list>ul>li {
+#group_devices>ul>li {
     display:block;
 	overflow: hidden;
     margin: 0;
@@ -268,12 +281,33 @@ color:#484949;
 
 }
 
+#quests_list>ul>li, #quests_list_top>ul>li, #quests_list_btm>ul>li {
+    display:block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0px;
+    list-style:none;
+    height: 40px; 
+    width: 750px;
+    
+
+    /* Decorative CSS */
+    background-color:#f0f0f0;
+
+    /* CSS3 Transition Effect */
+    /*transition: height 0.3s ease-out;
+    -moz-transition: height 0.2s ease-out;
+    -webkit-transition: height 0.2s ease-out;
+    -o-transition: height 0.3s ease-out;*/
+
+}
+
 #group_users>ul>li>p, #list_devices>ul>li>p, #list_us>ul>li>p,
-#group_devices>ul>li>p, #quests_list>ul>li>p {
+#group_devices>ul>li>p, #quests_list>ul>li>p, #quests_list_top>ul>li>p, #quests_list_btm ul li p {
     display:block;
     margin: 0;
     padding:10px;
-    height:19px;
+    height: 19px;
 
     /* Decorative CSS */
     border-top:#f0f0f0 1px solid;
@@ -289,12 +323,66 @@ color:#484949;
 }
 
 #group_users ul li.clicked, #list_devices>ul>li.clicked, #list_us>ul>li.clicked,
-#group_devices ul li.clicked, #quests_list ul li.clicked {
+#group_devices ul li.clicked, #quests_list ul li.clicked,
+#quests_list_top ul li.clickedMarked, #quests_list_top ul li.clickedNotMarked,
+#quests_list_btm ul li.clickedMarked, #quests_list_btm ul li.clickedNotMarked {
 	height: auto;
 }
 
+#quests_list_top ul li.clickedMarked p, #quests_list_top ul li.notclickedMarked p {
+	/* Decorative CSS */
+    color:#fff;
+    background: #0066FF;
+   
+
+    /* CSS3 Gradient Effect */
+    //background: -moz-linear-gradient( top, #e1ff7c, #0000ff); /* FF, Flock */
+    //background: -webkit-gradient(linear, left top, left bottom, from(#e1ff7c), to(#0000ff)); /* Safari, Chrome */
+    //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e1ff7c, endColorstr=#0000ff); /* IE 5.5 - IE 7 */
+    //-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff454545, endColorstr=#ff000000)";   /* IE 8 */
+}
+
+#quests_list_btm ul li.clickedMarked p, #quests_list_btm ul li.notclickedMarked p {
+    /* Decorative CSS */
+    color:#fff;
+    background: #FF2200;
+   
+
+    /* CSS3 Gradient Effect */
+    //background: -moz-linear-gradient( top, #e1ff7c, #0000ff); /* FF, Flock */
+    //background: -webkit-gradient(linear, left top, left bottom, from(#e1ff7c), to(#0000ff)); /* Safari, Chrome */
+    //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e1ff7c, endColorstr=#0000ff); /* IE 5.5 - IE 7 */
+    //-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff454545, endColorstr=#ff000000)";   /* IE 8 */
+}
+
+#quests_list_top ul li.clickedMarked:hover p, #quests_list_top ul li.notclickedMarked:hover p {
+	/* Decorative CSS */
+    color:#fff;
+    background: #294e8a;
+   
+
+    /* CSS3 Gradient Effect */
+    //background: -moz-linear-gradient( top, #e1ff7c, #0000ff); /* FF, Flock */
+    //background: -webkit-gradient(linear, left top, left bottom, from(#e1ff7c), to(#0000ff)); /* Safari, Chrome */
+    //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e1ff7c, endColorstr=#0000ff); /* IE 5.5 - IE 7 */
+    //-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff454545, endColorstr=#ff000000)";   /* IE 8 */
+}
+
+#quests_list_btm ul li.clickedMarked:hover p, #quests_list_btm ul li.notclickedMarked:hover p {
+    /* Decorative CSS */
+    color:#fff;
+    background: #7b1c26;
+   
+
+    /* CSS3 Gradient Effect */
+    //background: -moz-linear-gradient( top, #e1ff7c, #0000ff); /* FF, Flock */
+    //background: -webkit-gradient(linear, left top, left bottom, from(#e1ff7c), to(#0000ff)); /* Safari, Chrome */
+    //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e1ff7c, endColorstr=#0000ff); /* IE 5.5 - IE 7 */
+    //-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff454545, endColorstr=#ff000000)";   /* IE 8 */
+}
+
 #group_users>ul>li:hover>p, #list_devices>ul>li:hover>p, #list_us>ul>li:hover>p,
-#group_devices>ul>li:hover>p, #quests_list>ul>li:hover>p {
+#group_devices>ul>li:hover>p, #quests_list>ul>li:hover>p, #quests_list_top>ul>li:hover>p, #quests_list_btm>ul>li:hover>p {
     /* Decorative CSS */
     color:#fff;
     background: #000000;
@@ -308,10 +396,40 @@ color:#484949;
 }
 
 #group_users>ul>li>p:hover, #list_devices>ul>li>p:hover, #list_us>ul>li>p:hover,
-#group_devices>ul>li>p:hover, #quests_list>ul>li>p:hover {
+#group_devices>ul>li>p:hover, #quests_list>ul>li>p:hover, #quests_list_top>ul>li>p:hover, #quests_list_btm>ul>li>p:hover {
     cursor:pointer;
 }
-// end of lists
+/* end of lists */
+
+/* start of questionnaire's table */
+table.questTable {
+    border: 1px solid #e4e4e4;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 4px;
+}
+table.questTable th {
+    border: 1px solid #FFFFFF;
+    text-align: center;
+    font-size: 13px;
+    padding: 4px;
+    white-space:nowrap;
+}
+table.questTable td {
+    vertical-align: center;
+    text-align: center;
+    border: 1px solid #FFFFFF;
+    font-size: 12px;
+}
+table.questTable tr.notclicked {
+    //background: #00FFFF;
+    display: none;
+}
+table.questTable tbody tr:hover {
+    background: #FFFFFF;
+    cursor:pointer;
+}
+/* end of questionnaire's table */
 
 #splash {
 	width: 980px;
@@ -320,12 +438,12 @@ color:#484949;
 }
 
 #page {
-	width: 700px;
-	padding: 60px 80px 50px 250px;
+	width: 800px;
+	padding: 100px 80px 50px 250px;
 }
 
 #page-bgbtm {
-	margin: 0px;
+	margin: 30px;
 }
 
 #page_content {
@@ -393,6 +511,7 @@ color:#484949;
 .sensor_box li {
     display: inline;
     list-style-type: none;
+	
 }
 
 .sensor_box .sensor_box_name {
@@ -464,14 +583,31 @@ color:#484949;
 	height: 20px;
 	background: url("../images/sprites/bt_up_down.png") 0 0 no-repeat;
 }
-.clicked .bt_quest
+.clicked .bt_downloadCSV
+{
+    position: absolute;
+    margin-left: 660px;
+    z-index: 0;
+    width: 30px;
+    height: 30px;
+    background: url("../images/bt_download.png");
+}
+.clicked .bt_addquest
 {
 	position: absolute;
-	margin-left: 515px;
+	margin-left: 520px;
 	margin-bottom: 5px;
 	width: 30px;
 	height: 30px; 
-	background: url("../images/bt_quest.png") 0 0 no-repeat;
+	background: url("../images/bt_addquest.png") 0 0 no-repeat;
+}
+.clicked .bt_usquest
+{
+	position: absolute;
+	margin-left: 520px;
+	width: 20px;
+	height: 20px; 
+	background: url("../images/bt_usquest.png") 0 0 no-repeat;
 }
 
 .sensor_box .down_remove_links div {
@@ -508,19 +644,6 @@ color:#484949;
 .sensor_info ul {
     margin-left: -30px;   
 }
-
-/*.sensor_info .sensor_container_f {
-    position: absolute;
-    left: 5px;
-    top: 35px;
-}*/
-
-/*.sensor_container_f {
-    position: absolute;
-    left: 5px;
-    top: 35px;
-}*/
-
 
 .sensor_info .sensor_container_s {
     position: absolute;
@@ -588,8 +711,8 @@ color:#484949;
     display: inline-block;
     text-align: center;
     margin-left: 0;
-    margin-right: 6%;
-    margin-bottom: 5%;
+    margin-right: 0;
+    margin-bottom: 0;
     list-style-type: none;
     
 }
@@ -706,7 +829,7 @@ color:#484949;
 .your_stuff,
 .upload_successful,
 .upload_failed {
-    margin-top: 20px;
+    //margin-top: 20px;
 }
 
 .group_name {
@@ -718,7 +841,7 @@ color:#484949;
 }
 
 .leave_group button {
-    margin-top: 50px;
+   // margin-top: 50px;
 }
 
 .group_stats {
@@ -782,11 +905,7 @@ color:#484949;
 
 
 
- /**
- This stylesheet is part of the java script calendar tcal
-  **/
-
-
+/* This stylesheet is part of the java script calendar tcal */
 /* input box in default state */ 
 .tcalInput {
 	background: #FFFFFF url('../images/cal.gif') 100% 50% no-repeat;

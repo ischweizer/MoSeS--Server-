@@ -1,6 +1,7 @@
 <?php
+//Starting session
 session_start();
-  
+//Import of header 
 include_once("./include/_header.php");
   
 ?>
@@ -8,15 +9,11 @@ include_once("./include/_header.php");
 <title>Hauptseite von MoSeS - Docs</title>
 
 <?php  
+//Import of the header
 include_once("./include/_menu.php");  
 ?>  
   
-<!--<div id="header">
-    <div id="logo">
-        <h1><a href="./index.php">Mobile Sensing System</a></h1>
-    </div>
-</div>-->
-<!-- end #header -->
+ 
 
 <div id="page">
         <div id="page-bgtop">
@@ -30,7 +27,7 @@ include_once("./include/_menu.php");
                             <p>3. That's it!</p>
                         </div>
                         <div style="clear: both;">&nbsp;</div>
-                        <p class="meta">Posted by Admin on February 12, 2012</p>
+                        <p class="meta">Posted on September 2012</p>
                     </div>
                     <div style="clear: both;">&nbsp;</div>
                 </div>
@@ -43,7 +40,8 @@ include_once("./include/_menu.php");
 </div>
 
 <?php 
+//Import of the slider
   include_once("./include/_login_slider.php");
- 
+ //Import of the footer
   include_once("./include/_footer.php");  
 ?>

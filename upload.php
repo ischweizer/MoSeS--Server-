@@ -1,6 +1,7 @@
 <?php
+//Starting session
 session_start();
-
+//test if user is registered
 if(!isset($_SESSION['USER_LOGGED_IN']))
     die('Only registered users may access that file!');
 
@@ -9,18 +10,18 @@ include_once(MOSES_HOME."/include/functions/func.php");
 include_once(MOSES_HOME."/include/functions/logger.php");
     
 /**
-*  SETTINGS FOR UPLOAD
+*  SETTING FILE FOR UPLOAD
 */
 $allowedTypes = array('.apk');
-$maxFileSize = $CONFIG['UPLOAD']['FILESIZE'];
+$maxFileSize = $CONFIG['UPLOAD']['FILESIZE'];//stting the maximale size of file
 $uploadPath = './apk/'; // folder to save to
 
 $filename = $_FILES['userfile']['name']; // gets filename
-$fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);
+$fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);//gets the extension of file
 
     
 /**
-* Connect to DB and get hashes for folder and file
+* DECRYPTING THE NAME OF FILE FROM DATABSE
 */
 include_once(MOSES_HOME. "/include/functions/dbconnect.php");
 
@@ -31,6 +32,7 @@ $sql = "SELECT hash
 $result = $db->query($sql);
 $row = $result->fetch();
 
+//if the hash of file exists in database
 if(!empty($row))
 {
       
@@ -45,6 +47,7 @@ if(!empty($row))
     if(!is_dir($uploadPath))
     {
         $oldumask = umask(0);
+		//Test if the access permition allowed the upload
         if(!mkdir($uploadPath, 0777, true))
         {
             // failed to create folder
@@ -82,7 +85,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     && move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt))
 {
     
-    // fix file permission
+    // permission access rwx to File
     if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777))
     {
        header("Location: ucp.php?m=upload&res=4"); 
@@ -102,12 +105,12 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $candidates = array();
     $pending_users = array();
     $notified_users = array();
-    $USTUDY_FINISHED = 0;
     
-    // Initlization the contents of the pages for US creation form
+    // Initilization the contents of the pages for US creation form
     $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
     $req = $db->query($sql);
     $row = $req->fetch();
+	//Affectation of the different
     if(!empty($row))
     {
         $apk_title = $row['apk_title'];
@@ -115,7 +118,6 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         $radioButton = $row['radioButton'];
         $startdate = $row['startdate'];
         $startcriterion = $row['startcriterion'];
-        $radioButton1 = $row['radioButton1'];
         $enddate = $row['enddate'];
         $runningtime = $row['runningtime'];
         $maxdevice = $row['maxdevice'];
@@ -161,52 +163,39 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $pending_users = json_encode($pending_users);
     $notified_users = json_encode($notified_users);
 
-    /*$sql="insert into questionnaire values('',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'');";
-    $db->exec($sql);
-    
-    $idquestsql="select questid from questionnaire where questid in (select max(questid) from questionnaire);";
-    $req=$db->query($idquestsql);
-    $row=$req->fetch();
-    
-    $idquest=$row['questid'];
-
-    // Parametres standard
-
-    for($i = 1 ; $i < 21 ; $i++)
+    /* USTUDY_FINISHED encodings
+    * -1  update
+    * 0  user-study
+    * 1  finished
+    */
+    $USTUDY_FINISHED = 0;
+    if($radioButton == "1")
     {
-        if (1 == $_POST['standard'][$i])
-        { 
-            $sql="update questionnaire set standard".$i." = 1 where questionnaire.questid= ".$idquest;
-            $db->exec($sql);
-            
+        $startcriterion = 0;
+        $runningtime = NULL;
+
+        // user study should be finished if the end date is today or in the past days
+        if($enddate != NULL && strtotime($enddate) <= strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000))))
+        {
+            $USTUDY_FINISHED = 1;
         }
     }
-
-    if(isset($_POST['dynamic']))
-    {
-        $sql="update questionnaire set dynamic ='".$_POST['dynamic']."' where questionnaire.questid=".$idquest;
-        $db->exec($sql);
-    }*/
-
-    if($radioButton == "1")
-        $startcriterion = 0;
     elseif($radioButton == "2")
-        $startdate = null;
-
-    if($radioButton1 == "1")
-        $runningtime = null;
-    elseif($radioButton1 == "2")
-        $enddate = null;
-
+    {
+        $startdate = NULL;
+        $enddate = NULL;
+    }
+        
+	
     $logger->logInfo("title = ".$apk_title);
     $logger->logInfo("description = ".$description);
     $logger->logInfo("radioButton = ".$radioButton);
     $logger->logInfo("startdate = ".$startdate);
-    $logger->logInfo("startcriterion = ".$startcriterion);
-    $logger->logInfo("radioButton1 = ".$radioButton1);
     $logger->logInfo("enddate = ".$enddate);
+    $logger->logInfo("startcriterion = ".$startcriterion);
     $logger->logInfo("runningtime = ".$runningtime);
     $logger->logInfo("maxdevice = ".$maxdevice);
+    $logger->logInfo("USTUDY_FINISHED = ".$USTUDY_FINISHED);
     $logger->logInfo("locked = ".$locked);
     $logger->logInfo("inviteinstall = ".$inviteinstall);
     $logger->logInfo("androidversion = ".$androidversion);
@@ -214,6 +203,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
 
     /**
     * Store filename, hash in DB and other informations
+	* inserting into APK table
     */
     $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, apk_version,
                              apkhash, sensors, description,
@@ -249,7 +239,8 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $db->exec($sql) or die('Error SQL !<br/>'.$sql);
 
     $sql = "DELETE FROM temp WHERE userid = ". $_SESSION["USER_ID"];
-    $db->exec($sql);$row = $req->fetch();
+    $db->exec($sql);
+	$row = $req->fetch(); // TODO : remove this line
     
     header("Location: ucp.php?m=upload&res=1");
 }

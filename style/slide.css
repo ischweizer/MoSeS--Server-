@@ -17,10 +17,6 @@ body {
     min-width: 800px;
 }
 
-#toppanel {
-    font: 85%/0.9 arial, helvetica, sans-serif;
-}
-
 #toppanel a {
     color: #0099CC;
     text-decoration: none;
@@ -104,10 +100,11 @@ body {
 
 /* sliding panel */
 #toppanel {
-    position: absolute;   /*Panel will overlap  content */
+	font: 85%/0.9 arial, helvetica, sans-serif;
+    position: fixed;//absolute;   /*Panel will overlap  content */
     /*position: relative;*/   /*Panel will "push" the content down */
     top: 0;
-    right: 20px;
+    right: 0px;
     width: 290px;
     z-index: 999;
     text-align: center;

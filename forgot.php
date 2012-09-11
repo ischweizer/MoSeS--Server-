@@ -1,5 +1,5 @@
 <?php
-  
+  //Import of the header
   include_once("./include/_header.php");
   
 ?>
@@ -7,6 +7,7 @@
 <title>Hauptseite von MoSeS - Registration</title>
 
 <?php  
+   //Import of menu
   include_once("./include/_menu.php");  
 ?>  
   
@@ -45,7 +46,8 @@
 </div>
 
 <?php 
+   //Import of slider to login
   include_once("./include/_login_slider.php");
- 
+ //Import of footer
   include_once("./include/_footer.php");  
 ?>

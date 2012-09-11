@@ -1,0 +1,36 @@
+2012-07-19 14:54:44 - INFO --> ------------------UPLAOD------------------ 
+2012-07-19 14:54:44 - INFO --> title = ZHa 
+2012-07-19 14:54:44 - INFO --> description = akdjsc 
+2012-07-19 14:54:44 - INFO --> radioButton = 1 
+2012-07-19 14:54:44 - INFO --> startdate = 07/11/2012 
+2012-07-19 14:54:44 - INFO --> startcriterion = 0 
+2012-07-19 14:54:44 - INFO --> radioButton1 = 1 
+2012-07-19 14:54:44 - INFO --> enddate = 07/13/2012 
+2012-07-19 14:54:44 - INFO --> runningtime =  
+2012-07-19 14:54:44 - INFO --> maxdevice = 0 
+2012-07-19 14:54:44 - INFO --> locked = 0 
+2012-07-19 14:54:44 - INFO --> inviteinstall = 1 
+2012-07-19 14:54:44 - INFO --> androidversion = 15 
+2012-07-19 14:54:44 - INFO --> sensors = [2,6,8] 
+2012-07-19 14:59:53 - INFO --> ------------------UPLAOD------------------ 
+2012-07-19 14:59:53 - INFO --> title = startdatetest 
+2012-07-19 14:59:53 - INFO --> description = kjwf 
+2012-07-19 14:59:53 - INFO --> radioButton = 1 
+2012-07-19 14:59:53 - INFO --> startdate = 2012-07-17 
+2012-07-19 14:59:53 - INFO --> startcriterion = 0 
+2012-07-19 14:59:53 - INFO --> radioButton1 = 1 
+2012-07-19 14:59:53 - INFO --> enddate = 2012-07-19 
+2012-07-19 14:59:53 - INFO --> runningtime =  
+2012-07-19 14:59:53 - INFO --> maxdevice = 0 
+2012-07-19 14:59:53 - INFO --> locked = 1 
+2012-07-19 14:59:53 - INFO --> inviteinstall = 1 
+2012-07-19 14:59:53 - INFO --> androidversion = 15 
+2012-07-19 14:59:53 - INFO --> sensors = [1,2] 
+2012-07-19 14:59:53 - INFO --> sql = INSERT INTO apk (userid, userhash, apkname, apk_version,
+                             apkhash, sensors, description,
+                             apktitle, restriction_device_number, pending_devices,
+                             candidates, notified_devices, androidversion, ustudy_finished, locked,
+                             startdate, startcriterion, enddate, runningtime, maxdevice, inviteinstall
+                             )
+                              VALUES 
+                              (45, 'af2e34b0b3efe8dfc85a9f2f114802ed', 'TEST.apk', 0, 'e4e413e75ec76fef26ad23807f8694c6', '[1,2]', 'kjwf', 'startdatetest', 0, '[]', '[119,149,165]', '[]', '15', 0, 1, '2012-07-17', 0, '2012-07-19', '', 0, '1' ) 

@@ -1,4 +1,5 @@
 <?php
+//configuration of connection
 include_once("./include/functions/dbconnect.php");
 
 
@@ -12,6 +13,7 @@ $req=$db->query($sql) ;
 
 
 while($row=$req->fetch()){
+	//putting checkbox questionnaire
   $choice.= "<input type='checkbox'  name='questionnaire[]' value = ".$row['questid'] ." id = ".$row['name']." checked>";
   $choice.=  $row['name'];
   $choice.="<br>";

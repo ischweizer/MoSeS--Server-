@@ -1,0 +1,1952 @@
+2012-08-27 15:09:41 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:41 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 15:09:41 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 91979528d046dc0cf2d18bf2c095a81f 
+2012-08-27 15:09:41 - INFO --> USER_FOUND 
+2012-08-27 15:09:41 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:09:41 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 91979528d046dc0cf2d18bf2c095a81f
+)
+ 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS91979528d046dc0cf2d18bf2c095a81f 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346072981
+    [1] => 1346072981
+)
+ 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 15:09:41 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:09:43 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:09:43 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 91979528d046dc0cf2d18bf2c095a81f
+)
+ 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS91979528d046dc0cf2d18bf2c095a81f 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346072981
+    [1] => 1346072981
+)
+ 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 15:09:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:09:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:50 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 15:09:50 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 7330e4e75166583d4c17760e0d3bdafb 
+2012-08-27 15:09:50 - INFO --> USER_FOUND 
+2012-08-27 15:09:51 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:09:51 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 7330e4e75166583d4c17760e0d3bdafb
+)
+ 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS7330e4e75166583d4c17760e0d3bdafb 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346072990
+    [1] => 1346072990
+)
+ 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 15:09:51 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:09:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:09:52 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 7330e4e75166583d4c17760e0d3bdafb
+)
+ 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS7330e4e75166583d4c17760e0d3bdafb 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346072991
+    [1] => 1346072991
+)
+ 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 15:09:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:09:58 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:58 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 15:09:58 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION e53a9e56dc20dd1b393028d4587bbae1 
+2012-08-27 15:09:58 - INFO --> USER_FOUND 
+2012-08-27 15:09:59 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:09:59 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => e53a9e56dc20dd1b393028d4587bbae1
+)
+ 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISe53a9e56dc20dd1b393028d4587bbae1 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346072998
+    [1] => 1346072998
+)
+ 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 15:09:59 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:10:00 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:10:00 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => e53a9e56dc20dd1b393028d4587bbae1
+)
+ 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISe53a9e56dc20dd1b393028d4587bbae1 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346072999
+    [1] => 1346072999
+)
+ 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 15:10:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:10:17 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:10:17 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => e53a9e56dc20dd1b393028d4587bbae1
+)
+ 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISe53a9e56dc20dd1b393028d4587bbae1 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346073000
+    [1] => 1346073000
+)
+ 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 15:10:17 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:10:43 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:43 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 15:10:43 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION f4e25c502bc81291d827ca85b8e74ee2 
+2012-08-27 15:10:43 - INFO --> USER_FOUND 
+2012-08-27 15:10:44 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:10:44 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => f4e25c502bc81291d827ca85b8e74ee2
+)
+ 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISf4e25c502bc81291d827ca85b8e74ee2 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346073043
+    [1] => 1346073043
+)
+ 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 15:10:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:10:46 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:10:46 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => f4e25c502bc81291d827ca85b8e74ee2
+)
+ 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISf4e25c502bc81291d827ca85b8e74ee2 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346073044
+    [1] => 1346073044
+)
+ 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 15:10:46 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:10:51 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:51 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 15:10:51 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 7c0cd7b94a37c901e19d08cc6bec201a 
+2012-08-27 15:10:51 - INFO --> USER_FOUND 
+2012-08-27 15:10:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:10:52 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 7c0cd7b94a37c901e19d08cc6bec201a
+)
+ 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS7c0cd7b94a37c901e19d08cc6bec201a 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346073051
+    [1] => 1346073051
+)
+ 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:10:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 15:10:52 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 7c0cd7b94a37c901e19d08cc6bec201a
+)
+ 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS7c0cd7b94a37c901e19d08cc6bec201a 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346073052
+    [1] => 1346073052
+)
+ 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 15:10:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 15:11:58 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:26 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:21:26 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 386184f293e70f1b20dd91702ff2a7ec 
+2012-08-27 16:21:26 - INFO --> USER_FOUND 
+2012-08-27 16:21:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:21:26 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 386184f293e70f1b20dd91702ff2a7ec
+)
+ 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS386184f293e70f1b20dd91702ff2a7ec 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077286
+    [1] => 1346077286
+)
+ 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:21:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:21:27 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:21:27 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 386184f293e70f1b20dd91702ff2a7ec
+)
+ 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS386184f293e70f1b20dd91702ff2a7ec 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077286
+    [1] => 1346077286
+)
+ 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:21:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:21:42 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:42 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:21:42 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION dcba2541ebbad28cfefc6da8ef99d531 
+2012-08-27 16:21:42 - INFO --> USER_FOUND 
+2012-08-27 16:21:42 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:21:42 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => dcba2541ebbad28cfefc6da8ef99d531
+)
+ 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISdcba2541ebbad28cfefc6da8ef99d531 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077302
+    [1] => 1346077302
+)
+ 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:21:42 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:21:42 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => dcba2541ebbad28cfefc6da8ef99d531
+)
+ 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISdcba2541ebbad28cfefc6da8ef99d531 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077302
+    [1] => 1346077302
+)
+ 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:21:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:21:48 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:48 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:21:48 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 661459848651361d6a7dad161d724070 
+2012-08-27 16:21:48 - INFO --> USER_FOUND 
+2012-08-27 16:21:48 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:21:48 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 661459848651361d6a7dad161d724070
+)
+ 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS661459848651361d6a7dad161d724070 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077308
+    [1] => 1346077308
+)
+ 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:21:48 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:21:53 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:21:53 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 661459848651361d6a7dad161d724070
+)
+ 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS661459848651361d6a7dad161d724070 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077308
+    [1] => 1346077308
+)
+ 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:21:53 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:23 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:23 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:30:23 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 432c91fd88245289d3371234eb6a9e9f 
+2012-08-27 16:30:23 - INFO --> USER_FOUND 
+2012-08-27 16:30:23 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:23 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:30:23 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:23 - INFO --> USER_FOUND 
+2012-08-27 16:30:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:24 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077823
+    [1] => 1346077823
+)
+ 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:25 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:25 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077824
+    [1] => 1346077824
+)
+ 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:27 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:27 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077825
+    [1] => 1346077825
+)
+ 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:27 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:27 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077827
+    [1] => 1346077827
+)
+ 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:29 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:29 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:29 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:29 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077827
+    [1] => 1346077827
+)
+ 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077827
+    [1] => 1346077827
+)
+ 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:31 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:31 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077829
+    [1] => 1346077829
+)
+ 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:31 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:43 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:43 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077831
+    [1] => 1346077831
+)
+ 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:43 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:30:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:30:52 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077843
+    [1] => 1346077843
+)
+ 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:30:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:01 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:01 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077852
+    [1] => 1346077852
+)
+ 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:03 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:03 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077861
+    [1] => 1346077861
+)
+ 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:03 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:06 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:06 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077863
+    [1] => 1346077863
+)
+ 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:06 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:07 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:07 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077866
+    [1] => 1346077866
+)
+ 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:07 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:07 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077867
+    [1] => 1346077867
+)
+ 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:07 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:08 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:08 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077867
+    [1] => 1346077867
+)
+ 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:08 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:09 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:09 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077868
+    [1] => 1346077868
+)
+ 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:09 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:11 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:11 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077869
+    [1] => 1346077869
+)
+ 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:11 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:11 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077871
+    [1] => 1346077871
+)
+ 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:13 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:13 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077871
+    [1] => 1346077871
+)
+ 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:16 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:16 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077873
+    [1] => 1346077873
+)
+ 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:16 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:23 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:23 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 661459848651361d6a7dad161d724070
+)
+ 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS661459848651361d6a7dad161d724070 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077313
+    [1] => 1346077313
+)
+ 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:23 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:24 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077876
+    [1] => 1346077876
+)
+ 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:24 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:25 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:25 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077884
+    [1] => 1346077884
+)
+ 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:25 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:25 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077885
+    [1] => 1346077885
+)
+ 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:26 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077885
+    [1] => 1346077885
+)
+ 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:27 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:27 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077886
+    [1] => 1346077886
+)
+ 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:29 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:29 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077887
+    [1] => 1346077887
+)
+ 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:29 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:34 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:34 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:31:34 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION bb2eb5c415254caa89247b8d885f1e14 
+2012-08-27 16:31:34 - INFO --> USER_FOUND 
+2012-08-27 16:31:37 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:37 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => bb2eb5c415254caa89247b8d885f1e14
+)
+ 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISbb2eb5c415254caa89247b8d885f1e14 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077894
+    [1] => 1346077894
+)
+ 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:37 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:37 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => bb2eb5c415254caa89247b8d885f1e14
+)
+ 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISbb2eb5c415254caa89247b8d885f1e14 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077897
+    [1] => 1346077897
+)
+ 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:37 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:38 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:38 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => bb2eb5c415254caa89247b8d885f1e14
+)
+ 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISbb2eb5c415254caa89247b8d885f1e14 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077897
+    [1] => 1346077897
+)
+ 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:38 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:44 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:44 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:31:44 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 2df854e31edbe29722654478a9b41af9 
+2012-08-27 16:31:44 - INFO --> USER_FOUND 
+2012-08-27 16:31:44 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:44 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 2df854e31edbe29722654478a9b41af9
+)
+ 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS2df854e31edbe29722654478a9b41af9 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077904
+    [1] => 1346077904
+)
+ 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:44 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:52 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 2df854e31edbe29722654478a9b41af9
+)
+ 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS2df854e31edbe29722654478a9b41af9 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077904
+    [1] => 1346077904
+)
+ 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:52 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:31:55 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:31:55 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077889
+    [1] => 1346077889
+)
+ 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:31:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:11 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:11 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077915
+    [1] => 1346077915
+)
+ 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:32:11 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:13 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:13 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077931
+    [1] => 1346077931
+)
+ 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:32:13 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:15 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:15 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 6a696bc9004f525f3223f9dee9a50d36
+)
+ 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS6a696bc9004f525f3223f9dee9a50d36 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077933
+    [1] => 1346077933
+)
+ 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:32:15 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:21 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:21 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:32:21 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION b154433f4d9002f471c52be795ee563f 
+2012-08-27 16:32:21 - INFO --> USER_FOUND 
+2012-08-27 16:32:21 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:21 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => b154433f4d9002f471c52be795ee563f
+)
+ 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISb154433f4d9002f471c52be795ee563f 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077941
+    [1] => 1346077941
+)
+ 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:32:21 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:22 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:22 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => b154433f4d9002f471c52be795ee563f
+)
+ 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISb154433f4d9002f471c52be795ee563f 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077941
+    [1] => 1346077941
+)
+ 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:32:22 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:22 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:24 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:32:24 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION faa3f1bbf173707c75e34356c08c46be 
+2012-08-27 16:32:24 - INFO --> USER_FOUND 
+2012-08-27 16:32:25 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:25 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:32:25 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 449dccaa5d2fdf07b7d0cf236e6a2891 
+2012-08-27 16:32:25 - INFO --> USER_FOUND 
+2012-08-27 16:32:25 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:25 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 449dccaa5d2fdf07b7d0cf236e6a2891
+)
+ 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS449dccaa5d2fdf07b7d0cf236e6a2891 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346077945
+    [1] => 1346077945
+)
+ 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:32:25 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:26 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => b154433f4d9002f471c52be795ee563f
+)
+ 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISb154433f4d9002f471c52be795ee563f 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077942
+    [1] => 1346077942
+)
+ 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:32:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:32:27 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:32:27 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 449dccaa5d2fdf07b7d0cf236e6a2891
+)
+ 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS449dccaa5d2fdf07b7d0cf236e6a2891 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346077945
+    [1] => 1346077945
+)
+ 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:32:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:33:04 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:33:04 - INFO --> stdClass Object
+(
+    [DEVICEID] => neu
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => b154433f4d9002f471c52be795ee563f
+)
+ 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISb154433f4d9002f471c52be795ee563f 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID ISneu 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 45
+    [0] => 45
+    [lastactivity] => 1346077946
+    [1] => 1346077946
+)
+ 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND45 
+2012-08-27 16:33:04 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:25 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:25 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:36:25 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 8264f96aebee5e0e22b51f6dd229257d 
+2012-08-27 16:36:25 - INFO --> USER_FOUND 
+2012-08-27 16:36:26 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:26 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 8264f96aebee5e0e22b51f6dd229257d
+)
+ 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS8264f96aebee5e0e22b51f6dd229257d 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078185
+    [1] => 1346078185
+)
+ 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:26 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:27 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:27 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 8264f96aebee5e0e22b51f6dd229257d
+)
+ 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS8264f96aebee5e0e22b51f6dd229257d 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078186
+    [1] => 1346078186
+)
+ 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:27 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:30 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:30 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 8264f96aebee5e0e22b51f6dd229257d
+)
+ 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS8264f96aebee5e0e22b51f6dd229257d 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078187
+    [1] => 1346078187
+)
+ 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:30 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:30 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 8264f96aebee5e0e22b51f6dd229257d
+)
+ 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS8264f96aebee5e0e22b51f6dd229257d 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078190
+    [1] => 1346078190
+)
+ 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:30 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:38 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:38 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:36:38 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 527f0de54620b05f2e3ab307be9fac36 
+2012-08-27 16:36:38 - INFO --> USER_FOUND 
+2012-08-27 16:36:39 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:39 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 527f0de54620b05f2e3ab307be9fac36
+)
+ 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS527f0de54620b05f2e3ab307be9fac36 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078198
+    [1] => 1346078198
+)
+ 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:39 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:40 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:40 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 527f0de54620b05f2e3ab307be9fac36
+)
+ 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS527f0de54620b05f2e3ab307be9fac36 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078199
+    [1] => 1346078199
+)
+ 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:40 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:42 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:42 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 527f0de54620b05f2e3ab307be9fac36
+)
+ 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS527f0de54620b05f2e3ab307be9fac36 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078200
+    [1] => 1346078200
+)
+ 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:42 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:42 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => 527f0de54620b05f2e3ab307be9fac36
+)
+ 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID IS527f0de54620b05f2e3ab307be9fac36 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078202
+    [1] => 1346078202
+)
+ 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:42 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:48 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:48 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 16:36:48 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION f2f09fb821d427f09543c7b9299c4eea 
+2012-08-27 16:36:48 - INFO --> USER_FOUND 
+2012-08-27 16:36:49 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:49 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => f2f09fb821d427f09543c7b9299c4eea
+)
+ 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISf2f09fb821d427f09543c7b9299c4eea 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078208
+    [1] => 1346078208
+)
+ 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:49 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:50 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => f2f09fb821d427f09543c7b9299c4eea
+)
+ 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISf2f09fb821d427f09543c7b9299c4eea 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078209
+    [1] => 1346078209
+)
+ 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:50 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:55 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:55 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => f2f09fb821d427f09543c7b9299c4eea
+)
+ 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISf2f09fb821d427f09543c7b9299c4eea 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078210
+    [1] => 1346078210
+)
+ 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 16:36:55 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 16:36:55 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => f2f09fb821d427f09543c7b9299c4eea
+)
+ 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISf2f09fb821d427f09543c7b9299c4eea 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346078215
+    [1] => 1346078215
+)
+ 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 16:36:55 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 19:56:58 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 19:56:58 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-27 19:56:58 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION d31125a17638290dad8956f36a7951f0 
+2012-08-27 19:56:58 - INFO --> USER_FOUND 
+2012-08-27 19:56:58 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 19:56:58 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => d31125a17638290dad8956f36a7951f0
+)
+ 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISd31125a17638290dad8956f36a7951f0 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346090218
+    [1] => 1346090218
+)
+ 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 19:56:58 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 19:57:00 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 19:57:00 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => d31125a17638290dad8956f36a7951f0
+)
+ 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISd31125a17638290dad8956f36a7951f0 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346090218
+    [1] => 1346090218
+)
+ 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 19:57:00 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 19:57:00 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => d31125a17638290dad8956f36a7951f0
+)
+ 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISd31125a17638290dad8956f36a7951f0 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346090220
+    [1] => 1346090220
+)
+ 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 19:57:00 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 
+2012-08-27 19:57:01 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ARRIVED ########## 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ RECIVED JSON OBJECT 
+2012-08-27 19:57:01 - INFO --> stdClass Object
+(
+    [DEVICEID] => 23
+    [MESSAGE] => GET_APK_LIST_REQUEST
+    [SESSIONID] => d31125a17638290dad8956f36a7951f0
+)
+ 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST SESSIONID ISd31125a17638290dad8956f36a7951f0 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS23 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ LOGGED IN USERArray
+(
+    [userid] => 4
+    [0] => 4
+    [lastactivity] => 1346090220
+    [1] => 1346090220
+)
+ 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USER IS NOT EMPTY 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ USERID FOUND4 
+2012-08-27 19:57:01 - INFO --> ##################### GET_APK_LIST_REQUEST ################ Session update 

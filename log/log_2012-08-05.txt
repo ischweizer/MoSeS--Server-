@@ -1,0 +1,165 @@
+2012-08-05 0:06:56 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 0:06:56 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 0:06:56 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 862f0f65a828028ecf06c0324dd0a201 
+2012-08-05 0:06:56 - INFO --> USER_NOT_FOUND 
+2012-08-05 0:07:02 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 0:07:02 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 0:07:02 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION bac8779416a52f6081726db6fad6b0eb 
+2012-08-05 0:07:02 - INFO --> USER_FOUND 
+2012-08-05 0:07:03 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 0:07:03 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 0:07:03 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 1a87ae05bf6cf6e8f03314e033b9bb0c 
+2012-08-05 0:07:03 - INFO --> USER_FOUND 
+2012-08-05 0:07:07 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 0:07:07 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 1:09:28 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 5:37:01 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 5:37:01 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 5:37:01 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION c08aa327f16374bd5ceab284ebbc9791 
+2012-08-05 5:37:01 - INFO --> USER_FOUND 
+2012-08-05 5:37:02 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 5:37:02 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 17:54:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 17:54:24 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 17:54:24 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION f7de8620bdf25d0896d0c224b4114d03 
+2012-08-05 17:54:24 - INFO --> USER_FOUND 
+2012-08-05 17:56:23 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:04:21 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:04:21 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 18:04:21 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 3c704d0af6fbcae10053d0455dbdc898 
+2012-08-05 18:04:21 - INFO --> USER_FOUND 
+2012-08-05 18:04:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:04:50 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 18:05:45 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:05:45 - INFO --> ##################### CHANGE_DEVICE_ID, UPDATING SESSION ################ 
+2012-08-05 18:05:45 - INFO --> SESSION IS UPDATED 
+2012-08-05 18:05:45 - INFO --> #### VALUE OF CONFIG['DB_TABLE']['HARDWARE'] IS 
+2012-08-05 18:05:45 - INFO --> hardware 
+2012-08-05 18:05:45 - INFO --> SQL on changeDeviceID 
+2012-08-05 18:05:45 - INFO --> UPDATE hardware SET deviceid='neu' 
+                WHERE uid = 45 AND deviceid = 'test' 
+2012-08-05 18:05:45 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS ARRIVED ###################### 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS, IS MD5 ###################### 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS, DEVICEID IS neu 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS, SESSIONID IS 3c704d0af6fbcae10053d0455dbdc898 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS, FORCE IS TRUE 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS, UNIQUEID IS 104578c227c8b49e 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS, SESSION IS VALID, DEVICE IS FOUND ###################### 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS, UPDATING SESSION ################ 
+2012-08-05 18:05:45 - INFO --> SESSION IS UPDATED 
+2012-08-05 18:05:45 - INFO --> A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE 
+2012-08-05 18:05:45 - INFO --> FORCE IS TRUE 
+2012-08-05 18:05:45 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:05:45 - INFO --> ##################### C2DM ARRIVED ################ USER FOUND 
+2012-08-05 18:05:45 - INFO --> ##################### C2DM ################ Session update 
+2012-08-05 18:05:45 - INFO --> ############# C2DM ARRIVED FROM CLIENT ############## 
+2012-08-05 18:05:45 - INFO --> APA91bHk6yLsMujB1pdHb8wwx7t1fYh2l0p7I_xTnCHrq44iLp9cFfcy5i7ZDEaaQTded8Ec2NoIU2rEPbTdzXonwQNxJo4FmdpUleQTw_lL9vG8xWzriLS6mtODia0DG2V7mWoFprpPiZ--A-FYitW93t_LdKuEayJEnGO1s3oUkFCN5Xq4OWg 
+2012-08-05 18:05:45 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:05:45 - INFO --> ############# SET FILTER ARRIVED ############### 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING FILTER ################ USER FOUND 
+2012-08-05 18:05:45 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 18:05:45 - INFO --> Filter set by the user: [1,2,4,5,6,9,10,11] 
+2012-08-05 18:06:08 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:06:08 - INFO --> ############# SET FILTER ARRIVED ############### 
+2012-08-05 18:06:08 - INFO --> ##################### SETTING FILTER ################ USER FOUND 
+2012-08-05 18:06:08 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 18:06:08 - INFO --> Filter set by the user: [1,2] 
+2012-08-05 18:06:20 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:36:45 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:36:45 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 18:36:45 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION d83ee1f34a3a2dbb8cb58b29fa0b4df9 
+2012-08-05 18:36:45 - INFO --> USER_FOUND 
+2012-08-05 18:36:49 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 18:36:49 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 18:38:44 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:34:56 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:34:56 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 20:34:56 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION ebc92b47a62984150c4bc33179324eaa 
+2012-08-05 20:34:56 - INFO --> USER_FOUND 
+2012-08-05 20:34:57 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:34:57 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 20:49:11 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:49:11 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 20:49:11 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 8a320fd3b0ba3570e954091edfc55113 
+2012-08-05 20:49:11 - INFO --> USER_FOUND 
+2012-08-05 20:49:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:49:50 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 20:49:50 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION b7af696d5288c1d9366e9968daa0ff7e 
+2012-08-05 20:49:50 - INFO --> USER_FOUND 
+2012-08-05 20:49:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS ARRIVED ###################### 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS, IS MD5 ###################### 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS, DEVICEID IS deviceId 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS, SESSIONID IS b7af696d5288c1d9366e9968daa0ff7e 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS, FORCE IS FALSE 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS, UNIQUEID IS 39d16669e340292b 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS, SESSION IS VALID, DEVICE IS FOUND ###################### 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS, UPDATING SESSION ################ 
+2012-08-05 20:49:50 - INFO --> SESSION IS UPDATED 
+2012-08-05 20:49:50 - INFO --> The user has a new deviceID 
+2012-08-05 20:49:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:49:50 - INFO --> ##################### C2DM ARRIVED ################ USER FOUND 
+2012-08-05 20:49:50 - INFO --> ##################### C2DM ################ Session update 
+2012-08-05 20:49:50 - INFO --> ############# C2DM ARRIVED FROM CLIENT ############## 
+2012-08-05 20:49:50 - INFO --> APA91bHe1KtTacEvZp31Cztscd2-_HG5nt0t9mwlJaw_RizgbSOTfM_-FlRnQ9lacrlo53MYeJVIMGOuiEbAPWFHOJtBbliiDVgbuCwFjGoie7GJLYp_znT054M0yaGQik41UzkFdaZltEcLWCiURDf7ozy3DsIxfw_LzmKjnn32gXPMPkeGvq0 
+2012-08-05 20:49:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:49:50 - INFO --> ############# SET FILTER ARRIVED ############### 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING FILTER ################ USER FOUND 
+2012-08-05 20:49:50 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 20:49:50 - INFO --> Filter set by the user: [] 
+2012-08-05 20:49:50 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:49:50 - INFO --> ##################### C2DM ARRIVED ################ USER FOUND 
+2012-08-05 20:49:50 - INFO --> ##################### C2DM ################ Session update 
+2012-08-05 20:49:50 - INFO --> ############# C2DM ARRIVED FROM CLIENT ############## 
+2012-08-05 20:49:50 - INFO --> APA91bHe1KtTacEvZp31Cztscd2-_HG5nt0t9mwlJaw_RizgbSOTfM_-FlRnQ9lacrlo53MYeJVIMGOuiEbAPWFHOJtBbliiDVgbuCwFjGoie7GJLYp_znT054M0yaGQik41UzkFdaZltEcLWCiURDf7ozy3DsIxfw_LzmKjnn32gXPMPkeGvq0 
+2012-08-05 20:50:22 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:50:22 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 20:50:52 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:50:52 - INFO --> ############# SET FILTER ARRIVED ############### 
+2012-08-05 20:50:52 - INFO --> ##################### SETTING FILTER ################ USER FOUND 
+2012-08-05 20:50:52 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 20:50:52 - INFO --> Filter set by the user: [] 
+2012-08-05 20:51:07 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:51:07 - INFO --> ############# SET FILTER ARRIVED ############### 
+2012-08-05 20:51:07 - INFO --> ##################### SETTING FILTER ################ USER FOUND 
+2012-08-05 20:51:07 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 20:51:07 - INFO --> Filter set by the user: [1,2,3,4,5,6,8,9,10,11] 
+2012-08-05 20:51:28 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:51:28 - INFO --> ##################### GETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 20:51:49 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:53:23 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:53:23 - INFO --> ########### LOGIN ARRIVED ############## 
+2012-08-05 20:53:23 - INFO --> ########### LOGIN ARRIVED ############## ASSIGNED ANDROID-SESSION 748376971112d56e0ad25a015c62066e 
+2012-08-05 20:53:23 - INFO --> USER_FOUND 
+2012-08-05 20:53:23 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:53:23 - INFO --> ##################### CHANGE_DEVICE_ID, UPDATING SESSION ################ 
+2012-08-05 20:53:23 - INFO --> SESSION IS UPDATED 
+2012-08-05 20:53:23 - INFO --> #### VALUE OF CONFIG['DB_TABLE']['HARDWARE'] IS 
+2012-08-05 20:53:23 - INFO --> hardware 
+2012-08-05 20:53:23 - INFO --> SQL on changeDeviceID 
+2012-08-05 20:53:23 - INFO --> UPDATE hardware SET deviceid='newDeviceId' 
+                WHERE uid = 45 AND deviceid = 'deviceId' 
+2012-08-05 20:53:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS ARRIVED ###################### 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS, IS MD5 ###################### 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS, DEVICEID IS newDeviceId 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS, SESSIONID IS 748376971112d56e0ad25a015c62066e 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS, FORCE IS TRUE 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS, UNIQUEID IS 39d16669e340292b 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS, SESSION IS VALID, DEVICE IS FOUND ###################### 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS, UPDATING SESSION ################ 
+2012-08-05 20:53:24 - INFO --> SESSION IS UPDATED 
+2012-08-05 20:53:24 - INFO --> A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE 
+2012-08-05 20:53:24 - INFO --> FORCE IS TRUE 
+2012-08-05 20:53:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:53:24 - INFO --> ##################### C2DM ARRIVED ################ USER FOUND 
+2012-08-05 20:53:24 - INFO --> ##################### C2DM ################ Session update 
+2012-08-05 20:53:24 - INFO --> ############# C2DM ARRIVED FROM CLIENT ############## 
+2012-08-05 20:53:24 - INFO --> APA91bHe1KtTacEvZp31Cztscd2-_HG5nt0t9mwlJaw_RizgbSOTfM_-FlRnQ9lacrlo53MYeJVIMGOuiEbAPWFHOJtBbliiDVgbuCwFjGoie7GJLYp_znT054M0yaGQik41UzkFdaZltEcLWCiURDf7ozy3DsIxfw_LzmKjnn32gXPMPkeGvq0 
+2012-08-05 20:53:24 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
+2012-08-05 20:53:24 - INFO --> ############# SET FILTER ARRIVED ############### 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING FILTER ################ USER FOUND 
+2012-08-05 20:53:24 - INFO --> ##################### SETTING HARDWARE PARAMS ################ Session update 
+2012-08-05 20:53:24 - INFO --> Filter set by the user: [1,2,3,4,5,6,8,9,10,11] 
+2012-08-05 20:55:30 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 

@@ -1,6 +1,6 @@
 <?php
-	
-	$sql = "SELECT * FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE apkid in (select max(apkid) FROM ". $CONFIG['DB_TABLE']['APK'].");";
+	//Selecting parameters from APK table
+	$sql = "SELECT * FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE apkid in (select max(apkid) FROM ". $CONFIG['DB_TABLE']['APK']." WHERE userid = ".$_SESSION["USER_ID"].");";
     $res=$db->query($sql);
     $row = $res->fetch();
     if(!empty($row))
@@ -19,6 +19,7 @@
 	    $apkname = $row['apkname'];
 	}
 ?>
+<!-- Feedback about successfully upload of the apk-->
 <b>The name of this user study (title): </b><?php echo $apktitle; ?>
 <br>
 <br>
@@ -27,9 +28,9 @@
 <br>
 <b><?php echo $apktitle; ?> will commince
 <?php
-	if($startdate != null && strtotime($startdate) > strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000)))
+	if($startdate != null && strtotime($startdate) > strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000))))
 		echo " on: </b>".$startdate;
-	elseif($startcriterion != null)
+	elseif($startcriterion != "0")
 			echo " after </b>".$startcriterion." <b>users join ".$apktitle."</b>";
 	else
 		echo " immediately";
@@ -37,7 +38,7 @@
 <br>
 <b><?php echo $apktitle; ?> will be terminated
 <?php
-	if($enddate != null)
+	if($enddate != null && strtotime($enddate) > strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000))))
 		echo " on: </b>".$enddate;
 	elseif($runningtime != null)
 		echo " </b>".$runningtime." <b> after the start date.</b>";
@@ -61,17 +62,18 @@
                 array('gyroscope', 'gyroscope_pressed', 'Gyroscope sensor'),
                 array('light', 'light_pressed', 'Light sensor'),
                 array('pressure', 'pressure_pressed', 'Pressure sensor'),
-                array('temperature', 'temperature_pressed', 'Temperature sensor'),
+                array('temp', 'temperature_pressed', 'Temperature sensor'),
                 array('proximity', 'proximity_pressed', 'Proximity sensor'),
                 array('gravity', 'gravity_pressed', 'Gravity sensor'),
                 array('linear_acceleration', 'linear_acceleration_pressed', 'Linear acceleration sensor'),
                 array('rotation', 'rotation_pressed', 'Rotation sensor'),
                 array('humidity', 'humidity_pressed', 'Humidity sensor'),
-                array('ambient_temperature', 'ambient_temperature_pressed', 'Ambient temperature sensor'));                
+                array('ambient_temp', 'ambient_temperature_pressed', 'Ambient temperature sensor'));                
     $apk_to_update_sensors = json_decode($sensors);
-    if(count($apk_to_update_sensors) > 0)
+    
+	if(count($apk_to_update_sensors) > 0)
     {
-    	echo '<b>The sensors that '.$apktitle.' reguires are: </b>';
+    	echo '<b>The sensors that '.$apktitle.' requires are: </b>';
 	    for($i=0; $i < count($sensors_info); $i++)
 	    {
 	        if(in_array(($i+1), $apk_to_update_sensors))
@@ -82,26 +84,20 @@
         }
     }
     else
-    	echo '<b>You decided that '.$apktitle.' does not reguire any sensor.</b>';
-?>
-<br>
-<br>
-<?php
-	if($onlymygroup)
-		echo "<b>You decided ".$apktitle." will be </b>private for your group.";
-	else
-		echo "<b>You decided ".$apktitle." will be </b>public.";
+    	echo '<b>You decided that '.$apktitle.' does not require any sensor.</b>';
 ?>
 <br>
 <br> 
 <?php
-	echo "<b>You decided that ".$apktitle." can ";
-	if($invite == 1)
-		echo "be joined </b>only from users that you invited.";
+	echo "<b>You decided that ".$apktitle." ";
+	if($invite == 0)
+		echo "will be </b>private for your group.";
+	elseif($invite == 1)
+		echo "can be joined </b>only from users that you invited.";
 	elseif($invite == 2)
-		echo "be joined </b>from all users that were invited and installed ".$apktitle.".";
+		echo "can be joined </b>from all users that were invited and installed ".$apktitle.".";
 	elseif($invite == 3)
-		echo "be joined </b>from all users that installed it.";
+		echo "can be joined </b>from all users that installed it.";
 ?>
 <br>
 <br>

@@ -1,0 +1,105 @@
+2012-08-17 19:03:10 - INFO --> ------------------UPLAOD------------------ 
+2012-08-17 19:03:10 - INFO --> title = testname 
+2012-08-17 19:03:10 - INFO --> description = kjsdncds 
+2012-08-17 19:03:10 - INFO --> radioButton = 2 
+2012-08-17 19:03:10 - INFO --> startdate =  
+2012-08-17 19:03:10 - INFO --> enddate =  
+2012-08-17 19:03:10 - INFO --> startcriterion = 67 
+2012-08-17 19:03:10 - INFO --> runningtime = 0000-01-01 
+2012-08-17 19:03:10 - INFO --> maxdevice = 0 
+2012-08-17 19:03:10 - INFO --> locked = 1 
+2012-08-17 19:03:10 - INFO --> inviteinstall = 0 
+2012-08-17 19:03:10 - INFO --> androidversion = 15 
+2012-08-17 19:03:10 - INFO --> sensors = [1] 
+2012-08-17 19:03:10 - INFO --> sql = INSERT INTO apk (userid, userhash, apkname, apk_version,
+                             apkhash, sensors, description,
+                             apktitle, restriction_device_number, pending_devices,
+                             candidates, notified_devices, androidversion, ustudy_finished, locked,
+                             startdate, startcriterion, enddate, runningtime, maxdevice, inviteinstall
+                             )
+                              VALUES 
+                              (45, 'af2e34b0b3efe8dfc85a9f2f114802ed', 'TEST.apk', 0, '773241b72717bdc1e999bd22974815c2', '[1]', 'kjsdncds', 'testname', 0, '[]', '[168,175,165,119,171,170,149,169]', '[]', '15', 0, 1, '', 67, '', '0000-01-01', 0, '0' ) 
+2012-08-17 19:20:46 - INFO --> ------------------UPLAOD------------------ 
+2012-08-17 19:20:46 - INFO --> title = TEST2 
+2012-08-17 19:20:46 - INFO --> description = sadlkcm 
+2012-08-17 19:20:46 - INFO --> radioButton = 1 
+2012-08-17 19:20:46 - INFO --> startdate = 2012-08-17 
+2012-08-17 19:20:46 - INFO --> enddate = 2012-08-17 
+2012-08-17 19:20:46 - INFO --> startcriterion = 0 
+2012-08-17 19:20:46 - INFO --> runningtime =  
+2012-08-17 19:20:46 - INFO --> maxdevice = 0 
+2012-08-17 19:20:46 - INFO --> locked = 1 
+2012-08-17 19:20:46 - INFO --> inviteinstall = 0 
+2012-08-17 19:20:46 - INFO --> androidversion = 15 
+2012-08-17 19:20:46 - INFO --> sensors = [1] 
+2012-08-17 19:20:46 - INFO --> sql = INSERT INTO apk (userid, userhash, apkname, apk_version,
+                             apkhash, sensors, description,
+                             apktitle, restriction_device_number, pending_devices,
+                             candidates, notified_devices, androidversion, ustudy_finished, locked,
+                             startdate, startcriterion, enddate, runningtime, maxdevice, inviteinstall
+                             )
+                              VALUES 
+                              (45, 'af2e34b0b3efe8dfc85a9f2f114802ed', 'TEST.apk', 0, 'c0c2d25c13cd5ed5295db1e01cd8e4fd', '[1]', 'sadlkcm', 'TEST2', 0, '[]', '[170,119,169,175,165,171,149,168]', '[]', '15', 0, 1, '2012-08-17', 0, '2012-08-17', '', 0, '0' ) 
+2012-08-17 19:22:15 - INFO --> ------------------UPLAOD------------------ 
+2012-08-17 19:22:15 - INFO --> title = TEST2 
+2012-08-17 19:22:15 - INFO --> description = jshbc 
+2012-08-17 19:22:15 - INFO --> radioButton = 1 
+2012-08-17 19:22:15 - INFO --> startdate = 2012-08-18 
+2012-08-17 19:22:15 - INFO --> enddate = 2012-08-17 
+2012-08-17 19:22:15 - INFO --> startcriterion = 0 
+2012-08-17 19:22:15 - INFO --> runningtime =  
+2012-08-17 19:22:15 - INFO --> maxdevice = 2 
+2012-08-17 19:22:15 - INFO --> locked = 1 
+2012-08-17 19:22:15 - INFO --> inviteinstall = 0 
+2012-08-17 19:22:15 - INFO --> androidversion = 15 
+2012-08-17 19:22:15 - INFO --> sensors = [1] 
+2012-08-17 19:22:15 - INFO --> sql = INSERT INTO apk (userid, userhash, apkname, apk_version,
+                             apkhash, sensors, description,
+                             apktitle, restriction_device_number, pending_devices,
+                             candidates, notified_devices, androidversion, ustudy_finished, locked,
+                             startdate, startcriterion, enddate, runningtime, maxdevice, inviteinstall
+                             )
+                              VALUES 
+                              (45, 'af2e34b0b3efe8dfc85a9f2f114802ed', 'TEST.apk', 0, 'efc75d2e95e42567d5e3659cc9ea0043', '[1]', 'jshbc', 'TEST2', 2, '[]', '[168,175,165,169,170,171,119,149]', '[]', '15', 0, 1, '2012-08-18', 0, '2012-08-17', '', 2, '0' ) 
+2012-08-17 19:23:08 - INFO --> ------------------UPLAOD------------------ 
+2012-08-17 19:23:08 - INFO --> title = TEST3 
+2012-08-17 19:23:08 - INFO --> description = lkqdc 
+2012-08-17 19:23:08 - INFO --> radioButton = 1 
+2012-08-17 19:23:08 - INFO --> startdate = 2012-08-01 
+2012-08-17 19:23:08 - INFO --> enddate = 2012-08-02 
+2012-08-17 19:23:08 - INFO --> startcriterion = 0 
+2012-08-17 19:23:08 - INFO --> runningtime =  
+2012-08-17 19:23:08 - INFO --> maxdevice = 3 
+2012-08-17 19:23:08 - INFO --> locked = 1 
+2012-08-17 19:23:08 - INFO --> inviteinstall = 0 
+2012-08-17 19:23:08 - INFO --> androidversion = 15 
+2012-08-17 19:23:08 - INFO --> sensors = [] 
+2012-08-17 19:23:08 - INFO --> sql = INSERT INTO apk (userid, userhash, apkname, apk_version,
+                             apkhash, sensors, description,
+                             apktitle, restriction_device_number, pending_devices,
+                             candidates, notified_devices, androidversion, ustudy_finished, locked,
+                             startdate, startcriterion, enddate, runningtime, maxdevice, inviteinstall
+                             )
+                              VALUES 
+                              (45, 'af2e34b0b3efe8dfc85a9f2f114802ed', 'TEST.apk', 0, '4429d502788356dc6477000334fdfe6f', '[]', 'lkqdc', 'TEST3', 3, '[]', '[173,174,168,165,171,143,169,166,119,170,175,149]', '[]', '15', 0, 1, '2012-08-01', 0, '2012-08-02', '', 3, '0' ) 
+2012-08-17 19:26:59 - INFO --> ------------------UPLAOD------------------ 
+2012-08-17 19:26:59 - INFO --> title = Running time test 
+2012-08-17 19:26:59 - INFO --> description = test running time value 
+2012-08-17 19:26:59 - INFO --> radioButton = 2 
+2012-08-17 19:26:59 - INFO --> startdate =  
+2012-08-17 19:26:59 - INFO --> enddate =  
+2012-08-17 19:26:59 - INFO --> startcriterion = 100 
+2012-08-17 19:26:59 - INFO --> runningtime = 0001-11-11 
+2012-08-17 19:26:59 - INFO --> maxdevice = 11 
+2012-08-17 19:26:59 - INFO --> locked = 0 
+2012-08-17 19:26:59 - INFO --> inviteinstall = 1 
+2012-08-17 19:26:59 - INFO --> androidversion = 15 
+2012-08-17 19:26:59 - INFO --> sensors = [1,2,3,4,5,6,7,8,9,10,11,12,13] 
+2012-08-17 19:26:59 - INFO --> sql = INSERT INTO apk (userid, userhash, apkname, apk_version,
+                             apkhash, sensors, description,
+                             apktitle, restriction_device_number, pending_devices,
+                             candidates, notified_devices, androidversion, ustudy_finished, locked,
+                             startdate, startcriterion, enddate, runningtime, maxdevice, inviteinstall
+                             )
+                              VALUES 
+                              (45, 'af2e34b0b3efe8dfc85a9f2f114802ed', 'TEST.apk', 0, 'a0a4e7ae5b67699464248d5662182793', '[1,2,3,4,5,6,7,8,9,10,11,12,13]', 'test running time value', 'Running time test', 11, '[]', '[]', '[]', '15', 0, 0, '', 100, '', '0001-11-11', 11, '1' ) 
