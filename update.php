@@ -147,25 +147,33 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     // WARNING: hashed filename is WITHOUT .apk extention!
                              
     $db->exec($sql);
-
     include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
     $targetDevices = array();
     $row_installed_on = substr($row_installed_on, 1);
     $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
     $row_installed_on = explode(",", $row_installed_on);
-    
+    print_r($row_installed_on);
 	//Selecting all different apk in a hardware
     foreach($row_installed_on as $hardware_id)
     {
-         $sql0="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
-         $req0=$db->query($sql0);
-         $row0=$req->fetch();
-         $targetDevices[] = $row0['c2dm'];
+    	if($hardware_id != null)
+    	{
+         $sql="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
+         echo $sql."<br>";
+    	 $req=$db->query($sql);
+         $row=$req->fetch();
+      	 $targetDevices[] = $row['c2dm'];
+    	}
+    	else
+    		 echo "no hardware selected";
     }
-    GooglePushManager::googlePushSendUpdate($_SESSION['APKID'], $row_installed_on, $logger, $CONFIG);
+    if(!empty($targetDevices))
+    {	
+    GooglePushManager::googlePushSendUpdate($_SESSION['APKID'], $targetDevices, $logger, $CONFIG);
    
     header("Location: ucp.php?m=upload&res=1");
-}else{
+    }
+    }else{
     header("Location: ucp.php?m=upload&res=0");
 }
 
