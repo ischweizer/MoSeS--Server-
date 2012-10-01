@@ -17,7 +17,9 @@ if(isset($_POST['HTTP_JSON'])){
         include_once(MOSES_HOME . '/include/managers/DBManager.php');
         include_once(MOSES_HOME . '/include/managers/ApkManager.php');
         include_once(MOSES_HOME . '/include/managers/LoginManager.php'); 
-        include_once(MOSES_HOME . '/include/managers/HardwareManager.php'); 
+        include_once(MOSES_HOME . '/include/managers/HardwareManager.php');
+        include_once(MOSES_HOME . '/include/functions/dbconnect.php');
+        include_once(MOSES_HOME . '/include/managers/QuestionnaireManager.php'); 
         include_once(MOSES_HOME . '/include/functions/func.php');
         include_once(MOSES_HOME . '/include/functions/klogger.php');
     
@@ -114,7 +116,22 @@ if(isset($_POST['HTTP_JSON'])){
                     
                     include_once(MOSES_HOME . "/include/events/change_device_id.php.inc");
                     break;
+                
+                case "QUESTIONNAIRES_REQUEST":
                     
+                    include_once(MOSES_HOME . "/include/events/questionnaires_request.php.inc");
+                    break;                
+                
+                case "QUESTION_REQUEST":
+                    
+                    include_once(MOSES_HOME . "/include/events/question_request.php.inc");
+                    break;
+                
+                case "ANSWER_QUESTIONNAIRE":
+                    
+                    include_once(MOSES_HOME . "/include/events/answer_questionnaire.php.inc");
+                    break;
+    
                 default:
                     echo "Only specific messages are accepted.";
                     break;

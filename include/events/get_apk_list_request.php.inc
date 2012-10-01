@@ -15,7 +15,7 @@ if($data->SESSIONID != null){
         $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ ISMD5 TRUE");
        
         $sessionID = $data->SESSIONID;
-        $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ DEVICEID IS".$data->DEVICEID);
+        $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ DEVICEID IS ".$data->DEVICEID);
         
         if($data->DEVICEID != null && !empty($data->DEVICEID)){
             $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ DEVICEID IS SET");
@@ -32,7 +32,7 @@ if($data->SESSIONID != null){
                $USERID = $USER["userid"];
                $LASTACTIVITY = $USER["lastactivity"];
                $TIME_NOW = time();
-               $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ USERID FOUND".$USERID);
+               $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ USERID FOUND ".$USERID);
                
                $IS_VALID_SESSION = LoginManager::isSessionTimedout($LASTACTIVITY, $TIME_NOW, $CONFIG['SESSION']['TIMEOUT']);
                
@@ -66,7 +66,11 @@ if($data->SESSIONID != null){
                                               "NAME" => $apk['apktitle'],
                                               "ANDVER" => json_decode($APK['androidversion']),
                                               "DESCR" => $apk['description'],
-                                              "SENSORS" => json_decode($apk['sensors']));
+                                              "SENSORS" => json_decode($apk['sensors']),
+                                              "PRTCPTDICNT" => $apk['participated_count'],
+                                              "STARTDATE" => $apk['startdate'],
+                                              "ENDDATE" => $apk['enddate'],
+                                              "APKVERSION" => $apk['apk_version']);
                                               
                             $json_array_return[] = $APK_JSON; 
                         } 

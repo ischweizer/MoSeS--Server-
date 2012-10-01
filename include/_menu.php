@@ -23,10 +23,7 @@
 	                echo " class=\"current_page_item\"";
 	            } ?>><span><a href="./download.php">Download</a></span></li>
 	        
-	        <li<?php 
-	            if(strpos($SCRIPT, "about") !== false){
-	                echo " class=\"current_page_item\"";
-	            } ?>><span><a href="./about.php">About</a></span></li>
+	         
 	            <?php
 	            if(isset($_SESSION["USER_LOGGED_IN"])){
 	                ?>

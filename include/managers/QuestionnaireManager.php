@@ -3,8 +3,7 @@
   class QuestionnaireManager
   {
    
-      public function __construct(){
-                                       
+      public function __construct(){                  
       }
       
      /**
@@ -70,10 +69,11 @@
       * @param mixed $questionnaireTable
       * @param mixed $apk_questTable
       * @param mixed $apkID
+      * @return mixed $rows => Array of Questionnaire row
       */
       public static function getChosenQuestionnireForApkid($db, $questionnaireTable, $apk_questTable, $apkID){
       	
-	     $sql = "SELECT *  FROM ".$questionnaireTable." WHERE questid in (SELECT questid  FROM ".$apk_questTable." WHERE apkid = ".$apkID.")";
+	       $sql = "SELECT *  FROM ".$questionnaireTable." WHERE questid in (SELECT questid  FROM ".$apk_questTable." WHERE apkid = ".$apkID.")";
          $result = $db->query($sql);
          $rows = $result->fetchAll();
          return $rows;
@@ -239,6 +239,37 @@
         else
         {
           return "no answer";
+        }
+      }
+
+      /**
+      * unpair a questionnaire $questid with a user study $apkID in $apk_questTable from $db
+      * 
+      * @param mixed $db
+      */
+      public static function setAnswerForQuestion($db, $answerTable, $qid, $apkid, $userid, $ans, $logger){
+        $sql = "SELECT * FROM ".$answerTable." WHERE qid = ".$qid." AND apkid = ".$apkid." AND userid = ".$userid;
+        $logger->logInfo("sql = ".$sql);
+        $req = $db->query($sql);
+        $rows = $req->fetch();
+        $logger->logInfo("empty($rows) = ".empty($rows));
+        if(empty($rows))
+        {
+
+          $sql = "INSERT INTO ". $answerTable ." 
+                  (qid, apkid, userid, content) 
+                  VALUES 
+                  (". $qid .", ". $apkid . " , ".$userid." , '".$ans."')";
+          $logger->logInfo("sqlInsert = ".$sql);
+          $db->exec($sql);
+        }
+        else
+        {
+          $sql = "UPDATE ". $answerTable ." 
+                  SET content = '".$ans."'
+                  WHERE qid = ".$qid." AND apkid = ".$apkid." AND userid = ".$userid;
+          $logger->logInfo("sqlUpdate = ".$sql);
+          $db->exec($sql);
         }
       }
       

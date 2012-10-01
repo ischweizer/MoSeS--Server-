@@ -57,7 +57,11 @@ if($data->SESSIONID != null){
                                           "ANDVER" => json_decode($APK['androidversion']),
                                           "SENSORS" => json_decode($APK['sensors']),
                                           "NAME" => $APK['apktitle'],
-                                          "DESCR" => $APK['description']);
+                                          "DESCR" => $APK['description'],
+                                          "PRTCPTDICNT" => $apk['participated_count'],
+                                          "STARTDATE" => $apk['startdate'],
+                                          "ENDDATE" => $apk['enddate'],
+                                          "APKVERSION" => $apk['apk_version']);
                                       
                       }else{
                           $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 

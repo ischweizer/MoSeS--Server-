@@ -46,7 +46,7 @@ p, ul, ol {
 
 a {
 	text-decoration: none;
-	color: #5D9800;
+	color: #FF4500;
 }
 
 a:hover {
@@ -429,6 +429,30 @@ table.questTable tbody tr:hover {
     background: #FFFFFF;
     cursor:pointer;
 }
+
+/*changing image*/
+
+table.questTable td.collapsed {
+	background-image: url("../images/collapsed.gif");
+	background-position: center;
+    background-repeat: no-repeat;
+    
+    width: 11px;
+    text-align: center;
+    border: 1px solid #FFFFFF;
+    font-size: 12px;
+}
+table.questTable td.expanded {
+	background-image: url("../images/expanded.gif");
+	background-position: center;
+    background-repeat: no-repeat;
+    
+    width: 11px;
+    text-align: center;
+    border: 1px solid #FFFFFF;
+    font-size: 12px;
+}
+
 /* end of questionnaire's table */
 
 #splash {
@@ -994,4 +1018,7 @@ table.questTable tbody tr:hover {
 #tcalGrid td.tcalOtherMonth { color: silver; }
 #tcalGrid td.tcalWeekend { background-color: #ACD6F5; }
 #tcalGrid td.tcalToday { border: 1px solid red; }
-#tcalGrid td.tcalSelected { background-color: #FFB3BE; }		
+#tcalGrid td.tcalSelected { background-color: #FFB3BE; }
+
+
+

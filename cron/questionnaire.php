@@ -120,15 +120,36 @@
 
 	        // Get the questionnaire of the user study
 	        include_once(MOSES_HOME.'/include/managers/QuestionnaireManager.php');
+	        include_once(MOSES_HOME . '/include/functions/dbconnect.php');
 	        $quests = QuestionnaireManager::getChosenQuestionnireForApkid(
-	        	$db,
-	        	$CONFIG['DB_TABLE']['QUEST'],
-	        	$CONFIG['DB_TABLE']['APK_QUEST'],
-	        	$APK_ID);
+					$db,
+					$CONFIG['DB_TABLE']['QUEST'],
+					$CONFIG['DB_TABLE']['APK_QUEST'],
+					$APK_ID);
+
+	       	$sql = "SELECT *  FROM ".$CONFIG['DB_TABLE']['QUEST']." WHERE questid in (SELECT questid  FROM ".$CONFIG['DB_TABLE']['APK_QUEST']." WHERE apkid = ".$APK_ID.")";
+	        $logger->logInfo("sql get questids =  ".$sql, true);
+	        $result = $db->query($sql);
+	        $quests = $result->fetchAll();
+	        
 	        // print in the logger which quests has this apk
-			$logger->logInfo("its quests = ".$quests, true);
+			$logger->logInfo("its ".count($quests)." quests: ", true);
+			$logger->logInfo(print_r($quests),true);
+
+			$questsIds = array();
+			foreach($quests as $quest)
+			{
+				$questsIds[] = $quest['questid'];
+			}
+
+			$questsIdsEncoded = json_encode($questsIds);
+
+			// print in the logger the questids that will be sent
+			$logger->logInfo("Notification content = ".$questsIdsEncoded, true);
 
 	        $recievers_hardware_ids = json_decode($row['installed_on']);
+	        // print in the logger which hardwares installed this apk
+			$logger->logInfo("send to these hardwares = ".print_r($recievers_hardware_ids), true);
             if(count($recievers_hardware_ids)>0)
             {
             	foreach($recievers_hardware_ids as $hardware_id)
@@ -139,13 +160,13 @@
 		            $sql = "SELECT c2dm FROM ".$CONFIG['DB_TABLE']['HARDWARE']." WHERE hwid=".$hardware_id;
 		            $result = $db->query($sql);
 		            $hwrow = $result->fetch();
-		            $GOOGLE_C2DM_ID[] = $hwrow['c2dm'];
+		            $GOOGLE_C2DM_ID = $hwrow['c2dm'];
 
 		            // print in the logger what the c2dm id has this device
-					$logger->logInfo("c2dm = ".$GOOGLE_C2DM_ID[0], true);
+					$logger->logInfo("c2dm = ".$GOOGLE_C2DM_ID, true);
 
 		            include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
-		            // TODO : GooglePushManager::googlePushSendQuest($APK_ID, $GOOGLE_C2DM_ID[0], $hardware_id, $logger, $CONFIG, $quest_contents);
+		            GooglePushManager::googlePushSendQuest($APK_ID, $GOOGLE_C2DM_ID, $hardware_id, $logger, $CONFIG, $questsIdsEncoded);
            		}
            	}
            	else

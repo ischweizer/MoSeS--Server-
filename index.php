@@ -11,7 +11,7 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
       //And the password exists
       if(isset($_POST["password"]) && !empty($_POST["password"])){
         
-		  //Import of the connection�s file to database
+		  //Import of the connection�s file to database
           include_once("./config.php");
           include_once("./include/functions/dbconnect.php");   
           
@@ -98,9 +98,50 @@ include_once("./include/_menu.php");
                                 <h3>You have not confirmed your registration.</h3>
                                 <p>Please, check your mailbox and confirm the registration.</p>
                                <?php  
-                           }else{
+                           }
+						   else
+						   if (isset($_GET['m']) && ($_GET['m']=='print'))
+						   { 
+						   ?><fieldset><legend><b>About </b></legend>  
+						   		
+						   		<p> 
+						   		    Technische Universität Darmstadt<br>
+									Telekooperation<br>
+									Immanuel Schweizer <br>
+									Hochschulstraße 10 <br>
+									64289 Darmstadt <br>
+									schweizer@tk.informatik.tu-darmstadt.de<br> 
+									www.da-sense.de <br>
+								</p>
+								<br><p> Disclaimer</p> <br>
+
+								<p>	<b>1.</b> Content 
+									The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided. Liability claims regarding damage caused by the use of any information provided, including any kind of information which is incomplete or incorrect,will therefore be rejected. 
+									All offers are not-binding and without obligation. Parts of the pages or the complete publication including all offers and information might be extended, changed or partly or completely deleted by the author without separate announcement.</p> 
+									<br>	
+								<p>	<b>2.</b> Referrals and links 
+									The author is not responsible for any contents linked or referred to from his pages - unless he has full knowledge of illegal contents and would be able to prevent the visitors of his site fromviewing those pages. If any damage occurs by the use of information presented there, only the author of the respective pages might be liable, not the one who has linked to these pages. Furthermore the author is not liable for any postings or messages published by users of discussion boards, guestbooks or mailinglists provided on his page.</p> 
+									<br>
+								<p>	<b>3.</b> Copyright 
+									The author intended not to use any copyrighted material for the publication or, if not possible, to indicatethe copyright of the respective object. 
+									The copyright for any material created by the author is reserved. Any duplication or use of objects such as diagrams, sounds or texts in other electronic or printed publications is not permitted without the author s agreement. </p>
+									<br>	
+								<p>	<b>4.</b> Privacy policy 
+									If the opportunity for the input of personal or business data (email addresses, name, addresses) is given, the input of these data takes place voluntarily. The use and payment of all offered services are permitted - if and so far technically possible and reasonable - without specification of any personal data or under specification of anonymized data or an alias. The use of published postal addresses, telephone or fax numbers and email addresses for marketing purposes is prohibited, offenders sending unwanted spam messages will be punished.</p> 
+									<br>
+								<p>	<b>5.</b> Legal validity of this disclaimer 
+									This disclaimer is to be regarded as part of the internet publication which you were referred from. If sections or individual terms of this statement are not legal or correct, the content or validity of the other parts remain uninfluenced by this fact.</p>
+						   
+						   
+						   </fieldset>
+						   <?
+						
+						   }
+						   else
+						   {
                          ?>
-                            <h2 class="title">Welcome Friend!</h2>
+						 
+                            <h2 class="title"><em>Welcome Friend!</em></h2>
                             <div class="entry">
                                 
                                 <p>MoSeS helps scientists from all around the world to distribute their Android apps and make the world a better place.</p>
@@ -108,16 +149,31 @@ include_once("./include/_menu.php");
                                 <p>Be adwised: this site is under construction!</p>
                                 
                             </div>
-							<div class="post">
-							<h2 class="title">How to contribute?</h2>
-							<div class="entry">
+							
+							<h2 ><em>How to contribute?</em></h2>
+							
                             <p>1. <a href="./registration.php">Register</a>.</p>
                             <p>2. <a href="./download.php">Download</a> and install the client.</p>
-                            <p>3. That's it!</p>
+                            <p>3. That's it!</p><br>
+							
+							
+							<h2 class="title"><em>About MoSeS</em></h2>
+							<div class="entry">
+                            <p>MoSeS offers researchers a platform for distribution of non-comercial Android apps, that are used for research purposes.</p>
+                            <br />
+                            <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/" title="Telecooperation Group" target="_blank">Telecooperation Group</a> by <li><a href="https://github.com/maksuti" target="_blank">Zijad Maksuti</a>, <li><a href="https://github.com/wlsch" target="_blank">Wladimir Schmidt</a>, 
+                            <li><a href="https://github.com/simlei" target="_blank">Simon Leisching</a>, <li><a href="https://github.com/jahofmann" target="_blank">Jaco Hofmann</a>, <li><a href="https://github.com/scalaina" target="_blank">Sandra Christina Amend</a>, <li><a href="https://github.com/alyahya" target="_blank">Ibrahim Alyahya</a>, 
+                            <li><a href="https://github.com/fahouma" target="_blank">Fehmi Belhadj</a> and <li><a href="https://github.com/FSchnell" target="_blank">Florian Schnell</a> 
+							<br><br>under supervision of <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Immanuel Schweizer</a>.</p>
 							</div>
-                        <div style="clear: both;">&nbsp;</div>
+							
+							
+							
+							
+							
+                        
                        
-                    </div>
+                    
                           
                             <p class="meta">Posted by Admin on September 2012</p>
                             <?php
@@ -129,7 +185,9 @@ include_once("./include/_menu.php");
                 </div>
                 
             </div>
+			
         </div>
+		
     </div>
     <!-- end #page -->
 </div>

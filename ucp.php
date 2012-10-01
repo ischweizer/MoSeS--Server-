@@ -1736,6 +1736,7 @@ if(isset($_GET['m']))
 										<div id="quests_list">
 											<ul>
 												<script>
+												
 						                    	   	/*
 						                    	   	* to switch the class name of the parent of this element between clicked and notclicked
 						                    	   	*/
@@ -1750,20 +1751,82 @@ if(isset($_GET['m']))
 						                    	       		element.parentNode.className='clicked';	
 						                    	       	}
 						                    	   	}
-						                    	   	/*
+						                    	   	
+						                    	      /*
+							                    	   * to switch the image
+							                    	   */
+							                    	   function changeimage(parent)
+							                    	   {	
+								                    	   for (var i = 0; i < parent.childNodes.length; i++)
+							                    	    	{
+	
+															  var child = parent.childNodes[i];
+	
+														      	if(child.className=='collapsed')
+								                    	    	{
+								                    	       	 	child.className='expanded';
+								                    	       	 	
+								                    	       	}
+								                    	       	else if(child.className=='expanded')
+								                    	    	{
+								                    	       	 	child.className='collapsed';
+								                    	       	 	
+								                    	       	}
+							                    	    	}	
+						                    	       		
+															/* alert(imgID);		
+															var id=imgID/10;
+													
+							                    	   		if(document.getElementById(id) != null)
+								                    	   	{
+								                    	   		if(document.getElementById(id).className == "collapsed")
+									                    	   	{
+								                    	   			document.getElementById(id).className = "expanded";
+									                    	   	}
+									                    	   	else
+									                    	   	{
+								                    	   			document.getElementById(id).className = "collapsed";
+								                    	   		}
+								                    	   	}
+							                    	   		else
+							                    	   		{
+								                    	   		//alert(id);
+							                    	   		}*/
+							                    	   }
+							                    	   
+						                    	   /*
 						                    	   	* to switch the class name of this element between clicked and notclicked
 						                    	   	*/
-						                    	    function changeChildrenClass(element, id)
+						                    	    function changeChildrenClass(element, id, imgID)
 						                    	    {
+						                    	    	var changeImg = false;
+						                    	  		if(imgID == 0)
+						                    	  		{
+						                    	    		changeimage(element);
+						                    	  		}
+						                    	  		else
+													    {
+						                    	  			changeImg = true;
+													    }
+				                    	       	 		
 						                    	    	var parent = element.parentNode;
+														 
 						                    	    	for (var i = 0; i < parent.childNodes.length; i++)
 						                    	    	{
-													      var child = parent.childNodes[i];
+
+														  var child = parent.childNodes[i];
+
+														  if(changeImg && child.id == imgID)
+														  {
+															  changeimage(child);
+														  }
+
 													      if (child.id == id)
 													      {
 													      	if(child.className=='notclicked')
 							                    	    	{
 							                    	       	 	child.className='clicked';
+							                    	       	 	
 							                    	       	}
 							                    	       	else
 							                    	       	{
@@ -1775,9 +1838,16 @@ if(isset($_GET['m']))
 													      	child.className='notclicked';
 													      }
 													    }
+													    
 						                    	   	}
+						                    	  
 						                    	</script>
 <?php	  	                            
+
+
+
+
+
 							                    // loop for each chosen questionnaire
 							                    foreach($chosen_quests as $quest)
 						                        {
@@ -1785,7 +1855,7 @@ if(isset($_GET['m']))
 					                              	// max number of answers
 				                                  	$maxAnswer = 0;
 ?>
-						                      		<li >
+						                      		<li>
 														<p onclick="changeParentClass(this);" id="<?php echo $quest['name']; ?>">
 															<b>Name: </b>
 		 													<a href="./CSVs/<?php echo $quest['name'].'_'.$apkname; ?>.csv" title="Download as CSV" class="bt_downloadCSV"></a>	
@@ -1807,6 +1877,8 @@ if(isset($_GET['m']))
 							                          	<table class="questTable">
 							                          		<!-- the header of the table -->
 								                            <thead>
+															
+																<th>   </th>
 									                            <!-- Column 1 -->
 									                            <th>#</th>
 									                            <!-- Column 2 -->
@@ -1823,6 +1895,7 @@ if(isset($_GET['m']))
 									                            <th>Ans.ID</th>
 									                            <!-- end of the header of the table -->
 								                            </thead>
+								                            
 								                            <!-- the body of the table -->
 								                            <tbody>
 <?php                         
@@ -1839,7 +1912,13 @@ if(isset($_GET['m']))
 									                                  $q['qid'],
 									                                  $apkid);
 ?>
-								                                	<tr title="one click to collapse/expand more information" onclick="changeChildrenClass(this,<?php echo $i; ?>);"> <!-- make a new row for this question -->
+								                                	<tr  title="one click to collapse/expand more information" onclick="changeChildrenClass(this,<?php echo $i; ?>,0);"> 
+																		<!-- changing of the image collapse/expand -->
+																		
+																		<td id="<?php echo $i/10; ?>" class="collapsed" />
+																		
+																	
+																		<!-- make a new row for this question -->
 								                                 	 	<td><?php echo $i; ?></td>
 <?php
 								                                		if($q['type'] == 1) // multiple choices
@@ -1926,8 +2005,8 @@ if(isset($_GET['m']))
 									                                  			$answers_rows[$ans['content']] =
 										                                  			'</tr>
 										                                      		<tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
-										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.');">'
-										                                      		.'<td/><td/><td/><td/>'
+										                                      		//.' onclick="changeChildrenClass(this,'.$onclick_id.', '.$i.');">'
+										                                      		.'<td/><td/><td/><td/><td/>'
 										                                      		."<td>".$ans['userid']."</td>"
 											                                    	."<td>".$ans['content']."</td>"
 											                                    	."<td>".$ans['aid']."</td>";
@@ -1941,8 +2020,8 @@ if(isset($_GET['m']))
 									                                  			$answers_rows[$ans['content']].=
 										                                  			'</tr>
 										                                      		<tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
-										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.');">'
-										                                      		.'<td/><td/><td/><td/>'
+										                                      		//.' onclick="changeChildrenClass(this,'.$onclick_id.', '.$i.');">'
+										                                      		.'<td/><td/><td/><td/><td/>'
 										                                      		."<td>".$ans['userid']."</td>"
 											                                    	."<td>".$ans['content']."</td>"
 											                                    	."<td>".$ans['aid']."</td>";
@@ -1953,7 +2032,7 @@ if(isset($_GET['m']))
 										                                    
 										                                    // incremtent the number of users who answered with this answer
 										                                    $answers_counter[$ans['content']]++;
-
+																			
 										                                    // csv content
 										                                    $csvString.="\n;;;;".$ans['userid'].";".$ans['content'].";".$ans['aid'];
 
@@ -1994,8 +2073,8 @@ if(isset($_GET['m']))
 								                                  			$answers_rows[$key] = 
 									                                  				'</tr>
 										                                      		<tr title="one click to collapse/expand more information" id="'.$i.'" class="notclicked"'
-										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.');">'
-										                                      		.'<td/><td/><td/><td/>'
+										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.',0);">'
+										                                      		.'<td id="0.'.$i.'" class = "collapsed" /><td/><td/><td/><td/>'
 										                                      		."<td>"
 										                                      		. $answers_counter[$key]
 										                                      		." users</td>"
@@ -2308,6 +2387,7 @@ if(isset($_GET['m']))
 ?>
 						                          		<table class="questTable">
 								                            <thead>
+															  
 								                              <th>#</th>
 								                              <th>Question</th>
 								                              <th>Type of Question</th>

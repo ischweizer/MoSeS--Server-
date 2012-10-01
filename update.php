@@ -103,6 +103,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     * Parsing description of APKs
     */
     $APK_DESCRIPTION = '';
+    $APK_TITLE='';
     
     if(isset($_POST['apk_description'])){
         
@@ -113,7 +114,11 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         
     }
     
+    if(isset($_POST['apk_title'])){
+    	
     $APK_TITLE = trim($_POST['apk_title']);
+    
+    }
     
     $APK_ANDROID_VERSION = '';
     if(isset($_POST['apk_android_version'])){
@@ -148,13 +153,14 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $row_installed_on = substr($row_installed_on, 1);
     $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
     $row_installed_on = explode(",", $row_installed_on);
-	
+    
 	//Selecting all different apk in a hardware
-    foreach($row_installed_on as $hardware_id){
-         $sql="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
-         $req=$db->query($sql);
-         $row=$req->fetch();
-         $targetDevices[] = $row['c2dm'];
+    foreach($row_installed_on as $hardware_id)
+    {
+         $sql0="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
+         $req0=$db->query($sql0);
+         $row0=$req->fetch();
+         $targetDevices[] = $row0['c2dm'];
     }
     GooglePushManager::googlePushSendUpdate($_SESSION['APKID'], $row_installed_on, $logger, $CONFIG);
    
