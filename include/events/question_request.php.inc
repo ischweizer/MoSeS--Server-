@@ -13,72 +13,44 @@ if($data->SESSIONID != null)
   if(is_md5($data->SESSIONID))
   {
     $sessionID = $data->SESSIONID;
-    if($data->QUESTID != null && !empty($data->QUESTID))
+    if($data->QID != null && !empty($data->QID))
     {
-      $questid = $data->QUESTID;
-      if($data->PART != null && !empty($data->PART))
-      {
-        $part = $data->PART;
+      $qid = $data->QID;
 
-        $questions = QuestionnaireManager::getQuestionsForQuestid(
-            $DBManager->getDB(), $$CONFIG['DB_TABLE']['QUESTION'], $questid);
+      $question = QuestionnaireManager::getQuestionWithQid(
+          $DBManager->getDB(), $$CONFIG['DB_TABLE']['QUESTION'], $qid);
         
-        if(!empty($questions) && count($questions) > 0)
-        {
-          $logger->logInfo("##################### QUESTION REQUEST ################ QUESTION FOUND");
-          
-          if(is_integer($part) && $part <= (count($questions)))
-          {
-            $logger->logInfo("##################### QUESTION REQUEST ################ QUESTION FOR THIS PART FOUND");
-            $index = $part - 1;
-            $q = $questions[$index];
+      if(!empty($question))
+      {
+        $logger->logInfo("##################### QUESTION REQUEST ################ QUESTION FOUND");
+        
+        $qid = $question['qid'];
+        $qcontent = $question['content'];
+        $qtype = $question['type'];
+        $qSortedAnswer = $question['sortedAnswers'];
 
-            $qid = $q['qid'];
-            $qcontent = $q['content'];
-            $qtype = $q['type'];
-
-            $max = count($questions);
-
-            $return = array(
-                "MESSAGE" => "QUESTION_RESPONSE",
-                "STATUS" => "SUCCESS",
-                "QUESTID" => $questid,
-                "QID" => $qid,
-                "CONTENT" => $qcontent,
-                "TYPE" => $qtype,
-                "PART" => $part,
-                "MAX" => $max
-                );
-
-          }
-          else
-          {
-            $return = array(
-                "MESSAGE" => "QUESTION_RESPONSE",
-                "STATUS" => "INVALID_PART",
-                );
-          }
-        }
-        else
-        {
-          $return = array(
-              "MESSAGE" => "QUESTION_RESPONSE",
-              "STATUS" => "FAILURE_NO_QUESTION_FOUND",
-              ); 
-        }                                
+        $return = array(
+            "MESSAGE" => "QUESTION_RESPONSE",
+            "STATUS" => "SUCCESS",
+            "QID" => $qid,
+            "CONTENT" => $qcontent,
+            "TYPE" => $qtype,
+            "SORTEDANSWERS" => $qSortedAnswer
+            );
       }
       else
       {
         $return = array(
-            "MESSAGE" => "QUESTION_RESPONSE", 
-            "STATUS" => "INVALID_PART");
+            "MESSAGE" => "QUESTION_RESPONSE",
+            "STATUS" => "FAILURE_NO_QUESTION_FOUND",
+            ); 
       }
     }
     else
     {
       $return = array(
           "MESSAGE" => "QUESTION_RESPONSE", 
-          "STATUS" => "INVALID_QUESTID");
+          "STATUS" => "INVALID_QID");
     }
   }
   else

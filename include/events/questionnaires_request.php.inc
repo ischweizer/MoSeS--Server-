@@ -23,26 +23,55 @@ if($data->SESSIONID != null)
       if(!empty($questionnaires) && count($questionnaires) > 0)
       {
         $logger->logInfo("##################### QUESTIONNAIRES REQUEST ################ QUESTIONNAIRE FOUND");
-        $quests = '[';
+        $quests = array();
         $i = 1;
+
+        $isStandard1 = -1;
+        $isStandard2 = -1;
+        $isStandard3 = -1;
+        $isSUS = -1;
+
         foreach ($questionnaires as $quest)
         {
-          if($i > 1)
-          {
-            $quests .= ',';
-          }          
+                    
           $questid = $quest["questid"];
-          $questname = $quest["name"];
-          $quests .= '['.$questid.','.$questname.']';
-          $i++;
+          
+
+          if($questid == "1")
+          {
+            $isStandard1 = 3;
+          }
+          elseif($questid == "2")
+          {
+            $isStandard2 = 2;
+          }
+          elseif($questid == "3")
+          {
+            $isStandard2 = 2;
+          }
+          elseif($questid == "4")
+          {
+            $isSUS = 10;
+          }
+          else
+          {
+            $quests[]= $questid;
+          }
+
         }
-        $quests = ']';    
+        $questIds = json_encode($quests);    
         
         $return = array(
             "MESSAGE" => "QUESTIONNAIRES_RESPONSE",
             "STATUS" => "SUCCESS",
             "APKID" => $apkid,
-            "QUESTS" => $quests
+
+            "SUS" => $isSUS,
+            "STANDARD1" => $isStandard1,
+            "STANDARD2" => $isStandard2,
+            "STANDARD3" => $isStandard3,
+            
+            "QUESTIDS" => $questIds
             );                                
       }
       else

@@ -131,6 +131,11 @@ if(isset($_POST['HTTP_JSON'])){
                     
                     include_once(MOSES_HOME . "/include/events/answer_questionnaire.php.inc");
                     break;
+
+                case "GET_QUESTIONNAIRE":
+                    
+                    include_once(MOSES_HOME . "/include/events/get_questionnaire_info.php.inc");
+                    break;
     
                 default:
                     echo "Only specific messages are accepted.";

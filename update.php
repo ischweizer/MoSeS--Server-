@@ -8,6 +8,11 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
 include_once("./config.php");
 include_once(MOSES_HOME."/include/functions/func.php");
 include_once(MOSES_HOME."/include/functions/logger.php");
+include_once(MOSES_HOME . '/include/functions/klogger.php');
+    
+$logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO);
+
+$logger->logInfo("###################### UPDATE USER STUDY #########################");
     
 /**
 *  SETTINGS FOR UPLOAD
@@ -74,7 +79,8 @@ chmod($_FILES['userfile']['tmp_name'], 0777);
 * Moving file into its directory and storing that data in DB
 */
 if(is_uploaded_file($_FILES['userfile']['tmp_name']) 
-    && move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt)){
+    && move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt))
+{
     
     // fix file permission
     if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777)){
@@ -103,7 +109,6 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     * Parsing description of APKs
     */
     $APK_DESCRIPTION = '';
-    $APK_TITLE='';
     
     if(isset($_POST['apk_description'])){
         
@@ -114,11 +119,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
         
     }
     
-    if(isset($_POST['apk_title'])){
-    	
     $APK_TITLE = trim($_POST['apk_title']);
-    
-    }
     
     $APK_ANDROID_VERSION = '';
     if(isset($_POST['apk_android_version'])){
@@ -128,42 +129,45 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     $sql_installed_on = "SELECT installed_on FROM ".$CONFIG['DB_TABLE']['APK']." WHERE apkid=".$_SESSION['APKID'];
     $result_installed_on = $db->query($sql_installed_on);
     $row_installed_on = $result_installed_on->fetch();
-    $row_installed_on =  $row_installed_on[0];
-    
-    $sql="SELECT * FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE apkid=".$_SESSION['APKID'];
-    $req=$db->query($sql);
-    $row=$req->fetch();
-    
+    $logger->logInfo("row_installed_on = ".$row_installed_on);
+
     $APK_VERSION = $row['apk_version'] + 1;
 
-    /**
-    * Store filename, hash in DB and other informations
-    */
-    $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." SET apkname='". $filename."', apk_version='".$APK_VERSION."',
-                             apkhash='".$HASH_FILE ."', sensors='". $SENSOR_LIST_STRING ."', description='". $APK_DESCRIPTION ."',
-                             androidversion=". $APK_ANDROID_VERSION .", 
-                             ustudy_finished=-1 WHERE apkid=".$_SESSION['APKID'];
-    
-    // WARNING: hashed filename is WITHOUT .apk extention!
-                             
-    $db->exec($sql);
+      /**
+      * Store filename, hash in DB and other informations
+      */
+      $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." SET apkname='". $filename."', apk_version='".$APK_VERSION."',
+                               apkhash='".$HASH_FILE ."', sensors='". $SENSOR_LIST_STRING ."', description='". $APK_DESCRIPTION ."',
+                               androidversion=". $APK_ANDROID_VERSION .", 
+                               ustudy_finished=-1 WHERE apkid=".$_SESSION['APKID'];
+      // WARNING: hashed filename is WITHOUT .apk extention!                        
+      $db->exec($sql);
 
-    include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
-    $targetDevices = array();
-    $row_installed_on = substr($row_installed_on, 1);
-    $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
-    $row_installed_on = explode(",", $row_installed_on);
-    
-	//Selecting all different apk in a hardware
-    foreach($row_installed_on as $hardware_id)
+    if(!empty($row_installed_on) && count($row_installed_on) > 0)
     {
-         $sql0="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
-         $req0=$db->query($sql0);
-         $row0=$req->fetch();
-         $targetDevices[] = $row0['c2dm'];
+      $row_installed_on =  $row_installed_on[0];
+      $logger->logInfo("row_installed_on[0] = ".$row_installed_on);
+
+      if(!empty($row_installed_on) && count($row_installed_on) > 0)
+      {
+
+        include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
+        $targetDevices = array();
+        $row_installed_on = substr($row_installed_on, 1);
+        $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
+        $row_installed_on = explode(",", $row_installed_on);
+    	
+    	  //Selecting all different apk in a hardware
+        foreach($row_installed_on as $hardware_id){
+             $sql="SELECT * FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." WHERE hwid=".$hardware_id;
+             $req=$db->query($sql);
+             $row=$req->fetch();
+             $targetDevices[] = $row['c2dm'];
+        }
+        GooglePushManager::googlePushSendUpdate($_SESSION['APKID'], $targetDevices, $logger, $CONFIG);
+      }
     }
-    GooglePushManager::googlePushSendUpdate($_SESSION['APKID'], $row_installed_on, $logger, $CONFIG);
-   
+
     header("Location: ucp.php?m=upload&res=1");
 }else{
     header("Location: ucp.php?m=upload&res=0");

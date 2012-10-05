@@ -58,7 +58,6 @@ if($data->SESSIONID != null){
                                           "SENSORS" => json_decode($APK['sensors']),
                                           "NAME" => $APK['apktitle'],
                                           "DESCR" => $APK['description'],
-                                          "PRTCPTDICNT" => $apk['participated_count'],
                                           "STARTDATE" => $apk['startdate'],
                                           "ENDDATE" => $apk['enddate'],
                                           "APKVERSION" => $apk['apk_version']);

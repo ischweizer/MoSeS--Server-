@@ -19,53 +19,69 @@ if($data->SESSIONID != null)
 
     if($data->ANSWERS != null)
     {
-      $answers = $data->ANSWERS;
-      $logger->logInfo("print_r(anwsers) =  ".print_r($answers,true));
+      $answers_edcoded = $data->ANSWERS;
+      $logger->logInfo("anwsers_encoded =  ".$answers_edcoded);
 
       include_once(MOSES_HOME . '/include/functions/dbconnect.php');
       $userid = LoginManager::getLoggedInUser($db, $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
       $logger->logInfo("userid =  ".$userid['userid']);
 
-      foreach ($answers as $qid => $content)
+
+      $answers_elements = explode("#SG#", $answers_edcoded);
+
+      foreach ($answers_elements as $answer_element)
       {
-        $logger->logInfo("qid =  ".$qid." content = ".$content);
-        if($content != null)
+        $logger->logInfo("answer_element =  ".$answer_element);
+
+        $answer = explode("#SE#", $answer_element);
+
+        if(count($answer) == 2)
         {
+          $logger->logInfo("set for qid = ".$answer[0]." the answer = ".$answer[1]);
           include_once(MOSES_HOME . '/include/functions/dbconnect.php');
           QuestionnaireManager::setAnswerForQuestion( 
               $db,
               $CONFIG['DB_TABLE']['ANSWER'],
-              $qid,
+              $answer[0],
               $apkid,
               $userid['userid'],
-              $content,
+              $answer[1],
               $logger
             );
-        }
+        } 
       }
+
       $return = array(
           "MESSAGE" => "ANSWER_QUESTIONNAIRE", 
-          "STATUS" => "SUCCESS");  
+          "STATUS" => "SUCCESS",
+          "APKID" => $data->APKID
+          );  
     }
     else
     {
       $return = array(
         "MESSAGE" => "ANSWER_QUESTIONNAIRE",
-        "STATUS" => "FAILURE_INVALID_ANSWERS");
+        "STATUS" => "FAILURE_INVALID_ANSWERS",
+        "APKID" => $data->APKID
+        );
     }
   }
   else
   {
     $return = array(
       "MESSAGE" => "ANSWER_QUESTIONNAIRE",
-      "STATUS" => "FAILURE_INVALID_APKID");
+      "STATUS" => "FAILURE_INVALID_APKID",
+      "APKID" => $data->APKID
+      );
   }
 }
 else
 {
   $return = array(
     "MESSAGE" => "ANSWER_QUESTIONNAIRE",
-    "STATUS" => "FAILURE_INVALID_SESSION");
+    "STATUS" => "FAILURE_INVALID_SESSION",
+    "APKID" => $data->APKID
+    );
 }
 
 print(json_encode($return));

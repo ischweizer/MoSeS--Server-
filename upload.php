@@ -215,7 +215,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
                               (". $_SESSION["USER_ID"]
                                 .", '". $HASH_DIR ."'"
                                 .", '". $filename ."'"
-                                .", 0"
+                                .", 1"
                                 .", '" . $HASH_FILE ."'"
                                 .", '". $sensors ."'"
                                 .", '". $description ."'"
