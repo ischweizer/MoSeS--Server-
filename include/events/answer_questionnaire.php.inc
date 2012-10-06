@@ -33,7 +33,7 @@ if($data->SESSIONID != null)
       {
         $logger->logInfo("answer_element =  ".$answer_element);
 
-        $answer = explode("#SE#", $answer_element);
+        $answer = explode("#sep#", $answer_element);
 
         if(count($answer) == 2)
         {

@@ -39,7 +39,7 @@ if($data->SESSIONID != null)
 
           if($questid == "1")
           {
-            $isStandard1 = 3;
+            $isStandard1 = 1;
           }
           elseif($questid == "2")
           {
@@ -47,11 +47,11 @@ if($data->SESSIONID != null)
           }
           elseif($questid == "3")
           {
-            $isStandard2 = 2;
+            $isStandard2 = 3;
           }
           elseif($questid == "4")
           {
-            $isSUS = 10;
+            $isSUS = 4;
           }
           else
           {
