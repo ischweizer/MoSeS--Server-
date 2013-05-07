@@ -1,7 +1,0 @@
-2012-03-14 14:25:20 - INFO --> ###################### JSON OBJECT ARRIVED ######################### 
-2012-03-14 14:25:20 - INFO --> stdClass::__set_state(array(
-   'DEVICEID' => 'abc',
-   'MESSAGE' => 'GET_APK_LIST_REQUEST',
-   'SESSIONID' => '5ec9307195515a44ccd8de538584e0ec',
-)) 
-2012-03-14 14:25:20 - INFO --> ######### No session found 
