@@ -79,7 +79,7 @@
 	        if(in_array(($i+1), $apk_to_update_sensors))
 	        {
 	            // if sensor was selected, check and select it here
-	            echo '<img src="images/sensors/ultrasmall/'.$sensors_info[$i][0].'_sensor.png" alt="'.$sensors_info[$i][2].'" title="'.$sensors_info[$i][2].'" />';
+	            echo '<img src="img/sensors/ultrasmall/'.$sensors_info[$i][0].'_sensor.png" alt="'.$sensors_info[$i][2].'" title="'.$sensors_info[$i][2].'" />';
 	        }
         }
     }

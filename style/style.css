@@ -95,7 +95,7 @@ img.aligncenter {
 
 #menu_vertical ul li a {
 	display:block;
-	background:url("../images/nav_vertical.jpg") repeat-x top left;
+	background:url("../img/nav_vertical.jpg") repeat-x top left;
 	/*background: #d9cfb4;*/
 	width:200px;
 	text-decoration:none;
@@ -135,7 +135,7 @@ img.aligncenter {
 	//float: left;
 	width: 660px;
 	height: 63px;    
-	background: url(../images/img03.png) no-repeat left top;
+	background: url(../img/img03.png) no-repeat left top;
 }
 
 #logo h1 {
@@ -181,7 +181,7 @@ ul#menu{
 		
 	font-weight:bold;
 		
-	background:url("../images/nav_up.jpg") repeat-x top left;
+	background:url("../img/nav_up.jpg") repeat-x top left;
 
 }
 
@@ -226,7 +226,7 @@ ul#menu{
 
 #menu li a:hover{
 
-background: url("../images/down.jpg") no-repeat top center;
+background: url("../img/down.jpg") no-repeat top center;
 
 color:#484949;	
 	
@@ -235,7 +235,7 @@ color:#484949;
 
 .current_page_item{
 
-background: url("../images/down.jpg") no-repeat top center;	
+background: url("../img/down.jpg") no-repeat top center;	
 
 color:#484949;
 	
@@ -433,7 +433,7 @@ table.questTable tbody tr:hover {
 /*changing image*/
 
 table.questTable td.collapsed {
-	background-image: url("../images/collapsed.gif");
+	background-image: url("../img/collapsed.gif");
 	background-position: center;
     background-repeat: no-repeat;
     
@@ -443,7 +443,7 @@ table.questTable td.collapsed {
     font-size: 12px;
 }
 table.questTable td.expanded {
-	background-image: url("../images/expanded.gif");
+	background-image: url("../img/expanded.gif");
 	background-position: center;
     background-repeat: no-repeat;
     
@@ -578,7 +578,7 @@ table.questTable td.expanded {
 	margin-left: 540px;
 	width: 20px;
 	height: 20px; 
-	background: url("../images/sprites/bt_close.png") 0 -20px no-repeat;
+	background: url("../img/sprites/bt_close.png") 0 -20px no-repeat;
 }
 
 
@@ -588,7 +588,7 @@ table.questTable td.expanded {
 	margin-left: 580px;
 	width: 20px;
 	height: 20px; 
-	background: url("../images/sprites/bt_close.png") 0 -20px no-repeat;
+	background: url("../img/sprites/bt_close.png") 0 -20px no-repeat;
 }
 
 .clicked .bt_upload
@@ -597,7 +597,7 @@ table.questTable td.expanded {
 	margin-left: 560px;
 	width: 20px;
 	height: 20px; 
-	background: url("../images/sprites/bt_up_down.png") 0 -21px no-repeat; 
+	background: url("../img/sprites/bt_up_down.png") 0 -21px no-repeat; 
 }
 .clicked .bt_download
 {
@@ -605,7 +605,7 @@ table.questTable td.expanded {
 	margin-left: 540px;
 	width: 20px;
 	height: 20px;
-	background: url("../images/sprites/bt_up_down.png") 0 0 no-repeat;
+	background: url("../img/sprites/bt_up_down.png") 0 0 no-repeat;
 }
 .clicked .bt_downloadCSV
 {
@@ -614,7 +614,7 @@ table.questTable td.expanded {
     z-index: 0;
     width: 30px;
     height: 30px;
-    background: url("../images/bt_download.png");
+    background: url("../img/bt_download.png");
 }
 .clicked .bt_addquest
 {
@@ -623,7 +623,7 @@ table.questTable td.expanded {
 	margin-bottom: 5px;
 	width: 30px;
 	height: 30px; 
-	background: url("../images/bt_addquest.png") 0 0 no-repeat;
+	background: url("../img/bt_addquest.png") 0 0 no-repeat;
 }
 .clicked .bt_usquest
 {
@@ -631,7 +631,7 @@ table.questTable td.expanded {
 	margin-left: 520px;
 	width: 20px;
 	height: 20px; 
-	background: url("../images/bt_usquest.png") 0 0 no-repeat;
+	background: url("../img/bt_usquest.png") 0 0 no-repeat;
 }
 
 .sensor_box .down_remove_links div {
@@ -756,94 +756,94 @@ table.questTable td.expanded {
 }
 
 .upload_form .accelerometer {
-    background: url("../images/sensors/medium/sprites/accelerometer_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/accelerometer_sensor.png") 0 0 no-repeat;
 }
 .upload_form .accelerometer_pressed {
-    background: url("../images/sensors/medium/sprites/accelerometer_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/accelerometer_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .magnetic_field {
-    background: url("../images/sensors/medium/sprites/magnetic_field_sensor.png") 0 0 no-repeat
+    background: url("../img/sensors/medium/sprites/magnetic_field_sensor.png") 0 0 no-repeat
 }
 .upload_form .magnetic_field_pressed {
-    background: url("../images/sensors/medium/sprites/magnetic_field_sensor.png") 0 -81px no-repeat
+    background: url("../img/sensors/medium/sprites/magnetic_field_sensor.png") 0 -81px no-repeat
 }
 
 .upload_form .orientation {
-    background: url("../images/sensors/medium/sprites/orientation_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/orientation_sensor.png") 0 0 no-repeat;
 }
 .upload_form .orientation_pressed {
-    background: url("../images/sensors/medium/sprites/orientation_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/orientation_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .gyroscope {
-    background: url("../images/sensors/medium/sprites/gyroscope_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/gyroscope_sensor.png") 0 0 no-repeat;
 }
 .upload_form .gyroscope_pressed {
-    background: url("../images/sensors/medium/sprites/gyroscope_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/gyroscope_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .light {
-    background: url("../images/sensors/medium/sprites/light_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/light_sensor.png") 0 0 no-repeat;
 }
 .upload_form .light_pressed {
-    background: url("../images/sensors/medium/sprites/light_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/light_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .pressure {
-    background: url("../images/sensors/medium/sprites/pressure_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/pressure_sensor.png") 0 0 no-repeat;
 }
 .upload_form .pressure_pressed {
-    background: url("../images/sensors/medium/sprites/pressure_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/pressure_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .temperature {
-    background: url("../images/sensors/medium/sprites/temperature_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/temperature_sensor.png") 0 0 no-repeat;
 }
 .upload_form .temperature_pressed {
-    background: url("../images/sensors/medium/sprites/temperature_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/temperature_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .proximity {
-    background: url("../images/sensors/medium/sprites/proximity_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/proximity_sensor.png") 0 0 no-repeat;
 }
 .upload_form .proximity_pressed {
-    background: url("../images/sensors/medium/sprites/proximity_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/proximity_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .gravity {
-    background: url("../images/sensors/medium/sprites/gravity_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/gravity_sensor.png") 0 0 no-repeat;
 }
 .upload_form .gravity_pressed {
-    background: url("../images/sensors/medium/sprites/gravity_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/gravity_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .linear_acceleration {
-    background: url("../images/sensors/medium/sprites/linear_acceleration_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/linear_acceleration_sensor.png") 0 0 no-repeat;
 }
 .upload_form .linear_acceleration_pressed {
-    background: url("../images/sensors/medium/sprites/linear_acceleration_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/linear_acceleration_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .rotation {
-    background: url("../images/sensors/medium/sprites/rotation_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/rotation_sensor.png") 0 0 no-repeat;
 }
 .upload_form .rotation_pressed {
-    background: url("../images/sensors/medium/sprites/rotation_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/rotation_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .humidity {
-    background: url("../images/sensors/medium/sprites/humidity_w_percent_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/humidity_w_percent_sensor.png") 0 0 no-repeat;
 }
 .upload_form .humidity_pressed {
-    background: url("../images/sensors/medium/sprites/humidity_w_percent_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/humidity_w_percent_sensor.png") 0 -81px no-repeat;
 }
 
 .upload_form .ambient_temperature {
-    background: url("../images/sensors/medium/sprites/ambient_temperature_sensor.png") 0 0 no-repeat;
+    background: url("../img/sensors/medium/sprites/ambient_temperature_sensor.png") 0 0 no-repeat;
 }
 .upload_form .ambient_temperature_pressed {
-    background: url("../images/sensors/medium/sprites/ambient_temperature_sensor.png") 0 -81px no-repeat;
+    background: url("../img/sensors/medium/sprites/ambient_temperature_sensor.png") 0 -81px no-repeat;
 }
 
 .join_group,
@@ -932,13 +932,13 @@ table.questTable td.expanded {
 /* This stylesheet is part of the java script calendar tcal */
 /* input box in default state */ 
 .tcalInput {
-	background: #FFFFFF url('../images/cal.gif') 100% 50% no-repeat;
+	background: #FFFFFF url('../img/cal.gif') 100% 50% no-repeat;
 	cursor: pointer;
 }
 
 /* additional properties for input boxe in activated state, above still applies unless in conflict */
 .tcalActive {
-	background-image: url('../images/no_cal.gif');
+	background-image: url('../img/no_cal.gif');
 }
 /* container of calendar's pop-up */
 #tcal {
@@ -984,10 +984,10 @@ table.questTable td.expanded {
 	font-weight: bold;
 	white-space: nowrap;
 }
-#tcalPrevYear { background-image: url('../imgages/prev_year.gif'); }
-#tcalPrevMonth { background-image: url('../images/prev_mon.gif'); }
-#tcalNextMonth { background-image: url('../images/next_mon.gif'); }
-#tcalNextYear { background-image: url('../images/next_year.gif'); }
+#tcalPrevYear { background-image: url('../img/prev_year.gif'); }
+#tcalPrevMonth { background-image: url('../img/prev_mon.gif'); }
+#tcalNextMonth { background-image: url('../img/next_mon.gif'); }
+#tcalNextYear { background-image: url('../img/next_year.gif'); }
 
 /* table containing week days header and calendar grid */
 #tcalGrid {

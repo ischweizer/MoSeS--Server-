@@ -26,7 +26,7 @@ session_start();
                     <div class="post">
                         <h2 class="title">MoSeS for Android</h2>
                         <div class="entry">
-                            <p><img src="images/android_with_moses.png" alt="logo" class="alignleft" />Download MoSeS-client <a href="./setup/MoSeS.apk">here.</a> <br/>
+                            <p><img src="img/android_with_moses.png" alt="logo" class="alignleft" />Download MoSeS-client <a href="./setup/MoSeS.apk">here.</a> <br/>
                             It works on all Android devices with API-Version 8 and above.</p>
                         </div>
                         <div style="clear: both;">&nbsp;</div>

@@ -955,7 +955,7 @@ if(isset($_GET['m']))
 			                                        	echo "<br>";
 			                                        	foreach($sensor_array as $sensor_number)
 			                                        	{
-		                                                      echo '<img src="images/sensors/ultrasmall/'. 
+		                                                      echo '<img src="img/sensors/ultrasmall/'. 
 		                                                            $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
 		                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
 		                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
@@ -1424,7 +1424,7 @@ if(isset($_GET['m']))
 		                                					{
 		                                					   foreach($sensor_array as $sensor_number)
 		                                					   {
-		                            					           echo '<img src="images/sensors/ultrasmall/'. 
+		                            					           echo '<img src="img/sensors/ultrasmall/'. 
 		                            					                 $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
 		                            					                 $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
 		                            					                 $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
@@ -1639,7 +1639,7 @@ if(isset($_GET['m']))
 		                                        foreach($sensor_array as $sensor_number)
 		                                         {
 		                                            echo 
-		                                              '<img src="images/sensors/ultrasmall/'. 
+		                                              '<img src="img/sensors/ultrasmall/'. 
 		                                              $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
 		                                              $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
 		                                              $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
