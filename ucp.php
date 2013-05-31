@@ -761,7 +761,7 @@ if(isset($_GET['m']))
 }
 
 ?>
-  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
 <title>Hauptseite von MoSeS - User control panel</title>
 
 <?php  

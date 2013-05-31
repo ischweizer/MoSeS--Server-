@@ -910,7 +910,7 @@ table.questTable td.expanded {
 	clear: both;
 	width: 980px;
 	margin: 8px auto 0px auto;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Verdana, sans-serif;
 }
 
 #footer p {
@@ -918,7 +918,6 @@ table.questTable td.expanded {
 	padding: 5px 0px 20px 0px;
 	line-height: normal;
 	font-size: 10px;
-	text-transform: uppercase;
 	text-align: center;
 	color: #000000;
 }

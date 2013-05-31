@@ -11,7 +11,7 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
       //And the password exists
       if(isset($_POST["password"]) && !empty($_POST["password"])){
         
-		  //Import of the connection´s file to database
+		  //Import of the connections file to database
           include_once("./config.php");
           include_once("./include/functions/dbconnect.php");   
           
