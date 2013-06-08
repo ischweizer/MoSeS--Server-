@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
 <meta http-equiv="Pragma" content="no-cache">
@@ -7,149 +7,86 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Lang" content="en">
 <meta name="author" content="">
-<meta http-equiv="Reply-to" content="@.com">
-<meta name="generator" content="PhpED 8.0">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<meta name="creation-date" content="09/06/2012">
 <meta name="revisit-after" content="15 days">
 <title>MoSes - Home</title>
-<link rel="stylesheet" type="text/css" href="my.css">
 <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="./css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-<style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 60px;
-      }
-
-      /* Custom container */
-      .container {
-        margin: 0 auto;
-        max-width: 1000px;
-      }
-      .container > hr {
-        margin: 60px 0;
-      }
-
-      /* Customize the navbar links to be fill the entire space of the .navbar */
-      .navbar .navbar-inner {
-        padding: 0;
-      }
-      .navbar .nav {
-        margin: 0;
-        display: table;
-        width: 100%;
-      }
-      .navbar .nav li {
-        display: table-cell;
-        width: 1%;
-        float: none;
-      }
-      .navbar .nav li a {
-        font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-        font-weight: bold;
-        text-align: center;
-        border-left: 1px solid rgba(255,255,255,.75);
-        border-right: 1px solid rgba(0,0,0,.1);
-      }
-      .navbar .nav li:first-child a {
-        border-left: 0;
-        border-radius: 3px 0 0 3px;
-      }
-      .navbar .nav li:last-child a {
-        border-right: 0;
-        border-radius: 0 3px 3px 0;
-      }
-      
-      .tmp{
-          font-family: "Lucida Console", "Courier New", monospace;
-          color:#e5e5e5;
-      }
-      
-      .tmp_special {
-          margin-top: -25pt;
-          margin-right: 50pt;
-          margin-bottom: 20pt;
-          text-shadow: -1px -1px 0px #999, 1px 1px 0px #fff;
-      }
-      
-      .tmp2 {
-          text-shadow: -2px -2px 0px #999, 1px 1px 0px #fff;
-      }
-      
-      /* Sticky footer styles
-      -------------------------------------------------- */
-
-      html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
-
-      /* Set the fixed height of the footer here */
-      #footer {
-        height: 120px;
-      }
-      
-      #push{
-          height: 50px;
-      }
-      
-      #footer {
-        background-color: #333333;
-      }
-
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
-      
-      /* ************************************** */
-    </style>
+<link href="./css/style.css" rel="stylesheet" media="screen">
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body>
 
+<!-- Scroll to this -->
 <div id="top"></div>
 
-<div id="wrap">
+<div class="wrap">
 
 <div class="container">
 
-    <button class="btn" style="float: right; margin-top: 30pt;"><i class="icon-user"></i> Login</button>
+    <button class="btn" id="btn_login" style="float: right; margin-top: 30pt;"><i class="icon-user"></i> Login</button>
 
     <div class="masthead">
     <h1 class="muted text-center tmp tmp2" style="font-size: 50pt; margin-top: 20pt; margin-bottom: 30pt;">MoSeS</h1>
     <h5 class="muted text-center tmp tmp_special">Mobile Sensing System</h5>
+    
     <div class="navbar">
       <div class="navbar-inner">
-        <div class="container">
           <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Devices</a></li>
-            <li><a href="#">Groups</a></li>
-            <li><a href="#">Studies</a></li>
-            <li><a href="#">About</a></li>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Devices <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">View</a>
+                    </li>
+                    <li>
+                        <a href="#">Create</a>
+                    </li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Groups <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">View</a>
+                    </li>
+                    <li>
+                        <a href="#">Create</a>
+                    </li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Studies <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">View</a>
+                    </li>
+                    <li>
+                        <a href="#">Create</a>
+                    </li>
+                </ul>
+            </li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">Project</a>
+                    </li>
+                    <li>
+                        <a href="#">Developers</a>
+                    </li>
+                    <li>
+                        <a href="#">Impressum</a>
+                    </li>
+                </ul>
+            </li>
           </ul>
-        </div>
-      </div>
+        <!--</div>-->
     </div><!-- /.navbar -->
     </div>
     
@@ -205,18 +142,62 @@
     </div>
     </div> <!-- /container -->
     
-<div id="push"></div>
+<div class="push"></div>
 </div>
+
 
 <div id="footer">
   <div class="container">
-    <p class="muted credit text-center" style="margin-top: 55px; color: #FFF; font-family: "Lucida Console", "Courier New", monospace;">2013 (c) Telecooperation Lab. All rights reserved.</p>
+    <p class="muted credit text-center">2013 (c) Telecooperation Lab. All rights reserved.</p>
   </div>
 </div>
+
+<!-- Login form -->
+
+
+<div id="popup">
+        <form id="lightbox" class="form-signin">
+            <h2 class="form-signin-heading muted">Please sign in</h2>
+            <input type="text" class="input-block-level" placeholder="Login">
+            <input type="password" class="input-block-level" placeholder="Password">
+            <label class="checkbox muted">
+              <input type="checkbox" value="remember-me"> Remember me.
+            </label>
+            <label class="muted" style="margin-top: 15pt;">
+              Don't have login? <a href="#">Register!</a></label>
+            <button class="btn btn-warning" id="signin" type="submit">Sign in</button>
+        </form>
+</div>  <!-- #popup --> 
 
 <!-- JS Init -->  
 <script src="js/jquery-2.0.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script>$('.dropdown-toggle').dropdown();</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    /*$(document).click(function() {
+        $("#popup").fadeOut("fast");
+    });*/
+    
+    /* menu dropdown */
+    $('.dropdown-toggle').dropdown();
+
+    /* Login lightbox */
+    $("#btn_login").click(function(){
+        $("#popup").fadeIn("slow");
+    });
+    $("#signin").click(function(){
+        $("#popup").fadeOut("fast");
+    });
+
+    $('body').bind('keypress', function(e) {
+        if(e.keyCode==27){
+            $("#popup").fadeOut("fast");
+        }
+    });
+
+    /* ************************** */
+});
+</script>
 </body>
 </html>
