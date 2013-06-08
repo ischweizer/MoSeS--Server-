@@ -158,46 +158,20 @@
 <div id="popup">
         <form id="lightbox" class="form-signin">
             <h2 class="form-signin-heading muted">Please sign in</h2>
-            <input type="text" class="input-block-level" placeholder="Login">
-            <input type="password" class="input-block-level" placeholder="Password">
+            <input type="text" class="input-block-level" placeholder="Login" id="login">
+            <input type="password" class="input-block-level" placeholder="Password" id="password">
             <label class="checkbox muted">
-              <input type="checkbox" value="remember-me"> Remember me.
+            <input id="rememberme" type="checkbox" value="remember-me"> Remember me</label>
+            <label class="muted" style="margin-top: 15pt; cursor: default;">
+              Don't have login? <a href="#">Register!</a>
             </label>
-            <label class="muted" style="margin-top: 15pt;">
-              Don't have login? <a href="#">Register!</a></label>
-            <button class="btn btn-warning" id="signin" type="submit">Sign in</button>
+            <button class="btn btn-warning" style="font-weight: bold;" id="signin" type="submit">Sign in</button>
         </form>
 </div>  <!-- #popup --> 
 
 <!-- JS Init -->  
 <script src="js/jquery-2.0.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    
-    /*$(document).click(function() {
-        $("#popup").fadeOut("fast");
-    });*/
-    
-    /* menu dropdown */
-    $('.dropdown-toggle').dropdown();
-
-    /* Login lightbox */
-    $("#btn_login").click(function(){
-        $("#popup").fadeIn("slow");
-    });
-    $("#signin").click(function(){
-        $("#popup").fadeOut("fast");
-    });
-
-    $('body').bind('keypress', function(e) {
-        if(e.keyCode==27){
-            $("#popup").fadeOut("fast");
-        }
-    });
-
-    /* ************************** */
-});
-</script>
+<script src="js/moses.js"></script>
 </body>
 </html>
