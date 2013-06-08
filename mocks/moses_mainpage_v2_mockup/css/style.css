@@ -1,7 +1,8 @@
 
 body {
-    padding-top: 20px;
-    padding-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 /* Custom container */
@@ -22,16 +23,17 @@ body {
     display: inline;
     width: 100%;
 }
-.navbar .nav li {
+.navbar .nav > li {
     display: table-cell;
-    width: 1%;
-    float: none;
+    width: 20%;
+    /*width: 1%;
+    float: none;*/
 }
 
 .navbar .nav > li a {
     font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
     border-left: 1px solid rgba(255,255,255,.75);
     border-right: 1px solid rgba(0,0,0,.1);
 }
