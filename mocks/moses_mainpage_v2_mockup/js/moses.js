@@ -4,6 +4,14 @@ $(document).ready(function() {
         $("#popup").fadeOut("fast");
     });*/
     
+    /* Scroll to TOP */
+    $('#scrollToTop').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });    
+    
     /* menu dropdown */
     $('.dropdown-toggle').dropdown();
 
