@@ -149,13 +149,24 @@ body {
 }
 
 #popup{
-    position: fixed;
+    /*position: relative;
     top: -5px;
     background-color:rgba(0,0,0,0.5);
     height: 100%;
     width: 100%;
     margin: 0 auto;
-    display: none;
+    display: none;*/
+}
+
+#dim_back{ 
+    position:absolute; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    z-index:100; 
+    background-color: rgba(0,0,0,0.5); 
+    display:none; 
+    text-align:left; 
 }
 
 /* ************************************** */

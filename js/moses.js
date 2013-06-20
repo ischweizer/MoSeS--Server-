@@ -15,32 +15,40 @@ $(document).ready(function() {
     /* menu dropdown */
     $('.dropdown-toggle').dropdown();
 
-    /* Login lightbox */    
-    $('body').bind('keypress', function(e) {
-        if(e.keyCode==27){
-            $("#dim_back").fadeOut();
-                return false;
+    /* Login lightbox */
+    $("#btn_login").click(function(){
+        $("#popup").fadeIn("slow");
+        
+        // reads cookies and sets to fields
+        var cookie = readCookie('moses_l');
+        if(cookie != ''){
+            $('#login').val(cookie);
+            $('#rememberme').attr('checked', true);
+        }else{
+            $('#login').val('');   
+            $('#password').val('');
+            $('#login').focus();   
+            $('#rememberme').attr('checked', false);
         }
     });
-    
-    /* NEW!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-    
-    //Adjust height of overlay to fill screen when page loads
-    $("#dim_back").css("height", $(document).height());
-
-    //When the link that triggers the message is clicked fade in overlay/msgbox
-    $("#btn_login").click(function(){
-    $("#dim_back").fadeIn();
-        return false;
-    });
-
-    //When the message box is closed, fade out
     $("#signin").click(function(){
-    $("#dim_back").fadeOut();
-        return false;
+        if($('#rememberme').is(':checked')){
+            setCookie('moses_l', $('#login').val(), 31);
+        }else{
+            // if unchecked, just delete cookie
+            var cookie = readCookie('moses_l');
+            if(cookie != ''){
+                delCookie('moses_l');
+            } 
+        }
+        $("#popup").fadeOut("fast");
     });
-    
-    /* /// NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+    $('body').bind('keypress', function(e) {
+        if(e.keyCode==27){
+            $("#popup").fadeOut("fast");
+        }
+    });
 
     /* Sets cookies for N days */
     function setCookie(cookieName,cookieValue,nDays) {
@@ -69,9 +77,4 @@ $(document).ready(function() {
     } 
     
     /* ************************** */
-});
-
-//Adjust height of dim overlay to fill screen when browser gets resized
-$(window).bind("resize", function(){
-    $("#dim_back").css("height", $(window).innerHeight);
 });

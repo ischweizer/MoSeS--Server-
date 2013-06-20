@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!--<link href="./css/style.css" media="screen" rel="stylesheet" type="text/css" />-->
-<!--<link href="./css/slide.css" media="screen" rel="stylesheet" type="text/css" />-->
+<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Lang" content="en">
+<meta name="author" content="">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="revisit-after" content="15 days">
+<title>MoSes - Home</title>
 <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="./css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<link href="./css/style.css" rel="stylesheet" media="screen">
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
