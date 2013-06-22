@@ -6,11 +6,13 @@ include_once("./include/_header.php");
 
 //If the formular is sent
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){    
+    echo "FUCK ME1!";
   //If the login exists 
   if(isset($_POST["login"]) && !empty($_POST["login"]) && preg_match('/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/', $_POST["login"])){
+      echo "FUCK ME2!";
       //And the password exists
       if(isset($_POST["password"]) && !empty($_POST["password"])){
-        
+        echo "FUCK ME3!";
 		  //Import of the connection�s file to database
           include_once("./config.php");
           include_once("./include/functions/dbconnect.php");   
@@ -90,7 +92,7 @@ include_once("./include/_menu.php");
             </p>
             <p>&nbsp;
             </p>
-            <p><button class="btn btn-warning btn-large" style="font-weight: bold; width: 130px;"><i class="icon-white icon-tag"></i> Sign up</button></p>
+            <p><a href="registration.php" class="btn btn-warning btn-large" style="font-weight: bold; width: 130px;"><i class="icon-white icon-tag"></i> Sign up</a></p>
         </div>
     <!--</div>-->
     
@@ -121,7 +123,7 @@ include_once("./include/_menu.php");
       
       <div class="span8 text-center" style="width: 400pt; height: 50pt; background-color: #EEE; float: none; margin: 0 auto;">
         <div style="margin: 50pt 0pt;">
-            <button class="btn btn-link" style="color: #ffa338; font-weight: bold; font-size: 20pt; margin-left: 15pt; margin-top: 12pt;">Sign up</button>
+            <a href="registration.php" class="btn btn-link" style="color: #ffa338; font-weight: bold; font-size: 20pt; margin-left: 15pt; margin-top: 12pt;">Sign up</a>
             <a href="" id="scrollToTop"><i class="icon-chevron-up" style="float: right; margin-right: 15pt; margin-top: 20pt;"></i></a>
         </div>
       </div>

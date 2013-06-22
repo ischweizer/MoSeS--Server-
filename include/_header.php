@@ -10,7 +10,6 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="revisit-after" content="15 days">
-<title>MoSes - Home</title>
 <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="./css/style.css" rel="stylesheet" media="screen">
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
