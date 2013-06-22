@@ -46,6 +46,15 @@ body {
     border-radius: 0 3px 3px 0;
 }
 
+/* Navbar Buttons show submenus on hover */
+ul.nav li.dropdown:hover > ul.dropdown-menu{
+    display: block;    
+}
+
+.navbar .dropdown-menu {
+ margin-top: 0px;
+}
+
 .tmp{
     font-family: "Lucida Console", "Courier New", monospace;
     color:#e5e5e5;
