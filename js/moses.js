@@ -69,16 +69,29 @@ $(document).ready(function() {
        document.cookie = name + '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
     }
     
-    /* Navigation Bar Logic */
+    /************** Navigation Bar Logic ******************************************************************/
+    $clickedFromSubmenu = false; // this variable is  set to true only when an item in the Navigation Bar is clicked
     $('.navbar li').click(function(e) {
-    $('.navbar li').removeClass('active');
-    var $this = $(this);
-    if (!$this.hasClass('active')) {
-        $this.addClass('active');
-    }
-    e.preventDefault();
+        // emulate a flash when an item in the Navigation Bar is clicked
+        if(!$clickedFromSubmenu){
+        var $this = $(this);
+        $this.removeClass('active');
+    
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+            setTimeout(function(){$this.removeClass('active');},50);
+        }   
+        }
+        $clickedFromSubmenu = false; // reset the variable, next click may be made directly on the item and not on the submenu
+        return false;
     });
     
+    // prevent items in Navigation Bar from flashing when a submenu is clicked
+    $('.dropdown-menu a').click(function(e){
+        console.log("menu item clicked, implement me 2!");
+        $clickedFromSubmenu = true; // the flash should not be performed
+    }); 
+    /************** Navigation Bar Logic END END END END*********************************************************/
     
      
     

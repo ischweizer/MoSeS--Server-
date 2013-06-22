@@ -14,7 +14,7 @@
     <div class="navbar">
       <div class="navbar-inner">
           <ul class="nav">
-            <li class="active">
+            <li class="dropdown">
                 <a href="#">Home</a>
             </li>
             <li class="dropdown">
