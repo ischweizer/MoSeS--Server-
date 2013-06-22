@@ -1,9 +1,5 @@
 $(document).ready(function() {
     
-    /*$(document).click(function() {
-        $("#popup").fadeOut("fast");
-    });*/
-    
     /* Scroll to TOP */
     $('#scrollToTop').click(function () {
             $('body,html').animate({
@@ -78,9 +74,6 @@ $(document).ready(function() {
     }
     e.preventDefault();
     });
-    
-    
-     
     
     /* ************************** */
 });

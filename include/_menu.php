@@ -5,7 +5,17 @@
 
 <div class="container">
 
-    <button class="btn" id="btn_login" style="float: right; margin-top: 30pt;"><i class="icon-user"></i> Login</button>
+    <?php
+        if(isset($_SESSION["USER_LOGGED_IN"]) && $_SESSION["USER_LOGGED_IN"] == 1){
+    ?>
+    <a href="logout.php" class="btn btn-danger" id="btn_logout"><i class="icon-user"></i>Logout</a>        
+    <?php
+        }else{   
+    ?>
+    <a class="btn" id="btn_login"><i class="icon-user"></i>Login</a>
+    <?php
+        }
+    ?>
 
     <div class="masthead">
     <h1 class="muted text-center tmp tmp2" style="font-size: 50pt; margin-top: 20pt; margin-bottom: 30pt;">MoSeS</h1>
@@ -16,7 +26,11 @@
           <ul class="nav">
             <li class="active">
                 <a href="#">Home</a>
-            </li>
+            </li><?php
+            
+                if(isset($_SESSION["USER_LOGGED_IN"]) && $_SESSION["USER_LOGGED_IN"] == 1){
+            
+            ?>
             <li class="dropdown">
                 <a href="#">Devices</a>
             </li>
@@ -41,7 +55,9 @@
                         <a href="#">Create</a>
                     </li>
                 </ul>
-            </li>
+            </li><?php
+                     }
+                 ?>
              <li class="dropdown">
                 <a href="#">About <b class="caret"></b></a>
                 <ul class="dropdown-menu">
