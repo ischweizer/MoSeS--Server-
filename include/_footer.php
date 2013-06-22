@@ -1,17 +1,16 @@
  
-<div id="footer-wrapper">
-    <div id="footer">
-        <p><?php echo date("Y"); ?> (c) Telecooperation Lab. All rights reserved.</p>
-    </div>
-	 
-    <!-- end #footer -->
+<div class="push"></div>
 </div>
+
+<div id="footer">
+  <div class="container">
+    <p class="muted credit text-center"><?php echo date("Y"); ?> (c) Telecooperation Lab. All rights reserved.</p>
+  </div>
+</div>
+
+<!-- JS Init -->  
 <script src="js/jquery-2.0.1.min.js"></script>
-<!--<script src="js/slide.js" type="text/javascript"></script>-->
-<script src="js/main.js" type="text/javascript"></script>
-<!--[if lte IE 6]>
-<script type="text/javascript" src="js/iepngfix/supersleight-min.js"></script>
-<![endif]-->
 <script src="js/bootstrap.min.js"></script>
+<script src="js/moses.js"></script>
 </body>
 </html>

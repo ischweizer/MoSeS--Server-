@@ -15,40 +15,33 @@ $(document).ready(function() {
     /* menu dropdown */
     $('.dropdown-toggle').dropdown();
 
-    /* Login lightbox */
-    $("#btn_login").click(function(){
-        $("#popup").fadeIn("slow");
-        
-        // reads cookies and sets to fields
-        var cookie = readCookie('moses_l');
-        if(cookie != ''){
-            $('#login').val(cookie);
-            $('#rememberme').attr('checked', true);
-        }else{
-            $('#login').val('');   
-            $('#password').val('');
-            $('#login').focus();   
-            $('#rememberme').attr('checked', false);
+    
+    /* Login lightbox */    
+    $('body').bind('keydown', function(e) {
+        console.log("escape clicked");
+        if(e.keyCode==27){
+            // dim back when "escape" is pressed
+            $("#dim_back").fadeOut();
+                return false;
         }
     });
-    $("#signin").click(function(){
-        if($('#rememberme').is(':checked')){
-            setCookie('moses_l', $('#login').val(), 31);
-        }else{
-            // if unchecked, just delete cookie
-            var cookie = readCookie('moses_l');
-            if(cookie != ''){
-                delCookie('moses_l');
-            } 
-        }
-        $("#popup").fadeOut("fast");
+    
+    
+    //Adjust height of overlay to fill screen when page loads
+    $("#dim_back").css("height", $(document).height());
+
+    //When the link that triggers the message is clicked fade in overlay/msgbox
+    $("#btn_login").click(function(){
+    $("#dim_back").fadeIn();
+        return false;
     });
 
-    $('body').bind('keypress', function(e) {
-        if(e.keyCode==27){
-            $("#popup").fadeOut("fast");
-        }
+    //When the message box is closed, fade out
+    $("#signin").click(function(){
+    $("#dim_back").fadeOut();
+        return false;
     });
+    
 
     /* Sets cookies for N days */
     function setCookie(cookieName,cookieValue,nDays) {
@@ -74,7 +67,25 @@ $(document).ready(function() {
     /* Deletes a cookie */
     function delCookie(name) {
        document.cookie = name + '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
-    } 
+    }
+    
+    /* Navigation Bar Logic */
+    $('.navbar li').click(function(e) {
+    $('.navbar li').removeClass('active');
+    var $this = $(this);
+    if (!$this.hasClass('active')) {
+        $this.addClass('active');
+    }
+    e.preventDefault();
+    });
+    
+    
+     
     
     /* ************************** */
+});
+
+//Adjust height of dim overlay to fill screen when browser gets resized
+$(window).bind("resize", function(){
+    $("#dim_back").css("height", $(window).innerHeight);
 });

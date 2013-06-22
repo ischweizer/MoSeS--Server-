@@ -76,13 +76,62 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 include_once("./include/_menu.php");
 
 ?>
-  
-<!--<div id="header">
-    <div id="logo">
-        <h1><a href="./index.php">Mobile Sensing System</a></h1>
-    </div>
-</div>--> 
 
+<!-- Main Block -->
+    <!--<div style="width:800px; margin:0 auto;">-->
+        <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
+            <h2>MoSeS makes your life easier!</h2>
+            <p>The Mobile Sensing System helps scientists from all around the world 
+                to distribute their Android apps and make the world a better place.
+            </p>
+            <p>    
+                Every person with an Android device can contribute.
+                Feel free to register and download moses client, it's easy!
+            </p>
+            <p>&nbsp;
+            </p>
+            <p><button class="btn btn-warning btn-large" style="font-weight: bold; width: 130px;"><i class="icon-white icon-tag"></i> Sign up</button></p>
+        </div>
+    <!--</div>-->
+    
+    <hr>
+
+    <!-- Example row of columns -->
+   <!-- <div class="row-fluid">
+    <div class="span4">
+      <h2>Heading</h2>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p><a class="btn" href="#">View details &raquo;</a></p>
+    </div>
+    <div class="span4">
+      <h2>Heading</h2>
+      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+      <p><a class="btn" href="#">View details &raquo;</a></p>
+    </div>
+    <div class="span4">
+      <h2>Heading</h2>
+      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+      <p><a class="btn" href="#">View details &raquo;</a></p>
+    </div>
+    </div>
+-->
+
+    <!--<button class="btn btn-link btn-large span4" style="background-color: #EEE; width: 500pt; height: 50pt;">Sign up <a href="#top" class="icon-chevron-up"></a></button>-->
+    <div class="row">
+      
+      <div class="span8 text-center" style="width: 400pt; height: 50pt; background-color: #EEE; float: none; margin: 0 auto;">
+        <div style="margin: 50pt 0pt;">
+            <button class="btn btn-link" style="color: #ffa338; font-weight: bold; font-size: 20pt; margin-left: 15pt; margin-top: 12pt;">Sign up</button>
+            <a href="" id="scrollToTop"><i class="icon-chevron-up" style="float: right; margin-right: 15pt; margin-top: 20pt;"></i></a>
+        </div>
+      </div>
+      <div class="span1"></div>
+    </div>
+    <!--</div>--> <!-- /container -->
+
+ <?php
+      /*
+  ?>
 <div id="page">
         <div id="page-bgtop">
             <div id="page-bgbtm">
@@ -193,8 +242,9 @@ include_once("./include/_menu.php");
 </div>
 
 <?php
+*/
 //Import of the slider
-include_once("./include/_login_slider.php");
+include_once("./include/_login.php");
 //Import of the footer
 include_once("./include/_footer.php");  
 ?>
