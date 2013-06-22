@@ -15,15 +15,17 @@ $(document).ready(function() {
     /* menu dropdown */
     $('.dropdown-toggle').dropdown();
 
+    
     /* Login lightbox */    
-    $('body').bind('keypress', function(e) {
+    $('body').bind('keydown', function(e) {
+        console.log("escape clicked");
         if(e.keyCode==27){
+            // dim back when "escape" is pressed
             $("#dim_back").fadeOut();
                 return false;
         }
     });
     
-    /* NEW!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
     
     //Adjust height of overlay to fill screen when page loads
     $("#dim_back").css("height", $(document).height());
@@ -40,7 +42,6 @@ $(document).ready(function() {
         return false;
     });
     
-    /* /// NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 
     /* Sets cookies for N days */
     function setCookie(cookieName,cookieValue,nDays) {
