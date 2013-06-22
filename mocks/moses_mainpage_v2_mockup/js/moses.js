@@ -67,7 +67,20 @@ $(document).ready(function() {
     /* Deletes a cookie */
     function delCookie(name) {
        document.cookie = name + '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
-    } 
+    }
+    
+    /* Navigation Bar Logic */
+    $('.navbar li').click(function(e) {
+    $('.navbar li').removeClass('active');
+    var $this = $(this);
+    if (!$this.hasClass('active')) {
+        $this.addClass('active');
+    }
+    e.preventDefault();
+    });
+    
+    
+     
     
     /* ************************** */
 });
