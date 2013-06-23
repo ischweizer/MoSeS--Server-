@@ -65,11 +65,35 @@ $(document).ready(function() {
         	type: "POST",
         	url: "content_provider.php",
         	data: $('#lightbox').serialize(), 
-        	succsess: function(result){
-        		alert(result);
+        	success: function(result){
+        		switch(result)
+	        		{
+	        		case '0':
+	        			console.log("login ok!");
+	        			$('#login_error_message').hide();
+	        		  break;
+	        		case '1':
+	        			$('#login_error_message').text('You have not confirmed your E-Mail address.');
+	        			$('#login_error_message').show();
+	        		  break;
+	        		case '2':
+	        			$('#login_error_message').text('Wrong user name or password');
+	        			$('#login_error_message').show();
+	        			break;
+	        		case '3':
+	        			$('#login_error_message').text('Missing password');
+	        			$('#login_error_message').show();
+	        			break;
+	        		case '4':
+	        			$('#login_error_message').text('Missing user name');
+	        			$('#login_error_message').show();
+	        			break;
+	        		default:
+	        			$('#login_error_message').text('An unknown error has occured. Giovani Giorgo will be informed about this!');
+	        			$('#login_error_message').show();
+	        		}        		
         	}
         });
-        
         
         if($('#rememberme').is(':checked')){
             setCookie('moses_l', $('input[type=text]').val(), 31);
@@ -82,7 +106,7 @@ $(document).ready(function() {
             } 
         }
         
-        $("#dim_back").fadeOut();
+//        $("#dim_back").fadeOut();
         
         /*
          * Prevents the page from refreshing when button is clicked or enter is pressed;

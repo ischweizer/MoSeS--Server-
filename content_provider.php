@@ -3,12 +3,12 @@ session_start();
 
 //If the formular is sent
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
+	include_once("./config.php");
 	//If the login exists
 	if(isset($_POST["login"]) && !empty($_POST["login"]) && preg_match('/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/', $_POST["login"])){
 		//And the password exists
 		if(isset($_POST["password"]) && !empty($_POST["password"])){
 			//Import of the connection�s file to database
-			include_once("./config.php");
 			include_once("./include/functions/dbconnect.php");
 
 			$USER_LOGIN =  $_POST["login"];
@@ -46,17 +46,16 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 					echo $CONFIG['LOGIN_RESPONSE']['OK'];
 
 				}else{
-					$CONFIG['LOGIN_RESPONSE']['NOT_CONFIRMED'];
+					echo $CONFIG['LOGIN_RESPONSE']['NOT_CONFIRMED'];
 				}
 			}else{
-				$CONFIG['LOGIN_RESPONSE']['WRONG_LOGIN_OR_PASSWORD'];
+				echo $CONFIG['LOGIN_RESPONSE']['WRONG_LOGIN_OR_PASSWORD'];
 			}
 		}else{
-			$CONFIG['LOGIN_RESPONSE']['MISSING_PASSWORD'];
+			echo $CONFIG['LOGIN_RESPONSE']['MISSING_PASSWORD'];
 		}
 	}else{
-		$CONFIG['LOGIN_RESPONSE']['MISSING_LOGIN'];
-// 		echo "<meta http-equiv='refresh' content='3;URL=./'>";
+		echo $CONFIG['LOGIN_RESPONSE']['MISSING_LOGIN'];
 	}
 }
 

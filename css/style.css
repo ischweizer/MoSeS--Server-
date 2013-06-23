@@ -179,4 +179,8 @@ body {
     margin-right: 5pt;
 }
 
+#login_error_message{
+	display: none;
+}
+
 /* ************************************** */
