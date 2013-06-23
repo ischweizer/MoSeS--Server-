@@ -25,7 +25,7 @@
       <div class="navbar-inner">
           <ul class="nav">
             <li class="dropdown">
-                <a href="#">Home</a>
+                <a href="<?php echo dirname($_SERVER['PHP_SELF'])."/"; ?>">Home</a>
             </li><?php
             
                 if(isset($_SESSION["USER_LOGGED_IN"]) && $_SESSION["USER_LOGGED_IN"] == 1){
@@ -62,13 +62,13 @@
                 <a href="#">About <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#">Project</a>
+                        <a href="about.php">Project</a>
                     </li>
                     <li>
-                        <a href="#">Developers</a>
+                        <a href="developers.php">Developers</a>
                     </li>
                     <li>
-                        <a href="#">Impressum</a>
+                        <a href="impressum.php">Impressum</a>
                     </li>
                 </ul>
             </li>

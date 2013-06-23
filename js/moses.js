@@ -113,7 +113,9 @@ $(document).ready(function() {
         if (!$this.hasClass('active')) {
             $this.addClass('active');
             setTimeout(function(){$this.removeClass('active');},50);
-        }   
+        } 
+        // go to the webpage
+        document.location = $(this).find('a').attr('href'); 
         }
         $clickedFromSubmenu = false; // reset the variable, next click may be made directly on the item and not on the submenu
         return false;
@@ -121,7 +123,8 @@ $(document).ready(function() {
     
     // prevent items in Navigation Bar from flashing when a submenu is clicked
     $('.dropdown-menu a').click(function(e){
-        console.log("menu item clicked, implement me 2!");
+        // goto webpage from dropdown menu
+        document.location = $(this).attr('href');   
         $clickedFromSubmenu = true; // the flash should not be performed
     }); 
     /************** Navigation Bar Logic END END END END*********************************************************/

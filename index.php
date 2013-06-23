@@ -77,21 +77,20 @@ include_once("./include/_menu.php");
 ?>
 
 <!-- Main Block -->
-    <!--<div style="width:800px; margin:0 auto;">-->
-        <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
-            <h2>MoSeS makes your life easier!</h2>
-            <p>The Mobile Sensing System helps scientists from all around the world 
-                to distribute their Android apps and make the world a better place.
-            </p>
-            <p>    
-                Every person with an Android device can contribute.
-                Feel free to register and download moses client, it's easy!
-            </p>
-            <p>&nbsp;
-            </p>
-            <p><a href="registration.php" class="btn btn-warning btn-large" style="font-weight: bold; width: 130px;"><i class="icon-white icon-tag"></i> Sign up</a></p>
-        </div>
-    <!--</div>-->
+    <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
+        <h2>MoSeS makes your life easier!</h2>
+        <p>The Mobile Sensing System helps scientists from all around the world 
+            to distribute their Android apps and make the world a better place.
+        </p>
+        <p>    
+            Every person with an Android device can contribute.
+            Feel free to register and download moses client, it's easy!
+        </p>
+        <p>&nbsp;
+        </p>
+        <p><a href="registration.php" class="btn btn-warning btn-large" style="font-weight: bold; width: 130px;"><i class="icon-white icon-tag"></i> Sign up</a></p>
+    </div>
+    <!-- / Main Block -->
     
     <hr>
 

@@ -6,9 +6,9 @@ include_once("./include/_header.php");
 
 //If the formular is sent
 if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
-    //Import of configuration´s file
+    //Import of configuration?s file
    include_once("./config.php");
-   //Import of connection´s file to database
+   //Import of connections file to database
    include_once("./include/functions/dbconnect.php"); 
    
    $sql = "SELECT userid, confirmed  
