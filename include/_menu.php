@@ -32,7 +32,7 @@
             
             ?>
             <li class="dropdown">
-                <a href="#">Devices</a>
+                <a href="devices.php">Devices</a>
             </li>
              <li class="dropdown">
                 <a href="#">Groups <b class="caret"></b></a>
