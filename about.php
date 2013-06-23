@@ -15,7 +15,7 @@ include_once("./include/_menu.php");
   
 <!-- Main Block -->
     <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
-        <h2>About MoSeS</h2>
+        <h2>About</h2>
         <p>MoSeS offers researchers a platform for distribution of non-comercial Android apps, that are used for research purposes.</p>
         <br />
     </div>
