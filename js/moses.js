@@ -38,6 +38,7 @@ $(document).ready(function() {
     //When the link that triggers the message is clicked fade in overlay/msgbox
     $("#btn_login").click(function(){
         $("#dim_back").fadeIn();
+        $('#login_error_message').hide(); // prevent all errors from showing on the lighbox
         $('input[type=text]').focus();
         
         // reads cookies and sets to fields
@@ -52,37 +53,60 @@ $(document).ready(function() {
             $('input[type=text]').focus();   
             $('#rememberme').attr('checked', false);
         } 
-        
-        //return false;
+
     });
 
     //When the message box is closed, fade out
     $("#lightbox :submit").click(function(e){
         
         
-        /* AJAX Login request */
+        /* AJAX Login request*/
         $.ajax({
         	type: "POST",
         	url: "content_provider.php",
         	data: $('#lightbox').serialize(), 
-        	succsess: function(result){
-        		alert(result);
+        	success: function(result){
+        		switch(result)
+	        		{
+	        		case '0':
+	        			//login is succesfull, refresh the page
+	        			//and set the cookie if desired
+	        			$('#login_error_message').hide();
+	        			if($('#rememberme').is(':checked')){
+	        	            setCookie('moses_l', $('input[type=text]').val(), 31);
+	        	        }else{
+	        	            // if unchecked, just delete cookie
+	        	            var cookie = readCookie('moses_l');
+	        	            if(cookie != ''){
+	        	                delCookie('moses_l');
+	        	            } 
+	        	        }
+	        			document.location.reload();
+	        		  break;
+	        		case '1':
+	        			$('#login_error_message').text('You have not confirmed your E-Mail address!');
+	        			$('#login_error_message').show();
+	        		  break;
+	        		case '2':
+	        			$('#login_error_message').text('Wrong user name or password!');
+	        			$('#login_error_message').show();
+	        			break;
+	        		case '3':
+	        			$('#login_error_message').text('Missing password!');
+	        			$('#login_error_message').show();
+	        			break;
+	        		case '4':
+	        			$('#login_error_message').text('Missing user name!');
+	        			$('#login_error_message').show();
+	        			break;
+	        		default:
+	        			$('#login_error_message').text('An unknown error has occured. Giovani Giorgo will be informed about this!');
+	        			$('#login_error_message').show();
+	        		}        		
         	}
         });
         
-        
-        if($('#rememberme').is(':checked')){
-            setCookie('moses_l', $('input[type=text]').val(), 31);
-            // ;"+$('input[type=password]').val()
-        }else{
-            // if unchecked, just delete cookie
-            var cookie = readCookie('moses_l');
-            if(cookie != ''){
-                delCookie('moses_l');
-            } 
-        }
-        
-        $("#dim_back").fadeOut();
+//        $("#dim_back").fadeOut();
         
         /*
          * Prevents the page from refreshing when button is clicked or enter is pressed;
