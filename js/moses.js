@@ -58,6 +58,19 @@ $(document).ready(function() {
 
     //When the message box is closed, fade out
     $("#lightbox :submit").click(function(e){
+        
+        
+        /* AJAX Login request */
+        $.ajax({
+        	type: "POST",
+        	url: "content_provider.php",
+        	data: $('#lightbox').serialize(), 
+        	succsess: function(result){
+        		alert(result);
+        	}
+        });
+        
+        
         if($('#rememberme').is(':checked')){
             setCookie('moses_l', $('input[type=text]').val(), 31);
             // ;"+$('input[type=password]').val()
@@ -67,7 +80,8 @@ $(document).ready(function() {
             if(cookie != ''){
                 delCookie('moses_l');
             } 
-        } 
+        }
+        
         $("#dim_back").fadeOut();
         
         /*
