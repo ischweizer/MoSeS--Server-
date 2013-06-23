@@ -14,7 +14,6 @@ $(document).ready(function() {
     
     /* Login lightbox */    
     $('body').bind('keydown', function(e) {
-        console.log("escape clicked");
         if(e.keyCode==27){
             // dim back when "escape" is pressed
             $("#dim_back").fadeOut();
@@ -22,20 +21,56 @@ $(document).ready(function() {
         }
     });
     
+    // fadeout login lightbox on click outside
+    /*jQuery("#menu").click(function(){ return false; });
+    jQuery(document).one("click", function() { 
+        jQuery("#menu").fadeOut(); 
+    });
+    
+    $('#dim_back').click(function(){
+        $("#dim_back").fadeOut();    
+        return false;
+    });*/
     
     //Adjust height of overlay to fill screen when page loads
     $("#dim_back").css("height", $(document).height());
 
     //When the link that triggers the message is clicked fade in overlay/msgbox
     $("#btn_login").click(function(){
-    $("#dim_back").fadeIn();
-        return false;
+        $("#dim_back").fadeIn();
+        $('input[type=text]').focus();
+        
+        // reads cookies and sets to fields
+        var cookie = readCookie('moses_l');
+        if(cookie != ''){
+            $('input[type=text]').val(cookie);
+            $('input[type=password]').focus();
+            $('#rememberme').attr('checked', true);
+        }else{
+            $('input[type=text]').val('');   
+            $('input[type=password]').val('');
+            $('input[type=text]').focus();   
+            $('#rememberme').attr('checked', false);
+        } 
+        
+        //return false;
     });
 
     //When the message box is closed, fade out
-    $("#signin").click(function(){
-    $("#dim_back").fadeOut();
-        return false;
+    $("#lightbox :submit").click(function(){
+        if($('#rememberme').is(':checked')){
+            setCookie('moses_l', $('input[type=text]').val(), 31);
+            // ;"+$('input[type=password]').val()
+        }else{
+            // if unchecked, just delete cookie
+            var cookie = readCookie('moses_l');
+            if(cookie != ''){
+                delCookie('moses_l');
+            } 
+        } 
+        
+        $("#dim_back").fadeOut();
+        //return false;
     });
     
 
@@ -53,12 +88,14 @@ $(document).ready(function() {
     function readCookie(cookieName) {
      var theCookie=" "+document.cookie;
      var ind=theCookie.indexOf(" "+cookieName+"=");
+     
      if (ind==-1) ind=theCookie.indexOf(";"+cookieName+"=");
+     //alert(ind);
      if (ind==-1 || cookieName=="") return "";
      var ind1=theCookie.indexOf(";",ind+1);
      if (ind1==-1) ind1=theCookie.length; 
      return unescape(theCookie.substring(ind+cookieName.length+2,ind1));
-    }
+    }      
     
     /* Deletes a cookie */
     function delCookie(name) {

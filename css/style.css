@@ -175,4 +175,8 @@ body {
     margin-top: 30pt;
 }
 
+#btn_login i, #btn_logout i {
+    margin-right: 5pt;
+}
+
 /* ************************************** */

@@ -6,13 +6,10 @@ include_once("./include/_header.php");
 
 //If the formular is sent
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){    
-    echo "FUCK ME1!";
   //If the login exists 
   if(isset($_POST["login"]) && !empty($_POST["login"]) && preg_match('/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/', $_POST["login"])){
-      echo "FUCK ME2!";
       //And the password exists
       if(isset($_POST["password"]) && !empty($_POST["password"])){
-        echo "FUCK ME3!";
 		  //Import of the connection�s file to database
           include_once("./config.php");
           include_once("./include/functions/dbconnect.php");   
