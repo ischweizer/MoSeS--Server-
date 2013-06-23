@@ -57,7 +57,7 @@ $(document).ready(function() {
     });
 
     //When the message box is closed, fade out
-    $("#lightbox :submit").click(function(){
+    $("#lightbox :submit").click(function(e){
         if($('#rememberme').is(':checked')){
             setCookie('moses_l', $('input[type=text]').val(), 31);
             // ;"+$('input[type=password]').val()
@@ -68,9 +68,13 @@ $(document).ready(function() {
                 delCookie('moses_l');
             } 
         } 
-        
         $("#dim_back").fadeOut();
-        //return false;
+        
+        /*
+         * Prevents the page from refreshing when button is clicked or enter is pressed;
+         * Before that, the login credentials have to be validated
+         */
+        e.preventDefault();
     });
     
 
