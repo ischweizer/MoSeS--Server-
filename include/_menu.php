@@ -77,9 +77,8 @@
                  ?>
                      
                  <li class="dropdown">
-                    <a href="admin.php">Devices</a>
+                    <a href="admin.php">Admin</a>
                  </li>
-                 
                  <?php
                  }
                  ?>
