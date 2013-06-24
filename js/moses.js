@@ -186,7 +186,59 @@ $(document).ready(function() {
         }).on('page', function(event, num){
         $(".content2").html("Page " + num); // or some ajax content loading...
     });
-     
+    
+    
+    /**
+     * Registration Form
+     * Validation: Highlighting of empty fields or fields that are not filled correctly
+     */
+    $("#registerHere").validate({
+		rules:{
+			firstname:"required",
+			lastname:"required",
+			login:"required",
+			email:{
+					required:true,
+					email: true
+				},
+			password:{
+				required:true,
+				minlength: 6
+			},
+			password_repeat:{
+				required:true,
+				equalTo: "#pwd"
+			},
+		},
+		
+		messages:{
+			firstname:"Enter your firstname",
+			lastname:"Enter your lastname",
+			email:{
+				required:"Enter your email address",
+				email:"Enter valid email address"
+			},
+			password:{
+				required:"Enter your password",
+				minlength:"Password must be minimum 6 characters"
+			},
+			password_repeat:{
+				required:"Confirm password",
+				equalTo:"Password and Confirm Password must match"
+			},
+		},
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('error');
+			$(element).parents('.control-group').addClass('success');
+		}
+	});
+    
+    
     
     /* ************************** */
 });
