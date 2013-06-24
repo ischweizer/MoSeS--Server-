@@ -199,7 +199,7 @@ $(document).ready(function() {
 			},
 			password_repeat:{
 				required:true,
-				equalTo: "#pwd"
+				equalTo: "#password"
 			},
 		},
 		
