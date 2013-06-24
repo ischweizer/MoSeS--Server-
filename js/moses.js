@@ -21,6 +21,14 @@ $(document).ready(function() {
         }
     });
     
+    /**
+     * Lightbox Closing X
+     * When Users clicks on X on lightbox, the lightbox disappears
+     */
+    $('#boxclose').click(function(){
+    	$("#dim_back").fadeOut();
+    	});
+    
     // fadeout login lightbox on click outside
     /*jQuery("#menu").click(function(){ return false; });
     jQuery(document).one("click", function() { 
