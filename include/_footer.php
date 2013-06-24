@@ -13,5 +13,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="//rawgithub.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
 <script src="js/moses.js"></script>
+<script src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 </body>
 </html>
