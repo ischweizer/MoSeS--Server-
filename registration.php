@@ -193,7 +193,7 @@ if(isset($_POST["submitted"])){
 
 <!-- Main Block -->
     <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
-        <h2>Registration</h2>
+<!--         <h2>Registration</h2> -->
         <?php
                            
                 if(isset($USER_CONFIRMED) && $USER_CONFIRMED){
@@ -214,7 +214,7 @@ if(isset($_POST["submitted"])){
                    
             <div class="registration_form">
                 <fieldset>
-                    <legend>Registration of new user</legend>
+                    <legend>Registration</legend>
                     <label for="name" >Your registration was successful.</label>
                     <label for="name" >You will receive an e-mail with confirmation of registration.</label>
                 </fieldset>
@@ -225,49 +225,71 @@ if(isset($_POST["submitted"])){
                 
                 if(!(isset($USER_CREATED) && $USER_CREATED == 1) && !(isset($USER_CONFIRMED) && $USER_CONFIRMED)){
             ?>
-
-            <form class="registration_form" action="./registration.php" method="post" accept-charset="UTF-8">
+<!-- This is where the user enters his data when registering -->
+            <form class="form-horizontal" action="./registration.php" method="post" accept-charset="UTF-8" id="registerHere">
                 <fieldset>
-                    <legend>Registration of new user</legend>
-                    <label for="firstname" >Your first name (*): </label>
-                    <div class="clear"></div>
+                    <legend>Registration</legend>
+                    <div class="control-group">
+                    <label for="firstname" class="control-label">First name</label>
+<!--                     <div class="clear"></div> -->
+                    <div class="controls">
                     <input type="text" name="firstname" id="firstname" maxlength="50" <?php
                         if(isset($_POST["firstname"])){
                             echo 'value="'. trim($_POST["firstname"]) .'" ';
                         }                                                                         
                     ?>/>
-                    <div class="clear"></div>
-                    <label for="lastname" >Your last name (*): </label>
-                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    <div class="control-group">
+                    <label for="lastname" class="control-label">Last name</label>
+<!--                     <div class="clear"></div> -->
+                    <div class="controls">
                     <input type="text" name="lastname" id="lastname" maxlength="50" <?php
                         if(isset($_POST["lastname"])){
                             echo 'value="'. trim($_POST["lastname"]) .'" ';
                         }                                                                         
                     ?>/>
-                    <div class="clear"></div>
-                    <label for="email" >E-mail address (*):</label>
-                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    <div class="control-group">
+                    <label for="email" class="control-label">Email</label>
+<!--                     <div class="clear"></div> -->
+                    <div class="controls">
                     <input type="text" name="email" id="email" maxlength="50" <?php
                         if(isset($_POST["email"])){
                             echo 'value="'. trim($_POST["email"]) .'" ';
                         }                                                                         
                     ?>/>
-                    <div class="clear"></div>
-                    <label for="login" >Username (*):</label>
-                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    <div class="control-group">
+                    <label for="login" class="control-label">Username</label>
+<!--                     <div class="clear"></div> -->
+                    <div class="controls">
                     <input type="text" name="login" id="login" maxlength="50" <?php
                         if(isset($_POST["login"])){
                             echo 'value="'. trim($_POST["login"]) .'" ';
                         }                                                                         
                     ?>/>
-                    <div class="clear"></div>
-                    <label for="password" >Password (*):</label>
-                    <div class="clear"></div>
+                    </div>
+                    </div>
+                    <div class="control-group">
+                    <label for="password" class="control-label">Password</label>
+<!--                     <div class="clear"></div> -->
+                    <div class="controls">
                     <input type="password" name="password" id="password" maxlength="50" <?php
                         if(isset($_POST["password"])){
                             echo 'value="'. trim($_POST["password"]) .'" ';
                         }                                                                         
                     ?>/>
+                    </div>
+                    </div>
+                    <div class="control-group">
+                    	<label for="password_repeat" class="control-label">Confirm Password</label>
+                   			<div class="controls">
+                    			<input type="password" name="password_repeat" id="password" maxlength="50"/>
+                    		</div>
+                    </div>
                     <div class="clear"></div>
                     <?php
                          if(count($ERROR_REGFORM) > 0){
@@ -282,8 +304,13 @@ if(isset($_POST["submitted"])){
                     <?php
                          }
                      ?>
-                    <input type="hidden" name="submitted" id="submitted" value="1" />
-                    <input type="submit" name="submit" value="Register" />
+                     <div class="control-group">
+                     	<label class="control-label"></label>
+                     	<div class="controls">
+	                    	<input type="hidden" name="submitted" id="submitted" value="1" />
+	                    	<button type="submit" name="submit" class="btn btn-success">Create my Account</button>
+                    	</div>
+                    </div>
                 </fieldset>
             </form>
 
