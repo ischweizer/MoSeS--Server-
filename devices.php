@@ -1,6 +1,22 @@
 <?php
 //Starting the session
 session_start();
+ob_start();
+
+if(!isset($_SESSION['USER_LOGGED_IN']))
+    header("Location: " . dirname($_SERVER['PHP_SELF'])."/");
+    
+include_once("./include/functions/func.php");
+include_once("./config.php");
+
+$API_VERSION = array(array(8, 'API 8: "Froyo" 2.2.x'),
+                     array(9, 'API 9: "Gingerbread" 2.3.0 - 2.3.2'),
+                     array(10, 'API 10: "Gingerbread" 2.3.3 - 2.3.7'),
+                     array(11, 'API 11: "Honeycomb" 3.0'),
+                     array(12, 'API 12: "Honeycomb" 3.1'),
+                     array(13, 'API 13: "Honeycomb" 3.2.x'),
+                     array(14, 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2'),
+                     array(15, 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4'));
 
 /**
 * Select all user devices
@@ -36,44 +52,15 @@ include_once("./include/_menu.php");
     <!-- Main Block -->
     <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
         <h2>Devices</h2>
-        <p>
         <div class="pagination pagination-centered">
         <ul>
             <li class=""><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
             <li><a href="#">&raquo;</a></li>
         </ul>
         </div>
-        <div id="content">
+        <div id="content"> 
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -95,7 +82,7 @@ include_once("./include/_menu.php");
               </tbody>
             </table>
         </div>
-        </p>
+        <div id="page-selection">Pagination goes here</div>
     </div>
     <!-- / Main Block -->
     

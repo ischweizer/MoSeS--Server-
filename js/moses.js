@@ -171,6 +171,13 @@ $(document).ready(function() {
     }); 
     /************** Navigation Bar Logic END END END END*********************************************************/
     
+    $('.demo2').bootpag({
+        total: 23,
+        page: 1,
+        maxVisible: 10
+        }).on('page', function(event, num){
+        $(".content2").html("Page " + num); // or some ajax content loading...
+    });
      
     
     /* ************************** */
