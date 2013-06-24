@@ -16,7 +16,9 @@ $API_VERSION = array(array(8, 'API 8: "Froyo" 2.2.x'),
                      array(12, 'API 12: "Honeycomb" 3.1'),
                      array(13, 'API 13: "Honeycomb" 3.2.x'),
                      array(14, 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2'),
-                     array(15, 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4'));
+                     array(15, 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4'),
+                     array(16, 'API 16: "Jelly Bean" 4.1.x'),
+                     array(17, 'API 17: "Jelly Bean" 4.2.x'));
 
 /**
 * Select all user devices
@@ -74,7 +76,11 @@ include_once("./include/_menu.php");
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody><?php
+                
+                foreach($USER_DEVICES as $key )
+                         
+                ?>
                 <tr>
                   <td>1</td>
                   <td>Mark</td>
@@ -95,5 +101,25 @@ include_once("./include/_menu.php");
 //Import of the slider
 include_once("./include/_login.php");
 //Import of the footer
-include_once("./include/_footer.php");  
+include_once("./include/_footer.php");
+?>
+
+<script type="text/javascript">
+
+/**
+* Pagination
+*/
+$('#page-selection').bootpag({
+    total: <?php echo count($USER_DEVICES); ?>,
+    page: 1,
+    maxVisible: 10
+    }).on('page', function(event, num){
+        
+    $("#content").text("TEST"+num); // or some ajax content loading...
+});
+   
+</script>
+
+<?php
+  
 ?>
