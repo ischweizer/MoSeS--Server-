@@ -38,6 +38,8 @@ if(!empty($devices)){
 }
 
 
+print_r($USER_DEVICES);
+
 //Import of the header  
 include_once("./include/_header.php");                   
 ?>

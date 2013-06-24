@@ -79,7 +79,6 @@
                  <li class="dropdown">
                     <a href="admin.php">Admin</a>
                  </li>
-                 
                  <?php
                  }
                  ?>
