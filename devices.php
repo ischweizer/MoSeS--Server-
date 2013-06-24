@@ -60,6 +60,7 @@ include_once("./include/_menu.php");
             <li><a href="#">&raquo;</a></li>
         </ul>
         </div>
+        <div id="page-selection">Pagination goes here</div>
         <div id="content"> 
             <table class="table table-striped">
               <thead>
@@ -82,7 +83,6 @@ include_once("./include/_menu.php");
               </tbody>
             </table>
         </div>
-        <div id="page-selection">Pagination goes here</div>
     </div>
     <!-- / Main Block -->
     

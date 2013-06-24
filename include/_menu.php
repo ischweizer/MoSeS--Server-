@@ -71,7 +71,18 @@
                         <a href="impressum.php">Impressum</a>
                     </li>
                 </ul>
-            </li>
+            </li><?php
+                 
+                 if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
+                 ?>
+                     
+                 <li class="dropdown">
+                    <a href="admin.php">Devices</a>
+                 </li>
+                 
+                 <?php
+                 }
+                 ?>
           </ul>
         <!--</div>-->
     </div><!-- /.navbar-inner -->
