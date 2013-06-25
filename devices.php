@@ -9,16 +9,16 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
 include_once("./include/functions/func.php");
 include_once("./config.php");
 
-$API_VERSION = array(array(8, 'API 8: "Froyo" 2.2.x'),
-                     array(9, 'API 9: "Gingerbread" 2.3.0 - 2.3.2'),
-                     array(10, 'API 10: "Gingerbread" 2.3.3 - 2.3.7'),
-                     array(11, 'API 11: "Honeycomb" 3.0'),
-                     array(12, 'API 12: "Honeycomb" 3.1'),
-                     array(13, 'API 13: "Honeycomb" 3.2.x'),
-                     array(14, 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2'),
-                     array(15, 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4'),
-                     array(16, 'API 16: "Jelly Bean" 4.1.x'),
-                     array(17, 'API 17: "Jelly Bean" 4.2.x'));
+$API_VERSION = array(8 => 'API 8: "Froyo" 2.2.x',
+                     9 => 'API 9: "Gingerbread" 2.3.0 - 2.3.2',
+                     10 => 'API 10: "Gingerbread" 2.3.3 - 2.3.7',
+                     11 => 'API 11: "Honeycomb" 3.0',
+                     12 => 'API 12: "Honeycomb" 3.1',
+                     13 => 'API 13: "Honeycomb" 3.2.x',
+                     14 => 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2',
+                     15 => 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4',
+                     16 => 'API 16: "Jelly Bean" 4.1.x',
+                     17 => 'API 17: "Jelly Bean" 4.2.x');
 
 /**
 * Select all user devices
@@ -39,9 +39,6 @@ if(!empty($devices)){
   $USER_DEVICES = $devices;
 }
 
-
-print_r($USER_DEVICES);
-
 //Import of the header  
 include_once("./include/_header.php");                   
 ?>
@@ -56,15 +53,7 @@ include_once("./include/_menu.php");
     <!-- Main Block -->
     <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
         <h2>Devices</h2>
-        <div class="pagination pagination-centered">
-        <ul>
-            <li class=""><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
-        </div>
-        <div id="page-selection">Pagination goes here</div>
+        <div id="page-selection" class="pagination pagination-centered"></div>
         <div id="content"> 
             <table class="table table-striped">
               <thead>
@@ -78,16 +67,19 @@ include_once("./include/_menu.php");
               </thead>
               <tbody><?php
                 
-                foreach($USER_DEVICES as $key )
+                $i=1;
+                foreach($USER_DEVICES as $device){
+                    echo "<tr>";
+                    echo "<td>". $i ."</td>";
+                    echo "<td>". $device['deviceid'] ."</td>";
+                    echo "<td>". $device['modelname'] ."</td>";
+                    echo "<td>". $API_VERSION[$device['androidversion']] ."</td>";
+                    echo '<td><a href="'. $_SERVER['PHP_SELF'] .'?remove='. $device['hwid'] .'" title="Remove device" class="btn btn-warning">Remove</a></td>';
+                    echo "</tr>";
+                    $i++;
+                }
                          
                 ?>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>X</td>
-                </tr>
               </tbody>
             </table>
         </div>
