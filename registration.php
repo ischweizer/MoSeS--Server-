@@ -267,17 +267,6 @@ if(isset($_POST["submitted"])){
                     </div>
                     </div>
                     <div class="control-group">
-                    <label for="login" class="control-label">Username</label>
-<!--                     <div class="clear"></div> -->
-                    <div class="controls">
-                    <input type="text" name="login" id="login" maxlength="50" <?php
-                        if(isset($_POST["login"])){
-                            echo 'value="'. trim($_POST["login"]) .'" ';
-                        }                                                                         
-                    ?>/>
-                    </div>
-                    </div>
-                    <div class="control-group">
                     <label for="password" class="control-label">Password</label>
 <!--                     <div class="clear"></div> -->
                     <div class="controls">
