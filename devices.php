@@ -54,7 +54,6 @@ include_once("./include/_menu.php");
     <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
         <h2>Devices</h2>
         <div id="page-selection" class="pagination pagination-centered"></div>
-        <div id="content"> 
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -65,10 +64,11 @@ include_once("./include/_menu.php");
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody><?php
+              <tbody id="content"><?php
                 
                 $i=1;
                 foreach($USER_DEVICES as $device){
+                //for(int $i=1; $i<20; )
                     echo "<tr>";
                     echo "<td>". $i ."</td>";
                     echo "<td>". $device['deviceid'] ."</td>";
@@ -82,7 +82,6 @@ include_once("./include/_menu.php");
                 ?>
               </tbody>
             </table>
-        </div>
     </div>
     <!-- / Main Block -->
     
@@ -94,20 +93,63 @@ include_once("./include/_menu.php");
 include_once("./include/_login.php");
 //Import of the footer
 include_once("./include/_footer.php");
+
 ?>
 
 <script type="text/javascript">
 
 /**
-* Pagination
+* API Versions
 */
+
+var API_VERSION = {8: 'API 8: "Froyo" 2.2.x',
+                   9: 'API 9: "Gingerbread" 2.3.0 - 2.3.2',
+                   10: 'API 10: "Gingerbread" 2.3.3 - 2.3.7',
+                   11: 'API 11: "Honeycomb" 3.0',
+                   12: 'API 12: "Honeycomb" 3.1',
+                   13: 'API 13: "Honeycomb" 3.2.x',
+                   14: 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2',
+                   15: 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4',
+                   16: 'API 16: "Jelly Bean" 4.1.x',
+                   17: 'API 17: "Jelly Bean" 4.2.x'};
+
+/**
+* Pagination setup and query
+*/
+var paging = {
+    'pages': <?php echo ((int)(count($USER_DEVICES) / 5)) + 1; ?>,
+    'pageMax': 5,
+    'curPage': 1
+};
 $('#page-selection').bootpag({
-    total: <?php echo count($USER_DEVICES); ?>,
+    total: paging['pages'],
     page: 1,
-    maxVisible: 10
-    }).on('page', function(event, num){
+    maxVisible: paging['pageMax']
+    }).on('page', function(event, num){    
         
-    $("#content").text("TEST"+num); // or some ajax content loading...
+       // setting current selected page
+       paging['curPage'] = num;
+       // request json data
+       $.ajax({
+        dataType: "json",
+        url: 'content_provider.php',
+        data: paging,
+        success: function(result){
+            // processing returned data
+            var replaceRows = '';
+            for(var i=0; i<result.length; ++i){
+                replaceRows += '<tr>';
+                replaceRows += '<td>' + (i+1) + '</td>';
+                replaceRows += '<td>' + result[i].deviceid + '</td>';
+                replaceRows += '<td>' + result[i].modelname + '</td>';
+                replaceRows += '<td>' + API_VERSION[result[i].androidversion] + '</td>';
+                replaceRows += '<td><a href="devices.php?remove='+ result[i].hwid +'" title="Remove device" class="btn btn-warning">Remove</a></td>';
+                replaceRows += '</tr>';
+            }
+            
+            $('#content').html(replaceRows);
+        }
+       }); 
 });
    
 </script>

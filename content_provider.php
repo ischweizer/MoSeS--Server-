@@ -1,6 +1,39 @@
 <?php
 session_start();
 
+// handling of jsong request for new table devices entries
+                                                                 
+if(isset($_REQUEST['pages']) && !empty($_REQUEST['pages']) && 
+   isset($_REQUEST['pageMax']) && !empty($_REQUEST['pageMax']) &&
+   isset($_REQUEST['curPage']) && !empty($_REQUEST['curPage'])){
+    //configuration of connection
+    
+    include_once("./config.php");
+    include_once("./include/functions/dbconnect.php");
+
+    $pages = intval($_REQUEST['pages']);
+    $pageMax = intval($_REQUEST['pageMax']);
+    $curPage = intval($_REQUEST['curPage']);
+    
+    $USER_DEVICES = array();
+
+    $sql = 'SELECT * 
+           FROM hardware 
+           WHERE uid = '. $_SESSION['USER_ID'] .' 
+           LIMIT '.((($curPage-1)*$pageMax)).', '.($curPage*$pageMax);
+                                   
+    $result = $db->query($sql);
+    $devices = $result->fetchAll(PDO::FETCH_ASSOC);
+      
+    if(!empty($devices)){
+      $USER_DEVICES = $devices;
+    }
+    
+    //$ar = array('modelname' => $_SESSION['USER_ID']);
+    // return devices as json
+    echo json_encode($USER_DEVICES);  
+}
+
 //If the formular is sent
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 	include_once("./config.php");
