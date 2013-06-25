@@ -20,37 +20,73 @@ $API_VERSION = array(8 => 'API 8: "Froyo" 2.2.x',
                      16 => 'API 16: "Jelly Bean" 4.1.x',
                      17 => 'API 17: "Jelly Bean" 4.2.x');
 
-include_once("./include/functions/dbconnect.php");
-                     
-/*
-    Remove device by its device id
-*/
-if(isset($_REQUEST['remove']) && !empty($_REQUEST['remove']) && is_numeric($_REQUEST['remove'])){
-    
-   // remove device entry from DB 
-   $sql = "DELETE FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ."  
-                  WHERE uid = ". $_SESSION['USER_ID'] . " 
-                  AND hwid = '". $_REQUEST['remove'] ."'";
-      
-   $db->exec($sql);
-}
-
 /**
 * Select all user devices
 */
-$USER_DEVICES = array();
+if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
+       
+       include_once("./include/functions/dbconnect.php");
+       
+       // remove my group
+       if(isset($_GET['remove']))
+       {
+        
+           $RAW_REMOVE_HASH = trim($_GET['remove']);
+           
+           if(is_md5($RAW_REMOVE_HASH)){
+               
+              $APK_REMOVED = 1;
+              $REMOVE_HASH = strtolower($RAW_REMOVE_HASH);
+               
+              // getting userhah for dir later
+              $sql = "SELECT userhash 
+                      FROM apk 
+                      WHERE userid = ". $_SESSION['USER_ID'] . " 
+                      AND apkhash = '". $REMOVE_HASH ."'";
+              
+              $result = $db->query($sql);
+              $row = $result->fetch();
+              
+              if(!empty($row)){
+                  $dir = './apk/' . $row['userhash'];
+                  if(is_dir($dir)){
+                     if(file_exists($dir . '/'. $REMOVE_HASH . '.apk')){
+                         unlink($dir . '/' . $REMOVE_HASH . '.apk');
+                         
+                         if(is_empty_dir($dir)){
+                             rmdir($dir);
+                         }
+                     }
+                  }
+              }
+               
+              // remove entry from DB 
+              $sql = "DELETE FROM apk 
+                             WHERE userid = ". $_SESSION['USER_ID'] . " 
+                             AND apkhash = '". $REMOVE_HASH ."'";
+              
+              $db->exec($sql);
+               
+           }else{
+               $APK_REMOVED = 0;
+           }  
+           
+       }
 
-$sql = 'SELECT * 
-       FROM hardware 
-       WHERE uid = '. $_SESSION['USER_ID'] .' 
-       LIMIT 5';
-                               
-$result = $db->query($sql);
-$devices = $result->fetchAll(PDO::FETCH_ASSOC);
-  
-if(!empty($devices)){
-  $USER_DEVICES = $devices;
-}
+       // select all entries for particular user
+       $sql = "SELECT * 
+                FROM apk 
+                WHERE userid = ". $_SESSION["USER_ID"];
+                
+       $result = $db->query($sql);
+       $apk_listing = $result->fetchAll();    
+                    
+       if(!empty($apk_listing)){
+           $LIST_APK = 1;
+       }else{
+           $LIST_APK = 0;
+       }
+} 
 
 //Import of the header  
 include_once("./include/_header.php");                   

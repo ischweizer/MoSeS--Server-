@@ -88,176 +88,176 @@ if(isset($_GET['m']))
     {
 
         case 'ADDQUEST';
-        	// user want to add  questionnaires to a user study
-        	if(isset($_GET['id']))
-        	{
-            	$apkid = preg_replace("/\D/", "", $_GET['id']);
-	            $show_add_quest = true;
-	            include_once("./include/functions/dbconnect.php");
-	            $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
-	            $req = $db->query($sql);
-    			$row = $req->fetch();
-	            $apkname = $row['apktitle'];
-				include_once("./include/managers/QuestionnaireManager.php");
-				$notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
-					$db,
-					$CONFIG['DB_TABLE']['QUEST'],
-					$CONFIG['DB_TABLE']['APK_QUEST'],
-					$apkid);
-				$chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
-					$db,
-					$CONFIG['DB_TABLE']['QUEST'],
-					$CONFIG['DB_TABLE']['APK_QUEST'],
-					$apkid);
+            // user want to add  questionnaires to a user study
+            if(isset($_GET['id']))
+            {
+                $apkid = preg_replace("/\D/", "", $_GET['id']);
+                $show_add_quest = true;
+                include_once("./include/functions/dbconnect.php");
+                $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
+                $req = $db->query($sql);
+                $row = $req->fetch();
+                $apkname = $row['apktitle'];
+                include_once("./include/managers/QuestionnaireManager.php");
+                $notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
+                    $db,
+                    $CONFIG['DB_TABLE']['QUEST'],
+                    $CONFIG['DB_TABLE']['APK_QUEST'],
+                    $apkid);
+                $chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
+                    $db,
+                    $CONFIG['DB_TABLE']['QUEST'],
+                    $CONFIG['DB_TABLE']['APK_QUEST'],
+                    $apkid);
             }
             break;
 
          case 'USQUEST';
-        	// user want to see the result of the questionnaires to a user study
-        	if(isset($_GET['id']))
-        	{
-            	$apkid = preg_replace("/\D/", "", $_GET['id']);
-	            $show_us_quest = true;
-	            include_once("./include/functions/dbconnect.php");
-	            $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
-	            $req = $db->query($sql);
-    			$row = $req->fetch();
-	            $apkname = $row['apktitle'];
-				include_once("./include/managers/QuestionnaireManager.php");
-				$notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
-					$db,
-					$CONFIG['DB_TABLE']['QUEST'],
-					$CONFIG['DB_TABLE']['APK_QUEST'],
-					$apkid);
-				$chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
-					$db,
-					$CONFIG['DB_TABLE']['QUEST'],
-					$CONFIG['DB_TABLE']['APK_QUEST'],
-					$apkid);
+            // user want to see the result of the questionnaires to a user study
+            if(isset($_GET['id']))
+            {
+                $apkid = preg_replace("/\D/", "", $_GET['id']);
+                $show_us_quest = true;
+                include_once("./include/functions/dbconnect.php");
+                $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
+                $req = $db->query($sql);
+                $row = $req->fetch();
+                $apkname = $row['apktitle'];
+                include_once("./include/managers/QuestionnaireManager.php");
+                $notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
+                    $db,
+                    $CONFIG['DB_TABLE']['QUEST'],
+                    $CONFIG['DB_TABLE']['APK_QUEST'],
+                    $apkid);
+                $chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
+                    $db,
+                    $CONFIG['DB_TABLE']['QUEST'],
+                    $CONFIG['DB_TABLE']['APK_QUEST'],
+                    $apkid);
             }
             break;
 
         case 'UPLOAD':
-        	// user want to create a user study 
-        	if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2'])
+            // user want to create a user study 
+            if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2'])
             || isset($_REQUEST['back3']) || isset($_REQUEST['create']))
             {
-	            $page1 = false;
-	            $page2 = false;
-	            $page3 = false;
-	            if(isset($_REQUEST['back2']))
-	            {
-	            	$page1 = true;
-		            include_once("./include/functions/dbconnect.php");
-		            $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
-		            ."', startdate = '". ((isset($_POST['start_d'])) ? $_POST['start_d'] : NULL)
-		            ."', enddate = '". ((isset($_POST['end_d'])) ? $_POST['end_d'] : NULL)
-		            ."', startcriterion = '". ((isset($_POST['start_n'])) ? $_POST['start_n'] : "0")
-		            ."', runningtime = '". ((isset($_POST['end_n']) && $_POST['end_n'] != 'yyyy-mm-dd') ? $_POST['end_n'] : NULL)
-		            ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
-		            ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
-		            ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
-		            ."' WHERE userid = ".$_SESSION['USER_ID'];
-		            $db->exec($sql);
-	            }
-	            elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
-	            {
-	            	$page2 = true;
-		            if(isset($_REQUEST['next1']))
-		            {
-		                include_once("./include/functions/dbconnect.php");
-		                $sql = "UPDATE temp set apk_title = '".((isset($_POST['apk_title'])) ? $_POST['apk_title'] : "''")
-		                ."', description = '". ((isset($_POST['apk_description'])) ? $_POST['apk_description'] : "''")
-		                ."' WHERE userid = ".$_SESSION['USER_ID'];
-		                $db->exec($sql);
-		            }
-		            else
-		            {
-		                if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
-		                {
-		                    $RAW_SENSOR_LIST = $_POST['sensors'];
-		                    $SENSOR_LIST_STRING = '[';
-		                    foreach($RAW_SENSOR_LIST as $sensor)
-		                    {
-		                      $SENSOR_LIST_STRING .= $sensor .','; 
-		                    }
-		                    $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
-		                    
-		                }
-		                else
-		                {
-		                    $SENSOR_LIST_STRING = '[]';
-		                }
+                $page1 = false;
+                $page2 = false;
+                $page3 = false;
+                if(isset($_REQUEST['back2']))
+                {
+                    $page1 = true;
+                    include_once("./include/functions/dbconnect.php");
+                    $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
+                    ."', startdate = '". ((isset($_POST['start_d'])) ? $_POST['start_d'] : NULL)
+                    ."', enddate = '". ((isset($_POST['end_d'])) ? $_POST['end_d'] : NULL)
+                    ."', startcriterion = '". ((isset($_POST['start_n'])) ? $_POST['start_n'] : "0")
+                    ."', runningtime = '". ((isset($_POST['end_n']) && $_POST['end_n'] != 'yyyy-mm-dd') ? $_POST['end_n'] : NULL)
+                    ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
+                    ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
+                    ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
+                    ."' WHERE userid = ".$_SESSION['USER_ID'];
+                    $db->exec($sql);
+                }
+                elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
+                {
+                    $page2 = true;
+                    if(isset($_REQUEST['next1']))
+                    {
+                        include_once("./include/functions/dbconnect.php");
+                        $sql = "UPDATE temp set apk_title = '".((isset($_POST['apk_title'])) ? $_POST['apk_title'] : "''")
+                        ."', description = '". ((isset($_POST['apk_description'])) ? $_POST['apk_description'] : "''")
+                        ."' WHERE userid = ".$_SESSION['USER_ID'];
+                        $db->exec($sql);
+                    }
+                    else
+                    {
+                        if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
+                        {
+                            $RAW_SENSOR_LIST = $_POST['sensors'];
+                            $SENSOR_LIST_STRING = '[';
+                            foreach($RAW_SENSOR_LIST as $sensor)
+                            {
+                              $SENSOR_LIST_STRING .= $sensor .','; 
+                            }
+                            $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
+                            
+                        }
+                        else
+                        {
+                            $SENSOR_LIST_STRING = '[]';
+                        }
 
-		                include_once("./include/functions/dbconnect.php");
-		                $sql = "UPDATE temp set androidversion = '".((isset($_POST['apk_android_version']))?$_POST['apk_android_version']:'')
-		                ."' WHERE userid = ".$_SESSION['USER_ID'];
-		                $db->exec($sql);
-		
-		                // there is a problem if nothing changes on sensors' selecting
-		                $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
-		                $db->exec($sql);
-		            } // end of else : if(isset($_REQUEST['next1']))
-	            } // end of elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
-	            elseif(isset($_REQUEST['next2']))
-	            {
-	            	$page3 = true;
-	            	include_once("./include/functions/dbconnect.php");
-	            	$sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
-		            ."', startdate = '". ((isset($_POST['start_d'])) ? $_POST['start_d'] : NULL)
-		            ."', enddate = '". ((isset($_POST['end_d'])) ? $_POST['end_d'] : NULL)
-		            ."', startcriterion = '". ((isset($_POST['start_n'])) ? $_POST['start_n'] : "0")
-		            ."', runningtime = '". ((isset($_POST['end_n']) && $_POST['end_n'] != 'yyyy-mm-dd') ? $_POST['end_n'] : NULL)
-		            ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
-		            ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
-		            ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
-		            ."' WHERE userid = ".$_SESSION['USER_ID'];
-	            	$db->exec($sql);
-	            }
-	            elseif(isset($_REQUEST['create']))
-	            {
-	            	if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
-	            	{
-		            	$RAW_SENSOR_LIST = $_POST['sensors'];
-		                $SENSOR_LIST_STRING = '[';
-		                foreach($RAW_SENSOR_LIST as $sensor)
-		                {
-		                  $SENSOR_LIST_STRING .= $sensor .','; 
-		                }
-		                $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
+                        include_once("./include/functions/dbconnect.php");
+                        $sql = "UPDATE temp set androidversion = '".((isset($_POST['apk_android_version']))?$_POST['apk_android_version']:'')
+                        ."' WHERE userid = ".$_SESSION['USER_ID'];
+                        $db->exec($sql);
+        
+                        // there is a problem if nothing changes on sensors' selecting
+                        $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
+                        $db->exec($sql);
+                    } // end of else : if(isset($_REQUEST['next1']))
+                } // end of elseif(isset($_REQUEST['back3']) || isset($_REQUEST['next1']))
+                elseif(isset($_REQUEST['next2']))
+                {
+                    $page3 = true;
+                    include_once("./include/functions/dbconnect.php");
+                    $sql = "UPDATE temp set radioButton = '". ((isset($_POST['radioButton'])) ? $_POST['radioButton'] : "1")
+                    ."', startdate = '". ((isset($_POST['start_d'])) ? $_POST['start_d'] : NULL)
+                    ."', enddate = '". ((isset($_POST['end_d'])) ? $_POST['end_d'] : NULL)
+                    ."', startcriterion = '". ((isset($_POST['start_n'])) ? $_POST['start_n'] : "0")
+                    ."', runningtime = '". ((isset($_POST['end_n']) && $_POST['end_n'] != 'yyyy-mm-dd') ? $_POST['end_n'] : NULL)
+                    ."', maxdevice = '". ((isset($_POST['maxdevice'])) ? $_POST['maxdevice'] : NULL)
+                    ."', locked = '". ( !(isset($_POST['invite'])) || ((isset($_POST['invite']) && $_POST['invite'] == "0")) ? "1" : "0")
+                    ."', inviteinstall = '". ((isset($_POST['invite'])) ? $_POST['invite'] : "0")
+                    ."' WHERE userid = ".$_SESSION['USER_ID'];
+                    $db->exec($sql);
+                }
+                elseif(isset($_REQUEST['create']))
+                {
+                    if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0)
+                    {
+                        $RAW_SENSOR_LIST = $_POST['sensors'];
+                        $SENSOR_LIST_STRING = '[';
+                        foreach($RAW_SENSOR_LIST as $sensor)
+                        {
+                          $SENSOR_LIST_STRING .= $sensor .','; 
+                        }
+                        $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']';
                     
-		            }
-		            else
-		            {
-		            	$SENSOR_LIST_STRING = '[]';
-		            }
+                    }
+                    else
+                    {
+                        $SENSOR_LIST_STRING = '[]';
+                    }
 
-		            include_once("./include/functions/dbconnect.php");
-		            $sql = "UPDATE temp set androidversion = '". ((isset($_POST['apk_android_version'])) ? $_POST['apk_android_version'] : '')
-		            ."' WHERE userid = ".$_SESSION['USER_ID'];
-		            $db->exec($sql);
-	
-		            // there is a problem if nothing changes on sensors' selecting
-		            $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
-		            $db->exec($sql);
-	
-		            include_once("./upload.php");
-		        }// end of elseif(isset($_REQUEST['create']))  
-		    } // end of if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2']) || isset($_REQUEST['back3']) || isset($_REQUEST['create']))
-		    else
-		    {
-            	$page1 = true;
-	            $page2 = false;
-	            $page3 = false;
-	            include_once("./include/functions/dbconnect.php");
-	            $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
-	            $req = $db->query($sql);
-	            $row = $req->fetch();
-	            if(empty($row))
-	            {
-	            	$sql = "INSERT INTO temp (userid) VALUE(".$_SESSION['USER_ID'].")";
-	            	$db->exec($sql);
-              	}
+                    include_once("./include/functions/dbconnect.php");
+                    $sql = "UPDATE temp set androidversion = '". ((isset($_POST['apk_android_version'])) ? $_POST['apk_android_version'] : '')
+                    ."' WHERE userid = ".$_SESSION['USER_ID'];
+                    $db->exec($sql);
+    
+                    // there is a problem if nothing changes on sensors' selecting
+                    $sql = "UPDATE temp set sensors = '".$SENSOR_LIST_STRING."' WHERE userid = ".$_SESSION['USER_ID'];
+                    $db->exec($sql);
+    
+                    include_once("./upload.php");
+                }// end of elseif(isset($_REQUEST['create']))  
+            } // end of if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2']) || isset($_REQUEST['back3']) || isset($_REQUEST['create']))
+            else
+            {
+                $page1 = true;
+                $page2 = false;
+                $page3 = false;
+                include_once("./include/functions/dbconnect.php");
+                $sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
+                $req = $db->query($sql);
+                $row = $req->fetch();
+                if(empty($row))
+                {
+                    $sql = "INSERT INTO temp (userid) VALUE(".$_SESSION['USER_ID'].")";
+                    $db->exec($sql);
+                  }
             }
 
         $MODE = 'UPLOAD';
@@ -308,7 +308,7 @@ if(isset($_GET['m']))
            break;
                        
         case 'DEVICE':
-                             /*
+        
                     if(isset($_GET['remove'])){
                         
                         $DEVICE_ID = preg_replace("/\D/", "", $_GET['remove']);
@@ -334,7 +334,7 @@ if(isset($_GET['m']))
                        echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>"; 
                     }
         
-                    break; */
+                    break; 
         
         case 'LIST':
         
@@ -744,7 +744,7 @@ if(isset($_GET['m']))
     * Select all user devices
     */
 
-  /*  include_once("./include/functions/dbconnect.php");
+    include_once("./include/functions/dbconnect.php");
     
     $USER_DEVICES = array();
 
@@ -759,14 +759,23 @@ if(isset($_GET['m']))
       $USER_DEVICES = $devices;
     }
 }
-   */
+
 ?>
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <script src="js/jquery.js"></script>
 <title>Hauptseite von MoSeS - User control panel</title>
 
 <?php  
   include_once("./include/_menu.php");
 ?>  
+
+<!--<div id="header">
+    <div id="logo">
+        <h1><a href="./index.php">Mobile Sensing System</a></h1>
+    </div>
+</div>-->
+<!-- <div id="splash">&nbsp;</div> -->
+<!-- end #header -->
 
 <div  id="menu_vertical">  
     <ul><?php
@@ -794,14 +803,14 @@ if(isset($_GET['m']))
          if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>0)
          {
              
-	        ?>
-	        <li<?php 
-	            if(isset($_GET['m'])&& $_GET['m'] == 'group')
-	            {
-	                echo " id=\"current_page_menu\"";
-	            } ?>><a href="ucp.php?m=group" title="My Group">My Group</a></li>
-	        
-	        <?php
+            ?>
+            <li<?php 
+                if(isset($_GET['m'])&& $_GET['m'] == 'group')
+                {
+                    echo " id=\"current_page_menu\"";
+                } ?>><a href="ucp.php?m=group" title="My Group">My Group</a></li>
+            
+            <?php
          }
         if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"]>1)
         {
@@ -854,18 +863,18 @@ if(isset($_GET['m']))
                     $dev_result = $db->query($dev_sql);
                     $dev_rows = $dev_result->fetchAll(PDO::FETCH_ASSOC);
                     foreach($dev_rows as $row)
-                    	$all_devices[] = $row;
+                        $all_devices[] = $row;
                 }
                 // check for unique devices
                 for($h = 0 ; $h < count($all_devices) ; $h++)
-				{
-					if(($all_devices[$h]['uniqueid'] != NULL) && !in_array($all_devices[$h]['uniqueid'],$unique_array))
-					{
-						$unique_array[] = $all_devices[$h]['uniqueid'];
-						$nDevices++;
-					}
-				}
-				// The rule to get scientist credentials
+                {
+                    if(($all_devices[$h]['uniqueid'] != NULL) && !in_array($all_devices[$h]['uniqueid'],$unique_array))
+                    {
+                        $unique_array[] = $all_devices[$h]['uniqueid'];
+                        $nDevices++;
+                    }
+                }
+                // The rule to get scientist credentials
                 $control = $nDevices - ($nScientists * $CONFIG['MISC']['SC_TRESHOLD']);
                 if($control >= $CONFIG['MISC']['SC_TRESHOLD'])
                 {
@@ -899,83 +908,83 @@ if(isset($_GET['m']))
                         <div class="entry">
                            
 <?php 
-							/********************************************
+                            /********************************************
                             **************** My Devices *****************
                             *********************************************/
                           if(isset($USER_DEVICES))
                           {
 ?>
                             <fieldset>
-							<legend><h3><em><b>My Devices</b></em></h3></legend>
+                            <legend><h3><em><b>My Devices</b></em></h3></legend>
                             <br>
                             <div id="list_devices">
-                            	<ul>
-	                            	<script>
-	                            	    function changeClass(element)
-	                            	    {
-	                            	    	if(element.className=='clicked')
-	                            	    	{
-	                            	       	 	element.className='notclicked';
-	                            	       	}
-	                            	       	else
-	                            	       	{
-	                            	       		element.className='clicked';	
-	                            	       	}
-	                            	   	}
-	                            	</script>
+                                <ul>
+                                    <script>
+                                        function changeClass(element)
+                                        {
+                                            if(element.className=='clicked')
+                                            {
+                                                    element.className='notclicked';
+                                               }
+                                               else
+                                               {
+                                                   element.className='clicked';    
+                                               }
+                                           }
+                                    </script>
 <?php  
-		                            if(!empty($USER_DEVICES))
-		                            {
-		                                // user has got some devices
-		                                foreach($USER_DEVICES as $device)
-		                                {
+                                    if(!empty($USER_DEVICES))
+                                    {
+                                        // user has got some devices
+                                        foreach($USER_DEVICES as $device)
+                                        {
 ?>
-		                                    <li onclick="changeClass(this);">
-		                                        <p><b>Device name: </b><?php echo $device['deviceid'];?></p>
-		                                        <ul>      
+                                            <li onclick="changeClass(this);">
+                                                <p><b>Device name: </b><?php echo $device['deviceid'];?></p>
+                                                <ul>      
 <?php
-                                            	echo
-                                            	'<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device" class="sensor_box_api_remove"></a>';                                       
+                                                echo
+                                                '<a href="ucp.php?m=device&remove='. $device['hwid'] .'" title="Remove device" class="sensor_box_api_remove"></a>';                                       
 ?>
-		                                        
-		                                        <b>Selected sensors (filter):</b>
-		                                        
+                                                
+                                                <b>Selected sensors (filter):</b>
+                                                
 <?php
-		                                        	$sensor_array = json_decode($device['filter']);
-			                                        if(count($sensor_array) != 0)
-			                                        {
-			                                        	echo "<br>";
-			                                        	foreach($sensor_array as $sensor_number)
-			                                        	{
-		                                                      echo '<img src="img/sensors/ultrasmall/'. 
-		                                                            $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
-		                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
-		                                                            $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
-		                                                }
-		                                             }
-		                                             else
-		                                             {
-		                                             	echo ' Nothing';
-		                                           	 }
+                                                    $sensor_array = json_decode($device['filter']);
+                                                    if(count($sensor_array) != 0)
+                                                    {
+                                                        echo "<br>";
+                                                        foreach($sensor_array as $sensor_number)
+                                                        {
+                                                              echo '<img src="images/sensors/ultrasmall/'. 
+                                                                    $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+                                                                    $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+                                                                    $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
+                                                        }
+                                                     }
+                                                     else
+                                                     {
+                                                         echo ' Nothing';
+                                                        }
 ?>
-		                                        <br>
-		                                        <b>Android API version:</b><?php echo $device['androidversion']; ?>
-		                                    </ul></li><!-- device_element -->
+                                                <br>
+                                                <b>Android API version:</b><?php echo $device['androidversion']; ?>
+                                            </ul></li><!-- device_element -->
 <?php
-		                                } // end of foreach($USER_DEVICES as $device)s 
-		                           	} // end of if(!empty($USER_DEVICES))
-		                            else
-		                            {
+                                        } // end of foreach($USER_DEVICES as $device)s 
+                                       } // end of if(!empty($USER_DEVICES))
+                                    else
+                                    {
 ?>
-		                                <b>Your device list is empty.</b> 
+                                        <b>Your device list is empty.</b> 
 <?php
-		                            }
+                                    }
 ?>
-								</ul>
-							</div><br>
-							</fieldset>
+                                </ul>
+                            </div><br>
+                            </fieldset>
 <?php
-		                   }// if(isset($USER_DEVICES))
+                           }// if(isset($USER_DEVICES))
                             if($MODE == 'ADMIN' && !isset($_POST['pending_requests'])){
 ?>
                             
@@ -1045,44 +1054,44 @@ if(isset($_GET['m']))
                                     if($page1 == true)
                                     {
 ?>
-                                   		<!-- first page -->
-										<fieldset><legend> <h3><em><b>Create a User Study (1/3)</b></em></h3> </legend>
-	                                    <p>Userstudy name:</p>
-	                                    <input type="text" name="apk_title" value="<?php echo $apk_title_value; ?>">
-	                                    <br><br>
-	                                    <p>Program description:</p>
-	                                    <textarea cols="30" rows="6" name="apk_description"><?php echo $description_value; ?></textarea>
-	                                    <br>
-	                                    <input type="submit" name="next1" value="next" style="height: 25px; width: 90px"/>
+                                           <!-- first page -->
+                                        <fieldset><legend> <h3><em><b>Create a User Study (1/3)</b></em></h3> </legend>
+                                        <p>Userstudy name:</p>
+                                        <input type="text" name="apk_title" value="<?php echo $apk_title_value; ?>">
+                                        <br><br>
+                                        <p>Program description:</p>
+                                        <textarea cols="30" rows="6" name="apk_description"><?php echo $description_value; ?></textarea>
+                                        <br>
+                                        <input type="submit" name="next1" value="next" style="height: 25px; width: 90px"/>
                                         </fieldset>
 <?php
                                       
                                     }
                                     elseif($page2 == true)
                                     {
-                                    	
-?>    								<fieldset><legend><h3><em><b>Create a User Study (2/3)</b></em></h3></legend>
-	                                    	
-									 This user study:<br><br>
-									 
+                                        
+?>                                    <fieldset><legend><h3><em><b>Create a User Study (2/3)</b></em></h3></legend>
+                                            
+                                     This user study:<br><br>
+                                     
                                       <input type="radio"
                                         <?php echo (($radioButton_value == "1" || $radioButton_value == null)?'checked="checked"':''); ?>
                                         name="radioButton" value = "1" onclick="javascript:enableText('1');">
                                      starts on:
                                      <input type="text" class="tcal" name="start_d"
-                                     	value="<?php echo ($startdate_value == NULL)? '' : $startdate_value ; ?>"/>
+                                         value="<?php echo ($startdate_value == NULL)? '' : $startdate_value ; ?>"/>
                                      and ends on:
                                      <input type="text" class="tcal" name="end_d"
-                                     	value="<?php echo ($enddate_value == NULL)? '' : $enddate_value ; ?>"/><br><br>
-	                                 <input type="radio"
-	                                 	<?php echo (($radioButton_value == "2")?'checked="checked"':''); ?>
-	                                 	name="radioButton" value = "2" onclick="javascript:enabledate('1');"/>
-	                                 starts after number of installing:
-	                                 <input type="text" name="start_n"
-                                     	value="<?php echo ($startcriterion_value == NULL)? '0' : $startcriterion_value ; ?>"/>
+                                         value="<?php echo ($enddate_value == NULL)? '' : $enddate_value ; ?>"/><br><br>
+                                     <input type="radio"
+                                         <?php echo (($radioButton_value == "2")?'checked="checked"':''); ?>
+                                         name="radioButton" value = "2" onclick="javascript:enabledate('1');"/>
+                                     starts after number of installing:
+                                     <input type="text" name="start_n"
+                                         value="<?php echo ($startcriterion_value == NULL)? '0' : $startcriterion_value ; ?>"/>
                                      and ends after running time:
                                      <input type="text" name="end_n"
-                                     	value="<?php echo ($runningtime_value == NULL)? 'yyyy-mm-dd' : $runningtime_value ; ?>"/>
+                                         value="<?php echo ($runningtime_value == NULL)? 'yyyy-mm-dd' : $runningtime_value ; ?>"/>
                                      <br>
                                      <br><br><hr><br>
                                      Max number of Devices:
@@ -1092,12 +1101,12 @@ if(isset($_GET['m']))
 <?php
                                      if(!empty($groupname))
                                      {
-?>  								Who can run my userstudy?
-	                                     <br><br>  <input type=radio
-	                                        <?php  
-	                                        echo
-	                                        	($inviteinstall_value == "0"|| $inviteinstall_value == null)?'checked="checked"':''; ?>
-	                                        name="invite" value="0"/> only my group<br>
+?>                                  Who can run my userstudy?
+                                         <br><br>  <input type=radio
+                                            <?php  
+                                            echo
+                                                ($inviteinstall_value == "0"|| $inviteinstall_value == null)?'checked="checked"':''; ?>
+                                            name="invite" value="0"/> only my group<br>
                                       <?php
                                         }
                                       ?>
@@ -1114,15 +1123,15 @@ if(isset($_GET['m']))
                                       <input type="submit" name="back2" value="back" style="height: 25px; width: 90px"/>
                                       <input type="submit" name="next2" value="next"style="height: 25px; width: 90px"/>
                                       </fieldset>
-									  <!--<button>next</button>
+                                      <!--<button>next</button>
                                     </form>-->
 <?php
                                     }
                                     elseif($page3 == true)
                                     {
 ?>
-									<fieldset><legend><h3><em><b>Create a User Study (3/3)</b></em></h3></legend>
-	                                    	
+                                    <fieldset><legend><h3><em><b>Create a User Study (3/3)</b></em></h3></legend>
+                                            
                                       <!-- third page -->
                                       <label for="file">Select a file:</label>
                                       <input type="file" name="userfile" id="file" style="margin: 15px 0;">
@@ -1175,7 +1184,7 @@ if(isset($_GET['m']))
                                       <input type="submit" name="back3" value="back" style="height: 25px; width: 90px"/>
                                       <input type="submit" name="create" value="create" style="height: 25px; width: 90px" onClick = "docuemnt.location = 'http://da-sense.de/moses/upload.php' "/>
                                       
-									  <!--<button>create</button>-->
+                                      <!--<button>create</button>-->
                                     </form>
                                     <br>
                                     </fieldset>
@@ -1268,14 +1277,14 @@ if(isset($_GET['m']))
                             
                             if($MODE == 'GROUP')
                             {
-                            	// number of unique devices in this group
-                            	$numOfUniq = 0;
-                            	// list of devices
-                            	$all_devices = array();
-                            	// number of scientest useres in this group
-                            	$numOfSient = 0;
+                                // number of unique devices in this group
+                                $numOfUniq = 0;
+                                // list of devices
+                                $all_devices = array();
+                                // number of scientest useres in this group
+                                $numOfSient = 0;
 
-                            	if(!empty($groupname))
+                                if(!empty($groupname))
                                 { 
                                     echo '<fieldset><legend><h3><b><em>My Group: '.$groupname.'</em></b></h3></legend>';
                                    // echo '<div class="group_name">'. $groupname .'</div>';
@@ -1284,183 +1293,183 @@ if(isset($_GET['m']))
                                     
                                     if(count($group_members_array) > 0)
                                     {
-                                    	// By Ibrahim
+                                        // By Ibrahim
 ?>
-	                                    <br>Your group has <b><?php
-                                    	echo
-                                    		((count($group_members_array) > 1) ? count($group_members_array)
-                                    		.'</b> members:': 'a</b>'
-                                    		.'member:');
+                                        <br>Your group has <b><?php
+                                        echo
+                                            ((count($group_members_array) > 1) ? count($group_members_array)
+                                            .'</b> members:': 'a</b>'
+                                            .'member:');
 ?>
-                                    	<div id="group_users">
-                                    		<ul>
-	                                    		<script>
-	                                    		    function changeClass(element)
-	                                    		    {
-	                                    		    	if(element.className=='clicked')
-	                                    		    	{
-	                                    		       	 	element.className='notclicked';
-	                                    		       	}
-	                                    		       	else
-	                                    		       	{
-	                                    		       		element.className='clicked';	
-	                                    		       	}
-	                                    		   	}
-	                                    		</script>
+                                        <div id="group_users">
+                                            <ul>
+                                                <script>
+                                                    function changeClass(element)
+                                                    {
+                                                        if(element.className=='clicked')
+                                                        {
+                                                                element.className='notclicked';
+                                                           }
+                                                           else
+                                                           {
+                                                               element.className='clicked';    
+                                                           }
+                                                       }
+                                                </script>
 <?php
-		                                    	foreach ($group_members_array as $member)
-		                                    	{
-		                                    		include_once("./include/functions/dbconnect.php");
-		                                    		
-		                                    		// 
-		                                    		$user_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $member;    
-		                                    		$req = $db->query($user_sql);
-		                                    		$user = $req->fetch();
-		                                    		
-		                                    		$hw_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']. " WHERE uid=" . $member;
-		                                    		$req_hw = $db->query($hw_sql);
-		                                    		$hw_rows = $req_hw->fetchAll();
-		                                    		
-		                                    		$apk_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['APK']. " WHERE locked=1 AND userid=" . $member;
-		                                    		$req_apk = $db->query($apk_sql);
-		                                    		$apk_rows = $req_apk->fetchAll();
+                                                foreach ($group_members_array as $member)
+                                                {
+                                                    include_once("./include/functions/dbconnect.php");
+                                                    
+                                                    // 
+                                                    $user_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['USER']. " WHERE userid=" . $member;    
+                                                    $req = $db->query($user_sql);
+                                                    $user = $req->fetch();
+                                                    
+                                                    $hw_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['HARDWARE']. " WHERE uid=" . $member;
+                                                    $req_hw = $db->query($hw_sql);
+                                                    $hw_rows = $req_hw->fetchAll();
+                                                    
+                                                    $apk_sql = "SELECT * FROM ".$CONFIG['DB_TABLE']['APK']. " WHERE locked=1 AND userid=" . $member;
+                                                    $req_apk = $db->query($apk_sql);
+                                                    $apk_rows = $req_apk->fetchAll();
 ?>
-		                                    		<li onclick="changeClass(this);">
-			                                    		<p><b> Name:</b> <?php echo $user['firstname']." ".$user['lastname']; ?></p>
-			                                    		<ul>
-			                                    		<b> Account level: </b>
+                                                    <li onclick="changeClass(this);">
+                                                        <p><b> Name:</b> <?php echo $user['firstname']." ".$user['lastname']; ?></p>
+                                                        <ul>
+                                                        <b> Account level: </b>
 <?php
-														if($user['usergroupid'] == 1)
-														{
-															echo "normal";
-														}
-			                                    		elseif($user['usergroupid'] == 2)
-			                                    		{
-			                                    			echo "scientist";
-			                                    			$numOfSient++;
-			                                    		}
-			                                    		elseif ($user['usergroupid'] == 3)
-			                                    		{
-			                                    			echo "admin";
-			                                    			$numOfSient++;
-			                                    		}
+                                                        if($user['usergroupid'] == 1)
+                                                        {
+                                                            echo "normal";
+                                                        }
+                                                        elseif($user['usergroupid'] == 2)
+                                                        {
+                                                            echo "scientist";
+                                                            $numOfSient++;
+                                                        }
+                                                        elseif ($user['usergroupid'] == 3)
+                                                        {
+                                                            echo "admin";
+                                                            $numOfSient++;
+                                                        }
 ?>
-			                                    		<br><b> Email: </b><?php echo $user['email']; ?>
-			                                    		<br><b> Number of devices: </b><?php echo count($hw_rows); ?>
-			                                    		<br>
+                                                        <br><b> Email: </b><?php echo $user['email']; ?>
+                                                        <br><b> Number of devices: </b><?php echo count($hw_rows); ?>
+                                                        <br>
 <?php
-		                                    			if(count($hw_rows) > 0)
-		                                    			{
-		                                    				foreach($hw_rows as $row)
-		                                    					$all_devices[] = $row;
-				                                    	} // end of if(count($hw_rows) > 0)
-				                                    	
-				                                    	for($i = 0 ; $i < count($apk_rows) ;$i++)
-		                                				{
-		                                					$apk_lists.=($num_apks > 0)?", " : "";
-		                                					$apk_lists.=$apk_rows[$i]['apktitle'];
-		                                					$num_apks++;
-		                                				}
+                                                        if(count($hw_rows) > 0)
+                                                        {
+                                                            foreach($hw_rows as $row)
+                                                                $all_devices[] = $row;
+                                                        } // end of if(count($hw_rows) > 0)
+                                                        
+                                                        for($i = 0 ; $i < count($apk_rows) ;$i++)
+                                                        {
+                                                            $apk_lists.=($num_apks > 0)?", " : "";
+                                                            $apk_lists.=$apk_rows[$i]['apktitle'];
+                                                            $num_apks++;
+                                                        }
 ?>
-		                                   		</ul></li><!-- group_user -->
-		                                   		
+                                                   </ul></li><!-- group_user -->
+                                                   
 <?php
-		                                    	} // end of foreach ($group_members_array as $member)
-?>											</ul> <!-- list of users -->
-		                       			</div> <!-- group_users -->
-		                       			<br>              		
+                                                } // end of foreach ($group_members_array as $member)
+?>                                            </ul> <!-- list of users -->
+                                           </div> <!-- group_users -->
+                                           <br>                      
 <?php
                                     } // end of if(count($group_members_array) > 0)
 ?>
-									List of unique devices of this group:
-									<div id="group_devices">
+                                    List of unique devices of this group:
+                                    <div id="group_devices">
 <?php
-	                                    // list of all unique devices
-	                                    if(count($all_devices) > 0)
-	                                    {
-	                                    	$unique_array = array();
+                                        // list of all unique devices
+                                        if(count($all_devices) > 0)
+                                        {
+                                            $unique_array = array();
 ?>
-	                                    	<ul>
-	                                    		<script>
-	                                    		    function changeClass(element)
-	                                    		    {
-	                                    		    	if(element.className=='clicked')
-	                                    		    	{
-	                                    		       	 	element.className='notclicked';
-	                                    		       	}
-	                                    		       	else
-	                                    		       	{
-	                                    		       		element.className='clicked';	
-	                                    		       	}
-	                                    		   	}
-	                                    		</script>
-	                                    		
+                                            <ul>
+                                                <script>
+                                                    function changeClass(element)
+                                                    {
+                                                        if(element.className=='clicked')
+                                                        {
+                                                                element.className='notclicked';
+                                                           }
+                                                           else
+                                                           {
+                                                               element.className='clicked';    
+                                                           }
+                                                       }
+                                                </script>
+                                                
 <?php
-	                            				for($h = 0 ; $h < count($all_devices) ; $h++)
-	                            				{
-	                            					if(($all_devices[$h]['uniqueid'] != NULL) && !in_array($all_devices[$h]['uniqueid'],$unique_array))
-	                            					{
-	                            						$unique_array[] = $all_devices[$h]['uniqueid'];
-	                            						$numOfUniq++;
+                                                for($h = 0 ; $h < count($all_devices) ; $h++)
+                                                {
+                                                    if(($all_devices[$h]['uniqueid'] != NULL) && !in_array($all_devices[$h]['uniqueid'],$unique_array))
+                                                    {
+                                                        $unique_array[] = $all_devices[$h]['uniqueid'];
+                                                        $numOfUniq++;
 ?>
-		                                				<li onclick="changeClass(this);">
-		                                					<p><b>Device's model name: </b><?php echo $all_devices[$h]['modelname']; ?></p>
-		                                					<ul><b>  Android version number: </b>
-		                                    				<?php echo $all_devices[$h]['androidversion']; ?>
-		                                    				<br><b>   Availabe sensors: </b>
-		                                    				<br>
+                                                        <li onclick="changeClass(this);">
+                                                            <p><b>Device's model name: </b><?php echo $all_devices[$h]['modelname']; ?></p>
+                                                            <ul><b>  Android version number: </b>
+                                                            <?php echo $all_devices[$h]['androidversion']; ?>
+                                                            <br><b>   Availabe sensors: </b>
+                                                            <br>
 <?php
-		                                					$sensor_array = json_decode($all_devices[$h]['filter']);
-		                                					
-		                                					if(count($sensor_array) != 0)
-		                                					{
-		                                					   foreach($sensor_array as $sensor_number)
-		                                					   {
-		                            					           echo '<img src="img/sensors/ultrasmall/'. 
-		                            					                 $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
-		                            					                 $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
-		                            					                 $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
-		                                					        
-		                                					    }
-		                                					}
-		                                					else
-		                                					{
-		                                						echo "no sensor selected";
-		                                					}
-		                                					echo "<br>";
-		                                					echo "<b>C2DM</b> is ".(($all_devices[$h]['c2dm'] != null)?"" : "not ")."availabe";
-?>	                                    						
-														</ul></li><!-- group_device -->
+                                                            $sensor_array = json_decode($all_devices[$h]['filter']);
+                                                            
+                                                            if(count($sensor_array) != 0)
+                                                            {
+                                                               foreach($sensor_array as $sensor_number)
+                                                               {
+                                                                   echo '<img src="images/sensors/ultrasmall/'. 
+                                                                         $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+                                                                         $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+                                                                         $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
+                                                                    
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "no sensor selected";
+                                                            }
+                                                            echo "<br>";
+                                                            echo "<b>C2DM</b> is ".(($all_devices[$h]['c2dm'] != null)?"" : "not ")."availabe";
+?>                                                                
+                                                        </ul></li><!-- group_device -->
 <?php
-	                                    			}// end of if()
-	                                    		}
+                                                    }// end of if()
+                                                }
 ?>
-	                                 		</ul><!-- list of devices -->
+                                             </ul><!-- list of devices -->
 <?php
-	                                    } // end of if(count($all_devices) > 0)
+                                        } // end of if(count($all_devices) > 0)
 ?>
-									</div><!-- group_devices -->
-									<br>
+                                    </div><!-- group_devices -->
+                                    <br>
 <?php
-                                	echo (($num_apks == 0)?
-                        				"This group has <b>no</b> private apk"
-                        				: (($num_apks == 1 && $apk_lists != "")?
-                        				"This group has <b>a</b> private apk: ".$apk_lists
-                        				: "This group has <b>$num_apks</b> private apks:<br>".$apk_lists));
+                                    echo (($num_apks == 0)?
+                                        "This group has <b>no</b> private apk"
+                                        : (($num_apks == 1 && $apk_lists != "")?
+                                        "This group has <b>a</b> private apk: ".$apk_lists
+                                        : "This group has <b>$num_apks</b> private apks:<br>".$apk_lists));
 ?>
-                            		<br>
-                            		<br>
-                            		<form action=ucp.php?m=leave method="post" >
-                            		    <button>Leave this group</button>
-                            		</form>
-                            		<br>
-                            		</fieldset>
+                                    <br>
+                                    <br>
+                                    <form action=ucp.php?m=leave method="post" >
+                                        <button>Leave this group</button>
+                                    </form>
+                                    <br>
+                                    </fieldset>
 <?php
-	                            } // end of if(!empty($groupname)) 
-	                            else
-	                            {
+                                } // end of if(!empty($groupname)) 
+                                else
+                                {
 ?>
-                                	<h3>Join a research group or found one</h3>
+                                    <h3>Join a research group or found one</h3>
                                     <form action=ucp.php?m=join enctype="multipart/form-data" method="post" class="join_group">
                                         <input type="radio" name="join_create" value="join" class="radio_join" />Join<br>
                                         <input type="radio" name="join_create" value="create" class="radio_create" />Create                                        
@@ -1472,7 +1481,7 @@ if(isset($_GET['m']))
                                     </form>
 <?php
                               }
-                         	} // end of if($MODE == 'GROUP')
+                             } // end of if($MODE == 'GROUP')
                             
                             // THE USER HAS CLICKED THE JOIN BUTTON
                             if($MODE == 'JOIN'){
@@ -1529,163 +1538,163 @@ if(isset($_GET['m']))
                               if($LIST_APK == 1)
                               {
 ?>
-                              	<ul>
-	                              	<script>
-	                              	    function changeParentClass(element)
-	                              	    {
-	                              	    	if(element.parentNode.className=='clicked')
-	                              	    	{
-	                              	       	 	element.parentNode.className='notclicked';
-	                              	       	}
-	                              	       	else
-	                              	       	{
-	                              	       		element.parentNode.className='clicked';	
-	                              	       	}
-	                              	   	}
-	                              	</script>
+                                  <ul>
+                                      <script>
+                                          function changeParentClass(element)
+                                          {
+                                              if(element.parentNode.className=='clicked')
+                                              {
+                                                      element.parentNode.className='notclicked';
+                                                 }
+                                                 else
+                                                 {
+                                                     element.parentNode.className='clicked';    
+                                                 }
+                                             }
+                                      </script>
 <?php
-	                                foreach($apk_listing as $row)
-	                                {
+                                    foreach($apk_listing as $row)
+                                    {
 ?>   
-	                             		<li>
-	                                   		<p onclick="changeParentClass(this);"><b>Name: </b><?php echo $row['apktitle']; ?></p>
+                                         <li>
+                                               <p onclick="changeParentClass(this);"><b>Name: </b><?php echo $row['apktitle']; ?></p>
 <?php
                                             $android_version = $row['androidversion'];
-		                            		$startdate = $row['startdate'];
-	                                    	$startcriterion = $row['startcriterion']; 
-	                                  	    $enddate = $row['enddate'];
-	                                      	$runningtime = $row['runningtime'];
-	                                      	$description = $row['description'];
-	                                      	$ustudy_finished = $row['ustudy_finished'];
-	                                      	$onlymygroup = $row['locked'];
-	                                      	$invite = $row['inviteinstall'];
-	                                      	$maxdevice = $row['maxdevice'];
-	                                      	$apkname = $row['apkname'];
-	                                      	
-	                                      	echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk" class="bt_download"></a>';
+                                            $startdate = $row['startdate'];
+                                            $startcriterion = $row['startcriterion']; 
+                                              $enddate = $row['enddate'];
+                                              $runningtime = $row['runningtime'];
+                                              $description = $row['description'];
+                                              $ustudy_finished = $row['ustudy_finished'];
+                                              $onlymygroup = $row['locked'];
+                                              $invite = $row['inviteinstall'];
+                                              $maxdevice = $row['maxdevice'];
+                                              $apkname = $row['apkname'];
+                                              
+                                              echo '<a href="./apk/'. $row['userhash'] .'/'. $row['apkhash'] .'.apk" title="Download apk" class="bt_download"></a>';
                                             echo '<a href="ucp.php?m=update&id='. $row['apkid'] .'" title="Update APK" class="bt_upload"></a>';
                                             echo '<a href="ucp.php?m=list&remove='. $row['apkhash'] .'" title="Remove APK" class="sensor_box_api_remove"></a>';
                                             if($ustudy_finished == 1)
                                             {
-                                            	echo '<a href="ucp.php?m=usquest&id='. $row['apkid'] .'" title="Result Of Questionnaire" class="bt_usquest"></a>';
+                                                echo '<a href="ucp.php?m=usquest&id='. $row['apkid'] .'" title="Result Of Questionnaire" class="bt_usquest"></a>';
                                             }
                                             else
                                             {
-                                        		echo '<a href="ucp.php?m=addquest&id='. $row['apkid'] .'" title="Add Questionnaire" class="bt_addquest"></a>';
+                                                echo '<a href="ucp.php?m=addquest&id='. $row['apkid'] .'" title="Add Questionnaire" class="bt_addquest"></a>';
                                             }
                                             
                                             
-		                                   	
+                                               
 ?>
-		                                   	<ul>
-			                                   	The lowest supported android version: <?php echo $android_version; ?>
-			                                    <br>
+                                               <ul>
+                                                   The lowest supported android version: <?php echo $android_version; ?>
+                                                <br>
 <?php
-		                                        if($startdate != NULL)
-		                                          echo "The start date: ".$startdate;
-		                                        elseif($startcriterion != NULL)
-		                                            echo "Commencement after ".$startcriterion." users join.";
-		                                        else
-		                                          echo "Commenced while creating ".$row['apktitle'].".";
+                                                if($startdate != NULL)
+                                                  echo "The start date: ".$startdate;
+                                                elseif($startcriterion != NULL)
+                                                    echo "Commencement after ".$startcriterion." users join.";
+                                                else
+                                                  echo "Commenced while creating ".$row['apktitle'].".";
 ?>
-		                                      <br>
+                                              <br>
 <?php
-		                                        if($enddate != NULL)
-		                                          echo "The end date: ".$enddate;
-		                                        elseif($runningtime != NULL)
-		                                          echo "The termination after ".$runningtime." from start date.";
-		                                        else
-		                                          echo "Terminated immediately after creating ".$row['apktitle'].".";
+                                                if($enddate != NULL)
+                                                  echo "The end date: ".$enddate;
+                                                elseif($runningtime != NULL)
+                                                  echo "The termination after ".$runningtime." from start date.";
+                                                else
+                                                  echo "Terminated immediately after creating ".$row['apktitle'].".";
 ?>
-		                                      <br>
-		                                      Description:
-		                                      <?php
-		                                        echo $description;
-		                                      ?>
-		                                      <br>
-		                                      <?php
-		                                        if($onlymygroup)
-		                                          echo $row['apktitle']." is private for your group.";
-		                                        else
-		                                          echo $row['apktitle']." is public.";
-		                                      ?>
-		                                      <br> 
-		                                      <?php
-		                                        if($invite == 1)
-		                                          echo "Joining is allowed for invited users.";
-		                                        elseif($invite == 2)
-		                                          echo "Joining is allowd from all invited users that installed ".$row['apktitle'].".";
-		                                        elseif($invite == 3)
-		                                          echo "Joining is allowed from all users that installed ".$row['apktitle'].".";
-		                                      ?>
-		                                      <br>
-		                                      Max number of Devices: <?php echo $maxdevice; ?>
-		                                      <br>
-		<?php
-		                                      $sensor_array = json_decode($row['sensors']);
-		                                      if(count($sensor_array) != 0)
-		                                      {
-		                                      	
-		                                        echo "Required sensors:<br>";
-		                                        // we will make some lines of sensors
-		                                        foreach($sensor_array as $sensor_number)
-		                                         {
-		                                            echo 
-		                                              '<img src="img/sensors/ultrasmall/'. 
-		                                              $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
-		                                              $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
-		                                              $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
-		                                          }
-		                                      }
-		                                      else
-		                                      {
-		                                        echo 'No sensors set.';
-		                                      }
+                                              <br>
+                                              Description:
+                                              <?php
+                                                echo $description;
+                                              ?>
+                                              <br>
+                                              <?php
+                                                if($onlymygroup)
+                                                  echo $row['apktitle']." is private for your group.";
+                                                else
+                                                  echo $row['apktitle']." is public.";
+                                              ?>
+                                              <br> 
+                                              <?php
+                                                if($invite == 1)
+                                                  echo "Joining is allowed for invited users.";
+                                                elseif($invite == 2)
+                                                  echo "Joining is allowd from all invited users that installed ".$row['apktitle'].".";
+                                                elseif($invite == 3)
+                                                  echo "Joining is allowed from all users that installed ".$row['apktitle'].".";
+                                              ?>
+                                              <br>
+                                              Max number of Devices: <?php echo $maxdevice; ?>
+                                              <br>
+        <?php
+                                              $sensor_array = json_decode($row['sensors']);
+                                              if(count($sensor_array) != 0)
+                                              {
+                                                  
+                                                echo "Required sensors:<br>";
+                                                // we will make some lines of sensors
+                                                foreach($sensor_array as $sensor_number)
+                                                 {
+                                                    echo 
+                                                      '<img src="images/sensors/ultrasmall/'. 
+                                                      $sensors_ultrasmall_mapping[$sensor_number][0] .'" alt="'. 
+                                                      $sensors_ultrasmall_mapping[$sensor_number][1] .'" title="'. 
+                                                      $sensors_ultrasmall_mapping[$sensor_number][1] .'" />'; 
+                                                  }
+                                              }
+                                              else
+                                              {
+                                                echo 'No sensors set.';
+                                              }
 ?>                                    
-		                                      <br>
-		                                      There 
-		                                        <?php
-		                                          echo ($row['participated_count'] < 2 ? 'is ' : 'are ');
-		                                          echo ($row['participated_count'] == 0) ? "no" : $row['participated_count'];
-		                                          echo ($row['participated_count'] < 2 ? ' device' : ' devices');                           
-		                                          echo " currently joined to ".$row['apktitle'].".";
-		                                        ?>
-		                                       <br>
-		                                       
+                                              <br>
+                                              There 
+                                                <?php
+                                                  echo ($row['participated_count'] < 2 ? 'is ' : 'are ');
+                                                  echo ($row['participated_count'] == 0) ? "no" : $row['participated_count'];
+                                                  echo ($row['participated_count'] < 2 ? ' device' : ' devices');                           
+                                                  echo " currently joined to ".$row['apktitle'].".";
+                                                ?>
+                                               <br>
+                                               
 
 <?php
-												$sql ="SELECT questid FROM `apk_quest` WHERE apkid=".$row['apkid'];
-												$req=$db->query($sql);
-												$rows = $req->fetchAll();
-												if(count($rows) > 0)
-												{
+                                                $sql ="SELECT questid FROM `apk_quest` WHERE apkid=".$row['apkid'];
+                                                $req=$db->query($sql);
+                                                $rows = $req->fetchAll();
+                                                if(count($rows) > 0)
+                                                {
 ?>
-													The selected questionnaires:<br>
+                                                    The selected questionnaires:<br>
 <?php
-													for($qi = 0; $qi < count($rows); $qi++)
-													{
-														$sql ="SELECT name FROM `questionnaire` WHERE questid=".$rows[$qi]['questid'];
-														$req=$db->query($sql);
-														$us_quest = $req->fetch();
-														echo $us_quest['name'].(($qi+1 < count($rows))? " - ":"");
-													}
-												}
-												else
-												{
+                                                    for($qi = 0; $qi < count($rows); $qi++)
+                                                    {
+                                                        $sql ="SELECT name FROM `questionnaire` WHERE questid=".$rows[$qi]['questid'];
+                                                        $req=$db->query($sql);
+                                                        $us_quest = $req->fetch();
+                                                        echo $us_quest['name'].(($qi+1 < count($rows))? " - ":"");
+                                                    }
+                                                }
+                                                else
+                                                {
 ?>
-													There is no questionnaire selected
-<?php	
-												}
-													
-												
+                                                    There is no questionnaire selected
+<?php    
+                                                }
+                                                    
+                                                
 ?>
-		                                  </ul></li>
+                                          </ul></li>
 <?php 
-                                	}
+                                    }
 ?>
-								</ul>
-								</div><br></fieldset>
-							
+                                </ul>
+                                </div><br></fieldset>
+                            
 <?php   
                               }
                               else
@@ -1711,413 +1720,413 @@ if(isset($_GET['m']))
                             {
                                 
                                 
-  								// check if there is any questionnaire are chosen for this US
-  								if(empty($chosen_quests))
-  								{
-  									// no questionnaire found
+                                  // check if there is any questionnaire are chosen for this US
+                                  if(empty($chosen_quests))
+                                  {
+                                      // no questionnaire found
 ?>
-  									<h4>There is no questionnaire been added to <?php echo $apkname; ?>.</h4><br>
+                                      <h4>There is no questionnaire been added to <?php echo $apkname; ?>.</h4><br>
 <?php
-  								}
-  								else
-  								{
+                                  }
+                                  else
+                                  {
 ?>
-									<fieldset>
-                                    	<legend><h3><em><b>The result of chosen questionnaires for this user study: <?php echo $apkname; ?></b></em></h3></legend>
-										<div id="quests_list">
-											<ul>
-												<script>
-												
-						                    	   	/*
-						                    	   	* to switch the class name of the parent of this element between clicked and notclicked
-						                    	   	*/
-						                    	    function changeParentClass(element)
-						                    	    {
-						                    	    	if(element.parentNode.className=='clicked')
-						                    	    	{
-						                    	       	 	element.parentNode.className='notclicked';
-						                    	       	}
-						                    	       	else
-						                    	       	{
-						                    	       		element.parentNode.className='clicked';	
-						                    	       	}
-						                    	   	}
-						                    	   	
-						                    	      /*
-							                    	   * to switch the image
-							                    	   */
-							                    	   function changeimage(parent)
-							                    	   {	
-								                    	   for (var i = 0; i < parent.childNodes.length; i++)
-							                    	    	{
-	
-															  var child = parent.childNodes[i];
-	
-														      	if(child.className=='collapsed')
-								                    	    	{
-								                    	       	 	child.className='expanded';
-								                    	       	 	
-								                    	       	}
-								                    	       	else if(child.className=='expanded')
-								                    	    	{
-								                    	       	 	child.className='collapsed';
-								                    	       	 	
-								                    	       	}
-							                    	    	}	
-						                    	       		
-															/* alert(imgID);		
-															var id=imgID/10;
-													
-							                    	   		if(document.getElementById(id) != null)
-								                    	   	{
-								                    	   		if(document.getElementById(id).className == "collapsed")
-									                    	   	{
-								                    	   			document.getElementById(id).className = "expanded";
-									                    	   	}
-									                    	   	else
-									                    	   	{
-								                    	   			document.getElementById(id).className = "collapsed";
-								                    	   		}
-								                    	   	}
-							                    	   		else
-							                    	   		{
-								                    	   		//alert(id);
-							                    	   		}*/
-							                    	   }
-							                    	   
-						                    	   /*
-						                    	   	* to switch the class name of this element between clicked and notclicked
-						                    	   	*/
-						                    	    function changeChildrenClass(element, id, imgID)
-						                    	    {
-						                    	    	var changeImg = false;
-						                    	  		if(imgID == 0)
-						                    	  		{
-						                    	    		changeimage(element);
-						                    	  		}
-						                    	  		else
-													    {
-						                    	  			changeImg = true;
-													    }
-				                    	       	 		
-						                    	    	var parent = element.parentNode;
-														 
-						                    	    	for (var i = 0; i < parent.childNodes.length; i++)
-						                    	    	{
+                                    <fieldset>
+                                        <legend><h3><em><b>The result of chosen questionnaires for this user study: <?php echo $apkname; ?></b></em></h3></legend>
+                                        <div id="quests_list">
+                                            <ul>
+                                                <script>
+                                                
+                                                       /*
+                                                       * to switch the class name of the parent of this element between clicked and notclicked
+                                                       */
+                                                    function changeParentClass(element)
+                                                    {
+                                                        if(element.parentNode.className=='clicked')
+                                                        {
+                                                                element.parentNode.className='notclicked';
+                                                           }
+                                                           else
+                                                           {
+                                                               element.parentNode.className='clicked';    
+                                                           }
+                                                       }
+                                                       
+                                                      /*
+                                                       * to switch the image
+                                                       */
+                                                       function changeimage(parent)
+                                                       {    
+                                                           for (var i = 0; i < parent.childNodes.length; i++)
+                                                            {
+    
+                                                              var child = parent.childNodes[i];
+    
+                                                                  if(child.className=='collapsed')
+                                                                {
+                                                                        child.className='expanded';
+                                                                        
+                                                                   }
+                                                                   else if(child.className=='expanded')
+                                                                {
+                                                                        child.className='collapsed';
+                                                                        
+                                                                   }
+                                                            }    
+                                                               
+                                                            /* alert(imgID);        
+                                                            var id=imgID/10;
+                                                    
+                                                               if(document.getElementById(id) != null)
+                                                               {
+                                                                   if(document.getElementById(id).className == "collapsed")
+                                                                   {
+                                                                       document.getElementById(id).className = "expanded";
+                                                                   }
+                                                                   else
+                                                                   {
+                                                                       document.getElementById(id).className = "collapsed";
+                                                                   }
+                                                               }
+                                                               else
+                                                               {
+                                                                   //alert(id);
+                                                               }*/
+                                                       }
+                                                       
+                                                   /*
+                                                       * to switch the class name of this element between clicked and notclicked
+                                                       */
+                                                    function changeChildrenClass(element, id, imgID)
+                                                    {
+                                                        var changeImg = false;
+                                                          if(imgID == 0)
+                                                          {
+                                                            changeimage(element);
+                                                          }
+                                                          else
+                                                        {
+                                                              changeImg = true;
+                                                        }
+                                                            
+                                                        var parent = element.parentNode;
+                                                         
+                                                        for (var i = 0; i < parent.childNodes.length; i++)
+                                                        {
 
-														  var child = parent.childNodes[i];
+                                                          var child = parent.childNodes[i];
 
-														  if(changeImg && child.id == imgID)
-														  {
-															  changeimage(child);
-														  }
+                                                          if(changeImg && child.id == imgID)
+                                                          {
+                                                              changeimage(child);
+                                                          }
 
-													      if (child.id == id)
-													      {
-													      	if(child.className=='notclicked')
-							                    	    	{
-							                    	       	 	child.className='clicked';
-							                    	       	 	
-							                    	       	}
-							                    	       	else
-							                    	       	{
-						                    	       			child.className='notclicked';
-						                    	       		}	
-													      }
-													      else if(child.id > id && child.id < (id + 1))
-													      {
-													      	child.className='notclicked';
-													      }
-													    }
-													    
-						                    	   	}
-						                    	  
-						                    	</script>
-<?php	  	                            
-
-
+                                                          if (child.id == id)
+                                                          {
+                                                              if(child.className=='notclicked')
+                                                            {
+                                                                    child.className='clicked';
+                                                                    
+                                                               }
+                                                               else
+                                                               {
+                                                                   child.className='notclicked';
+                                                               }    
+                                                          }
+                                                          else if(child.id > id && child.id < (id + 1))
+                                                          {
+                                                              child.className='notclicked';
+                                                          }
+                                                        }
+                                                        
+                                                       }
+                                                  
+                                                </script>
+<?php                                      
 
 
 
-							                    // loop for each chosen questionnaire
-							                    foreach($chosen_quests as $quest)
-						                        {
 
-					                              	// max number of answers
-				                                  	$maxAnswer = 0;
+
+                                                // loop for each chosen questionnaire
+                                                foreach($chosen_quests as $quest)
+                                                {
+
+                                                      // max number of answers
+                                                      $maxAnswer = 0;
 ?>
-						                      		<li>
-														<p onclick="changeParentClass(this);" id="<?php echo $quest['name']; ?>">
-															<b>Name: </b>
-		 													<a href="./CSVs/<?php echo $quest['name'].'_'.$apkname; ?>.csv" title="Download as CSV" class="bt_downloadCSV"></a>	
-<?php														
-															echo $quest['name'];
+                                                      <li>
+                                                        <p onclick="changeParentClass(this);" id="<?php echo $quest['name']; ?>">
+                                                            <b>Name: </b>
+                                                             <a href="./CSVs/<?php echo $quest['name'].'_'.$apkname; ?>.csv" title="Download as CSV" class="bt_downloadCSV"></a>    
+<?php                                                        
+                                                            echo $quest['name'];
 ?>
-														</p>
+                                                        </p>
 
 <?php
-								                        include_once("./include/managers/QuestionnaireManager.php");
-								                        // get all questions in this questionnaire
-								                        $qust = QuestionnaireManager::getQuestionsForQuestid(
-								                        	$db,
-								                            $CONFIG['DB_TABLE']['QUESTION'],
-								                            $quest['questid']);
-								                        // the content of csv as string. Write the head of the table
-								                        $csvContent = "#;Question;Question ID;Type of Question;User ID;Answer;Answer ID\n";
+                                                        include_once("./include/managers/QuestionnaireManager.php");
+                                                        // get all questions in this questionnaire
+                                                        $qust = QuestionnaireManager::getQuestionsForQuestid(
+                                                            $db,
+                                                            $CONFIG['DB_TABLE']['QUESTION'],
+                                                            $quest['questid']);
+                                                        // the content of csv as string. Write the head of the table
+                                                        $csvContent = "#;Question;Question ID;Type of Question;User ID;Answer;Answer ID\n";
 ?>
-							                          	<table class="questTable">
-							                          		<!-- the header of the table -->
-								                            <thead>
-															
-																<th>   </th>
-									                            <!-- Column 1 -->
-									                            <th>#</th>
-									                            <!-- Column 2 -->
-								                              	<th>Question</th>
-								                              	<!-- Column 3 -->
-								                              	<th>Qst.ID</th>
-								                              	<!-- Column 4 -->
-								                             	<th>Type of Question</th>
-								                             	<!-- Column 5 -->
-								                              	<th>User ID</th>
-								                              	<!-- Column 6 -->
-									                            <th>Answer</th>
-									                            <!-- Column 7 -->
-									                            <th>Ans.ID</th>
-									                            <!-- end of the header of the table -->
-								                            </thead>
-								                            
-								                            <!-- the body of the table -->
-								                            <tbody>
+                                                          <table class="questTable">
+                                                              <!-- the header of the table -->
+                                                            <thead>
+                                                            
+                                                                <th>   </th>
+                                                                <!-- Column 1 -->
+                                                                <th>#</th>
+                                                                <!-- Column 2 -->
+                                                                  <th>Question</th>
+                                                                  <!-- Column 3 -->
+                                                                  <th>Qst.ID</th>
+                                                                  <!-- Column 4 -->
+                                                                 <th>Type of Question</th>
+                                                                 <!-- Column 5 -->
+                                                                  <th>User ID</th>
+                                                                  <!-- Column 6 -->
+                                                                <th>Answer</th>
+                                                                <!-- Column 7 -->
+                                                                <th>Ans.ID</th>
+                                                                <!-- end of the header of the table -->
+                                                            </thead>
+                                                            
+                                                            <!-- the body of the table -->
+                                                            <tbody>
 <?php                         
-								                              	// $i represents the index of a question
-								                              	$i = 1;
-								                              	// loop for each question in this questionnaire
-								                              	foreach($qust as $q)
-								                              	{
-									                                include_once("./include/managers/QuestionnaireManager.php");
-									                                // get all answers of this question
-									                                $answers = QuestionnaireManager::getAnswersForQidAndApkid(
-									                                  $db,
-									                                  $CONFIG['DB_TABLE']['ANSWER'],
-									                                  $q['qid'],
-									                                  $apkid);
+                                                                  // $i represents the index of a question
+                                                                  $i = 1;
+                                                                  // loop for each question in this questionnaire
+                                                                  foreach($qust as $q)
+                                                                  {
+                                                                    include_once("./include/managers/QuestionnaireManager.php");
+                                                                    // get all answers of this question
+                                                                    $answers = QuestionnaireManager::getAnswersForQidAndApkid(
+                                                                      $db,
+                                                                      $CONFIG['DB_TABLE']['ANSWER'],
+                                                                      $q['qid'],
+                                                                      $apkid);
 ?>
-								                                	<tr  title="one click to collapse/expand more information" onclick="changeChildrenClass(this,<?php echo $i; ?>,0);"> 
-																		<!-- changing of the image collapse/expand -->
-																		
-																		<td id="<?php echo $i/10; ?>" class="collapsed" />
-																		
-																	
-																		<!-- make a new row for this question -->
-								                                 	 	<td><?php echo $i; ?></td>
+                                                                    <tr  title="one click to collapse/expand more information"> 
+                                                                        <!-- changing of the image collapse/expand -->
+                                                                        
+                                                                        <td id="<?php echo $i/10; ?>" class="collapsed" />
+                                                                        
+                                                                    
+                                                                        <!-- make a new row for this question -->
+                                                                          <td><?php echo $i; ?></td>
 <?php
-								                                		if($q['type'] == 1) // multiple choices
-								                                  		{
+                                                                        if($q['type'] == 1) // multiple choices
+                                                                          {
 ?>
-										                                    <td><?php echo trim(substr($q['content'],0,strrpos($q['content'],"["))); ?></td>
-										                                    <td><?php echo $q['qid']; ?></td>
-										                                    <td>Multiple Choices</td>
+                                                                            <td><?php echo trim(substr($q['content'],0,strrpos($q['content'],"["))); ?></td>
+                                                                            <td><?php echo $q['qid']; ?></td>
+                                                                            <td>Multiple Choices</td>
 <?php                               
-																			// adding index, question, question id and its type
-																			$csvContent.=
-																				$i
-																				.";".trim(substr($q['content'],0,strrpos($q['content'],"[")))
-																				.";".$q['qid'].
-																				";Multiple Choices;";
-									                                  	}
-									                                  	elseif($q['type'] == 2) // single choice
-									                                  	{
+                                                                            // adding index, question, question id and its type
+                                                                            $csvContent.=
+                                                                                $i
+                                                                                .";".trim(substr($q['content'],0,strrpos($q['content'],"[")))
+                                                                                .";".$q['qid'].
+                                                                                ";Multiple Choices;";
+                                                                          }
+                                                                          elseif($q['type'] == 2) // single choice
+                                                                          {
 ?>
-										                                    <td><?php echo trim(substr($q['content'],0,strrpos($q['content'],"["))); ?></td>
-										                                    <td><?php echo $q['qid']; ?></td>
-										                                    <td>Single Choice</td>
+                                                                            <td><?php echo trim(substr($q['content'],0,strrpos($q['content'],"["))); ?></td>
+                                                                            <td><?php echo $q['qid']; ?></td>
+                                                                            <td>Single Choice</td>
 <?php                               
-										                                  	// adding index, question, question id and its type
-																			$csvContent.=
-																				$i
-																				.";".trim(substr($q['content'],0,strrpos($q['content'],"[")))
-																				.";".$q['qid']
-																				.";Single Choice;";
-									                                  	}
-									                                  	else // open question
-									                                  	{
+                                                                              // adding index, question, question id and its type
+                                                                            $csvContent.=
+                                                                                $i
+                                                                                .";".trim(substr($q['content'],0,strrpos($q['content'],"[")))
+                                                                                .";".$q['qid']
+                                                                                .";Single Choice;";
+                                                                          }
+                                                                          else // open question
+                                                                          {
 ?>
-										                                    <td><?php echo trim($q['content']); ?></td>
-										                                    <td><?php echo $q['qid']; ?></td>
-										                                    <td>Open Question</td>
+                                                                            <td><?php echo trim($q['content']); ?></td>
+                                                                            <td><?php echo $q['qid']; ?></td>
+                                                                            <td>Open Question</td>
 <?php                               
-										                                  	// adding index, question, question id and its type
-																			$csvContent.=
-																				$i
-																				.";".trim($q['content'])
-																				.";".$q['qid']
-																				.";Open Question;";
-								                                  		}
-									                                  	$csvString = "";
+                                                                              // adding index, question, question id and its type
+                                                                            $csvContent.=
+                                                                                $i
+                                                                                .";".trim($q['content'])
+                                                                                .";".$q['qid']
+                                                                                .";Open Question;";
+                                                                          }
+                                                                          $csvString = "";
 
-									                                  	// number of answers for this question
-									                                  	$numOfAnswer = 0;
+                                                                          // number of answers for this question
+                                                                          $numOfAnswer = 0;
 
-									                                  	// to calculate the average answer
-									                                  	$answers_array = array();
-									                                  	
-									                                  	// to pair each answer as a key and how many times as a value
-									                                  	$answers_counter = array();
-									                                  	
-									                                  	// to pair each answer as a key with its html code as a value
-									                                  	$answers_rows = array();
+                                                                          // to calculate the average answer
+                                                                          $answers_array = array();
+                                                                          
+                                                                          // to pair each answer as a key and how many times as a value
+                                                                          $answers_counter = array();
+                                                                          
+                                                                          // to pair each answer as a key with its html code as a value
+                                                                          $answers_rows = array();
 
-									                                  	// to pair each answer as a key with its table row id as a value
-									                                  	$answers_itr = array();
+                                                                          // to pair each answer as a key with its table row id as a value
+                                                                          $answers_itr = array();
 
-									                                  	// to create id for each table row
-									                                  	$iTr = 0; 
-									                                  	// loop for each answer of this question
-									                                  	foreach($answers as $ans)
-									                                  	{
-										                                  	// for each answer found for this question
-									                                  		$numOfAnswer++;
+                                                                          // to create id for each table row
+                                                                          $iTr = 0; 
+                                                                          // loop for each answer of this question
+                                                                          foreach($answers as $ans)
+                                                                          {
+                                                                              // for each answer found for this question
+                                                                              $numOfAnswer++;
 
-									                                  		// check if this answer comes early
-									                                  		if($answers_counter[$ans['content']] == 0)
-									                                  		{
-										                                  		// increase id for tr
-										                                  		$iTr++;
+                                                                              // check if this answer comes early
+                                                                              if($answers_counter[$ans['content']] == 0)
+                                                                              {
+                                                                                  // increase id for tr
+                                                                                  $iTr++;
 
-										                                  		// the complate id for a table row
-										                                  		$onclick_id = $i.".".$iTr;
+                                                                                  // the complate id for a table row
+                                                                                  $onclick_id = $i.".".$iTr;
 
-										                                  		// put a new iTr key to these answers
-										                                  		$answers_itr[$ans['content']] = $iTr;
+                                                                                  // put a new iTr key to these answers
+                                                                                  $answers_itr[$ans['content']] = $iTr;
 
-									                                  			// and make a row for this answer
-											                                    // make a new row and skip the first 4 fields (index, question, question id, type)
-									                                  			$answers_rows[$ans['content']] =
-										                                  			'</tr>
-										                                      		<tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
-										                                      		//.' onclick="changeChildrenClass(this,'.$onclick_id.', '.$i.');">'
-										                                      		.'<td/><td/><td/><td/><td/>'
-										                                      		."<td>".$ans['userid']."</td>"
-											                                    	."<td>".$ans['content']."</td>"
-											                                    	."<td>".$ans['aid']."</td>";
-									                                  		}
-									                                  		else
-									                                  		{
-									                                  			// the complate id for a table row
-									                                  			$onclick_id = $i.".".$answers_itr[$ans['content']];
-									                                  			
-									                                  			// make a new row and skip the first 4 fields (index, question, question id, type)
-									                                  			$answers_rows[$ans['content']].=
-										                                  			'</tr>
-										                                      		<tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
-										                                      		//.' onclick="changeChildrenClass(this,'.$onclick_id.', '.$i.');">'
-										                                      		.'<td/><td/><td/><td/><td/>'
-										                                      		."<td>".$ans['userid']."</td>"
-											                                    	."<td>".$ans['content']."</td>"
-											                                    	."<td>".$ans['aid']."</td>";
-									                                  		}
+                                                                                  // and make a row for this answer
+                                                                                // make a new row and skip the first 4 fields (index, question, question id, type)
+                                                                                  $answers_rows[$ans['content']] =
+                                                                                      '</tr>
+                                                                                      <tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
+                                                                                      //.' onclick="changeChildrenClass(this,'.$onclick_id.', '.$i.');">'
+                                                                                      .'<td/><td/><td/><td/><td/>'
+                                                                                      ."<td>".$ans['userid']."</td>"
+                                                                                    ."<td>".$ans['content']."</td>"
+                                                                                    ."<td>".$ans['aid']."</td>";
+                                                                              }
+                                                                              else
+                                                                              {
+                                                                                  // the complate id for a table row
+                                                                                  $onclick_id = $i.".".$answers_itr[$ans['content']];
+                                                                                  
+                                                                                  // make a new row and skip the first 4 fields (index, question, question id, type)
+                                                                                  $answers_rows[$ans['content']].=
+                                                                                      '</tr>
+                                                                                      <tr title="one click to collapse/expand more information" id="'.$onclick_id.'" class="notclicked"'
+                                                                                      //.' onclick="changeChildrenClass(this,'.$onclick_id.', '.$i.');">'
+                                                                                      .'<td/><td/><td/><td/><td/>'
+                                                                                      ."<td>".$ans['userid']."</td>"
+                                                                                    ."<td>".$ans['content']."</td>"
+                                                                                    ."<td>".$ans['aid']."</td>";
+                                                                              }
 
-									                                  		// add this answer in the array of answers
-										                                    $answers_array[] = $ans['content'];
-										                                    
-										                                    // incremtent the number of users who answered with this answer
-										                                    $answers_counter[$ans['content']]++;
-																			
-										                                    // csv content
-										                                    $csvString.="\n;;;;".$ans['userid'].";".$ans['content'].";".$ans['aid'];
+                                                                              // add this answer in the array of answers
+                                                                            $answers_array[] = $ans['content'];
+                                                                            
+                                                                            // incremtent the number of users who answered with this answer
+                                                                            $answers_counter[$ans['content']]++;
+                                                                            
+                                                                            // csv content
+                                                                            $csvString.="\n;;;;".$ans['userid'].";".$ans['content'].";".$ans['aid'];
 
-								                                  		} // end of foreach($answers as $ans)
-								                                  		
-								                                  		$sortedAnswers = $q['sortedAnswers'];
-								                                  		$average = NULL;
-								                                  		$polpular = NULL;
+                                                                          } // end of foreach($answers as $ans)
+                                                                          
+                                                                          $sortedAnswers = $q['sortedAnswers'];
+                                                                          $average = NULL;
+                                                                          $polpular = NULL;
 
-								                                  		// get the average/popular answer of this question
-								                                  		include_once("./include/managers/QuestionnaireManager.php");
-								                                  		
-								                                  		if($sortedAnswers != NULL && $sortedAnswers == 1)
-								                                  		{ 	
-								                                  			// Get the sorted answers
-								                                  			$sortedAnswersArray = json_decode(trim(substr($q['content'],(strrpos($q['content'],"[")-1),(strrpos($q['content'],"]")+1))));
-								                                  			$average = QuestionnaireManager::getAverageAnswerOfArray($answers_array,$sortedAnswersArray);
-								                                  			// set the average answer of this question in html
-									                                  		$trWithaverage = "<td>average</td><td>";
-									                                  		$trWithaverage .=$average."</td><td></td>";
-									                                  		// as well in csv
-									                                  		$csvContent .= "average;".$average.";".$csvString."\n";	
-								                                  		}
-								                                  		else
-								                                  		{
-								                                  			$popular = QuestionnaireManager::getPopularAnswerOfArray($answers_array);
-								                                  			// set the polpular answer of this question in html
-									                                  		$trWithaverage = "<td>popular</td><td>";
-									                                  		$trWithaverage .=$popular."</td><td></td>";
-									                                  		// as well in csv
-									                                  		$csvContent .= "popular;".$popular.";".$csvString."\n";
-								                                  		}
+                                                                          // get the average/popular answer of this question
+                                                                          include_once("./include/managers/QuestionnaireManager.php");
+                                                                          
+                                                                          if($sortedAnswers != NULL && $sortedAnswers == 1)
+                                                                          {     
+                                                                              // Get the sorted answers
+                                                                              $sortedAnswersArray = json_decode(trim(substr($q['content'],(strrpos($q['content'],"[")-1),(strrpos($q['content'],"]")+1))));
+                                                                              $average = QuestionnaireManager::getAverageAnswerOfArray($answers_array,$sortedAnswersArray);
+                                                                              // set the average answer of this question in html
+                                                                              $trWithaverage = "<td>average</td><td>";
+                                                                              $trWithaverage .=$average."</td><td></td>";
+                                                                              // as well in csv
+                                                                              $csvContent .= "average;".$average.";".$csvString."\n";    
+                                                                          }
+                                                                          else
+                                                                          {
+                                                                              $popular = QuestionnaireManager::getPopularAnswerOfArray($answers_array);
+                                                                              // set the polpular answer of this question in html
+                                                                              $trWithaverage = "<td>popular</td><td>";
+                                                                              $trWithaverage .=$popular."</td><td></td>";
+                                                                              // as well in csv
+                                                                              $csvContent .= "popular;".$popular.";".$csvString."\n";
+                                                                          }
 
-								                                  		// get all strings of table rows of these answers
-								                                  		foreach ($answers_rows as $key => $value)
-								                                  		{
-								                                  			$onclick_id = $i.".".$answers_itr[$key];
-								                                  			$answers_rows[$key] = 
-									                                  				'</tr>
-										                                      		<tr title="one click to collapse/expand more information" id="'.$i.'" class="notclicked"'
-										                                      		.' onclick="changeChildrenClass(this,'.$onclick_id.',0);">'
-										                                      		.'<td id="0.'.$i.'" class = "collapsed" /><td/><td/><td/><td/>'
-										                                      		."<td>"
-										                                      		. $answers_counter[$key]
-										                                      		." users</td>"
-											                                    	."<td>".$key."</td>"
-											                                    	."<td></td>"
-											                                    	.$value;
-								                                  		
-								                                  			$trWithaverage.=$answers_rows[$key];
-								                                  			$iTr++;
-								                                  		}
-								                                  		// finaly print the html code
-								                                  		echo $trWithaverage;
+                                                                          // get all strings of table rows of these answers
+                                                                          foreach ($answers_rows as $key => $value)
+                                                                          {
+                                                                              $onclick_id = $i.".".$answers_itr[$key];
+                                                                              $answers_rows[$key] = 
+                                                                                      '</tr>
+                                                                                      <tr title="one click to collapse/expand more information" id="'.$i.'" class="notclicked"'
+                                                                                      .' onclick="changeChildrenClass(this,'.$onclick_id.',0);">'
+                                                                                      .'<td id="0.'.$i.'" class = "collapsed" /><td/><td/><td/><td/>'
+                                                                                      ."<td>"
+                                                                                      . $answers_counter[$key]
+                                                                                      ." users</td>"
+                                                                                    ."<td>".$key."</td>"
+                                                                                    ."<td></td>"
+                                                                                    .$value;
+                                                                          
+                                                                              $trWithaverage.=$answers_rows[$key];
+                                                                              $iTr++;
+                                                                          }
+                                                                          // finaly print the html code
+                                                                          echo $trWithaverage;
 
 
-																		// set max number of answers
-																		if($maxAnswer < $numOfAnswer)
-																		{
-																			$maxAnswer = $numOfAnswer;
-																		}
+                                                                        // set max number of answers
+                                                                        if($maxAnswer < $numOfAnswer)
+                                                                        {
+                                                                            $maxAnswer = $numOfAnswer;
+                                                                        }
 
-																		// increment the index of this table
-									                                  	$i++;
+                                                                        // increment the index of this table
+                                                                          $i++;
 ?>
-						                      	         		 	</tr>
+                                                                        </tr>
 <?php
-						                     	         		} // end of foreach($qust as $q)
+                                                                  } // end of foreach($qust as $q)
 ?>
-							                            	<!-- end of the body of the table -->
-							                            	</tbody>
-							                            </table>
-							                            There are <?php echo $maxAnswer; ?> users answer this questionnaire.
+                                                            <!-- end of the body of the table -->
+                                                            </tbody>
+                                                        </table>
+                                                        There are <?php echo $maxAnswer; ?> users answer this questionnaire.
 <?php
-							                            // make a csv file for this questionnaire
-														
-								                        $csvFilePath = './CSVs/'.$quest['name'].'_'.$apkname.'.csv';
-								                        $csvF = fopen($csvFilePath, 'w');
-								                        fwrite($csvF, $csvContent);
-								                        fclose($csvF);
+                                                        // make a csv file for this questionnaire
+                                                        
+                                                        $csvFilePath = './CSVs/'.$quest['name'].'_'.$apkname.'.csv';
+                                                        $csvF = fopen($csvFilePath, 'w');
+                                                        fwrite($csvF, $csvContent);
+                                                        fclose($csvF);
 ?>
-					                      		  	</li>
+                                                        </li>
 <?php
-							  		   			} // end of foreach($chosen_quests as $quest)
+                                                     } // end of foreach($chosen_quests as $quest)
 ?>
-											</ul>
-										</div>
-									</fieldset>
+                                            </ul>
+                                        </div>
+                                    </fieldset>
 <?php
-  		                        } // end of else : if(empty($chosen_quests))
+                                  } // end of else : if(empty($chosen_quests))
 ?>
 
 <?php
-							} // end of if($show_us_quest == true)
+                            } // end of if($show_us_quest == true)
 
                             /********************************************
                             ************* ADD QUEST TO US ***************
@@ -2126,354 +2135,354 @@ if(isset($_GET['m']))
                             if($show_add_quest == true)
                             {
 ?>
-								
+                                
                                 <fieldset><legend><h3><b><em>Adding questionnaires for: <?php echo $apkname; ?></h3></b></em></legend>
                                 <h4>List of all available not chosen questionnaires:</h4>
                                     <form action="" method="POST">
-									<div id="quests_list_top">
-										<ul>
-											<script>
-												/* 
-												* To change the class name of its parent between (clicked..) and (notclicked..)
-												* It helps to determine which element as been clicked to be opened
-												*/
-											    function changeClicked(element)
-											    {
-											    	if(element.parentNode.className=='clickedMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedMarked';
-											       	}
-											       	else if(element.parentNode.className=='notclickedMarked')
-											    	{
-											       	 	element.parentNode.className='clickedMarked';
-											       	}
-											       	else if(element.parentNode.className=='clickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedNotMarked';
-											       	}
-											       	else if(element.parentNode.className=='notclickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='clickedNotMarked';
-											       	}
-											       	else
-											       		element.parentNode.className='clickedNotMarked';
-											   	}
-											   	/* 
-												* To change the class name of its parent between (..Marked) and (..NotMarked)
-												* It helps to determine which element as been marked
-												*/
-											   	function changeMark(element,id)
-											   	{
-											   		if(element.parentNode.className=='clickedMarked')
-											    	{
-											       	 	element.parentNode.className='clickedNotMarked';
-											       	 	document.getElementById(id).value = "notchosen";
-											       	}
-											       	else if(element.parentNode.className=='notclickedMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedNotMarked';
-											       	 	document.getElementById(id).value = "notchosen";
-											       	}
-											       	else if(element.parentNode.className=='clickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='clickedMarked';
-											       	 	document.getElementById(id).value = "chosen";
-											       	}
-											       	else if(element.parentNode.className=='notclickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedMarked';
-											       	 	document.getElementById(id).value = "chosen";
-											       	}
-											       	else
-											       	{
-											       		element.parentNode.className='notclickedMarked';
-											       		document.getElementById(id).value = "chosen";
-											       	}
-											   	}
-											</script>
-<?php										
-											// check if there is any not already chosen questionnaire
-											if(!empty($notchosen_quests))
-											{
-												echo "(one click to select & double click to show/hide more information)";
-											}
-											else
-											{
-												echo "There is no more available questionnaires";
-											}
+                                    <div id="quests_list_top">
+                                        <ul>
+                                            <script>
+                                                /* 
+                                                * To change the class name of its parent between (clicked..) and (notclicked..)
+                                                * It helps to determine which element as been clicked to be opened
+                                                */
+                                                function changeClicked(element)
+                                                {
+                                                    if(element.parentNode.className=='clickedMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedMarked';
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedMarked')
+                                                    {
+                                                            element.parentNode.className='clickedMarked';
+                                                       }
+                                                       else if(element.parentNode.className=='clickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedNotMarked';
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='clickedNotMarked';
+                                                       }
+                                                       else
+                                                           element.parentNode.className='clickedNotMarked';
+                                                   }
+                                                   /* 
+                                                * To change the class name of its parent between (..Marked) and (..NotMarked)
+                                                * It helps to determine which element as been marked
+                                                */
+                                                   function changeMark(element,id)
+                                                   {
+                                                       if(element.parentNode.className=='clickedMarked')
+                                                    {
+                                                            element.parentNode.className='clickedNotMarked';
+                                                            document.getElementById(id).value = "notchosen";
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedNotMarked';
+                                                            document.getElementById(id).value = "notchosen";
+                                                       }
+                                                       else if(element.parentNode.className=='clickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='clickedMarked';
+                                                            document.getElementById(id).value = "chosen";
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedMarked';
+                                                            document.getElementById(id).value = "chosen";
+                                                       }
+                                                       else
+                                                       {
+                                                           element.parentNode.className='notclickedMarked';
+                                                           document.getElementById(id).value = "chosen";
+                                                       }
+                                                   }
+                                            </script>
+<?php                                        
+                                            // check if there is any not already chosen questionnaire
+                                            if(!empty($notchosen_quests))
+                                            {
+                                                echo "(one click to select & double click to show/hide more information)";
+                                            }
+                                            else
+                                            {
+                                                echo "There is no more available questionnaires";
+                                            }
 
-											// loop for each not already chosen questionnaires
-											foreach($notchosen_quests as $quest)
-											{
+                                            // loop for each not already chosen questionnaires
+                                            foreach($notchosen_quests as $quest)
+                                            {
 ?>
-												<li>
-													<!-- title -->
-													<p
-														onclick="changeMark(this,<?php echo $quest['questid']; ?>);"
-														ondblclick="changeClicked(this);">
-														<b>Name: </b><?php echo $quest['name']; ?>
-													</p>
-													<!-- hidden input is used to know if the element been chosen -->
-													<input type="hidden" name="<?php echo $quest['questid']; ?>" id="<?php echo $quest['questid']; ?>" value="notchosen"/>
+                                                <li>
+                                                    <!-- title -->
+                                                    <p
+                                                        onclick="changeMark(this,<?php echo $quest['questid']; ?>);"
+                                                        ondblclick="changeClicked(this);">
+                                                        <b>Name: </b><?php echo $quest['name']; ?>
+                                                    </p>
+                                                    <!-- hidden input is used to know if the element been chosen -->
+                                                    <input type="hidden" name="<?php echo $quest['questid']; ?>" id="<?php echo $quest['questid']; ?>" value="notchosen"/>
 <?php
-							                        include_once("./include/managers/QuestionnaireManager.php");
-							                        // get all questions of this questionnaire
-							                        $qust = QuestionnaireManager::getQuestionsForQuestid(
-						                                $db,
-						                                $CONFIG['DB_TABLE']['QUESTION'],
-						                                $quest['questid']);
+                                                    include_once("./include/managers/QuestionnaireManager.php");
+                                                    // get all questions of this questionnaire
+                                                    $qust = QuestionnaireManager::getQuestionsForQuestid(
+                                                        $db,
+                                                        $CONFIG['DB_TABLE']['QUESTION'],
+                                                        $quest['questid']);
 ?>
-													<table class="questTable">
-							                            <thead>
-							                              <th>#</th>
-							                              <th>Question</th>
-							                              <th>Type of Question</th>
-							                            </thead>
-							                            <tbody>
-<?php													
-								                            // index of the question in the table
-								                            $i = 1;
-								                            // loop for each question in this questionnaire
-							                                foreach($qust as $q)
-								                            {
-								                            	include_once("./include/managers/QuestionnaireManager.php");
-								                                $answers = QuestionnaireManager::getAnswersForQidAndApkid(
-								                                  $db,
-								                                  $CONFIG['DB_TABLE']['ANSWER'],
-								                                  $q['qid'],
-								                                  $apkid);
+                                                    <table class="questTable">
+                                                        <thead>
+                                                          <th>#</th>
+                                                          <th>Question</th>
+                                                          <th>Type of Question</th>
+                                                        </thead>
+                                                        <tbody>
+<?php                                                    
+                                                            // index of the question in the table
+                                                            $i = 1;
+                                                            // loop for each question in this questionnaire
+                                                            foreach($qust as $q)
+                                                            {
+                                                                include_once("./include/managers/QuestionnaireManager.php");
+                                                                $answers = QuestionnaireManager::getAnswersForQidAndApkid(
+                                                                  $db,
+                                                                  $CONFIG['DB_TABLE']['ANSWER'],
+                                                                  $q['qid'],
+                                                                  $apkid);
 ?>
-								                                <tr>
-								                                	<!-- print the index of this question -->
-							                                  		<td><?php echo $i; ?></td>
+                                                                <tr>
+                                                                    <!-- print the index of this question -->
+                                                                      <td><?php echo $i; ?></td>
 <?php
-									                                if($q['type'] == 1) // multiple choices
-								                                    {
+                                                                    if($q['type'] == 1) // multiple choices
+                                                                    {
 ?>
-									                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
-									                                    <td>Multiple Choices</td>
+                                                                        <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+                                                                        <td>Multiple Choices</td>
 <?php                               
-							                                  		}
-									                                elseif($q['type'] == 2) // single choices
-									                                {
+                                                                      }
+                                                                    elseif($q['type'] == 2) // single choices
+                                                                    {
 ?>
-									                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
-									                                    <td>Single Choices</td>
+                                                                        <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+                                                                        <td>Single Choices</td>
 <?php                               
-							                                  		}
-							                                  		else // open question
-							                                  		{
+                                                                      }
+                                                                      else // open question
+                                                                      {
 ?>
-									                                    <td><?php echo $q['content']; ?></td>
-									                                    <td>Open Question</td>
+                                                                        <td><?php echo $q['content']; ?></td>
+                                                                        <td>Open Question</td>
 <?php                               
-							                                  		}
-							                                  		$i++; 
+                                                                      }
+                                                                      $i++; 
 ?>
-						                                		</tr>
+                                                                </tr>
 <?php
-						                              		} // end of foreach($qust as $q)
+                                                              } // end of foreach($qust as $q)
 ?>
-												    	</tbody>
-						                          	</table>
-						                        </li>
-<?php										
-											} // end of foreach($notchosen_quests as $quest)
+                                                        </tbody>
+                                                      </table>
+                                                </li>
+<?php                                        
+                                            } // end of foreach($notchosen_quests as $quest)
 
 ?>
-										</ul>
-									</div>
-									<br>
-									<div id="quests_list_btm">
-										<ul>
-											<script>
-					                    	    /* 
-												* To change the class name of its parent between (clicked..) and (notclicked..)
-												* It helps to determine which element as been clicked to be opened
-												*/
-											    function changeClicked(element)
-											    {
-											    	if(element.parentNode.className=='clickedMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedMarked';
-											       	}
-											       	else if(element.parentNode.className=='notclickedMarked')
-											    	{
-											       	 	element.parentNode.className='clickedMarked';
-											       	}
-											       	else if(element.parentNode.className=='clickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedNotMarked';
-											       	}
-											       	else if(element.parentNode.className=='notclickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='clickedNotMarked';
-											       	}
-											       	else
-											       		element.parentNode.className='clickedNotMarked';
-											   	}
-											   	/* 
-												* To change the class name of its parent between (..Marked) and (..NotMarked)
-												* It helps to determine which element as been marked
-												*/
-											   	function changeMark(element,id)
-											   	{
-											   		if(element.parentNode.className=='clickedMarked')
-											    	{
-											       	 	element.parentNode.className='clickedNotMarked';
-											       	 	document.getElementById(id).value = "notchosen";
-											       	}
-											       	else if(element.parentNode.className=='notclickedMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedNotMarked';
-											       	 	document.getElementById(id).value = "notchosen";
-											       	}
-											       	else if(element.parentNode.className=='clickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='clickedMarked';
-											       	 	document.getElementById(id).value = "chosen";
-											       	}
-											       	else if(element.parentNode.className=='notclickedNotMarked')
-											    	{
-											       	 	element.parentNode.className='notclickedMarked';
-											       	 	document.getElementById(id).value = "chosen";
-											       	}
-											       	else
-											       	{
-											       		element.parentNode.className='notclickedMarked';
-											       		document.getElementById(id).value = "chosen";
-											       	}
-											   	}
-					                    	</script>
+                                        </ul>
+                                    </div>
+                                    <br>
+                                    <div id="quests_list_btm">
+                                        <ul>
+                                            <script>
+                                                /* 
+                                                * To change the class name of its parent between (clicked..) and (notclicked..)
+                                                * It helps to determine which element as been clicked to be opened
+                                                */
+                                                function changeClicked(element)
+                                                {
+                                                    if(element.parentNode.className=='clickedMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedMarked';
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedMarked')
+                                                    {
+                                                            element.parentNode.className='clickedMarked';
+                                                       }
+                                                       else if(element.parentNode.className=='clickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedNotMarked';
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='clickedNotMarked';
+                                                       }
+                                                       else
+                                                           element.parentNode.className='clickedNotMarked';
+                                                   }
+                                                   /* 
+                                                * To change the class name of its parent between (..Marked) and (..NotMarked)
+                                                * It helps to determine which element as been marked
+                                                */
+                                                   function changeMark(element,id)
+                                                   {
+                                                       if(element.parentNode.className=='clickedMarked')
+                                                    {
+                                                            element.parentNode.className='clickedNotMarked';
+                                                            document.getElementById(id).value = "notchosen";
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedNotMarked';
+                                                            document.getElementById(id).value = "notchosen";
+                                                       }
+                                                       else if(element.parentNode.className=='clickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='clickedMarked';
+                                                            document.getElementById(id).value = "chosen";
+                                                       }
+                                                       else if(element.parentNode.className=='notclickedNotMarked')
+                                                    {
+                                                            element.parentNode.className='notclickedMarked';
+                                                            document.getElementById(id).value = "chosen";
+                                                       }
+                                                       else
+                                                       {
+                                                           element.parentNode.className='notclickedMarked';
+                                                           document.getElementById(id).value = "chosen";
+                                                       }
+                                                   }
+                                            </script>
 <?php
-											if(empty($chosen_quests))
-		  									{
+                                            if(empty($chosen_quests))
+                                              {
 ?>
-  												<br><h4>There is no questionnaire been added to this user study.</h4><br>
+                                                  <br><h4>There is no questionnaire been added to this user study.</h4><br>
 <?php
-			  								}
-			  								else
-			  								{
-?>									
-												<br><h4>You added already these questionnaires:</h4>
-									
-<?php	  	                            
-							                    foreach($chosen_quests as $quest)
-						                        {
+                                              }
+                                              else
+                                              {
+?>                                    
+                                                <br><h4>You added already these questionnaires:</h4>
+                                    
+<?php                                      
+                                                foreach($chosen_quests as $quest)
+                                                {
 ?>
-	                      							<li>
-														<p 
-															onclick="changeMark(this,<?php echo $quest['questid']; ?>);"
-															ondblclick="changeClicked(this);">
-															<b>Name: </b><?php echo $quest['name']; ?>
-														</p>
-														<!-- hidden input is used to know if the element been chosen -->
-														<input type="hidden" name="<?php echo $quest['questid']; ?>" id="<?php echo $quest['questid']; ?>" value="notchosen"/>
+                                                      <li>
+                                                        <p 
+                                                            onclick="changeMark(this,<?php echo $quest['questid']; ?>);"
+                                                            ondblclick="changeClicked(this);">
+                                                            <b>Name: </b><?php echo $quest['name']; ?>
+                                                        </p>
+                                                        <!-- hidden input is used to know if the element been chosen -->
+                                                        <input type="hidden" name="<?php echo $quest['questid']; ?>" id="<?php echo $quest['questid']; ?>" value="notchosen"/>
 <?php
-							                            include_once("./include/managers/QuestionnaireManager.php");
-							                          	$qust = QuestionnaireManager::getQuestionsForQuestid(
-							                            	$db,
-							                            	$CONFIG['DB_TABLE']['QUESTION'],
-							                            	$quest['questid']);
+                                                        include_once("./include/managers/QuestionnaireManager.php");
+                                                          $qust = QuestionnaireManager::getQuestionsForQuestid(
+                                                            $db,
+                                                            $CONFIG['DB_TABLE']['QUESTION'],
+                                                            $quest['questid']);
 ?>
-						                          		<table class="questTable">
-								                            <thead>
-															  
-								                              <th>#</th>
-								                              <th>Question</th>
-								                              <th>Type of Question</th>
-								                            </thead>
-						                            		<tbody>
+                                                          <table class="questTable">
+                                                            <thead>
+                                                              
+                                                              <th>#</th>
+                                                              <th>Question</th>
+                                                              <th>Type of Question</th>
+                                                            </thead>
+                                                            <tbody>
 <?php                         
-	                              								$i = 1;
-								                              	foreach($qust as $q)
-								                              	{
-									                                include_once("./include/managers/QuestionnaireManager.php");
-									                                $answers = QuestionnaireManager::getAnswersForQidAndApkid(
-									                                  $db,
-									                                  $CONFIG['DB_TABLE']['ANSWER'],
-									                                  $q['qid'],
-									                                  $apkid);
+                                                                  $i = 1;
+                                                                  foreach($qust as $q)
+                                                                  {
+                                                                    include_once("./include/managers/QuestionnaireManager.php");
+                                                                    $answers = QuestionnaireManager::getAnswersForQidAndApkid(
+                                                                      $db,
+                                                                      $CONFIG['DB_TABLE']['ANSWER'],
+                                                                      $q['qid'],
+                                                                      $apkid);
 ?>
-									                                <tr>
-									                                  	<td><?php echo $i; ?></td>
+                                                                    <tr>
+                                                                          <td><?php echo $i; ?></td>
 <?php
-									                                  	if($q['type'] == 1) // multiple choices
-									                                  	{
+                                                                          if($q['type'] == 1) // multiple choices
+                                                                          {
 ?>
-										                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
-										                                    <td>multiple Choices</td>
+                                                                            <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+                                                                            <td>multiple Choices</td>
 <?php                               
-									                                  	}
-									                                  	elseif($q['type'] == 2) // single choices
-									                                  	{
+                                                                          }
+                                                                          elseif($q['type'] == 2) // single choices
+                                                                          {
 ?>
-										                                    <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
-										                                    <td>Single Choices</td>
+                                                                            <td><?php echo substr($q['content'],0,strrpos($q['content'],"[")); ?></td>
+                                                                            <td>Single Choices</td>
 <?php                               
-									                                  	}
-									                                  	else // open question
-									                                  	{
+                                                                          }
+                                                                          else // open question
+                                                                          {
 ?>
-										                                    <td><?php echo $q['content']; ?></td>
-										                                    <td>Open Question</td>
+                                                                            <td><?php echo $q['content']; ?></td>
+                                                                            <td>Open Question</td>
 <?php                               
-	                                  									}
-	                                  									$i++;
+                                                                          }
+                                                                          $i++;
 ?>
-                                									</tr>
+                                                                    </tr>
 <?php
-                              									} // end of foreach($qust as $q)
+                                                                  } // end of foreach($qust as $q)
 ?>
-                            								</tbody>
-                          								</table>
-                          							</li>
+                                                            </tbody>
+                                                          </table>
+                                                      </li>
 <?php
-		  		                           		} // end of foreach($chosen_quests as $quest)
-	  		                           		} // end of else : if(empty($chosen_quests))
+                                                     } // end of foreach($chosen_quests as $quest)
+                                                 } // end of else : if(empty($chosen_quests))
 ?>
-										</ul>
-									</div>
-									<br>
-									<input type="submit" value="update" name="update" style="height: 25px; width: 100px"/>
-								</form></fieldset>
+                                        </ul>
+                                    </div>
+                                    <br>
+                                    <input type="submit" value="update" name="update" style="height: 25px; width: 100px"/>
+                                </form></fieldset>
 <?php
-								if(isset($_POST['update']))
-								{
-									
-									$numOfSelected = 0;
-									foreach($notchosen_quests as $quest)
-									{
-										if(isset($_POST[$quest['questid']]) && $_POST[$quest['questid']] == "chosen")
-										{
-											$numOfSelected++;
-											QuestionnaireManager::pairQuestionnireWithApk($db, $CONFIG['DB_TABLE']['APK_QUEST'], $apkid, $quest['questid']);
-										}
-									}
+                                if(isset($_POST['update']))
+                                {
+                                    
+                                    $numOfSelected = 0;
+                                    foreach($notchosen_quests as $quest)
+                                    {
+                                        if(isset($_POST[$quest['questid']]) && $_POST[$quest['questid']] == "chosen")
+                                        {
+                                            $numOfSelected++;
+                                            QuestionnaireManager::pairQuestionnireWithApk($db, $CONFIG['DB_TABLE']['APK_QUEST'], $apkid, $quest['questid']);
+                                        }
+                                    }
 
-									foreach($chosen_quests as $quest)
-									{
-										if(isset($_POST[$quest['questid']]) && $_POST[$quest['questid']] == "chosen")
-										{
-											$numOfSelected++;
-											QuestionnaireManager::unpairQuestionnireWithApk($db, $CONFIG['DB_TABLE']['APK_QUEST'], $apkid, $quest['questid']);
-										}
-									}
+                                    foreach($chosen_quests as $quest)
+                                    {
+                                        if(isset($_POST[$quest['questid']]) && $_POST[$quest['questid']] == "chosen")
+                                        {
+                                            $numOfSelected++;
+                                            QuestionnaireManager::unpairQuestionnireWithApk($db, $CONFIG['DB_TABLE']['APK_QUEST'], $apkid, $quest['questid']);
+                                        }
+                                    }
 
-									if($numOfSelected > 0)
-									{
-										header("Location: ucp.php?m=addquest&id=".$apkid);
-									}
-									else
-									{
+                                    if($numOfSelected > 0)
+                                    {
+                                        header("Location: ucp.php?m=addquest&id=".$apkid);
+                                    }
+                                    else
+                                    {
 ?>
-										You did not select any questionnaire to update on this user study!
-										<br>
-										You may want to select a questionnaire by one click on it and then click on update button.
-										<br>
+                                        You did not select any questionnaire to update on this user study!
+                                        <br>
+                                        You may want to select a questionnaire by one click on it and then click on update button.
+                                        <br>
 <?php
-									} 
-								} // end of if(isset($_POST['update']))							
+                                    } 
+                                } // end of if(isset($_POST['update']))                            
                             } // end of if($show_add_quest == true)
                             
                             /********************************************
@@ -2483,58 +2492,58 @@ if(isset($_GET['m']))
                             if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1)
                             {
 ?>                              <fieldset><legend><h3><em>Update</em></h3></legend>
-                            	<form action="update.php" method="post" enctype="multipart/form-data" class="upload_form">
-	                                <p>Program name (title):</p>
-	                                <h4><?php echo $apk_to_update['apktitle']; ?></h4><br>
+                                <form action="update.php" method="post" enctype="multipart/form-data" class="upload_form">
+                                    <p>Program name (title):</p>
+                                    <h4><?php echo $apk_to_update['apktitle']; ?></h4><br>
                                         <p>Program description:</p>
-	                                <textarea cols="30" rows="6" name="apk_description">
-	                                	<?php echo $apk_to_update['description']; ?>
-	                                </textarea><br><br><hr><br>
-	                                <p>Lowest android version needed for my program to run:</p>
-	                                <select name="apk_android_version">
+                                    <textarea cols="30" rows="6" name="apk_description">
+                                        <?php echo $apk_to_update['description']; ?>
+                                    </textarea><br><br><hr><br>
+                                    <p>Lowest android version needed for my program to run:</p>
+                                    <select name="apk_android_version">
 <?php
-	                                    $_SESSION['APKID'] = $apk_to_update['apkid'];
-	                                    for($i=0; $i<count($API_VERSION); $i++)
-	                                    {
-	                                        echo
-	                                        	'<option value="'. $API_VERSION[$i][0] .'"'. 
-	                                        	($apk_to_update['androidversion'] == $API_VERSION[$i][0] ? ' selected="selected" ' : '') 
-	                                        	.'>'. $API_VERSION[$i][1] .'</option>';    
-	                                    }
+                                        $_SESSION['APKID'] = $apk_to_update['apkid'];
+                                        for($i=0; $i<count($API_VERSION); $i++)
+                                        {
+                                            echo
+                                                '<option value="'. $API_VERSION[$i][0] .'"'. 
+                                                ($apk_to_update['androidversion'] == $API_VERSION[$i][0] ? ' selected="selected" ' : '') 
+                                                .'>'. $API_VERSION[$i][1] .'</option>';    
+                                        }
 ?>
-	                                </select>                              
-	                                
-	                                <p style="margin: 20px 0;">My program uses following sensors:</p>
-	                                <ul>
+                                    </select>                              
+                                    
+                                    <p style="margin: 20px 0;">My program uses following sensors:</p>
+                                    <ul>
 <?php
-	                                  	$apk_to_update_sensors = json_decode($apk_to_update['sensors']);
-		                                for($i=0; $i < count($sensors_info); $i++)
-	                                    {
-	                                        echo '<li>';
-	                                        if(in_array(($i+1), $apk_to_update_sensors))
-	                                        {
-	                                            // if sensor was selected, check and select it here
-	                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
-	                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'"></div>';
-	                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" checked="checked" />';
-	                                        }
-	                                        else
-	                                        {
-	                                           	// here is no selection of sensor
-	                                            echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'"></div>';
-	                                            echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
-	                                            echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" />';
-	                                        }
-	                                        echo '</li>';
-	                                    } 
+                                          $apk_to_update_sensors = json_decode($apk_to_update['sensors']);
+                                        for($i=0; $i < count($sensors_info); $i++)
+                                        {
+                                            echo '<li>';
+                                            if(in_array(($i+1), $apk_to_update_sensors))
+                                            {
+                                                // if sensor was selected, check and select it here
+                                                echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+                                                echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'"></div>';
+                                                echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" checked="checked" />';
+                                            }
+                                            else
+                                            {
+                                                   // here is no selection of sensor
+                                                echo '<div class="'. $sensors_info[$i][0] .'" title="'. $sensors_info[$i][2] .'"></div>';
+                                                echo '<div class="'. $sensors_info[$i][1] .'" title="'. $sensors_info[$i][2] .'" style="display: none;"></div>';
+                                                echo '<input type="checkbox" name="sensors[]" value="'. ($i+1) .'" />';
+                                            }
+                                            echo '</li>';
+                                        } 
 ?>
-                                	</ul>
+                                    </ul>
                                         <hr>
                                         <label for="file">Select a file:</label> 
-	                                <input type="file" name="userfile" id="file" style="margin: 15px 0;">
-	                                <br /><br />
-	                                <button>Update</button>
-	                                <p style="margin-top: 50px;"></p>
+                                    <input type="file" name="userfile" id="file" style="margin: 15px 0;">
+                                    <br /><br />
+                                    <button>Update</button>
+                                    <p style="margin-top: 50px;"></p>
                                 </form></fieldset>
 <?php
                             } // end of if(isset($SHOW_UPDATE_PAGE) && $SHOW_UPDATE_PAGE == 1)
@@ -2544,26 +2553,26 @@ if(isset($_GET['m']))
                             ******* SCIENTIST CREDINTIAL REQUEST ********
                             *********************************************/
                             if(
-                            	$MODE == 'PROMO' && !isset($_POST['promo_sent'])
-                            	&& (!isset($USER_ALREADY_ACCEPTED) || !isset($USER_PENDING)))
+                                $MODE == 'PROMO' && !isset($_POST['promo_sent'])
+                                && (!isset($USER_ALREADY_ACCEPTED) || !isset($USER_PENDING)))
                             {    
 ?> 
-	                            <h3>Application for scientist credentials</h3>
-	                            <form action="ucp.php?m=promo" method="post" class="promo_form">
-	                                 <fieldset>
-	                                    <legend>Become a scientist!</legend>
-	                                    <label for="telephone" >Telephone:</label>
-	                                    <div class="clear"></div>
-	                                    <input type="text" name="telephone" id="telephone" maxlength="10" />
-	                                    <div class="clear"></div>
-	                                    <label for="reason" >Reason? Tell us why, pls (*):</label>
-	                                    <div class="clear"></div>
-	                                    <textarea cols="30" rows="10" name="reason" id="reason"></textarea>
-	                                    <div class="clear"></div>
-	                                    <input type="hidden" name="promo_sent" id="promo_sent" value="1" />
-	                                    <input type="submit" name="submit" value="Send" />
-	                                 </fieldset>
-	                            </form>   
+                                <h3>Application for scientist credentials</h3>
+                                <form action="ucp.php?m=promo" method="post" class="promo_form">
+                                     <fieldset>
+                                        <legend>Become a scientist!</legend>
+                                        <label for="telephone" >Telephone:</label>
+                                        <div class="clear"></div>
+                                        <input type="text" name="telephone" id="telephone" maxlength="10" />
+                                        <div class="clear"></div>
+                                        <label for="reason" >Reason? Tell us why, pls (*):</label>
+                                        <div class="clear"></div>
+                                        <textarea cols="30" rows="10" name="reason" id="reason"></textarea>
+                                        <div class="clear"></div>
+                                        <input type="hidden" name="promo_sent" id="promo_sent" value="1" />
+                                        <input type="submit" name="submit" value="Send" />
+                                     </fieldset>
+                                </form>   
 <?php   
                             }
 
@@ -2577,7 +2586,7 @@ if(isset($_GET['m']))
                             }
                             
                             if(
-                            	$MODE == 'PROMO' && isset($USER_PENDING) && $USER_PENDING == 1
+                                $MODE == 'PROMO' && isset($USER_PENDING) && $USER_PENDING == 1
                                 && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED != 1)
                             {
 ?>
@@ -2599,7 +2608,7 @@ if(isset($_GET['m']))
                             
                             // nobody wants you as scientist
                             if(
-                            	$MODE == 'PROMO' && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED == 0 
+                                $MODE == 'PROMO' && isset($USER_ALREADY_ACCEPTED) && $USER_ALREADY_ACCEPTED == 0 
                                 && isset($USER_PENDING) && $USER_PENDING == 0)
                             {
 ?>
