@@ -308,7 +308,7 @@ if(isset($_GET['m']))
            break;
                        
         case 'DEVICE':
-        
+                             /*
                     if(isset($_GET['remove'])){
                         
                         $DEVICE_ID = preg_replace("/\D/", "", $_GET['remove']);
@@ -334,7 +334,7 @@ if(isset($_GET['m']))
                        echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>"; 
                     }
         
-                    break; 
+                    break; */
         
         case 'LIST':
         
@@ -744,7 +744,7 @@ if(isset($_GET['m']))
     * Select all user devices
     */
 
-    include_once("./include/functions/dbconnect.php");
+  /*  include_once("./include/functions/dbconnect.php");
     
     $USER_DEVICES = array();
 
@@ -759,7 +759,7 @@ if(isset($_GET['m']))
       $USER_DEVICES = $devices;
     }
 }
-
+   */
 ?>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 <title>Hauptseite von MoSeS - User control panel</title>

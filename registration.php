@@ -1,6 +1,10 @@
 <?php
 // start the session
 session_start();
+
+if(isset($_SESSION['USER_LOGGED_IN']))
+        header("Location: " . dirname($_SERVER['PHP_SELF'])."/"); 
+
 // include header
 include_once("./include/_header.php");
 
@@ -308,7 +312,7 @@ if(isset($_POST["submitted"])){
                      	<label class="control-label"></label>
                      	<div class="controls">
 	                    	<input type="hidden" name="submitted" id="submitted" value="1" />
-	                    	<button type="submit" name="submit" class="btn btn-success">Create my Account</button>
+	                    	<button type="submit" name="submit" class="btn btn-success">Create account</button>
                     	</div>
                     </div>
                 </fieldset>

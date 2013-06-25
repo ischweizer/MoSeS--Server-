@@ -87,8 +87,13 @@ include_once("./include/_menu.php");
             Feel free to register and download moses client, it's easy!
         </p>
         <p>&nbsp;
-        </p>
+        </p><?php
+            if(!isset($_SESSION['USER_LOGGED_IN'])){    
+            ?>
         <p><a href="registration.php" class="btn btn-warning btn-large" style="font-weight: bold; width: 130px;"><i class="icon-white icon-tag"></i> Sign up</a></p>
+        <?php
+            }                                                                                                                                                                
+        ?>
     </div>
     <!-- / Main Block -->
     
@@ -114,7 +119,9 @@ include_once("./include/_menu.php");
     </div>
 -->
 
-    <!--<button class="btn btn-link btn-large span4" style="background-color: #EEE; width: 500pt; height: 50pt;">Sign up <a href="#top" class="icon-chevron-up"></a></button>-->
+<?php
+    if(!isset($_SESSION['USER_LOGGED_IN'])){
+?>
     <div class="row">
       
       <div class="span8 text-center" style="width: 400pt; height: 50pt; background-color: #EEE; float: none; margin: 0 auto;">
@@ -125,7 +132,10 @@ include_once("./include/_menu.php");
       </div>
       <div class="span1"></div>
     </div>
-    <!--</div>--> <!-- /container -->
+<?php
+    }         
+?>    
+    
 
  <?php
       /*

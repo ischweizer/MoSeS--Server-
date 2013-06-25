@@ -1,6 +1,12 @@
 <?php
-  //Import of the header
-  include_once("./include/_header.php");
+// start the session
+session_start();
+
+if(isset($_SESSION['USER_LOGGED_IN']))
+    header("Location: " . dirname($_SERVER['PHP_SELF'])."/");  
+
+//Import of the header
+include_once("./include/_header.php");
 ?>
   
 <title>Hauptseite von MoSeS - Registration</title>
