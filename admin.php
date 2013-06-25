@@ -94,7 +94,7 @@ include_once("./include/_menu.php");
                    echo '<td>'. $user['email'] .'</td>'; 
                    //echo '<td><label class="checkbox"><input type="checkbox" name="pending_requests[]" value="'. $user['hash'] .'"></label></td>'; 
                    echo '<td>'. $user['reason'] .'</td>'; 
-                   echo '<td><button class="btn btn-success" data-loading-text="Working...">Give access</button></td>'; 
+                   echo '<td><button type="button" class="btn btn-warning" data-loading-text="Working...">Give access</button></td>'; 
                    echo '</tr>';
                 }
                

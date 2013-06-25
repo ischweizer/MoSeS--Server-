@@ -21,6 +21,7 @@ if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
 <?php
 }                                          
 ?>
+
 <script src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 </body>
 </html>
