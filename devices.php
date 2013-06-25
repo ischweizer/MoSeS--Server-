@@ -4,7 +4,7 @@ session_start();
 ob_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']))
-    header("Location: " . dirname($_SERVER['PHP_SELF'])."/");
+    header("Location: " . dirname($_SERVER['PHP_SELF'])."/");   
     
 include_once("./include/functions/func.php");
 include_once("./config.php");
@@ -26,11 +26,22 @@ $API_VERSION = array(8 => 'API 8: "Froyo" 2.2.x',
 
 include_once("./include/functions/dbconnect.php");
 
+if(isset($_REQUEST['remove']) && !empty($_REQUEST['remove']) && is_numeric($_REQUEST['remove'])){
+
+   // remove device entry from DB 
+   $sql = "DELETE FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ."  
+                  WHERE uid = ". $_SESSION['USER_ID'] . " 
+                  AND hwid = '". $_REQUEST['remove'] ."'";
+      
+   $db->exec($sql);
+}
+
 $USER_DEVICES = array();
 
 $sql = 'SELECT * 
        FROM hardware 
-       WHERE uid = '. $_SESSION['USER_ID'];
+       WHERE uid = '. $_SESSION['USER_ID'] .' 
+       LIMIT 5';
                                
 $result = $db->query($sql);
 $devices = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -53,7 +64,6 @@ include_once("./include/_menu.php");
     <!-- Main Block -->
     <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
         <h2>Devices</h2>
-        <div id="page-selection" class="pagination pagination-centered"></div>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -82,6 +92,7 @@ include_once("./include/_menu.php");
                 ?>
               </tbody>
             </table>
+            <div id="page-selection" class="pagination pagination-centered"></div>
     </div>
     <!-- / Main Block -->
     
@@ -136,10 +147,11 @@ $('#page-selection').bootpag({
         data: paging,
         success: function(result){
             // processing returned data
+            var deviceNumber = (((paging['curPage']-1)*paging['pageMax'])+1);
             var replaceRows = '';
             for(var i=0; i<result.length; ++i){
                 replaceRows += '<tr>';
-                replaceRows += '<td>' + (i+1) + '</td>';
+                replaceRows += '<td>' + (deviceNumber+i) + '</td>';
                 replaceRows += '<td>' + result[i].deviceid + '</td>';
                 replaceRows += '<td>' + result[i].modelname + '</td>';
                 replaceRows += '<td>' + API_VERSION[result[i].androidversion] + '</td>';
