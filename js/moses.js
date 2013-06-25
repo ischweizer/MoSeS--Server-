@@ -188,7 +188,7 @@ $(document).ready(function() {
 		rules:{
 			firstname:"required",
 			lastname:"required",
-			login:"required",
+//			login:"required",
 			email:{
 					required:true,
 					email: true
