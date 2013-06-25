@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// handling of jsong request for new table devices entries
+// handling of json request for new table devices entries
                                                                  
 if(isset($_REQUEST['pages']) && !empty($_REQUEST['pages']) && 
    isset($_REQUEST['pageMax']) && !empty($_REQUEST['pageMax']) &&
@@ -90,6 +90,37 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 	}else{
 		echo $CONFIG['LOGIN_RESPONSE']['MISSING_LOGIN'];
 	}
+}
+
+/**
+ * Handling of requests for checking the uniqueness of an email
+ * a new user is trying to register with.
+ * The new user has to provide a new email.
+ */
+if(isset($_POST['isEmailUnique']) && !empty($_POST['isEmailUnique'])){
+	
+	// If the email is unique, 0 is returned
+	// if the email is already contained in the database (someone used it already) 1 is returned
+	
+	include_once("./config.php");
+	include_once("./include/functions/dbconnect.php");
+	
+	// search the database for users who are registered with the email
+	// if found, check if they have confirmed the registration via email
+	// if yes, the email is not unique
+	// this means, user can use the same email if (for some reason) he has 
+	// not confirmed his previous registration with the same email
+	$sql = "SELECT confirmed
+           FROM ".$CONFIG["DB_TABLE"]["USER"]." WHERE email='".$_POST["isEmailUnique"]."' AND confirmed=1";
+	 
+	$result = $db->query($sql);
+	$emails = $result->fetchAll(PDO::FETCH_ASSOC);
+
+	if(empty($emails)){
+		echo 0; // no users with such confirmed email found, the email is thus unique
+	}
+	else
+		echo 1; // a user has already confirmed this email, the email is thus NOT unique
 }
 
 
