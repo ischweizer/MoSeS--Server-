@@ -287,7 +287,7 @@ if(isset($_POST["submitted"])){
                     <div class="control-group">
                     	<label for="password_repeat" class="control-label">Confirm Password</label>
                    			<div class="controls">
-                    			<input type="password" name="password_repeat" id="password" maxlength="50"/>
+                    			<input type="password" name="password_repeat" id="password_repeat" maxlength="50"/>
                     		</div>
                     </div>
                     <div class="clear"></div>
