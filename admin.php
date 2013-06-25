@@ -43,7 +43,7 @@ if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
    
    $USERS_SCIENTIST_LIST = array();
    
-   $sql = "SELECT r.telephone, r.reason, u.hash, u.usergroupid, u.firstname, u.lastname 
+   $sql = "SELECT r.telephone, r.reason, u.hash, u.usergroupid, u.firstname, u.lastname, u.email 
            FROM request r, user u 
            WHERE r.pending = 1 AND r.uid = u.userid";
            
@@ -68,30 +68,42 @@ include_once("./include/_menu.php");
 
     <!-- Main Block -->
     <div class="hero-unit" style="font-family: 'Myriad Pro', 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;">
-        <h2>Admin</h2>
-        <table>
-          <tr><th>Users that wanting permission to be a scientiest:</th></tr>
+        <h2>Admin control panel</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>E-mail</th>
+              <th>Reason</th>
+              <th>Allow</th>
+            </tr>
+          </thead>
+          <tbody id="content">
           <?php
             
             if(!empty($USERS_SCIENTIST_LIST)){
           
+                $i=1;
                 foreach($USERS_SCIENTIST_LIST as $user){
-                    
-                ?>
-                    <tr><td><?php echo $user['firstname'] ." ". $user['lastname']; ?></td><td>Accept:<input type="checkbox" name="pending_requests[]" value="<?php echo $user['hash']; ?> " /></td></tr>        
-                <?php
+                   echo '<tr>';
+                   echo '<td>'. $i .'</td>';
+                   echo '<td>'. $user['firstname'] .'</td>'; 
+                   echo '<td>'. $user['lastname'] .'</td>'; 
+                   echo '<td>'. $user['email'] .'</td>'; 
+                   //echo '<td><label class="checkbox"><input type="checkbox" name="pending_requests[]" value="'. $user['hash'] .'"></label></td>'; 
+                   echo '<td>'. $user['reason'] .'</td>'; 
+                   echo '<td><button class="btn btn-success" data-loading-text="Working...">Give access</button></td>'; 
+                   echo '</tr>';
                 }
-             ?>
-             
-             <tr><td>&nbsp;</td><td><button class="btn btn-success">Give access</button></td></tr>
-             
-             <?php   
-                
+               
             }else{
-                echo "<tr><td>No requests.</td></tr>";
+                echo "<tr><td>No pending requests.</td></tr>";
             }
           ?>
-          </table>
+          </tbody>
+        </table>
     <hr>
 
  <?php

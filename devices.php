@@ -80,7 +80,6 @@ include_once("./include/_menu.php");
                 
                 $i=1;
                 foreach($USER_DEVICES as $device){
-                //for(int $i=1; $i<20; )
                     echo "<tr>";
                     echo "<td>". $i ."</td>";
                     echo "<td>". $device['deviceid'] ."</td>";
