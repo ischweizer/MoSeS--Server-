@@ -158,14 +158,12 @@ if(isset($_POST['isEmailUnique']) && !empty($_POST['isEmailUnique'])){
 	 
 	$result = $db->query($sql);
 	$emails = $result->fetchAll(PDO::FETCH_ASSOC);
-	echo $sql;
-
-// 	if(empty($emails)){
-// 		echo 0; // no users with such confirmed email found, the email is thus unique
-// 	}
-// 	else
-// 		echo 1; // a user has already confirmed this email, the email is thus NOT unique
+	
+	if(empty($emails)){
+		echo 0; // no users with such confirmed email found, the email is thus unique
+	}
+	else
+		echo 1; // a user has already confirmed this email, the email is thus NOT unique
 }
-
 
 ?>

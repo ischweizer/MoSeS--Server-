@@ -29,17 +29,6 @@ $(document).ready(function() {
     	$("#dim_back").fadeOut();
     	});
     
-    // fadeout login lightbox on click outside
-    /*jQuery("#menu").click(function(){ return false; });
-    jQuery(document).one("click", function() { 
-        jQuery("#menu").fadeOut(); 
-    });
-    
-    $('#dim_back').click(function(){
-        $("#dim_back").fadeOut();    
-        return false;
-    });*/
-    
     //Adjust height of overlay to fill screen when page loads
     $("#dim_back").css("height", $(document).height());
 
@@ -238,20 +227,19 @@ $(document).ready(function() {
     		/*
     		 * Check the uniqueness of the email only if previous validation found no errors
     		 */
+    		var enteredText = $(this).val();
     		$.ajax({
                 type: "POST",
                 url: "content_provider.php",
-                data: {"isEmailUnique":$(this).value},
+                data: {"isEmailUnique":enteredText},
                 success: function(result){
-                	console.log("ajax recived");
                 	if(result == '0'){
-                		console.log("DEBUG TRUE");
+                		// nothing to do here
                 		}
                 	else{
                 		if(result == '1'){
-                			console.log("DEBUG FALSE");
-                			$(this).parents(".control-group").removeClass('success');
-                    		$(this).parents(".control-group").addClass('error');
+                			$("#email").parents(".control-group").removeClass('success');
+                    		$("#email").parents(".control-group").addClass('error');
                     		// add the span
                     		var errorSpan = document.createElement("span");
                     		errorSpan.setAttribute("id", "tempErrorSpan");
@@ -261,7 +249,11 @@ $(document).ready(function() {
                     		errorSpan.setAttribute("style", "display: inline-block;");
                     		errorSpan.innerHTML="Email is already in use, please choose another one";
                     		var emailInput = document.getElementById("email");
-                    		emailInput.parentNode.appendChild(errorSpan);
+                    		var oldChild = document.getElementById("tempErrorSpan");
+                    		if(oldChild != null)
+                    			emailInput.parentNode.replaceChild(errorSpan, oldChild);
+                    		else
+                    			emailInput.parentNode.appendChild(errorSpan);
                 			}
                 		}
                 	}
