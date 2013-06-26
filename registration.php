@@ -235,7 +235,6 @@ if(isset($_POST["submitted"])){
                     <legend>Registration</legend>
                     <div class="control-group">
                     <label for="firstname" class="control-label">First name</label>
-<!--                     <div class="clear"></div> -->
                     <div class="controls">
                     <input type="text" name="firstname" id="firstname" maxlength="50" <?php
                         if(isset($_POST["firstname"])){
@@ -246,7 +245,6 @@ if(isset($_POST["submitted"])){
                     </div>
                     <div class="control-group">
                     <label for="lastname" class="control-label">Last name</label>
-<!--                     <div class="clear"></div> -->
                     <div class="controls">
                     <input type="text" name="lastname" id="lastname" maxlength="50" <?php
                         if(isset($_POST["lastname"])){
@@ -257,7 +255,6 @@ if(isset($_POST["submitted"])){
                     </div>
                     <div class="control-group">
                     <label for="email" class="control-label">Email</label>
-<!--                     <div class="clear"></div> -->
                     <div class="controls">
                     <input type="text" name="email" id="email" maxlength="50" <?php
                         if(isset($_POST["email"])){

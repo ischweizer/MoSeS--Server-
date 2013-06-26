@@ -29,17 +29,6 @@ $(document).ready(function() {
     	$("#dim_back").fadeOut();
     	});
     
-    // fadeout login lightbox on click outside
-    /*jQuery("#menu").click(function(){ return false; });
-    jQuery(document).one("click", function() { 
-        jQuery("#menu").fadeOut(); 
-    });
-    
-    $('#dim_back').click(function(){
-        $("#dim_back").fadeOut();    
-        return false;
-    });*/
-    
     //Adjust height of overlay to fill screen when page loads
     $("#dim_back").css("height", $(document).height());
 
@@ -114,8 +103,6 @@ $(document).ready(function() {
         	}
         });
         
-//        $("#dim_back").fadeOut();
-        
         /*
          * Prevents the page from refreshing when button is clicked or enter is pressed;
          * Before that, the login credentials have to be validated
@@ -188,7 +175,6 @@ $(document).ready(function() {
 		rules:{
 			firstname:"required",
 			lastname:"required",
-//			login:"required",
 			email:{
 					required:true,
 					email: true
@@ -222,6 +208,7 @@ $(document).ready(function() {
 		errorClass: "help-inline",
 		errorElement: "span",
 		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('success');
 			$(element).parents('.control-group').addClass('error');
 		},
 		unhighlight: function(element, errorClass, validClass) {
@@ -229,6 +216,63 @@ $(document).ready(function() {
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+    
+    /**
+     * Validating the uniqueness of the email.
+     * Done separately, because validation framework above is buggy
+     * when using ajax
+     */
+    $("#email").blur(function(){
+    	if($(this).valid()){
+    		/*
+    		 * Check the uniqueness of the email only if previous validation found no errors
+    		 */
+    		var enteredText = $(this).val();
+    		$.ajax({
+                type: "POST",
+                url: "content_provider.php",
+                data: {"isEmailUnique":enteredText},
+                success: function(result){
+                	if(result == '0'){
+                		// nothing to do here
+                		}
+                	else{
+                		if(result == '1'){
+                			$("#email").parents(".control-group").removeClass('success');
+                    		$("#email").parents(".control-group").addClass('error');
+                    		// add the span
+                    		var errorSpan = document.createElement("span");
+                    		errorSpan.setAttribute("id", "tempErrorSpan");
+                    		errorSpan.setAttribute("for", "email");
+                    		errorSpan.setAttribute("generated", "true");
+                    		errorSpan.setAttribute("class", "help-inline");
+                    		errorSpan.setAttribute("style", "display: inline-block;");
+                    		errorSpan.innerHTML="Email is already in use, please choose another one";
+                    		var emailInput = document.getElementById("email");
+                    		var oldChild = document.getElementById("tempErrorSpan");
+                    		if(oldChild != null)
+                    			emailInput.parentNode.replaceChild(errorSpan, oldChild);
+                    		else
+                    			emailInput.parentNode.appendChild(errorSpan);
+                			}
+                		}
+                	}
+                });
+    	}
+    });
+    
+    /**
+     * make the custom error message for email uniqueness disappear
+     * after the user starts typing again
+     */
+    $('#email').keyup(function(){
+    	var emailInput = document.getElementById("email");
+    	var errorSpan = document.getElementById("tempErrorSpan");
+    	if(errorSpan != null)
+    		emailInput.parentNode.removeChild(errorSpan);
+    });
+    
+    
     
     // transform orange button to disabled gray with waiting text on click
     $('#allowAccessForm :submit').click(function(e){        
