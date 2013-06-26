@@ -7,7 +7,7 @@ include_once("./include/functions/func.php");
 * Handle allow access for scientists in admin panel
 */
 
-if(/*isset($_SESSION['USER_LOGGED_IN']) && */isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
+if(isset($_SESSION['USER_LOGGED_IN']) && isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
     if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
        
        include_once("./config.php");
