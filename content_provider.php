@@ -1,9 +1,48 @@
 <?php
 session_start();
 
-// handling of json request for new table devices entries
+include_once("./include/functions/func.php");
+
+/*
+* Handle allow access for scientists in admin panel
+*/
+
+if(isset($_SESSION['USER_LOGGED_IN']) && isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
+    if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
+       
+       include_once("./config.php");
+       include_once("./include/functions/dbconnect.php"); 
+           
+       $request = $_REQUEST['hash'];
+           
+       // update his request, set to not pending one              
+       $sql = "UPDATE request
+                 SET
+                 pending = 0, accepted = 1 
+                 WHERE
+                 uid = (SELECT userid 
+                         FROM user
+                         WHERE hash = '". $request ."')";
+                            
+        $db->exec($sql);
+       
+        // USER IS NOW IN A SCIENTIST GROUP
+        $sql = "UPDATE user 
+                SET usergroupid= 2 
+                WHERE hash = '". $request ."'";
+       
+        $db->exec($sql);
+        
+        echo "0";
+   }
+}
+
+/*
+* Handling of json request for new devices table
+*/
                                                                  
-if(isset($_REQUEST['pages']) && !empty($_REQUEST['pages']) && 
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+   isset($_REQUEST['pages']) && !empty($_REQUEST['pages']) && 
    isset($_REQUEST['pageMax']) && !empty($_REQUEST['pageMax']) &&
    isset($_REQUEST['curPage']) && !empty($_REQUEST['curPage'])){
     //configuration of connection
@@ -34,9 +73,13 @@ if(isset($_REQUEST['pages']) && !empty($_REQUEST['pages']) &&
     echo json_encode($USER_DEVICES);  
 }
 
-//If the formular is sent
+/*
+* Handle user login
+*/
+
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
-	include_once("./config.php");
+	
+    include_once("./config.php");
 	//If the login exists
 	if(isset($_POST["login"]) && !empty($_POST["login"]) && preg_match('/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/', $_POST["login"])){
 		//And the password exists
