@@ -230,7 +230,12 @@ $(document).ready(function() {
 		}
 	});
     
-    
+    // transform orange button to disabled gray with waiting text on click
+    $('#btnAllowAccess').click(function(){
+        $(this).removeClass('btn-warning');
+        $(this).attr('disabled', true);
+        $(this).text('Working...');
+    });
     
     /* ************************** */
 });
