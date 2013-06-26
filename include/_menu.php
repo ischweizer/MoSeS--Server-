@@ -35,10 +35,10 @@
                 <a href="devices.php">Devices</a>
             </li>
              <li class="dropdown">
-                <a href="#">Groups <b class="caret"></b></a>
+                <a href="group.php">Groups <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#">View</a>
+                        <a href="group.php">View</a>
                     </li>
                     <li>
                         <a href="#">Create</a>
@@ -59,7 +59,7 @@
                      }
                  ?>
              <li class="dropdown">
-                <a href="#">About <b class="caret"></b></a>
+                <a href="about.php">About <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="about.php">Project</a>
