@@ -1,6 +1,6 @@
 <!-- Login form -->
 <div id="dim_back">
-    <form id="lightbox" class="form-signin" action="./" method="post" name="login_form" accept-charset="UTF-8">
+    <form id="lightbox" class="form-signin" method="post" name="login_form" accept-charset="UTF-8">
     	<a class="boxclose" id="boxclose"></a>
         <h2 class="form-signin-heading muted">Please sign in</h2>
 <!--         <div class="control-group error"> -->
