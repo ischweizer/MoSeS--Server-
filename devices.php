@@ -8,18 +8,6 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
     
 include_once("./include/functions/func.php");
 include_once("./config.php");
-
-$API_VERSION = array(8 => 'API 8: "Froyo" 2.2.x',
-                     9 => 'API 9: "Gingerbread" 2.3.0 - 2.3.2',
-                     10 => 'API 10: "Gingerbread" 2.3.3 - 2.3.7',
-                     11 => 'API 11: "Honeycomb" 3.0',
-                     12 => 'API 12: "Honeycomb" 3.1',
-                     13 => 'API 13: "Honeycomb" 3.2.x',
-                     14 => 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2',
-                     15 => 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4',
-                     16 => 'API 16: "Jelly Bean" 4.1.x',
-                     17 => 'API 17: "Jelly Bean" 4.2.x');
-
 include_once("./include/functions/dbconnect.php");
                      
 /*
@@ -84,7 +72,7 @@ include_once("./include/_menu.php");
                     echo "<td>". $i ."</td>";
                     echo "<td>". $device['deviceid'] ."</td>";
                     echo "<td>". $device['modelname'] ."</td>";
-                    echo "<td>". $API_VERSION[$device['androidversion']] ."</td>";
+                    echo "<td>". getAPILevel($device['androidversion']) ."</td>";
                     echo '<td><a href="'. $_SERVER['PHP_SELF'] .'?remove='. $device['hwid'] .'" title="Remove device" class="btn btn-warning">Remove</a></td>';
                     echo "</tr>";
                     $i++;
