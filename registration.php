@@ -298,7 +298,7 @@ if(isset($_POST["submitted"])){
                      	<label class="control-label"></label>
                      	<div class="controls">
 	                    	<input type="hidden" name="submitted" id="submitted" value="1" />
-	                    	<button type="submit" name="submit" class="btn btn-success">Create account</button>
+	                    	<button type="submit" name="submit" id="submitButton" class="btn btn-success">Create account</button>
                     	</div>
                     </div>
                 </fieldset>
