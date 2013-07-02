@@ -13,7 +13,7 @@ include_once(MOSES_HOME."/include/functions/logger.php");
 $logger->logInfo(" ###################### REGISTRATION ############################## ");
 
 //If the formular is sent
-if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
+if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
     //Import of configurations file
    include_once("./config.php");
    //Import of connections file to database
@@ -60,73 +60,42 @@ if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["
                     <div class="registration_form">
                         <fieldset>
                             <legend>Confirmed!</legend>
-                            <label>Your registration was successfully confirmed.</label>
-                            <label>You can now log in.</label>
+                            <h4>You have successfully confirmed your registration. You can now log in.</h4>
                         </fieldset>
                     </div>
                    
                    <?php 
                 }
-           
-                if(isset($USER_CREATED) && $USER_CREATED == 1){
-                   ?>
-                   
-            <div class="registration_form">
-                <fieldset>
-                    <legend>Registered</legend>
-                    <label for="name" >Your registration was successful!</label>
-                    <label for="name" >You will receive an e-mail for confirmation of your registration.</label>
-                </fieldset>
-            </div>
-                   
-                   <?php       
-                }
                 
-                if(!(isset($USER_CREATED) && $USER_CREATED == 1) && !(isset($USER_CONFIRMED) && $USER_CONFIRMED)){
+                if(!(isset($USER_CONFIRMED) && $USER_CONFIRMED)){
             ?>
 <!-- This is where the user enters his data when registering -->
             <form class="form-horizontal" action="./registration.php" method="post" accept-charset="UTF-8" id="registerHere">
-                <fieldset>
+                <fieldset id="registration_fieldset">
                     <legend>Registration</legend>
                     <div class="control-group">
-                    <label for="firstname" class="control-label">First name</label>
-                    <div class="controls">
-                    <input type="text" name="firstname" id="firstname" maxlength="50" <?php
-                        if(isset($_POST["firstname"])){
-                            echo 'value="'. trim($_POST["firstname"]) .'" ';
-                        }                                                                         
-                    ?>/>
-                    </div>
+                    	<label for="firstname" class="control-label">First name</label>
+	                    <div class="controls">
+	                    	<input type="text" name="firstname" id="firstname" maxlength="50"/>
+	                    </div>
                     </div>
                     <div class="control-group">
-                    <label for="lastname" class="control-label">Last name</label>
-                    <div class="controls">
-                    <input type="text" name="lastname" id="lastname" maxlength="50" <?php
-                        if(isset($_POST["lastname"])){
-                            echo 'value="'. trim($_POST["lastname"]) .'" ';
-                        }                                                                         
-                    ?>/>
-                    </div>
+	                    <label for="lastname" class="control-label">Last name</label>
+	                    <div class="controls">
+	                    	<input type="text" name="lastname" id="lastname" maxlength="50"/>
+	                    </div>
                     </div>
                     <div class="control-group">
-                    <label for="email" class="control-label">Email</label>
-                    <div class="controls">
-                    <input type="text" name="email" id="email" maxlength="50" <?php
-                        if(isset($_POST["email"])){
-                            echo 'value="'. trim($_POST["email"]) .'" ';
-                        }                                                                         
-                    ?>/>
-                    </div>
+	                    <label for="email" class="control-label">Email</label>
+	                    <div class="controls">
+	                    	<input type="text" name="email" id="email" maxlength="50"/>
+	                    </div>
                     </div>
                     <div class="control-group">
                     <label for="password" class="control-label">Password</label>
 <!--                     <div class="clear"></div> -->
                     <div class="controls">
-                    <input type="password" name="password" id="password" maxlength="50" <?php
-                        if(isset($_POST["password"])){
-                            echo 'value="'. trim($_POST["password"]) .'" ';
-                        }                                                                         
-                    ?>/>
+                    <input type="password" name="password" id="password" maxlength="50"/>
                     </div>
                     </div>
                     <div class="control-group">
@@ -136,19 +105,6 @@ if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["
                     		</div>
                     </div>
                     <div class="clear"></div>
-                    <?php
-//                          if(count($ERROR_REGFORM) > 0){
-//                      ?>
-                        <ul class="error_regform"><?php
-                        
-//                         foreach($ERROR_REGFORM as $err){
-//                            echo "<li>". $err ."</li>"; 
-//                         }
-                        
-                        ?></ul>
-                    <?php
-//                          }
-//                      ?>
                      <div class="control-group">
                      	<label class="control-label"></label>
                      	<div class="controls">

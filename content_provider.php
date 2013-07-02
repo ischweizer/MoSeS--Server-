@@ -6,7 +6,6 @@ include_once("./include/functions/func.php");
 /*
 * Handle allow access for scientists in admin panel
 */
-
 if(isset($_SESSION['USER_LOGGED_IN']) && isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
     if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
        
@@ -314,7 +313,7 @@ if(isset($_POST['isEmailUnique']) && !empty($_POST['isEmailUnique'])){
 	// if the email is already contained in the database (someone used it already) 1 is returned
 	$logger->logInfo(" ###################### content_provider.php request for only checking the email ############################## ");
 	if(isEmailUnique($_POST["isEmailUnique"], $CONFIG, $db, $logger)){
-		echo 0; // no users with such confirmed email found, the email is thus unique
+		echo 0; // no users with such email found, the email is thus unique
 	}
 	else
 		echo 1; // a user has already confirmed this email, the email is thus NOT unique
@@ -361,7 +360,7 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
 		$from = "admin@moses.tk.informatik.tu-darmstadt.de";
 		$message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
 		$message .= "Please follow this link to confirm your registration: ";
-		$message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
+		$message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/registration.php" ."?confirm=". $CONFIRM_CODE;
 		
 		$headers = "From: $from";
 		$sent = mail($to, $subject, $message, $headers);
@@ -369,9 +368,6 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
 		// sending was successful?
 		if(!$sent) { // there was a problem sending email
 			echo 2;
-// 			die("We have encountered an error sending your mail, please try register again.");
-// 			// delete the entry so that user can register again
-// 			$sql = "DELETE FROM ". $CONFIG['DB_TABLE']['USER'] ." WHERE email='" .$EMAIL. "'";
 		}
 		else
 			echo 0; 
@@ -382,7 +378,7 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
 
 /**
  * 
- * Returns true if and only if there is a user that has registered and confirmed the consumed email
+ * Returns true if and only if there is a user that has registered the consumed email
  * @param String $email the email that has to be checked for uniquiness
  * @param mappings $CONFIG 
  * @param database-Object $db
@@ -390,25 +386,20 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
  * @return boolean
  */
 function isEmailUnique($email, $CONFIG, $db, $logger){
-	$logger->logInfo(getcwd());
 	$logger->logInfo(" ###################### content_provider.php isEmailUnique ############################## ");
 	
 	// search the database for users who are registered with the email
-	// if found, check if they have confirmed the registration via email
-	// if yes, the email is not unique
-	// this means, user can use the same email if (for some reason) he has
-	// not confirmed his previous registration with the same email
 	$sql = "SELECT confirmed
-           FROM ".$CONFIG["DB_TABLE"]["USER"]." WHERE email='".$email."' AND confirmed=1";
+           FROM ".$CONFIG["DB_TABLE"]["USER"]." WHERE email='".$email."'";
 	$logger->logInfo($sql);
 	$result = $db->query($sql);
 	$emails = $result->fetchAll(PDO::FETCH_ASSOC);
 	
 	if(empty($emails)){
-		return true; // no users with such confirmed email found, the email is thus unique
+		return true; // no users with such email found, the email is thus unique
 	}
 	else
-		return false; // a user has already confirmed this email, the email is thus NOT unique
+		return false; // a user has already used this email, the email is thus NOT unique
 }
 
 ?>
