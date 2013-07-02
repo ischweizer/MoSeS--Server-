@@ -13,7 +13,7 @@ include_once(MOSES_HOME."/include/functions/logger.php");
 $logger->logInfo(" ###################### REGISTRATION ############################## ");
 
 //If the formular is sent
-if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
+if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
     //Import of configurations file
    include_once("./config.php");
    //Import of connections file to database
