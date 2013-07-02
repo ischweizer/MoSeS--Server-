@@ -97,8 +97,15 @@ include_once("./include/_menu.php");
 
     <!-- Main Block -->
     <div class="hero-unit">
+        <?php
+             if(empty($GROUP_MEMBERS)){
+                 ?><h2 class="text-center">You're not a member of any research group.</h2><?php
+             }else{
+                 
+         ?>
         <h2>You're member of group: <?php echo $groupname; ?></h2>
         <button class="btn btn-info" id="btnLeaveGroup" value="<?php echo $_SESSION['USER_ID']; ?>">Leave group</button>
+        <br>
         <h4>This group has <?php 
                 echo $group_members_count > 1 ? $group_members_count.' members' : '1 member (you)' 
             ?> with <?php 
@@ -182,7 +189,10 @@ include_once("./include/_menu.php");
               <?php
                    }
                ?>
-            </div> 
+            </div>
+            <?php
+                 } // end of else
+             ?> 
     </div>
     <!-- / Main Block -->
     
@@ -200,15 +210,16 @@ include_once("./include/_footer.php");
 
 $('#btnLeaveGroup').click(function(){
     $.ajax({
-        dataType: "POST",
+        type: "POST",
         url: 'content_provider.php',
         data: {'leaveGroup': $('#btnLeaveGroup').val()},
         success: function(result){
-            if(result == '0'){
-                alert('Wow! alles ok!');
+            if(result){
+                $('.hero-unit').html('<h3 class="text-center">You left the group '+ result +'!</h3>');
             }
         }
        });
+       return false;
 });
 
 </script>
