@@ -51,8 +51,7 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
 ?>  
 
 <!-- Main Block -->
-    <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
-<!--         <h2>Registration</h2> -->
+    <div class="hero-unit">
         <?php
                            
                 if(isset($USER_CONFIRMED) && $USER_CONFIRMED){
