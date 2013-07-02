@@ -5,84 +5,96 @@ ob_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']))
     header("Location: " . dirname($_SERVER['PHP_SELF'])."/");   
-    
+
 include_once("./config.php");
 include_once("./include/functions/func.php");
 include_once("./include/functions/dbconnect.php");
 
-$sql = 'SELECT u.rgroup, rg.members 
-        FROM '. $CONFIG['DB_TABLE']['USER'] .' u 
-        LEFT JOIN '. $CONFIG['DB_TABLE']['RGROUP'] .' rg 
-        ON u.rgroup=rg.name 
-        WHERE u.userid='. $_SESSION['USER_ID'];
+$CREATE = 0;
+  
+// user want to create or to join a group
+if(isset($_GET['m']) && $_GET['m'] == 'new'){
+    
+   $CREATE = 1; 
 
-$result = $db->query($sql);
-$row = $result->fetch(PDO::FETCH_ASSOC);
+}else{  
 
-$group_members_array_ids = json_decode($row['members']);
-$group_members_count = count($group_members_array_ids);
-$groupname = $row['rgroup'];
-$GROUP_MEMBERS = array();
-$group_device_count = 0;
-$group_has_private_apks = '';
-$GROUP_UNIQUE_DEVICES = array();
+    $CREATE = 0;
+    
+    $sql = 'SELECT u.rgroup, rg.members 
+            FROM '. $CONFIG['DB_TABLE']['USER'] .' u 
+            LEFT JOIN '. $CONFIG['DB_TABLE']['RGROUP'] .' rg 
+            ON u.rgroup=rg.name 
+            WHERE u.userid='. $_SESSION['USER_ID'];
 
-if(!empty($group_members_array_ids)){
- foreach($group_members_array_ids as $member_id){
-             
-     $sql = 'SELECT * 
-             FROM '. $CONFIG['DB_TABLE']['USER'] .' u 
-             WHERE u.userid='. $member_id;
-             
-     $result = $db->query($sql);
-     $user_info = $result->fetch(PDO::FETCH_ASSOC);
-     
-     if(!empty($user_info)){
-         $user_info['NUM_OF_DEVICES'] = 0;
-         $GROUP_MEMBERS[] = $user_info;
-     }
-     
-     /*
-     * Requesting user's devices
-     */
-     
-     $sql = 'SELECT h.hwid, h.uid, h.uniqueid, h.modelname, h.androidversion, h.c2dm  
-             FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .' h
-             WHERE h.uid='. $member_id;
-             
-     $result = $db->query($sql);
-     $user_devices = $result->fetchAll(PDO::FETCH_ASSOC);
-     
-     if(!empty($user_devices)){
-         $group_device_count += count($user_devices);
-         $user_info['NUM_OF_DEVICES'] = $group_device_count;
-         $GROUP_MEMBERS[count($GROUP_MEMBERS)-1] = $user_info;
-         
-         $tmp_unique_devices = array();
-         foreach($user_devices as $device){
-              if(!in_array($device['uniqueid'], $tmp_unique_devices)){
-                  $tmp_unique_devices[] = $device['uniqueid'];
-                  $GROUP_UNIQUE_DEVICES[] = $device;
-              }
-         } 
-     }
-     
-     $apk_sql = "SELECT apktitle 
-                 FROM ".$CONFIG['DB_TABLE']['APK']. " 
-                 WHERE locked=1 AND userid=" . $member_id;
+    $result = $db->query($sql);
+    $row = $result->fetch(PDO::FETCH_ASSOC);
+
+    $group_members_array_ids = json_decode($row['members']);
+    $group_members_count = count($group_members_array_ids);
+    $groupname = $row['rgroup'];
+    $GROUP_MEMBERS = array();
+    $group_device_count = 0;
+    $group_has_private_apks = '';
+    $GROUP_UNIQUE_DEVICES = array();
+
+    if(!empty($group_members_array_ids)){
+     foreach($group_members_array_ids as $member_id){
                  
-     $req_apk = $db->query($apk_sql);
-     $apk_rows = $req_apk->fetchAll();
-     
-     if(!empty($apk_rows)){
-         $i=0;
-         foreach($apk_rows as $apk){
-            $group_has_private_apks .= $i > 0 ? ", " : "";
-            $group_has_private_apks .= $apk['apktitle'];
-            $i++;
-        }
+         $sql = 'SELECT * 
+                 FROM '. $CONFIG['DB_TABLE']['USER'] .' u 
+                 WHERE u.userid='. $member_id;
+                 
+         $result = $db->query($sql);
+         $user_info = $result->fetch(PDO::FETCH_ASSOC);
+         
+         if(!empty($user_info)){
+             $user_info['NUM_OF_DEVICES'] = 0;
+             $GROUP_MEMBERS[] = $user_info;
+         }
+         
+         /*
+         * Requesting user's devices
+         */
+         
+         $sql = 'SELECT h.hwid, h.uid, h.uniqueid, h.modelname, h.androidversion, h.c2dm  
+                 FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .' h
+                 WHERE h.uid='. $member_id;
+                 
+         $result = $db->query($sql);
+         $user_devices = $result->fetchAll(PDO::FETCH_ASSOC);
+         
+         if(!empty($user_devices)){
+             $group_device_count += count($user_devices);
+             $user_info['NUM_OF_DEVICES'] = $group_device_count;
+             $GROUP_MEMBERS[count($GROUP_MEMBERS)-1] = $user_info;
+             
+             $tmp_unique_devices = array();
+             foreach($user_devices as $device){
+                  if(!in_array($device['uniqueid'], $tmp_unique_devices)){
+                      $tmp_unique_devices[] = $device['uniqueid'];
+                      $GROUP_UNIQUE_DEVICES[] = $device;
+                  }
+             } 
+         }
+         
+         $apk_sql = "SELECT apktitle 
+                     FROM ".$CONFIG['DB_TABLE']['APK']. " 
+                     WHERE locked=1 AND userid=" . $member_id;
+                     
+         $req_apk = $db->query($apk_sql);
+         $apk_rows = $req_apk->fetchAll();
+         
+         if(!empty($apk_rows)){
+             $i=0;
+             foreach($apk_rows as $apk){
+                $group_has_private_apks .= $i > 0 ? ", " : "";
+                $group_has_private_apks .= $apk['apktitle'];
+                $i++;
+            }
+         }
      }
- }
+    }
 }
 
 //Import of the header  
@@ -98,6 +110,27 @@ include_once("./include/_menu.php");
     <!-- Main Block -->
     <div class="hero-unit">
         <?php
+            if($CREATE == 1){
+                ?><h2>Join to a research group or create one</h2>
+                <label class="radio">
+                  <input type="radio" name="groupRadios" id="optionsRadios1" value="createGroup" checked>
+                  Create
+                </label>
+                <label class="radio">
+                  <input type="radio" name="groupRadios" id="optionsRadios2" value="joinGroup">
+                  Join
+                </label>
+                <br>
+                <label>Enter name for research group
+                    <input type="text" class="input-block-level" placeholder="Name of group" id="group_name" name="group_name">
+                </label>
+                <label>Enter password
+                    <input type="password" class="input-block-level" placeholder="Password" id="group_password" name="group_password">
+                </label>
+                <button class="btn btn-warning" id="btnCreateJoinGroup" value="<?php echo $_SESSION['USER_ID']; ?>">GO</button><?php
+                
+            }else{
+        
              if(empty($GROUP_MEMBERS)){
                  ?><h2 class="text-center">You're not a member of any research group.</h2><?php
              }else{
@@ -192,6 +225,7 @@ include_once("./include/_menu.php");
             </div>
             <?php
                  } // end of else
+            }
              ?> 
     </div>
     <!-- / Main Block -->
@@ -221,5 +255,60 @@ $('#btnLeaveGroup').click(function(){
        });
        return false;
 });
+
+$('#btnCreateJoinGroup').click(function(e){        
+    
+    var clickedButton = $(this);
+    
+    clickedButton.removeClass('btn-warning');
+    clickedButton.attr('disabled', true);
+    clickedButton.text('Working...');
+    
+    // create group ajax
+    if($('#optionsRadios1').is(':checked')){
+        $.ajax({
+            type: "POST",
+            url: "content_provider.php",
+            data: { 'createGroup': clickedButton.val(),
+                    'group_name': $('#group_name').val(),
+                    'group_password': $('#group_password').val()}
+        }).done(function(result) {
+            handleGroupServerAnswer(result);
+        });
+    }
+    
+    // join group ajax
+    if($('#optionsRadios2').is(':checked')){
+        $.ajax({
+            type: "POST",
+            url: "content_provider.php",
+            data: { 'joinGroup': clickedButton.val(),
+                    'group_name': $('#group_name').val(),
+                    'group_password': $('#group_password').val()}
+        }).done(function(result) {
+           handleGroupServerAnswer(result);
+        });
+    }    
+    
+    e.preventDefault();
+});
+
+function handleGroupServerAnswer(result){
+    switch(result){
+        case '1':   $('.hero-unit').html('<h2 class="text-center">You successfully joined a group!</h2>'); 
+                    break;
+        case '2':   $('.hero-unit').html('<h2 class="text-center">Error: That name already exists!</h2>'); 
+                    break;
+        case '3':   $('.hero-unit').html('<h2 class="text-center">You successfully created a group!</h2>');
+                    break;
+        case '4':   $('.hero-unit').html('<h2 class="text-center">Error: Entered group doesn\'t exist!</h2>');
+                    break;
+        default:    alert('Something went wrong! Try again later.');
+                    $('#btnCreateJoinGroup').addClass('btn-warning');
+                    $('#btnCreateJoinGroup').attr('disabled', false);
+                    $('#btnCreateJoinGroup').text('OK');
+                    break;
+    }
+}
 
 </script>

@@ -41,7 +41,7 @@
                         <a href="group.php">View</a>
                     </li>
                     <li>
-                        <a href="#">Create</a>
+                        <a href="group.php?m=new">Join/Create</a>
                     </li>
                 </ul>
             </li>
