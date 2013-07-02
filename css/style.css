@@ -5,6 +5,16 @@ body {
     height: 100%;
 }
 
+/* Hero unit tweak */
+.hero-unit {
+    font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+}
+
+#btnLeaveGroup {
+    float: right; 
+    margin-top: -30pt;
+}
+
 /* Custom container */
 .container {
     margin: 0 auto;

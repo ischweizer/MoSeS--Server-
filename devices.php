@@ -52,7 +52,7 @@ include_once("./include/_menu.php");
 ?>
 
     <!-- Main Block -->
-    <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
+    <div class="hero-unit">
         <h2>Devices</h2>
             <table class="table table-striped">
               <thead>
