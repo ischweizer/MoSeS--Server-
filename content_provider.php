@@ -256,7 +256,7 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
 		$from = "admin@moses.tk.informatik.tu-darmstadt.de";
 		$message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
 		$message .= "Please follow this link to confirm your registration: ";
-		$message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
+		$message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/registration.php" ."?confirm=". $CONFIRM_CODE;
 		
 		$headers = "From: $from";
 		$sent = mail($to, $subject, $message, $headers);

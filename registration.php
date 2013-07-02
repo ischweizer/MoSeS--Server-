@@ -60,27 +60,12 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
                     <div class="registration_form">
                         <fieldset>
                             <legend>Confirmed!</legend>
-                            <label>Your registration was successfully confirmed.</label>
-                            <label>You can now log in.</label>
+                            <h4>You have successfully confirmed your registration. You can now log in.</h4>
                         </fieldset>
                     </div>
                    
                    <?php 
                 }
-           
-//                 if(isset($USER_CREATED) && $USER_CREATED == 1){
-//                    ?>
-                   
-<!--             <div class="registration_form"> -->
-<!--                 <fieldset> -->
-<!--                     <legend>Registered</legend> -->
-<!--                     <label for="name" >Your registration was successful!</label> -->
-<!--                     <label for="name" >You will receive an e-mail for confirmation of your registration.</label> -->
-<!--                 </fieldset> -->
-<!--             </div> -->
-                   
-                   <?php       
-//                 }
                 
                 if(!(isset($USER_CONFIRMED) && $USER_CONFIRMED)){
             ?>
