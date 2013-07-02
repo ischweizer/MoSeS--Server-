@@ -287,6 +287,7 @@ $(document).ready(function() {
 			/*
 			 * Check the uniqueness of the email only if previous validation found no errors
 			 */
+			var emailAddress = $('#email').val();
 			$.ajax({
 	            type: "POST",
 	            url: "content_provider.php",
@@ -295,10 +296,18 @@ $(document).ready(function() {
 	            	switch(result){
 	            	case '0':
 	            		// the email is unique, the email has been sent
-	            		alert("alles OK!");
+	            		// inform the user
+	            		var fieldset = document.getElementById("registration_fieldset");
+	            		// remove all children except legend
+	            		while(fieldset.lastChild && fieldset.lastChild.tagName != "LEGEND")
+	            			fieldset.removeChild(fieldset.lastChild);
+	            		// add the new child containing the message
+	            		var message = document.createElement("h4");
+	            		message.innerHTML="We have sent an email for confirmation to <i>" + emailAddress +"</i>";
+	            		fieldset.appendChild(message);
 	            		break;
 	        		case '1':
-//            			// the email is not unique
+            			// the email is not unique
             			$("#email").parents(".control-group").removeClass('success');
                 		$("#email").parents(".control-group").addClass('error');
                 		// add the span
@@ -323,12 +332,25 @@ $(document).ready(function() {
 	            		break;
 	        		case '2':
 	        			// problem sending the email
-	        			alert("there was a problem sending your email :(");
+	        			var fieldset = document.getElementById("registration_fieldset");
+	            		// remove all children except legend
+	            		while(fieldset.lastChild && fieldset.lastChild.tagName != "LEGEND")
+	            			fieldset.removeChild(fieldset.lastChild);
+	            		// add the new child containing the message
+	            		var message = document.createElement("h4");
+	            		message.innerHTML="There was a problem sending an email for confirmation. We are sorry :(";
+	            		fieldset.appendChild(message);
 	        			break;
 	        		default:
 	        			// unknown error
-	        			alert("An unknown error has occured. We are sorry.");
-	        		}     
+	        			var fieldset = document.getElementById("registration_fieldset");
+	            		// remove all children except legend
+	            		while(fieldset.lastChild && fieldset.lastChild.tagName != "LEGEND")
+	            			fieldset.removeChild(fieldset.lastChild);
+	            		// add the new child containing the message
+	            		var message = document.createElement("h4");
+	            		message.innerHTML="An unknown error has occured. We are sorry :(";
+	            		}     
 	            	}
 	            });
 			}
