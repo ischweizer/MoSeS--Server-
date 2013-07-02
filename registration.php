@@ -8,9 +8,13 @@ if(isset($_SESSION['USER_LOGGED_IN']))
 // include header
 include_once("./include/_header.php");
 
+include_once("./config.php");
+include_once(MOSES_HOME."/include/functions/logger.php");
+$logger->logInfo(" ###################### REGISTRATION ############################## ");
+
 //If the formular is sent
 if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
-    //Import of configuration?s file
+    //Import of configurations file
    include_once("./config.php");
    //Import of connections file to database
    include_once("./include/functions/dbconnect.php"); 
@@ -38,155 +42,6 @@ if(!isset($_POST["submitted"]) && isset($_GET["confirm"]) && strlen(trim($_GET["
    }
 }
 
-if(isset($_POST["submitted"])){
-  
-  include_once("./config.php");
-  include_once("./include/functions/dbconnect.php");
-  
-  $USER_CREATED = 0;
-  $LOGIN_EXISTS = 1;    // default 1 because of fault tolerance
-  $ERROR_REGFORM = array();
-  
-  // init
-  $FIRSTNAME = '';
-  $LASTNAME = '';
-  $EMAIL = '';
-  $LOGIN = '';
-  $PASSWORD = '';
-  
-  if(!isset($_POST["firstname"])){
-      $ERROR_REGFORM[] = "Please, enter your firstname!";
-  }else{
-      
-     $_POST["firstname"] = trim($_POST["firstname"]);
-     if(empty($_POST["firstname"])){
-        $ERROR_REGFORM[] = "Please, enter your firstname!";    
-     }
-  }
-  
-  if(!isset($_POST["lastname"])){
-      $ERROR_REGFORM[] = "Please, enter your lastname!";
-  }else{
-    
-     $_POST["lastname"] = trim($_POST["lastname"]);
-     if(empty($_POST["lastname"])){
-        $ERROR_REGFORM[] = "Please, enter your lastname!";    
-     }
-  }
-  
-  if(!isset($_POST["email"])){
-      $ERROR_REGFORM[] = "Please, enter your E-mail!";
-  }else{
-    
-     $_POST["email"] = trim($_POST["email"]);
-                                  
-     // really better than !preg_match( "/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/", $_POST["email"] ) ????
-     if(empty($_POST["email"]) || !filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
-        $ERROR_REGFORM[] = "Please, enter valid E-mail!";    
-     }
-  }
-  
-  if(!isset($_POST["login"])){
-      $ERROR_REGFORM[] = "Please, enter your login!";
-  }else{
-    
-     $_POST["login"] = trim($_POST["login"]); 
-     if(empty($_POST["login"]) || !preg_match("/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/", $_POST["login"])){
-        $ERROR_REGFORM[] = "Please, enter valid login!";    
-     }
-  }
-  
-  if(!isset($_POST["password"])){
-      $ERROR_REGFORM[] = "Please, enter your password!";   
-  }else{
-    
-     $_POST["password"] = trim($_POST["password"]); 
-     if(empty($_POST["password"])){
-        $ERROR_REGFORM[] = "Please, enter your password!";   
-     } 
-  }
-  
-  if(count($ERROR_REGFORM) == 0){
-      
-      $FIRSTNAME = $_POST["firstname"];
-      $LASTNAME = $_POST["lastname"];
-      $EMAIL = $_POST["email"];
-      $LOGIN = $_POST["login"];
-      $PASSWORD = $_POST["password"];
-      $CUR_TIME = time();
-      $CONFIRM_CODE = md5($EMAIL);
-      
-      $sql = "SELECT userid 
-              FROM ". $CONFIG['DB_TABLE']['USER'] ." 
-              WHERE login = '". $LOGIN ."'";
-      
-      $result = $db->query($sql);
-      $row = $result->fetch();
-
-      if(!empty($row)){
-          $USER_CREATED = 0;
-          $LOGIN_EXISTS = 1;
-          
-          $ERROR_REGFORM[] = "That login already exists! Please choose another one.";
-          
-      }else{
-          
-          $sql = "SELECT userid 
-                  FROM ". $CONFIG['DB_TABLE']['USER'] ." 
-                  WHERE email = '". $EMAIL ."'";
-          
-          $result = $db->query($sql);
-          $row = $result->fetch();
-
-          if(!empty($row)){
-              
-              $USER_CREATED = 0;
-              $LOGIN_EXISTS = 1;
-              
-              $ERROR_REGFORM[] = "That E-mail already exists! Please choose another one.";
-              
-          }else{
-              
-            $LOGIN_EXISTS = 0;
-          
-              // we have no duplicate logins
-              // so we can insert new entry
-
-             $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['USER'] ." (usergroupid, firstname, lastname, 
-                                                      login, password, hash, usertitle,
-                                                      email, ipaddress, lastactivity, 
-                                                      joindate, passworddate)
-                          VALUES 
-                          (0, '". $FIRSTNAME ."', '". $LASTNAME ."',
-                          '". $LOGIN ."', '". $PASSWORD ."', '". $CONFIRM_CODE ."', '". $USER_TITLE ."',
-                          '". $EMAIL ."', '". $_SERVER["REMOTE_ADDR"] ."', ". $CUR_TIME .",
-                          ". $CUR_TIME .", ". $CUR_TIME .")";
-              
-              $db->exec($sql);
-              
-              $USER_CREATED = 1;  
-                 
-              // compose email to user                                        
-              $to = $EMAIL; 
-              $subject = "MoSeS: Please confirm your registration"; 
-              $from = "admin@moses.tk.informatik.tu-darmstadt.de"; 
-                  
-              $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
-              $message .= "Please follow this link to confirm your registration: ";
-              $message .= "http://". $_SERVER["SERVER_NAME"] . $_SERVER["PHP_SELF"] ."?confirm=". $CONFIRM_CODE;
-               
-              $headers = "From: $from"; 
-              $sent = mail($to, $subject, $message, $headers); 
-              
-              // sending was successful?
-              if(!$sent) {
-                  die("We encountered an error sending your mail"); 
-              }      
-          }
-      } 
-  } 
-}
-  
 ?>
   
 <title>Hauptseite von MoSeS - Registration</title>
@@ -205,8 +60,8 @@ if(isset($_POST["submitted"])){
                     <div class="registration_form">
                         <fieldset>
                             <legend>Confirmed!</legend>
-                            <label>Your registration was successful confirmed.</label>
-                            <label>You may now log in into MoSeS.</label>
+                            <label>Your registration was successfully confirmed.</label>
+                            <label>You can now log in.</label>
                         </fieldset>
                     </div>
                    
@@ -218,9 +73,9 @@ if(isset($_POST["submitted"])){
                    
             <div class="registration_form">
                 <fieldset>
-                    <legend>Registration</legend>
-                    <label for="name" >Your registration was successful.</label>
-                    <label for="name" >You will receive an e-mail with confirmation of registration.</label>
+                    <legend>Registered</legend>
+                    <label for="name" >Your registration was successful!</label>
+                    <label for="name" >You will receive an e-mail for confirmation of your registration.</label>
                 </fieldset>
             </div>
                    
@@ -282,18 +137,18 @@ if(isset($_POST["submitted"])){
                     </div>
                     <div class="clear"></div>
                     <?php
-                         if(count($ERROR_REGFORM) > 0){
-                     ?>
+//                          if(count($ERROR_REGFORM) > 0){
+//                      ?>
                         <ul class="error_regform"><?php
                         
-                        foreach($ERROR_REGFORM as $err){
-                           echo "<li>". $err ."</li>"; 
-                        }
+//                         foreach($ERROR_REGFORM as $err){
+//                            echo "<li>". $err ."</li>"; 
+//                         }
                         
                         ?></ul>
                     <?php
-                         }
-                     ?>
+//                          }
+//                      ?>
                      <div class="control-group">
                      	<label class="control-label"></label>
                      	<div class="controls">
@@ -307,7 +162,7 @@ if(isset($_POST["submitted"])){
             <?php
             }
         ?>
-        <br />
+        <br/>
     </div>
     <!-- / Main Block -->
     

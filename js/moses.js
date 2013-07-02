@@ -127,7 +127,6 @@ $(document).ready(function() {
      var ind=theCookie.indexOf(" "+cookieName+"=");
      
      if (ind==-1) ind=theCookie.indexOf(";"+cookieName+"=");
-     //alert(ind);
      if (ind==-1 || cookieName=="") return "";
      var ind1=theCookie.indexOf(";",ind+1);
      if (ind1==-1) ind1=theCookie.length; 
@@ -288,53 +287,58 @@ $(document).ready(function() {
 			/*
 			 * Check the uniqueness of the email only if previous validation found no errors
 			 */
-			var enteredText = $("#email").val();
 			$.ajax({
 	            type: "POST",
 	            url: "content_provider.php",
-	            data: {"isEmailUnique":enteredText},
+	            data: $('#registerHere').serialize(),
 	            success: function(result){
-	            	if(result == '0'){
-	            		alert("Ok!");
-	            		}
-	            	else{
-	            		if(result == '1'){
-	            			// the email is not unique
-	            			$("#email").parents(".control-group").removeClass('success');
-	                		$("#email").parents(".control-group").addClass('error');
-	                		// add the span
-	                		var errorSpan = document.createElement("span");
-	                		errorSpan.setAttribute("id", "tempErrorSpan");
-	                		errorSpan.setAttribute("for", "email");
-	                		errorSpan.setAttribute("generated", "true");
-	                		errorSpan.setAttribute("class", "help-inline");
-	                		errorSpan.setAttribute("style", "display: inline-block;");
-	                		errorSpan.innerHTML="Email is already in use, please choose another one";
-	                		var emailInput = document.getElementById("email");
-	                		var oldChild = document.getElementById("tempErrorSpan");
-	                		if(oldChild != null)
-	                			emailInput.parentNode.replaceChild(errorSpan, oldChild);
-	                		else
-	                			emailInput.parentNode.appendChild(errorSpan);
-	                		
-	                		// reenable the button
-	                		clickedButton.addClass('btn-success');
-		            		clickedButton.attr('disabled', false);
-		            		clickedButton.text("Create account");
-	            			}
-	            		}
+	            	switch(result){
+	            	case '0':
+	            		// the email is unique, the email has been sent
+	            		alert("alles OK!");
+	            		break;
+	        		case '1':
+//            			// the email is not unique
+            			$("#email").parents(".control-group").removeClass('success');
+                		$("#email").parents(".control-group").addClass('error');
+                		// add the span
+                		var errorSpan = document.createElement("span");
+                		errorSpan.setAttribute("id", "tempErrorSpan");
+                		errorSpan.setAttribute("for", "email");
+                		errorSpan.setAttribute("generated", "true");
+                		errorSpan.setAttribute("class", "help-inline");
+                		errorSpan.setAttribute("style", "display: inline-block;");
+                		errorSpan.innerHTML="Email is already in use, please choose another one";
+                		var emailInput = document.getElementById("email");
+                		var oldChild = document.getElementById("tempErrorSpan");
+                		if(oldChild != null)
+                			emailInput.parentNode.replaceChild(errorSpan, oldChild);
+                		else
+                			emailInput.parentNode.appendChild(errorSpan);
+                		
+                		// reenable the button
+                		clickedButton.addClass('btn-success');
+	            		clickedButton.attr('disabled', false);
+	            		clickedButton.text("Create account");
+	            		break;
+	        		case '2':
+	        			// problem sending the email
+	        			alert("there was a problem sending your email :(");
+	        			break;
+	        		default:
+	        			// unknown error
+	        			alert("An unknown error has occured. We are sorry.");
+	        		}     
 	            	}
 	            });
-			
-			
-		}
+			}
 		else{
 			// the validation has failed, reenable the button
     		clickedButton.addClass('btn-success');
     		clickedButton.attr('disabled', false);
     		clickedButton.text("Create account");
 		}
-		
+		e.preventDefault();
 	});
 
 
