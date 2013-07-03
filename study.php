@@ -114,6 +114,13 @@ include_once("./include/_menu.php");
 
     <!-- Main Block -->
     <div class="hero-unit">
+        <?php
+                 if(empty($USER_APKS)){
+                     
+            ?><h2>No user study was created by you.</h2><?php
+                     
+                 }else{
+             ?>
         <h2>Studies</h2>
         <br>
         <div class="accordion" id="accordionFather">
@@ -193,7 +200,9 @@ include_once("./include/_menu.php");
           <?php
                }
            ?>
-        </div>   
+        </div><?php
+        }             
+        ?>   
     </div>
     <!-- / Main Block -->
     
