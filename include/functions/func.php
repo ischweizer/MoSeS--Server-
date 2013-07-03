@@ -77,16 +77,23 @@ function isFilterMatch($filter_array, $apk_sensors_array){
 */
 function getAPILevel($level){
 
-    $API_LEVELS = array(8 => 'API 8: "Froyo" 2.2.x',
-                        9 => 'API 9: "Gingerbread" 2.3.0 - 2.3.2',
-                        10 => 'API 10: "Gingerbread" 2.3.3 - 2.3.7',
-                        11 => 'API 11: "Honeycomb" 3.0',
-                        12 => 'API 12: "Honeycomb" 3.1',
-                        13 => 'API 13: "Honeycomb" 3.2.x',
-                        14 => 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2',
-                        15 => 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4',
-                        16 => 'API 16: "Jelly Bean" 4.1.x',
-                        17 => 'API 17: "Jelly Bean" 4.2.x');
+    $API_LEVELS = array(1 => 'Android 1.0 (API: 1)',
+                        2 => 'Android 1.1 (API: 2)',
+                        3 => '"Cupcake" 1.5 (API: 3)',
+                        4 => '"Donut" 1.6 (API: 4)',
+                        5 => '"Eclair" 2.0 (API: 5)',
+                        6 => '"Eclair" 2.0.1 (API: 6)',
+                        7 => '"Eclair" 2.1 (API: 7)',
+                        8 => '"Froyo" 2.2.x (API: 8)',
+                        9 => '"Gingerbread" 2.3.0 - 2.3.2 (API: 9)',
+                        10 => '"Gingerbread" 2.3.3 - 2.3.7 (API: 10)',
+                        11 => '"Honeycomb" 3.0 (API: 11)',
+                        12 => '"Honeycomb" 3.1 (API: 12)',
+                        13 => '"Honeycomb" 3.2.x (API: 13)',
+                        14 => '"Ice Cream Sandwich" 4.0.0 - 4.0.2 (API: 14)',
+                        15 => '"Ice Cream Sandwich" 4.0.3 - 4.0.4 (API: 15)',
+                        16 => '"Jelly Bean" 4.1.x (API: 16)',
+                        17 => '"Jelly Bean" 4.2.x (API: 17)');
                         
     return $API_LEVELS[$level];
 }
