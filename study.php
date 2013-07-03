@@ -8,80 +8,104 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
     
 include_once("./include/functions/func.php");
 include_once("./config.php");
+include_once("./include/functions/dbconnect.php");
 
-/**
-* Select all user devices
-*/
+
 if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
-       
-       include_once("./include/functions/dbconnect.php");
-       
-       // remove my group
-       if(isset($_GET['remove']))
-       {
-        
-           $RAW_REMOVE_HASH = trim($_GET['remove']);
-           
-           if(is_md5($RAW_REMOVE_HASH)){
-               
-              $APK_REMOVED = 1;
-              $REMOVE_HASH = strtolower($RAW_REMOVE_HASH);
-               
-              // getting userhah for dir later
-              $sql = "SELECT userhash 
-                      FROM apk 
-                      WHERE userid = ". $_SESSION['USER_ID'] . " 
-                      AND apkhash = '". $REMOVE_HASH ."'";
-              
-              $result = $db->query($sql);
-              $row = $result->fetch();
-              
-              if(!empty($row)){
-                  $dir = './apk/' . $row['userhash'];
-                  if(is_dir($dir)){
-                     if(file_exists($dir . '/'. $REMOVE_HASH . '.apk')){
-                         unlink($dir . '/' . $REMOVE_HASH . '.apk');
-                         
-                         if(is_empty_dir($dir)){
-                             rmdir($dir);
-                         }
-                     }
-                  }
-              }
-               
-              // remove entry from DB 
-              $sql = "DELETE FROM apk 
-                             WHERE userid = ". $_SESSION['USER_ID'] . " 
-                             AND apkhash = '". $REMOVE_HASH ."'";
-              
-              $db->exec($sql);
-               
-           }else{
-               $APK_REMOVED = 0;
-           }  
-           
-       }
 
-       // select all entries for particular user
-       $sql = "SELECT * 
-                FROM apk 
-                WHERE userid = ". $_SESSION["USER_ID"];
-                
-       $result = $db->query($sql);
-       $apk_listing = $result->fetchAll();    
-                    
-       if(!empty($apk_listing)){
-           $LIST_APK = 1;
+   // remove APK 
+   if(isset($_GET['remove'])){
+    
+       $RAW_REMOVE_HASH = trim($_GET['remove']);
+       
+       if(is_md5($RAW_REMOVE_HASH)){
+           
+          $APK_REMOVED = 1;
+          $REMOVE_HASH = strtolower($RAW_REMOVE_HASH);
+           
+          // getting userhah for dir later
+          $sql = "SELECT userhash 
+                  FROM apk 
+                  WHERE userid = ". $_SESSION['USER_ID'] . " 
+                  AND apkhash = '". $REMOVE_HASH ."'";
+          
+          $result = $db->query($sql);
+          $row = $result->fetch();
+          
+          if(!empty($row)){
+              $dir = './apk/' . $row['userhash'];
+              if(is_dir($dir)){
+                 if(file_exists($dir . '/'. $REMOVE_HASH . '.apk')){
+                     unlink($dir . '/' . $REMOVE_HASH . '.apk');
+                     
+                     if(is_empty_dir($dir)){
+                         rmdir($dir);
+                     }
+                 }
+              }
+          }
+           
+          // remove entry from DB 
+          $sql = "DELETE FROM apk 
+                         WHERE userid = ". $_SESSION['USER_ID'] . " 
+                         AND apkhash = '". $REMOVE_HASH ."'";
+          
+          $db->exec($sql);
+           
        }else{
-           $LIST_APK = 0;
-       }
-} 
+           $APK_REMOVED = 0;
+       }  
+       
+   }
+     
+   // select all entries for particular user
+   $sql = "SELECT * 
+           FROM apk 
+           WHERE userid = ". $_SESSION["USER_ID"];
+            
+   $result = $db->query($sql);
+   $USER_APKS = $result->fetchAll(PDO::FETCH_ASSOC);
+   
+   /**
+   * Selecting questions related to apk
+   */
+   $APK_QUESTIONS = array();
+   
+   foreach($USER_APKS as $APK){
+      
+       $sql ="SELECT questid 
+              FROM ". $CONFIG['DB_TABLE']['APK_QUEST'] ." 
+              WHERE apkid=" .$APK['apkid'];
+        
+        $req=$db->query($sql);
+        $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+        if(!empty($rows)){
+            
+            $QUESTIONS = array();
+            
+            for($qi = 0; $qi < count($rows); $qi++){
+                
+                $sql ="SELECT name 
+                        FROM ". $CONFIG['DB_TABLE']['QUEST'] ." 
+                        WHERE questid=".$rows[$qi]['questid'];
+                        
+                $req=$db->query($sql);
+                $us_quest = $req->fetch(PDO::FETCH_ASSOC);
+
+                $QUESTIONS[] = $us_quest['name'];
+            }
+            
+            $APK_QUESTIONS[$APK['apkid']] = $QUESTIONS;
+        }
+   }
+}
 
 //Import of the header  
 include_once("./include/_header.php");                   
 ?>
   
-<title>Hauptseite von MoSeS - Devices</title>
+<title>Hauptseite von MoSeS - Studies</title>
 
 <?php  //Import of the menu
 include_once("./include/_menu.php");
@@ -89,37 +113,96 @@ include_once("./include/_menu.php");
 ?>
 
     <!-- Main Block -->
-    <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
-        <h2>Devices</h2>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Model</th>
-                  <th>API</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody id="content"><?php
-                
-                $i=1;
-                foreach($USER_DEVICES as $device){
-                //for(int $i=1; $i<20; )
-                    echo "<tr>";
-                    echo "<td>". $i ."</td>";
-                    echo "<td>". $device['deviceid'] ."</td>";
-                    echo "<td>". $device['modelname'] ."</td>";
-                    echo "<td>". $API_VERSION[$device['androidversion']] ."</td>";
-                    echo '<td><a href="'. $_SERVER['PHP_SELF'] .'?remove='. $device['hwid'] .'" title="Remove device" class="btn btn-warning">Remove</a></td>';
-                    echo "</tr>";
-                    $i++;
-                }
-                         
+    <div class="hero-unit">
+        <?php
+                 if(empty($USER_APKS)){
+                     
+            ?><h2>No user study was created by you.</h2><?php
+                     
+                 }else{
+             ?>
+        <h2>Studies</h2>
+        <br>
+        <div class="accordion" id="accordionFather">
+        <?php
+           for($i=0; $i<count($USER_APKS); $i++){
+               $APK = $USER_APKS[$i];
+        ?>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFather" href="#collapseStudies<?php echo $i; ?>">
+                <?php
+                   echo $APK['apktitle'].' (Filename: '. $APK['apkname'] .')'; 
                 ?>
-              </tbody>
-            </table>
-            <div id="page-selection" class="pagination pagination-centered"></div>
+              </a>
+            </div>
+            <div id="collapseStudies<?php 
+                echo $i;
+                
+                // for selected collapse use "collapse in" for class 
+                ?>" class="accordion-body collapse">
+              <div class="accordion-inner">
+              <?php
+                    $startCriterion = $APK['startcriterion'];
+                    $startDate = (!empty($APK['startdate']) ? 
+                                    $APK['startdate'] : 
+                                    (!empty($startCriterion) ? 
+                                    'Commencement after '. $startCriterion .' user'. 
+                                    ($startCriterion > 1 ? 's' : '') .' join'. 
+                                    ($startCriterion > 1 ? '' : 's') .'.' 
+                                    : 'Commenced while creating '. $APK['apktitle'] .'.'));
+                                    
+                    $runningTime = $APK['runningtime'];
+                    $endDate = (!empty($APK['enddate']) ? 
+                                $APK['enddate'] : 
+                                (!empty($runningTime) ? 
+                                'The termination after '. $runningTime .' from the date of start.' :
+                                'Terminated immediately after creating '. $APK['apktitle'] .'.')); 
+                                
+                    $joinedDevices = 'There '. ($APK['participated_count'] < 2 ? 'is' : 'are') .' '.
+                                               ($APK['participated_count'] == 0 ? 'no' : $APK['participated_count']) .' '.
+                                               ($APK['participated_count'] < 2 ? 'device' : 'devices') .' '.                           
+                                                'currently joined to "'. $APK['apktitle'] .'".';
+              
+                    echo 'Study version: '. $APK['apk_version'] .' <br>';
+                    echo 'Lowest Android version: '. getAPILevel($APK['androidversion']) .' <br>';
+                    echo 'Start: '. $startDate .' <br>';
+                    echo 'End: '. $endDate .' <br>';
+                    echo 'Description: '. $APK['description'] .' <br>';
+                    echo 'This study marked as <strong>'. ($APK['locked'] == 1 ? 'private' : 'public') .'</strong> <br>';
+                    
+                    switch($APK['inviteinstall']){
+                        case '1': echo 'Joining is allowed for invited users. <br>';
+                                break;
+                        case '2': echo 'Joining is allowd from all invited users that installed '. $APK['apktitle'] .'. <br>'; 
+                                break;
+                        case '3': echo 'Joining is allowed from all users that installed '. $APK['apktitle'] .'. <br>';
+                                break;
+                        default: echo 'Something went wrong with retrieving invite install! <br>';
+                    }
+                    
+                    echo 'Max number of participating devices: '. $APK['maxdevice'] .' <br>';
+                    echo $joinedDevices .' <br>';
+                    if(!empty($APK_QUESTIONS[$APK['apkid']])){
+                        echo 'Selected quests: <br>';
+                        echo '<ul>';
+                        foreach($APK_QUESTIONS[$APK['apkid']] as $quests){
+                           echo '<li>'. $quests .'</li>'; 
+                        }
+                        echo '</ul>';
+                    }else{
+                        echo 'No quests were selected for this study! <br>';
+                    }
+                ?>  
+              </div>
+            </div>
+          </div>
+          <?php
+               }
+           ?>
+        </div><?php
+        }             
+        ?>   
     </div>
     <!-- / Main Block -->
     
@@ -132,67 +215,4 @@ include_once("./include/_login.php");
 //Import of the footer
 include_once("./include/_footer.php");
 
-?>
-
-<script type="text/javascript">
-
-/**
-* API Versions
-*/
-
-var API_VERSION = {8: 'API 8: "Froyo" 2.2.x',
-                   9: 'API 9: "Gingerbread" 2.3.0 - 2.3.2',
-                   10: 'API 10: "Gingerbread" 2.3.3 - 2.3.7',
-                   11: 'API 11: "Honeycomb" 3.0',
-                   12: 'API 12: "Honeycomb" 3.1',
-                   13: 'API 13: "Honeycomb" 3.2.x',
-                   14: 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2',
-                   15: 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4',
-                   16: 'API 16: "Jelly Bean" 4.1.x',
-                   17: 'API 17: "Jelly Bean" 4.2.x'};
-
-/**
-* Pagination setup and query
-*/
-var paging = {
-    'pages': <?php echo ((int)(count($USER_DEVICES) / 5)) + 1; ?>,
-    'pageMax': 5,
-    'curPage': 1
-};
-$('#page-selection').bootpag({
-    total: paging['pages'],
-    page: 1,
-    maxVisible: paging['pageMax']
-    }).on('page', function(event, num){    
-        
-       // setting current selected page
-       paging['curPage'] = num;
-       // request json data
-       $.ajax({
-        dataType: "json",
-        url: 'content_provider.php',
-        data: paging,
-        success: function(result){
-            // processing returned data
-            var deviceNumber = (((paging['curPage']-1)*paging['pageMax'])+1);
-            var replaceRows = '';
-            for(var i=0; i<result.length; ++i){
-                replaceRows += '<tr>';
-                replaceRows += '<td>' + (deviceNumber+i) + '</td>';
-                replaceRows += '<td>' + result[i].deviceid + '</td>';
-                replaceRows += '<td>' + result[i].modelname + '</td>';
-                replaceRows += '<td>' + API_VERSION[result[i].androidversion] + '</td>';
-                replaceRows += '<td><a href="devices.php?remove='+ result[i].hwid +'" title="Remove device" class="btn btn-warning">Remove</a></td>';
-                replaceRows += '</tr>';
-            }
-            
-            $('#content').html(replaceRows);
-        }
-       }); 
-});
-   
-</script>
-
-<?php
-  
 ?>
