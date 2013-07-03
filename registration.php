@@ -87,7 +87,7 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
                     <div class="control-group">
 	                    <label for="email" class="control-label">Email</label>
 	                    <div class="controls">
-	                    	<input type="text" name="email" id="email" maxlength="50"/>
+	                    	<input type="text" type="email" name="email" id="email" maxlength="50"/>
 	                    </div>
                     </div>
                     <div class="control-group">

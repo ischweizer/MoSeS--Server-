@@ -377,6 +377,57 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
 }
 
 /**
+ * Checking the correctness of the email provided form on forgot password form and
+ * sending the email to the user if it is.
+ * This functions echoes back:
+ * 		0 if the provided email is known by the server and the email has been sent
+ * 		1 if the email provided by the user is unknown to the server
+ * 		2 the server knows the email, but there has been a problem sending the email (i.e. the mail server did not respond)
+ */
+if(isset($_POST["submitted_forgot"]) && $_POST["submitted_forgot"] == "1"){
+	include_once("./config.php");
+	include_once("./include/functions/dbconnect.php");
+	include_once("./include/functions/logger.php");
+	$logger->logInfo(" ###################### content_provider.php request for checking the email AND sending password forgot email ############################## ");
+
+	// init
+	$FIRSTNAME;
+	$LASTNAME;
+	$EMAIL = $_POST["email_for"];
+	$CUR_TIME = time();
+	$CONFIRM_CODE = md5($EMAIL);
+	if(!isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
+
+		// the server knows the email, get the first and last name
+		$sql = "SELECT firstname, lastname FROM ". $CONFIG['DB_TABLE']['USER'] ." WHERE email='".$EMAIL."'";
+		$result = $db->query($sql);
+		$fsname = $result->fetch();
+		$FIRSTNAME = $fsname['firstname'];
+		$LASTNAME = $fsname['lastname'];
+
+		// compose email to user
+		$to = $EMAIL;
+		$subject = "MoSeS: Password reset";
+		$from = "admin@moses.tk.informatik.tu-darmstadt.de";
+		$message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
+		$message .= "Please follow this link to enter a new password: ";
+		$message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/forgot.php" ."?newpassword=". $CONFIRM_CODE;
+
+		$headers = "From: $from";
+		$sent = mail($to, $subject, $message, $headers);
+
+		// sending was successful?
+		if(!$sent) { // there was a problem sending email
+			echo 2;
+		}
+		else
+			echo 0;
+	}
+	else
+		echo 1; // the email was not found in the database
+}
+
+/**
  * 
  * Returns true if and only if there is a user that has registered the consumed email
  * @param String $email the email that has to be checked for uniquiness
