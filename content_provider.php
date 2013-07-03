@@ -394,7 +394,6 @@ if(isset($_POST["submitted_forgot"]) && $_POST["submitted_forgot"] == "1"){
 	$FIRSTNAME;
 	$LASTNAME;
 	$EMAIL = $_POST["email_for"];
-	$CUR_TIME = time();
 	$CONFIRM_CODE = md5($EMAIL);
 	if(!isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
 
@@ -451,6 +450,26 @@ function isEmailUnique($email, $CONFIG, $db, $logger){
 	}
 	else
 		return false; // a user has already used this email, the email is thus NOT unique
+}
+
+/**
+ * Changes the password. The user is identified by the provided email-hash
+ * This functions echoes back:
+ * 		0 if the password is successfully changed
+ */
+if(isset($_POST["hash"]) && isset($_POST["newPassword"])){
+	include_once("./config.php");
+	include_once("./include/functions/dbconnect.php");
+	include_once("./include/functions/logger.php");
+	$logger->logInfo(" ###################### content_provider.php changing password ############################## ");
+
+	// init
+	$CUR_TIME = time();
+	// update the password
+	$sql = "UPDATE ".$CONFIG["DB_TABLE"]["USER"]." 
+			SET password='".$_POST["newPassword"]."', passworddate=".$CUR_TIME." WHERE hash='".$_POST["hash"]."'";
+	$db->exec($sql);
+	echo "0";
 }
 
 ?>

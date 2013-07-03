@@ -13,36 +13,97 @@ include_once("./include/_header.php");
 
 <?php  
    //Import of menu
-  include_once("./include/_menu.php");  
-?>  
+  include_once("./include/_menu.php");
+  $PASSWORD_RESET = false;
+  //Check if somebody is trying to reset his password
+  if(isset($_GET["newpassword"]) && strlen(trim($_GET["newpassword"])) == 32){
+  	//Import of configurations file
+  	include_once("./config.php");
+  	//Import of connections file to database
+  	include_once("./include/functions/dbconnect.php");
+  	 
+  	$sql = "SELECT userid, confirmed
+           FROM ". $CONFIG['DB_TABLE']['USER'] ."
+           WHERE hash = '". $_GET["newpassword"] ."'";
+  	 
+  	$result = $db->query($sql);
+  	$row = $result->fetch();
+  	 
+  	// allow password change only if user is confirmed (prevents missuse)
+  	if(!empty($row) && $row['confirmed'] != 0){
+  		 
+//   		$sql = "UPDATE ". $CONFIG['DB_TABLE']['USER'] ."
+//               SET confirmed=1, usergroupid=1
+//               WHERE userid=". $row["userid"];
   
-<!-- Shown to the user when he has to enter his email address -->
+//   		$db->exec($sql);
+  
+  		$PASSWORD_RESET = true;
+  		 
+  	}
+  }
+?>  
+
     <div class="hero-unit">
 		<form class="form-horizontal" action="./forgot.php" method="post" accept-charset="UTF-8" id="forgotEmailForm">
 			<fieldset id="forgot_fieldset">
-				<legend>Forgot your credentials? Your are on the right place!</legend>
+<?php
+			  if(!$PASSWORD_RESET){
+?>
+			<!-- Shown to the user when he has to enter his email address -->
+							<legend>Forgot your credentials? Your are on the right place!</legend>
+			                <div class="control-group">
+			                	<label for="email_for" class="control-label">Enter your Email here</label>
+			                    <div class="controls">
+			                    	<input type="email" name="email_for" id="email_for" maxlength="50" />
+			                    </div>
+							</div>
+							<div class="clear"></div>
+							<div class="control-group">
+								<label class="control-label"></label>
+								<div class="controls">
+			                    	<input type="hidden" name="submitted_forgot" id="submitted_forgot" value="1" />
+			                    	<button type="submit" name="submit" class="btn btn-success" id="button_forgot">Yes send me an email</button>
+			                    </div>
+							</div>
+
+<?php 
+}
+else{
+?>
+
+<!-- Shown to the user when he has to reset the password (he gets here by following a link from an email) -->
+				<legend>Enter a new password</legend>
                 <div class="control-group">
-                	<label for="email_for" class="control-label">Enter your Email here</label>
+                	<label for="password_reset" class="control-label">Your new password</label>
                     <div class="controls">
-                    	<input type="email" name="email_for" id="email_for" maxlength="50" />
+                    	<input type="password" name="password_reset" id="password_reset" maxlength="50" />
                     </div>
 				</div>
+				<div class="control-group">
+                    	<label for="password_reset_repeat" class="control-label">Confirm the password</label>
+                   			<div class="controls">
+                    			<input type="password" name="password_reset_repeat" id="password_reset_repeat" maxlength="50"/>
+                    		</div>
+                    </div>
 				<div class="clear"></div>
 				<div class="control-group">
 					<label class="control-label"></label>
 					<div class="controls">
-                    	<input type="hidden" name="submitted_forgot" id="submitted_forgot" value="1" />
-                    	<button type="submit" name="submit" class="btn btn-success" id="button_forgot">I am not a bot</button>
+                    	<input type="hidden" name="reset_password" id="reset_password" value="<?php echo $_GET["newpassword"]; ?>" />
+                    	<button type="reset" name="submit" class="btn btn-success" id="button_forgot">Change password</button>
                     </div>
 				</div>
-			</fieldset>
+<?php
+}
+?>
+		</fieldset>
 		</form>
-	</div>
-        <br />
-        
-    <hr>
+		</div>
+		<br />
+		<hr>
+<?php
 
-<?php 
    //Import of slider to login
   include_once("./include/_login.php");
  //Import of footer
@@ -61,14 +122,30 @@ include_once("./include/_header.php");
 			email_for:{
 					required:true,
 					email: true
-				}
+				},
+				password_reset:{
+					required:true,
+					minlength: 6
+				},
+				password_reset_repeat:{
+					required:true,
+					equalTo: "#password_reset"
+				},
 		},
 		
 		messages:{
 			email_for:{
 				required:"Enter your email address",
 				email:"Enter a valid email address"
-			}
+			},
+			password_reset:{
+				required:"Enter your new password",
+				minlength:"Password must be minimum 6 characters"
+			},
+			password_reset_repeat:{
+				required:"Confirm your new password",
+				equalTo:"Password and Confirm Password must match"
+			},
 		},
 		errorClass: "help-inline",
 		errorElement: "span",
@@ -137,7 +214,7 @@ include_once("./include/_header.php");
                 		// reenable the button
                 		clickedButton.addClass('btn-success');
 	            		clickedButton.attr('disabled', false);
-	            		clickedButton.text("I am not a bot");
+	            		clickedButton.text("Yes send me an email");
 	            		break;
 	        		case '2':
 	        			// problem sending the email
@@ -167,7 +244,7 @@ include_once("./include/_header.php");
 			// the validation has failed, reenable the button
     		clickedButton.addClass('btn-success');
     		clickedButton.attr('disabled', false);
-    		clickedButton.text("I am not a bot");
+    		clickedButton.text("Yes send me an email");
 		}
 		e.preventDefault();
 	});
@@ -182,5 +259,58 @@ include_once("./include/_header.php");
     	if(errorSpan != null)
     		emailInput.parentNode.removeChild(errorSpan);
     });
+
+
+    /**
+     * Changing email password
+     */
+	$("#forgotEmailForm :reset").click(function(e){
+		
+		var clickedButton = $("#button_forgot");
+        clickedButton.removeClass('btn-success');
+        clickedButton.attr('disabled', true);
+        clickedButton.text('Working...');
+		
+		if($("#forgotEmailForm").valid()){
+			/*
+			 * Update the new password, if previous validation returned no errors
+			 */
+			var hash = $("#reset_password").val(); // get the hash
+			var newPassword = $('#password_reset').val();
+			$.ajax({
+	            type: "POST",
+	            url: "content_provider.php",
+	            data: {"hash":hash, "newPassword":newPassword},
+	            success: function(result){
+	            	var fieldset = document.getElementById("forgot_fieldset");
+            		// remove all children except legend
+            		while(fieldset.lastChild && fieldset.lastChild.tagName != "LEGEND")
+            			fieldset.removeChild(fieldset.lastChild);
+            		// add the new child containing the message
+            		var message = document.createElement("h4");
+            		
+	            	switch(result){
+	            	case '0':
+	            		// the password has been updated
+	            		message.innerHTML="MoSeS acknowledged your new password. You can now log in.";
+	            		break;
+	        		default:
+	        			// unknown error
+	            		// add the new child containing the message
+	            		message.innerHTML="An unknown error has occured. We are sorry :(";
+	            		}
+	            	fieldset.appendChild(message);     
+	            	}
+	            });
+			}
+		else{
+			// the validation has failed, reenable the button
+    		clickedButton.addClass('btn-success');
+    		clickedButton.attr('disabled', false);
+    		clickedButton.text("Change password");
+		}
+		e.preventDefault();
+	});
+    
 	
     </script>
