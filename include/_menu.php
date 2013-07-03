@@ -46,10 +46,10 @@
                 </ul>
             </li>
              <li class="dropdown">
-                <a href="#">Studies <b class="caret"></b></a>
+                <a href="study.php">Studies <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#">View</a>
+                        <a href="study.php">View</a>
                     </li>
                     <li>
                         <a href="#">Create</a>
