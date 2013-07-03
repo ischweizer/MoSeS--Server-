@@ -176,12 +176,16 @@ include_once("./include/_menu.php");
                     
                     echo 'Max number of participating devices: '. $APK['maxdevice'] .' <br>';
                     echo $joinedDevices .' <br>';
-                    echo 'Selected quests: <br>';
-                    echo '<ul>';
-                    foreach($APK_QUESTIONS[$APK['apkid']] as $quests){
-                       echo '<li>'. $quests .'</li>'; 
+                    if(!empty($APK_QUESTIONS[$APK['apkid']])){
+                        echo 'Selected quests: <br>';
+                        echo '<ul>';
+                        foreach($APK_QUESTIONS[$APK['apkid']] as $quests){
+                           echo '<li>'. $quests .'</li>'; 
+                        }
+                        echo '</ul>';
+                    }else{
+                        echo 'No quests were selected for this study! <br>';
                     }
-                    echo '</ul>';
                 ?>  
               </div>
             </div>
