@@ -53,7 +53,14 @@ include_once("./include/_menu.php");
 
     <!-- Main Block -->
     <div class="hero-unit">
-        <h2>Devices</h2>
+            <?php
+                 if(empty($USER_DEVICES)){
+                     
+            ?><h2>You have no devices.</h2><?php
+                     
+                 }else{
+             ?>
+            <h2>Devices</h2>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -81,6 +88,9 @@ include_once("./include/_menu.php");
                 ?>
               </tbody>
             </table>
+            <?php
+                 }
+            ?>
             <div id="page-selection" class="pagination pagination-centered"></div>
     </div>
     <!-- / Main Block -->
