@@ -14,9 +14,9 @@ include_once("./include/functions/dbconnect.php");
 if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
 
    // remove APK 
-   if(isset($_GET['remove'])){
-    
-       $RAW_REMOVE_HASH = trim($_GET['remove']);
+   if(isset($_POST['remove']) && !empty($_POST['remove'])){
+       
+       $RAW_REMOVE_HASH = trim($_POST['remove']);
        
        if(is_md5($RAW_REMOVE_HASH)){
            
@@ -56,6 +56,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
            $APK_REMOVED = 0;
        }  
        
+       die('success');
    }
      
    // select all entries for particular user
@@ -284,7 +285,7 @@ include_once("./include/_menu.php");
                     
                     echo '<ul class="apk_control_buttons">';
                     echo '<li><a href="./apk/'. $APK['userhash'] .'/'. $APK['apkhash'] .'.apk" title="Download APP" class="btn btn-success">Download</a></li>';
-                    echo '<li><button class="btn btn-warning" id="btnUpdateStudy">Update</button></li>';
+                    echo '<li><button class="btn btn-warning" id="btnUpdateStudy" title="Update APP">Update</button></li>';
                     
                     if($APK['ustudy_finished'] == 1){
                         echo '<li><a href="'. $_SERVER['PHP_SELF'] .'?m=usquest&id='. $APK['apkid'] .'" title="Result Of Questionnaire" class="btn btn-info">Results</a></li>';
@@ -292,7 +293,7 @@ include_once("./include/_menu.php");
                         echo '<li><a href="'. $_SERVER['PHP_SELF'] .'?m=addquest&id='. $APK['apkid'] .'" title="Add Questionnaire" class="btn btn-info">Add quest</a></li>';
                     }
                     
-                    echo '<li><a href="'. $_SERVER['PHP_SELF'] .'?m=remove&id='. $APK['apkhash'] .'" title="Remove APP" class="btn btn-danger">Remove</a></li>';
+                    echo '<li><button class="btn btn-danger" title="Remove APP" id="btnRemoveStudy" value="'. $APK['apkhash'] .'">Remove</button></li>';
                     echo '</ul>';
                 ?>  
               </div>
@@ -403,6 +404,19 @@ $('#btnUpdateOK').click(function(e){
     });
     
     e.preventDefault();
+});
+
+$('#btnRemoveStudy').click(function(e){
+   
+    if(confirm('Are you sure want to remove this APP?')){
+        // removing APK
+        $.post("study.php", { 'remove': $('#btnRemoveStudy').val() })
+            .done(function() {
+              location.reload();
+              });
+    }
+    
+   e.preventDefault(); 
 });
 
 </script>
