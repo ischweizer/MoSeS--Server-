@@ -55,7 +55,10 @@ $(document).ready(function() {
 
     //When the message box is closed, fade out
     $("#lightbox :submit").click(function(e){
-        
+    	var clickedButton = $(this);
+//        clickedButton.removeClass('btn-warning');
+        clickedButton.attr('disabled', true);
+//        clickedButton.text('Working...');
         
         /* AJAX Login request*/
         $.ajax({
@@ -63,6 +66,12 @@ $(document).ready(function() {
         	url: "content_provider.php",
         	data: $('#lightbox').serialize(), 
         	success: function(result){
+        		if(result != '0'){
+        			// reenable the button
+//            		clickedButton.addClass('btn-warning');
+            		clickedButton.attr('disabled', false);
+//            		clickedButton.text("Sign in");
+        		}
         		switch(result)
 	        		{
 	        		case '0':
@@ -78,6 +87,7 @@ $(document).ready(function() {
 	        	                delCookie('moses_l');
 	        	            } 
 	        	        }
+	        			$("#dim_back").fadeOut();
 	        			document.location.reload();
 	        		  break;
 	        		case '1':
@@ -85,7 +95,7 @@ $(document).ready(function() {
 	        			$('#login_error_message').show();
 	        		  break;
 	        		case '2':
-	        			$('#login_error_message').text('Wrong user name or password!');
+	        			$('#login_error_message').text('Wrong email or password!');
 	        			$('#login_error_message').show();
 	        			break;
 	        		case '3':
@@ -93,7 +103,7 @@ $(document).ready(function() {
 	        			$('#login_error_message').show();
 	        			break;
 	        		case '4':
-	        			$('#login_error_message').text('Missing user name!');
+	        			$('#login_error_message').text('Invalid email!');
 	        			$('#login_error_message').show();
 	        			break;
 	        		default:
