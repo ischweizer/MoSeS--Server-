@@ -73,10 +73,10 @@ function isFilterMatch($filter_array, $apk_sensors_array){
 }
 
 /**
-* Returns name for suplied API level integer
+*  Returns array of APIs
 */
-function getAPILevel($level){
-
+function getAPIArray(){
+    
     $API_LEVELS = array(1 => 'Android 1.0 (API: 1)',
                         2 => 'Android 1.1 (API: 2)',
                         3 => '"Cupcake" 1.5 (API: 3)',
@@ -95,7 +95,22 @@ function getAPILevel($level){
                         16 => '"Jelly Bean" 4.1.x (API: 16)',
                         17 => '"Jelly Bean" 4.2.x (API: 17)');
                         
-    return $API_LEVELS[$level];
+    return $API_LEVELS;
+}
+
+/**
+* Returns name for suplied API level integer
+*/
+function getAPILevel($level){
+    $levels = getAPIArray();
+    return $levels[$level];
+}
+
+/**
+*   Returns count of all APIs
+*/
+function getAllAPIsCount(){                      
+    return count(getAPIArray());
 }
   
 ?>

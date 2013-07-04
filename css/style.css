@@ -19,6 +19,21 @@ body {
     float: right;
 }
 
+
+.control-label {
+    /*cursor: default;*/   
+}
+
+/* Study APK buttos */
+.apk_control_buttons {
+    list-style-type: none;
+}
+
+.apk_control_buttons li {
+    display: inline;
+    margin: 0 10pt;
+}
+
 /* Custom container */
 .container {
     margin: 0 auto;
