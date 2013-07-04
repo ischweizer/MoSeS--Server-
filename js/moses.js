@@ -55,7 +55,10 @@ $(document).ready(function() {
 
     //When the message box is closed, fade out
     $("#lightbox :submit").click(function(e){
-        
+    	var clickedButton = $(this);
+//        clickedButton.removeClass('btn-warning');
+        clickedButton.attr('disabled', true);
+//        clickedButton.text('Working...');
         
         /* AJAX Login request*/
         $.ajax({
@@ -63,6 +66,12 @@ $(document).ready(function() {
         	url: "content_provider.php",
         	data: $('#lightbox').serialize(), 
         	success: function(result){
+        		if(result != '0'){
+        			// reenable the button
+//            		clickedButton.addClass('btn-warning');
+            		clickedButton.attr('disabled', false);
+//            		clickedButton.text("Sign in");
+        		}
         		switch(result)
 	        		{
 	        		case '0':
