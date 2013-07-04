@@ -4,19 +4,20 @@
     	<a class="boxclose" id="boxclose"></a>
         <h2 class="form-signin-heading muted">Please sign in</h2>
 <!--         <div class="control-group error"> -->
-        <input type="text" class="input-block-level" placeholder="Login" name="login">
+<!--         <input type="text" class="input-block-level" placeholder="Login" name="login"> -->
+        <input type="email" class="input-block-level" placeholder="Email" name="email_login">
 <!--         </div> -->
 <!--         <div class="control-group success"> -->
-        <input type="password" class="input-block-level" placeholder="Password" name="password">
+        <input type="password" class="input-block-level" placeholder="Password" name="password_login">
 <!--         </div> -->
         <label class="text-error" id="login_error_message">Hier ist ein Error!</label>
         <label class="checkbox muted">
         <input id="rememberme" type="checkbox" value="remember-me"> Remember me</label>
         <label class="muted" style="margin-top: 15pt; cursor: default;">
-          Don't have login? <a href="registration.php">Register!</a>
+          Not registered? <a href="registration.php">Register!</a>
         </label>
         <label class="muted" style="cursor: default;">
-          Forgot password? <a href="forgot.php">Send E-mail.</a>
+          Password forgotten? <a href="forgot.php">Reset my password</a>
         </label>
         <input type="hidden" name="submit" value="1">
         <button class="btn btn-warning" type="submit">Sign in</button>

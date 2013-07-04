@@ -85,7 +85,7 @@ $(document).ready(function() {
 	        			$('#login_error_message').show();
 	        		  break;
 	        		case '2':
-	        			$('#login_error_message').text('Wrong user name or password!');
+	        			$('#login_error_message').text('Wrong email or password!');
 	        			$('#login_error_message').show();
 	        			break;
 	        		case '3':
@@ -93,7 +93,7 @@ $(document).ready(function() {
 	        			$('#login_error_message').show();
 	        			break;
 	        		case '4':
-	        			$('#login_error_message').text('Missing user name!');
+	        			$('#login_error_message').text('Invalid email!');
 	        			$('#login_error_message').show();
 	        			break;
 	        		default:

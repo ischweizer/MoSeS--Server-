@@ -245,19 +245,19 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 	
     include_once("./config.php");
 	//If the login exists
-	if(isset($_POST["login"]) && !empty($_POST["login"]) && preg_match('/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/', $_POST["login"])){
+	if(isset($_POST["email_login"]) && !empty($_POST["email_login"]) && preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $_POST["email_login"])){
 		//And the password exists
-		if(isset($_POST["password"]) && !empty($_POST["password"])){
+		if(isset($_POST["password_login"]) && !empty($_POST["password_login"])){
 			//Import of the connection�s file to database
 			include_once("./include/functions/dbconnect.php");
 
-			$USER_LOGIN =  $_POST["login"];
-			$USER_PASSWORD =  $_POST["password"];
+			$USER_EMAIL =  $_POST["email_login"];
+			$USER_PASSWORD =  $_POST["password_login"];
 
 			//Select the user
 			$sql = "SELECT *
                   FROM ". $CONFIG['DB_TABLE']['USER'] ."
-                  WHERE login = '". $USER_LOGIN ."'
+                  WHERE email = '". $USER_EMAIL ."'
                   AND password = '". $USER_PASSWORD ."'";
 
 			$result = $db->query($sql);
@@ -274,7 +274,8 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 
 					$_SESSION["USER_ID"] =   $row["userid"];
 					$_SESSION["GROUP_ID"] =  $row["usergroupid"];
-					$_SESSION["LOGIN"] =     $row["login"];
+					$_SESSION["EMAIL"] =	 $row["email"];
+// 					$_SESSION["LOGIN"] =     $row["login"];
 					$_SESSION["PASSWORD"] =  $row["password"];
 					$_SESSION["FIRSTNAME"] = $row["firstname"];
 					$_SESSION["LASTNAME"] =  $row["lastname"];
