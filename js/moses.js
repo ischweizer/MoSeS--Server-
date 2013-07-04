@@ -78,6 +78,7 @@ $(document).ready(function() {
 	        	                delCookie('moses_l');
 	        	            } 
 	        	        }
+	        			$("#dim_back").fadeOut();
 	        			document.location.reload();
 	        		  break;
 	        		case '1':
