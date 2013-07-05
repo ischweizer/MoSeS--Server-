@@ -147,7 +147,8 @@ body {
     position: fixed;
     top: 30%;
     left: 40%;
-    max-width: 450px;
+    max-width: 400px;
+    width: 220pt;
     padding: 19px 29px 29px;
     margin: 0 auto 20px;
     background-color: #333333;
