@@ -309,7 +309,7 @@ if(isset($_GET['m']))
                        
         case 'DEVICE':
         
-                    if(isset($_GET['remove'])){
+                  /*  if(isset($_GET['remove'])){
                         
                         $DEVICE_ID = preg_replace("/\D/", "", $_GET['remove']);
                         
@@ -333,7 +333,7 @@ if(isset($_GET['m']))
                     }else{
                        echo "<meta http-equiv='refresh' content='0;URL=". $_SERVER['HTTP_REFERER'] ."'>"; 
                     }
-        
+                    */
                     break; 
         
         case 'LIST':

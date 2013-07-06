@@ -5,6 +5,14 @@ body {
     height: 100%;
 }
 
+/* Custom Dialog */
+
+.hide {
+    display: none;
+}
+
+/* --------------- */
+
 /* Hero unit tweak */
 .hero-unit {
     font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
@@ -17,6 +25,21 @@ body {
 
 #btnCreateJoinGroup {
     float: right;
+}
+
+
+.control-label {
+    /*cursor: default;*/   
+}
+
+/* Study APK buttos */
+.apk_control_buttons {
+    list-style-type: none;
+}
+
+.apk_control_buttons li {
+    display: inline;
+    margin: 0 10pt;
 }
 
 /* Custom container */
@@ -132,7 +155,8 @@ body {
     position: fixed;
     top: 30%;
     left: 40%;
-    max-width: 450px;
+    max-width: 400px;
+    width: 220pt;
     padding: 19px 29px 29px;
     margin: 0 auto 20px;
     background-color: #333333;

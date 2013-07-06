@@ -8,6 +8,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']))
 include_once("./config.php");
 include_once(MOSES_HOME."/include/functions/func.php");
 include_once(MOSES_HOME."/include/functions/logger.php");
+include_once(MOSES_HOME. "/include/functions/dbconnect.php");
     
 /**
 *  SETTING FILE FOR UPLOAD
@@ -23,7 +24,6 @@ $fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);//ge
 /**
 * DECRYPTING THE NAME OF FILE FROM DATABSE
 */
-include_once(MOSES_HOME. "/include/functions/dbconnect.php");
 
 $sql = "SELECT hash 
         FROM ". $CONFIG['DB_TABLE']['USER'] ." 
@@ -58,23 +58,26 @@ if(!empty($row))
     }
    
 }
-else
-{
+else{
    // no hash for user found
-   header("Location: ucp.php?m=upload&res=0");
+   die('0');
+   //header("Location: ucp.php?m=upload&res=0");
 }
 
 /**
 * Checking for necessary conditions
 */
 if(!in_array($fileExt, $allowedTypes))
-  header("Location: ucp.php?m=upload&res=2");
+    die('2');
+  //header("Location: ucp.php?m=upload&res=2");
  
 if(filesize($_FILES['userfile']['tmp_name']) > $maxFileSize)
-  header("Location: ucp.php?m=upload&res=3");
+    die('3');
+  //header("Location: ucp.php?m=upload&res=3");
        
 if(!is_writable($uploadPath))
-  header("Location: ucp.php?m=upload&res=4");
+    die('4');
+  //header("Location: ucp.php?m=upload&res=4");
  
 chmod($_FILES['userfile']['tmp_name'], 0777);       
 
@@ -86,13 +89,13 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
 {
     
     // permission access rwx to File
-    if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777))
-    {
-       header("Location: ucp.php?m=upload&res=4"); 
+    if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777)){
+        die('4');
+       //header("Location: ucp.php?m=upload&res=4"); 
     }
      
     
-    $logger->logInfo("------------------UPLAOD------------------");
+    $logger->logInfo("------------------ REQUESTED UPLOAD------------------");
     /**
     * Parsing description of APKs
     */
@@ -135,7 +138,7 @@ if(is_uploaded_file($_FILES['userfile']['tmp_name'])
     if($locked == "1")
     {
         $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $CONFIG['DB_TABLE']['RGROUP'],
-            $androidversion, $_SESSION['RGROUP'],$logger);
+                                                            $androidversion, $_SESSION['RGROUP'],$logger);
     }
     else
     {
