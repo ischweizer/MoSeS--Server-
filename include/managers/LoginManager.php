@@ -25,14 +25,14 @@ class LoginManager{
     * and returns the session id assigned to the
     * user, if login successfull, or null if unsuccessful
     *     
-    * @param string $uname
+    * @param string $email
     * @param string $password
     */
-    public static function loginUser($db, $userTable, $aSessionTable, $login, $password, $sessionID){
+    public static function loginUser($db, $userTable, $aSessionTable, $email, $password, $sessionID){
          
         $sql =   "SELECT * 
                       FROM ". $userTable ." 
-                      WHERE login = '". $login ."' AND password = '". $password ."' AND confirmed=1";
+                      WHERE email = '". $email ."' AND password = '". $password ."' AND confirmed=1";
 
         // check if the user is in the table
         $result = $db->query($sql);
