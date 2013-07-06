@@ -56,7 +56,7 @@ include_once("./include/_menu.php");
             <?php
                  if(empty($USER_DEVICES)){
                      
-            ?><h2>You have no devices.</h2><?php
+            ?><h2 class="text-center">You have no devices.</h2><?php
                      
                  }else{
              ?>
@@ -88,10 +88,10 @@ include_once("./include/_menu.php");
                 ?>
               </tbody>
             </table>
+            <div id="page-selection" class="pagination pagination-centered"></div>
             <?php
                  }
             ?>
-            <div id="page-selection" class="pagination pagination-centered"></div>
     </div>
     <!-- / Main Block -->
     
