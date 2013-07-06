@@ -5,6 +5,14 @@ body {
     height: 100%;
 }
 
+/* Custom Dialog */
+
+.hide {
+    display: none;
+}
+
+/* --------------- */
+
 /* Hero unit tweak */
 .hero-unit {
     font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;

@@ -59,6 +59,33 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
        die('success');
    }
      
+   // getting quest results  
+   if(isset($_POST['USQUEST']) && !empty($_POST['USQUEST']))
+    {
+        $apkid = preg_replace("/\D/", "", $_POST['USQUEST']);
+        $show_us_quest = true;
+
+        $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
+        $req = $db->query($sql);
+        $row = $req->fetch();
+        
+        $apkname = $row['apktitle'];
+        
+        include_once("./include/managers/QuestionnaireManager.php");
+        
+        $notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
+            $db,
+            $CONFIG['DB_TABLE']['QUEST'],
+            $CONFIG['DB_TABLE']['APK_QUEST'],
+            $apkid);
+        
+        $chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
+            $db,
+            $CONFIG['DB_TABLE']['QUEST'],
+            $CONFIG['DB_TABLE']['APK_QUEST'],
+            $apkid);
+    }  
+     
    // select all entries for particular user
    $sql = "SELECT * 
            FROM apk 
@@ -122,13 +149,29 @@ include_once("./include/_header.php");
 include_once("./include/_menu.php");
 
 ?>
+    <!-- Custom confirm dialog -->
+    <div id="modal-from-dom" class="modal fade" style="display: none;">
+        <div class="modal-header">
+          <a href="#" class="close">&times;</a>
+          <h3>Remove of study</h3>
+        </div>
+        <div class="modal-body">
+          <p>You are about to remove this study. This procedure is irreversible!</p>
+          <p>Do you want to proceed?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btnConfirmCancel">Cancel</button>
+          <button class="btn btn-danger btnConfirm">Confirm</button>
+        </div>
+    </div>
+    <!-- //////// custom confirm dialog -->
 
     <!-- Main Block -->
     <div class="hero-unit">
         <?php
                  if(empty($USER_APKS)){
                      
-            ?><h2>No user study was created by you.</h2><?php
+            ?><h2 class="text-center">No user study was created by you.</h2><?php
                      
                  }else{
              ?>
@@ -277,25 +320,26 @@ include_once("./include/_menu.php");
                                     <input type="file" name="file">
                                 </div>
                             </div>
-                            <progress style="display: none;"></progress><br>
+                            <progress value="0" style="display: none;"></progress><br>
                             <button class="btn btn-success" id="btnUpdateOK" style="display: none;">OK</button>
                         </fieldset>
                     </form>
-                    <?php 
-                    
-                    echo '<ul class="apk_control_buttons">';
-                    echo '<li><a href="./apk/'. $APK['userhash'] .'/'. $APK['apkhash'] .'.apk" title="Download APP" class="btn btn-success">Download</a></li>';
-                    echo '<li><button class="btn btn-warning" id="btnUpdateStudy" title="Update APP">Update</button></li>';
-                    
+                    <ul class="apk_control_buttons">
+                        <li><a href="./apk/<?php echo $APK['userhash'] .'/'. $APK['apkhash']; ?>.apk" title="Download APP" class="btn btn-success">Download</a></li>
+                        <li><button class="btn btn-warning" id="btnUpdateStudy" title="Update APP">Update</button></li>
+                    <?php
                     if($APK['ustudy_finished'] == 1){
-                        echo '<li><a href="'. $_SERVER['PHP_SELF'] .'?m=usquest&id='. $APK['apkid'] .'" title="Result Of Questionnaire" class="btn btn-info">Results</a></li>';
+                        ?>
+                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Result Of Questionnaire" class="btn btn-info">Results</a></li>
+                        <?php
                     }else{
-                        echo '<li><a href="'. $_SERVER['PHP_SELF'] .'?m=addquest&id='. $APK['apkid'] .'" title="Add Questionnaire" class="btn btn-info">Add quest</a></li>';
+                        ?>
+                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=addquest&id=<?php echo $APK['apkid']; ?>" title="Add Questionnaire" class="btn btn-info">Add quest</a></li>
+                    <?php
                     }
-                    
-                    echo '<li><button class="btn btn-danger" title="Remove APP" id="btnRemoveStudy" value="'. $APK['apkhash'] .'">Remove</button></li>';
-                    echo '</ul>';
-                ?>  
+                    ?>
+                        <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkhash']; ?>">Remove</button></li>
+                    </ul>
               </div>
             </div>
           </div>
@@ -321,6 +365,31 @@ include_once("./include/_footer.php");
 <script src="js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
 
+/* Confirm dialog */
+$('.confirm-delete').click(function(e) {
+    e.preventDefault();
+    $('#modal-from-dom').modal('show'); 
+});
+
+/* Button confirm study deletion */
+$('.btnConfirm').click(function(e){
+
+    // removing APK
+    $.post("study.php", { 'remove': $('.confirm-delete').val() })
+        .done(function() {
+          location.reload();
+    });
+    
+   e.preventDefault(); 
+});
+
+/* Button cancel study deletion */
+$('.btnConfirmCancel, .close').click(function(){
+   $('#modal-from-dom').modal('hide'); 
+});
+/* ------------------- */
+
+/* Showing form data */
 $('#btnUpdateStudy').click(function(){
    $('#android_version').hide();
    $('#start_date').hide();
@@ -333,25 +402,12 @@ $('#btnUpdateStudy').click(function(){
    $('.controls :input').show();
    $('#quests_select').show();
    $('#uploadFile').show();
-   $('progress').show();
    $('#btnUpdateOK').show();
+   
+   $(this).attr('disabled',true);
 });
 
-$('#btnUpdateOK').click(function(){
-   $('#android_version').show();
-   $('#start_date').show();
-   $('#end_date').show();
-   $('#description').show(); 
-   $('#max_devices_number').show();
-   $('#quests').show();  
-                 
-   $('#android_version_select').hide();
-   $('.controls :input').hide();
-   $('#quests_select').hide();
-   $('#uploadFile').hide();
-   $('#btnUpdateOK').hide(); 
-});
-
+/* Datepicker format */
 $('#dp1').datepicker({
   format: 'yyyy-mm-dd'
 });
@@ -359,6 +415,7 @@ $('#dp1').datepicker({
 $('#dp2').datepicker({
   format: 'yyyy-mm-dd'
 });
+/* ---------------- */
 
 $(':file').change(function(){
     var file = this.files[0];
@@ -366,15 +423,33 @@ $(':file').change(function(){
     size = file.size;
     type = file.type;
                                
-    /*if(type.toLowerCase() != 'apk')
-        alert("Only *.apk files are accepted!");
-        */
 });
 
+/* Handling of button send updated study to server and show changes */
 $('#btnUpdateOK').click(function(e){
-    
+   
+   /* Hide and show form stuff */
+   $('#android_version').show();
+   $('#start_date').show();
+   $('#end_date').show();
+   $('#description').show(); 
+   $('#max_devices_number').show();
+   $('#quests').show();
+   $('progress').show();  
+                 
+   $('#android_version_select').hide();
+   $('.controls :input').hide();
+   $('#quests_select').hide();
+   $('#uploadFile').hide();
+   $(this).hide();
+   /* ------------------------ */
+   
+   /* Handling form data */ 
     var formData = new FormData($('form')[0]);
-    $.ajax({
+    
+    alert(formData.max_devices_number);
+    
+    /*$.ajax({
         url: 'upload.php',  //server script to process data
         type: 'POST',
         xhr: function() {  // custom xhr
@@ -393,6 +468,7 @@ $('#btnUpdateOK').click(function(e){
         //beforeSend: beforeSendHandler,
         success: function(){
             $('progress').hide();
+            $('#btnUpdateStudy').attr('disabled',false);
         },
         //error: errorHandler,
         // Form data
@@ -401,22 +477,8 @@ $('#btnUpdateOK').click(function(e){
         cache: false,
         contentType: false,
         processData: false
-    });
+    });*/
     
     e.preventDefault();
 });
-
-$('#btnRemoveStudy').click(function(e){
-   
-    if(confirm('Are you sure want to remove this APP?')){
-        // removing APK
-        $.post("study.php", { 'remove': $('#btnRemoveStudy').val() })
-            .done(function() {
-              location.reload();
-              });
-    }
-    
-   e.preventDefault(); 
-});
-
 </script>
