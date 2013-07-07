@@ -10,133 +10,141 @@ include_once("./include/functions/func.php");
 include_once("./config.php");
 include_once("./include/functions/dbconnect.php");
 
+$CREATE = 0;
 
 if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
 
-   // remove APK 
-   if(isset($_POST['remove']) && !empty($_POST['remove'])){
-       
-       $RAW_REMOVE_HASH = trim($_POST['remove']);
-       
-       if(is_md5($RAW_REMOVE_HASH)){
+   if(isset($_GET['m']) && !empty($_GET['m']) && $_GET['m'] === 'new'){
+     
+      $CREATE = 1; 
+   
+   }else{ 
+    
+       // remove APK 
+       if(isset($_POST['remove']) && !empty($_POST['remove'])){
            
-          $APK_REMOVED = 1;
-          $REMOVE_HASH = strtolower($RAW_REMOVE_HASH);
+           $RAW_REMOVE_HASH = trim($_POST['remove']);
            
-          // getting userhah for dir later
-          $sql = "SELECT userhash 
-                  FROM apk 
-                  WHERE userid = ". $_SESSION['USER_ID'] . " 
-                  AND apkhash = '". $REMOVE_HASH ."'";
-          
-          $result = $db->query($sql);
-          $row = $result->fetch();
-          
-          if(!empty($row)){
-              $dir = './apk/' . $row['userhash'];
-              if(is_dir($dir)){
-                 if(file_exists($dir . '/'. $REMOVE_HASH . '.apk')){
-                     unlink($dir . '/' . $REMOVE_HASH . '.apk');
-                     
-                     if(is_empty_dir($dir)){
-                         rmdir($dir);
+           if(is_md5($RAW_REMOVE_HASH)){
+               
+              $APK_REMOVED = 1;
+              $REMOVE_HASH = strtolower($RAW_REMOVE_HASH);
+               
+              // getting userhah for dir later
+              $sql = "SELECT userhash 
+                      FROM apk 
+                      WHERE userid = ". $_SESSION['USER_ID'] . " 
+                      AND apkhash = '". $REMOVE_HASH ."'";
+              
+              $result = $db->query($sql);
+              $row = $result->fetch();
+              
+              if(!empty($row)){
+                  $dir = './apk/' . $row['userhash'];
+                  if(is_dir($dir)){
+                     if(file_exists($dir . '/'. $REMOVE_HASH . '.apk')){
+                         unlink($dir . '/' . $REMOVE_HASH . '.apk');
+                         
+                         if(is_empty_dir($dir)){
+                             rmdir($dir);
+                         }
                      }
-                 }
+                  }
               }
-          }
+               
+              // remove entry from DB 
+              $sql = "DELETE FROM apk 
+                             WHERE userid = ". $_SESSION['USER_ID'] . " 
+                             AND apkhash = '". $REMOVE_HASH ."'";
+              
+              $db->exec($sql);
+               
+           }else{
+               $APK_REMOVED = 0;
+           }  
            
-          // remove entry from DB 
-          $sql = "DELETE FROM apk 
-                         WHERE userid = ". $_SESSION['USER_ID'] . " 
-                         AND apkhash = '". $REMOVE_HASH ."'";
-          
-          $db->exec($sql);
-           
-       }else{
-           $APK_REMOVED = 0;
-       }  
-       
-       die('success');
-   }
-     
-   // getting quest results  
-   if(isset($_POST['USQUEST']) && !empty($_POST['USQUEST']))
-    {
-        $apkid = preg_replace("/\D/", "", $_POST['USQUEST']);
-        $show_us_quest = true;
+           die('success');
+       }
+         
+       // getting quest results  
+       if(isset($_POST['USQUEST']) && !empty($_POST['USQUEST']))
+        {
+            $apkid = preg_replace("/\D/", "", $_POST['USQUEST']);
+            $show_us_quest = true;
 
-        $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
-        $req = $db->query($sql);
-        $row = $req->fetch();
-        
-        $apkname = $row['apktitle'];
-        
-        include_once("./include/managers/QuestionnaireManager.php");
-        
-        $notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
-            $db,
-            $CONFIG['DB_TABLE']['QUEST'],
-            $CONFIG['DB_TABLE']['APK_QUEST'],
-            $apkid);
-        
-        $chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
-            $db,
-            $CONFIG['DB_TABLE']['QUEST'],
-            $CONFIG['DB_TABLE']['APK_QUEST'],
-            $apkid);
-    }  
-     
-   // select all entries for particular user
-   $sql = "SELECT * 
-           FROM apk 
-           WHERE userid = ". $_SESSION["USER_ID"];
+            $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
+            $req = $db->query($sql);
+            $row = $req->fetch();
             
-   $result = $db->query($sql);
-   $USER_APKS = $result->fetchAll(PDO::FETCH_ASSOC);
-   
-   /**
-   * Selecting questions related to apk
-   */
-   $APK_QUESTIONS = array();
-   
-   foreach($USER_APKS as $APK){
-      
-       $sql ="SELECT questid 
-              FROM ". $CONFIG['DB_TABLE']['APK_QUEST'] ." 
-              WHERE apkid=" .$APK['apkid'];
-        
-        $req=$db->query($sql);
-        $rows = $req->fetchAll(PDO::FETCH_ASSOC);
-        
-        if(!empty($rows)){
+            $apkname = $row['apktitle'];
             
-            $QUESTIONS = array();
+            include_once("./include/managers/QuestionnaireManager.php");
             
-            for($qi = 0; $qi < count($rows); $qi++){
+            $notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
+                $db,
+                $CONFIG['DB_TABLE']['QUEST'],
+                $CONFIG['DB_TABLE']['APK_QUEST'],
+                $apkid);
+            
+            $chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
+                $db,
+                $CONFIG['DB_TABLE']['QUEST'],
+                $CONFIG['DB_TABLE']['APK_QUEST'],
+                $apkid);
+        }  
+         
+       // select all entries for particular user
+       $sql = "SELECT * 
+               FROM apk 
+               WHERE userid = ". $_SESSION["USER_ID"];
                 
-                $sql ="SELECT name 
-                        FROM ". $CONFIG['DB_TABLE']['QUEST'] ." 
-                        WHERE questid=".$rows[$qi]['questid'];
-                        
-                $req=$db->query($sql);
-                $us_quest = $req->fetch(PDO::FETCH_ASSOC);
-
-                $QUESTIONS[] = $us_quest['name'];
-            }
+       $result = $db->query($sql);
+       $USER_APKS = $result->fetchAll(PDO::FETCH_ASSOC);
+       
+       /**
+       * Selecting questions related to apk
+       */
+       $APK_QUESTIONS = array();
+       
+       foreach($USER_APKS as $APK){
+          
+           $sql ="SELECT questid 
+                  FROM ". $CONFIG['DB_TABLE']['APK_QUEST'] ." 
+                  WHERE apkid=" .$APK['apkid'];
             
-            $APK_QUESTIONS[$APK['apkid']] = $QUESTIONS;
-        }
+            $req=$db->query($sql);
+            $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+            
+            if(!empty($rows)){
+                
+                $QUESTIONS = array();
+                
+                for($qi = 0; $qi < count($rows); $qi++){
+                    
+                    $sql ="SELECT name 
+                            FROM ". $CONFIG['DB_TABLE']['QUEST'] ." 
+                            WHERE questid=".$rows[$qi]['questid'];
+                            
+                    $req=$db->query($sql);
+                    $us_quest = $req->fetch(PDO::FETCH_ASSOC);
+
+                    $QUESTIONS[] = $us_quest['name'];
+                }
+                
+                $APK_QUESTIONS[$APK['apkid']] = $QUESTIONS;
+            }
+       }
+       
+       /*
+       * Select all questions for the selection below
+       */
+       
+       $sql = "SELECT * 
+              FROM ". $CONFIG['DB_TABLE']['QUEST'];
+            
+        $result=$db->query($sql);
+        $ALL_QUESTS = $result->fetchAll(PDO::FETCH_ASSOC);
    }
-   
-   /*
-   * Select all questions for the selection below
-   */
-   
-   $sql = "SELECT * 
-          FROM ". $CONFIG['DB_TABLE']['QUEST'];
-        
-    $result=$db->query($sql);
-    $ALL_QUESTS = $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //Import of the header  
@@ -154,12 +162,133 @@ include_once("./include/_confirm.php");
     <!-- Main Block -->
     <div class="hero-unit">
         <?php
-                 if(empty($USER_APKS)){
+        
+        if($CREATE == 1){
+        /**
+        * CREATE STUDY/UPLOAD APK FORM
+        */
+        ?>
+        <h2>Create user study</h2>
+        <br>
+        <form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8" id="createAPKForm">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label">Study name: </label>
+                    <div class="controls">
+                        <input type="text" name="apk_title" id="study_name" maxlength="50" placeholder="Study name" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Lowest Android version: </label>
+                    <div class="controls">
+                        <select id="android_version_select">
+                          <?php
+                             for($i=1; $i<=getAllAPIsCount(); $i++){ 
+                          ?>
+                          <option value="<?php echo $i; ?>"><?php echo getAPILevel($i); ?></option>
+                          <?php
+                             }
+                          ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <label><input type="radio" name="study_period" value="1" checked="checked"> Study period from date to date</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Start: </label>
+                    <div class="controls">
+                        <input type="text" name="start_date" id="dp1" maxlength="50" placeholder="yyyy-mm-dd" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">End: </label>
+                    <div class="controls">
+                        <input type="text" name="end_date" id="dp2" maxlength="50" placeholder="yyyy-mm-dd" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <label><input type="radio" name="study_period" value="2"> Study for minimum devices and running period</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Minimum number of devices to start after: </label>
+                    <div class="controls">
+                        <input type="text" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Running period:</label>
+                    <div class="controls">
+                        <input type="text" name="running_time" maxlength="50" placeholder="Number" disabled="disabled" />
+                        <select name="running_time_value" disabled="disabled">
+                            <option value="h">Hours</option>
+                            <option value="d">Days</option>
+                            <option value="m">Months</option>
+                            <option value="y">Years</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Description: </label>
+                    <div class="controls">
+                        <textarea rows="3" cols="20" name="description"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Setup types</label>
+                    <div class="controls">
+                        <label><input type="radio" id="r1" name="setup_types" value="1" /> Invite only</label>
+                        <label><input type="radio" name="setup_types" value="2" checked="checked" /> Invite & Install (Default)</label>
+                        <label><input type="radio" name="setup_types" value="3" /> Install only</label>
+                    </div>
+                </div>                
+                <div class="control-group">
+                    <label class="control-label">Max participating devices: </label>
+                    <div class="controls">
+                        <input type="text" name="max_devices_number" maxlength="10" placeholder="Max devices" />
+                    </div>
+                </div>
+                <div class="control-group" id="uploadFile">
+                    <label class="control-label">Select an APP: </label>
+                    <div class="controls">
+                        <input type="file" name="file">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <progress value="0" style="display: none;"></progress>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <button class="btn btn-success" id="btnCreateOK">Create study</button>
+                    </div>
+                </div>
+            </fieldset>
+            <input name="study_screate" type="hidden" value="2975">
+        </form>
+        <?php 
+         
+        }elseif(empty($USER_APKS)){
+        /**
+        * EMPTY USER APK/STUDY LIST
+        */
                      
-            ?><h2 class="text-center">No user study was created by you.</h2><?php
+        ?><h2 class="text-center">No user study was created by you.</h2><?php
                      
-                 }else{
-             ?>
+        }else{
+        /**
+        * POPULATE USER APK LIST, EDIT FUNCTIONS, REMOVE ETC
+        */
+        ?>
         <h2>Studies</h2>
         <br>     
         <div class="accordion" id="accordionFather">
@@ -226,21 +355,21 @@ include_once("./include/_confirm.php");
                                 <label class="control-label">Start: </label>
                                 <div class="controls">
                                     <div id="start_date"><?php echo $startDate; ?></div>
-                                    <input type="text" name="start_date" id="dp1" maxlength="50" placeholder="Format: yyyy-mm-dd" value="<?php echo $startDate; ?>" style="display: none;" />
+                                    <input type="text" name="start_date" id="dp1" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $startDate; ?>" style="display: none;" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">End: </label>
                                 <div class="controls">
                                     <div id="end_date"><?php echo $endDate; ?></div>
-                                    <input type="text" name="end_date" id="dp2" maxlength="50" placeholder="Format: yyyy-mm-dd" value="<?php echo $endDate; ?>" style="display: none;" />
+                                    <input type="text" name="end_date" id="dp2" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $endDate; ?>" style="display: none;" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Description: </label>
                                 <div class="controls">
                                     <div id="description"><?php echo $APK['description']; ?></div>
-                                    <textarea rows="3" cols="20" style="display: none;"><?php echo $APK['description']; ?></textarea>
+                                    <textarea rows="3" cols="20" name="description" style="display: none;"><?php echo $APK['description']; ?></textarea>
                                 </div>
                             </div>
                             This study marked as <strong><?php echo $APK['locked'] == 1 ? 'private' : 'public'; ?>.</strong> <br>
@@ -305,8 +434,18 @@ include_once("./include/_confirm.php");
                                     <input type="file" name="file">
                                 </div>
                             </div>
-                            <progress value="0" style="display: none;"></progress><br>
-                            <button class="btn btn-success" id="btnUpdateOK" style="display: none;">OK</button>
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                <div class="controls">
+                                    <progress value="0" style="display: none;"></progress>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                <div class="controls">
+                                    <button class="btn btn-success" id="btnUpdateOK" style="display: none;">OK</button>
+                                </div>
+                            </div>
                         </fieldset>
                     </form>
                     <ul class="apk_control_buttons">
@@ -349,7 +488,11 @@ include_once("./include/_footer.php");
 ?>
 <script src="js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
+<?php
 
+/* UPDATE AND VIEW PAGE */
+if($CREATE == 0){
+?>
 /* Confirm dialog */
 $('.confirm-delete').click(function(e) {
     e.preventDefault();
@@ -392,24 +535,6 @@ $('#btnUpdateStudy').click(function(){
    $(this).attr('disabled',true);
 });
 
-/* Datepicker format */
-$('#dp1').datepicker({
-  format: 'yyyy-mm-dd'
-});
-
-$('#dp2').datepicker({
-  format: 'yyyy-mm-dd'
-});
-/* ---------------- */
-
-$(':file').change(function(){
-    var file = this.files[0];
-    name = file.name;
-    size = file.size;
-    type = file.type;
-                               
-});
-
 /* Handling of button send updated study to server and show changes */
 $('#btnUpdateOK').click(function(e){
    
@@ -435,13 +560,12 @@ $('#btnUpdateOK').click(function(e){
     alert(formData.max_devices_number);
     
     /*$.ajax({
-        url: 'upload.php',  //server script to process data
+        url: 'upload.php',  
         type: 'POST',
         xhr: function() {  // custom xhr
             var myXhr = $.ajaxSettings.xhr();
             if(myXhr.upload){ // check if upload property exists
                 myXhr.upload.addEventListener('progress', function(e) {
-                                                                console.log("progress Handling Function");
                                                                 if(e.lengthComputable){
                                                                     $('progress').attr({value:e.loaded,max:e.total});
                                                                 }
@@ -466,4 +590,93 @@ $('#btnUpdateOK').click(function(e){
     
     e.preventDefault();
 });
+<?php
+}else{    
+/* CREATE STUDY PAGE */
+?>
+
+$('[name="study_period"]').click(function(){
+    if($(this).is(':checked')){
+        if($(this).val() == 1){
+            $('[name="start_date"]').attr('disabled', false);    
+            $('[name="end_date"]').attr('disabled', false);
+            
+            $('[name="start_after_n_devices"]').attr('disabled', true);    
+            $('[name="running_time"]').attr('disabled', true);
+            $('[name="running_time_value"]').attr('disabled', true);
+        }
+        
+        if($(this).val() == 2){
+            $('[name="start_date"]').attr('disabled', true);    
+            $('[name="end_date"]').attr('disabled', true);
+            
+            $('[name="start_after_n_devices"]').attr('disabled', false);    
+            $('[name="running_time"]').attr('disabled', false);
+            $('[name="running_time_value"]').attr('disabled', false);
+        }
+    }
+});
+
+$('#btnCreateOK').click(function(e){
+   
+   $('progress').show(); 
+    
+   /* Handling form data */ 
+    var formData = new FormData($('form')[0]);
+    
+    $.ajax({
+        url: 'content_provider.php', 
+        type: 'POST',
+        xhr: function() {  // custom xhr
+            var myXhr = $.ajaxSettings.xhr();
+            if(myXhr.upload){ // check if upload property exists
+                myXhr.upload.addEventListener('progress', function(e) {
+                                                                if(e.lengthComputable){
+                                                                    $('progress').attr({value:e.loaded,max:e.total});
+                                                                }
+                                                            }, false); // for handling the progress of the upload
+            }
+            return myXhr;
+        },
+        //Ajax events
+        //beforeSend: beforeSendHandler,
+        success: function(result){
+            if(result){
+                $('progress').hide();
+                $('.hero-unit').html('<h3 class="text-center">You created a study <strong>'+ $('#study_name').val() +'</strong></h3>');
+            }
+        },
+        //error: errorHandler,
+        // Form data
+        data: formData,
+        //Options to tell JQuery not to process data or worry about content-type
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+    
+    e.preventDefault();
+});
+
+<?php
+}
+?>
+/* Datepicker format */
+$('#dp1').datepicker({
+  format: 'yyyy-mm-dd'
+});
+
+$('#dp2').datepicker({
+  format: 'yyyy-mm-dd'
+});
+/* ---------------- */
+
+$(':file').change(function(){
+    var file = this.files[0];
+    name = file.name;
+    size = file.size;
+    type = file.type;
+                               
+});
+
 </script>

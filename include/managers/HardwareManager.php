@@ -260,17 +260,22 @@ class HardwareManager{
     * @param String $hardwareTable the name of the hardware table to search in
     * @param String $androidVersion the lowest android version required by the apk
     */
-    public static function getCandidatesForAndroid($db, $hardwareTable, $androidVersion){
+    public static function getCandidatesForAndroid($db, $hardwareTable, $androidVersion, $logger){
         
-        // get for android version
-        $sql = "SELECT hwid, filter
-                FROM " .$hardwareTable. " 
-                WHERE androidversion >=".$androidVersion;
+        if(!empty($androidVersion)){
         
-        $result = $db->query($sql);
-        $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+            // get for android version
+            $sql = "SELECT hwid, filter
+                    FROM " .$hardwareTable. " 
+                    WHERE androidversion >=".$androidVersion;
+            
+            //$logger->logInfo($sql);
+            
+            $result = $db->query($sql);
+            $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         
-        
+            return $rows;
+        }
         return $rows;
     }
     
@@ -284,7 +289,7 @@ class HardwareManager{
     * @param mixed $db the database
     * @param String $hardwareTable the name of the hardware table to search in
     * @param String $androidVersion the lowest android version required by the apk
-    * @param String §rGroup select only hardware from this group
+    * @param String ?rGroup select only hardware from this group
     */
     public static function getCandidatesForAndroidFromGroup($db, $hardwareTable, $rgroupTable, $androidVersion, $rGroup, $logger){
         

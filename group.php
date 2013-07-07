@@ -129,9 +129,7 @@ include_once("./include/_menu.php");
                 </label>
                 <button class="btn btn-warning" id="btnCreateJoinGroup" value="<?php echo $_SESSION['USER_ID']; ?>">GO</button><?php
                 
-            }else{
-        
-             if(empty($GROUP_MEMBERS)){
+            }elseif(empty($GROUP_MEMBERS)){
                  ?><h2 class="text-center">You're not a member of any research group.</h2><?php
              }else{
                  
@@ -225,7 +223,6 @@ include_once("./include/_menu.php");
             </div>
             <?php
                  } // end of else
-            }
              ?> 
     </div>
     <!-- / Main Block -->

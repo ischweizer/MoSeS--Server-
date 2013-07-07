@@ -52,7 +52,7 @@
                         <a href="study.php">View</a>
                     </li>
                     <li>
-                        <a href="#">Create</a>
+                        <a href="study.php?m=new">Create</a>
                     </li>
                 </ul>
             </li><?php
