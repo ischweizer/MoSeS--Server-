@@ -130,10 +130,10 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
 
                     $QUESTIONS[] = $us_quest['name'];
                 }
-                
+
                 $APK_QUESTIONS[$APK['apkid']] = $QUESTIONS;
             }
-       }
+       }    
        
        /*
        * Select all questions for the selection below
@@ -293,7 +293,9 @@ include_once("./include/_confirm.php");
         <br>     
         <div class="accordion" id="accordionFather">
         <?php
+              
            for($i=0; $i<count($USER_APKS); $i++){
+               
                $APK = $USER_APKS[$i];
         ?>
           <div class="accordion-group">
@@ -339,12 +341,12 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label">Lowest Android version: </label>
                                 <div class="controls">
-                                    <div id="android_version"><?php echo getAPILevel($APK['androidversion']); ?></div>
-                                    <select id="android_version_select" style="display: none;">
+                                    <div name="android_version"><?php echo getAPILevel($APK['androidversion']); ?></div>
+                                    <select name="android_version_select" style="display: none;">
                                       <?php
-                                         for($i=1; $i<=getAllAPIsCount(); $i++){ 
+                                         for($j=1; $j<=getAllAPIsCount(); $j++){ 
                                       ?>
-                                      <option value="<?php echo $i; ?>"<?php if($APK['androidversion'] == $i) echo ' selected="selected"'; ?>><?php echo getAPILevel($i); ?></option>
+                                      <option value="<?php echo $j; ?>"<?php if($APK['androidversion'] == $j) echo ' selected="selected"'; ?>><?php echo getAPILevel($j); ?></option>
                                       <?php
                                          }
                                       ?>
@@ -354,14 +356,14 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label">Start: </label>
                                 <div class="controls">
-                                    <div id="start_date"><?php echo $startDate; ?></div>
+                                    <div name="start_date_text"><?php echo $startDate; ?></div>
                                     <input type="text" name="start_date" id="dp1" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $startDate; ?>" style="display: none;" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">End: </label>
                                 <div class="controls">
-                                    <div id="end_date"><?php echo $endDate; ?></div>
+                                    <div id="end_date_text"><?php echo $endDate; ?></div>
                                     <input type="text" name="end_date" id="dp2" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $endDate; ?>" style="display: none;" />
                                 </div>
                             </div>
@@ -387,7 +389,7 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label">Max participating devices: </label>
                                 <div class="controls">
-                                    <div id="max_devices_number"><?php echo $APK['maxdevice']; ?></div>
+                                    <div name="max_devices_number_text"><?php echo $APK['maxdevice']; ?></div>
                                     <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" value="<?php echo $APK['maxdevice']; ?>" style="display: none;" />
                                 </div>
                             </div>
@@ -397,7 +399,7 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label">Selected quests: </label>
                                 <div class="controls">
-                                    <div id="quests"><?php 
+                                    <div name="quests"><?php 
 
                                            if(!empty($APK_QUESTIONS[$APK['apkid']])){
                                                 echo '<ul>';
@@ -410,25 +412,30 @@ include_once("./include/_confirm.php");
                                             }
                                             
                                      ?></div>
-                                    <select multiple="multiple" id="quests_select" style="display: none;">
+                                    <select multiple="multiple" name="quests_select" style="display: none;">
                                       <?php
-                                         foreach($ALL_QUESTS as $quest){
-                                            foreach($APK_QUESTIONS[$APK['apkid']] as $need_to_seelect_quest){ 
-                                      ?>
-                                      <option value="<?php echo $quest['questid']; ?>"<?php 
-                                            if($quest['name'] == $need_to_seelect_quest) 
-                                                echo ' selected="selected"'; 
-                                            }
-                                                ?>><?php 
-                                                    echo $quest['name']; 
-                                                    ?></option>
+                                                
+                                         foreach($ALL_QUESTS as $quest){?>
+                                             <option value="<?php echo $quest['questid']; ?>"<?php
+                                             
+                                             if(!empty($APK_QUESTIONS[$APK['apkid']])){
+                                                foreach($APK_QUESTIONS[$APK['apkid']] as $need_to_seelect_quest){ 
+                                          ?>
+                                          <?php 
+                                                if($quest['name'] == $need_to_seelect_quest) 
+                                                    echo ' selected="selected"'; 
+                                                }
+                                             }
+                                        ?>><?php 
+                                            echo $quest['name']; 
+                                            ?></option>
                                       <?php
-                                         }
+                                         }                              
                                       ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="control-group" id="uploadFile" style="display: none;">
+                            <div class="control-group" name="uploadFile" style="display: none;">
                                 <label class="control-label">Select an APP: </label>
                                 <div class="controls">
                                     <input type="file" name="file">
@@ -437,20 +444,20 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label"></label>
                                 <div class="controls">
-                                    <progress value="0" style="display: none;"></progress>
+                                    <progress name="progress" value="0" style="display: none;"></progress>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label"></label>
                                 <div class="controls">
-                                    <button class="btn btn-success" id="btnUpdateOK" style="display: none;">OK</button>
+                                    <button class="btn btn-success" name="btnUpdateOK" style="display: none;">OK</button>
                                 </div>
                             </div>
                         </fieldset>
                     </form>
                     <ul class="apk_control_buttons">
                         <li><a href="./apk/<?php echo $APK['userhash'] .'/'. $APK['apkhash']; ?>.apk" title="Download APP" class="btn btn-success">Download</a></li>
-                        <li><button class="btn btn-warning" id="btnUpdateStudy" title="Update APP">Update</button></li>
+                        <li><button class="btn btn-warning" name="btnUpdateStudy" title="Update APP">Update</button></li>
                     <?php
                     if($APK['ustudy_finished'] == 1){
                         ?>
@@ -518,46 +525,52 @@ $('.btnConfirmCancel, .close').click(function(){
 /* ------------------- */
 
 /* Showing form data */
-$('#btnUpdateStudy').click(function(){
-   $('#android_version').hide();
-   $('#start_date').hide();
-   $('#end_date').hide();
-   $('#description').hide(); 
-   $('#max_devices_number').hide();
-   $('#quests').hide();  
+$('[name="btnUpdateStudy"]').click(function(){ 
+    
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+    /* Hide and show form stuff */
+    p.find('[name="android_version"]').hide();
+    p.find('[name="start_date_text"]').hide();
+    p.find('[name="end_date_text"]').hide();
+    p.find('[name="description"]').hide(); 
+    p.find('[name="max_devices_number_text"]').hide();
+    p.find('[name="quests"]').hide();  
                  
-   $('#android_version_select').show();
-   $('.controls :input').show();
-   $('#quests_select').show();
-   $('#uploadFile').show();
-   $('#btnUpdateOK').show();
+    p.find('[name="android_version_select"]').show();
+    p.find('.controls :input').show();
+    p.find('[name="quests_select"]').show();
+    p.find('[name="uploadFile"]').show();
+    p.find('[name="btnUpdateOK"]').show();
    
-   $(this).attr('disabled',true);
+    $(this).attr('disabled',true);
 });
 
 /* Handling of button send updated study to server and show changes */
-$('#btnUpdateOK').click(function(e){
+$('[name="btnUpdateOK"]').click(function(e){
    
+   // get the parent of selected stuff
+   var p = $(this).parent().parent().parent();
    /* Hide and show form stuff */
-   $('#android_version').show();
-   $('#start_date').show();
-   $('#end_date').show();
-   $('#description').show(); 
-   $('#max_devices_number').show();
-   $('#quests').show();
-   $('progress').show();  
+   p.find('[name="android_version"]').show();
+   p.find('[name="start_date_text"]').show();
+   p.find('[name="end_date_text"]').show();
+   p.find('[name="description"]').show(); 
+   p.find('[name="max_devices_number_text]').show();
+   p.find('[name="quests"]').show();
+   p.find('[name="progress"]').show();  
                  
-   $('#android_version_select').hide();
-   $('.controls :input').hide();
-   $('#quests_select').hide();
-   $('#uploadFile').hide();
+   p.find('[name="android_version_select"]').hide();
+   p.find('.controls :input').hide();
+   p.find('[name="quests_select]').hide();
+   p.find('[name="uploadFile]').hide();
    $(this).hide();
    /* ------------------------ */
    
    /* Handling form data */ 
     var formData = new FormData($('form')[0]);
     
-    alert(formData.max_devices_number);
+    
     
     /*$.ajax({
         url: 'upload.php',  
@@ -577,7 +590,7 @@ $('#btnUpdateOK').click(function(e){
         //beforeSend: beforeSendHandler,
         success: function(){
             $('progress').hide();
-            $('#btnUpdateStudy').attr('disabled',false);
+            $('[name="btnUpdateStudy"]').attr('disabled',false);
         },
         //error: errorHandler,
         // Form data

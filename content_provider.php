@@ -587,19 +587,18 @@ if(isset($_REQUEST['study_screate']) && !empty($_REQUEST['study_screate']) && $_
         // Initilization the contents of the pages
         
         $apk_title = $_POST['apk_title'];
+        $androidversion = $_POST['android_version_select'];
         $description = $_POST['description'];
-        $radioButton = $_POST['setup_types'];
+        $radioButton = $_POST['study_period'];
+        $startcriterion = NULL;
+        $runningtime = NULL;
         $startdate = $_POST['start_date'];
-        $startcriterion = $_POST['start_after_n_devices'];
         $enddate = $_POST['end_date'];        
-        $runningtime = $row['running_time'];
-        $maxdevice = $row['maxdevice'];
-        $locked = $row['locked'];
-        $inviteinstall = $row['inviteinstall'];
-        $androidversion = $row['androidversion'];
-        $sensors = $row['sensors'];
+        $maxdevice = $_POST['max_devices_number'];
+        $inviteinstall = $_POST['setup_types'];
 
         $RESTRICTION_USER_NUMBER = $maxdevice;
+        
         include_once("./include/managers/HardwareManager.php");
         // get the list of candidates with the specified android version
         // Check if the user wants only members from his group to take part on the user study
@@ -624,7 +623,9 @@ if(isset($_REQUEST['study_screate']) && !empty($_REQUEST['study_screate']) && $_
             shuffle($candidates);
         }
 
-        // WRITE APK TO DATABASE AND START USER STUDY IF NEEDED
+        /*
+        *  WRITE APK TO DATABASE AND START USER STUDY IF NEEDED
+        */  
        
         // convert to json 
         $candidates = json_encode($candidates);
@@ -652,38 +653,37 @@ if(isset($_REQUEST['study_screate']) && !empty($_REQUEST['study_screate']) && $_
         {
             $startdate = NULL;
             $enddate = NULL;
+            
+            $startcriterion = $_POST['start_after_n_devices'];
+            
+            // converting to milliseconds
+            switch($_POST['running_time_value']){        
+                case 'h': $runningtime = intval($_POST['running_time'])*60*60*1000;   
+                        break;
+                case 'd': $runningtime = intval($_POST['running_time'])*24*60*60*1000;
+                        break;
+                case 'm': $runningtime = intval($_POST['running_time'])*30*24*60*60*1000;
+                        break;
+                case 'y': $runningtime = intval($_POST['running_time'])*12*30*24*60*60*1000;
+                        break;
+            }
         }
             
-        
-        $logger->logInfo("title = ".$apk_title);
-        $logger->logInfo("description = ".$description);
-        $logger->logInfo("radioButton = ".$radioButton);
-        $logger->logInfo("startdate = ".$startdate);
-        $logger->logInfo("enddate = ".$enddate);
-        $logger->logInfo("startcriterion = ".$startcriterion);
-        $logger->logInfo("runningtime = ".$runningtime);
-        $logger->logInfo("maxdevice = ".$maxdevice);
-        $logger->logInfo("USTUDY_FINISHED = ".$USTUDY_FINISHED);
-        $logger->logInfo("locked = ".$locked);
-        $logger->logInfo("inviteinstall = ".$inviteinstall);
-        $logger->logInfo("androidversion = ".$androidversion);
-        $logger->logInfo("sensors = ".$sensors);
-
+       
         /**
         * Store filename, hash in DB and other informations
         * inserting into APK table
         */
-        $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname, apk_version,
+        $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname,
                                  apkhash, sensors, description,
                                  apktitle, restriction_device_number, pending_devices,
-                                 candidates, notified_devices, androidversion, ustudy_finished, locked,
+                                 candidates, notified_devices, androidversion, ustudy_finished,
                                  startdate, startcriterion, enddate, runningtime, maxdevice, inviteinstall
                                  )
                                   VALUES 
                                   (". $_SESSION["USER_ID"]
                                     .", '". $HASH_DIR ."'"
                                     .", '". $filename ."'"
-                                    .", 1"
                                     .", '" . $HASH_FILE ."'"
                                     .", '". $sensors ."'"
                                     .", '". $description ."'"
@@ -694,21 +694,18 @@ if(isset($_REQUEST['study_screate']) && !empty($_REQUEST['study_screate']) && $_
                                     .", '". $notified_users ."'"
                                     .", '". $androidversion ."'"
                                     .", ". $USTUDY_FINISHED
-                                    .", ". $locked
                                     .", '". $startdate."'"
                                     .", ". $startcriterion
                                     .", '". $enddate."'"
                                     .", '". $runningtime."'"
                                     .", ". $maxdevice
                                     .", '". $inviteinstall."' )";
-        $logger->logInfo("sql = ".$sql);
+                                    
+        $logger->logInfo("Upload APK sql: ". $sql);
 
         // WARNING: hashed filename is WITHOUT .apk extention!
         $db->exec($sql);
 
-        $sql = "DELETE FROM temp WHERE userid = ". $_SESSION["USER_ID"];
-        $db->exec($sql);
-        
         die('1');
         //header("Location: ucp.php?m=upload&res=1");
     }else{
