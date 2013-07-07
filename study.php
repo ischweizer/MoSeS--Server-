@@ -219,7 +219,7 @@ include_once("./include/_confirm.php");
                 <div class="control-group">
                     <label class="control-label">Minimum number of devices to start after: </label>
                     <div class="controls">
-                        <input type="text" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" />
+                        <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" />
                     </div>
                 </div>
                 <div class="control-group">
@@ -243,7 +243,7 @@ include_once("./include/_confirm.php");
                 <div class="control-group">
                     <label class="control-label">Setup types</label>
                     <div class="controls">
-                        <label><input type="radio" id="r1" name="setup_types" value="1" /> Invite only</label>
+                        <label><input type="radio" name="setup_types" value="1" /> Invite only</label>
                         <label><input type="radio" name="setup_types" value="2" checked="checked" /> Invite & Install (Default)</label>
                         <label><input type="radio" name="setup_types" value="3" /> Install only</label>
                     </div>
@@ -251,7 +251,7 @@ include_once("./include/_confirm.php");
                 <div class="control-group">
                     <label class="control-label">Max participating devices: </label>
                     <div class="controls">
-                        <input type="text" name="max_devices_number" maxlength="10" placeholder="Max devices" />
+                        <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" />
                     </div>
                 </div>
                 <div class="control-group" id="uploadFile">
@@ -388,7 +388,7 @@ include_once("./include/_confirm.php");
                                 <label class="control-label">Max participating devices: </label>
                                 <div class="controls">
                                     <div id="max_devices_number"><?php echo $APK['maxdevice']; ?></div>
-                                    <input type="text" name="max_devices_number" maxlength="10" placeholder="Max devices" value="<?php echo $APK['maxdevice']; ?>" style="display: none;" />
+                                    <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" value="<?php echo $APK['maxdevice']; ?>" style="display: none;" />
                                 </div>
                             </div>
                             <?php 

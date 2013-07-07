@@ -584,27 +584,20 @@ if(isset($_REQUEST['study_screate']) && !empty($_REQUEST['study_screate']) && $_
         $pending_users = array();
         $notified_users = array();
         
-        // Initilization the contents of the pages for US creation form
-        /*$sql = "SELECT * FROM temp WHERE userid = ". $_SESSION["USER_ID"];
-        $req = $db->query($sql);
-        $row = $req->fetch();*/
-        //Affectation of the different
-        if(!empty($row))
-        {
-            $apk_title = $_POST['apk_title'];
-            $description = $_POST['description'];
-            $radioButton = $_POST['setup_types'];
-            $startdate = $_POST['start_date'];
-            $startcriterion = $_POST['start_after_n_devices'];
-            $enddate = $_POST['end_date'];
-            $runningtime = $row['running_time'];
-            $maxdevice = $row['maxdevice'];
-            $locked = $row['locked'];
-            $inviteinstall = $row['inviteinstall'];
-            $androidversion = $row['androidversion'];
-            $sensors = $row['sensors'];
-        }
-
+        // Initilization the contents of the pages
+        
+        $apk_title = $_POST['apk_title'];
+        $description = $_POST['description'];
+        $radioButton = $_POST['setup_types'];
+        $startdate = $_POST['start_date'];
+        $startcriterion = $_POST['start_after_n_devices'];
+        $enddate = $_POST['end_date'];        
+        $runningtime = $row['running_time'];
+        $maxdevice = $row['maxdevice'];
+        $locked = $row['locked'];
+        $inviteinstall = $row['inviteinstall'];
+        $androidversion = $row['androidversion'];
+        $sensors = $row['sensors'];
 
         $RESTRICTION_USER_NUMBER = $maxdevice;
         include_once("./include/managers/HardwareManager.php");
