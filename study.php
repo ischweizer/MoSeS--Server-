@@ -357,14 +357,14 @@ include_once("./include/_confirm.php");
                                 <label class="control-label">Start: </label>
                                 <div class="controls">
                                     <div name="start_date_text"><?php echo $startDate; ?></div>
-                                    <input type="text" name="start_date" id="dp1" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $startDate; ?>" style="display: none;" />
+                                    <input type="text" name="start_date" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $startDate; ?>" style="display: none;" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">End: </label>
                                 <div class="controls">
-                                    <div id="end_date_text"><?php echo $endDate; ?></div>
-                                    <input type="text" name="end_date" id="dp2" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $endDate; ?>" style="display: none;" />
+                                    <div name="end_date_text"><?php echo $endDate; ?></div>
+                                    <input type="text" name="end_date" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $endDate; ?>" style="display: none;" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -675,21 +675,21 @@ $('#btnCreateOK').click(function(e){
 }
 ?>
 /* Datepicker format */
-$('#dp1').datepicker({
+$('[name="start_date"]').datepicker({
   format: 'yyyy-mm-dd'
 });
 
-$('#dp2').datepicker({
+$('[name="end_date"]').datepicker({
   format: 'yyyy-mm-dd'
 });
 /* ---------------- */
 
-$(':file').change(function(){
+/*$(':file').change(function(){
     var file = this.files[0];
     name = file.name;
     size = file.size;
     type = file.type;
                                
-});
+}); */
 
 </script>
