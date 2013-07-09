@@ -20,6 +20,6 @@
           Password forgotten? <a href="forgot.php">Reset it.</a>
         </label>
         <input type="hidden" name="submit" value="1">
-        <button class="btn btn-warning" type="submit">Sign in</button>
+        <button class="btn btn-success" type="submit">Sign in</button>
     </form>
 </div>
