@@ -450,7 +450,8 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label"></label>
                                 <div class="controls">
-                                    <button class="btn btn-success" name="btnUpdateOK" style="display: none;">OK</button>
+                                    <button class="btn" name="btnUpdateCancel" style="display: none;">Cancel</button>
+                                    <button class="btn btn-success" name="btnUpdateOK" style="display: none; margin-left: 20pt;">OK</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -542,6 +543,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="quests_select"]').show();
     p.find('[name="uploadFile"]').show();
     p.find('[name="btnUpdateOK"]').show();
+    p.find('[name="btnUpdateCancel"]').show();
    
     $(this).attr('disabled',true);
 });
@@ -549,22 +551,7 @@ $('[name="btnUpdateStudy"]').click(function(){
 /* Handling of button send updated study to server and show changes */
 $('[name="btnUpdateOK"]').click(function(e){
    
-   // get the parent of selected stuff
-   var p = $(this).parent().parent().parent();
-   /* Hide and show form stuff */
-   p.find('[name="android_version"]').show();
-   p.find('[name="start_date_text"]').show();
-   p.find('[name="end_date_text"]').show();
-   p.find('[name="description"]').show(); 
-   p.find('[name="max_devices_number_text]').show();
-   p.find('[name="quests"]').show();
-   p.find('[name="progress"]').show();  
-                 
-   p.find('[name="android_version_select"]').hide();
-   p.find('.controls :input').hide();
-   p.find('[name="quests_select]').hide();
-   p.find('[name="uploadFile]').hide();
-   $(this).hide();
+   $(this).attr('disabled', true);
    /* ------------------------ */
    
    /* Handling form data */ 
@@ -603,6 +590,33 @@ $('[name="btnUpdateOK"]').click(function(e){
     
     e.preventDefault();
 });
+
+/* Hide edit form data */
+$('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
+ 
+    e.preventDefault();
+    
+   // get the parent of selected stuff
+   var p = $(this).parent().parent().parent();
+   /* Hide and show form stuff */
+   p.find('[name="android_version"]').show();
+   p.find('[name="start_date_text"]').show();
+   p.find('[name="end_date_text"]').show();
+   p.find('[name="description"]').show(); 
+   p.find('[name="max_devices_number_text"]').show();
+   p.find('[name="quests"]').show();
+   p.find('[name="progress"]').show();  
+                 
+   p.find('[name="android_version_select"]').hide();
+   p.find('.controls :input').hide();
+   p.find('[name="quests_select"]').hide();
+   p.find('[name="uploadFile"]').hide();
+   p.find('[name="btnUpdateCancel"]').hide();
+   p.find('[name="progress"]').hide();
+   
+   $(this).parent().parent().parent().parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
+});
+
 <?php
 }else{    
 /* CREATE STUDY PAGE */
@@ -633,6 +647,7 @@ $('[name="study_period"]').click(function(){
 $('#btnCreateOK').click(function(e){
    
    $('progress').show(); 
+   $(this).attr('disabled', true);
     
    /* Handling form data */ 
     var formData = new FormData($('form')[0]);
