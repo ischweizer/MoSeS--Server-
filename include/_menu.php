@@ -8,7 +8,7 @@
     <?php
         if(isset($_SESSION["USER_LOGGED_IN"]) && $_SESSION["USER_LOGGED_IN"] == 1){
     ?>
-    <a href="logout.php" class="btn btn-danger" id="btn_logout"><i class="icon-user"></i>Logout</a>        
+    <a href="logout.php" class="btn" id="btn_logout"><i class="icon-user"></i>Logout</a>        
     <?php
         }else{   
     ?>
