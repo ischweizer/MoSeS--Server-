@@ -689,10 +689,10 @@ $('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
 
 $('[name="study_period"]').click(function(){
     // get the parent of selected stuff
-    var p = $(this).parent().parent().parent();
-    var this1 = p.find('[name="study_period"]');
-    if(this1.is(':checked')){
-        if(this1.val() == 1){
+    var p = $(this).parent().parent().parent().parent().parent();
+    
+    if($(this).is(':checked')){
+        if($(this).val() == 1){
             p.find('[name="start_date"]').attr('disabled', false);    
             p.find('[name="end_date"]').attr('disabled', false);
             
@@ -701,7 +701,7 @@ $('[name="study_period"]').click(function(){
             p.find('[name="running_time_value"]').attr('disabled', true);
         }
         
-        if(this1.val() == 2){
+        if($(this).val() == 2){
             p.find('[name="start_date"]').attr('disabled', true);    
             p.find('[name="end_date"]').attr('disabled', true);
             
