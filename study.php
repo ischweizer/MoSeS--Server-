@@ -254,7 +254,7 @@ include_once("./include/_confirm.php");
                         <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" />
                     </div>
                 </div>
-                <div class="control-group" id="uploadFile">
+                <div class="control-group" name="uploadFile">
                     <label class="control-label">Select an APP: </label>
                     <div class="controls">
                         <input type="file" name="file">
@@ -263,17 +263,17 @@ include_once("./include/_confirm.php");
                 <div class="control-group">
                     <label class="control-label"></label>
                     <div class="controls">
-                        <progress value="0" style="display: none;"></progress>
+                        <progress name="progress" value="0" style="display: none;"></progress>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"></label>
                     <div class="controls">
-                        <button class="btn btn-success" id="btnCreateOK">Create study</button>
+                        <button class="btn btn-success" name="btnCreateOK" title="Upload changes">Create study</button>
                     </div>
                 </div>
             </fieldset>
-            <input name="study_screate" type="hidden" value="2975">
+            <input name="study_create" type="hidden" value="2975">
         </form>
         <?php 
          
@@ -339,6 +339,13 @@ include_once("./include/_confirm.php");
                         <fieldset>
                             Study ver. <?php echo $APK['apk_version']; ?> <br>
                             <div class="control-group">
+                                <label class="control-label">Study name: </label>
+                                <div class="controls">
+                                    <div name="study_title_text"><?php echo $APK['apktitle']; ?></div>
+                                    <input type="text" name="apk_title" value="<?php echo $APK['apktitle']; ?>" maxlength="50" placeholder="Study name" style="display: none;" />
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label">Lowest Android version: </label>
                                 <div class="controls">
                                     <div name="android_version"><?php echo getAPILevel($APK['androidversion']); ?></div>
@@ -351,6 +358,12 @@ include_once("./include/_confirm.php");
                                          }
                                       ?>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="control-group" name="study_period_text1" style="display: none;">
+                                <label class="control-label"></label>
+                                <div class="controls">
+                                    <label><input type="radio" name="study_period" value="1" checked="checked"> Study period from date to date</label>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -367,25 +380,59 @@ include_once("./include/_confirm.php");
                                     <input type="text" name="end_date" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $endDate; ?>" style="display: none;" />
                                 </div>
                             </div>
+                            <div class="control-group" name="study_period_text2" style="display: none;">
+                                <label class="control-label"></label>
+                                <div class="controls">
+                                    <label><input type="radio" name="study_period" value="2"> Study for minimum devices and running period</label>
+                                </div>
+                            </div>
+                            <div class="control-group" name="start_after_n_devices_text" style="display: none;">
+                                <label class="control-label">Minimum number of devices to start after: </label>
+                                <div class="controls">
+                                    <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" />
+                                </div>
+                            </div>
+                            <div class="control-group" name="running_time_text" style="display: none;">
+                                <label class="control-label">Running period:</label>
+                                <div class="controls">
+                                    <input type="text" name="running_time" maxlength="50" placeholder="Number" disabled="disabled" />
+                                    <select name="running_time_value" disabled="disabled">
+                                        <option value="h">Hours</option>
+                                        <option value="d">Days</option>
+                                        <option value="m">Months</option>
+                                        <option value="y">Years</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="control-group">
                                 <label class="control-label">Description: </label>
                                 <div class="controls">
-                                    <div id="description"><?php echo $APK['description']; ?></div>
+                                    <div name="description_text"><?php echo $APK['description']; ?></div>
                                     <textarea rows="3" cols="20" name="description" style="display: none;"><?php echo $APK['description']; ?></textarea>
                                 </div>
                             </div>
                             This study marked as <strong><?php echo $APK['locked'] == 1 ? 'private' : 'public'; ?>.</strong> <br>
+                            <div name="allowed_join_text">
                             <?php
                                 switch($APK['inviteinstall']){
-                                    case '1': echo 'Joining is allowed for invited users. <br>';
+                                    case '1': echo 'Joining is allowed for invited users.';
                                             break;
-                                    case '2': echo 'Joining is allowd from all invited users that installed '. $APK['apktitle'] .'. <br>'; 
+                                    case '2': echo 'Joining is allowd from all invited users that installed '. $APK['apktitle'] .'.'; 
                                             break;
-                                    case '3': echo 'Joining is allowed from all users that installed '. $APK['apktitle'] .'. <br>';
+                                    case '3': echo 'Joining is allowed from all users that installed '. $APK['apktitle'] .'.';
                                             break;
-                                    default: echo 'Something went wrong with retrieving invite install! <br>';
+                                    default: echo 'Something went wrong with retrieving invite install!';
                                 }
                             ?>
+                            </div>
+                            <div class="control-group" name="allowed_join" style="display: none;">
+                                <label class="control-label">Setup types</label>
+                                <div class="controls">
+                                    <label><input type="radio" name="setup_types" value="1" <?php echo $APK['inviteinstall'] == 1 ? 'checked="checked"' : ''; ?> /> Invite only</label>
+                                    <label><input type="radio" name="setup_types" value="2" <?php echo $APK['inviteinstall'] == 2 ? 'checked="checked"' : ''; ?> /> Invite & Install (Default)</label>
+                                    <label><input type="radio" name="setup_types" value="3" <?php echo $APK['inviteinstall'] == 3 ? 'checked="checked"' : ''; ?> /> Install only</label>
+                                </div>
+                            </div> 
                             <div class="control-group">
                                 <label class="control-label">Max participating devices: </label>
                                 <div class="controls">
@@ -450,23 +497,25 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label"></label>
                                 <div class="controls">
-                                    <button class="btn" name="btnUpdateCancel" style="display: none;">Cancel</button>
-                                    <button class="btn btn-success" name="btnUpdateOK" style="display: none; margin-left: 20pt;">OK</button>
+                                    <button class="btn" name="btnUpdateCancel" title="Cancel update!" style="display: none;">Cancel</button>
+                                    <button class="btn btn-success" name="btnUpdateOK" title="Upload changes" style="display: none; margin-left: 20pt;">OK</button>
                                 </div>
                             </div>
                         </fieldset>
+                        <input type="hidden" name="study_update" value="6825">
+                        <input type="hidden" name="apk_id" value="<?php echo $APK['apkid']; ?>">
                     </form>
                     <ul class="apk_control_buttons">
-                        <li><a href="./apk/<?php echo $APK['userhash'] .'/'. $APK['apkhash']; ?>.apk" title="Download APP" class="btn btn-success">Download</a></li>
-                        <li><button class="btn btn-warning" name="btnUpdateStudy" title="Update APP">Update</button></li>
+                        <li><a href="./apk/<?php echo $APK['userhash'] .'/'. $APK['apkhash']; ?>.apk" title="Download APP" class="btn">Download</a></li>
+                        <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
                     <?php
                     if($APK['ustudy_finished'] == 1){
                         ?>
-                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Result Of Questionnaire" class="btn btn-info">Results</a></li>
+                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Result Of Questionnaire" class="btn">Results</a></li>
                         <?php
                     }else{
                         ?>
-                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=addquest&id=<?php echo $APK['apkid']; ?>" title="Add Questionnaire" class="btn btn-info">Add quest</a></li>
+                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=addquest&id=<?php echo $APK['apkid']; ?>" title="Add Questionnaire" class="btn">Add quest</a></li>
                     <?php
                     }
                     ?>
@@ -531,15 +580,24 @@ $('[name="btnUpdateStudy"]').click(function(){
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
     /* Hide and show form stuff */
+    
+    p.find('[name="study_title_text"]').hide();
     p.find('[name="android_version"]').hide();
     p.find('[name="start_date_text"]').hide();
     p.find('[name="end_date_text"]').hide();
-    p.find('[name="description"]').hide(); 
+    p.find('[name="description_text"]').hide(); 
     p.find('[name="max_devices_number_text"]').hide();
+    p.find('[name="allowed_join_text"]').hide();
     p.find('[name="quests"]').hide();  
                  
     p.find('[name="android_version_select"]').show();
     p.find('.controls :input').show();
+    p.find('[name="study_period_text1"]').show();
+    p.find('[name="study_period_text2"]').show();
+    p.find('[name="start_after_n_devices_text"]').show();
+    p.find('[name="running_time_text"]').show();
+    p.find('[name="description"]').show();
+    p.find('[name="allowed_join"]').show();
     p.find('[name="quests_select"]').show();
     p.find('[name="uploadFile"]').show();
     p.find('[name="btnUpdateOK"]').show();
@@ -554,20 +612,21 @@ $('[name="btnUpdateOK"]').click(function(e){
    $(this).attr('disabled', true);
    /* ------------------------ */
    
+   // get the parent of selected stuff
+   var p = $(this).parent().parent().parent();
+   
    /* Handling form data */ 
-    var formData = new FormData($('form')[0]);
-    
-    
-    
-    /*$.ajax({
-        url: 'upload.php',  
+    var formData = new FormData($(this).parent().parent().parent().parent().parent().find('form')[0]);
+
+    $.ajax({
+        url: 'content_provider.php',  
         type: 'POST',
         xhr: function() {  // custom xhr
             var myXhr = $.ajaxSettings.xhr();
             if(myXhr.upload){ // check if upload property exists
                 myXhr.upload.addEventListener('progress', function(e) {
                                                                 if(e.lengthComputable){
-                                                                    $('progress').attr({value:e.loaded,max:e.total});
+                                                                    p.find('progress').attr({value:e.loaded,max:e.total});
                                                                 }
                                                             }, false); // for handling the progress of the upload
             }
@@ -575,9 +634,11 @@ $('[name="btnUpdateOK"]').click(function(e){
         },
         //Ajax events
         //beforeSend: beforeSendHandler,
-        success: function(){
-            $('progress').hide();
-            $('[name="btnUpdateStudy"]').attr('disabled',false);
+        success: function(result){
+            if(result){
+                p.find('progress').hide();
+                p.find('[name="btnUpdateStudy"]').attr('disabled',false);
+            }
         },
         //error: errorHandler,
         // Form data
@@ -586,7 +647,7 @@ $('[name="btnUpdateOK"]').click(function(e){
         cache: false,
         contentType: false,
         processData: false
-    });*/
+    });
     
     e.preventDefault();
 });
@@ -599,22 +660,56 @@ $('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
    // get the parent of selected stuff
    var p = $(this).parent().parent().parent();
    /* Hide and show form stuff */
+   
+   p.find('[name="study_title_text"]').show();
    p.find('[name="android_version"]').show();
    p.find('[name="start_date_text"]').show();
    p.find('[name="end_date_text"]').show();
-   p.find('[name="description"]').show(); 
+   p.find('[name="description_text"]').show(); 
    p.find('[name="max_devices_number_text"]').show();
+   p.find('[name="allowed_join_text"]').show();
    p.find('[name="quests"]').show();
    p.find('[name="progress"]').show();  
                  
    p.find('[name="android_version_select"]').hide();
    p.find('.controls :input').hide();
+   p.find('[name="study_period_text1"]').hide();
+   p.find('[name="study_period_text2"]').hide();
+   p.find('[name="start_after_n_devices_text"]').hide();
+   p.find('[name="running_time_text"]').hide();
+   p.find('[name="description"]').hide();
+   p.find('[name="allowed_join"]').hide();
    p.find('[name="quests_select"]').hide();
    p.find('[name="uploadFile"]').hide();
    p.find('[name="btnUpdateCancel"]').hide();
    p.find('[name="progress"]').hide();
    
    $(this).parent().parent().parent().parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
+});
+
+$('[name="study_period"]').click(function(){
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+    var this1 = p.find('[name="study_period"]');
+    if(this1.is(':checked')){
+        if(this1.val() == 1){
+            p.find('[name="start_date"]').attr('disabled', false);    
+            p.find('[name="end_date"]').attr('disabled', false);
+            
+            p.find('[name="start_after_n_devices"]').attr('disabled', true);    
+            p.find('[name="running_time"]').attr('disabled', true);
+            p.find('[name="running_time_value"]').attr('disabled', true);
+        }
+        
+        if(this1.val() == 2){
+            p.find('[name="start_date"]').attr('disabled', true);    
+            p.find('[name="end_date"]').attr('disabled', true);
+            
+            p.find('[name="start_after_n_devices"]').attr('disabled', false);    
+            p.find('[name="running_time"]').attr('disabled', false);
+            p.find('[name="running_time_value"]').attr('disabled', false);
+        }
+    }
 });
 
 <?php
@@ -648,7 +743,7 @@ $('#btnCreateOK').click(function(e){
    
    $('progress').show(); 
    $(this).attr('disabled', true);
-    
+       
    /* Handling form data */ 
     var formData = new FormData($('form')[0]);
     

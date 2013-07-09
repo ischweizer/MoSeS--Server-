@@ -477,10 +477,10 @@ if(isset($_POST["hash"]) && isset($_POST["newPassword"])){
 /*
 *  UPLOAD Handling. User study CREATE
 */
-if(isset($_REQUEST['study_screate']) && !empty($_REQUEST['study_screate']) && $_REQUEST['study_screate'] == 2975){
+if(isset($_SESSION['USER_LOGGED_IN']) &&
+   isset($_REQUEST['study_create']) && !empty($_REQUEST['study_create']) && $_REQUEST['study_create'] == 2975){
     
     include_once("./config.php");
-    include_once("./include/functions/func.php");
     include_once("./include/functions/logger.php");
     include_once("./include/functions/dbconnect.php");
     
@@ -712,5 +712,205 @@ if(isset($_REQUEST['study_screate']) && !empty($_REQUEST['study_screate']) && $_
         die('0');
         //header("Location: ucp.php?m=upload&res=0");
     }
+}
+
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+   isset($_REQUEST['study_update']) && !empty($_REQUEST['study_update']) && $_REQUEST['study_update'] == 6825){
+       
+    include_once("./config.php");
+    include_once("./include/functions/dbconnect.php");
+    include_once("./include/functions/logger.php");
+    include_once('./include/functions/klogger.php');
+        
+    $logger = new KLogger(MOSES_HOME . "/log", KLogger::INFO);
+
+    $logger->logInfo("###################### UPDATE USER STUDY #########################");
+        
+    /**
+    *  SETTINGS FOR UPLOAD
+    */
+    $allowedTypes = array('.apk');
+    $maxFileSize = $CONFIG['UPLOAD']['FILESIZE'];
+    $uploadPath = './apk/'; // folder to save to
+
+    $filename = $_FILES['file']['name']; // gets filename
+    $fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);
+        
+    /**
+    * Connect to DB and get hashes for folder and file
+    */    
+
+    $sql = "SELECT hash 
+            FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+            WHERE userid = ". $_SESSION["USER_ID"];
+           
+    $result = $db->query($sql);
+    $row = $result->fetch();
+
+    if(!empty($row)){
+      
+    $HASH_DIR = $row['hash'];   
+    $HASH_FILE = md5(time() . $filename);
+
+    $uploadPath .= $HASH_DIR . "/";
+
+    // check if directory exists
+    clearstatcache();
+
+    if(!is_dir($uploadPath)){
+        $oldumask = umask(0);
+        if(!mkdir($uploadPath, 0777, true)){
+            // folder failed to create
+            umask($oldumask);
+            die('0');
+            //header("Location: ucp.php?m=upload&res=0");
+        }
+        umask($oldumask); 
+    }
+       
+    }else{
+       // no hash for user found
+       die('0');
+       //header("Location: ucp.php?m=upload&res=0");
+    }
+
+    /**
+    * Checking for necessary conditions
+    */
+    if(!in_array($fileExt, $allowedTypes))
+      die('2');
+      //header("Location: ucp.php?m=upload&res=2");
+
+    if(filesize($_FILES['file']['tmp_name']) > $maxFileSize)
+      die('3');
+      //header("Location: ucp.php?m=upload&res=3");
+           
+    if(!is_writable($uploadPath))
+      die('4');
+      //header("Location: ucp.php?m=upload&res=4");
+     
+    chmod($_FILES['file']['tmp_name'], 0777);       
+
+    /**
+    * Moving file into its directory and storing that data in DB
+    */
+    if(is_uploaded_file($_FILES['file']['tmp_name']) 
+        && move_uploaded_file($_FILES['file']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt)){
+        
+        // fix file permission
+        if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777)){
+            die('4');
+            //header("Location: ucp.php?m=upload&res=4"); 
+        }
+         
+        /**
+        * Building sensors string in JSON-Array-Format
+        */
+        if(isset($_POST['sensors']) && is_array($_POST['sensors']) && count($_POST['sensors']) > 0){
+            
+            /*
+            $RAW_SENSOR_LIST = $_POST['sensors'];
+            $SENSOR_LIST_STRING = '[';
+            
+            foreach($RAW_SENSOR_LIST as $sensor){
+              $SENSOR_LIST_STRING .= $sensor .','; 
+            }
+            
+            $SENSOR_LIST_STRING = substr($SENSOR_LIST_STRING, 0, -1) . ']'; */
+            
+        }else{
+            $SENSOR_LIST_STRING = '[]';
+        }
+        
+        $startDate = $_POST['start_date'];
+        $endDate = $_POST['end_date'];
+        $maxDevices = $_POST['max_devices_number'];
+        $setupType = $_POST['setup_types'];
+        
+        
+        /**
+        * Parsing description of APKs
+        */
+        $APK_DESCRIPTION = '';
+        
+        if(isset($_POST['description'])){
+            
+            //Affecting the APK with examinating the space 
+           $RAW_APK_DESCRIPTION = trim($_POST['description']);
+           
+           $APK_DESCRIPTION = $RAW_APK_DESCRIPTION;
+            
+        }
+        
+        $APK_TITLE = trim($_POST['apk_title']);
+        
+        $APK_ANDROID_VERSION = '';
+        if(isset($_POST['android_version_select'])){
+            $APK_ANDROID_VERSION = trim($_POST['android_version_select']);    
+        }
+        
+        $sql_installed_on = "SELECT installed_on, apk_version
+                             FROM ".$CONFIG['DB_TABLE']['APK']." 
+                             WHERE apkid=".$_SESSION['APKID'];
+                             
+        $result_installed_on = $db->query($sql_installed_on);
+        $row_installed_on = $result_installed_on->fetch();
+        
+        $logger->logInfo("row_installed_on = ".$row_installed_on);
+
+        $APK_VERSION = $row_installed_on['apk_version'] + 1;
+
+          /**
+          * Store filename, hash in DB and other informations
+          */
+          $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." 
+                  SET apkname='". $filename."', 
+                      apk_version='".$APK_VERSION."',
+                      apkhash='".$HASH_FILE ."', 
+                      sensors='". $SENSOR_LIST_STRING ."', 
+                      description='". $APK_DESCRIPTION ."',
+                      startdate='". $startDate ."',
+                      enddate='". $endDate ."',
+                      maxdevice=". $maxDevices .",
+                      androidversion=". $APK_ANDROID_VERSION .",
+                      ustudy_finished=-1 WHERE apkid=".$_SESSION['APKID'];
+          
+          // WARNING: hashed filename is WITHOUT .apk extention!                        
+          $db->exec($sql);
+
+        if(!empty($row_installed_on))
+        {
+          $row_installed_on =  $row_installed_on[0];
+          $logger->logInfo("row_installed_on[0] = ".$row_installed_on);
+
+          if(!empty($row_installed_on))
+          {
+
+            include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
+            $targetDevices = array();
+            $row_installed_on = substr($row_installed_on, 1);
+            $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
+            $row_installed_on = explode(",", $row_installed_on);
+            
+              //Selecting all different apk in a hardware
+            foreach($row_installed_on as $hardware_id){
+                 $sql="SELECT * 
+                       FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." 
+                       WHERE hwid=".$hardware_id;
+                       
+                 $req=$db->query($sql);
+                 $row=$req->fetch();
+                 $targetDevices[] = $row['c2dm'];
+            }
+            GooglePushManager::googlePushSendUpdate($_SESSION['APKID'], $targetDevices, $logger, $CONFIG);
+          }
+        }
+
+        die('1');
+        //header("Location: ucp.php?m=upload&res=1");
+    }else{
+        die('0');
+        //header("Location: ucp.php?m=upload&res=0");
+    }       
 }
 ?>
