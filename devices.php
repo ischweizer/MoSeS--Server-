@@ -68,7 +68,7 @@ include_once("./include/_menu.php");
                   <th>Name</th>
                   <th>Model</th>
                   <th>API</th>
-                  <th>Delete</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody id="content"><?php
