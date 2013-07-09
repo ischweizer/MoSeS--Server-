@@ -504,18 +504,22 @@ include_once("./include/_confirm.php");
                         </fieldset>
                         <input type="hidden" name="study_update" value="6825">
                         <input type="hidden" name="apk_id" value="<?php echo $APK['apkid']; ?>">
+                        <input type="hidden" name="userhash" value="<?php echo $APK['userhash']; ?>">
+                        <input type="hidden" name="apkhash" value="<?php echo $APK['apkhash']; ?>">
                     </form>
                     <ul class="apk_control_buttons">
-                        <li><a href="./apk/<?php echo $APK['userhash'] .'/'. $APK['apkhash']; ?>.apk" title="Download APP" class="btn">Download</a></li>
+                        <li><button class="btn" name="btnDownloadApp" title="Download APP">Download</button></li>
                         <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
                     <?php
                     if($APK['ustudy_finished'] == 1){
+                        // href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Result Of Questionnaire"
+                        // href="<?php echo $_SERVER['PHP_SELF']; ?>?m=addquest&id=<?php echo $APK['apkid']; ?>"
                         ?>
-                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Result Of Questionnaire" class="btn">Results</a></li>
+                        <li><button class="btn" title="Result Of Questionnaire">Results</button></li>
                         <?php
                     }else{
                         ?>
-                        <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?m=addquest&id=<?php echo $APK['apkid']; ?>" title="Add Questionnaire" class="btn">Add quest</a></li>
+                        <li><button class="btn" title="Add Questionnaire">Add quest</button></li>
                     <?php
                     }
                     ?>
@@ -550,6 +554,15 @@ include_once("./include/_footer.php");
 /* UPDATE AND VIEW PAGE */
 if($CREATE == 0){
 ?>
+
+/* Download handler */
+$('[name="btnDownloadApp"]').click(function(e){
+    e.preventDefault(); 
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+    window.location.href = './apk/'+ p.find('[name="userhash"]').val() +'/'+ p.find('[name="apkhash"]').val() +'.apk';
+});
+
 /* Confirm dialog */
 $('.confirm-delete').click(function(e) {
     e.preventDefault();
