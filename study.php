@@ -436,8 +436,8 @@ include_once("./include/_confirm.php");
                             <div class="control-group">
                                 <label class="control-label">Max participating devices: </label>
                                 <div class="controls">
-                                    <div name="max_devices_number_text"><?php echo $APK['maxdevice']; ?></div>
-                                    <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" value="<?php echo $APK['maxdevice']; ?>" style="display: none;" />
+                                    <div name="max_devices_number_text"><?php echo $APK['restriction_device_number']; ?></div>
+                                    <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" value="<?php echo $APK['restriction_device_number']; ?>" style="display: none;" />
                                 </div>
                             </div>
                             <?php 
@@ -635,9 +635,13 @@ $('[name="btnUpdateOK"]').click(function(e){
         //Ajax events
         //beforeSend: beforeSendHandler,
         success: function(result){
-            if(result){
+            if(result == '1'){
                 p.find('progress').hide();
                 p.find('[name="btnUpdateStudy"]').attr('disabled',false);
+                p.find('[name="btnUpdateOK"]').attr('disabled', false);
+                
+                // get all info from inputs and inline substitute with old one
+                
             }
         },
         //error: errorHandler,
