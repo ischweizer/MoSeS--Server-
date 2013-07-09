@@ -300,9 +300,9 @@ include_once("./include/_confirm.php");
         ?>
           <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFather" href="#collapseStudies<?php echo $i; ?>">
+              <a class="accordion-toggle" name="study_title_link" data-toggle="collapse" data-parent="#accordionFather" href="#collapseStudies<?php echo $i; ?>">
                 <?php
-                   echo $APK['apktitle'].' (Filename: '. $APK['apkname'] .')'; 
+                   echo $APK['apktitle']; 
                 ?>
               </a>
             </div>
@@ -641,7 +641,25 @@ $('[name="btnUpdateOK"]').click(function(e){
                 p.find('[name="btnUpdateOK"]').attr('disabled', false);
                 
                 // get all info from inputs and inline substitute with old one
-                
+                p.parent().parent().parent().parent().find('[name="study_title_link"]').text(p.find('[name="apk_title"]').val());
+                p.find('[name="study_title_text"]').text(p.find('[name="apk_title"]').val());
+                p.find('[name="android_version"]').text(p.find('[name="android_version_select"] :selected').text());
+                p.find('[name="start_date_text"]').text(p.find('[name="start_date"]').val());
+                p.find('[name="end_date_text"]').text(p.find('[name="end_date"]').val());
+                p.find('[name="description_text"]').text(p.find('[name="description"]').val()); 
+                p.find('[name="max_devices_number_text"]').text(p.find('[name="max_devices_number"]').val());
+                    
+                switch(p.find('[name="setup_types"]:checked').val()){
+                    
+                    case '1': p.find('[name="allowed_join_text"]').text("Joining is allowed for invited users.");
+                            break; 
+                    case '2': p.find('[name="allowed_join_text"]').text("Joining is allowd from all invited users that installed "+ p.find('[name="apk_title"]').val() +".");
+                            break;
+                    case '3': p.find('[name="allowed_join_text"]').text("Joining is allowed from all users that installed "+ p.find('[name="apk_title"]').val() +".");
+                            break;
+                    default: 
+                            p.find('[name="allowed_join_text"]').text("Something went wrong with retrieving invite install!");
+                }
             }
         },
         //error: errorHandler,
