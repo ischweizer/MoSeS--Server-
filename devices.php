@@ -80,7 +80,7 @@ include_once("./include/_menu.php");
                     echo "<td>". $device['deviceid'] ."</td>";
                     echo "<td>". $device['modelname'] ."</td>";
                     echo "<td>". getAPILevel($device['androidversion']) ."</td>";
-                    echo '<td><a href="'. $_SERVER['PHP_SELF'] .'?remove='. $device['hwid'] .'" title="Remove device" class="btn btn-warning">Remove</a></td>';
+                    echo '<td><a href="'. $_SERVER['PHP_SELF'] .'?remove='. $device['hwid'] .'" title="Remove device" class="btn btn-danger">Remove</a></td>';
                     echo "</tr>";
                     $i++;
                 }
@@ -154,7 +154,7 @@ $('#page-selection').bootpag({
                 replaceRows += '<td>' + result[i].deviceid + '</td>';
                 replaceRows += '<td>' + result[i].modelname + '</td>';
                 replaceRows += '<td>' + API_VERSION[result[i].androidversion] + '</td>';
-                replaceRows += '<td><a href="devices.php?remove='+ result[i].hwid +'" title="Remove device" class="btn btn-warning">Remove</a></td>';
+                replaceRows += '<td><a href="devices.php?remove='+ result[i].hwid +'" title="Remove device" class="btn btn-danger">Remove</a></td>';
                 replaceRows += '</tr>';
             }
             

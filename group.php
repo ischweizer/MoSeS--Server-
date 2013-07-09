@@ -127,7 +127,7 @@ include_once("./include/_menu.php");
                 <label>Enter password
                     <input type="password" class="input-block-level" placeholder="Password" id="group_password" name="group_password">
                 </label>
-                <button class="btn btn-warning" id="btnCreateJoinGroup" value="<?php echo $_SESSION['USER_ID']; ?>">GO</button><?php
+                <button class="btn btn-success" id="btnCreateJoinGroup" value="<?php echo $_SESSION['USER_ID']; ?>">GO</button><?php
                 
             }elseif(empty($GROUP_MEMBERS)){
                  ?><h2 class="text-center">You're not a member of any research group.</h2><?php
@@ -135,7 +135,7 @@ include_once("./include/_menu.php");
                  
          ?>
         <h2>You're member of group: <?php echo $groupname; ?></h2>
-        <button class="btn btn-info" id="btnLeaveGroup" value="<?php echo $_SESSION['USER_ID']; ?>">Leave group</button>
+        <button class="btn btn-danger" id="btnLeaveGroup" value="<?php echo $_SESSION['USER_ID']; ?>">Leave group</button>
         <br>
         <h4>This group has <?php 
                 echo $group_members_count > 1 ? $group_members_count.' members' : '1 member (you)' 
@@ -257,7 +257,7 @@ $('#btnCreateJoinGroup').click(function(e){
     
     var clickedButton = $(this);
     
-    clickedButton.removeClass('btn-warning');
+    clickedButton.removeClass('btn-success');
     clickedButton.attr('disabled', true);
     clickedButton.text('Working...');
     
@@ -301,7 +301,7 @@ function handleGroupServerAnswer(result){
         case '4':   $('.hero-unit').html('<h2 class="text-center">Error: Entered group doesn\'t exist!</h2>');
                     break;
         default:    alert('Something went wrong! Try again later.');
-                    $('#btnCreateJoinGroup').addClass('btn-warning');
+                    $('#btnCreateJoinGroup').addClass('btn-success');
                     $('#btnCreateJoinGroup').attr('disabled', false);
                     $('#btnCreateJoinGroup').text('OK');
                     break;
