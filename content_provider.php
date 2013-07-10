@@ -598,11 +598,11 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         $radioButton = $_POST['study_period'];
         $startcriterion = NULL;
         $runningtime = NULL;
-        $private = $_POST['private'];
+        $private = (isset($_POST['private']) ? 1 : 0);
         $startdate = $_POST['start_date'];
         $enddate = $_POST['end_date'];        
         $maxdevice = $_POST['max_devices_number'];
-        $inviteinstall = $_POST['setup_types'];
+        $inviteinstall = (isset($_POST['setup_types']) ? 1 : 0);
 
         $RESTRICTION_USER_NUMBER = $maxdevice;
         
@@ -610,7 +610,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         // get the list of candidates with the specified android version
         // Check if the user wants only members from his group to take part on the user study
         
-        if($private == "1" && isset($_SESSION['RGROUP'])){
+        if($private == 1 && isset($_SESSION['RGROUP'])){
             $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $CONFIG['DB_TABLE']['RGROUP'],
                                                                 $androidversion, $_SESSION['RGROUP'],$logger);
         }else{
@@ -865,8 +865,8 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         $startdate = $_POST['start_date'];
         $enddate = $_POST['end_date'];
         $maxDevices = $_POST['max_devices_number'];
-        $setupType = $_POST['setup_types'];
-        $private = $_POST['private'];
+        $setupType = (isset($_POST['setup_types']) ? 1 : 0);
+        $private = (isset($_POST['private']) ? 1 : 0);
         $startcriterion = NULL;
         $runningtime = NULL;
         $radioButton = $_POST['study_period'];

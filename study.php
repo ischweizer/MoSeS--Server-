@@ -658,6 +658,12 @@ $('[name="btnUpdateOK"]').click(function(e){
                 }else{
                    p.find('[name="allowed_join_text"]').text("Only invited people can see this study!"); 
                 }
+                
+                if(p.find('[name="private"]').is(':checked')){
+                   p.find('[name="private_text"]').html("This study marked as <strong>private</strong>."); 
+                }else{
+                   p.find('[name="private_text"]').html("This study marked as <strong>public</strong>."); 
+                }
             }
         },
         //error: errorHandler,
