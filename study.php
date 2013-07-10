@@ -66,7 +66,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
            die('success');
        }
          
-       // getting quest results  
+       // getting survey results  
        if(isset($_POST['USQUEST']) && !empty($_POST['USQUEST']))
         {
             $apkid = preg_replace("/\D/", "", $_POST['USQUEST']);
@@ -81,7 +81,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
             
             $apkname = $row['apktitle'];
             
-            include_once("./include/managers/QuestionnaireManager.php");
+            include_once("./include/managers/SurveyManager.php");
             
             $notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
                 $db,
@@ -505,16 +505,20 @@ include_once("./include/_confirm.php");
                         <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
                     <?php
                     if($APK['ustudy_finished'] == 1){
-                        // href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Result Of Questionnaire"
+                        // href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Results of survey"
                         // href="<?php echo $_SERVER['PHP_SELF']; ?>?m=addquest&id=<?php echo $APK['apkid']; ?>"
                         ?>
-                        <li><button class="btn" title="Result Of Questionnaire">Results</button></li>
+                        <li><button class="btn" title="Results of survey">Results</button></li>
                         <?php
                     }
                     ?>
                         <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkhash']; ?>">Remove</button></li>
                     </ul>
               </div>
+              <hr><button class="btn" name="btnAddSurvey" value="" style="float: right;"><i class="icon-plus-sign"></i> Add survey</button>
+               <?php
+               include_once('./include/_survey.php');        
+               ?>
             </div>
           </div>
           <?php
@@ -522,7 +526,7 @@ include_once("./include/_confirm.php");
            ?>
         </div><?php
         }             
-        ?>   
+        ?>
     </div>
     <!-- / Main Block -->
     
@@ -829,5 +833,24 @@ $('[name="end_date"]').datepicker({
     type = file.type;
                                
 }); */
+
+$('[name="btnAddSurvey"]').click(function(e){
+    e.preventDefault();
+    
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+    
+    p.find('[name="survey_controls"]').show();
+    p.find('[name="survey_container"]').hide();
+});
+
+$('[name="btnAddSurveyOK"]').click(function(e){
+    e.preventDefault();
+    
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+    
+    p.find('[name="survey_container"]').show();
+});
 
 </script>

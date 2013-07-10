@@ -19,7 +19,7 @@ if(isset($_POST['HTTP_JSON'])){
         include_once(MOSES_HOME . '/include/managers/LoginManager.php'); 
         include_once(MOSES_HOME . '/include/managers/HardwareManager.php');
         include_once(MOSES_HOME . '/include/functions/dbconnect.php');
-        include_once(MOSES_HOME . '/include/managers/QuestionnaireManager.php'); 
+        include_once(MOSES_HOME . '/include/managers/SurveyManager.php'); 
         include_once(MOSES_HOME . '/include/functions/func.php');
         include_once(MOSES_HOME . '/include/functions/klogger.php');
     

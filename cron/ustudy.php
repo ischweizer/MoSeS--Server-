@@ -12,7 +12,7 @@
 	include_once('/home/dasense/moses/config.php');
 	include_once(MOSES_HOME."/include/functions/cronLogger.php");
 	include_once(MOSES_HOME. "/include/functions/dbconnect.php");
-	include(MOSES_HOME."/cron/questionnaire.php");
+	include(MOSES_HOME."/cron/survey.php");
 	
 	$logger->logInfo(" ###################### STARTED USER STUDY CRONJOB ############################## ");
 	 

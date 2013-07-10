@@ -119,7 +119,7 @@
 	        $db->exec($sql);
 
 	        // Get the questionnaire of the user study
-	        include_once(MOSES_HOME.'/include/managers/QuestionnaireManager.php');
+	        include_once(MOSES_HOME.'/include/managers/SurveyManager.php');
 	        include_once(MOSES_HOME . '/include/functions/dbconnect.php');
 	        $quests = QuestionnaireManager::getChosenQuestionnireForApkid(
 					$db,
