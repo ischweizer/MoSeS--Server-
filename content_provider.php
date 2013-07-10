@@ -38,7 +38,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_REQUEST['hash']) && !empty($_RE
 }
 
 /*
-* Handling user creates or joins existing group 
+* Handling user CREATES or JOINS existing group 
 */
 
 if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
@@ -142,7 +142,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
 }
  
 /*
-* Handling user leaves his group 
+* Handling user LEAVES his group 
 */
 
 if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
@@ -240,7 +240,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
 }
 
 /*
-* Handle user login
+* Handle user LOGIN
 */
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 	
@@ -598,11 +598,11 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         $radioButton = $_POST['study_period'];
         $startcriterion = NULL;
         $runningtime = NULL;
-        $private = $_POST['private'];
+        $private = (isset($_POST['private']) ? 1 : 0);
         $startdate = $_POST['start_date'];
         $enddate = $_POST['end_date'];        
         $maxdevice = $_POST['max_devices_number'];
-        $inviteinstall = $_POST['setup_types'];
+        $inviteinstall = (isset($_POST['setup_types']) ? 1 : 0);
 
         $RESTRICTION_USER_NUMBER = $maxdevice;
         
@@ -610,7 +610,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         // get the list of candidates with the specified android version
         // Check if the user wants only members from his group to take part on the user study
         
-        if($private == "1" && isset($_SESSION['RGROUP'])){
+        if($private == 1 && isset($_SESSION['RGROUP'])){
             $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $CONFIG['DB_TABLE']['RGROUP'],
                                                                 $androidversion, $_SESSION['RGROUP'],$logger);
         }else{
@@ -682,7 +682,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         * inserting into APK table
         */
         $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname,
-                                 apkhash, sensors, description,
+                                 apkhash, sensors, description, private,
                                  apktitle, restriction_device_number, pending_devices,
                                  candidates, notified_devices, androidversion, ustudy_finished,
                                  startdate, startcriterion, enddate, runningtime, inviteinstall
@@ -694,6 +694,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
                                     .", '" . $HASH_FILE ."'"
                                     .", '". $sensors ."'"
                                     .", '". $description ."'"
+                                    .", ". $private
                                     .", '". $apk_title ."'"
                                     .", ". $RESTRICTION_USER_NUMBER
                                     .", '". $pending_users ."'"
@@ -864,7 +865,8 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         $startdate = $_POST['start_date'];
         $enddate = $_POST['end_date'];
         $maxDevices = $_POST['max_devices_number'];
-        $setupType = $_POST['setup_types'];
+        $setupType = (isset($_POST['setup_types']) ? 1 : 0);
+        $private = (isset($_POST['private']) ? 1 : 0);
         $startcriterion = NULL;
         $runningtime = NULL;
         $radioButton = $_POST['study_period'];
@@ -945,7 +947,8 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
                       apkname='". (!$FILE_WAS_UPLOADED ? $oldAPKName : $filename)."', 
                       apk_version='".$APK_VERSION."',
                       apkhash='".(!$FILE_WAS_UPLOADED ? $oldAPKHash : $HASH_FILE) ."', 
-                      sensors='". $SENSOR_LIST_STRING ."', 
+                      sensors='". $SENSOR_LIST_STRING ."',
+                      private=". $private .", 
                       description='". $APK_DESCRIPTION ."',".
                       (!empty($startcriterion) ? 'startcriterion='.$startcriterion : '')."
                       startdate='". $startdate ."',
