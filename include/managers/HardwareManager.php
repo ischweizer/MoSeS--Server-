@@ -162,29 +162,30 @@ class HardwareManager{
        return $res;
     }
     
-    /**
-    * Returns a filter from user
-    * 
-    * @param mixed $db
-    * @param mixed $hardwareTable
-    * @param mixed $userID
-    * @param mixed $deviceID
-    */
-    public static function getFilter($db, $hardwareTable, $userID, $deviceID){
+//     TODO remove because no longer needed
+//     /** 
+//     * Returns a filter from user
+//     * 
+//     * @param mixed $db
+//     * @param mixed $hardwareTable
+//     * @param mixed $userID
+//     * @param mixed $deviceID
+//     */
+//     public static function getFilter($db, $hardwareTable, $userID, $deviceID){
         
-        $sql = "SELECT filter 
-                FROM ". $hardwareTable ." 
-                WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+//         $sql = "SELECT filter 
+//                 FROM ". $hardwareTable ." 
+//                 WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
                     
-       $result = $db->query($sql);
-       $row = $result->fetch();
+//        $result = $db->query($sql);
+//        $row = $result->fetch();
        
-       if(!empty($row)){
-           return $row;
-       }
+//        if(!empty($row)){
+//            return $row;
+//        }
        
-       return null;
-    }
+//        return null;
+//     }
     
     /**
     * Returns an android version for given user and device id
