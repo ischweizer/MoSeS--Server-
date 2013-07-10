@@ -42,9 +42,9 @@ if($data->SESSIONID != null){
                    
                   LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $sessionID);
                   
-                  $FILTER = HardwareManager::getFilter($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
+//                   $FILTER = HardwareManager::getFilter($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
                   
-                  if(!empty($FILTER)){
+//                   if(!empty($FILTER)){
                       
                      $ANDROID_VERSION = HardwareManager::getAndroidVersion($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
                      
@@ -56,10 +56,10 @@ if($data->SESSIONID != null){
                      foreach($APKs as $apk){
                         
                         // filter fits to sensors in APK
-                        if(isFilterMatch($USER_FILTER, json_decode($apk['sensors'])) 
-                            && !empty($apk['androidversion']) 
-                            && is_numeric($apk['androidversion'])
-                            && intval($apk['androidversion']) <= intval($ANDROID_VERSION)){
+//                         if(isFilterMatch($USER_FILTER, json_decode($apk['sensors'])) 
+//                             && !empty($apk['androidversion']) 
+//                             && is_numeric($apk['androidversion'])
+//                             && intval($apk['androidversion']) <= intval($ANDROID_VERSION)){
                              
                          
                             $APK_JSON = array("ID" => $apk['apkid'],
@@ -72,17 +72,17 @@ if($data->SESSIONID != null){
                                               "APKVERSION" => $apk['apk_version']);
                                               
                             $json_array_return[] = $APK_JSON; 
-                        } 
+//                         } 
                      }
                      
                      $return = array("MESSAGE" => "GET_APK_LIST_RESPONSE",
                                      "STATUS" => "SUCCESS",
                                      "APK_LIST" => $json_array_return);
-                  }else{
+//                   }else{
 
-                      $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
-                                      "STATUS" => "FAILURE_UNKNOWN_HARDWARE");
-                  }
+//                       $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
+//                                       "STATUS" => "FAILURE_UNKNOWN_HARDWARE");
+//                   }
                }else{
 
                    $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
