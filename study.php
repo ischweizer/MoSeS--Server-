@@ -237,13 +237,13 @@ include_once("./include/_confirm.php");
                 <div class="control-group">
                     <label class="control-label">Description: </label>
                     <div class="controls">
-                        <textarea rows="3" cols="20" name="description" ="Add here some description about the study"></textarea>
+                        <textarea rows="3" cols="20" name="description" placeholder="Add here some description about the study"></textarea>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Number of invitations:</label>
                     <div class="controls">
-                        <input type="number" name="max_devices_number" maxlength="10" placeholder="Number" />
+                        <input type="number" name="max_devices_number" maxlength="10" placeholder="Number" value="10" />
                     </div>
                 </div>
                 <div class="control-group">
@@ -437,45 +437,6 @@ include_once("./include/_confirm.php");
                             <?php 
                                 echo $joinedDevices; 
                             ?> <br>
-                            <div class="control-group">
-                                <label class="control-label">Selected quests: </label>
-                                <div class="controls">
-                                    <div name="quests"><?php 
-
-                                           if(!empty($APK_QUESTIONS[$APK['apkid']])){
-                                                echo '<ul>';
-                                                foreach($APK_QUESTIONS[$APK['apkid']] as $quests){
-                                                   echo '<li>'. $quests .'</li>'; 
-                                                }
-                                                echo '</ul>';
-                                            }else{
-                                                echo 'No quests were selected for this study! <br>';
-                                            }
-                                            
-                                     ?></div>
-                                    <select multiple="multiple" name="quests_select" style="display: none;">
-                                      <?php
-                                                
-                                         foreach($ALL_QUESTS as $quest){?>
-                                             <option value="<?php echo $quest['questid']; ?>"<?php
-                                             
-                                             if(!empty($APK_QUESTIONS[$APK['apkid']])){
-                                                foreach($APK_QUESTIONS[$APK['apkid']] as $need_to_seelect_quest){ 
-                                          ?>
-                                          <?php 
-                                                if($quest['name'] == $need_to_seelect_quest) 
-                                                    echo ' selected="selected"'; 
-                                                }
-                                             }
-                                        ?>><?php 
-                                            echo $quest['name']; 
-                                            ?></option>
-                                      <?php
-                                         }                              
-                                      ?>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="control-group" name="uploadFile" style="display: none;">
                                 <label class="control-label">Select an APP: </label>
                                 <div class="controls">
