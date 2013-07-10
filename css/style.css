@@ -45,7 +45,7 @@ body {
     margin: 10pt 0pt;
 }
 
-.apk_control_buttons a, .apk_control_buttons button {
+.apk_control_buttons button {
     width: 10em !important;
 }
 

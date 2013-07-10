@@ -80,7 +80,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
          
          $apk_sql = "SELECT apktitle 
                      FROM ".$CONFIG['DB_TABLE']['APK']. " 
-                     WHERE locked=1 AND userid=" . $member_id;
+                     WHERE private=1 AND userid=" . $member_id;
                      
          $req_apk = $db->query($apk_sql);
          $apk_rows = $req_apk->fetchAll();

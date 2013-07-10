@@ -592,6 +592,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         $radioButton = $_POST['study_period'];
         $startcriterion = NULL;
         $runningtime = NULL;
+        $private = $_POST['private'];
         $startdate = $_POST['start_date'];
         $enddate = $_POST['end_date'];        
         $maxdevice = $_POST['max_devices_number'];
@@ -603,7 +604,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         // get the list of candidates with the specified android version
         // Check if the user wants only members from his group to take part on the user study
         
-        if($locked == "1" && isset($_SESSION['RGROUP'])){
+        if($private == "1" && isset($_SESSION['RGROUP'])){
             $rows = HardwareManager::getCandidatesForAndroidFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $CONFIG['DB_TABLE']['RGROUP'],
                                                                 $androidversion, $_SESSION['RGROUP'],$logger);
         }else{

@@ -32,7 +32,7 @@ class ApkManager{
     public static function getNonStudyAllApk($db, $apkTable){
         
         $sql = "SELECT * 
-                FROM ". $apkTable ." WHERE locked=0";
+                FROM ". $apkTable ." WHERE private=0";
                 
         $result = $db->query($sql);
         $array = $result->fetchAll(PDO::FETCH_ASSOC);

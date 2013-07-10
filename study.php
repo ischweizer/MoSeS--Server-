@@ -237,21 +237,19 @@ include_once("./include/_confirm.php");
                 <div class="control-group">
                     <label class="control-label">Description: </label>
                     <div class="controls">
-                        <textarea rows="3" cols="20" name="description"></textarea>
+                        <textarea rows="3" cols="20" name="description" ="Add here some description about the study"></textarea>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Setup types</label>
+                    <label class="control-label">Number of invitations:</label>
                     <div class="controls">
-                        <label><input type="radio" name="setup_types" value="1" /> Invite only</label>
-                        <label><input type="radio" name="setup_types" value="2" checked="checked" /> Invite & Install (Default)</label>
-                        <label><input type="radio" name="setup_types" value="3" /> Install only</label>
+                        <input type="number" name="max_devices_number" maxlength="10" placeholder="Number" />
                     </div>
-                </div>                
+                </div>
                 <div class="control-group">
-                    <label class="control-label">Max participating devices: </label>
+                    <label class="control-label"></label>
                     <div class="controls">
-                        <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" />
+                        <label><input type="checkbox" name="setup_types" checked="checked">Publish to MoSeS</label>
                     </div>
                 </div>
                 <div class="control-group" name="uploadFile">
@@ -408,36 +406,32 @@ include_once("./include/_confirm.php");
                                 <label class="control-label">Description: </label>
                                 <div class="controls">
                                     <div name="description_text"><?php echo $APK['description']; ?></div>
-                                    <textarea rows="3" cols="20" name="description" style="display: none;"><?php echo $APK['description']; ?></textarea>
+                                    <textarea rows="3" cols="20" name="description" placeholder="Add here some description about the study" style="display: none;"><?php echo $APK['description']; ?></textarea>
                                 </div>
                             </div>
-                            This study marked as <strong><?php echo $APK['locked'] == 1 ? 'private' : 'public'; ?>.</strong> <br>
+                            This study marked as <strong><?php echo $APK['private'] == 1 ? 'private' : 'public'; ?>.</strong> <br>
+                            <div class="control-group">
+                                <label class="control-label">Number of invitations: </label>
+                                <div class="controls">
+                                    <div name="max_devices_number_text"><?php echo $APK['restriction_device_number']; ?></div>
+                                    <input type="number" name="max_devices_number" maxlength="10" placeholder="Number" value="<?php echo $APK['restriction_device_number']; ?>" style="display: none;" />
+                                </div>
+                            </div>
                             <div name="allowed_join_text">
                             <?php
                                 switch($APK['inviteinstall']){
-                                    case '1': echo 'Joining is allowed for invited users.';
+                                    case '1': echo 'Only invited people can see this study!';
                                             break;
-                                    case '2': echo 'Joining is allowd from all invited users that installed '. $APK['apktitle'] .'.'; 
+                                    case '2': echo 'This study is avalaible for everyone.'; 
                                             break;
-                                    case '3': echo 'Joining is allowed from all users that installed '. $APK['apktitle'] .'.';
-                                            break;
-                                    default: echo 'Something went wrong with retrieving invite install!';
+                                    default: echo 'Something went wrong!';
                                 }
                             ?>
                             </div>
                             <div class="control-group" name="allowed_join" style="display: none;">
-                                <label class="control-label">Setup types</label>
+                                <label class="control-label"></label>
                                 <div class="controls">
-                                    <label><input type="radio" name="setup_types" value="1" <?php echo $APK['inviteinstall'] == 1 ? 'checked="checked"' : ''; ?> /> Invite only</label>
-                                    <label><input type="radio" name="setup_types" value="2" <?php echo $APK['inviteinstall'] == 2 ? 'checked="checked"' : ''; ?> /> Invite & Install (Default)</label>
-                                    <label><input type="radio" name="setup_types" value="3" <?php echo $APK['inviteinstall'] == 3 ? 'checked="checked"' : ''; ?> /> Install only</label>
-                                </div>
-                            </div> 
-                            <div class="control-group">
-                                <label class="control-label">Max participating devices: </label>
-                                <div class="controls">
-                                    <div name="max_devices_number_text"><?php echo $APK['restriction_device_number']; ?></div>
-                                    <input type="number" name="max_devices_number" maxlength="10" placeholder="Max devices" value="<?php echo $APK['restriction_device_number']; ?>" style="display: none;" />
+                                    <label><input type="checkbox" name="setup_types" checked="checked">Publish to MoSeS</label>
                                 </div>
                             </div>
                             <?php 
@@ -517,10 +511,6 @@ include_once("./include/_confirm.php");
                         ?>
                         <li><button class="btn" title="Result Of Questionnaire">Results</button></li>
                         <?php
-                    }else{
-                        ?>
-                        <li><button class="btn" title="Add Questionnaire">Add quest</button></li>
-                    <?php
                     }
                     ?>
                         <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkhash']; ?>">Remove</button></li>
@@ -662,16 +652,10 @@ $('[name="btnUpdateOK"]').click(function(e){
                 p.find('[name="description_text"]').text(p.find('[name="description"]').val()); 
                 p.find('[name="max_devices_number_text"]').text(p.find('[name="max_devices_number"]').val());
                     
-                switch(p.find('[name="setup_types"]:checked').val()){
-                    
-                    case '1': p.find('[name="allowed_join_text"]').text("Joining is allowed for invited users.");
-                            break; 
-                    case '2': p.find('[name="allowed_join_text"]').text("Joining is allowd from all invited users that installed "+ p.find('[name="apk_title"]').val() +".");
-                            break;
-                    case '3': p.find('[name="allowed_join_text"]').text("Joining is allowed from all users that installed "+ p.find('[name="apk_title"]').val() +".");
-                            break;
-                    default: 
-                            p.find('[name="allowed_join_text"]').text("Something went wrong with retrieving invite install!");
+                if(p.find('[name="setup_types"]').is(':checked')){
+                   p.find('[name="allowed_join_text"]').text("This study is avalaible for everyone."); 
+                }else{
+                   p.find('[name="allowed_join_text"]').text("Only invited people can see this study!"); 
                 }
             }
         },
