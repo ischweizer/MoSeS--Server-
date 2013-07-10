@@ -106,6 +106,10 @@ $(document).ready(function() {
 	        			$('#login_error_message').text('Invalid email!');
 	        			$('#login_error_message').show();
 	        			break;
+	        		case '5':
+	        			$('#login_error_message').text('Password has to be at least six characters long!');
+	        			$('#login_error_message').show();
+	        			break;
 	        		default:
 	        			$('#login_error_message').text('An unknown error has occured. Giovani Giorgo will be informed about this!');
 	        			$('#login_error_message').show();
