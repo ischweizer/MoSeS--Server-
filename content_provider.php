@@ -38,7 +38,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_REQUEST['hash']) && !empty($_RE
 }
 
 /*
-* Handling user creates or joins existing group 
+* Handling user CREATES or JOINS existing group 
 */
 
 if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
@@ -142,7 +142,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
 }
  
 /*
-* Handling user leaves his group 
+* Handling user LEAVES his group 
 */
 
 if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
@@ -240,7 +240,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
 }
 
 /*
-* Handle user login
+* Handle user LOGIN
 */
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 	
@@ -682,7 +682,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         * inserting into APK table
         */
         $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname,
-                                 apkhash, sensors, description,
+                                 apkhash, sensors, description, private,
                                  apktitle, restriction_device_number, pending_devices,
                                  candidates, notified_devices, androidversion, ustudy_finished,
                                  startdate, startcriterion, enddate, runningtime, inviteinstall
@@ -694,6 +694,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
                                     .", '" . $HASH_FILE ."'"
                                     .", '". $sensors ."'"
                                     .", '". $description ."'"
+                                    .", ". $private
                                     .", '". $apk_title ."'"
                                     .", ". $RESTRICTION_USER_NUMBER
                                     .", '". $pending_users ."'"
@@ -865,6 +866,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         $enddate = $_POST['end_date'];
         $maxDevices = $_POST['max_devices_number'];
         $setupType = $_POST['setup_types'];
+        $private = $_POST['private'];
         $startcriterion = NULL;
         $runningtime = NULL;
         $radioButton = $_POST['study_period'];
@@ -945,7 +947,8 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
                       apkname='". (!$FILE_WAS_UPLOADED ? $oldAPKName : $filename)."', 
                       apk_version='".$APK_VERSION."',
                       apkhash='".(!$FILE_WAS_UPLOADED ? $oldAPKHash : $HASH_FILE) ."', 
-                      sensors='". $SENSOR_LIST_STRING ."', 
+                      sensors='". $SENSOR_LIST_STRING ."',
+                      private=". $private .", 
                       description='". $APK_DESCRIPTION ."',".
                       (!empty($startcriterion) ? 'startcriterion='.$startcriterion : '')."
                       startdate='". $startdate ."',

@@ -32,7 +32,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                
               // getting userhah for dir later
               $sql = "SELECT userhash 
-                      FROM apk 
+                      FROM ". $CONFIG['DB_TABLE']['APK'] ." 
                       WHERE userid = ". $_SESSION['USER_ID'] . " 
                       AND apkhash = '". $REMOVE_HASH ."'";
               
@@ -53,9 +53,9 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
               }
                
               // remove entry from DB 
-              $sql = "DELETE FROM apk 
-                             WHERE userid = ". $_SESSION['USER_ID'] . " 
-                             AND apkhash = '". $REMOVE_HASH ."'";
+              $sql = "DELETE 
+                      FROM ". $CONFIG['DB_TABLE']['APK'] ." 
+                      WHERE userid = ". $_SESSION['USER_ID'] . " AND apkhash = '". $REMOVE_HASH ."'";
               
               $db->exec($sql);
                
@@ -72,7 +72,10 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
             $apkid = preg_replace("/\D/", "", $_POST['USQUEST']);
             $show_us_quest = true;
 
-            $sql = "SELECT apktitle FROM apk WHERE apkid = ".$apkid;
+            $sql = "SELECT apktitle 
+                    FROM ". $CONFIG['DB_TABLE']['APK'] ." 
+                    WHERE apkid = ".$apkid;
+                    
             $req = $db->query($sql);
             $row = $req->fetch();
             
@@ -93,9 +96,19 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                 $apkid);
         }  
          
-       // select all entries for particular user
+       /* taking group name from user */
+       $sql = "SELECT rgroup 
+               FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+               WHERE userid = ". $_SESSION["USER_ID"];
+                
+       $result = $db->query($sql);
+       $row = $result->fetch(PDO::FETCH_ASSOC);
+       
+       $USER_RGROUP = (!empty($row['rgroup']) ? $row['rgroup'] : ''); 
+       
+       // select all entries from apk table for user
        $sql = "SELECT * 
-               FROM apk 
+               FROM ". $CONFIG['DB_TABLE']['APK'] ." 
                WHERE userid = ". $_SESSION["USER_ID"];
                 
        $result = $db->query($sql);
@@ -252,6 +265,18 @@ include_once("./include/_confirm.php");
                         <label><input type="checkbox" name="setup_types" checked="checked">Publish to MoSeS</label>
                     </div>
                 </div>
+                <?php
+                    if(!empty($USER_RGROUP)){
+                ?>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <label><input type="checkbox" name="private">Make visible only to my group</label>
+                    </div>
+                </div>
+                <?php
+                    }
+                 ?>
                 <div class="control-group" name="uploadFile">
                     <label class="control-label">Select an APP: </label>
                     <div class="controls">
@@ -409,7 +434,6 @@ include_once("./include/_confirm.php");
                                     <textarea rows="3" cols="20" name="description" placeholder="Add here some description about the study" style="display: none;"><?php echo $APK['description']; ?></textarea>
                                 </div>
                             </div>
-                            This study marked as <strong><?php echo $APK['private'] == 1 ? 'private' : 'public'; ?>.</strong> <br>
                             <div class="control-group">
                                 <label class="control-label">Number of invitations: </label>
                                 <div class="controls">
@@ -434,15 +458,29 @@ include_once("./include/_confirm.php");
                                     <label><input type="checkbox" name="setup_types" checked="checked">Publish to MoSeS</label>
                                 </div>
                             </div>
+                            <div name="private_text">
+                                This study marked as <strong><?php echo $APK['private'] == 1 ? 'private' : 'public'; ?>.</strong>
+                            </div>
+                            <?php
+                                if(!empty($USER_RGROUP)){
+                            ?>
+                            <div class="control-group" name="private_type" style="display: none;">
+                                <label class="control-label"></label>
+                                <div class="controls">
+                                    <label><input type="checkbox" name="private" <?php echo ($APK['private'] == 1 ? 'checked="checked"' : ''); ?> />Make visible only to my group</label>
+                                </div>
+                            </div>
                             <?php 
-                                echo $joinedDevices; 
-                            ?> <br>
+                                }?>
                             <div class="control-group" name="uploadFile" style="display: none;">
                                 <label class="control-label">Select an APP: </label>
                                 <div class="controls">
                                     <input type="file" name="file">
                                 </div>
                             </div>
+                            <?php
+                                echo $joinedDevices; 
+                            ?> <br>
                             <div class="control-group">
                                 <label class="control-label"></label>
                                 <div class="controls">
@@ -552,7 +590,8 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="description_text"]').hide(); 
     p.find('[name="max_devices_number_text"]').hide();
     p.find('[name="allowed_join_text"]').hide();
-    p.find('[name="quests"]').hide();  
+    p.find('[name="private_text"]').hide();
+    //p.find('[name="quests"]').hide();  
                  
     p.find('[name="android_version_select"]').show();
     p.find('.controls :input').show();
@@ -562,7 +601,8 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="running_time_text"]').show();
     p.find('[name="description"]').show();
     p.find('[name="allowed_join"]').show();
-    p.find('[name="quests_select"]').show();
+    p.find('[name="private_type"]').show();
+    //p.find('[name="quests_select"]').show();
     p.find('[name="uploadFile"]').show();
     p.find('[name="btnUpdateOK"]').show();
     p.find('[name="btnUpdateCancel"]').show();
@@ -648,7 +688,8 @@ $('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
    p.find('[name="description_text"]').show(); 
    p.find('[name="max_devices_number_text"]').show();
    p.find('[name="allowed_join_text"]').show();
-   p.find('[name="quests"]').show();
+   p.find('[name="private_text"]').show();
+   //p.find('[name="quests"]').show();
    p.find('[name="progress"]').show();  
                  
    p.find('[name="android_version_select"]').hide();
@@ -659,7 +700,8 @@ $('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
    p.find('[name="running_time_text"]').hide();
    p.find('[name="description"]').hide();
    p.find('[name="allowed_join"]').hide();
-   p.find('[name="quests_select"]').hide();
+   p.find('[name="private_type"]').hide();
+   //p.find('[name="quests_select"]').hide();
    p.find('[name="uploadFile"]').hide();
    p.find('[name="btnUpdateCancel"]').hide();
    p.find('[name="progress"]').hide();
