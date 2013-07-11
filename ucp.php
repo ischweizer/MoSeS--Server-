@@ -139,7 +139,7 @@ if(isset($_GET['m']))
 
         case 'UPLOAD':
             // user want to create a user study 
-            if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2'])
+           /* if(isset($_REQUEST['next1']) || isset($_REQUEST['back2']) || isset($_REQUEST['next2'])
             || isset($_REQUEST['back3']) || isset($_REQUEST['create']))
             {
                 $page1 = false;
@@ -304,7 +304,7 @@ if(isset($_GET['m']))
            
            $groupname = $row['rgroup'];
            $_SESSION['RGROUP'] = $groupname;
-           
+                 */
            break;
                        
         case 'DEVICE':
@@ -338,7 +338,7 @@ if(isset($_GET['m']))
         
         case 'LIST':
         
-            if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
+           /* if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                    $MODE = 'LIST'; 
                    
                    include_once("./include/functions/dbconnect.php");
@@ -401,13 +401,13 @@ if(isset($_GET['m']))
                    }else{
                        $LIST_APK = 0;
                    }
-            }   
+            }   */
                    
                    break;
                    
         case 'UPDATE':
         
-                    $MODE = 'UPLOAD';
+                /*    $MODE = 'UPLOAD';
                     
                     if(isset($_GET['id'])){
                                  
@@ -434,7 +434,7 @@ if(isset($_GET['m']))
                         }
                     }else{
                         $SHOW_UPDATE_PAGE = 0;    
-                    }
+                    }*/
                     
                     break;
                    
@@ -513,7 +513,7 @@ if(isset($_GET['m']))
                     break;
                        
         case 'ADMIN':  
-                    if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
+              /*      if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
                        
                        $MODE = 'ADMIN';
                        
@@ -556,13 +556,13 @@ if(isset($_GET['m']))
                        if(!empty($array)){
                           $USERS_SCIENTIST_LIST = $array;
                        }
-                    }
+                    } */
                     
                     break;
         
         case 'GROUP':
         
-            $MODE = 'GROUP';
+          /*  $MODE = 'GROUP';
             
             include_once("./include/functions/dbconnect.php");
             
@@ -604,11 +604,11 @@ if(isset($_GET['m']))
                          }
                      }
                  }
-            }
+            }    */
             break;
     
         case 'JOIN':
-            if(isset($_POST["group_name"]) && isset($_POST["group_pwd"])){ 
+           /* if(isset($_POST["group_name"]) && isset($_POST["group_pwd"])){ 
                 
                 include_once("./include/functions/dbconnect.php");
                 $MODE = 'JOIN';
@@ -657,12 +657,12 @@ if(isset($_GET['m']))
                         $db->exec($sql_update3);
                     }
                 }
-            }
+            } */
             
             break;
 
         case 'LEAVE':
-            $MODE = 'LEAVE';
+          /*  $MODE = 'LEAVE';
             include_once("./include/functions/dbconnect.php");
             $sql_leave = "SELECT rgroup FROM ".$CONFIG['DB_TABLE']['USER']." WHERE userid=".$_SESSION['USER_ID'];
             $old_group_result =  $db->query($sql_leave);
@@ -690,7 +690,7 @@ if(isset($_GET['m']))
                 $sql_update4 = "UPDATE ".$CONFIG['DB_TABLE']['RGROUP']." SET members='".$newMembers."' WHERE name='".$groupname."'";
             }
             $db->exec($sql_update4);
-            
+               */
             break;
 
         case 'INSTANT':
