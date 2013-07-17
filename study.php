@@ -147,17 +147,18 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                 $APK_QUESTIONS[$APK['apkid']] = $QUESTIONS;
             }
        }    
-       
-       /*
-       * Select all questions for the selection below
-       */
-       
-       $sql = "SELECT * 
-              FROM ". $CONFIG['DB_TABLE']['QUEST'];
-            
-        $result=$db->query($sql);
-        $ALL_QUESTS = $result->fetchAll(PDO::FETCH_ASSOC);
    }
+   
+   /*
+   *    Select all survey names, ids for dropdown list  
+   */
+   $SURVEYS_ALL = array();
+   
+   $sql = 'SELECT * 
+           FROM `'. $CONFIG['DB_TABLE']['QUEST'] .'`';
+            
+   $result=$db->query($sql);
+   $SURVEYS_ALL = $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //Import of the header  
@@ -176,7 +177,7 @@ include_once("./include/_confirm.php");
     <div class="hero-unit">
         <?php
         
-        if($CREATE == 1){
+        if(isset($CREATE) && $CREATE == 1){
         /**
         * CREATE STUDY/UPLOAD APK FORM
         */
@@ -296,6 +297,10 @@ include_once("./include/_confirm.php");
                     </div>
                 </div>
             </fieldset>
+            <hr><button class="btn" name="btnAddSurvey" value="" style="float: right;"><i class="icon-plus-sign"></i> Add survey</button>
+               <?php
+               include_once('./include/_survey.php');        
+               ?>
             <input name="study_create" type="hidden" value="2975">
         </form>
         <?php 
@@ -850,7 +855,16 @@ $('[name="btnAddSurveyOK"]').click(function(e){
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
     
-    p.find('[name="survey_container"]').show();
+    // Requesting server for questions for selected survey (ID)
+    $.post("content_provider.php", { 'get_questions': $('#survey_select :selected').val(), 'get_questions_pwd' : 6767 })
+        .done(function(result) {
+          if(result){
+             $('#content_appears_here').append(result); 
+          }
+    });
+    
+    //p.find('[name="survey_container_'+ p.find('[name="survey_select"]').val() +'"]').show();
+    
 });
 
 </script>

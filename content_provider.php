@@ -3,11 +3,58 @@ session_start();
 
 include_once("./include/functions/func.php");
 
+/**
+* Add survey handler
+*/ 
+
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_POST['get_questions_pwd']) && $_POST['get_questions_pwd'] == 6767 &&
+    isset($_POST['get_questions']) && is_numeric($_POST['get_questions'])){
+
+    
+  /*
+   * Select all surveys from DB to show them later on
+   */
+   
+   include_once("./config.php");
+   include_once("./include/functions/dbconnect.php");
+   
+   $sql = 'SELECT * 
+           FROM `'. $CONFIG['DB_TABLE']['QUESTION'] .'` 
+           WHERE questid = '. $_POST['get_questions'];
+            
+   $result=$db->query($sql);
+   $SURVEYS_ALL = $result->fetchAll(PDO::FETCH_ASSOC);
+?>  
+   <div class="row-fluid" name="survey_container_<?php echo $SURVEY['questid']; ?>">
+    <div class="span10" name="survey_body">
+      <!--Body content-->
+      <?php
+        $i = 1;
+        foreach($SURVEYS_ALL as $SURVEY){
+            echo '#'. $i .' '. $SURVEY['content'] .'<br>'; 
+            $i++;
+        }   
+       ?>
+    </div>
+    <div class="span2" name="survey_sidebar">
+      <!--Sidebar content-->
+      <?php
+      include_once('./include/_survey_controls.php');    
+      ?>
+    </div>
+  </div>
+  
+<?php
+}
+
 /*
 * Handle allow access for scientists in admin panel
 */
 
-if(isset($_SESSION['USER_LOGGED_IN']) && isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
+    
     if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
        
        include_once("./config.php");
