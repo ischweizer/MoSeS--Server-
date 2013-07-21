@@ -866,5 +866,14 @@ $('[name="btnAddSurveyOK"]').click(function(e){
     //p.find('[name="survey_container_'+ p.find('[name="survey_select"]').val() +'"]').show();
     
 });
+      name="survey_sidebar"
+
+$('#survey_select').change(function(){
+     var value = $(this).val();
+     
+     if(value == 9001){
+        //$('[name="survey_container_9001"]').find('[name="survey_sidebar"]').find('div').show();   
+     }
+});
 
 </script>

@@ -27,6 +27,15 @@ body {
     float: right;
 }
 
+/*
+* Survey style
+*/
+
+div[name*='survey_container_'] {
+    margin: 3em 1em 3em 1em;
+}
+
+/* ---------------------- */
 
 .control-label {
     /*cursor: default;*/   

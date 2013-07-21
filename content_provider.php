@@ -12,7 +12,33 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     isset($_POST['get_questions']) && is_numeric($_POST['get_questions'])){
 
     
+    /* if user wants to make custom survey */
+    if(intval($_POST['get_questions']) == 9001){
+    ?>
+        <div class="row-fluid" name="survey_container_<?php echo $_POST['get_questions']; ?>">
+        <div class="span10" name="survey_body">
+          <!--Body content-->
+          <?php
+            $i = 1;
+            foreach($QUESTIONS as $Q){
+                echo '#'. $i .' '. $Q['content'] .'<br>'; 
+                $i++;
+            }   
+           ?>
+        </div>
+        <div class="span2" name="survey_sidebar">
+          <!--Sidebar content-->
+          <?php
+          include_once('./include/_survey_controls.php');    
+          ?>
+        </div>
+      </div>    
+ <?php
+    }else{
+    
+    
   /*
+   * FOR Prefefined survey!
    * Select all surveys from DB to show them later on
    */
    
@@ -24,28 +50,27 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
            WHERE questid = '. $_POST['get_questions'];
             
    $result=$db->query($sql);
-   $SURVEYS_ALL = $result->fetchAll(PDO::FETCH_ASSOC);
+   $QUESTIONS = $result->fetchAll(PDO::FETCH_ASSOC);
 ?>  
-   <div class="row-fluid" name="survey_container_<?php echo $SURVEY['questid']; ?>">
+   <div class="row-fluid" name="survey_container_<?php echo $_POST['get_questions']; ?>">
     <div class="span10" name="survey_body">
       <!--Body content-->
       <?php
         $i = 1;
-        foreach($SURVEYS_ALL as $SURVEY){
-            echo '#'. $i .' '. $SURVEY['content'] .'<br>'; 
+        foreach($QUESTIONS as $Q){
+            echo '#'. $i .' '. $Q['content'] .'<br>'; 
             $i++;
         }   
        ?>
     </div>
     <div class="span2" name="survey_sidebar">
       <!--Sidebar content-->
-      <?php
-      include_once('./include/_survey_controls.php');    
-      ?>
+      <label>No control.</label>
     </div>
   </div>
   
 <?php
+    }
 }
 
 /*
