@@ -39,11 +39,11 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
     $GROUP_UNIQUE_DEVICES = array();
 
     if(!empty($group_members_array_ids)){
-     foreach($group_members_array_ids as $member_id){
+     foreach($group_members_array_ids as $user_id){
                  
          $sql = 'SELECT * 
-                 FROM '. $CONFIG['DB_TABLE']['USER'] .' u 
-                 WHERE u.userid='. $member_id;
+                 FROM '. $CONFIG['DB_TABLE']['USER'] .' 
+                 WHERE userid='. $user_id;
                  
          $result = $db->query($sql);
          $user_info = $result->fetch(PDO::FETCH_ASSOC);
@@ -57,9 +57,9 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
          * Requesting user's devices
          */
          
-         $sql = 'SELECT h.hwid, h.uid, h.uniqueid, h.modelname, h.androidversion, h.c2dm  
-                 FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .' h
-                 WHERE h.uid='. $member_id;
+         $sql = 'SELECT *  
+                 FROM '. $CONFIG['DB_TABLE']['HARDWARE'] .'
+                 WHERE uid='. $user_id;
                  
          $result = $db->query($sql);
          $user_devices = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -80,7 +80,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
          
          $apk_sql = "SELECT apktitle 
                      FROM ".$CONFIG['DB_TABLE']['APK']. " 
-                     WHERE private=1 AND userid=" . $member_id;
+                     WHERE private=1 AND userid=" . $user_id;
                      
          $req_apk = $db->query($apk_sql);
          $apk_rows = $req_apk->fetchAll();
