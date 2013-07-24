@@ -236,21 +236,48 @@ class HardwareManager{
     }
     
     /**
-    * Changes the deviceID of a device
-    *     
-    * @param mixed $db
-    * @param mixed $hardwareTable
-    * @param mixed $userID
-    * @param mixed $deviceID
-    * @param mixed $newDeviceID
-    */
-    public static function changeDeviceID($db, $hardwareTable, $userID, $deviceID, $newDeviceID, $logger){
-        $sql = "UPDATE ". $hardwareTable ." SET deviceid='". $newDeviceID ."' 
-                WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";
-        $logger->logInfo("SQL on changeDeviceID");
-        $logger->logInfo($sql);
-        $db->exec($sql);
+     * Returns the devicename assigned to the provided deviceid and userid
+     *
+     * @param mixed $db the database
+     * @param string $hardwareTable the name of the hardware table 
+     * @param string $userID the id of the user
+     * @param string $deviceID the id of the device
+     * @return the name of the device with deviceID and assigned to the user with the ID $userID
+     * or null if the name does not exist
+     */
+    public static function getDeviceName($db, $hardwareTable, $userID, $deviceID){
+    
+    	$sql = "SELECT devicename
+                FROM ". $hardwareTable ."
+                WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+    
+    	$result = $db->query($sql);
+    	$row = $result->fetch();
+    	 
+    	if(!empty($row)){
+    		return $row['devicename'];
+    	}
+    	 
+    	return null;
     }
+    
+    
+//     /** TO BE REMOVED, BECAUSE NO LONGER NEEDED
+//     * Changes the deviceID of a device
+//     *     
+//     * @param mixed $db
+//     * @param mixed $hardwareTable
+//     * @param mixed $userID
+//     * @param mixed $deviceID
+//     * @param mixed $newDeviceID
+//     */
+//     public static function changeDeviceID($db, $hardwareTable, $userID, $deviceID, $newDeviceID, $logger){
+//         $sql = "UPDATE ". $hardwareTable ." SET deviceid='". $newDeviceID ."' 
+//                 WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";
+//         $logger->logInfo("SQL on changeDeviceID");
+//         $logger->logInfo($sql);
+//         $db->exec($sql);
+//     }
     
                                                 
     /**
