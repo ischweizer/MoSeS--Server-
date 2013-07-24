@@ -21,13 +21,34 @@ if($data->EMAIL != null && !empty($data->EMAIL) && preg_match('/^[_a-z0-9-]+(\.[
                         
         if($result !== false){
             
-            $logger->logInfo("USER_FOUND");
+            $logger->logInfo("A client has logged in");
 
             $logger->logInfo("ASSIGNED ANDROID-SESSION ".session_id());
             
-            $return = array("MESSAGE" => "LOGIN_RESPONSE",
-                            "EMAIL" => $EMAIL,
-                            "SESSIONID" => session_id());
+            /*
+             * Remember the DEVICEID and look for the assigned DEVICENAME
+             */
+            $DEVICEID = $data->DEVICEID;
+            $logger->logInfo("DEVICEID provided by the client ".$DEVICEID);
+            
+            $userIDRow = LoginManager::getLoggedInUser($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], session_id());
+            $userID = $userIDRow['userid'];
+            $deviceName = HardwareManager::getDeviceName($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $userID, $DEVICEID);
+            if($deviceName != null){
+            	$logger->logInfo("DEVICENAME found: ".$deviceName);
+            	// the server knows the name of the device, the client should recive it
+            	$return = array("MESSAGE" => "LOGIN_RESPONSE",
+            					"EMAIL" => $EMAIL,
+            					"SESSIONID" => session_id(),
+            					"DEVICENAME" => $deviceName);
+            }
+            else{
+            	$logger->logInfo("DEVICENAME not found; the response will NOT contain DEVICENAME");
+            	// the server does not know the name of the device
+            	$return = array("MESSAGE" => "LOGIN_RESPONSE",
+            			"EMAIL" => $EMAIL,
+            			"SESSIONID" => session_id());
+            }
         }else{
             $return = array("MESSAGE" => "LOGIN_RESPONSE",
                             "SESSIONID" => "NULL");
