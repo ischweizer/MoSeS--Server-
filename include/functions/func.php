@@ -93,7 +93,8 @@ function getAPIArray(){
                         14 => '"Ice Cream Sandwich" 4.0.0 - 4.0.2 (API: 14)',
                         15 => '"Ice Cream Sandwich" 4.0.3 - 4.0.4 (API: 15)',
                         16 => '"Jelly Bean" 4.1.x (API: 16)',
-                        17 => '"Jelly Bean" 4.2.x (API: 17)');
+                        17 => '"Jelly Bean" 4.2.x (API: 17)',
+                        18 => '"Jelly Bean" 4.3 (API: 18)');
                         
     return $API_LEVELS;
 }
