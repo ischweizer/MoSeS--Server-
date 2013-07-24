@@ -754,6 +754,15 @@ $('[name="study_period"]').click(function(){
 /* CREATE STUDY PAGE */
 ?>
 
+$("#content_appears_here").bind("DOMSubtreeModified", function() {
+    
+    $('.btnRemoveSurvey').click(function(e) {
+        e.preventDefault();
+        
+        $(this).parent().parent().remove();
+    });
+});
+
 $('[name="study_period"]').click(function(){
     if($(this).is(':checked')){
         if($(this).val() == 1){
@@ -847,6 +856,9 @@ $('[name="btnAddSurvey"]').click(function(e){
     
     p.find('[name="survey_controls"]').show();
     p.find('[name="survey_container"]').hide();
+    
+    $(this).hide();
+    
 });
 
 $('[name="btnAddSurveyOK"]').click(function(e){
@@ -866,8 +878,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
     //p.find('[name="survey_container_'+ p.find('[name="survey_select"]').val() +'"]').show();
     
 });
-      name="survey_sidebar"
-
+      
 $('#survey_select').change(function(){
      var value = $(this).val();
      

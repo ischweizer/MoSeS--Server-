@@ -15,16 +15,13 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     /* if user wants to make custom survey */
     if(intval($_POST['get_questions']) == 9001){
     ?>
-        <div class="row-fluid" name="survey_container_<?php echo $_POST['get_questions']; ?>">
+        <div class="row-fluid" style="border:2px solid;" name="survey_container_<?php echo $_POST['get_questions']; ?>">
         <div class="span10" name="survey_body">
           <!--Body content-->
-          <?php
-            $i = 1;
-            foreach($QUESTIONS as $Q){
-                echo '#'. $i .' '. $Q['content'] .'<br>'; 
-                $i++;
-            }   
-           ?>
+          <div>
+              <input type="text" name="survey_questions[]">
+              <div name="survey_answers[]"></div>
+              </div>
         </div>
         <div class="span2" name="survey_sidebar">
           <!--Sidebar content-->
@@ -32,6 +29,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
           include_once('./include/_survey_controls.php');    
           ?>
         </div>
+        <div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>
       </div>    
  <?php
     }else{
@@ -65,10 +63,10 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     </div>
     <div class="span2" name="survey_sidebar">
       <!--Sidebar content-->
-      <label>No control.</label>
+      <label>No controls</label>
     </div>
+    <div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>
   </div>
-  
 <?php
     }
 }
