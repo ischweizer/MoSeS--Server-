@@ -11,33 +11,9 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     isset($_POST['get_questions_pwd']) && $_POST['get_questions_pwd'] == 6767 &&
     isset($_POST['get_questions']) && is_numeric($_POST['get_questions'])){
 
-    
-    /* if user wants to make custom survey */
-    if(intval($_POST['get_questions']) == 9001){
-    ?>
-        <div class="row-fluid" style="border:2px solid;" name="survey_container_<?php echo $_POST['get_questions']; ?>">
-        <div class="span10" name="survey_body">
-          <!--Body content-->
-          <div>
-              <input type="text" name="survey_questions[]">
-              <div name="survey_answers[]"></div>
-              </div>
-        </div>
-        <div class="span2" name="survey_sidebar">
-          <!--Sidebar content-->
-          <?php
-          include_once('./include/_survey_controls.php');    
-          ?>
-        </div>
-        <div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>
-      </div>    
- <?php
-    }else{
-    
-    
   /*
-   * FOR Prefefined survey!
-   * Select all surveys from DB to show them later on
+   * Prints survey's questions as JSON string
+   * Select all surveys from DB
    */
    
    include_once("./config.php");
@@ -49,26 +25,13 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
             
    $result=$db->query($sql);
    $QUESTIONS = $result->fetchAll(PDO::FETCH_ASSOC);
-?>  
-   <div class="row-fluid" name="survey_container_<?php echo $_POST['get_questions']; ?>">
-    <div class="span10" name="survey_body">
-      <!--Body content-->
-      <?php
-        $i = 1;
-        foreach($QUESTIONS as $Q){
-            echo '#'. $i .' '. $Q['content'] .'<br>'; 
-            $i++;
-        }   
-       ?>
-    </div>
-    <div class="span2" name="survey_sidebar">
-      <!--Sidebar content-->
-      <label>No controls</label>
-    </div>
-    <div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>
-  </div>
-<?php
-    }
+   
+   $RESULT = array();
+   foreach($QUESTIONS as $Q){
+        $RESULT[] = $Q['content']; 
+   }
+   
+   die(json_encode($RESULT));
 }
 
 /*
@@ -103,7 +66,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
        
         $db->exec($sql);
         
-        echo "0";
+        die("0");
    }
 }
 
@@ -138,7 +101,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
         if(!empty($check_row)){
             // group-name is already given
             $jcstatsus = 2;
-            echo $jcstatsus; 
+            die($jcstatsus); 
         }else{
             // update the databases
             $members = json_encode(array(intval($_SESSION['USER_ID'])));
@@ -155,7 +118,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
             $db->exec($sql_update2);
             
             $jcstatsus = 3;
-            echo $jcstatsus;
+            die($jcstatsus);
         }
     }
     
@@ -203,10 +166,10 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
             
             $db->exec($sql_update3);
             
-            echo $jcstatsus;
+            die($jcstatsus);
         }else{
             $jcstatsus = 4; // that group name doesn't exist
-            echo $jcstatsus;
+            die($jcstatsus);
         } 
     }
 }
@@ -270,7 +233,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
         }
         $db->exec($sql_update4); 
         
-        echo $groupname;
+        die($groupname);
    }
 
 /*
@@ -306,7 +269,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     
     //$ar = array('modelname' => $_SESSION['USER_ID']);
     // return devices as json
-    echo json_encode($USER_DEVICES);  
+    die(json_encode($USER_DEVICES));  
 }
 
 /*
@@ -321,7 +284,7 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 		if(isset($_POST["password_login"]) && !empty($_POST["password_login"])){
 			if(strlen($_POST["password_login"]) < 6){
 				// password too short
-				echo $CONFIG['LOGIN_RESPONSE']['SHORT_PASSWORD'];
+				die($CONFIG['LOGIN_RESPONSE']['SHORT_PASSWORD']);
 			}
 			else{
 				//Import of the connection�s file to database
@@ -360,20 +323,20 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 						if($row["usergroupid"] == 3){
 							$_SESSION["ADMIN_ACCOUNT"] =  "YES";
 						}
-						echo $CONFIG['LOGIN_RESPONSE']['OK'];
+						die($CONFIG['LOGIN_RESPONSE']['OK']);
 				
 					}else{
-						echo $CONFIG['LOGIN_RESPONSE']['NOT_CONFIRMED'];
+						die($CONFIG['LOGIN_RESPONSE']['NOT_CONFIRMED']);
 					}
 				}else{
-					echo $CONFIG['LOGIN_RESPONSE']['WRONG_LOGIN_OR_PASSWORD'];
+					die($CONFIG['LOGIN_RESPONSE']['WRONG_LOGIN_OR_PASSWORD']);
 				}	
 			}
 		}else{
-			echo $CONFIG['LOGIN_RESPONSE']['MISSING_PASSWORD'];
+			die($CONFIG['LOGIN_RESPONSE']['MISSING_PASSWORD']);
 		}
 	}else{
-		echo $CONFIG['LOGIN_RESPONSE']['MISSING_LOGIN'];
+		die($CONFIG['LOGIN_RESPONSE']['MISSING_LOGIN']);
 	}
 }
 
@@ -391,10 +354,10 @@ if(isset($_POST['isEmailUnique']) && !empty($_POST['isEmailUnique'])){
 	// if the email is already contained in the database (someone used it already) 1 is returned
 	$logger->logInfo(" ###################### content_provider.php request for only checking the email ############################## ");
 	if(isEmailUnique($_POST["isEmailUnique"], $CONFIG, $db, $logger)){
-		echo 0; // no users with such email found, the email is thus unique
+		die(0); // no users with such email found, the email is thus unique
 	}
 	else
-		echo 1; // a user has already confirmed this email, the email is thus NOT unique
+		die(1); // a user has already confirmed this email, the email is thus NOT unique
 }
 
 /**
@@ -445,13 +408,13 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
 		
 		// sending was successful?
 		if(!$sent) { // there was a problem sending email
-			echo 2;
+			die(2);
 		}
 		else
-			echo 0; 
+			die(0); 
 	}
 	else
-		echo 1; // the email was not unique
+		die(1); // the email was not unique
 }
 
 /**
@@ -495,13 +458,13 @@ if(isset($_POST["submitted_forgot"]) && $_POST["submitted_forgot"] == "1"){
 
 		// sending was successful?
 		if(!$sent) { // there was a problem sending email
-			echo 2;
+			die(2);
 		}
 		else
-			echo 0;
+			die(0);
 	}
 	else
-		echo 1; // the email was not found in the database
+	    die(1); // the email was not found in the database
 }
 
 /**
@@ -547,7 +510,7 @@ if(isset($_POST["hash"]) && isset($_POST["newPassword"])){
 	$sql = "UPDATE ".$CONFIG["DB_TABLE"]["USER"]." 
 			SET password='".$_POST["newPassword"]."', passworddate=".$CUR_TIME." WHERE hash='".$_POST["hash"]."'";
 	$db->exec($sql);
-	echo "0";
+	die("0");
 }
 
 /*
