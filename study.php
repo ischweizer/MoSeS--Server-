@@ -754,14 +754,7 @@ $('[name="study_period"]').click(function(){
 /* CREATE STUDY PAGE */
 ?>
 
-$("#content_appears_here").bind("DOMSubtreeModified", function() {
-    
-    $('.btnRemoveSurvey').click(function(e) {
-        e.preventDefault();
-        
-        $(this).parent().parent().remove();
-    });
-});
+var surveyQuestionNumber = 1;   
 
 $('[name="study_period"]').click(function(){
     if($(this).is(':checked')){
@@ -840,14 +833,6 @@ $('[name="end_date"]').datepicker({
 });
 /* ---------------- */
 
-/*$(':file').change(function(){
-    var file = this.files[0];
-    name = file.name;
-    size = file.size;
-    type = file.type;
-                               
-}); */
-
 $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();
     
@@ -867,24 +852,114 @@ $('[name="btnAddSurveyOK"]').click(function(e){
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
     
-    // Requesting server for questions for selected survey (ID)
-    $.post("content_provider.php", { 'get_questions': $('#survey_select :selected').val(), 'get_questions_pwd' : 6767 })
-        .done(function(result) {
-          if(result){
-             $('#content_appears_here').append(result); 
-          }
-    });
+    if(parseInt($('#survey_select :selected').val()) != 9001){
     
-    //p.find('[name="survey_container_'+ p.find('[name="survey_select"]').val() +'"]').show();
+        // Requesting server for questions for selected survey (ID)
+        $.post("content_provider.php", { 'get_questions': $('#survey_select :selected').val(), 'get_questions_pwd' : 6767 })
+            .done(function(result) {
+                if(result){
+                    
+                    var data = $.parseJSON(result);
+                    
+                    var content = '<div class="row-fluid" style="border:2px solid #CCC;" name="survey_container_9001">'+
+                                  '<div class="span10" name="survey_body">'+
+                                  '<!--Body content-->'+
+                                  '<div class="survey_question_container">';
+                                  
+                   /*$('<div>').attr({
+                        class: 'row-fluid',
+                        style: 'border:2px solid #CCC;',
+                        name:  'survey_container_9001'
+                    }).html('content')
+                    .appendTo("#content_appears_here"); 
+                     */
+                                 
+                   for(var i=0; i < data.length; i++) {
+                        content += "#"+(i+1)+" "+data[i]+"<br>";
+                   }                        
+                   
+                   content += '</div>'+
+                              '</div>'+
+                              '<div class="span2" name="survey_sidebar">'+
+                              '<!--Sidebar content-->'+
+                              '</div>'+     
+                              '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
+                              '</div>';
+                         
+                   $('#content_appears_here').append(content);
+                    
+                    // reset questions counter
+                    surveyQuestionNumber = 1;
+                }   
+        });
+        
+    }else{
+        
+       var content = '<div class="row-fluid" style="border:2px solid #CCC;" name="survey_container_9001">'+
+                  '<div class="span10" name="survey_body">'+
+                  '<!--Body content-->'+
+                  '<div class="survey_question_container">'+
+                  'Type your questions below.<br>'+
+                  '  <div class="survey_question_1">'+
+                  '      <div class="survey_question_number">1</div><input type="text" name="survey_questions[]">'+
+                  '      <div name="survey_answers[]"></div>'+
+                  '  </div>'+
+                  '</div>'+
+                  '<div class="btn btn-link survey_add_more_questions">+ Add one more question</div>'+
+                  '</div>'+
+                  '<div class="span2" name="survey_sidebar">'+
+                  '<!--Sidebar content-->'+
+                  '<div style="margin-left: -50px;">'+
+                  '    <ul style="list-style-type: none;">'+
+                  '       <li>'+
+                  '            <a class="btn btn-link survey_control_choose_one">Element "Choose one"</a> Quantity <input type="text" value="5" maxlength="2" style="width: 1.2em;">'+
+                  '        </li>'+
+                  '       <li>'+
+                  '            <a class="btn btn-link survey_control_multiple">Element "Multiple"</a> Quantity <input type="text" value="5" maxlength="2" style="width: 1.2em;">'+
+                  '        </li>'+
+                  '        <li>'+
+                  '            <a class="btn btn-link survey_control_custom">Element "Custom answer"</a> Quantity <input type="text" value="5" maxlength="2" style="width: 1.2em;">'+
+                  '       </li>'+
+                  '   </ul>'+
+                  '</div>'+
+                  '</div>'+
+                  '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
+                  '</div>';
+        
+        $('#content_appears_here').append(content);
+    }
     
 });
-      
-$('#survey_select').change(function(){
-     var value = $(this).val();
-     
-     if(value == 9001){
-        //$('[name="survey_container_9001"]').find('[name="survey_sidebar"]').find('div').show();   
-     }
+
+// remove whole survey
+$('#content_appears_here').on('click','.btnRemoveSurvey',function(e) {
+    e.preventDefault();
+    $(this).parent().parent().remove();
+    return false;
+});
+
+// remove question from survey
+$('#content_appears_here').on('click','.survey_remove_question',function(e){
+    e.preventDefault();
+ 
+   return false; 
+});
+
+// add question
+$('#content_appears_here').on('click','.survey_add_more_questions', function(e){
+    
+    e.preventDefault();
+    
+   // take actual question number in survey and +1 it 
+   surveyQuestionNumber = parseInt($(this).siblings().find('.survey_question_number').last().text());
+   surveyQuestionNumber += 1; 
+   
+   $(this).siblings()
+          .append('<div class="survey_question_'+ surveyQuestionNumber +'">')
+          .append('<div class="survey_question_number">'+ surveyQuestionNumber +'</div><input type="text" name="survey_questions[]">')
+          .append('<div class="btn btn-link survey_remove_question">Remove question</div>')
+          .append('<div name="survey_answers[]"></div>')
+          .append('</div>');
 });
 
 </script>
