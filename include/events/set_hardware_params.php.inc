@@ -25,12 +25,11 @@ if($data->SESSIONID != null){
             
             // get all information from data
             $deviceID = $data->DEVICEID;
-            $FORCE = $data->FORCE;
+            $deviceName = $data->DEVICENAME;
             $SENSORS = $data->SENSORS;
             $androidVersion = $data->ANDVER;
             $modelName = $data->MODEL_NAME;
             $vendorName = $data->VENDOR_NAME;
-            $uniqueid = $data->UNIQUEID;
       
             $device = LoginManager::getLoggedInDevice($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
                                 
@@ -55,33 +54,18 @@ if($data->SESSIONID != null){
                    $row = HardwareManager::selectDeviceForUser($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
                    
                    if(!empty($row)){
-                       
-                       // A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE
-                       
-                       $logger->logInfo("A device with the given ID already exists, the hardware information will be updated if FORCE-flag is set to TRUE");
-                       
-                       if($FORCE){
-                           
-                           $logger->logInfo("FORCE IS TRUE");
-                           
-                           $SENSORS = HardwareManager::sortSensors($SENSORS);
-                           
-                           HardwareManager::updateDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
-                                    $androidVersion, $SENSORS, $modelName, $vendorName,  $USERID, $deviceID, $uniqueid);
-                                    
-                           $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-                                           "STATUS" => "SUCCESS");
-                       }else{
-                           
-                           $logger->logInfo("the FORCE-flag is not set, inform the user about the duplication");
-                           
-                           // the FORCE-flas is not set, inform the user about the duplication
-                           $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-                                           "STATUS" => "FAILURE_DEVICEID_DUPLICATED",
-                                           "MODEL_NAME" => $row['modelname'],
-                                           "VENDOR_NAME" => $row['vendorname'],
-                                           "ANDVER" => $row['androidversion']);
-                       }
+                   	 
+                   	// A device with the given ID already exists, the hardware information will be updated
+                   	 
+                   	$logger->logInfo("A device with the given ID already exists, the hardware information will be updated");
+                   	 
+                   	$SENSORS = HardwareManager::sortSensors($SENSORS);
+                   	
+                   	HardwareManager::updateDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $androidVersion,
+                   	$SENSORS, $modelName, $vendorName, $USERID, $deviceID, $deviceName);
+
+                   	$return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
+                   			"STATUS" => "SUCCESS");
                    }else{
                        
                        $logger->logInfo("The user has a new deviceID");
@@ -90,7 +74,7 @@ if($data->SESSIONID != null){
                        $SENSORS = HardwareManager::sortSensors($SENSORS);
                        
                        HardwareManager::insertDeviceLogger($logger, $DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'],
-                            $androidVersion, $SENSORS, $modelName, $vendorName, $USERID, $deviceID, $uniqueid);
+                            $androidVersion, $SENSORS, $modelName, $vendorName, $USERID, $deviceID, $deviceName);
                             
                        $return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
                                        "STATUS" => "SUCCESS");
