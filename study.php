@@ -899,28 +899,19 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                   '<div class="span10" name="survey_body">'+
                   '<!--Body content-->'+
                   '<div class="survey_question_container">'+
-                  'Type your questions below.<br>'+
+                  'Compose your questions below!<br>'+
                   '  <div class="survey_question_1">'+
-                  '      <div class="survey_question_number">1</div><input type="text" name="survey_questions[]">'+
-                  '      <div name="survey_answers[]"></div>'+
+                  //'      <input type="text" name="survey_questions[]">'+
+                  '      <select class="survey_elements" name="survey_question_type">'+
+                  '         <option value="1">Yes/No question</option>'+
+                  '         <option value="2">Text question</option>'+
+                  '         <option value="3">Scale question</option>'+
+                  '         <option value="4">Multiple choice question</option>'+
+                  '         <option value="5">Single choice question</option>'+
+                  '      </select>'+
+                  '      <label class="survey_elements">Number of answers: <input type="text" value="5" maxlength="2" style="width: 1.2em;"></label>'+
+                  '      <button class="btn btn-success survey_elements" name="btnAddQuestionOK">OK</button>'+
                   '  </div>'+
-                  '</div>'+
-                  '<div class="btn btn-link survey_add_more_questions">+ Add one more question</div>'+
-                  '</div>'+
-                  '<div class="span2" name="survey_sidebar">'+
-                  '<!--Sidebar content-->'+
-                  '<div style="margin-left: -50px;">'+
-                  '    <ul style="list-style-type: none;">'+
-                  '       <li>'+
-                  '            <a class="btn btn-link survey_control_choose_one">Element "Choose one"</a> Quantity <input type="text" value="5" maxlength="2" style="width: 1.2em;">'+
-                  '        </li>'+
-                  '       <li>'+
-                  '            <a class="btn btn-link survey_control_multiple">Element "Multiple"</a> Quantity <input type="text" value="5" maxlength="2" style="width: 1.2em;">'+
-                  '        </li>'+
-                  '        <li>'+
-                  '            <a class="btn btn-link survey_control_custom">Element "Custom answer"</a> Quantity <input type="text" value="5" maxlength="2" style="width: 1.2em;">'+
-                  '       </li>'+
-                  '   </ul>'+
                   '</div>'+
                   '</div>'+
                   '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
@@ -941,11 +932,11 @@ $('#content_appears_here').on('click','.btnRemoveSurvey',function(e) {
 // remove question from survey
 $('#content_appears_here').on('click','.survey_remove_question',function(e){
     e.preventDefault();
- 
-   return false; 
+    $(this).parent().remove();
+    return false; 
 });
 
-// add question
+// add question to survey
 $('#content_appears_here').on('click','.survey_add_more_questions', function(e){
     
     e.preventDefault();
@@ -954,12 +945,28 @@ $('#content_appears_here').on('click','.survey_add_more_questions', function(e){
    surveyQuestionNumber = parseInt($(this).siblings().find('.survey_question_number').last().text());
    surveyQuestionNumber += 1; 
    
-   $(this).siblings()
-          .append('<div class="survey_question_'+ surveyQuestionNumber +'">')
-          .append('<div class="survey_question_number">'+ surveyQuestionNumber +'</div><input type="text" name="survey_questions[]">')
-          .append('<div class="btn btn-link survey_remove_question">Remove question</div>')
-          .append('<div name="survey_answers[]"></div>')
-          .append('</div>');
+   var content = '<div class="survey_question_'+ surveyQuestionNumber +'">'+
+                 '<div class="survey_question_number">'+ surveyQuestionNumber +'</div><input type="text" name="survey_questions[]">'+
+                 '<div class="btn btn-link survey_remove_question">Remove question</div>'+
+                 '<div name="survey_answers[]"></div>'+
+                 '</div>';
+   
+   $(this).siblings().append(content);
 });
+
+/* SURVEY CONTROLS */
+
+$('#content_appears_here').on('click', '.survey_control_choose_one', function(e){
+    e.preventDefault();
+    
+    var quantity = parseInt($(this).parent().find(':input').val());
+    var parent = $(this).parent().parent().parent().parent().parent();
+    
+    
+    
+    return false;
+});
+
+/* ---------------------------------- */
 
 </script>
