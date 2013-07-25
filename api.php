@@ -67,16 +67,6 @@ if(isset($_POST['HTTP_JSON'])){
                     include_once(MOSES_HOME . "/include/events/get_hardware_params.php.inc");
                     break;
                         
-                case "SET_FILTER":
-                        
-                    include_once(MOSES_HOME . "/include/events/set_filter.php.inc");                    
-                    break;
-                    
-                case "GET_FILTER":
-
-                    include_once(MOSES_HOME . "/include/events/get_filter.php.inc");
-                    break;
-                        
                 case "STILL_ALIVE":
                 
                     include_once(MOSES_HOME . "/include/events/still_alive.php.inc");

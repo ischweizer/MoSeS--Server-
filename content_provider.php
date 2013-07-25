@@ -649,11 +649,11 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
         }else{
             $rows =  HardwareManager::getCandidatesForAndroid($db, $CONFIG['DB_TABLE']['HARDWARE'], $androidversion, $logger);    
         }
-        // check the filters
+        // check the sensors
         if(!empty($rows))
         {
             foreach($rows as $hardware){
-                $hwFilter_array = json_decode($hardware['filter']);
+                $hwFilter_array = json_decode($hardware['sensors']);
                 $apkSensors_array = json_decode($SENSOR_LIST_STRING);
                 if(isFilterMatch($hwFilter_array, $apkSensors_array))
                 {

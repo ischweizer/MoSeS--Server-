@@ -41,25 +41,14 @@ if($data->SESSIONID != null){
                   $logger->logInfo("##################### GET_APK_LIST_REQUEST ################ Session update");
                    
                   LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $sessionID);
-                  
-//                   $FILTER = HardwareManager::getFilter($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
-                  
-//                   if(!empty($FILTER)){
                       
                      $ANDROID_VERSION = HardwareManager::getAndroidVersion($DBManager->getDB(), $CONFIG['DB_TABLE']['HARDWARE'], $USERID, $deviceID);
-                     
-                     $USER_FILTER = json_decode($FILTER['filter']);
+
                      $json_array_return = array();
                      
                      $APKs = ApkManager::getNonStudyAllApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK']);
                      
                      foreach($APKs as $apk){
-                        
-                        // filter fits to sensors in APK
-//                         if(isFilterMatch($USER_FILTER, json_decode($apk['sensors'])) 
-//                             && !empty($apk['androidversion']) 
-//                             && is_numeric($apk['androidversion'])
-//                             && intval($apk['androidversion']) <= intval($ANDROID_VERSION)){
                              
                          
                             $APK_JSON = array("ID" => $apk['apkid'],

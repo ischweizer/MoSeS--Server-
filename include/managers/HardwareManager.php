@@ -148,51 +148,6 @@ class HardwareManager{
     }
     
     /**
-    * Sets a filter for APK filter later on
-    * 
-    * @param mixed $db
-    * @param mixed $hardwareTable
-    * @param mixed $filter
-    * @param mixed $userID
-    * @param mixed $deviceID
-    */
-    public static function setFilter($db, $hardwareTable, $filter, $userID, $deviceID){
-        
-        $sql = "UPDATE ". $hardwareTable ."
-                SET filter = '". $filter ."' 
-                WHERE uid = ". $userID. " AND deviceid = '". $deviceID ."'";      
-                        
-       $res = $db->exec($sql);
-        
-       return $res;
-    }
-    
-//     TODO remove because no longer needed
-//     /** 
-//     * Returns a filter from user
-//     * 
-//     * @param mixed $db
-//     * @param mixed $hardwareTable
-//     * @param mixed $userID
-//     * @param mixed $deviceID
-//     */
-//     public static function getFilter($db, $hardwareTable, $userID, $deviceID){
-        
-//         $sql = "SELECT filter 
-//                 FROM ". $hardwareTable ." 
-//                 WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
-                    
-//        $result = $db->query($sql);
-//        $row = $result->fetch();
-       
-//        if(!empty($row)){
-//            return $row;
-//        }
-       
-//        return null;
-//     }
-    
-    /**
     * Returns an android version for given user and device id
     * 
     * @param mixed $db
@@ -298,7 +253,7 @@ class HardwareManager{
         if(!empty($androidVersion)){
         
             // get for android version
-            $sql = "SELECT hwid, filter
+            $sql = "SELECT hwid, sensors
                     FROM " .$hardwareTable. " 
                     WHERE androidversion >=".$androidVersion;
             
@@ -322,7 +277,7 @@ class HardwareManager{
     * @param mixed $db the database
     * @param String $hardwareTable the name of the hardware table to search in
     * @param String $androidVersion the lowest android version required by the apk
-    * @param String ?rGroup select only hardware from this group
+    * @param String $rGroup select only hardware from this group
     */
     public static function getCandidatesForAndroidFromGroup($db, $hardwareTable, $rgroupTable, $androidVersion, $rGroup, $logger){
         
@@ -333,7 +288,7 @@ class HardwareManager{
         $members = json_decode($member_row['members']);
         foreach($members as $member){
                 // get for android version
-            $sql = "SELECT hwid, filter
+            $sql = "SELECT hwid, sensors
                     FROM " .$hardwareTable. " 
                     WHERE androidversion >=".$androidVersion. " AND uid=".$member;    
             
