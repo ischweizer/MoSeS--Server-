@@ -9,7 +9,7 @@
 </div>
 
 <!-- JS Init -->  
-<script src="js/jquery-2.0.1.min.js"></script>
+<script src="js/jquery-2.0.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="//rawgithub.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
 <script src="js/moses.js"></script><?php
