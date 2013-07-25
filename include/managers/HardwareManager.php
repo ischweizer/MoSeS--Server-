@@ -27,7 +27,7 @@ class HardwareManager{
     }
     
     /**
-    * Updates device info
+    * Updates the hardware table with new information regarding a specific device assinged to a user.
     * 
     * @param mixed $db
     * @param mixed $hardwareTable
@@ -37,23 +37,23 @@ class HardwareManager{
     * @param mixed $vendorname
     * @param mixed $userID
     * @param mixed $deviceID
-    * @param mixed $uniqueid
+    * @param string $deviceName the name of the device
     */
-    public static function updateDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
-      
+    public static function updateDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $deviceName){
+           
        $sql = "UPDATE ". $hardwareTable ." 
                SET androidversion = '". $aVersion ."', 
                    sensors = '". $sensors ."' , 
                    modelname = '".$modelname."' , 
-                   vendorname = '".$vendorname."' ,
-                   uniqueid = '".$uniqueid."'  
+                   vendorname = '".$vendorname."',
+                   devicename = '".$deviceName."'  
                WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
                         
        $db->exec($sql);
     }
     
     /**
-    * put your comment there...
+    * Updates the hardware table with new information regarding a specific device assinged to a user.
     * 
     * @param mixed $logger
     * @param mixed $db
@@ -64,16 +64,16 @@ class HardwareManager{
     * @param mixed $vendorname
     * @param mixed $userID
     * @param mixed $deviceID
-    * @param mixed $uniqueid
+    * @param string $deviceName the name of the device
     */
-    public static function updateDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
+    public static function updateDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $deviceName){
            
        $sql = "UPDATE ". $hardwareTable ." 
                SET androidversion = '". $aVersion ."', 
                    sensors = '". $sensors ."' , 
                    modelname = '".$modelname."' , 
                    vendorname = '".$vendorname."',
-                   uniqueid = '".$uniqueid."'  
+                   devicename = '".$deviceName."'  
                WHERE uid = ". $userID . " AND deviceid = '". $deviceID ."'";
                         
        $db->exec($sql);
@@ -95,31 +95,8 @@ class HardwareManager{
        $db->exec($sql);
     }
     
-    /**
-    * Inserts a new entry for a device
-    * 
-    * @param mixed $db
-    * @param mixed $hardwareTable
-    * @param mixed $aVersion
-    * @param mixed $sensors
-    * @param mixed $modelname
-    * @param mixed $vendorname
-    * @param mixed $userID
-    * @param mixed $deviceID
-    * @param mixed $uniqueid
-    */
-    public static function insertDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
-      
-      $sql = "INSERT INTO ". $hardwareTable ." 
-                (uid, deviceid, modelname, vendorname, androidversion, sensors, uniqueid) 
-                VALUES 
-                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."', '". $uniqueid ."')";
-
-      $db->exec($sql); 
-    }
-    
-    /**
-    * put your comment there...
+ /**
+    * Inserts a new device into hardware table.
     * 
     * @param mixed $logger
     * @param mixed $db
@@ -130,14 +107,42 @@ class HardwareManager{
     * @param mixed $vendorname
     * @param mixed $userID
     * @param mixed $deviceID
-    * @param mixed $uniqueid
+    * @param string $deviceName the name of the device
     */
-    public static function insertDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $uniqueid){
+    public static function insertDevice($db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $deviceName){
       
       $sql = "INSERT INTO ". $hardwareTable ." 
-                (uid, deviceid, modelname, vendorname, androidversion, sensors, uniqueid) 
+                (uid, deviceid, modelname, vendorname, androidversion, sensors, devicename) 
                 VALUES 
-                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."', '". $uniqueid ."')";
+                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."', '". $deviceName ."')";
+      
+      $logger->logInfo("insertDeviceLogger; sql=".$sql);
+
+      $db->exec($sql); 
+    }
+    
+    /**
+    * Inserts a new device into hardware table.
+    * 
+    * @param mixed $logger
+    * @param mixed $db
+    * @param mixed $hardwareTable
+    * @param mixed $aVersion
+    * @param mixed $sensors
+    * @param mixed $modelname
+    * @param mixed $vendorname
+    * @param mixed $userID
+    * @param mixed $deviceID
+    * @param string $deviceName the name of the device
+    */
+    public static function insertDeviceLogger($logger, $db, $hardwareTable, $aVersion, $sensors, $modelname, $vendorname, $userID, $deviceID, $deviceName){
+      
+      $sql = "INSERT INTO ". $hardwareTable ." 
+                (uid, deviceid, modelname, vendorname, androidversion, sensors, devicename) 
+                VALUES 
+                (". $userID .", '". $deviceID . "' , '".$modelname."' , '".$vendorname."' , '". $aVersion ."', '". $sensors ."', '". $deviceName ."')";
+      
+      $logger->logInfo("insertDeviceLogger; sql=".$sql);
 
       $db->exec($sql); 
     }
@@ -375,6 +380,23 @@ class HardwareManager{
         $result = json_encode($array);
         
         return $result;
+    }
+    
+    /**
+     * Validates the consumed name of the device. A device name is valid
+     * if it is not empty and it does not consist characters other than
+     * letters, numbers, underscores and whitespaces. A name consisting only
+     * out of whitespaces is invalid.
+     * @param string $deviceName the name to be validated
+     * @return true if $deviceName is valid, fals otherwise
+     */
+    public static function isValidDeviceName($deviceName){
+    	if($deviceName == null || empty($deviceName) || strlen(trim($deviceName)) == 0)
+    		return false; // empty or null
+    	else
+    	if(!preg_match("/^[a-zA-Z0-9_]+$/", str_replace(" ", "", $deviceName)))
+    		return false; // invalid character found
+    	return true; // if we got here, everything was ok
     }
 }
     
