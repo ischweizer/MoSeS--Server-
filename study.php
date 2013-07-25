@@ -900,8 +900,8 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                   '<!--Body content-->'+
                   '<div class="survey_question_container">'+
                   'Compose your questions below!<br>'+
-                  '  <div class="survey_question_1">'+
-                  //'      <input type="text" name="survey_questions[]">'+
+                  '  <div>'+
+                  '    <div class="survey_elements_container">'+
                   '      <select class="survey_elements" name="survey_question_type">'+
                   '         <option value="1">Yes/No question</option>'+
                   '         <option value="2">Text question</option>'+
@@ -909,8 +909,10 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                   '         <option value="4">Multiple choice question</option>'+
                   '         <option value="5">Single choice question</option>'+
                   '      </select>'+
-                  '      <label class="survey_elements">Number of answers: <input type="text" value="5" maxlength="2" style="width: 1.2em;"></label>'+
-                  '      <button class="btn btn-success survey_elements" name="btnAddQuestionOK">OK</button>'+
+                  '      <label class="survey_elements" style="display: none;">Number of answers:</label>'+
+                  '      <input type="text" title="Number of answers" value="5" maxlength="2" style="width: 1.2em; display: none;">'+
+                  '      <button class="btn btn-success survey_elements btnAddQuestionOK">OK</button>'+
+                  '    </div>'+
                   '  </div>'+
                   '</div>'+
                   '</div>'+
@@ -920,6 +922,39 @@ $('[name="btnAddSurveyOK"]').click(function(e){
         $('#content_appears_here').append(content);
     }
     
+});
+
+// on change question type in survey 
+$('#content_appears_here').on('change','[name="survey_question_type"]',function(e) {
+    e.preventDefault();
+    switch(parseInt($(this).val())){
+        // YES/No question
+        case 1: // hide number of questions
+                $(this).parent().find(':text').hide();
+                $(this).parent().find('label').hide();
+                break;
+                
+        // Text question
+        case 2: $(this).parent().find(':text').hide();
+                $(this).parent().find('label').hide();
+                break;
+                
+        // Scale question
+        case 3: $(this).parent().find(':text').hide();
+                $(this).parent().find('label').hide();
+                break;
+                
+        // Multiple choice question
+        case 4: $(this).parent().find(':text').show();
+                $(this).parent().find('label').show();
+                break;
+                
+        // Single choice question
+        case 5: $(this).parent().find(':text').show();
+                $(this).parent().find('label').show();
+                break;
+    }
+    return false;
 });
 
 // remove whole survey
@@ -936,33 +971,85 @@ $('#content_appears_here').on('click','.survey_remove_question',function(e){
     return false; 
 });
 
-// add question to survey
-$('#content_appears_here').on('click','.survey_add_more_questions', function(e){
-    
-    e.preventDefault();
-    
-   // take actual question number in survey and +1 it 
-   surveyQuestionNumber = parseInt($(this).siblings().find('.survey_question_number').last().text());
-   surveyQuestionNumber += 1; 
-   
-   var content = '<div class="survey_question_'+ surveyQuestionNumber +'">'+
-                 '<div class="survey_question_number">'+ surveyQuestionNumber +'</div><input type="text" name="survey_questions[]">'+
-                 '<div class="btn btn-link survey_remove_question">Remove question</div>'+
-                 '<div name="survey_answers[]"></div>'+
-                 '</div>';
-   
-   $(this).siblings().append(content);
-});
-
 /* SURVEY CONTROLS */
 
-$('#content_appears_here').on('click', '.survey_control_choose_one', function(e){
+$('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     e.preventDefault();
     
-    var quantity = parseInt($(this).parent().find(':input').val());
-    var parent = $(this).parent().parent().parent().parent().parent();
+    var quantity = parseInt($(this).parent().find(':text').val());
+    var p = $(this).parent().parent().parent();
+                                                  
+    p.append('<div></div>');
+    // copy survey control
+    p.find(':last').html($(this).parent().parent().html());
+      
+    switch(parseInt($(this).parent().find('[name="survey_question_type"]').val())){
+        // YES/NO Question
+        case 1: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+                // compose all answers
+                var answers = '<ul>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">Yes</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">No</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">Not sure</li>'+
+                              '</ul>';
+                 
+                content += answers; 
+                // finally append to dom
+                //alert($(this).parent().html());
+                $(this).parent().parent().append(content);
+                break;
+                
+        // Text question
+        case 2: // compose all answers
+                var answers = '<ul>'+
+                              '<ul><textarea name="description" cols="20" rows="3"></textarea></ul>'+
+                              '</ul>';
+                
+                // finally append to dom
+                $(this).parent().append(answers);
+                break; 
+                
+        // Scale question        
+        case 3: // compose all answers
+                var answers = '<ul>';
+                for(var i=1; i <= quantity; i++){
+                   answers += '<ul>Yes</ul>'; 
+                }
+                answers += '</ul>';
+                
+                // finally append to dom
+                $(this).parent().append(answers);
+                break;
+                
+        // Multiple choice
+        case 4: // compose all answers
+                var answers = '<ul>';
+                for(var i=1; i <= quantity; i++){
+                   answers += '<ul>Yes</ul>'; 
+                }
+                answers += '</ul>';
+                
+                // finally append to dom
+                $(this).parent().append(answers);
+                break;
+            
+                
+        case 5: // compose all answers
+                var answers = '<ul>';
+                for(var i=1; i <= quantity; i++){
+                   answers += '<ul>Yes</ul>'; 
+                }
+                answers += '</ul>';
+                
+                // finally append to dom
+                $(this).parent().append(answers);
+                break;               
+        default:
+                $(this).parent().append('Something went wrong!');
+    }
     
-    
+    // remove survey control from dom
+    $(this).parent().remove();
     
     return false;
 });
