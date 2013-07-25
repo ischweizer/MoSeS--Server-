@@ -381,6 +381,23 @@ class HardwareManager{
         
         return $result;
     }
+    
+    /**
+     * Validates the consumed name of the device. A device name is valid
+     * if it is not empty and it does not consist characters other than
+     * letters, numbers, underscores and whitespaces. A name consisting only
+     * out of whitespaces is invalid.
+     * @param string $deviceName the name to be validated
+     * @return true if $deviceName is valid, fals otherwise
+     */
+    public static function isValidDeviceName($deviceName){
+    	if($deviceName == null || empty($deviceName) || strlen(trim($deviceName)) == 0)
+    		return false; // empty or null
+    	else
+    	if(!preg_match("/^[a-zA-Z0-9_]+$/", str_replace(" ", "", $deviceName)))
+    		return false; // invalid character found
+    	return true; // if we got here, everything was ok
+    }
 }
     
 ?>
