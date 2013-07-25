@@ -995,57 +995,70 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                  
                 content += answers; 
                 // finally append to dom
-                //alert($(this).parent().html());
                 $(this).parent().parent().append(content);
                 break;
                 
         // Text question
-        case 2: // compose all answers
+        case 2: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+                // compose all answers
                 var answers = '<ul>'+
-                              '<ul><textarea name="description" cols="20" rows="3"></textarea></ul>'+
+                              '<li><textarea name="answer" cols="20" rows="3" disabled="disabled" placeholder="Answer will be here..."></textarea></li>'+
                               '</ul>';
+                 
+                content += answers;
                 
                 // finally append to dom
-                $(this).parent().append(answers);
+                $(this).parent().parent().append(content);
                 break; 
                 
         // Scale question        
-        case 3: // compose all answers
-                var answers = '<ul>';
-                for(var i=1; i <= quantity; i++){
-                   answers += '<ul>Yes</ul>'; 
-                }
-                answers += '</ul>';
+        case 3: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+                // compose all answers
+                var answers = '<ul>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">"Strongly Disagree"</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">"Disagree"</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">"Neither Agree nor Disagree"</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">"Agree"</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled">"Strongly Agree"</li>'+
+                              '</ul>';
+                 
+                content += answers;
                 
                 // finally append to dom
-                $(this).parent().append(answers);
+                $(this).parent().parent().append(content);
                 break;
                 
         // Multiple choice
-        case 4: // compose all answers
+        case 4: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+                // compose all answers
                 var answers = '<ul>';
-                for(var i=1; i <= quantity; i++){
-                   answers += '<ul>Yes</ul>'; 
-                }
+                    for(var i=1; i <= quantity; i++){
+                       answers += '<li><input type="checkbox" value="'+ i +'" disabled="disabled"><input type="text" placeholder="Answer here"></li>'; 
+                    }
                 answers += '</ul>';
+                 
+                content += answers;
                 
                 // finally append to dom
-                $(this).parent().append(answers);
+                $(this).parent().parent().append(content);
                 break;
             
                 
-        case 5: // compose all answers
+        case 5: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+                // compose all answers
                 var answers = '<ul>';
-                for(var i=1; i <= quantity; i++){
-                   answers += '<ul>Yes</ul>'; 
-                }
+                    for(var i=1; i <= quantity; i++){
+                       answers += '<li><input type="radio" name="survey_single_choice" value="'+ i +'" disabled="disabled"><input type="text" placeholder="Answer here"></li>'; 
+                    }
                 answers += '</ul>';
+                 
+                content += answers;
                 
                 // finally append to dom
-                $(this).parent().append(answers);
+                $(this).parent().parent().append(content);
                 break;               
         default:
-                $(this).parent().append('Something went wrong!');
+                $(this).parent().append('Something went wrong! =(');
     }
     
     // remove survey control from dom

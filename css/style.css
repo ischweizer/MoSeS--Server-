@@ -39,6 +39,10 @@ div[name*='survey_container_'] {
     display: inline;
 }
 
+#content_appears_here ul {
+    list-style-type: none;
+}
+
 /* ---------------------- */
 
 .control-label {
