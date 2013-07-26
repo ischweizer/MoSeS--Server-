@@ -113,5 +113,31 @@ function getAPILevel($level){
 function getAllAPIsCount(){                      
     return count(getAPIArray());
 }
+
+/**
+ * 
+ * Returns true if and only if there is a user that has registered the consumed email
+ * @param String $email the email that has to be checked for uniquiness
+ * @param mappings $CONFIG 
+ * @param database-Object $db
+ * @param logger-Object $logger
+ * @return boolean
+ */
+function isEmailUnique($email, $CONFIG, $db, $logger){
+    $logger->logInfo(" ###################### content_provider.php isEmailUnique ############################## ");
+    
+    // search the database for users who are registered with the email
+    $sql = "SELECT confirmed
+           FROM ".$CONFIG["DB_TABLE"]["USER"]." WHERE email='".$email."'";
+    $logger->logInfo($sql);
+    $result = $db->query($sql);
+    $emails = $result->fetchAll(PDO::FETCH_ASSOC);
+    
+    if(empty($emails)){
+        return true; // no users with such email found, the email is thus unique
+    }
+    else
+        return false; // a user has already used this email, the email is thus NOT unique
+}
   
 ?>
