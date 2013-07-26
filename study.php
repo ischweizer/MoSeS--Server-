@@ -986,11 +986,16 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     $(this).parent().find(':text').hide();
     $(this).parent().find('label').hide();
     p.find(':last').html($(this).parent().parent().html());
+    
+    // Question field (common content for all questions)
+    var content = '<span class="survey_question_number">#'+parentForQCounter.find('.survey_questions_counter').val()+'</span> '+
+                  '<input type="text" name="question" placeholder="Type here your question">'+
+                  '<button class="btn btn-link btnRemoveQuestion">Remove question</button>'+
+                  '<br>';
       
     switch(parseInt($(this).parent().find('[name="survey_question_type"]').val())){
         // YES/NO Question
-        case 1: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
-                // compose all answers
+        case 1: // compose all answers
                 var answers = '<ul>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">Yes</span></li>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">No</span></li>'+
@@ -1003,8 +1008,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break;
                 
         // Text question
-        case 2: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
-                // compose all answers
+        case 2: // compose all answers
                 var answers = '<ul>'+
                               '<li><textarea name="answer" cols="20" rows="3" disabled="disabled" placeholder="Answer will be here..."></textarea></li>'+
                               '</ul>';
@@ -1016,8 +1020,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break; 
                 
         // Scale question        
-        case 3: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
-                // compose all answers
+        case 3: // compose all answers
                 var answers = '<ul>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Strongly Disagree"</span></li>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Disagree"</span></li>'+
@@ -1033,8 +1036,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break;
                 
         // Multiple choice
-        case 4: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
-                // compose all answers
+        case 4: // compose all answers
                 var answers = '<ul>';
                     for(var i=1; i <= quantity; i++){
                        answers += '<li><input type="checkbox" value="'+ i +'" disabled="disabled"><span><input type="text" placeholder="Answer here"></span></li>'; 
@@ -1048,8 +1050,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break;
             
                 
-        case 5: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
-                // compose all answers
+        case 5: // compose all answers
                 var answers = '<ul>';
                     for(var i=1; i <= quantity; i++){
                        answers += '<li><input type="radio" name="survey_single_choice" value="'+ i +'" disabled="disabled"><span><input type="text" placeholder="Answer here"></span></li>'; 
@@ -1072,6 +1073,19 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     $(this).parent().remove();
     
     return false;
+});
+
+$('#content_appears_here').on('click', '.btnRemoveQuestion', function(e){
+    e.preventDefault();
+    
+    var parentForQCounter = $(this).parent().parent().parent().parent();
+    // remove question
+    $(this).parent().remove();
+    // update question counter 
+    parentForQCounter.find('.survey_questions_counter').val(parseInt(parentForQCounter.find('.survey_questions_counter').val())-1);
+                                            //.find('.survey_question_number')
+    //$(this).parent().parent().parent().html();
+    
 });
 
 /* ---------------------------------- */
