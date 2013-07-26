@@ -983,6 +983,8 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                                                   
     p.append('<div></div>');
     // copy survey control
+    $(this).parent().find(':text').hide();
+    $(this).parent().find('label').hide();
     p.find(':last').html($(this).parent().parent().html());
       
     switch(parseInt($(this).parent().find('[name="survey_question_type"]').val())){
