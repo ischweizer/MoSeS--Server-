@@ -8,7 +8,7 @@ class GooglePushManager
     /**
     * Sends apkid of the new apk to all targetDevices
     * 
-    * @param String $apkid  the id for the user study
+    * @param String $apkid the id for the user study
     * @param String $targetDevices array of String ids of target devices c2dm-ids
     * @param logger the Logger
     */

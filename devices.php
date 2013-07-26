@@ -121,7 +121,8 @@ var API_VERSION = {8: 'API 8: "Froyo" 2.2.x',
                    14: 'API 14: "Ice Cream Sandwich" 4.0.0 - 4.0.2',
                    15: 'API 15: "Ice Cream Sandwich" 4.0.3 - 4.0.4',
                    16: 'API 16: "Jelly Bean" 4.1.x',
-                   17: 'API 17: "Jelly Bean" 4.2.x'};
+                   17: 'API 17: "Jelly Bean" 4.2.x',
+                   18: 'API 18: "Jelly Bean" 4.3'};
 
 /**
 * Pagination setup and query
