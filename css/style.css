@@ -43,6 +43,14 @@ div[name*='survey_container_'] {
     list-style-type: none;
 }
 
+#content_appears_here span {
+    margin-left: 15px;
+}
+
+.survey_q_element {
+    padding-top: 15px;
+}
+
 /* ---------------------- */
 
 .control-label {

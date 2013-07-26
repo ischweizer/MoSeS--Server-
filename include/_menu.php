@@ -30,6 +30,8 @@
             
                 if(isset($_SESSION["USER_LOGGED_IN"]) && $_SESSION["USER_LOGGED_IN"] == 1){
             
+                    // only confirmed users can see this
+                    if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] > 0){
             ?>
             <li class="dropdown">
                 <a href="devices.php">Devices</a>
@@ -44,7 +46,11 @@
                         <a href="group.php?m=new">Join/Create</a>
                     </li>
                 </ul>
-            </li>
+            </li><?php
+                  }
+                 // only scientist and admins can see this 
+                 if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] > 1){    
+                 ?>
              <li class="dropdown">
                 <a href="study.php">Studies <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -56,7 +62,8 @@
                     </li>
                 </ul>
             </li><?php
-                     }
+                 }
+            }
                  ?>
              <li class="dropdown">
                 <a href="about.php">About <b class="caret"></b></a>

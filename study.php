@@ -177,6 +177,13 @@ include_once("./include/_confirm.php");
     <div class="hero-unit">
         <?php
         
+        // user isn't scientiest or admin
+        if(!isset($_SESSION['GROUP_ID']) || $_SESSION['GROUP_ID'] < 2 ){
+           ?>
+           <h2 class="text-center">You must be a scientist to have access here.</h2>
+           <?php 
+        }else
+        
         if(isset($CREATE) && $CREATE == 1){
         /**
         * CREATE STUDY/UPLOAD APK FORM
@@ -305,8 +312,9 @@ include_once("./include/_confirm.php");
         </form>
         <?php 
          
-        }elseif(empty($USER_APKS)){
-        /**
+        }else
+            if(empty($USER_APKS)){
+        /*
         * EMPTY USER APK/STUDY LIST
         */
                      
@@ -865,14 +873,6 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                                   '<div class="span10" name="survey_body">'+
                                   '<!--Body content-->'+
                                   '<div class="survey_question_container">';
-                                  
-                   /*$('<div>').attr({
-                        class: 'row-fluid',
-                        style: 'border:2px solid #CCC;',
-                        name:  'survey_container_9001'
-                    }).html('content')
-                    .appendTo("#content_appears_here"); 
-                     */
                                  
                    for(var i=0; i < data.length; i++) {
                         content += "#"+(i+1)+" "+data[i]+"<br>";
@@ -915,6 +915,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                   '    </div>'+
                   '  </div>'+
                   '</div>'+
+                  '<input type="hidden" class="survey_questions_counter" value="1">'+
                   '</div>'+
                   '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
                   '</div>';
@@ -976,21 +977,24 @@ $('#content_appears_here').on('click','.survey_remove_question',function(e){
 $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     e.preventDefault();
     
+    var parentForQCounter = $(this).parent().parent().parent().parent();
     var quantity = parseInt($(this).parent().find(':text').val());
     var p = $(this).parent().parent().parent();
                                                   
     p.append('<div></div>');
     // copy survey control
+    $(this).parent().find(':text').hide();
+    $(this).parent().find('label').hide();
     p.find(':last').html($(this).parent().parent().html());
       
     switch(parseInt($(this).parent().find('[name="survey_question_type"]').val())){
         // YES/NO Question
-        case 1: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+        case 1: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
                 // compose all answers
                 var answers = '<ul>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">Yes</li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">No</li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">Not sure</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">Yes</span></li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">No</span></li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">Not sure</span></li>'+
                               '</ul>';
                  
                 content += answers; 
@@ -999,7 +1003,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break;
                 
         // Text question
-        case 2: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+        case 2: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
                 // compose all answers
                 var answers = '<ul>'+
                               '<li><textarea name="answer" cols="20" rows="3" disabled="disabled" placeholder="Answer will be here..."></textarea></li>'+
@@ -1012,14 +1016,14 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break; 
                 
         // Scale question        
-        case 3: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+        case 3: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
                 // compose all answers
                 var answers = '<ul>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">"Strongly Disagree"</li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">"Disagree"</li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">"Neither Agree nor Disagree"</li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">"Agree"</li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled">"Strongly Agree"</li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Strongly Disagree"</span></li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Disagree"</span></li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Neither Agree nor Disagree"</span></li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Agree"</span></li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'+
                               '</ul>';
                  
                 content += answers;
@@ -1029,11 +1033,11 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break;
                 
         // Multiple choice
-        case 4: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+        case 4: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
                 // compose all answers
                 var answers = '<ul>';
                     for(var i=1; i <= quantity; i++){
-                       answers += '<li><input type="checkbox" value="'+ i +'" disabled="disabled"><input type="text" placeholder="Answer here"></li>'; 
+                       answers += '<li><input type="checkbox" value="'+ i +'" disabled="disabled"><span><input type="text" placeholder="Answer here"></span></li>'; 
                     }
                 answers += '</ul>';
                  
@@ -1044,11 +1048,11 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 break;
             
                 
-        case 5: var content = '<input type="text" name="question" placeholder="Type here your question"><br>';
+        case 5: var content = '#'+parentForQCounter.find('.survey_questions_counter').val()+' <input type="text" name="question" placeholder="Type here your question"><br>';
                 // compose all answers
                 var answers = '<ul>';
                     for(var i=1; i <= quantity; i++){
-                       answers += '<li><input type="radio" name="survey_single_choice" value="'+ i +'" disabled="disabled"><input type="text" placeholder="Answer here"></li>'; 
+                       answers += '<li><input type="radio" name="survey_single_choice" value="'+ i +'" disabled="disabled"><span><input type="text" placeholder="Answer here"></span></li>'; 
                     }
                 answers += '</ul>';
                  
@@ -1060,6 +1064,9 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
         default:
                 $(this).parent().append('Something went wrong! =(');
     }
+    
+    // increment question counter
+    parentForQCounter.find('.survey_questions_counter').val(parseInt(parentForQCounter.find('.survey_questions_counter').val())+1);
     
     // remove survey control from dom
     $(this).parent().remove();
