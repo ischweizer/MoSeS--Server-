@@ -15,7 +15,7 @@
               <?php
                  for($i=1; $i<=getAllAPIsCount(); $i++){ 
               ?>
-              <option value="<?php echo $i; ?>"><?php echo getAPILevel($i); ?></option>
+              <option<?php echo($i == 14 ? ' selected="selected"' : ''); ?> value="<?php echo $i; ?>"><?php echo getAPILevel($i); ?></option>
               <?php
                  }
               ?>
