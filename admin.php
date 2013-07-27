@@ -86,3 +86,4 @@ include_once("./include/_login.php");
 //Import of the footer
 include_once("./include/_footer.php");  
 ?>
+<script src="js/admin.js"></script>

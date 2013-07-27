@@ -123,8 +123,8 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
     
     <hr>  
 <?php 
-//Import of the slider to login
   include_once("./include/_login.php");
 //IMport of the footer 
   include_once("./include/_footer.php");  
 ?>
+<script src="js/registration.js"></script>
