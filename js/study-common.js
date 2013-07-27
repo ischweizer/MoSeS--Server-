@@ -72,7 +72,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                   '      <select class="survey_elements" name="survey_question_type">'+
                   '         <option value="1">Yes/No question</option>'+
                   '         <option value="2">Text question</option>'+
-                  '         <option value="3">Scale question</option>'+
+                  '         <option value="3">Likert scale question</option>'+
                   '         <option value="4">Multiple choice question</option>'+
                   '         <option value="5">Single choice question</option>'+
                   '      </select>'+
@@ -191,7 +191,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 var answers = '<ul>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Strongly Disagree"</span></li>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Disagree"</span></li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Neither Agree nor Disagree"</span></li>'+
+                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Neutral"</span></li>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Agree"</span></li>'+
                               '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'+
                               '</ul>';
