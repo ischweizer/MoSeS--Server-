@@ -11,7 +11,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     isset($_POST['get_questions_pwd']) && $_POST['get_questions_pwd'] == 6767 &&
     isset($_POST['get_questions']) && is_numeric($_POST['get_questions'])){
 
-    include_once("./include/providers/_add-survey-provider.php");
+    include_once("./include/providers/_study-add-survey-get-questions-provider.php");
 }
 
 /*

@@ -16,7 +16,9 @@
    
    $RESULT = array();
    foreach($QUESTIONS as $Q){
-        $RESULT[] = $Q['content']; 
+        $RESULT[] = array('question_type' => $Q['type'], 
+                          'question'=> $Q['content'], 
+                          'question_number_of_answers' => $Q['num_answers']); 
    }
    
    die(json_encode($RESULT));
