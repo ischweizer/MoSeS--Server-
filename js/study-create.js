@@ -49,9 +49,22 @@ $('[name="btnCreateOK"]').click(function(e){
         //Ajax events
         //beforeSend: beforeSendHandler,
         success: function(result){
-            if(result){
-                $('progress').hide();
-                $('.hero-unit').html('<h3 class="text-center">You created a study <strong>'+ $('#study_name').val() +'</strong></h3>');
+            
+            $('progress').hide();
+            
+            // react to response code
+            switch(result){
+                case '0':   $('.hero-unit').html('<h3 class="text-center">No such user found!</h3>');
+                            break;
+                case '1':   $('.hero-unit').html('<h3 class="text-center">You created a study <strong>'+ $('#study_name').val() +'</strong></h3>');
+                            break;
+                case '2':   $('.hero-unit').html('<h3 class="text-center">That file extension was not accepted by server! Please, user <strong>*.apk</strong></h3>');
+                            break;
+                case '3':   $('.hero-unit').html('<h3 class="text-center">The filesize exceeds permitted size!</h3>');
+                            break;
+                case '4':   $('.hero-unit').html('<h3 class="text-center">Cannot set permission for file on server!</h3>');
+                            break;
+                default:    $('.hero-unit').html('<h3 class="text-center">Something went wrong with creating user study. Sorry.</h3>');  
             }
         },
         //error: errorHandler,

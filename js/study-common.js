@@ -101,6 +101,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                    }
                    
                    content += '</div>'+
+                              '<input type="hidden" name="survey_id[]" value="'+ $('#survey_select :selected').val() +'">'+  
                               '</div>'+
                               '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
                               '</div>';
@@ -136,6 +137,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                       '  </div>'+
                       '</div>'+
                       '<input type="hidden" class="survey_questions_counter" value="1">'+
+                      '<input type="hidden" name="survey_id[]" value="9001">'+
                       '</div>'+
                       '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
                       '</div>';
