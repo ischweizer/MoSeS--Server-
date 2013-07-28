@@ -11,7 +11,7 @@
     <div class="control-group">
         <label class="control-label">Lowest Android version: </label>
         <div class="controls">
-            <select id="android_version_select">
+            <select name="android_version_select">
               <?php
                  for($i=1; $i<=getAllAPIsCount(); $i++){ 
               ?>

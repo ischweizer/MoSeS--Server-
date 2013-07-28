@@ -22,8 +22,10 @@ $('[name="study_period"]').click(function(){
     }
 });
 
-$('#btnCreateOK').click(function(e){
+$('[name="btnCreateOK"]').click(function(e){
    
+   e.preventDefault();
+    
    $('progress').show(); 
    $(this).attr('disabled', true);
        
@@ -60,6 +62,4 @@ $('#btnCreateOK').click(function(e){
         contentType: false,
         processData: false
     });
-    
-    e.preventDefault();
 });

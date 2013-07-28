@@ -57,7 +57,7 @@
                     <div class="control-group">
                         <label class="control-label">Lowest Android version: </label>
                         <div class="controls">
-                            <div name="android_version"><?php echo getAPILevel($APK['androidversion']); ?></div>
+                            <div name="android_version_text"><?php echo getAPILevel($APK['androidversion']); ?></div>
                             <select name="android_version_select" style="display: none;">
                               <?php
                                  for($j=1; $j<=getAllAPIsCount(); $j++){ 

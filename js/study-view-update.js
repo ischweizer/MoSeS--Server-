@@ -38,7 +38,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     /* Hide and show form stuff */
     
     p.find('[name="study_title_text"]').hide();
-    p.find('[name="android_version"]').hide();
+    p.find('[name="android_version_text"]').hide();
     p.find('[name="start_date_text"]').hide();
     p.find('[name="end_date_text"]').hide();
     p.find('[name="description_text"]').hide(); 
@@ -101,7 +101,7 @@ $('[name="btnUpdateOK"]').click(function(e){
                 // get all info from inputs and inline substitute with old one
                 p.parent().parent().parent().parent().find('[name="study_title_link"]').text(p.find('[name="apk_title"]').val());
                 p.find('[name="study_title_text"]').text(p.find('[name="apk_title"]').val());
-                p.find('[name="android_version"]').text(p.find('[name="android_version_select"] :selected').text());
+                p.find('[name="android_version_text"]').text(p.find('[name="android_version_select"] :selected').text());
                 p.find('[name="start_date_text"]').text(p.find('[name="start_date"]').val());
                 p.find('[name="end_date_text"]').text(p.find('[name="end_date"]').val());
                 p.find('[name="description_text"]').text(p.find('[name="description"]').val()); 
@@ -142,7 +142,7 @@ $('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
    /* Hide and show form stuff */
    
    p.find('[name="study_title_text"]').show();
-   p.find('[name="android_version"]').show();
+   p.find('[name="android_version_text"]').show();
    p.find('[name="start_date_text"]').show();
    p.find('[name="end_date_text"]').show();
    p.find('[name="description_text"]').show(); 
