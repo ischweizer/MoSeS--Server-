@@ -16,7 +16,7 @@ $('.confirm-delete').click(function(e) {
 $('.btnConfirm').click(function(e){
 
     // removing APK
-    $.post("study.php", { 'remove': $('.confirm-delete').val() })
+    $.post("content_provider.php", { 'study_remove': $('.confirm-delete').val() })
         .done(function() {
           location.reload();
     });

@@ -14,6 +14,16 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     include_once("./include/providers/_study-add-survey-get-questions-provider.php");
 }
 
+/**
+* Remove study
+*/ 
+
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_POST['study_remove']) && !empty($_POST['study_remove'])){
+
+    include_once("./include/providers/_study-remove-provider.php");
+}
+
 /*
 * Update pending requests to be a scientist 
 */

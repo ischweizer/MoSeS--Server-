@@ -20,52 +20,6 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
    
    }else{ 
     
-       // remove APK 
-       if(isset($_POST['remove']) && !empty($_POST['remove'])){
-           
-           $RAW_REMOVE_HASH = trim($_POST['remove']);
-           
-           if(is_md5($RAW_REMOVE_HASH)){
-               
-              $APK_REMOVED = 1;
-              $REMOVE_HASH = strtolower($RAW_REMOVE_HASH);
-               
-              // getting userhah for dir later
-              $sql = "SELECT userhash 
-                      FROM ". $CONFIG['DB_TABLE']['APK'] ." 
-                      WHERE userid = ". $_SESSION['USER_ID'] . " 
-                      AND apkhash = '". $REMOVE_HASH ."'";
-              
-              $result = $db->query($sql);
-              $row = $result->fetch();
-              
-              if(!empty($row)){
-                  $dir = './apk/' . $row['userhash'];
-                  if(is_dir($dir)){
-                     if(file_exists($dir . '/'. $REMOVE_HASH . '.apk')){
-                         unlink($dir . '/' . $REMOVE_HASH . '.apk');
-                         
-                         if(is_empty_dir($dir)){
-                             rmdir($dir);
-                         }
-                     }
-                  }
-              }
-               
-              // remove entry from DB 
-              $sql = "DELETE 
-                      FROM ". $CONFIG['DB_TABLE']['APK'] ." 
-                      WHERE userid = ". $_SESSION['USER_ID'] . " AND apkhash = '". $REMOVE_HASH ."'";
-              
-              $db->exec($sql);
-               
-           }else{
-               $APK_REMOVED = 0;
-           }  
-           
-           die('success');
-       }
-         
        // getting survey results  
        if(isset($_POST['USQUEST']) && !empty($_POST['USQUEST']))
         {

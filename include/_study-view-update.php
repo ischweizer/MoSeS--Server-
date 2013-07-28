@@ -198,10 +198,10 @@
                 <?php
             }
             ?>
-                <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkhash']; ?>">Remove</button></li>
+                <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkid']; ?>">Remove</button></li>
             </ul>
       </div>
-      <hr><button class="btn" name="btnAddSurvey" value="" style="float: right;"><i class="icon-plus-sign"></i> Add survey</button>
+      <hr><button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
        <?php
        include_once('./include/_survey.php');        
        ?>
