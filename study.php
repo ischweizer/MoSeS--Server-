@@ -1,7 +1,6 @@
 <?php
 //Starting the session
 session_start();
-ob_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']))
     header("Location: " . dirname($_SERVER['PHP_SELF'])."/");   
