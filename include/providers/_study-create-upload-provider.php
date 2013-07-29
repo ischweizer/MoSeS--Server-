@@ -3,6 +3,7 @@ include_once("./config.php");
 include_once("./include/functions/logger.php");
 include_once("./include/functions/dbconnect.php");
 
+
 /**
 *  SETTING FILE FOR UPLOAD
 */
@@ -15,7 +16,7 @@ $fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);//ge
 
     
 /**
-* DECRYPTING THE NAME OF FILE FROM DATABSE
+* DECRYPTING THE NAME OF FILE FROM THE DATABASE
 */
 
 $sql = "SELECT hash 
@@ -55,23 +56,25 @@ if(!empty($row))
 else{
    // no hash for user found
    die('0');
-   //header("Location: ucp.php?m=upload&res=0");
 }
 
 /**
-* Checking for necessary conditions
+* Checking for necessary conditions: file extension match
 */
 if(!in_array($fileExt, $allowedTypes))
     die('2');
-  //header("Location: ucp.php?m=upload&res=2");
- 
+
+/**
+* Checking for necessary conditions: file size match
+*/ 
 if(filesize($_FILES['file']['tmp_name']) > $maxFileSize)
     die('3');
-  //header("Location: ucp.php?m=upload&res=3");
-       
+    
+/**
+* Checking for necessary conditions: is that directory writable?
+*/   
 if(!is_writable($uploadPath))
     die('4');
-  //header("Location: ucp.php?m=upload&res=4");
  
 chmod($_FILES['file']['tmp_name'], 0777);       
 
@@ -79,13 +82,13 @@ chmod($_FILES['file']['tmp_name'], 0777);
 * Moving file into its directory and storing that data in DB
 */
 if(is_uploaded_file($_FILES['file']['tmp_name']) 
-    && move_uploaded_file($_FILES['file']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt))
-{
+    && move_uploaded_file($_FILES['file']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt)){
     
-    // permission access rwx to File
+    /**
+    * Checking for: can I change permission to file?
+    */
     if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777)){
         die('4');
-       //header("Location: ucp.php?m=upload&res=4"); 
     }
      
     
@@ -176,7 +179,7 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
         
         $startcriterion = $_POST['start_after_n_devices'];
         
-        // converting to milliseconds
+        // converting time to milliseconds
         switch($_POST['running_time_value']){        
             case 'h': $runningtime = intval($_POST['running_time'])*60*60*1000;   
                     break;
@@ -193,6 +196,7 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     /**
     * Store filename, hash in DB and other informations
     * inserting into APK table
+    * WARNING: hashed filename is WITHOUT .apk extention!
     */
     $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname,
                              apkhash, sensors, description, private,
@@ -222,14 +226,13 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                                 .", '". $inviteinstall."' )";
                                 
     $logger->logInfo("Upload APK sql: ". $sql);
-
-    // WARNING: hashed filename is WITHOUT .apk extention!
+    
     $db->exec($sql);
 
+    // success!
     die('1');
-    //header("Location: ucp.php?m=upload&res=1");
 }else{
+    // cannot move file to its destination
     die('0');
-    //header("Location: ucp.php?m=upload&res=0");
 }
 ?>
