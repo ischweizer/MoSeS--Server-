@@ -36,18 +36,18 @@ $(document).ready(function() {
     $("#btn_login").click(function(){
         $("#dim_back").fadeIn();
         $('#login_error_message').hide(); // prevent all errors from showing on the lighbox
-        $('input[type=text]').focus();
+        $('input[type=email]').focus();
         
         // reads cookies and sets to fields
         var cookie = readCookie('moses_l');
         if(cookie != ''){
-            $('input[type=text]').val(cookie);
+            $('input[type=email]').val(cookie);
             $('input[type=password]').focus();
             $('#rememberme').attr('checked', true);
         }else{
-            $('input[type=text]').val('');   
+            $('input[type=email]').val('');   
             $('input[type=password]').val('');
-            $('input[type=text]').focus();   
+            $('input[type=email]').focus();   
             $('#rememberme').attr('checked', false);
         } 
 
@@ -79,7 +79,7 @@ $(document).ready(function() {
 	        			//and set the cookie if desired
 	        			$('#login_error_message').hide();
 	        			if($('#rememberme').is(':checked')){
-	        	            setCookie('moses_l', $('input[type=text]').val(), 31);
+	        	            setCookie('moses_l', $('input[type=email]').val(), 31);
 	        	        }else{
 	        	            // if unchecked, just delete cookie
 	        	            var cookie = readCookie('moses_l');
