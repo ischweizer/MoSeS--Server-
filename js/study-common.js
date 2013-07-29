@@ -107,9 +107,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                               '</div>';
                          
                    $('#content_appears_here').append(content);
-                    
-                    // reset questions counter
-                    surveyQuestionNumber = 1;
+                   
                 }   
         });
         
