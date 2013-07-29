@@ -197,7 +197,7 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     * WARNING: hashed filename is WITHOUT .apk extention!
     */
     $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname,
-                             apkhash, sensors, description, private,
+                             apkhash, description, private,
                              apktitle, restriction_device_number, pending_devices,
                              candidates, notified_devices, androidversion, ustudy_finished,
                              startdate, startcriterion, enddate, runningtime, inviteinstall
@@ -207,7 +207,6 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                                 .", '". $HASH_DIR ."'"
                                 .", '". $filename ."'"
                                 .", '" . $HASH_FILE ."'"
-                                .", '". $sensors ."'"
                                 .", '". $description ."'"
                                 .", ". $private
                                 .", '". $apk_title ."'"
