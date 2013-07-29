@@ -42,12 +42,10 @@ if(!empty($row))
     {
         $oldumask = umask(0);
         //Test if the access permition allowed the upload
-        if(!mkdir($uploadPath, 0777, true))
-        {
-            // failed to create folder
+        if(!mkdir($uploadPath, 0777, true)){
             umask($oldumask);
+            // failed to create folder
             die('0');
-            //header("Location: ucp.php?m=upload&res=0");
         }
         umask($oldumask); 
     }

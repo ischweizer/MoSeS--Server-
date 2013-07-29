@@ -21,7 +21,8 @@ $result = $db->query($sql);
 $row = $result->fetch();    
 
 if(empty($row)){
-    die('-1');  // that user can't access and modify the apk!
+    // that user can't access and modify the apk!
+    die('-1');
 }
 
 $oldAPKName = $row['apkname'];
@@ -40,8 +41,6 @@ $FILE_WAS_UPLOADED = FALSE;
 
 
 if($_FILES['file']['error'] !== 4){
-    
-    $FILE_WAS_UPLOADED = TRUE;
     
     /**
     * Connect to DB and get hashes for folder and file
@@ -67,10 +66,9 @@ if($_FILES['file']['error'] !== 4){
     if(!is_dir($uploadPath)){
         $oldumask = umask(0);
         if(!mkdir($uploadPath, 0777, true)){
-            // folder failed to create
             umask($oldumask);
+            // folder failed to create
             die('0');
-            //header("Location: ucp.php?m=upload&res=0");
         }
         umask($oldumask); 
     }
@@ -78,26 +76,30 @@ if($_FILES['file']['error'] !== 4){
     }else{
        // no hash for user found
        die('0');
-       //header("Location: ucp.php?m=upload&res=0");
     }
 
     /**
-    * Checking for necessary conditions
+    * Checking for necessary conditions: file extension match
     */
     if(!in_array($fileExt, $allowedTypes))
       die('2');
-      //header("Location: ucp.php?m=upload&res=2");
 
+    /**
+    * Checking for necessary conditions: file size match
+    */
     if(filesize($_FILES['file']['tmp_name']) > $maxFileSize)
       die('3');
-      //header("Location: ucp.php?m=upload&res=3");
-           
+    
+    /**
+    * Checking for necessary conditions: is that directory writable?
+    */       
     if(!is_writable($uploadPath))
       die('4');
-      //header("Location: ucp.php?m=upload&res=4");
      
     chmod($_FILES['file']['tmp_name'], 0777);       
 
+    $FILE_WAS_UPLOADED = TRUE;
+    
 }else{
     $logger->logInfo("NO FILE WAS UPLOADED!");
 }
@@ -110,10 +112,12 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     && move_uploaded_file($_FILES['file']['tmp_name'], $uploadPath . $HASH_FILE . $fileExt)){
     
     if($FILE_WAS_UPLOADED){
-        // fix file permission
+        
         if(!chmod($uploadPath . $HASH_FILE . $fileExt, 0777)){
+            /**
+            * Checking for: can I change permission to file?
+            */
             die('4');
-            //header("Location: ucp.php?m=upload&res=4"); 
         }
     }
      
@@ -146,19 +150,17 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     $runningtime = NULL;
     $radioButton = $_POST['study_period'];
     
-    if($radioButton == "1")
-    {
+    if($radioButton == "1"){
         $startcriterion = 0;
         $runningtime = NULL;
 
         // user study should be finished if the end date is today or in the past days
-        if($enddate != NULL && strtotime($enddate) <= strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000))))
-        {
+        if($enddate != NULL && strtotime($enddate) <= strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000)))){
             $USTUDY_FINISHED = 1;
         }
     }
-    elseif($radioButton == "2")
-    {
+    elseif($radioButton == "2"){
+        
         $startdate = NULL;
         $enddate = NULL;
         
@@ -215,7 +217,8 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     $APK_VERSION = $row_installed_on['apk_version'] + 1;
 
       /**
-      * Store filename, hash in DB and other informations
+      * Update the given APK and study
+      * WARNING: hashed filename is WITHOUT .apk extention!
       */
       $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." 
               SET apktitle='". $APK_TITLE ."',
@@ -236,7 +239,6 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
               
       $logger->logInfo($sql);
       
-      // WARNING: hashed filename is WITHOUT .apk extention!                        
       $db->exec($sql);
 
     if(!empty($row_installed_on))
@@ -267,10 +269,10 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
       }
     }
 
+    // success!
     die('1');
-    //header("Location: ucp.php?m=upload&res=1");
 }else{
+    // cannot move file to its destination
     die('0');
-    //header("Location: ucp.php?m=upload&res=0");
 }       
 ?>
