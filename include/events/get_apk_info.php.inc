@@ -55,7 +55,6 @@ if($data->SESSIONID != null){
                                           "STATUS" => "SUCCESS",
                                           "ID" => $APK['apkid'],
                                           "ANDVER" => json_decode($APK['androidversion']),
-                                          "SENSORS" => json_decode($APK['sensors']),
                                           "NAME" => $APK['apktitle'],
                                           "DESCR" => $APK['description'],
                                           "STARTDATE" => $apk['startdate'],

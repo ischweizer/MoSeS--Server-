@@ -224,8 +224,7 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
               SET apktitle='". $APK_TITLE ."',
                   apkname='". (!$FILE_WAS_UPLOADED ? $oldAPKName : $filename)."', 
                   apk_version='".$APK_VERSION."',
-                  apkhash='".(!$FILE_WAS_UPLOADED ? $oldAPKHash : $HASH_FILE) ."', 
-                  sensors='". $SENSOR_LIST_STRING ."',
+                  apkhash='".(!$FILE_WAS_UPLOADED ? $oldAPKHash : $HASH_FILE) ."',
                   private=". $private .", 
                   description='". $APK_DESCRIPTION ."',".
                   (!empty($startcriterion) ? 'startcriterion='.$startcriterion : '')."
