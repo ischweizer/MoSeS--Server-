@@ -12,7 +12,7 @@
           Not registered? <a href="registration.php">Register!</a>
         </label>
         <label class="muted" style="cursor: default;">
-          Forgotten a password? <a href="forgot.php">Reset it.</a>
+          Forgot your password? <a href="forgot.php">Reset it.</a>
         </label>
         <input type="hidden" name="submit" value="1">
         <button class="btn btn-success" type="submit">Sign in</button>
