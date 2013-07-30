@@ -2,8 +2,10 @@
 //Starting the session
 session_start();
 
-if(!isset($_SESSION['USER_LOGGED_IN']))
+if(!isset($_SESSION['USER_LOGGED_IN'])){
     header("Location: " . dirname($_SERVER['PHP_SELF'])."/");   
+    exit;
+}
 
 include_once("./config.php");
 include_once("./include/functions/func.php");

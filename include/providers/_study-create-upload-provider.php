@@ -3,6 +3,8 @@ include_once("./config.php");
 include_once("./include/functions/logger.php");
 include_once("./include/functions/dbconnect.php");
 
+print_r($_POST);
+die();
 
 /**
 *  SETTING FILE FOR UPLOAD

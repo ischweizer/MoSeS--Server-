@@ -1,4 +1,14 @@
-<h2>Create user study</h2>
+<?php
+
+//Starting the session
+session_start();
+
+if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SESSION['GROUP_ID'] <= 1){
+    header("Location: " . dirname($_SERVER['PHP_SELF'])."/"); 
+    exit;
+}
+                              
+?><h2>Create user study</h2>
 <br>
 <form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8" id="createAPKForm">
 <fieldset>

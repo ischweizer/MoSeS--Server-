@@ -2,8 +2,10 @@
 // start the session
 session_start();
 
-if(isset($_SESSION['USER_LOGGED_IN']))
-        header("Location: " . dirname($_SERVER['PHP_SELF'])."/"); 
+if(isset($_SESSION['USER_LOGGED_IN'])){
+    header("Location: " . dirname($_SERVER['PHP_SELF'])."/"); 
+    exit;
+}
 
 // include header
 include_once("./include/_header.php");
@@ -124,7 +126,6 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
     <hr>  
 <?php 
   include_once("./include/_login.php");
-//IMport of the footer 
   include_once("./include/_footer.php");  
 ?>
 <script src="js/registration.js"></script>

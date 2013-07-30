@@ -1,4 +1,12 @@
-<h2>Studies</h2>
+<?php
+    
+//Starting the session
+session_start();
+
+if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SESSION['GROUP_ID'] <= 1)
+    header("Location: " . dirname($_SERVER['PHP_SELF'])."/");
+                    
+?><h2>Studies</h2>
 <br>     
 <div class="accordion" id="accordionFather">
 <?php

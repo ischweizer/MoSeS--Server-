@@ -61,7 +61,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                                               '</ul>';
                   
                    for(var i=0; i < data.length; i++) {
-                        content += "#"+(i+1)+" "+ data[i].question +"<br>";
+                        content += (i+1)+". "+ data[i].question +"<br>";
                         
                         // handle type of question's answers
                         switch(data[i].question_type){
@@ -121,7 +121,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                       'Compose your questions below!<br>'+
                       '  <div>'+
                       '    <div class="survey_elements_container">'+
-                      '      <select class="survey_elements" name="survey_question_type">'+
+                      '      <select class="survey_elements">'+
                       '         <option value="1">Yes/No question</option>'+
                       '         <option value="2">Text question</option>'+
                       '         <option value="3">Likert scale question</option>'+
@@ -146,7 +146,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
 });
 
 // on change question type in survey 
-$('#content_appears_here').on('change','[name="survey_question_type"]',function(e) {
+$('#content_appears_here').on('change','.survey_elements',function(e) {
     e.preventDefault();
     switch(parseInt($(this).val())){
         // YES/No question
@@ -208,18 +208,18 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     p.find(':last').html($(this).parent().parent().html());
     
     // Question field (common content for all questions)
-    var content = '<span class="survey_question_number">#'+parentForQCounter.find('.survey_questions_counter').val()+'</span> '+
-                  '<input type="text" name="question" placeholder="Type here your question">'+
+    var content = '<span class="survey_question_number">'+parentForQCounter.find('.survey_questions_counter').val()+'. </span> '+
+                  '<input type="text" name="question[]" placeholder="Type here your question">'+
                   '<button class="btn btn-link btnRemoveQuestion">Remove question</button>'+
                   '<br>';
       
-    switch(parseInt($(this).parent().find('[name="survey_question_type"]').val())){
+    switch(parseInt($(this).parent().find('.survey_elements').val())){
         // YES/NO Question
         case 1: // compose all answers
                 var answers = '<ul>'+
-                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">Yes</span></li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">No</span></li>'+
-                              '<li><input type="radio" name="answer" disabled="disabled"><span class="survey_q_element">Not sure</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Yes</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">No</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Not sure</span></li>'+
                               '</ul>';
                  
                 content += answers; 
@@ -230,7 +230,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
         // Text question
         case 2: // compose all answers
                 var answers = '<ul>'+
-                              '<li><textarea name="answer" cols="20" rows="3" disabled="disabled" placeholder="Answer will be here..."></textarea></li>'+
+                              '<li><textarea cols="20" rows="3" disabled="disabled" placeholder="Answer will be here..."></textarea></li>'+
                               '</ul>';
                  
                 content += answers;
@@ -259,7 +259,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
         case 4: // compose all answers
                 var answers = '<ul>';
                     for(var i=1; i <= quantity; i++){
-                       answers += '<li><input type="checkbox" value="'+ i +'" disabled="disabled"><span><input type="text" placeholder="Answer here"></span></li>'; 
+                       answers += '<li><input type="checkbox" value="'+ i +'" disabled="disabled"><span><input type="text" name="answer[4]" placeholder="Answer here"></span></li>'; 
                     }
                 answers += '</ul>';
                  
@@ -273,7 +273,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
         case 5: // compose all answers
                 var answers = '<ul>';
                     for(var i=1; i <= quantity; i++){
-                       answers += '<li><input type="radio" name="survey_single_choice" value="'+ i +'" disabled="disabled"><span><input type="text" placeholder="Answer here"></span></li>'; 
+                       answers += '<li><input type="radio" name="survey_single_choice" value="'+ i +'" disabled="disabled"><span><input type="text" name="answer[5]" placeholder="Answer here"></span></li>'; 
                     }
                 answers += '</ul>';
                  

@@ -3,8 +3,10 @@
 session_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']))
-    if(!(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"))
+    if(!(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES")){
         header("Location: " . dirname($_SERVER['PHP_SELF'])."/");
+        exit;
+    }
 
 if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
    
@@ -36,7 +38,7 @@ include_once("./include/_menu.php");
 ?>
 
     <!-- Main Block -->
-    <div class="hero-unit" style="font-family: 'Myriad Pro', 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;">
+    <div class="hero-unit">
         <h2>Admin control panel</h2>
         <form id="allowAccessForm" action="" method="post">
             <table class="table table-striped">

@@ -13,7 +13,7 @@ include_once("./include/_menu.php");
 ?>
 
     <!-- Main Block -->
-    <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
+    <div class="hero-unit">
         <h2>MoSeS makes your life easier!</h2>
         <p>The Mobile Sensing System helps scientists from all around the world 
             to distribute their Android apps and make the world a better place.
@@ -49,8 +49,7 @@ include_once("./include/_menu.php");
     </div>
 <?php
     }         
-
-//Import of the slider
+    
 include_once("./include/_login.php");
 //Import of the footer
 include_once("./include/_footer.php");  

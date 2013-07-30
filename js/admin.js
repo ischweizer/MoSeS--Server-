@@ -1,6 +1,8 @@
 // transform orange button to disabled gray with waiting text on click
 $('#allowAccessForm :submit').click(function(e){        
     
+    e.preventDefault();
+    
     var clickedButton = $(this);
     
     clickedButton.removeClass('btn-warning');
@@ -19,6 +21,4 @@ $('#allowAccessForm :submit').click(function(e){
             
         }
     });
-    
-    e.preventDefault();
 });
