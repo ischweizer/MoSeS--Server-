@@ -12,6 +12,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     isset($_POST['get_questions']) && is_numeric($_POST['get_questions'])){
 
     include_once("./include/providers/_study-add-survey-get-questions-provider.php");
+    exit;
 }
 
 /**
@@ -22,6 +23,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     isset($_POST['study_remove']) && !empty($_POST['study_remove'])){
 
     include_once("./include/providers/_study-remove-provider.php");
+    exit;
 }
 
 /*
@@ -34,6 +36,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
        
         include_once("./include/providers/_approve-scientist-provider.php");
+        exit;
    }
 }
 
@@ -49,6 +52,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
     !(isset($_REQUEST['createGroup']) && isset($_REQUEST['joinGroup']))){
      
      include_once("./include/providers/_create-join-group-provider.php");   
+     exit;
 }
  
 /*
@@ -60,6 +64,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) && isset($_SESSION['USER_ID']) &&
    intval($_REQUEST['leaveGroup']) == $_SESSION['USER_ID']){
       
      include_once("./include/providers/_leave-group-provider.php");   
+     exit;
 }
 
 /*
@@ -73,6 +78,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     //configuration of connection
     
     include_once("./include/providers/_devices-request-pager-provider.php");  
+    exit;
 }
 
 /*
@@ -81,6 +87,7 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
 if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 	
     include_once("./include/providers/_login-provider.php");
+    exit;
 }
 
 /**
@@ -91,6 +98,7 @@ if(isset($_POST["submit"]) && $_POST["submit"] == "1"){
 if(isset($_POST['isEmailUnique']) && !empty($_POST['isEmailUnique'])){
 
     include_once("./include/providers/_email-unique-check-provider.php");
+    exit;
 }
 
 /**
@@ -104,6 +112,7 @@ if(isset($_POST['isEmailUnique']) && !empty($_POST['isEmailUnique'])){
 if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
     
 	include_once("./include/providers/_registration-provider.php");
+    exit;
 }
 
 /**
@@ -117,6 +126,7 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
 if(isset($_POST["submitted_forgot"]) && $_POST["submitted_forgot"] == "1"){
 	
     include_once("./include/providers/_reset-password-provider.php");
+    exit;
 }
 
 /**
@@ -127,6 +137,7 @@ if(isset($_POST["submitted_forgot"]) && $_POST["submitted_forgot"] == "1"){
 if(isset($_POST["hash"]) && isset($_POST["newPassword"])){
 	
    include_once("./include/providers/_reset-password-confirmation-provider.php"); 
+   exit;
 }
 
 /*
@@ -136,11 +147,16 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
    isset($_REQUEST['study_create']) && !empty($_REQUEST['study_create']) && $_REQUEST['study_create'] == 2975){
     
    include_once("./include/providers/_study-create-upload-provider.php");
+   exit;
 }
 
+/* 
+*  UPLOAD Handling. User study UPDATE 
+*/
 if(isset($_SESSION['USER_LOGGED_IN']) && 
    isset($_REQUEST['study_update']) && !empty($_REQUEST['study_update']) && $_REQUEST['study_update'] == 6825){
        
    include_once("./include/providers/_study-update-upload-provider.php"); 
+   exit;
 }
 ?>

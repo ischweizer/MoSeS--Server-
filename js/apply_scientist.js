@@ -18,7 +18,7 @@ $('.btnApplyScientistSend').click(function(e){
         if(result == '1'){
             $('.hero-unit').html('<h2 class="text-center">Your scientist application was sent!</h2>');
         }else{
-            // if now success, try again later
+            // if no success, try again later
             // enable button again
             clickedButton.addClass('btn-success');
             clickedButton.text('Send');

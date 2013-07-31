@@ -3,9 +3,6 @@ include_once("./config.php");
 include_once("./include/functions/logger.php");
 include_once("./include/functions/dbconnect.php");
 
-print_r($_POST);
-die();
-
 /**
 *  SETTING FILE FOR UPLOAD
 */
@@ -18,7 +15,7 @@ $fileExt = substr($filename, strripos($filename, '.'), strlen($filename)-1);//ge
 
     
 /**
-* DECRYPTING THE NAME OF FILE FROM THE DATABASE
+* Selecting THE NAME OF FILE FROM THE DATABASE
 */
 
 $sql = "SELECT hash 
