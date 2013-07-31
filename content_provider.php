@@ -3,6 +3,18 @@ session_start();
 
 include_once("./include/functions/func.php");
 
+/*
+*   Apply as scientist
+*/
+
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_POST['promo_sent']) && $_POST['promo_sent'] == 9325 &&
+    isset($_POST['reason']) && !empty($_POST['reason'])){
+
+    include_once("./include/providers/_apply-as-scientist-provider.php");
+    exit;
+}
+
 /**
 * Get survey's predefined questions
 */ 
