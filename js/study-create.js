@@ -30,21 +30,59 @@ $('[name="btnCreateOK"]').click(function(e){
    /* Handling form data */ 
     var formData = new FormData($('form')[0]);
     
+    /* Gather a JSON-Object for surveys */
+    var surveysJSON = {};
+    
+    // find all surveys
+    $('.survey').each(function(survey_i, elem){
+        
+        var survey = $(this);
+        var survey_id = survey.find('.survey_id').val();
+        var questions = {};
+
+        // iterate through all questions of one survey
+        survey.find('.survey_question').each(function(question_i, elem2){
+            
+            var question = $(this);
+            var answers = [];
+            
+            // find all answers
+            question.parent().find('.survey_answer').each(function(answer_i, elem3){
+                var answer = $(this);
+                answers.push(answer.val());
+            });
+            
+            questions = {'question':question.val(),
+                         'answers':answers};
+            
+        }); 
+
+        // populate JSON object
+        surveysJSON[survey_i] = {'survey_id':survey_id,
+                                 'survey_questions':questions}; 
+    });
+    
+    // append created JSON object to form data
+    formData.append('survey_json', JSON.stringify(surveysJSON));
+    
+    /* ******************************** */
+    
     $.ajax({
         url: 'content_provider.php', 
         type: 'POST',
-        xhr: function() {  // custom xhr
+        xhr: function() {
             var myXhr = $.ajaxSettings.xhr();
-            if(myXhr.upload){ // check if upload property exists
+            
+            // check if upload property exists
+            if(myXhr.upload){
                 myXhr.upload.addEventListener('progress', function(e) {
                                                                 if(e.lengthComputable){
                                                                     $('progress').attr({value:e.loaded,max:e.total});
                                                                 }
-                                                            }, false); // for handling the progress of the upload
+                                                            }, false);
             }
             return myXhr;
         },
-        //Ajax events
         //beforeSend: beforeSendHandler,
         success: function(result){
             
@@ -66,9 +104,7 @@ $('[name="btnCreateOK"]').click(function(e){
             }
         },
         //error: errorHandler,
-        // Form data
         data: formData,
-        //Options to tell JQuery not to process data or worry about content-type
         cache: false,
         contentType: false,
         processData: false
