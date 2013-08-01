@@ -15,6 +15,21 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     exit;
 }
 
+/*
+*   Reject scientist by admin
+*/
+
+if(isset($_SESSION['USER_LOGGED_IN']) &&
+    isset($_POST['reject']) && $_POST['reject'] == 3434 &&
+    isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
+    
+    if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
+
+        include_once("./include/providers/_reject-scientist-provider.php");
+        exit;
+    }
+}
+
 /**
 * Get survey's predefined questions
 */ 
@@ -39,10 +54,11 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
 }
 
 /*
-* Update pending requests to be a scientist 
+* Approve a scientist 
 */
 
 if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_POST['allow']) && $_POST['allow'] == 4343 &&
     isset($_REQUEST['hash']) && !empty($_REQUEST['hash']) && is_md5($_REQUEST['hash'])){
     
     if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){

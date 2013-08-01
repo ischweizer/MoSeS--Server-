@@ -15,7 +15,7 @@ if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
    $USERS_SCIENTIST_LIST = array();
    
    $sql = "SELECT r.telephone, r.reason, u.hash, u.usergroupid, u.firstname, u.lastname, u.email 
-           FROM request r, user u 
+           FROM ". $CONFIG['DB_TABLE']['REQUEST'] ." r, ". $CONFIG['DB_TABLE']['USER'] ." u 
            WHERE r.pending = 1 AND r.uid = u.userid";
            
    $result = $db->query($sql);
@@ -40,7 +40,10 @@ include_once("./include/_menu.php");
     <!-- Main Block -->
     <div class="hero-unit">
         <h2>Admin control panel</h2>
-        <form id="allowAccessForm" action="" method="post">
+        <?php
+        if(!empty($USERS_SCIENTIST_LIST)){
+        ?>
+        <form action="" method="post">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -51,34 +54,35 @@ include_once("./include/_menu.php");
                   <th>Reason</th>
                   <th>Telephone</th>
                   <th>Allow</th>
+                  <th>Reject</th>
                 </tr>
               </thead>
               <tbody id="content">
               <?php
                 
-                if(!empty($USERS_SCIENTIST_LIST)){
-              
-                    $i=1;
-                    foreach($USERS_SCIENTIST_LIST as $user){
-                       echo '<tr>';
-                       echo '<td>'. $i .'</td>';
-                       echo '<td>'. $user['firstname'] .'</td>'; 
-                       echo '<td>'. $user['lastname'] .'</td>'; 
-                       echo '<td>'. $user['email'] .'</td>'; 
-                       echo '<td>'. $user['reason'] .'</td>'; 
-                       echo '<td>'. $user['telephone'] .'</td>'; 
-                       echo '<td><button type="submit" class="btn btn-warning btnAllowAccess" value="'. $user['hash'] .'">Give access</button></td>'; 
-                       echo '</tr>';
-                       $i++;
-                    }
-                   
-                }else{
-                    echo "<tr><td>No pending requests.</td></tr>";
+                $i=1;
+                foreach($USERS_SCIENTIST_LIST as $user){
+                   echo '<tr>';
+                   echo '<td>'. $i .'</td>';
+                   echo '<td>'. $user['firstname'] .'</td>'; 
+                   echo '<td>'. $user['lastname'] .'</td>'; 
+                   echo '<td>'. $user['email'] .'</td>'; 
+                   echo '<td>'. $user['reason'] .'</td>'; 
+                   echo '<td>'. $user['telephone'] .'</td>'; 
+                   echo '<td><button type="submit" class="btn btn-warning btnAllowAccess" value="'. $user['hash'] .'">Approve</button></td>'; 
+                   echo '<td><button type="submit" class="btn btn-danger btnRejectAccess" value="'. $user['hash'] .'">Reject</button></td>'; 
+                   echo '</tr>';
+                   $i++;
                 }
               ?>
               </tbody>
             </table>
         </form>
+        <?php
+        }else{
+                echo "<p>No pending requests.</p>";
+            }
+        ?>
     <hr>
 
  <?php
