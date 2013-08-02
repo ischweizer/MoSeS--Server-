@@ -61,7 +61,7 @@ if($data->SESSIONID != null){
                       }
                       else{
                           $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 
-                                    "STATUS" => "FALIURE_NO_SUCH_APK");
+                                    "STATUS" => "FAILURE_NO_SUCH_APK");
                       }
                    }else{
                        $return = array("MESSAGE" => "APK_INSTALLED_RESPONSE", 

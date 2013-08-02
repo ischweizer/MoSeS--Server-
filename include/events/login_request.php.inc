@@ -38,6 +38,7 @@ if($data->EMAIL != null && !empty($data->EMAIL) && preg_match('/^[_a-z0-9-]+(\.[
             	$logger->logInfo("DEVICENAME found: ".$deviceName);
             	// the server knows the name of the device, the client should recive it
             	$return = array("MESSAGE" => "LOGIN_RESPONSE",
+            					"STATUS" => "SUCCESS",
             					"EMAIL" => $EMAIL,
             					"SESSIONID" => session_id(),
             					"DEVICENAME" => $deviceName);
@@ -46,21 +47,25 @@ if($data->EMAIL != null && !empty($data->EMAIL) && preg_match('/^[_a-z0-9-]+(\.[
             	$logger->logInfo("DEVICENAME not found; the response will NOT contain DEVICENAME");
             	// the server does not know the name of the device
             	$return = array("MESSAGE" => "LOGIN_RESPONSE",
+            			"STATUS" => "SUCCESS",
             			"EMAIL" => $EMAIL,
             			"SESSIONID" => session_id());
             }
         }else{
             $return = array("MESSAGE" => "LOGIN_RESPONSE",
+            				"STATUS" => "FAILURE",
                             "SESSIONID" => "NULL");
             
             $logger->logInfo("USER_NOT_FOUND");
         }
     }else{
         $return = array("MESSAGE" => "LOGIN_RESPONSE",
+        				"STATUS" => "FAILURE",
                         "SESSIONID" => "NULL");
     }
 }else{
     $return = array("MESSAGE" => "LOGIN_RESPONSE",
+    				"STATUS" => "FAILURE",
                     "SESSIONID" => "NULL");
 }
     

@@ -66,11 +66,11 @@ if($data->SESSIONID != null){
                       }
                    }else{
                        $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 
-                                       "STATUS" => "FAILURE_INVALID_SESSION");
+                                       "STATUS" => "INVALID_SESSION");
                    }
                 }else{
                     $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 
-                                    "STATUS" => "FAILURE_INVALID_SESSION");
+                                    "STATUS" => "INVALID_SESSION");
                 }
           }else{
                 $return = array("MESSAGE" => "GET_APK_INFO_RESPONSE", 

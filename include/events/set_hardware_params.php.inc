@@ -81,12 +81,12 @@ if($data->SESSIONID != null){
 					}else{
 						// session is timed out
 						$return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-								"STATUS" => "FAILURE_INVALID_SESSION");
+								"STATUS" => "INVALID_SESSION");
 					}
 				}else{
 					// session not in the database at all
 					$return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-							"STATUS" => "FAILURE_INVALID_SESSION");
+							"STATUS" => "INVALID_SESSION");
 				}
 			}
 			else{
@@ -101,11 +101,11 @@ if($data->SESSIONID != null){
 		}
 	}else{
 		$return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-				"STATUS" => "FAILURE_INVALID_SESSION");
+				"STATUS" => "INVALID_SESSION");
 	}
 }else{
 	$return = array("MESSAGE" => "HARDWARE_CHANGE_RESPONSE",
-			"STATUS" => "FAILURE_INVALID_SESSION");
+			"STATUS" => "INVALID_SESSION");
 }
 
 print(json_encode($return));

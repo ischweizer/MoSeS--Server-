@@ -68,12 +68,12 @@ if($data->SESSIONID != null){
                }else{
 
                    $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
-                                   "STATUS" => "FAILURE");
+                                   "STATUS" => "INVALID_SESSION");
                }
             }else{
 
                 $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
-                                "STATUS" => "FAILURE_NOT_LOGGED_IN");
+                                "STATUS" => "INVALID_SESSION");
             }
        }else{
             $return = array("MESSAGE" => "GET_APK_LIST_REQUEST", 

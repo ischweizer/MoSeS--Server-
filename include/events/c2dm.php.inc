@@ -56,11 +56,11 @@ if($data->SESSIONID != null){
                    }else{
                         // session is timed out
                         $return = array("MESSAGE" => "C2DM",
-                                        "STATUS" => "FAILURE_SESSION_TIME_OUT");
+                                        "STATUS" => "INVALID_SESSION");
                    }
                 }else{
                     $return = array("MESSAGE" => "C2DM",
-                                    "STATUS" => "FAILURE_NO_SUCH_USER");
+                                    "STATUS" => "INVALID_SESSION");
                 }
             }else{
                $return = array("MESSAGE" => "C2DM", 
