@@ -32,6 +32,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
         // Requesting server for questions for selected survey (ID)
         $.post("content_provider.php", { 'get_questions': $('#survey_select :selected').val(), 'get_questions_pwd' : 6767 })
             .done(function(result) {
+                
                 if(result){
                     
                     var data = $.parseJSON(result);
@@ -60,27 +61,28 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                                               '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'+
                                               '</ul>';
                   
-                   for(var i=0; i < data.length; i++) {
-                        content += (i+1)+". "+ data[i].question +"<br>";
+                   $(data.content).each(function(i, question){
+                       
+                        content += (i+1)+". "+ question.question +"<br>";
                         
                         // handle type of question's answers
-                        switch(data[i].question_type){
+                        switch(question.question_type){
                             
                             // YES/NO 
-                            case '1': content += answers_yes_no;
+                            case 1: content += answers_yes_no;
                                     break;
                             
                             // Text        
-                            case '2': content += answers_text; 
+                            case 2: content += answers_text; 
                                     break;
                             
                             // Scale        
-                            case '3': content += answers_likert_scale;
+                            case 3: content += answers_likert_scale;
                                     break;
                              
                             // Multiple choice        
-                            case '4': var answers_multiple_choice = '<ul>';
-                                       for(var j=1; j <= data[i].question_number_of_answers; j++){
+                            case 4: var answers_multiple_choice = '<ul>';
+                                       for(var j=1; j <= question.question_number_of_answers; j++){
                                           answers_multiple_choice += '<li>'+
                                                                      '<input type="checkbox" value="'+ j +'" disabled="disabled">'+
                                                                      '<span><input type="text" class="survey_answer" placeholder="Answer here"></span>'+
@@ -91,8 +93,8 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                                     break;
                                     
                             // Single choice
-                            case '5': var answers_single_choice = '<ul>';
-                                      for(var j=1; j <= data[i].question_number_of_answers; j++){
+                            case 5: var answers_single_choice = '<ul>';
+                                      for(var j=1; j <= question.question_number_of_answers; j++){
                                         answers_single_choice += '<li>'+
                                                                  '<input type="radio" value="'+ j +'" disabled="disabled">'+
                                                                  '<span><input type="text" class="survey_answer" placeholder="Answer here"></span>'+
@@ -104,7 +106,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                                     
                             default: content += 'Something went wrong with displaying question type answers!<br>'; 
                         }
-                   }
+                   });
                    
                    content += '</div>'+
                               '<input type="hidden" class="survey_id" value="'+ $('#survey_select :selected').val() +'">'+

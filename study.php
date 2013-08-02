@@ -20,36 +20,6 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
       $CREATE = 1; 
    
    }else{ 
-    
-       // getting survey results  
-       if(isset($_POST['USQUEST']) && !empty($_POST['USQUEST']))
-        {
-            $apkid = preg_replace("/\D/", "", $_POST['USQUEST']);
-            $show_us_quest = true;
-
-            $sql = "SELECT apktitle 
-                    FROM ". $CONFIG['DB_TABLE']['APK'] ." 
-                    WHERE apkid = ".$apkid;
-                    
-            $req = $db->query($sql);
-            $row = $req->fetch();
-            
-            $apkname = $row['apktitle'];
-            
-            include_once("./include/managers/SurveyManager.php");
-            
-            $notchosen_quests = QuestionnaireManager::getNotChosenQuestionnireForApkid(
-                $db,
-                $CONFIG['DB_TABLE']['QUEST'],
-                $CONFIG['DB_TABLE']['APK_QUEST'],
-                $apkid);
-            
-            $chosen_quests = QuestionnaireManager::getChosenQuestionnireForApkid(
-                $db,
-                $CONFIG['DB_TABLE']['QUEST'],
-                $CONFIG['DB_TABLE']['APK_QUEST'],
-                $apkid);
-        }  
          
        /* taking group name from user */
        $sql = "SELECT rgroup 
@@ -68,52 +38,21 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                 
        $result = $db->query($sql);
        $USER_APKS = $result->fetchAll(PDO::FETCH_ASSOC);
-       
-       /**
-       * Selecting questions related to apk
-       */
-       $APK_QUESTIONS = array();
-       
-       foreach($USER_APKS as $APK){
-          
-           $sql ="SELECT questid 
-                  FROM ". $CONFIG['DB_TABLE']['APK_QUEST'] ." 
-                  WHERE apkid=" .$APK['apkid'];
-            
-            $req=$db->query($sql);
-            $rows = $req->fetchAll(PDO::FETCH_ASSOC);
-            
-            if(!empty($rows)){
-                
-                $QUESTIONS = array();
-                
-                for($qi = 0; $qi < count($rows); $qi++){
-                    
-                    $sql ="SELECT name 
-                            FROM ". $CONFIG['DB_TABLE']['QUEST'] ." 
-                            WHERE questid=".$rows[$qi]['questid'];
-                            
-                    $req=$db->query($sql);
-                    $us_quest = $req->fetch(PDO::FETCH_ASSOC);
-
-                    $QUESTIONS[] = $us_quest['name'];
-                }
-
-                $APK_QUESTIONS[$APK['apkid']] = $QUESTIONS;
-            }
-       }    
    }
    
-   /*
-   *    Select all survey names, ids for dropdown list  
+   /**
+   * Selecting standard survey's questions 
    */
-   $SURVEYS_ALL = array();
+   $SURVEYS = array();
    
-   $sql = 'SELECT * 
-           FROM `'. $CONFIG['DB_TABLE']['QUEST'] .'`';
-            
-   $result=$db->query($sql);
-   $SURVEYS_ALL = $result->fetchAll(PDO::FETCH_ASSOC);
+   $i=1;
+   $res = json_decode(getStandardSurveyById($i), true);
+   
+   while(!empty($res)){
+       $SURVEYS[] = json_decode(getStandardSurveyById($i), true);
+       $i++;
+       $res = json_decode(getStandardSurveyById($i), true);
+   } 
 }
 
 //Import of the header  

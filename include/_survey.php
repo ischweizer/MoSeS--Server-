@@ -4,15 +4,19 @@
     <label>Please, select your survey -></label>
     </div>
     <div class="span4 offset2"><select id="survey_select"><?php 
+     
+     echo "BEFORE"; 
+     print_r($SURVEYS); 
+     echo "AFTER";
         
-     foreach($SURVEYS_ALL as $SURVEY){   
+     foreach($SURVEYS as $SURVEY){   
     
-     ?><option value="<?php echo $SURVEY['questid']; ?>"><?php echo $SURVEY['name']; ?></option><?php
+     ?><option value="<?php echo $SURVEY['survey_id']; ?>"><?php echo $SURVEY['survey_name']; ?></option><?php
      
      }
      
      ?>
-     <option value="9001">Custom</option>
+     <option value="9001">Custom survey</option>
      </select></div>
     <div class="span2"><button class="btn btn-success" name="btnAddSurveyOK">ADD</button></div>
   </div>
