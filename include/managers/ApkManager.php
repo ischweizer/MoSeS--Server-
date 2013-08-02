@@ -40,16 +40,37 @@ class ApkManager{
         return $array;
     }
     
+    /**
+     * Returns all APKs in DB that are not published in a user-study and
+     * that can run on the specified android version.
+     *
+     * @param mixed $db the database instance
+     * @param mixed $apkTable the name of the apk table
+     * @param int $minAndroidVersion the minimal android version on which the apk should be runnable
+     * @return array an array containing all apks that meet the requirements. If no such apks exist, an empty array is returned.
+     */
+    public static function getNonStudyAllApkRegardingMinAndroidVersion($db, $apkTable, $minAndroidVersion){
+    
+    	$sql = "SELECT *
+                FROM ". $apkTable ." WHERE private=0 AND androidversion<=".$minAndroidVersion;
+    
+    	$result = $db->query($sql);
+    	$array = $result->fetchAll(PDO::FETCH_ASSOC);
+    
+    	return $array;
+    }
+    
     
     /**
-    * Returns particular APK that fits requirements
+    * Returns a particular APK.
     * 
     * @param mixed $db
     * @param mixed $apkTable
     * @param mixed $userID
     * @param mixed $apkID
+    * @return mixed A row containing the apk or. If no apk with the provided apkID exists, an empty row is returned.
     */
-    public static function getApk($db, $apkTable, $userID, $apkID, $logger){
+    public static function getApk($db, $apkTable, $apkID, $logger){
         
         $sql = "SELECT *  
                FROM ". $apkTable ." 

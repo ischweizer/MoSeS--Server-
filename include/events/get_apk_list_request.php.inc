@@ -46,8 +46,8 @@ if($data->SESSIONID != null){
 
                      $json_array_return = array();
                      
-                     $APKs = ApkManager::getNonStudyAllApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK']);
-                     
+                     $APKs = ApkManager::getNonStudyAllApkRegardingMinAndroidVersion($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $ANDROID_VERSION);
+                                          
                      foreach($APKs as $apk){
                              
                          
@@ -60,17 +60,11 @@ if($data->SESSIONID != null){
                                               "APKVERSION" => $apk['apk_version']);
                                               
                             $json_array_return[] = $APK_JSON; 
-//                         } 
                      }
                      
                      $return = array("MESSAGE" => "GET_APK_LIST_RESPONSE",
                                      "STATUS" => "SUCCESS",
                                      "APK_LIST" => $json_array_return);
-//                   }else{
-
-//                       $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",
-//                                       "STATUS" => "FAILURE_UNKNOWN_HARDWARE");
-//                   }
                }else{
 
                    $return = array("MESSAGE" => "GET_APK_LIST_REQUEST",

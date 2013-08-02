@@ -37,7 +37,6 @@ if($data->SESSIONID != null){
                     
                    $logger->logInfo("##################### GET APK INFO ################ USER FOUND");
                     
-                   $USERID = $USER["userid"];
                    $LASTACTIVITY = $USER["lastactivity"];
                    $TIME_NOW = time();
                    
@@ -47,7 +46,7 @@ if($data->SESSIONID != null){
                        
                       LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $sessionID);
                       
-                      $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $USERID, $APKID, $logger);
+                      $APK = ApkManager::getApk($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $APKID, $logger);
                       
                       if(!empty($APK)){
                           
