@@ -3,6 +3,26 @@ include_once("./config.php");
 include_once("./include/functions/logger.php");
 include_once("./include/functions/dbconnect.php");
 
+$SURVEY_JSON = stripslashes(trim($_POST['survey_json']));
+// decode json to arrays instead of objects
+$SURVEY_OBJ = json_decode($SURVEY_JSON, true);
+
+print_r($SURVEY_OBJ);
+exit;
+foreach($SURVEY_OBJ as $value){
+    
+    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['QUEST'] ." 
+                            (name)
+                            VALUES 
+                            (". $survey_name .")";
+                                
+    //$logger->logInfo("Upload/insert APK sql: ". $sql);
+    
+    $db->exec($sql);
+}
+
+exit;
+
 /**
 *  SETTING FILE FOR UPLOAD
 */
@@ -116,6 +136,14 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     $enddate = $_POST['end_date'];        
     $maxdevice = $_POST['max_devices_number'];
     $inviteinstall = (isset($_POST['setup_types']) ? 1 : 0);
+    
+    $SURVEY_JSON = trim($_POST['survey_json']);
+    $SURVEY_OBJ = json_decode($SURVEY_JSON);
+    
+    if($SURVEY_OBJ == NULL){
+        // bad format
+        die('5');
+    }
 
     $RESTRICTION_USER_NUMBER = $maxdevice;
     
@@ -195,7 +223,8 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     * inserting into APK table
     * WARNING: hashed filename is WITHOUT .apk extention!
     */
-    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." (userid, userhash, apkname,
+    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['APK'] ." 
+                            (userid, userhash, apkname,
                              apkhash, description, private,
                              apktitle, restriction_device_number, pending_devices,
                              candidates, notified_devices, androidversion, ustudy_finished,
@@ -221,10 +250,25 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                                 .", '". $runningtime."'"
                                 .", '". $inviteinstall."' )";
                                 
-    $logger->logInfo("Upload APK sql: ". $sql);
+    //$logger->logInfo("Upload/insert APK sql: ". $sql);
     
     $db->exec($sql);
 
+    /* insert survey for user study */
+    
+    
+    
+    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['QUEST'] ." 
+                            (name)
+                            VALUES 
+                            (". $survey_name .")";
+                                
+    //$logger->logInfo("Upload/insert APK sql: ". $sql);
+    
+    $db->exec($sql);
+    
+    /* **************************** */
+    
     // success!
     die('1');
 }else{
