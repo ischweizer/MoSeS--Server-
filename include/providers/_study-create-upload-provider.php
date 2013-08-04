@@ -236,6 +236,12 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     
     $db->exec($sql);
 
+    /* ****************************************************************
+    *
+    *               SURVEYS
+    * 
+    * ****************************************************************/
+    
     /* if there are some selected surveys */
     if(!empty($SURVEY_OBJ)){
         
@@ -260,11 +266,11 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
             switch(intval($survey['survey_id'])){
                 case 9001:  $survey_title = 'Custom survey';
                             break;
-                case 1:  $survey_title = 'System Usability Scale';
+                case 1:  $survey_title = getStandardSurveyNameById(1);
                          break;
-                case 2:  $survey_title = 'Standard 1';
+                case 2:  $survey_title = getStandardSurveyNameById(2);
                          break;
-                case 3:  $survey_title = 'Standard 2';
+                case 3:  $survey_title = getStandardSurveyNameById(3);
                          break;
                             
                 default: die('6');  // wrong JSON                

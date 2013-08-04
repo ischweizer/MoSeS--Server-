@@ -140,9 +140,146 @@ function isEmailUnique($email, $CONFIG, $db, $logger){
         return false; // a user has already used this email, the email is thus NOT unique
 }
 
+/**
+* Returns array of standard surves
+* * !!! DEFINE STANDARD SURVEY HERE !!! 
+* 
+*/
+function getStandardSurveysArray(){
+    
+    $SURVEYS_STD_RESULT = array();
+    
+    /* System Usability Scale (SUS) */
+               
+    $SYSTEM_USABILITY_SCALE_Q = array();                            
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I think that I would like to use this system frequently', 
+                                'question_number_of_answers' => 0
+                                );                             
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I found the system unnecessarily complex', 
+                                'question_number_of_answers' => 0
+                                );
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I thought the system was easy to use', 
+                                'question_number_of_answers' => 0
+                                );                                
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I think that I would need the support of a technical person to be able to use this system', 
+                                'question_number_of_answers' => 0
+                                );                             
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I found the various functions in this system were well integrated', 
+                                'question_number_of_answers' => 0
+                                );
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I thought there was too much inconsistency in this system', 
+                                'question_number_of_answers' => 0
+                                );
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I would imagine that most people would learn to use this system very quickly', 
+                                'question_number_of_answers' => 0
+                                );                             
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I found the system very cumbersome to use', 
+                                'question_number_of_answers' => 0
+                                );
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I felt very confident using the system', 
+                                'question_number_of_answers' => 0
+                                );                             
+    $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
+                                'question'=> 'I needed to learn a lot of things before I could get going with this system', 
+                                'question_number_of_answers' => 0
+                                );
+                                
+    $SYSTEM_USABILITY_SCALE = array('survey_id' => 1,
+                                   'survey_name' => 'System Usability Scale', 
+                                   'content' => $SYSTEM_USABILITY_SCALE_Q);
+                                   
+    // first element
+    $SURVEYS_STD_RESULT[] = $SYSTEM_USABILITY_SCALE;
+    
+    /* Standard 1 */
+
+    $STANDARD_SURVEY_1_Q = array();
+    $STANDARD_SURVEY_1_Q[] = array('question_type' => 1, 
+                                'question'=> 'Standard1- question1', 
+                                'question_number_of_answers' => 0
+                                );
+                                
+    $STANDARD_SURVEY_1_Q[] = array('question_type' => 2, 
+                                'question'=> 'Standard1- question2', 
+                                'question_number_of_answers' => 0
+                                );
+    $STANDARD_SURVEY_1_Q[] = array('question_type' => 3, 
+                                'question'=> 'Standard1- question3', 
+                                'question_number_of_answers' => 0
+                                );
+
+    $STANDARD_SURVEY_1 = array('survey_id' => 2,
+                              'survey_name' => 'Standard 1 survey', 
+                              'content' => $STANDARD_SURVEY_1_Q);
+                              
+    // second element
+    $SURVEYS_STD_RESULT[] = $STANDARD_SURVEY_1;
+    
+    /* Standard 2 */
+               
+    $STANDARD_SURVEY_2_Q = array();                           
+    $STANDARD_SURVEY_2_Q[] = array('question_type' => 4, 
+                                'question'=> 'Standard2- question1', 
+                                'question_number_of_answers' => 2
+                                );
+                                
+    $STANDARD_SURVEY_2_Q[] = array('question_type' => 2, 
+                                'question'=> 'Standard2- question2', 
+                                'question_number_of_answers' => 0
+                                );
+    $STANDARD_SURVEY_2_Q[] = array('question_type' => 5, 
+                                'question'=> 'Standard2- question3', 
+                                'question_number_of_answers' => 4
+                                );
+                                
+    $STANDARD_SURVEY_2 = array('survey_id' => 3,
+                              'survey_name' => 'Standard 2 survey',
+                              'content' => $STANDARD_SURVEY_2_Q);
+                              
+    // third element
+    $SURVEYS_STD_RESULT[] = $STANDARD_SURVEY_2;
+    
+    
+    return $SURVEYS_STD_RESULT;
+}
+
+/** 
+* Returns name of standard survey by id
+* 
+* @param mixed $survey_id
+*/
+function getStandardSurveyNameById($survey_id){
+    
+    $RESULT = '';
+    
+    switch($survey_id){
+       
+       case 1: $RESULT = getStandardSurveysArray()[0]['survey_name'];
+               break;
+   
+       case 2: $RESULT = getStandardSurveysArray()[1]['survey_name'];
+               break;
+   
+       case 3: $RESULT = getStandardSurveysArray()[2]['survey_name'];
+               break;
+               
+        default: $RESULT = array();
+   }
+   
+   return $RESULT;
+}
+
 /* 
-* !!! DEFINE STANDARD SURVEY HERE !!! 
-* Returns survey as json back
+* Returns survey as JSON string back
 */
 function getStandardSurveyById($survey_id){
     
@@ -153,109 +290,13 @@ function getStandardSurveyById($survey_id){
    
    switch($survey_id){
        
-       case 1: 
-       
-               /* System Usability Scale (SUS) */
-               
-               $SYSTEM_USABILITY_SCALE_Q = array();                            
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I think that I would like to use this system frequently', 
-                                            'question_number_of_answers' => 0
-                                            );                             
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I found the system unnecessarily complex', 
-                                            'question_number_of_answers' => 0
-                                            );
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I thought the system was easy to use', 
-                                            'question_number_of_answers' => 0
-                                            );                                
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I think that I would need the support of a technical person to be able to use this system', 
-                                            'question_number_of_answers' => 0
-                                            );                             
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I found the various functions in this system were well integrated', 
-                                            'question_number_of_answers' => 0
-                                            );
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I thought there was too much inconsistency in this system', 
-                                            'question_number_of_answers' => 0
-                                            );
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I would imagine that most people would learn to use this system very quickly', 
-                                            'question_number_of_answers' => 0
-                                            );                             
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I found the system very cumbersome to use', 
-                                            'question_number_of_answers' => 0
-                                            );
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I felt very confident using the system', 
-                                            'question_number_of_answers' => 0
-                                            );                             
-               $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
-                                            'question'=> 'I needed to learn a lot of things before I could get going with this system', 
-                                            'question_number_of_answers' => 0
-                                            );
-                                            
-               $SYSTEM_USABILITY_SCALE = array('survey_id' => 1,
-                                               'survey_name' => 'System Usability Scale', 
-                                               'content' => $SYSTEM_USABILITY_SCALE_Q);
-                                               
-               $RESULT = $SYSTEM_USABILITY_SCALE;
+       case 1: $RESULT = getStandardSurveysArray()[0];
                break;
    
-        case 2:
-   
-               /* Standard 1 */
-               
-               $STANDARD_SURVEY_1_Q = array();
-               $STANDARD_SURVEY_1_Q[] = array('question_type' => 1, 
-                                            'question'=> 'Standard1- question1', 
-                                            'question_number_of_answers' => 0
-                                            );
-                                            
-               $STANDARD_SURVEY_1_Q[] = array('question_type' => 2, 
-                                            'question'=> 'Standard1- question2', 
-                                            'question_number_of_answers' => 0
-                                            );
-               $STANDARD_SURVEY_1_Q[] = array('question_type' => 3, 
-                                            'question'=> 'Standard1- question3', 
-                                            'question_number_of_answers' => 0
-                                            );
-               
-               $STANDARD_SURVEY_1 = array('survey_id' => 2,
-                                          'survey_name' => 'Standard 1 survey', 
-                                          'content' => $STANDARD_SURVEY_1_Q);
-                                          
-               $RESULT = $STANDARD_SURVEY_1;
+       case 2: $RESULT = getStandardSurveysArray()[1];
                break;
    
-        case 3:
-        
-               /* Standard 2 */
-               
-               $STANDARD_SURVEY_2_Q = array();                           
-               $STANDARD_SURVEY_2_Q[] = array('question_type' => 4, 
-                                            'question'=> 'Standard2- question1', 
-                                            'question_number_of_answers' => 2
-                                            );
-                                            
-               $STANDARD_SURVEY_2_Q[] = array('question_type' => 2, 
-                                            'question'=> 'Standard2- question2', 
-                                            'question_number_of_answers' => 0
-                                            );
-               $STANDARD_SURVEY_2_Q[] = array('question_type' => 5, 
-                                            'question'=> 'Standard2- question3', 
-                                            'question_number_of_answers' => 4
-                                            );
-                                            
-               $STANDARD_SURVEY_2 = array('survey_id' => 3,
-                                          'survey_name' => 'Standard 2 survey',
-                                          'content' => $STANDARD_SURVEY_2_Q); 
-                                          
-               $RESULT = $STANDARD_SURVEY_2;
+       case 3: $RESULT = getStandardSurveysArray()[2];
                break;
                
         default: $RESULT = array();
