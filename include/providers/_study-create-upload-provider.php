@@ -3,10 +3,6 @@ include_once("./config.php");
 include_once("./include/functions/logger.php");
 include_once("./include/functions/dbconnect.php");
 
-$SURVEY_JSON = stripslashes(trim($_POST['survey_json']));
-// decode json to arrays instead of objects
-$SURVEY_OBJ = json_decode($SURVEY_JSON, true);
-
 /**
 *  SETTING FILE FOR UPLOAD
 */
@@ -121,8 +117,9 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     $maxdevice = $_POST['max_devices_number'];
     $inviteinstall = (isset($_POST['setup_types']) ? 1 : 0);
     
-    $SURVEY_JSON = trim($_POST['survey_json']);
-    $SURVEY_OBJ = json_decode($SURVEY_JSON);
+    $SURVEY_JSON = stripslashes(trim($_POST['survey_json']));
+    // decode json to arrays instead of objects
+    $SURVEY_OBJ = json_decode($SURVEY_JSON, true);
     
     if($SURVEY_OBJ == NULL){
         // bad format
@@ -142,9 +139,9 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
         $rows =  HardwareManager::getCandidatesForAndroid($db, $CONFIG['DB_TABLE']['HARDWARE'], $androidversion, $logger);    
     }
     // check the sensors
-    if(!empty($rows))
-    {
-        foreach($rows as $hardware){
+    if(!empty($rows)){
+        // TODO: what we do with sensors/filters?
+       /* foreach($rows as $hardware){
             $hwFilter_array = json_decode($hardware['sensors']);
             $apkSensors_array = json_decode($SENSOR_LIST_STRING);
             if(isFilterMatch($hwFilter_array, $apkSensors_array))
@@ -153,6 +150,7 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
             }
         }
         shuffle($candidates);
+        */
     }
 
     /*

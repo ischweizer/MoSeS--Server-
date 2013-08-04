@@ -220,8 +220,6 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                   '<input type="text" class="survey_question" placeholder="Your question here">'+
                   '<button class="btn btn-link btnRemoveQuestion">Remove question</button>'+
                   '<br>';
-    
-    var questionType = 0;
       
     switch(parseInt($(this).parent().find('.survey_elements').val())){
         // YES/NO Question
@@ -293,7 +291,6 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 
                 // finally append to dom
                 $(this).parent().parent().append(content);
-                questionType = 4;
                 break;
             
         // Single choice
