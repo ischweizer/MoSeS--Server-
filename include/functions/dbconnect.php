@@ -8,10 +8,8 @@ $db = "";
 try {
 $db = new PDO("mysql:host=".$CONFIG['DB']['HOST'].";dbname=". $CONFIG['DB']['DBNAME'], $user, $pass);
 
-
 } catch (PDOException $e) {
-    print "Error!: " . $e->getMessage() . "<br/>";
-    die();
+    die("Error!: " . $e->getMessage() . "<br/>");
 }
     
 ?>

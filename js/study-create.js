@@ -37,8 +37,8 @@ $('[name="btnCreateOK"]').click(function(e){
     $('.survey').each(function(survey_i, elem){
         
         var survey = $(this);
-        var survey_id = survey.find('.survey_id').val();
-        var questions = {};
+        var survey_id = parseInt(survey.find('.survey_id').val());
+        var questions = [];
 
         // iterate through all questions of one survey
         survey.find('.survey_question').each(function(question_i, elem2){
@@ -46,14 +46,18 @@ $('[name="btnCreateOK"]').click(function(e){
             var question = $(this);
             var answers = [];
             
+            // find question type
+            var question_type = question.parent().find('.survey_question_type').val();
+            
             // find all answers
             question.parent().find('.survey_answer').each(function(answer_i, elem3){
                 var answer = $(this);
                 answers.push(answer.val());
             });
             
-            questions = {'question':question.val(),
-                         'answers':answers};
+            questions.push({'question_type':question_type,
+                            'question':question.val(),
+                            'answers':answers});
             
         }); 
 

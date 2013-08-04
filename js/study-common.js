@@ -220,6 +220,8 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                   '<input type="text" class="survey_question" placeholder="Your question here">'+
                   '<button class="btn btn-link btnRemoveQuestion">Remove question</button>'+
                   '<br>';
+    
+    var questionType = 0;
       
     switch(parseInt($(this).parent().find('.survey_elements').val())){
         // YES/NO Question
@@ -231,6 +233,10 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                               '</ul>';
                  
                 content += answers; 
+                
+                // append question type
+                content += '<input type="hidden" class="survey_question_type" value="1">';
+                
                 // finally append to dom
                 $(this).parent().parent().append(content);
                 break;
@@ -242,6 +248,9 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                               '</ul>';
                  
                 content += answers;
+                
+                // append question type
+                content += '<input type="hidden" class="survey_question_type" value="2">';
                 
                 // finally append to dom
                 $(this).parent().parent().append(content);
@@ -258,6 +267,9 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                               '</ul>';
                  
                 content += answers;
+                
+                // append question type
+                content += '<input type="hidden" class="survey_question_type" value="3">';
                 
                 // finally append to dom
                 $(this).parent().parent().append(content);
@@ -276,11 +288,15 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                  
                 content += answers;
                 
+                // append question type
+                content += '<input type="hidden" class="survey_question_type" value="4">';
+                
                 // finally append to dom
                 $(this).parent().parent().append(content);
+                questionType = 4;
                 break;
             
-                
+        // Single choice
         case 5: // compose all answers
                 var answers = '<ul>';
                     for(var i=1; i <= quantity; i++){
@@ -292,6 +308,9 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
                 answers += '</ul>';
                  
                 content += answers;
+                
+                // append question type
+                content += '<input type="hidden" class="survey_question_type" value="5">'; 
                 
                 // finally append to dom
                 $(this).parent().parent().append(content);

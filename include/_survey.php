@@ -4,10 +4,6 @@
     <label>Please, select your survey -></label>
     </div>
     <div class="span4 offset2"><select id="survey_select"><?php 
-     
-     echo "BEFORE"; 
-     print_r($SURVEYS); 
-     echo "AFTER";
         
      foreach($SURVEYS as $SURVEY){   
     

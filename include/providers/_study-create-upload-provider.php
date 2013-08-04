@@ -7,22 +7,6 @@ $SURVEY_JSON = stripslashes(trim($_POST['survey_json']));
 // decode json to arrays instead of objects
 $SURVEY_OBJ = json_decode($SURVEY_JSON, true);
 
-print_r($SURVEY_OBJ);
-exit;
-foreach($SURVEY_OBJ as $value){
-    
-    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['QUEST'] ." 
-                            (name)
-                            VALUES 
-                            (". $survey_name .")";
-                                
-    //$logger->logInfo("Upload/insert APK sql: ". $sql);
-    
-    $db->exec($sql);
-}
-
-exit;
-
 /**
 *  SETTING FILE FOR UPLOAD
 */
@@ -254,18 +238,94 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     
     $db->exec($sql);
 
-    /* insert survey for user study */
-    
-    
-    
-    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['QUEST'] ." 
-                            (name)
-                            VALUES 
-                            (". $survey_name .")";
+    /* if there are some selected surveys */
+    if(!empty($SURVEY_OBJ)){
+        
+        $apk_id = $db->lastInsertId();
+        
+        // for each supplied surveys store in db
+        foreach($SURVEY_OBJ as $survey){
+                
+            /* insert survey for user study */
+            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
+                                    (userid, apkid)
+                                    VALUES 
+                                    (". $_SESSION["USER_ID"] .", ". $apk_id .")";
+            
+            $db->exec($sql);       
+            
+            $survey_id = $db->lastInsertId();
+        
+            // determine form's title
+            $survey_title = '';
+            
+            switch(intval($survey['survey_id'])){
+                case 9001:  $survey_title = 'Custom survey';
+                            break;
+                case 1:  $survey_title = 'System Usability Scale';
+                         break;
+                case 2:  $survey_title = 'Standard 1';
+                         break;
+                case 3:  $survey_title = 'Standard 2';
+                         break;
+                            
+                default: die('6');  // wrong JSON                
+            }
+            
+            // store form title in db
+            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_FORM'] ." 
+                                    (surveyid, title)
+                                    VALUES 
+                                    (". $survey_id .", '". $survey_title ."')";
+            
+            $db->exec($sql);
+            
+            $form_id = $db->lastInsertId();
+            
+            switch(intval($survey['survey_id'])){
+                
+                case 9001:  // loop through all questions in the form
+                            foreach($survey['survey_questions'] as $question){
+
+                                $question_type = intval($question['question_type']);
+                                $question_text = $question['question'];
                                 
-    //$logger->logInfo("Upload/insert APK sql: ". $sql);
-    
-    $db->exec($sql);
+                                // store question in db
+                                $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                        (formid, type, text)
+                                                        VALUES 
+                                                        (". $form_id .", ". $question_type .", '". $question_text ."')";
+                                
+                                $db->exec($sql);
+                                
+                                $question_id = $db->lastInsertId();
+                                
+                                // store answers in db
+                                $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                                        (questionid, text) 
+                                                        VALUES ";
+                                // loop through all answers in the question and append values                                                        
+                                foreach($question['answers'] as $answer){ 
+                                  $sql .=" (". $question_id .", '". $answer ."') ,";
+                                }
+                                // remove last ',' from sql string
+                                $sql = substr($sql, 0, -1);
+                                
+                                $db->exec($sql);
+                            }
+                
+                            break;
+                case 1:  // TODO: insert default values from config
+                         break;
+                case 2:  // TODO: insert default values from config
+                         break;
+                case 3:  // TODO: insert default values from config
+                         break;
+                            
+                default: die('6');  // wrong JSON                
+            }            
+        } 
+    }
     
     /* **************************** */
     
