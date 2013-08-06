@@ -36,7 +36,7 @@ foreach($members as $mid)
     if($mid != $_SESSION['USER_ID'])
         $newMembers[] = $mid;
         
-$sql_update4;
+$sql_update4 = '';
 
 if(count($newMembers) == 0)
     $sql_update4 = "DELETE 

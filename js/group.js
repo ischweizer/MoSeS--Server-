@@ -1,8 +1,8 @@
-$('#btnLeaveGroup').click(function(){
+$('.btnLeaveGroup').click(function(){
     $.ajax({
         type: "POST",
         url: 'content_provider.php',
-        data: {'leaveGroup': $('#btnLeaveGroup').val()},
+        data: {'leaveGroup': $('.btnLeaveGroup').val()},
         success: function(result){
             if(result){
                 $('.hero-unit').html('<h3 class="text-center">You left the group '+ result +'!</h3>');

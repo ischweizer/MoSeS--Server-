@@ -136,7 +136,7 @@ include_once("./include/_menu.php");
                  
          ?>
         <h2>You're member of group: <?php echo $groupname; ?></h2>
-        <button class="btn btn-danger" id="btnLeaveGroup" value="<?php echo $_SESSION['USER_ID']; ?>">Leave group</button>
+        <button class="btn btn-danger btnLeaveGroup" value="<?php echo $_SESSION['USER_ID']; ?>">Leave group</button>
         <br>
         <h4>This group has <?php 
                 echo $group_members_count > 1 ? $group_members_count.' members' : '1 member (you)' 
