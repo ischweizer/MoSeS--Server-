@@ -98,7 +98,7 @@ $('[name="btnCreateOK"]').click(function(e){
                             break;
                 case '1':   $('.hero-unit').html('<h3 class="text-center">You created a study <strong>'+ $('#study_name').val() +'</strong></h3>');
                             break;
-                case '2':   $('.hero-unit').html('<h3 class="text-center">That file extension was not accepted by server! Please, user <strong>*.apk</strong></h3>');
+                case '2':   $('.hero-unit').html('<h3 class="text-center">That file extension was not accepted by server! Please, use <strong>*.apk</strong></h3>');
                             break;
                 case '3':   $('.hero-unit').html('<h3 class="text-center">The filesize exceeds permitted size!</h3>');
                             break;

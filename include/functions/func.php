@@ -263,13 +263,16 @@ function getStandardSurveyNameById($survey_id){
     
     switch($survey_id){
        
-       case 1: $RESULT = getStandardSurveysArray()[0]['survey_name'];
+       case 1: $survey_array = getStandardSurveysArray();
+               $RESULT = $survey_array[0]['survey_name'];
                break;
    
-       case 2: $RESULT = getStandardSurveysArray()[1]['survey_name'];
+       case 2: $survey_array = getStandardSurveysArray();
+               $RESULT = $survey_array[1]['survey_name'];
                break;
    
-       case 3: $RESULT = getStandardSurveysArray()[2]['survey_name'];
+       case 3: $survey_array = getStandardSurveysArray();
+               $RESULT = $survey_array[2]['survey_name'];
                break;
                
         default: $RESULT = array();
@@ -290,13 +293,16 @@ function getStandardSurveyById($survey_id){
    
    switch($survey_id){
        
-       case 1: $RESULT = getStandardSurveysArray()[0];
+       case 1: $survey_array = getStandardSurveysArray();
+               $RESULT = $survey_array[0];
                break;
    
-       case 2: $RESULT = getStandardSurveysArray()[1];
+       case 2: $survey_array = getStandardSurveysArray();
+               $RESULT = $survey_array[1];
                break;
    
-       case 3: $RESULT = getStandardSurveysArray()[2];
+       case 3: $survey_array = getStandardSurveysArray();
+               $RESULT = $survey_array[2];
                break;
                
         default: $RESULT = array();

@@ -319,11 +319,74 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                             }
                 
                             break;
-                case 1:  // TODO: insert default values from config
+                case 1:  
+                         $survey_array = getStandardSurveysArray();
+                         // SUS
+                         $survey = $survey_array[0];
+                         $survey_questions = $survey['content'];
+                         
+                         foreach($survey_questions as $question){
+                             
+                            $question_type = $question['question_type'];
+                            $question_text = $question['question'];
+                             
+                            // store question in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                    (formid, type, text)
+                                                    VALUES 
+                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
+                            
+                            $db->exec($sql);
+                            
+                            // no store of answers 
+                         } 
+                
                          break;
-                case 2:  // TODO: insert default values from config
+                case 2:  
+                         $survey_array = getStandardSurveysArray();
+                         // Standard 1
+                         $survey = $survey_array[1];
+                         $survey_questions = $survey['content'];
+                         
+                         foreach($survey_questions as $question){
+                             
+                            $question_type = $question['question_type'];
+                            $question_text = $question['question'];
+                             
+                            // store question in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                    (formid, type, text)
+                                                    VALUES 
+                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
+                            
+                            $db->exec($sql);
+                            
+                            // no store of answers 
+                         }              
+                
                          break;
-                case 3:  // TODO: insert default values from config
+                case 3:  
+                         $survey_array = getStandardSurveysArray();
+                         // Standard 2
+                         $survey = $survey_array[2];
+                         $survey_questions = $survey['content'];
+                         
+                         foreach($survey_questions as $question){
+                             
+                            $question_type = $question['question_type'];
+                            $question_text = $question['question'];
+                             
+                            // store question in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                    (formid, type, text)
+                                                    VALUES 
+                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
+                            
+                            $db->exec($sql);
+                            
+                            // no store of answers 
+                         }
+                
                          break;
                             
                 default: die('6');  // wrong JSON                
