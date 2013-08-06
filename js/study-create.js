@@ -20,7 +20,7 @@ $('[name="study_period"]').click(function(){
     }
 });
 
-$('[name="btnCreateOK"]').click(function(e){
+$('.btnCreateOK').click(function(e){
    
    e.preventDefault();
     

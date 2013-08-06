@@ -1,7 +1,11 @@
 <?php
+
 include_once("./config.php");
 //If the login exists
-if(isset($_POST["email_login"]) && !empty($_POST["email_login"]) && preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $_POST["email_login"])){
+if(isset($_POST["email_login"]) && 
+   !empty($_POST["email_login"]) && 
+   preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $_POST["email_login"])){
+   
     //And the password exists
     if(isset($_POST["password_login"]) && !empty($_POST["password_login"])){
         if(strlen($_POST["password_login"]) < 6){

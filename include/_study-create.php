@@ -119,7 +119,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="control-group">
         <label class="control-label"></label>
         <div class="controls">
-            <button class="btn btn-success" name="btnCreateOK" title="Upload changes">Create study</button>
+            <button class="btn btn-success btnCreateOK" title="Upload changes">Create study</button>
         </div>
     </div>
 </fieldset>
