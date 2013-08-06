@@ -27,7 +27,7 @@ $(document).ready(function() {
      */
     $('#boxclose').click(function(){
     	$("#dim_back").fadeOut();
-    	});
+    });
     
     //Adjust height of overlay to fill screen when page loads
     $("#dim_back").css("height", $(document).height());
@@ -55,10 +55,17 @@ $(document).ready(function() {
 
     //When the message box is closed, fade out
     $("#lightbox :submit").click(function(e){
+        
+        /*
+         * Prevents the page from refreshing when button is clicked or enter is pressed
+         */
+        e.preventDefault();
+        
     	var clickedButton = $(this);
-//        clickedButton.removeClass('btn-warning');
+        
+        clickedButton.removeClass('btn-success');
         clickedButton.attr('disabled', true);
-//        clickedButton.text('Working...');
+        clickedButton.text('Working...');
         
         /* AJAX Login request*/
         $.ajax({
@@ -68,9 +75,9 @@ $(document).ready(function() {
         	success: function(result){
         		if(result != '0'){
         			// reenable the button
-//            		clickedButton.addClass('btn-warning');
-            		clickedButton.attr('disabled', false);
-//            		clickedButton.text("Sign in");
+                    clickedButton.addClass('btn-success');
+                    clickedButton.attr('disabled', false);
+                    clickedButton.text('Sign in');
         		}
         		switch(result)
 	        		{
@@ -116,11 +123,6 @@ $(document).ready(function() {
 	        		}        		
         	}
         });
-        
-        /*
-         * Prevents the page from refreshing when button is clicked or enter is pressed
-         */
-        e.preventDefault();
     });
     
 
