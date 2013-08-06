@@ -177,7 +177,7 @@ $(document).ready(function() {
         $clickedFromSubmenu = true; // the flash should not be performed
     }); 
     /************** Navigation Bar Logic END END END END*********************************************************/
-
+    
 });
 
 //Adjust height of dim overlay to fill screen when browser gets resized

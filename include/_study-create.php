@@ -59,7 +59,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="control-group">
         <label class="control-label">Minimum number of devices to start after: </label>
         <div class="controls">
-            <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" />
+            <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" min="1" />
         </div>
     </div>
     <div class="control-group">

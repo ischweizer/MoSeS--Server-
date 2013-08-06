@@ -17,7 +17,7 @@ $("#registerHere").validate({
         password_repeat:{
             required:true,
             equalTo: "#password"
-        },
+        }
     },
     
     messages:{
@@ -34,7 +34,7 @@ $("#registerHere").validate({
         password_repeat:{
             required:"Confirm password",
             equalTo:"Password and Confirm Password must match"
-        },
+        }
     },
     errorClass: "help-inline",
     errorElement: "span",
