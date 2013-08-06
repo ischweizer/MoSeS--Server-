@@ -13,4 +13,4 @@
       <button class="btn btn-danger btnConfirm">Confirm</button>
     </div>
 </div>
-<!-- //////// custom confirm dialog -->
+<!-- ************************* -->

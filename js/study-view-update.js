@@ -9,6 +9,7 @@ $('[name="btnDownloadApp"]').click(function(e){
 /* Confirm dialog */
 $('.confirm-delete').click(function(e) {
     e.preventDefault();
+    $('.btnConfirm').val($(this).val());
     $('#modal-from-dom').modal('show'); 
 });
 
@@ -16,7 +17,7 @@ $('.confirm-delete').click(function(e) {
 $('.btnConfirm').click(function(e){
 
     // removing APK
-    $.post("content_provider.php", { 'study_remove': $('.confirm-delete').val() })
+    $.post("content_provider.php", { 'study_remove': $('.btnConfirm').val() })
         .done(function() {
           location.reload();
     });
