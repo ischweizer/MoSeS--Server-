@@ -16,9 +16,32 @@ include_once("./include/_menu.php");
 <!-- Main Block -->
     <div class="hero-unit">
         <h2>Developers</h2>
-        <p>Project MoSeS is developed at <a href="http://www.tk.informatik.tu-darmstadt.de/" title="Telecooperation Group" target="_blank">Telecooperation Group</a> by <a href="https://github.com/maksuti" target="_blank">Zijad Maksuti</a>, <a href="https://github.com/wlsch" target="_blank">Wladimir Schmidt</a>, 
-                            <a href="https://github.com/simlei" target="_blank">Simon Leisching</a>, <a href="https://github.com/jahofmann" target="_blank">Jaco Hofmann</a>, <a href="https://github.com/scalaina" target="_blank">Sandra Christina Amend</a>, <a href="https://github.com/alyahya" target="_blank">Ibrahim Alyahya</a>, 
-                            <a href="https://github.com/fahouma" target="_blank">Fehmi Belhadj</a> and <a href="https://github.com/FSchnell" target="_blank">Florian Schnell</a> under supervision of <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Immanuel Schweizer</a>.</p>
+        <p>Mobile Sensing System (MoSeS) was founded and originally developed in Telecooperation Lab of TU Darmstadt in 2011 by:</p>
+        <p>
+            <ul style="list-style-type: none;">
+                <li><a href="https://github.com/wlsch" target="_blank">Wladimir Schmidt</a></li> 
+                <li><a href="https://github.com/maksuti" target="_blank">Zijad Maksuti</a></li> 
+                <li><a href="https://github.com/jahofmann" target="_blank">Jaco Hofmann</a></li>
+                <li><a href="https://github.com/simlei" target="_blank">Simon Leisching</a></li>
+            </ul>
+        </p>
+
+        <p>The further development of the MoSeS platform was accomplished in 2012 by:</p>
+
+        <p>
+            <ul style="list-style-type: none;">
+                <li><a href="https://github.com/scalaina" target="_blank">Sandra Christina Amend</a></li>
+                <li><a href="https://github.com/alyahya" target="_blank">Ibrahim Alyahya</a></li>
+                <li><a href="https://github.com/fahouma" target="_blank">Fehmi Belhadj</a></li>
+                <li><a href="https://github.com/FSchnell" target="_blank">Florian Schnell</a></li>
+            </ul>
+        </p>
+
+        <p>In the summer of 2013 Wladimir Schmidt and Zijad Maksuti started working on improving of MoSeS platform.</p>
+
+        <p>The MoSeS project started and being developed under supervision of Smart Urban Networks's area head <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Dr. Immanuel Schweizer</a>.</p>
+
+        <p>More info about Telecooperation Lab on the website: <a href="http://www.tk.informatik.tu-darmstadt.de/" target="_blank">http://www.tk.informatik.tu-darmstadt.de</a></p>
     </div>
     <!-- / Main Block -->
     
