@@ -116,10 +116,10 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             <progress name="progress" value="0" style="display: none;"></progress>
         </div>
     </div>
-    <div class="control-group">
+    <div class="control-group my_control-group_create">
         <label class="control-label"></label>
         <div class="controls">
-            <button class="btn btn-success btnCreateOK" title="Upload changes">Create study</button>
+            <button class="btn btn-success btnCreateOK">Create study</button>
         </div>
     </div>
 </fieldset>

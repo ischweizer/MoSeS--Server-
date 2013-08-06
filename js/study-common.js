@@ -11,6 +11,12 @@ $('[name="end_date"]').datepicker({
 $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();
     
+    // move button create study to bottom of page
+    $('.btnCreateOK').css('margin-left','120pt');   // TODO: fix that to proper value
+    var createButton = $('.my_control-group_create').find('.controls').html();
+    $('.my_control-group_create').remove();
+    $('[name="survey_controls"]').append(createButton);
+    
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
     
