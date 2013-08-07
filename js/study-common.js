@@ -148,7 +148,7 @@ $('[name="btnAddSurveyOK"]').click(function(e){
                       '    </div>'+
                       '  </div>'+
                       '</div>'+
-                      '<input type="hidden" class="survey_questions_counter" value="1">'+
+                      '<input type="hidden" class="survey_questions_counter" value="0">'+
                       '<input type="hidden" class="survey_id" value="9001">'+
                       '</div>'+
                       '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
@@ -222,7 +222,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     p.find(':last').html($(this).parent().parent().html());
     
     // Question field (common content for all questions)
-    var content = '<span class="survey_question_number">'+parentForQCounter.find('.survey_questions_counter').val()+'. </span> '+
+    var content = '<span class="survey_question_number">'+(parseInt(parentForQCounter.find('.survey_questions_counter').val())+1)+'. </span> '+
                   '<input type="text" class="survey_question" placeholder="Your question here">'+
                   '<button class="btn btn-link btnRemoveQuestion">Remove question</button>'+
                   '<br>';
