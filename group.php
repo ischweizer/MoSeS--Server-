@@ -213,7 +213,7 @@ include_once("./include/_menu.php");
                   <?php
                         echo 'Android version: '. getAPILevel($DEVICE['androidversion']) .' <br>';
                         echo 'Model name: '.$DEVICE['modelname'].' <br>';
-                        echo 'C2DM is '.(!empty($DEVICE['c2dm']) ? 'active' : 'not active');
+                        echo 'GCM is '.(!empty($DEVICE['c2dm']) ? 'ON' : 'OFF');
                     ?>  
                   </div>
                 </div>
