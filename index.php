@@ -54,3 +54,11 @@ include_once("./include/_login.php");
 //Import of the footer
 include_once("./include/_footer.php");  
 ?>
+<script type="text/javascript">
+    // iterate through all menus and remove selection
+    $('.dropdown').each(function(){
+        $(this).removeClass('active');   
+    });
+    // add selection for this page
+    $('.nav-menu1').addClass('active');
+</script>

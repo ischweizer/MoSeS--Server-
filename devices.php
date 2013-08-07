@@ -104,4 +104,75 @@ include_once("./include/_login.php");
 //Import of the footer
 include_once("./include/_footer.php");
 ?>
-<script src="js/devices.js"></script>
+<script type="text/javascript">
+    /**
+    * API Versions
+    */
+
+    var API_VERSION = {1 : 'Android 1.0 (API: 1)',
+                       2 : 'Android 1.1 (API: 2)',
+                       3 : '"Cupcake" 1.5 (API: 3)',
+                       4 : '"Donut" 1.6 (API: 4)',
+                       5 : '"Eclair" 2.0 (API: 5)',
+                       6 : '"Eclair" 2.0.1 (API: 6)',
+                       7 : '"Eclair" 2.1 (API: 7)',
+                       8 : '"Froyo" 2.2.x (API: 8)',
+                       9 : '"Gingerbread" 2.3.0 - 2.3.2 (API: 9)',
+                       10 : '"Gingerbread" 2.3.3 - 2.3.7 (API: 10)',
+                       11 : '"Honeycomb" 3.0 (API: 11)',
+                       12 : '"Honeycomb" 3.1 (API: 12)',
+                       13 : '"Honeycomb" 3.2.x (API: 13)',
+                       14 : '"Ice Cream Sandwich" 4.0.0 - 4.0.2 (API: 14)',
+                       15 : '"Ice Cream Sandwich" 4.0.3 - 4.0.4 (API: 15)',
+                       16 : '"Jelly Bean" 4.1.x (API: 16)',
+                       17 : '"Jelly Bean" 4.2.x (API: 17)',
+                       18 : '"Jelly Bean" 4.3 (API: 18)'};
+
+    /**
+    * Pagination setup and query
+    */
+    var paging = {
+        'pages': <?php echo ((int)(count($USER_DEVICES) / 5)) + 1; ?>,
+        'pageMax': 5,
+        'curPage': 1
+    };
+    $('#page-selection').bootpag({
+        total: paging['pages'],
+        page: 1,
+        maxVisible: paging['pageMax']
+        }).on('page', function(event, num){    
+            
+           // setting current selected page
+           paging['curPage'] = num;
+           // request json data
+           $.ajax({
+            dataType: "json",
+            url: 'content_provider.php',
+            data: paging,
+            success: function(result){
+                // processing returned data
+                var deviceNumber = (((paging['curPage']-1)*paging['pageMax'])+1);
+                var replaceRows = '';
+                for(var i=0; i<result.length; ++i){
+                    replaceRows += '<tr>';
+                    replaceRows += '<td>' + (deviceNumber+i) + '</td>';
+                    replaceRows += '<td>' + result[i].deviceid + '</td>';
+                    replaceRows += '<td>' + result[i].modelname + '</td>';
+                    replaceRows += '<td>' + API_VERSION[result[i].androidversion] + '</td>';
+                    replaceRows += '<td><a href="devices.php?remove='+ result[i].hwid +'" title="Remove device" class="btn btn-danger">Remove</a></td>';
+                    replaceRows += '</tr>';
+                }
+                
+                $('#content').html(replaceRows);
+            }
+           }); 
+    });
+
+    // iterate through all menus and remove selection
+    $('.dropdown').each(function(){
+        $(this).removeClass('active');   
+    });
+    // add selection for this page
+    $('.nav-menu2').addClass('active');
+    
+</script>

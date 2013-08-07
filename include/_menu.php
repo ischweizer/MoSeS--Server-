@@ -24,7 +24,7 @@
     <div class="navbar">
       <div class="navbar-inner">
           <ul class="nav">
-            <li class="dropdown">
+            <li class="dropdown nav-menu1">
                 <a href="<?php echo dirname($_SERVER['PHP_SELF'])."/"; ?>">Home</a>
             </li><?php
             
@@ -33,10 +33,10 @@
                     // only confirmed users can see this
                     if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] > 0){
             ?>
-            <li class="dropdown">
+            <li class="dropdown nav-menu2">
                 <a href="devices.php">Devices</a>
             </li>
-             <li class="dropdown">
+             <li class="dropdown nav-menu3">
                 <a href="group.php">Groups <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
@@ -51,7 +51,7 @@
                  // only scientist and admins can see this 
                  if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] > 1){    
                  ?>
-             <li class="dropdown">
+             <li class="dropdown nav-menu4">
                 <a href="study.php">Studies <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
@@ -66,7 +66,7 @@
                      if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] == 1){
                          // request a scientist account link
                          ?>
-                         <li class="dropdown">
+                         <li class="dropdown nav-menu5">
                             <a href="apply.php">Apply as scientist</a>
                         </li>
                     <?php
@@ -74,7 +74,7 @@
                  }
             }
                  ?>
-             <li class="dropdown">
+             <li class="dropdown nav-menu6">
                 <a href="about.php">About <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
@@ -92,7 +92,7 @@
                  if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
                  ?>
                      
-                 <li class="dropdown">
+                 <li class="dropdown nav-menu7">
                     <a href="admin.php">Admin</a>
                  </li>
                  <?php

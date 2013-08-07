@@ -51,3 +51,10 @@ $('.btnRejectAccess').click(function(e){
         }
     });
 });
+
+// iterate through all menus and remove selection
+$('.dropdown').each(function(){
+    $(this).removeClass('active');   
+});
+// add selection for this page
+$('.nav-menu7').addClass('active');

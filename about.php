@@ -30,3 +30,11 @@ include_once("./include/_menu.php");
   //import of the footer to affich the year of project
   include_once("./include/_footer.php");  
 ?>
+<script type="text/javascript">
+    // iterate through all menus and remove selection
+    $('.dropdown').each(function(){
+        $(this).removeClass('active');   
+    });
+    // add selection for this page
+    $('.nav-menu6').addClass('active');
+</script>

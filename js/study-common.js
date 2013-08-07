@@ -1,3 +1,10 @@
+// iterate through all menus and remove selection
+$('.dropdown').each(function(){
+    $(this).removeClass('active');   
+});
+// add selection for this page
+$('.nav-menu4').addClass('active');
+
 /* Datepicker format */
 $('[name="start_date"]').datepicker({
   format: 'yyyy-mm-dd'

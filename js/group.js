@@ -66,3 +66,10 @@ function handleGroupServerAnswer(result){
                     break;
     }
 }
+
+// iterate through all menus and remove selection
+$('.dropdown').each(function(){
+    $(this).removeClass('active');   
+});
+// add selection for this page
+$('.nav-menu3').addClass('active');
