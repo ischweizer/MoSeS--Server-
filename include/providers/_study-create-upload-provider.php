@@ -121,7 +121,7 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     // decode json to arrays instead of objects
     $SURVEY_OBJ = json_decode($SURVEY_JSON, true);
     
-    if($SURVEY_OBJ == NULL){
+    if($SURVEY_OBJ === NULL){
         // bad format
         die('5');
     }

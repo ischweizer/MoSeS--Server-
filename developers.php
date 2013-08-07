@@ -37,7 +37,7 @@ include_once("./include/_menu.php");
             </ul>
         </p>
 
-        <p>In the summer of 2013 Wladimir Schmidt and Zijad Maksuti started working on improving of MoSeS platform.</p>
+        <p>In the summer of 2013 <a href="https://github.com/wlsch" target="_blank">Wladimir Schmidt</a> and <a href="https://github.com/maksuti" target="_blank">Zijad Maksuti</a> started working on improving of MoSeS platform.</p>
 
         <p>The MoSeS project started and being developed under supervision of Smart Urban Networks's area head <a href="http://www.tk.informatik.tu-darmstadt.de/?id=1699" title="Immanuel Schweizer" target="_blank">Dr. Immanuel Schweizer</a>.</p>
 
