@@ -16,7 +16,11 @@
 // check of user an admin, adjust the menu (css via js)!
 if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
 ?>
-    <script type="text/javascript">$('.navbar .nav > li').css('width','16%')</script>
+    <script type="text/javascript">
+        $('.navbar').hide();
+        $('.navbar .nav > li').css('width','16%');
+        $('.navbar').show();
+    </script>
 <?php
 }                                          
 ?>
