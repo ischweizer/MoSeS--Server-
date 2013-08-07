@@ -339,12 +339,6 @@ $('#content_appears_here').on('click', '.btnRemoveQuestion', function(e){
     $(this).parent().remove();
     
     // iterate throug all numbers and correct them
-    /*var qCounter = parseInt(parentForQCounter.find('.survey_questions_counter').val());
-    
-    for(var i=1; i <= qCounter; i++){
-        
-    }*/
-    
     var newCounter = 1;
     parentForQCounter.find('.survey_question_number').each(function(){
         $(this).text(newCounter+'. ');
