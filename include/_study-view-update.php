@@ -19,7 +19,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="accordion-heading">
       <a class="accordion-toggle" name="study_title_link" data-toggle="collapse" data-parent="#accordionFather" href="#collapseStudies<?php echo $i; ?>">
         <?php
-           echo $APK['apktitle']; 
+           echo 'Study name: "'. $APK['apktitle'] .'"'; 
         ?>
       </a>
     </div>
