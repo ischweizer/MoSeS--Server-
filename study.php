@@ -15,22 +15,22 @@ $CREATE = 0;
 
 if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
 
+   /* taking group name from user */
+   $sql = "SELECT rgroup 
+           FROM ". $CONFIG['DB_TABLE']['USER'] ." 
+           WHERE userid = ". $_SESSION["USER_ID"];
+            
+   $result = $db->query($sql);
+   $row = $result->fetch(PDO::FETCH_ASSOC);
+   
+   $USER_RGROUP = (!empty($row['rgroup']) ? $row['rgroup'] : ''); 
+    
    if(isset($_GET['m']) && !empty($_GET['m']) && $_GET['m'] === 'new'){
      
       $CREATE = 1; 
    
    }else{ 
          
-       /* taking group name from user */
-       $sql = "SELECT rgroup 
-               FROM ". $CONFIG['DB_TABLE']['USER'] ." 
-               WHERE userid = ". $_SESSION["USER_ID"];
-                
-       $result = $db->query($sql);
-       $row = $result->fetch(PDO::FETCH_ASSOC);
-       
-       $USER_RGROUP = (!empty($row['rgroup']) ? $row['rgroup'] : ''); 
-       
        // select all information from apk table by user id
        $sql = "SELECT * 
                FROM ". $CONFIG['DB_TABLE']['APK'] ." 
