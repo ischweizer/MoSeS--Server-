@@ -48,6 +48,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('.survey_available_text').hide();
     p.find('[name="private_text"]').hide();
     p.find('.surveyShowHide').hide();
+    p.find('.surveyRemove').hide();
     //p.find('[name="quests"]').hide();  
                  
     p.find('[name="android_version_select"]').show();
@@ -155,6 +156,7 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.find('[name="private_text"]').show();
    p.find('.survey_available_text').show();
    p.find('.surveyShowHide').show();
+   p.find('.surveyRemove').show();
    //p.find('[name="quests"]').show();
    p.find('[name="progress"]').show();  
                  

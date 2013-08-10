@@ -117,11 +117,11 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     $maxdevice = $_POST['max_devices_number'];
     $inviteinstall = (isset($_POST['setup_types']) ? 1 : 0);
     
-    $SURVEY_JSON = stripslashes(trim($_POST['survey_json']));
+    $SURVEY_FORMS_JSON = stripslashes(trim($_POST['survey_json']));
     // decode json to arrays instead of objects
-    $SURVEY_OBJ = json_decode($SURVEY_JSON, true);
+    $SURVEY_FORMS_OBJ = json_decode($SURVEY_FORMS_JSON, true);
     
-    if($SURVEY_OBJ === NULL){
+    if($SURVEY_FORMS_OBJ === NULL){
         // bad format
         die('5');
     }
@@ -243,34 +243,34 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     * ****************************************************************/
     
     /* if there are some selected surveys */
-    if(!empty($SURVEY_OBJ)){
+    if(!empty($SURVEY_FORMS_OBJ)){
         
         $apk_id = $db->lastInsertId();
         
-        // for each supplied surveys store in db
-        foreach($SURVEY_OBJ as $survey){
-                
-            /* insert survey for user study */
-            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
-                                    (userid, apkid)
-                                    VALUES 
-                                    (". $_SESSION["USER_ID"] .", ". $apk_id .")";
-            
-            $db->exec($sql);       
-            
-            $survey_id = $db->lastInsertId();
+        /* insert survey for user study */
+        $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
+                                (userid, apkid)
+                                VALUES 
+                                (". $_SESSION["USER_ID"] .", ". $apk_id .")";
+        
+        $db->exec($sql);       
+        
+        $survey_id = $db->lastInsertId();
+        
+        // for each supplied survey's form
+        foreach($SURVEY_FORMS_OBJ as $survey_form){
         
             // determine form's title
-            $survey_title = '';
+            $survey_form_title = '';
             
-            switch(intval($survey['survey_id'])){
-                case 9001:  $survey_title = 'Custom survey';
+            switch(intval($survey_form['survey_form_id'])){
+                case 9001:  $survey_form_title = 'Custom form';
                             break;
-                case 1:  $survey_title = getStandardSurveyNameById(1);
+                case 1:  $survey_form_title = getStandardSurveyNameById(1);
                          break;
-                case 2:  $survey_title = getStandardSurveyNameById(2);
+                case 2:  $survey_form_title = getStandardSurveyNameById(2);
                          break;
-                case 3:  $survey_title = getStandardSurveyNameById(3);
+                case 3:  $survey_form_title = getStandardSurveyNameById(3);
                          break;
                             
                 default: die('6');  // wrong JSON                
@@ -280,16 +280,16 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
             $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_FORM'] ." 
                                     (surveyid, title)
                                     VALUES 
-                                    (". $survey_id .", '". $survey_title ."')";
+                                    (". $survey_id .", '". $survey_form_title ."')";
             
             $db->exec($sql);
             
             $form_id = $db->lastInsertId();
             
-            switch(intval($survey['survey_id'])){
+            switch(intval($survey_form['survey_form_id'])){
                 
                 case 9001:  // loop through all questions in the form
-                            foreach($survey['survey_questions'] as $question){
+                            foreach($survey_form['survey_form_questions'] as $question){
 
                                 $question_type = intval($question['question_type']);
                                 $question_text = $question['question'];
@@ -322,10 +322,10 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                 case 1:  
                          $survey_array = getStandardSurveysArray();
                          // SUS
-                         $survey = $survey_array[0];
-                         $survey_questions = $survey['content'];
+                         $survey_form = $survey_array[0];
+                         $survey_form_questions = $survey_form['content'];
                          
-                         foreach($survey_questions as $question){
+                         foreach($survey_form_questions as $question){
                              
                             $question_type = $question['question_type'];
                             $question_text = $question['question'];
@@ -345,10 +345,10 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                 case 2:  
                          $survey_array = getStandardSurveysArray();
                          // Standard 1
-                         $survey = $survey_array[1];
-                         $survey_questions = $survey['content'];
+                         $survey_form = $survey_array[1];
+                         $survey_form_questions = $survey_form['content'];
                          
-                         foreach($survey_questions as $question){
+                         foreach($survey_form_questions as $question){
                              
                             $question_type = $question['question_type'];
                             $question_text = $question['question'];
@@ -368,10 +368,10 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                 case 3:  
                          $survey_array = getStandardSurveysArray();
                          // Standard 2
-                         $survey = $survey_array[2];
-                         $survey_questions = $survey['content'];
+                         $survey_form = $survey_array[2];
+                         $survey_form_questions = $survey_form['content'];
                          
-                         foreach($survey_questions as $question){
+                         foreach($survey_form_questions as $question){
                              
                             $question_type = $question['question_type'];
                             $question_text = $question['question'];

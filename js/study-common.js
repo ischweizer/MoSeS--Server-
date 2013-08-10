@@ -52,7 +52,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                     
                     var data = $.parseJSON(result);
 
-                    var content = '<div class="row-fluid survey" style="border:2px solid #CCC;">'+
+                    var content = '<div class="row-fluid survey_form" style="border:2px solid #CCC;">'+
                                   '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +'</div>'+
                                   '<div class="span10" name="survey_body">'+
                                   '<!--Body content-->'+
@@ -124,7 +124,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                    });
                    
                    content += '</div>'+
-                              '<input type="hidden" class="survey_id" value="'+ $('#survey_select :selected').val() +'">'+
+                              '<input type="hidden" class="survey_form_id" value="'+ $('#survey_select :selected').val() +'">'+
                               '</div>'+
                               '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
                               '</div>';
@@ -136,7 +136,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
         
     }else{
                       
-       var content =  '<div class="row-fluid survey" style="border:2px solid #CCC;">'+
+       var content =  '<div class="row-fluid survey_form" style="border:2px solid #CCC;">'+
                       '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +' survey</div>'+  
                       '<div class="span10" name="survey_body">'+
                       '<!--Body content-->'+
@@ -157,8 +157,8 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                       '    </div>'+
                       '  </div>'+
                       '</div>'+
-                      '<input type="hidden" class="survey_questions_counter" value="0">'+
-                      '<input type="hidden" class="survey_id" value="9001">'+
+                      '<input type="hidden" class="survey_form_questions_counter" value="0">'+
+                      '<input type="hidden" class="survey_form_id" value="9001">'+
                       '</div>'+
                       '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
                       '</div>';
@@ -231,7 +231,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     p.find(':last').html($(this).parent().parent().html());
     
     // Question field (common content for all questions)
-    var content = '<span class="survey_question_number">'+(parseInt(parentForQCounter.find('.survey_questions_counter').val())+1)+'. </span> '+
+    var content = '<span class="survey_question_number">'+(parseInt(parentForQCounter.find('.survey_form_questions_counter').val())+1)+'. </span> '+
                   '<input type="text" class="survey_question" placeholder="Your question here">'+
                   '<button class="btn btn-link btnRemoveQuestion">Remove question</button>'+
                   '<br>';
@@ -332,7 +332,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     }
     
     // increment question counter
-    parentForQCounter.find('.survey_questions_counter').val(parseInt(parentForQCounter.find('.survey_questions_counter').val())+1);
+    parentForQCounter.find('.survey_form_questions_counter').val(parseInt(parentForQCounter.find('.survey_form_questions_counter').val())+1);
     
     // remove survey control from dom
     $(this).parent().remove();
@@ -355,7 +355,7 @@ $('#content_appears_here').on('click', '.btnRemoveQuestion', function(e){
     });
     
     // update question counter 
-    parentForQCounter.find('.survey_questions_counter').val(parseInt(parentForQCounter.find('.survey_questions_counter').val())-1);
+    parentForQCounter.find('.survey_form_questions_counter').val(parseInt(parentForQCounter.find('.survey_form_questions_counter').val())-1);
 
 });
 

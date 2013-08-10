@@ -193,8 +193,8 @@ function getStandardSurveysArray(){
                                 'question_number_of_answers' => 0
                                 );
                                 
-    $SYSTEM_USABILITY_SCALE = array('survey_id' => 1,
-                                   'survey_name' => 'System Usability Scale', 
+    $SYSTEM_USABILITY_SCALE = array('survey_form_id' => 1,
+                                   'survey_form_name' => 'System Usability Scale', 
                                    'content' => $SYSTEM_USABILITY_SCALE_Q);
                                    
     // first element
@@ -217,8 +217,8 @@ function getStandardSurveysArray(){
                                 'question_number_of_answers' => 0
                                 );
 
-    $STANDARD_SURVEY_1 = array('survey_id' => 2,
-                              'survey_name' => 'Standard form 1', 
+    $STANDARD_SURVEY_1 = array('survey_form_id' => 2,
+                              'survey_form_name' => 'Standard form 1', 
                               'content' => $STANDARD_SURVEY_1_Q);
                               
     // second element
@@ -241,8 +241,8 @@ function getStandardSurveysArray(){
                                 'question_number_of_answers' => 4
                                 );
                                 
-    $STANDARD_SURVEY_2 = array('survey_id' => 3,
-                              'survey_name' => 'Standard form 2',
+    $STANDARD_SURVEY_2 = array('survey_form_id' => 3,
+                              'survey_form_name' => 'Standard form 2',
                               'content' => $STANDARD_SURVEY_2_Q);
                               
     // third element
@@ -257,22 +257,22 @@ function getStandardSurveysArray(){
 * 
 * @param mixed $survey_id
 */
-function getStandardSurveyNameById($survey_id){
+function getStandardSurveyNameById($survey_form_id){
     
     $RESULT = '';
     
-    switch($survey_id){
+    switch($survey_form_id){
        
        case 1: $survey_array = getStandardSurveysArray();
-               $RESULT = $survey_array[0]['survey_name'];
+               $RESULT = $survey_array[0]['survey_form_name'];
                break;
    
        case 2: $survey_array = getStandardSurveysArray();
-               $RESULT = $survey_array[1]['survey_name'];
+               $RESULT = $survey_array[1]['survey_form_name'];
                break;
    
        case 3: $survey_array = getStandardSurveysArray();
-               $RESULT = $survey_array[2]['survey_name'];
+               $RESULT = $survey_array[2]['survey_form_name'];
                break;
                
         default: $RESULT = array();
@@ -284,14 +284,14 @@ function getStandardSurveyNameById($survey_id){
 /* 
 * Returns survey as JSON string back
 */
-function getStandardSurveyById($survey_id){
+function getStandardSurveyById($survey_form_id){
     
-   if(empty($survey_id))
+   if(empty($survey_form_id))
     return '[]'; 
    
    $RESULT = array();
    
-   switch($survey_id){
+   switch($survey_form_id){
        
        case 1: $survey_array = getStandardSurveysArray();
                $RESULT = $survey_array[0];

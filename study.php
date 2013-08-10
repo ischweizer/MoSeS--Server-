@@ -105,7 +105,9 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                // user study got NO survey created by user
                $SURVEY_BY_APK_ID[$apk['apkid']] = array();
            }
-       }   
+       } 
+       
+       //print_r($SURVEY_BY_APK_ID);  
        
        /**
        * *********************************************
