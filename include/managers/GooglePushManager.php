@@ -73,6 +73,11 @@ class GooglePushManager
     			'data'              => array( "message" => $message ),
     	);
     	
+    	$headers = array(
+    			'Authorization: key=' . $apiKey,
+    			'Content-Type: application/json'
+    	);
+    	
     	// Open connection
     	$ch = curl_init();
     	
