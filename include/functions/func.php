@@ -218,7 +218,7 @@ function getStandardSurveysArray(){
                                 );
 
     $STANDARD_SURVEY_1 = array('survey_id' => 2,
-                              'survey_name' => 'Standard 1 survey', 
+                              'survey_name' => 'Standard form 1', 
                               'content' => $STANDARD_SURVEY_1_Q);
                               
     // second element
@@ -242,7 +242,7 @@ function getStandardSurveysArray(){
                                 );
                                 
     $STANDARD_SURVEY_2 = array('survey_id' => 3,
-                              'survey_name' => 'Standard 2 survey',
+                              'survey_name' => 'Standard form 2',
                               'content' => $STANDARD_SURVEY_2_Q);
                               
     // third element

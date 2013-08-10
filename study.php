@@ -31,28 +31,43 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
        
        $USER_RGROUP = (!empty($row['rgroup']) ? $row['rgroup'] : ''); 
        
-       // select all entries from apk table for user
+       // select all information from apk table by user id
        $sql = "SELECT * 
                FROM ". $CONFIG['DB_TABLE']['APK'] ." 
                WHERE userid = ". $_SESSION["USER_ID"];
                 
        $result = $db->query($sql);
        $USER_APKS = $result->fetchAll(PDO::FETCH_ASSOC);
+       
+       /**
+       * Selecting user survey  if any created
+       */
+       
+       
+       
+       /**
+       * *********************************************
+       */
    }
    
    /**
-   * Selecting standard survey's questions 
+   * Selecting standard form's questions 
    */
-   $SURVEYS = array();
+   $FORMS = array();
    
    $i=1;
    $res = json_decode(getStandardSurveyById($i), true);
    
    while(!empty($res)){
-       $SURVEYS[] = json_decode(getStandardSurveyById($i), true);
+       // forming array with standard surveys
+       $FORMS[] = json_decode(getStandardSurveyById($i), true);
        $i++;
        $res = json_decode(getStandardSurveyById($i), true);
-   } 
+   }
+   
+   /**
+   * ************************************************
+   */ 
 }
 
 //Import of the header  

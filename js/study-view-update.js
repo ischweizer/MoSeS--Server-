@@ -61,14 +61,14 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="btnAddSurvey"]').show();
     //p.find('[name="quests_select"]').show();
     p.find('[name="uploadFile"]').show();
-    p.find('[name="btnUpdateOK"]').show();
-    p.find('[name="btnUpdateCancel"]').show();
+    p.find('.btnUpdateOK').show();
+    p.find('.btnUpdateCancel').show();
    
     $(this).attr('disabled',true);
 });
 
 /* Handling of button send updated study to server and show changes */
-$('[name="btnUpdateOK"]').click(function(e){
+$('.btnUpdateOK').click(function(e){
    
    $(this).attr('disabled', true);
    /* ------------------------ */
@@ -99,7 +99,7 @@ $('[name="btnUpdateOK"]').click(function(e){
             if(result == '1'){
                 p.find('progress').hide();
                 p.find('[name="btnUpdateStudy"]').attr('disabled',false);
-                p.find('[name="btnUpdateOK"]').attr('disabled', false);
+                p.find('.btnUpdateOK').attr('disabled', false);
                 
                 // get all info from inputs and inline substitute with old one
                 p.parent().parent().parent().parent().find('[name="study_title_link"]').text(p.find('[name="apk_title"]').val());
@@ -136,7 +136,7 @@ $('[name="btnUpdateOK"]').click(function(e){
 });
 
 /* Hide edit form data */
-$('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
+$('.btnUpdateOK, .btnUpdateCancel').click(function(e){
  
     e.preventDefault();
     
@@ -166,7 +166,7 @@ $('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
    p.find('[name="private_type"]').hide();
    //p.find('[name="quests_select"]').hide();
    p.find('[name="uploadFile"]').hide();
-   p.find('[name="btnUpdateCancel"]').hide();
+   p.find('.btnUpdateCancel').hide();
    p.find('[name="progress"]').hide();
    p.parent().parent().find('[name="btnAddSurvey"]').hide();
    

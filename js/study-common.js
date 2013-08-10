@@ -34,7 +34,7 @@ $('[name="btnAddSurvey"]').click(function(e){
     
 });
 
-$('[name="btnAddSurveyOK"]').click(function(e){
+$('[name="survey_controls"]').on('click','.btnAddForm',function(e){
     e.preventDefault();
     
     // get the parent of selected stuff

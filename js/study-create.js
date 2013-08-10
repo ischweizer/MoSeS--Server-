@@ -32,7 +32,7 @@ $('[name="start_after_n_devices"]').change(function(){
     }
 });
 
-$('.btnCreateOK').click(function(e){
+$('[name="survey_controls"]').on('click','.btnCreateOK',function(e){
    
    e.preventDefault();
     
@@ -108,7 +108,7 @@ $('.btnCreateOK').click(function(e){
             switch(result){
                 case '0':   $('.hero-unit').html('<h3 class="text-center">No such user found!</h3>');
                             break;
-                case '1':   $('.hero-unit').html('<h3 class="text-center">You created a study <strong>'+ $('#study_name').val() +'</strong></h3>');
+                case '1':   $('.hero-unit').html('<h3 class="text-center">You created a study "<strong>'+ $('#study_name').val() +'</strong>"</h3>');
                             break;
                 case '2':   $('.hero-unit').html('<h3 class="text-center">That file extension was not accepted by server! Please, use <strong>*.apk</strong></h3>');
                             break;
