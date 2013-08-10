@@ -179,6 +179,14 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         echo $joinedDevices; 
                     ?>
                     </div>
+                    <?php
+                        // checks if a users tudy survey available for this apk
+                        if(!empty($SURVEY_BY_APK_ID[$APK['apkid']])){
+                            ?>
+                            <div class="survey_available_text">A survey is attached to this user study.</div>
+                            <?php
+                        }
+                    ?>
                     <br>
                     <div class="control-group">
                         <label class="control-label"></label>

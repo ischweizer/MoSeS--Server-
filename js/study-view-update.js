@@ -46,6 +46,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="max_devices_number_text"]').hide();
     p.find('[name="allowed_join_text"]').hide();
     p.find('[name="joined_devices_text"]').hide();
+    p.find('.survey_available_text').hide();
     p.find('[name="private_text"]').hide();
     //p.find('[name="quests"]').hide();  
                  
@@ -152,6 +153,7 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.find('[name="max_devices_number_text"]').show();
    p.find('[name="allowed_join_text"]').show();
    p.find('[name="private_text"]').show();
+   p.find('.survey_available_text').show();
    //p.find('[name="quests"]').show();
    p.find('[name="progress"]').show();  
                  

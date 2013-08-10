@@ -43,7 +43,69 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
        * Selecting user survey  if any created
        */
        
+       $SURVEY_BY_APK_ID = array();
        
+       foreach($USER_APKS as $apk){
+       
+           $sql = "SELECT surveyid 
+                   FROM ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
+                   WHERE userid = ". $_SESSION["USER_ID"] ." AND apkid = ". $apk['apkid'];
+                    
+           $result = $db->query($sql);
+           $survey = $result->fetch(PDO::FETCH_ASSOC);
+           
+           // user study got a survey
+           if(!empty($survey)){
+           
+               $sql = "SELECT title, formid 
+                       FROM ". $CONFIG['DB_TABLE']['STUDY_FORM'] ." 
+                       WHERE surveyid = ". $survey['surveyid'];
+                        
+               $result = $db->query($sql);
+               $forms = $result->fetchAll(PDO::FETCH_ASSOC);
+               
+               $forms_array = array();
+               foreach($forms as $f){
+                  
+                  $sql = "SELECT questionid, type, text  
+                          FROM ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                          WHERE formid = ". $f['formid'];
+                            
+                  $result = $db->query($sql);
+                  $questions = $result->fetchAll(PDO::FETCH_ASSOC);
+                  
+                  $questions_array = array();
+                  foreach($questions as $q){
+                      
+                      $sql = "SELECT text  
+                              FROM ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                              WHERE questionid = ". $q['questionid'];
+                                
+                      $result = $db->query($sql);
+                      $answers = $result->fetchAll(PDO::FETCH_ASSOC);
+                      
+                      $answers_array = array();
+                      foreach($answers as $a){
+                          $answers_array[] = $a['text'];
+                      }
+                      
+                      $questions_array[] = array('question_type' => $q['type'],
+                                                 'question' => $q['text'],
+                                                 'answers' => $answers_array);
+                  }
+                   
+                  $forms_array[] = array('form_id' => $f['formid'],
+                                         'form_title' => $f['title'],
+                                         'questions' => $questions_array);
+               }
+               
+               $SURVEY_BY_APK_ID[$apk['apkid']] = array('survey_id' => $survey['surveyid'],
+                                                           'forms' => $forms_array);
+           }else{
+               // user study got NO survey created by user
+               $SURVEY_BY_APK_ID[$apk['apkid']] = array();
+           }
+       }   
        
        /**
        * *********************************************
