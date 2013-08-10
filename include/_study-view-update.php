@@ -289,10 +289,15 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         <?php
                     }
                 ?>
+                <?php
+                   // only include add survey feature if there was no survey already assigned to the user study 
+                  if(empty($survey)){  
+                ?>
                 <hr>
                 <button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
                 <?php
                     include_once('./include/_survey.php');        
+                  }
                 ?>
                 <input type="hidden" name="study_update" value="6825">
                 <input type="hidden" name="apk_id" value="<?php echo $APK['apkid']; ?>">

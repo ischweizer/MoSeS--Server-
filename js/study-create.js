@@ -32,7 +32,7 @@ $('[name="start_after_n_devices"]').change(function(){
     }
 });
 
-$('[name="survey_controls"]').on('click','.btnCreateOK',function(e){
+$('.form-horizontal').on('click','.btnCreateOK',function(e){
    
    e.preventDefault();
     
@@ -45,11 +45,11 @@ $('[name="survey_controls"]').on('click','.btnCreateOK',function(e){
     /* Gather a JSON-Object for surveys */
     var surveysJSON = {};
     
-    // find all surveys
-    $('.survey').each(function(survey_i, elem){
+    // find all forms in a survey
+    $('.survey_form').each(function(survey_i, elem){
         
         var survey = $(this);
-        var survey_id = parseInt(survey.find('.survey_id').val());
+        var survey_form_id = parseInt(survey.find('.survey_form_id').val());
         var questions = [];
 
         // iterate through all questions of one survey
@@ -74,8 +74,8 @@ $('[name="survey_controls"]').on('click','.btnCreateOK',function(e){
         }); 
 
         // populate JSON object
-        surveysJSON[survey_i] = {'survey_id':survey_id,
-                                 'survey_questions':questions}; 
+        surveysJSON[survey_i] = {'survey_form_id':survey_form_id,
+                                 'survey_form_questions':questions}; 
     });
     
     // append created JSON object to form data
