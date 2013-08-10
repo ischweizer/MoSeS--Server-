@@ -16,6 +16,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
    for($i=0; $i<count($USER_APKS); $i++){
        
        $APK = $USER_APKS[$i];
+       $survey = $SURVEY_BY_APK_ID[$APK['apkid']];
 ?>
   <div class="accordion-group">
     <div class="accordion-heading">
@@ -181,7 +182,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                     </div>
                     <?php
                         // checks if a users tudy survey available for this apk
-                        if(!empty($SURVEY_BY_APK_ID[$APK['apkid']])){
+                        if(!empty($survey)){
                             ?>
                             <div class="survey_available_text">A survey is attached to this user study.</div>
                             <?php
@@ -202,6 +203,89 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         </div>
                     </div>
                 </fieldset>
+                <?php
+                
+                    // if user study got survey, show it! 
+                    if(!empty($survey)){
+                        ?>
+                        <button type="button" class="btn btn-link surveyShowHide">Show/Hide survey <i class="icon icon-chevron-right"></i></button>
+                        <?php
+                        ?><hr class="survey_content" style="display: none;">
+                        <div class="survey_content" style="display: none;"><?php
+                        $forms = $survey['forms'];
+                        
+                        foreach($forms as $form){
+                            ?>
+                            <div class="row-fluid survey" style="border:2px solid #CCC;">
+                              <div class="survey_name text-center"><?php echo $form['form_title']; ?></div>
+                                  <div class="span10" name="survey_body">
+                                    <!--Body content-->
+                                    <div class="survey_question_container">
+                                    <?php
+                                         $questions = $form['questions'];
+                                         
+                                         $k=1;
+                                         foreach($questions as $question){
+                                             echo $k .'. '. $question['question'] .'<br>';
+                                             $k++;
+                                             
+                                             $answers_yes_no =  '<ul style="list-style-type: none;">'.
+                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Yes</span></li>'.
+                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_q_element">No</span></li>'.
+                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Not sure</span></li>'.
+                                                                '</ul>';
+                                                                      
+                                             $answers_text = '<ul style="list-style-type: none;">'.
+                                                                '<li><textarea cols="20" rows="3" disabled="disabled" placeholder="Answer will be here..."></textarea></li>'.
+                                                             '</ul>';
+                                               
+                                             $answers_likert_scale = '<ul style="list-style-type: none;">'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Disagree"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Disagree"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Neutral"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Agree"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'.
+                                                                    '</ul>';
+                                                                    
+                                             switch($question['question_type']){
+                                                 case 1: echo $answers_yes_no;
+                                                         break;
+                                                 case 2: echo $answers_text;
+                                                         break;
+                                                 case 3: echo $answers_likert_scale;
+                                                         break;
+                                                 case 4: foreach($question['answers'] as $answer){
+                                                             echo '<ul style="list-style-type: none;">'.
+                                                                    '<li>'.
+                                                                        '<input type="checkbox" disabled="disabled">'.
+                                                                        '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                     '</li>'.
+                                                                  '</ul>';
+                                                         }
+                                                         break;
+                                                 case 5: foreach($question['answers'] as $answer){
+                                                             echo '<ul style="list-style-type: none;">'.
+                                                                    '<li>'.
+                                                                        '<input type="radio" disabled="disabled">'.
+                                                                        '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                     '</li>'.
+                                                                  '</ul>';
+                                                         }
+                                                         break;
+                                                 default: 
+                                             }
+                                         }
+                                     ?>
+                                    </div>                              
+                                  </div>
+                              </div>
+                            <?php                               
+                        }
+                        ?>
+                        </div>
+                        <?php
+                    }
+                ?>
                 <hr>
                 <button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
                 <?php

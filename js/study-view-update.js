@@ -199,3 +199,17 @@ $('[name="study_period"]').click(function(){
         }
     }
 });
+
+$('.surveyShowHide').click(function(e){
+    e.preventDefault();
+    
+    if($('.survey_content').is(':visible')){
+        $('.survey_content').hide();
+        $('.surveyShowHide').find('i').addClass('icon-chevron-right');
+        $('.surveyShowHide').find('i').removeClass('icon-chevron-down');
+    }else{
+        $('.survey_content').show();
+        $('.surveyShowHide').find('i').addClass('icon-chevron-down');
+        $('.surveyShowHide').find('i').removeClass('icon-chevron-right');
+    }
+});

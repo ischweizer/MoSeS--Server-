@@ -42,14 +42,16 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
     
     if(parseInt($('#survey_select :selected').val()) != 9001){
     
-        // Requesting server for questions for selected survey (ID)
+        /*
+         * Requesting server for standard questions for a survey ID
+         */
         $.post("content_provider.php", { 'get_questions': $('#survey_select :selected').val(), 'get_questions_pwd' : 6767 })
             .done(function(result) {
                 
                 if(result){
                     
                     var data = $.parseJSON(result);
-                    //'<div class="row-fluid" style="border:2px solid #CCC;" name="survey_container_'+ $('#survey_select :selected').val() +'">'+
+
                     var content = '<div class="row-fluid survey" style="border:2px solid #CCC;">'+
                                   '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +'</div>'+
                                   '<div class="span10" name="survey_body">'+
