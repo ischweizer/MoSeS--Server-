@@ -45,6 +45,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="description_text"]').hide(); 
     p.find('[name="max_devices_number_text"]').hide();
     p.find('[name="allowed_join_text"]').hide();
+    p.find('[name="joined_devices_text"]').hide();
     p.find('[name="private_text"]').hide();
     //p.find('[name="quests"]').hide();  
                  

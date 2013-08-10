@@ -172,9 +172,12 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                             <input type="file" name="file">
                         </div>
                     </div>
+                    <div name="joined_devices_text">
                     <?php
                         echo $joinedDevices; 
-                    ?> <br>
+                    ?>
+                    </div>
+                    <br>
                     <div class="control-group">
                         <label class="control-label"></label>
                         <div class="controls">
