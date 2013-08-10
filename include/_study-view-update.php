@@ -208,7 +208,10 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                     // if user study got survey, show it! 
                     if(!empty($survey)){
                         ?>
-                        <button type="button" class="btn btn-link surveyShowHide">Show/Hide survey <i class="icon icon-chevron-right"></i></button>
+                        <ul style="list-style-type: none;">
+                            <li style="display: inline;"><button type="button" class="btn btn-link surveyShowHide">Show/Hide survey <i class="icon icon-chevron-right"></i></button></li>
+                            <li style="display: inline;"><button type="button" class="btn btn-link surveyRemove" value="<?php echo $survey['survey_id']; ?>">Remove survey <i class="icon icon-remove-sign"></i></button></li>
+                        </ul>
                         <?php
                         ?><hr class="survey_content" style="display: none;">
                         <div class="survey_content" style="display: none;"><?php

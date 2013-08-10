@@ -15,14 +15,13 @@ $('.confirm-delete').click(function(e) {
 
 /* Button confirm study deletion */
 $('.btnConfirm').click(function(e){
-
+    e.preventDefault(); 
+    
     // removing APK
     $.post("content_provider.php", { 'study_remove': $('.btnConfirm').val() })
         .done(function() {
           location.reload();
     });
-    
-   e.preventDefault(); 
 });
 
 /* Button cancel study deletion */
@@ -48,6 +47,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="joined_devices_text"]').hide();
     p.find('.survey_available_text').hide();
     p.find('[name="private_text"]').hide();
+    p.find('.surveyShowHide').hide();
     //p.find('[name="quests"]').hide();  
                  
     p.find('[name="android_version_select"]').show();
@@ -154,6 +154,7 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.find('[name="allowed_join_text"]').show();
    p.find('[name="private_text"]').show();
    p.find('.survey_available_text').show();
+   p.find('.surveyShowHide').show();
    //p.find('[name="quests"]').show();
    p.find('[name="progress"]').show();  
                  
@@ -203,13 +204,35 @@ $('[name="study_period"]').click(function(){
 $('.surveyShowHide').click(function(e){
     e.preventDefault();
     
-    if($('.survey_content').is(':visible')){
-        $('.survey_content').hide();
-        $('.surveyShowHide').find('i').addClass('icon-chevron-right');
-        $('.surveyShowHide').find('i').removeClass('icon-chevron-down');
+    var p = $(this).parent().parent().parent();
+    
+    if(p.find('.survey_content').is(':visible')){
+        p.find('.survey_content').hide();
+        p.find('.surveyShowHide').find('i').addClass('icon-chevron-right');
+        p.find('.surveyShowHide').find('i').removeClass('icon-chevron-down');
     }else{
-        $('.survey_content').show();
-        $('.surveyShowHide').find('i').addClass('icon-chevron-down');
-        $('.surveyShowHide').find('i').removeClass('icon-chevron-right');
+        p.find('.survey_content').show();
+        p.find('.surveyShowHide').find('i').addClass('icon-chevron-down');
+        p.find('.surveyShowHide').find('i').removeClass('icon-chevron-right');
     }
+});
+
+$('.surveyRemove').click(function(e){
+    e.preventDefault();
+    
+    var p = $(this).parent().parent().parent();
+    
+    // Remove survey from user study
+    $.post("content_provider.php", { 'study_survey_remove': p.find('.surveyRemove').val(),
+                                     'study_survey_remove_code': 4931})
+        .done(function(result) {
+          if(result){
+              p.find('.survey_content').remove();
+              p.find('.surveyShowHide').remove();
+              p.find('.surveyRemove').remove();
+              p.find('.survey_available_text').remove();
+          }else{
+              alert("Cannot remove user study survey! Try again later.");
+          }
+    });
 });

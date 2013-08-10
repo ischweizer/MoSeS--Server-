@@ -31,6 +31,18 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
 }
 
 /**
+*  Survey remove from user study
+*/ 
+
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_POST['study_survey_remove_code']) && $_POST['study_survey_remove_code'] == 4931 &&
+    isset($_POST['study_survey_remove']) && is_numeric($_POST['study_survey_remove'])){
+
+    include_once("./include/providers/_study-remove-survey-provider.php");
+    exit;
+}
+
+/**
 * Get survey's predefined questions
 */ 
 
