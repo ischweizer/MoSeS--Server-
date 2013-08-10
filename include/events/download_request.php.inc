@@ -61,35 +61,36 @@ if($data->SESSIONID != null){
                            $APK_NAME = $APK['apkname'];
                        
                            $return = array("MESSAGE" => "DOWNLOAD_RESPONSE",
+                           					"STATUS" => "SUCCESS",
                                            "NAME" => $APK_NAME,
                                            "URL" => $DOWNLOAD_URL);
                                            
                       }else{
-                          $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                          $return = array("MESSAGE" => "DOWNLOAD_RESPONSE",
                                           "STATUS" => "FAILURE");
                       }
                   }else{
-                      $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                      $return = array("MESSAGE" => "DOWNLOAD_RESPONSE",
                                       "STATUS" => "INVALID_SESSION");
                   }
                 }else{
-                    $return = array("MESSAGE" => "DOWNLOAD_REQUEST",
+                    $return = array("MESSAGE" => "DOWNLOAD_RESPONSE",
                                     "STATUS" => "INVALID_SESSION");
                 }
             }else{
-                $return = array("MESSAGE" => "DOWNLOAD_REQUEST", 
+                $return = array("MESSAGE" => "DOWNLOAD_RESPONSE", 
                                 "STATUS" => "INVALID_APKID");
                }              
         }else{
-            $return = array("MESSAGE" => "DOWNLOAD_REQUEST", 
+            $return = array("MESSAGE" => "DOWNLOAD_RESPONSE", 
                             "STATUS" => "INVALID_DEVICEID");
             }
     }else{
-        $return = array("MESSAGE" => "DOWNLOAD_REQUEST", 
+        $return = array("MESSAGE" => "DOWNLOAD_RESPONSE", 
                         "STATUS" => "INVALID_SESSION");
     }
 }else{
-    $return = array("MESSAGE" => "DOWNLOAD_REQUEST", 
+    $return = array("MESSAGE" => "DOWNLOAD_RESPONSE", 
                     "STATUS" => "INVALID_SESSION");
 } 
 
