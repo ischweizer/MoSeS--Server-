@@ -58,6 +58,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="description"]').show();
     p.find('[name="allowed_join"]').show();
     p.find('[name="private_type"]').show();
+    p.find('[name="btnAddSurvey"]').show();
     //p.find('[name="quests_select"]').show();
     p.find('[name="uploadFile"]').show();
     p.find('[name="btnUpdateOK"]').show();
@@ -167,6 +168,7 @@ $('[name="btnUpdateOK"], [name="btnUpdateCancel"]').click(function(e){
    p.find('[name="uploadFile"]').hide();
    p.find('[name="btnUpdateCancel"]').hide();
    p.find('[name="progress"]').hide();
+   p.parent().parent().find('[name="btnAddSurvey"]').hide();
    
    $(this).parent().parent().parent().parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
 });

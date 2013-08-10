@@ -192,6 +192,11 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         </div>
                     </div>
                 </fieldset>
+                <hr>
+                <button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
+                <?php
+                    include_once('./include/_survey.php');        
+                ?>
                 <input type="hidden" name="study_update" value="6825">
                 <input type="hidden" name="apk_id" value="<?php echo $APK['apkid']; ?>">
                 <input type="hidden" name="userhash" value="<?php echo $APK['userhash']; ?>">
@@ -202,20 +207,14 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                 <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
             <?php
             if($APK['ustudy_finished'] == 1){
-                // href="<?php echo $_SERVER['PHP_SELF']; ?>?m=usquest&id=<?php echo $APK['apkid']; ?>" title="Results of survey"
-                // href="<?php echo $_SERVER['PHP_SELF']; ?>?m=addquest&id=<?php echo $APK['apkid']; ?>"
                 ?>
-                <li><button class="btn" title="Results of survey">Results</button></li>
+                <li><button class="btn" title="Survey results">Results</button></li>
                 <?php
             }
             ?>
                 <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkid']; ?>">Remove</button></li>
             </ul>
       </div>
-      <hr><button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
-       <?php
-       include_once('./include/_survey.php');        
-       ?>
     </div>
   </div>
   <?php
