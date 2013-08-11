@@ -158,6 +158,9 @@ $('.btnUpdateOK').click(function(e){
                 }else{
                    p.find('[name="private_text"]').html("This study marked as <strong>public</strong>."); 
                 }
+                
+                // removing survey controls
+                p.parent().find('[name="survey_controls"]').remove();
             }
         },
         //error: errorHandler,
@@ -213,6 +216,16 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.parent().parent().find('[name="btnAddSurvey"]').hide();
    
    $(this).parent().parent().parent().parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
+});
+
+// special activities for cancel user study button
+$('.btnUpdateCancel').click(function(e){
+    e.preventDefault();
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+     
+    // removing survey controls if it was selected
+    p.parent().find('[name="survey_controls"]').remove();
 });
 
 $('[name="study_period"]').click(function(){
