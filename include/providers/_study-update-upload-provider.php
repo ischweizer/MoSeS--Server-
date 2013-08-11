@@ -240,8 +240,6 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
               ustudy_finished=". $USTUDY_FINISHED ." 
           WHERE apkid=". $apkId;
      
-     echo $sql;
-     
     //$logger->logInfo($sql);
 
     $db->exec($sql);
