@@ -171,13 +171,13 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     
         // converting to milliseconds
         switch($_POST['running_time_value']){        
-            case 'h': $runningtime = intval($_POST['running_time'])*60*60*1000; // hours   
+            case 'h': $runningtime = intval($_POST['running_time']); // hours (in hours)   
                     break;
-            case 'd': $runningtime = intval($_POST['running_time'])*24*60*60*1000;  // days
+            case 'd': $runningtime = intval($_POST['running_time'])*24;  // days (in hours)
                     break;
-            case 'm': $runningtime = intval($_POST['running_time'])*30*24*60*60*1000;   // months
+            case 'm': $runningtime = intval($_POST['running_time'])*30*24;   // months (in hours)
                     break;
-            case 'y': $runningtime = intval($_POST['running_time'])*12*30*24*60*60*1000;    // years
+            case 'y': $runningtime = intval($_POST['running_time'])*12*30*24;    // years (in hours)
                     break;
         }
     }
