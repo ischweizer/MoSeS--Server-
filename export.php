@@ -107,9 +107,6 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']) &&
            
            $RESULTS_ARRAY['forms'] = $forms_array;
             
-           print_r($RESULTS_ARRAY); 
-           exit; 
-            
            download_send_headers("survey_results_" . date("d.m.Y") . ".csv");
            echo survey2csv($RESULTS_ARRAY);   
         

@@ -358,20 +358,42 @@ function download_send_headers($filename) {
     header("Content-Transfer-Encoding: binary");
 }
   
-function survey2csv(array $array){
-   
-   print_r($array); 
+function survey2csv(array $RESULTS){
     
-   if(count($array) == 0)
+   if(count($RESULTS) == 0)
     return null;
      
    ob_start();
    $out = fopen("php://output", 'w');
    
-   fputcsv($out, array('There are '. count($array['forms']) .' forms'));
+   fputcsv($out, array($RESULTS['apk_title']));
    
-   foreach ($array as $f) {
+   $FORMS = $RESULTS['forms'];
+   
+   foreach($FORMS as $f) {
         fputcsv($out, array($f['form_title']));
+        
+        $QUESTIONS = $f['questions'];
+        
+        foreach($QUESTIONS as $q){
+            fputcsv($out, array($q['question_title'], 'Type '. $q['question_type']));
+            
+            $ANSWERS = $q['answers'];
+            $t = $ANSWERS['titles'];
+            $c = $ANSWERS['counters'];
+            for($i=1; $i <= count($t); $i++){
+                if(!empty($c[$i])){
+                    fputcsv($out, array($t[$i-1], ' # of answers: '. $c[$i]));        
+                }else{
+                    fputcsv($out, array($t[$i-1]));        
+                }
+            }
+            
+            // unanswered
+            if(!empty($c[0])){
+                fputcsv($out, array('Unanswered', ' # of answers: '. $c[0]));        
+            }
+        }
    }
    
    fclose($out);
