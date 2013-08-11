@@ -39,11 +39,11 @@ if(is_numeric($APK_ID)){
   $db->exec($sql);
   
   /* 
-   * Remove corresponding surveys 
+   * Remove corresponding surveys and results 
    * 
    */
   
-  // select answers
+  // remove answers
   $survey_answers_sql = 'DELETE 
                          FROM '. $CONFIG['DB_TABLE']['STUDY_ANSWER'] .' 
                          WHERE questionid 
@@ -57,9 +57,9 @@ if(is_numeric($APK_ID)){
                                      FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                                      WHERE userid = '. $_SESSION['USER_ID'] .' AND apkid = '. $APK_ID .')))';
                                      
-  // remove answers
   $db->exec($survey_answers_sql);
-                                    
+                                   
+  // remove questions 
   $survey_questions_sql = 'DELETE 
                            FROM '. $CONFIG['DB_TABLE']['STUDY_QUESTION'] .' 
                            WHERE formid 
@@ -70,9 +70,10 @@ if(is_numeric($APK_ID)){
                                    FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                                    WHERE userid = '. $_SESSION['USER_ID'] .' AND apkid = '. $APK_ID .'))';
                                    
-  // remove questions
   $db->exec($survey_questions_sql);
-                                     
+
+  
+  // remove forms
   $survey_forms_sql = 'DELETE 
                        FROM '. $CONFIG['DB_TABLE']['STUDY_FORM'] .' 
                        WHERE surveyid 
@@ -80,17 +81,24 @@ if(is_numeric($APK_ID)){
                            FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                            WHERE userid = '. $_SESSION['USER_ID'] .' AND apkid = '. $APK_ID .')';
                            
-  // remove forms
   $db->exec($survey_forms_sql);
-                                     
+                         
+                         
+  // remove surveys
   $survey_surveys_sql = 'DELETE 
                          FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                          WHERE userid = '. $_SESSION['USER_ID'] .' AND apkid = '. $APK_ID;
                          
-  // remove surveys
   $db->exec($survey_surveys_sql);
   
-  // success
+  
+  // remove survey results
+  $survey_results_sql = 'DELETE 
+                         FROM '. $CONFIG['DB_TABLE']['STUDY_RESULT'] .' 
+                         WHERE survey_id = '. $SURVEY_ID;
+                         
+  $db->exec($survey_results_sql);
+  
   die('1'); 
 }else{
    die('0');
