@@ -204,7 +204,7 @@ $('.btnUpdateOK').click(function(e){
                 // removing survey controls
                 p.parent().find('[name="survey_controls"]').remove();*/
                 
-                //location.reload();
+                location.reload();
             }
         },
         //error: errorHandler,
