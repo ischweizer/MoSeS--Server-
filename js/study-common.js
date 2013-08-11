@@ -100,7 +100,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                                        for(var j=1; j <= question.question_number_of_answers; j++){
                                           answers_multiple_choice += '<li>'+
                                                                      '<input type="checkbox" value="'+ j +'" disabled="disabled">'+
-                                                                     '<span><input type="text" class="survey_answer" placeholder="Answer here"></span>'+
+                                                                     '<span><input type="text" class="survey_answer" placeholder="Answer here" disabled="disabled"></span>'+
                                                                      '</li>'; 
                                        }
                                        answers_multiple_choice += '</ul>';
@@ -112,7 +112,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                                       for(var j=1; j <= question.question_number_of_answers; j++){
                                         answers_single_choice += '<li>'+
                                                                  '<input type="radio" value="'+ j +'" disabled="disabled">'+
-                                                                 '<span><input type="text" class="survey_answer" placeholder="Answer here"></span>'+
+                                                                 '<span><input type="text" class="survey_answer" placeholder="Answer here" disabled="disabled"></span>'+
                                                                  '</li>'; 
                                       }
                                       answers_single_choice += '</ul>';
