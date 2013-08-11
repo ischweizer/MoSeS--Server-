@@ -3,7 +3,7 @@ $('[name="btnDownloadApp"]').click(function(e){
     e.preventDefault(); 
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
-    window.location.href = './apk/'+ p.find('[name="userhash"]').val() +'/'+ p.find('[name="apkhash"]').val() +'.apk';
+    location.href = './apk/'+ p.find('[name="userhash"]').val() +'/'+ p.find('[name="apkhash"]').val() +'.apk';
 });
 
 /* Confirm dialog */
@@ -81,6 +81,47 @@ $('.btnUpdateOK').click(function(e){
    /* Handling form data */ 
     var formData = new FormData($(this).parent().parent().parent().parent().parent().find('form')[0]);
 
+    /* Gather a JSON-Object for surveys */
+    var surveysJSON = {};
+    
+    // find all forms in a survey
+    $('.survey_form').each(function(survey_i, elem){
+        
+        var survey = $(this);
+        var survey_form_id = parseInt(survey.find('.survey_form_id').val());
+        var questions = [];
+
+        // iterate through all questions of one survey
+        survey.find('.survey_question').each(function(question_i, elem2){
+            
+            var question = $(this);
+            var answers = [];
+            
+            // find question type
+            var question_type = question.parent().find('.survey_question_type').val();
+            
+            // find all answers
+            question.parent().find('.survey_answer').each(function(answer_i, elem3){
+                var answer = $(this);
+                answers.push(answer.val());
+            });
+            
+            questions.push({'question_type':question_type,
+                            'question':question.val(),
+                            'answers':answers});
+            
+        }); 
+
+        // populate JSON object
+        surveysJSON[survey_i] = {'survey_form_id':survey_form_id,
+                                 'survey_form_questions':questions}; 
+    });
+    
+    // append created JSON object to form data
+    formData.append('survey_json', JSON.stringify(surveysJSON));
+    
+    /* ******************************** */
+    
     $.ajax({
         url: 'content_provider.php',  
         type: 'POST',
@@ -99,6 +140,7 @@ $('.btnUpdateOK').click(function(e){
         //beforeSend: beforeSendHandler,
         success: function(result){
             if(result == '1'){
+                /*
                 p.find('progress').hide();
                 p.find('[name="btnUpdateStudy"]').attr('disabled',false);
                 p.find('.btnUpdateOK').attr('disabled', false);
@@ -160,7 +202,9 @@ $('.btnUpdateOK').click(function(e){
                 }
                 
                 // removing survey controls
-                p.parent().find('[name="survey_controls"]').remove();
+                p.parent().find('[name="survey_controls"]').remove();*/
+                
+                //location.reload();
             }
         },
         //error: errorHandler,
@@ -287,4 +331,10 @@ $('.surveyRemove').click(function(e){
               alert("Cannot remove user study survey! Try again later.");
           }
     });
+});
+
+$('.btnSurveyResultsExportCsv').click(function(e){
+    e.preventDefault();
+    
+    location.href = './export.php?id='+ $(this).val() +'&m=csv';
 });

@@ -151,6 +151,10 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     $runningtime = NULL;
     $radioButton = intval($_POST['study_period']);
     
+    $SURVEY_FORMS_JSON = stripslashes(trim($_POST['survey_json']));
+    // decode json to arrays instead of objects
+    $SURVEY_FORMS_OBJ = json_decode($SURVEY_FORMS_JSON, true);
+    
     if($radioButton == 1){
         
         $startcriterion = 0;
@@ -244,8 +248,175 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
 
     $db->exec($sql);
 
-    if(!empty($row_installed_on))
-    {
+    /* ****************************************************************
+    *
+    *               SURVEYS
+    * 
+    * ****************************************************************/
+    
+    /* if there are some selected surveys */
+    if(!empty($SURVEY_FORMS_OBJ)){
+        
+        /* insert survey for user study */
+        $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
+                                (userid, apkid)
+                                VALUES 
+                                (". $_SESSION["USER_ID"] .", ". $apkId .")";
+        
+        $db->exec($sql);       
+        
+        $survey_id = $db->lastInsertId();
+        
+        // for each supplied survey's form
+        foreach($SURVEY_FORMS_OBJ as $survey_form){
+        
+            // determine form's title
+            $survey_form_title = '';
+            $isStandardForm = false;
+            
+            switch(intval($survey_form['survey_form_id'])){
+                case 9001:  $survey_form_title = 'Custom form';
+                            $isStandardForm = false;
+                            break;
+                case 1:  $survey_form_title = getStandardSurveyNameById(1);
+                         $isStandardForm = true;
+                         break;
+                case 2:  $survey_form_title = getStandardSurveyNameById(2);
+                         $isStandardForm = true;
+                         break;
+                case 3:  $survey_form_title = getStandardSurveyNameById(3);
+                         $isStandardForm = true;
+                         break;
+                            
+                default: die('6');  // wrong JSON                
+            }
+            
+            // store form title in db
+            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_FORM'] ." 
+                                    (surveyid, title, standard)
+                                    VALUES 
+                                    (". $survey_id .", '". $survey_form_title ."'". ($isStandardForm ? ",1" : ",0") .")";
+            
+            $db->exec($sql);
+            
+            $form_id = $db->lastInsertId();
+            
+            switch(intval($survey_form['survey_form_id'])){
+                
+                case 9001:  // loop through all questions in the form
+                            foreach($survey_form['survey_form_questions'] as $question){
+
+                                $question_type = intval($question['question_type']);
+                                $question_text = $question['question'];
+                                
+                                // store question in db
+                                $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                        (formid, type, text)
+                                                        VALUES 
+                                                        (". $form_id .", ". $question_type .", '". $question_text ."')";
+                                
+                                $db->exec($sql);
+                                
+                                $question_id = $db->lastInsertId();
+                                
+                                // store answers in db
+                                $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                                        (questionid, text) 
+                                                        VALUES ";
+                                // loop through all answers in the question and append values                                                        
+                                foreach($question['answers'] as $answer){ 
+                                  $sql .=" (". $question_id .", '". $answer ."') ,";
+                                }
+                                // remove last ',' from sql string
+                                $sql = substr($sql, 0, -1);
+                                
+                                $db->exec($sql);
+                            }
+                
+                            break;
+                case 1:  
+                         $survey_array = getStandardSurveysArray();
+                         // SUS
+                         $survey_form = $survey_array[0];
+                         $survey_form_questions = $survey_form['content'];
+                         
+                         foreach($survey_form_questions as $question){
+                             
+                            $question_type = $question['question_type'];
+                            $question_text = $question['question'];
+                             
+                            // store question in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                    (formid, type, text)
+                                                    VALUES 
+                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
+                            
+                            $db->exec($sql);
+                            
+                            // no store of answers 
+                         } 
+                
+                         break;
+                case 2:  
+                         $survey_array = getStandardSurveysArray();
+                         // Standard 1
+                         $survey_form = $survey_array[1];
+                         $survey_form_questions = $survey_form['content'];
+                         
+                         foreach($survey_form_questions as $question){
+                             
+                            $question_type = $question['question_type'];
+                            $question_text = $question['question'];
+                             
+                            // store question in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                    (formid, type, text)
+                                                    VALUES 
+                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
+                            
+                            $db->exec($sql);
+                            
+                            // no store of answers 
+                         }              
+                
+                         break;
+                case 3:  
+                         $survey_array = getStandardSurveysArray();
+                         // Standard 2
+                         $survey_form = $survey_array[2];
+                         $survey_form_questions = $survey_form['content'];
+                         
+                         foreach($survey_form_questions as $question){
+                             
+                            $question_type = $question['question_type'];
+                            $question_text = $question['question'];
+                             
+                            // store question in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                                    (formid, type, text)
+                                                    VALUES 
+                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
+                            
+                            $db->exec($sql);
+                            
+                            // no store of answers 
+                         }
+                
+                         break;
+                            
+                default: die('6');  // wrong JSON                
+            }            
+        } 
+    }
+    
+    /* **************************** */
+    
+    
+    /*
+    * PREPAIRING FOR GOOGLE PUSH 
+    */
+    if(!empty($row_installed_on)){
+        
       $row_installed_on =  $row_installed_on[0];
       $logger->logInfo("row_installed_on[0] = ".$row_installed_on);
 

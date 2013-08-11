@@ -252,6 +252,20 @@ function getStandardSurveysArray(){
     return $SURVEYS_STD_RESULT;
 }
 
+/*
+*   Returns standard form by name
+*/
+function getStandardFormByName($name){
+    $forms = getStandardSurveysArray();
+    
+    foreach($forms as $f){
+        if($f['survey_form_name'] == $name){
+            return $f;
+        }       
+    }
+    return NULL;
+}
+
 /** 
 * Returns name of standard survey by id
 * 
@@ -310,5 +324,42 @@ function getStandardSurveyById($survey_form_id){
    }
    return json_encode($RESULT);
 }
+
+function download_send_headers($filename) {
+    // disable caching
+    $now = gmdate("D, d M Y H:i:s");
+    header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+    header("Cache-Control: max-age=0, no-cache, must-revalidate, proxy-revalidate");
+    header("Last-Modified: {$now} GMT");
+
+    // force download  
+    header("Content-Type: application/force-download");
+    header("Content-Type: application/octet-stream");
+    header("Content-Type: application/download");
+
+    // disposition / encoding on response body
+    header("Content-Disposition: attachment;filename={$filename}");
+    header("Content-Transfer-Encoding: binary");
+}
   
+function survey2csv(array $array){
+   
+   print_r($array); 
+    
+   if(count($array) == 0)
+    return null;
+     
+   ob_start();
+   $out = fopen("php://output", 'w');
+   
+   fputcsv($out, array('There are '. count($array['forms']) .' forms'));
+   
+   foreach ($array as $f) {
+        fputcsv($out, array($f['form_title']));
+   }
+   
+   fclose($out);
+   return ob_get_clean();
+}  
+
 ?>

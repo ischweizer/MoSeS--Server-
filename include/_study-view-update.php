@@ -264,32 +264,55 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                                                         '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'.
                                                                     '</ul>';
                                                                     
-                                             switch($question['question_type']){
+                                             switch(intval($question['question_type'])){
                                                  case 1: echo $answers_yes_no;
                                                          break;
                                                  case 2: echo $answers_text;
                                                          break;
                                                  case 3: echo $answers_likert_scale;
                                                          break;
-                                                 case 4: foreach($question['answers'] as $answer){
-                                                             echo '<ul style="list-style-type: none;">'.
+                                                 case 4: if(!empty($question['answers'])){
+                                                             foreach($question['answers'] as $answer){
+                                                                 echo '<ul style="list-style-type: none;">'.
+                                                                        '<li>'.
+                                                                            '<input type="checkbox" disabled="disabled">'.
+                                                                            '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                         '</li>'.
+                                                                      '</ul>';
+                                                             }
+                                                         }else{
+                                                             // if answers were empty!
+                                                             // TODO: insert standards for that type of answer
+                                                             /*echo '<ul style="list-style-type: none;">'.
                                                                     '<li>'.
                                                                         '<input type="checkbox" disabled="disabled">'.
                                                                         '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
                                                                      '</li>'.
-                                                                  '</ul>';
+                                                                  '</ul>';*/
+                                                                  
                                                          }
                                                          break;
-                                                 case 5: foreach($question['answers'] as $answer){
-                                                             echo '<ul style="list-style-type: none;">'.
+                                                 case 5: if(!empty($question['answers'])){
+                                                             foreach($question['answers'] as $answer){
+                                                                 echo '<ul style="list-style-type: none;">'.
+                                                                        '<li>'.
+                                                                            '<input type="radio" disabled="disabled">'.
+                                                                            '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                         '</li>'.
+                                                                      '</ul>';
+                                                             }
+                                                         }else{
+                                                             // if answers were empty!
+                                                             // TODO: insert standards for that type of answer
+                                                             /*ho '<ul style="list-style-type: none;">'.
                                                                     '<li>'.
                                                                         '<input type="radio" disabled="disabled">'.
                                                                         '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
                                                                      '</li>'.
-                                                                  '</ul>';
+                                                                  '</ul>';*/
                                                          }
                                                          break;
-                                                 default: 
+                                                 default: echo 'Something went wrong!'; 
                                              }
                                          }
                                      ?>
@@ -324,7 +347,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             <?php
             if($APK['ustudy_finished'] == 1){
                 ?>
-                <li><button class="btn" title="Survey results">Results</button></li>
+                <li><button class="btn btnSurveyResultsExportCsv" title="Survey results" value="<?php echo $survey['survey_id']; ?>">Results to CSV</button></li>
                 <?php
             }
             ?>
