@@ -141,6 +141,7 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     }
     
     // TODO: security checks!
+    $USTUDY_FINISHED = 0;
     $startdate = $_POST['start_date'];
     $enddate = $_POST['end_date'];
     $maxDevices = $_POST['max_devices_number'];
@@ -148,9 +149,10 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     $private = (isset($_POST['private']) ? 1 : 0);
     $startcriterion = NULL;
     $runningtime = NULL;
-    $radioButton = $_POST['study_period'];
+    $radioButton = intval($_POST['study_period']);
     
-    if($radioButton == "1"){
+    if($radioButton == 1){
+        
         $startcriterion = 0;
         $runningtime = NULL;
 
@@ -159,13 +161,14 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
             $USTUDY_FINISHED = 1;
         }
     }
-    elseif($radioButton == "2"){
+    
+    if($radioButton == 2){
         
         $startdate = NULL;
         $enddate = NULL;
         
-        $startcriterion = $_POST['start_after_n_devices'];
-        
+        $startcriterion = intval($_POST['start_after_n_devices']);
+    
         // converting to milliseconds
         switch($_POST['running_time_value']){        
             case 'h': $runningtime = intval($_POST['running_time'])*60*60*1000; // hours   
@@ -206,49 +209,52 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
                          FROM ".$CONFIG['DB_TABLE']['APK']." 
                          WHERE apkid=". $apkId;
                          
-    $logger->logInfo($sql_installed_on);                             
+    //$logger->logInfo($sql_installed_on);                             
                          
     $result_installed_on = $db->query($sql_installed_on);
     $row_installed_on = $result_installed_on->fetch();
     
-    $logger->logInfo("row_installed_on = ".$row_installed_on);
+    //$logger->logInfo("row_installed_on = ".$row_installed_on);
 
     /* incrementing study version*/
     $APK_VERSION = $row_installed_on['apk_version'] + 1;
+    
+    /**
+    * Update the given APK and study
+    * WARNING: hashed filename is WITHOUT .apk extention!
+    */
+    $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." 
+          SET apktitle='". $APK_TITLE ."',
+              apkname='". (!$FILE_WAS_UPLOADED ? $oldAPKName : $filename)."', 
+              apk_version='".$APK_VERSION."',
+              apkhash='".(!$FILE_WAS_UPLOADED ? $oldAPKHash : $HASH_FILE) ."',
+              private=". $private .", 
+              description='". $APK_DESCRIPTION ."',".
+              (!empty($startcriterion) ? 'startcriterion='.$startcriterion .',' : '')."
+              startdate=". ($startdate != NULL ? "'". $startdate ."'" : "NULL") .",
+              enddate=". ($enddate != NULL ? "'". $enddate ."'" : "NULL") .",
+              restriction_device_number=". $maxDevices .",
+              androidversion=". $APK_ANDROID_VERSION .",".
+              (!empty($runningtime) ? 'runningtime='. $runningtime .',' : '')."
+              inviteinstall=". $setupType .",
+              ustudy_finished=". $USTUDY_FINISHED ." 
+          WHERE apkid=". $apkId;
+     
+     echo $sql;
+     
+    //$logger->logInfo($sql);
 
-      /**
-      * Update the given APK and study
-      * WARNING: hashed filename is WITHOUT .apk extention!
-      */
-      $sql = "UPDATE ". $CONFIG['DB_TABLE']['APK'] ." 
-              SET apktitle='". $APK_TITLE ."',
-                  apkname='". (!$FILE_WAS_UPLOADED ? $oldAPKName : $filename)."', 
-                  apk_version='".$APK_VERSION."',
-                  apkhash='".(!$FILE_WAS_UPLOADED ? $oldAPKHash : $HASH_FILE) ."',
-                  private=". $private .", 
-                  description='". $APK_DESCRIPTION ."',".
-                  (!empty($startcriterion) ? 'startcriterion='.$startcriterion : '')."
-                  startdate='". $startdate ."',
-                  enddate='". $enddate ."',
-                  restriction_device_number=". $maxDevices .",
-                  androidversion=". $APK_ANDROID_VERSION .",
-                  inviteinstall=". $setupType .",
-                  ustudy_finished=-1 
-              WHERE apkid=". $apkId;
-              
-      $logger->logInfo($sql);
-      
-      $db->exec($sql);
+    $db->exec($sql);
 
     if(!empty($row_installed_on))
     {
       $row_installed_on =  $row_installed_on[0];
       $logger->logInfo("row_installed_on[0] = ".$row_installed_on);
 
-      if(!empty($row_installed_on))
-      {
+      if(!empty($row_installed_on)){
 
         include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
+        
         $targetDevices = array();
         $row_installed_on = substr($row_installed_on, 1);
         $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
@@ -256,6 +262,7 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
         
           //Selecting all different apk in a hardware
         foreach($row_installed_on as $hardware_id){
+        
              $sql="SELECT * 
                    FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." 
                    WHERE hwid=".$hardware_id;
