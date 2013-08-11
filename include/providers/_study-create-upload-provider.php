@@ -262,20 +262,15 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
         
             // determine form's title
             $survey_form_title = '';
-            $isStandardForm = false;
             
             switch(intval($survey_form['survey_form_id'])){
                 case 9001:  $survey_form_title = 'Custom form';
-                            $isStandardForm = false;
                             break;
                 case 1:  $survey_form_title = getStandardSurveyNameById(1);
-                         $isStandardForm = true;
                          break;
                 case 2:  $survey_form_title = getStandardSurveyNameById(2);
-                         $isStandardForm = true;
                          break;
                 case 3:  $survey_form_title = getStandardSurveyNameById(3);
-                         $isStandardForm = true;
                          break;
                             
                 default: die('6');  // wrong JSON                
@@ -283,9 +278,9 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
             
             // store form title in db
             $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_FORM'] ." 
-                                    (surveyid, title, standard)
+                                    (surveyid, title)
                                     VALUES 
-                                    (". $survey_id .", '". $survey_form_title ."'". ($isStandardForm ? ",1" : ",0") .")";
+                                    (". $survey_id .", '". $survey_form_title ."')";
             
             $db->exec($sql);
             
@@ -343,7 +338,24 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                             
                             $db->exec($sql);
                             
-                            // no store of answers 
+                            $question_id = $db->lastInsertId();
+                            
+                            $answers = $question['answers'];
+                            
+                            // store answers in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                                    (questionid, text) 
+                                                    VALUES ";
+                            
+                            foreach($answers as $answer){
+                                // append answer values 
+                                $sql .=" (". $question_id .", '". $answer ."'),";       
+                            }
+                            
+                            // remove last ',' from sql string
+                            $sql = substr($sql, 0, -1);
+                            
+                            $db->exec($sql);
                          } 
                 
                          break;
@@ -366,7 +378,7 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                             
                             $db->exec($sql);
                             
-                            // no store of answers 
+                            // no store of answers
                          }              
                 
                          break;
@@ -389,7 +401,24 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                             
                             $db->exec($sql);
                             
-                            // no store of answers 
+                            $question_id = $db->lastInsertId();
+                            
+                            $answers = $question['answers'];
+                            
+                            // store answers in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                                    (questionid, text) 
+                                                    VALUES ";
+                            
+                            foreach($answers as $answer){
+                                // append answer values 
+                                $sql .=" (". $question_id .", '". $answer ."'),";       
+                            }
+                            
+                            // remove last ',' from sql string
+                            $sql = substr($sql, 0, -1);
+                            
+                            $db->exec($sql);
                          }
                 
                          break;
