@@ -111,7 +111,42 @@ $('.btnUpdateOK').click(function(e){
                 p.find('[name="end_date_text"]').text(p.find('[name="end_date"]').val());
                 p.find('[name="description_text"]').text(p.find('[name="description"]').val()); 
                 p.find('[name="max_devices_number_text"]').text(p.find('[name="max_devices_number"]').val());
-                    
+                
+                // forming criterion
+                var startCriterion = $('[name="start_after_n_devices"]').val();                 
+                if(startCriterion.length != 0){
+                    var content = 'Commencement after '+ startCriterion +' user';
+                    if(startCriterion > 1){
+                        content += 's';
+                    }
+                    content += ' join';
+                    if(startCriterion > 1){
+                        content += '';
+                    }else{
+                        content += 's';
+                    }
+                    content += '.';
+                    startCriterion = content;
+                }
+                startCriterion += 'Commenced while creating '+ $('[name="apk_title"]').val() +'.';
+                
+                // setting starting criterion
+                p.find('[name="start_date_text"]').text(startCriterion);
+                       
+                // forming running time             
+                var runningTime = $('[name="running_time"]').val();
+                if(runningTime.length != 0){
+                    runningTime = 'The termination after '+ runningTime +' hours from the date of start.';
+                }else{
+                    runningTime = 'Terminated immediately after creating '+ $('[name="apk_title"]').val() +'.';
+                }
+                
+                // setting running time
+                p.find('[name="end_date_text"]').text(runningTime);
+                
+                // show joined devices string
+                p.find('[name="joined_devices_text"]').show();
+                
                 if(p.find('[name="setup_types"]').is(':checked')){
                    p.find('[name="allowed_join_text"]').text("This study is avalaible for everyone."); 
                 }else{
@@ -154,6 +189,8 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.find('[name="max_devices_number_text"]').show();
    p.find('[name="allowed_join_text"]').show();
    p.find('[name="private_text"]').show();
+   // show joined devices string
+   p.find('[name="joined_devices_text"]').show();
    p.find('.survey_available_text').show();
    p.find('.surveyShowHide').show();
    p.find('.surveyRemove').show();

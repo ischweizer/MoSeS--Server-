@@ -48,7 +48,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         
             $runningTime = $APK['runningtime'];
             $runningTime = !empty($runningTime) ? 
-                            'The termination after '. $runningTime .' from the date of start.' :
+                            'The termination after '. $runningTime .' hours from the date of start.' :
                             'Terminated immediately after creating '. $APK['apktitle'] .'.'; 
                         
             $joinedDevices = 'There '. ($APK['participated_count'] < 2 ? 'is' : 'are') .' '.
