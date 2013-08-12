@@ -1,4 +1,23 @@
+
+$('.btnInstantScientist').click(function(e){
+    e.preventDefault();
+    
+    $.ajax({
+        type: "POST",
+        url: 'content_provider.php',
+        data: {'instantScientist': 7779},
+        success: function(result){
+            if(result == "1"){
+                $('.hero-unit').html('<h3 class="text-center">Congrats! You are now a scientist!</h3>');
+            }
+        }
+       });
+});
+
 $('.btnLeaveGroup').click(function(){
+    
+    e.preventDefault();
+    
     $.ajax({
         type: "POST",
         url: 'content_provider.php',
@@ -9,10 +28,11 @@ $('.btnLeaveGroup').click(function(){
             }
         }
        });
-       return false;
 });
 
 $('#btnCreateJoinGroup').click(function(e){        
+    
+    e.preventDefault();
     
     var clickedButton = $(this);
     
@@ -45,8 +65,6 @@ $('#btnCreateJoinGroup').click(function(e){
            handleGroupServerAnswer(result);
         });
     }    
-    
-    e.preventDefault();
 });
 
 function handleGroupServerAnswer(result){

@@ -4,6 +4,17 @@ session_start();
 include_once("./include/functions/func.php");
 
 /*
+*   Instant scientist
+*/
+
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_POST['instantScientist']) && $_POST['instantScientist'] == 7779){
+
+    include_once("./include/providers/_instant-scientist-provider.php");
+    exit;
+}
+
+/*
 *   Apply as scientist
 */
 
