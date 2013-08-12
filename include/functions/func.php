@@ -154,43 +154,53 @@ function getStandardSurveysArray(){
     $SYSTEM_USABILITY_SCALE_Q = array();                            
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I think that I would like to use this system frequently', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );                             
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I found the system unnecessarily complex', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I thought the system was easy to use', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );                                
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I think that I would need the support of a technical person to be able to use this system', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );                             
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I found the various functions in this system were well integrated', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I thought there was too much inconsistency in this system', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I would imagine that most people would learn to use this system very quickly', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );                             
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I found the system very cumbersome to use', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I felt very confident using the system', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );                             
     $SYSTEM_USABILITY_SCALE_Q[] = array('question_type' => 3, 
                                 'question'=> 'I needed to learn a lot of things before I could get going with this system', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );
                                 
     $SYSTEM_USABILITY_SCALE = array('survey_form_id' => 1,
@@ -205,16 +215,19 @@ function getStandardSurveysArray(){
     $STANDARD_SURVEY_1_Q = array();
     $STANDARD_SURVEY_1_Q[] = array('question_type' => 1, 
                                 'question'=> 'Standard1- question1', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 3,
+                                'answers' => array('Yes', 'No', 'Not sure')
                                 );
                                 
     $STANDARD_SURVEY_1_Q[] = array('question_type' => 2, 
                                 'question'=> 'Standard1- question2', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array()
                                 );
     $STANDARD_SURVEY_1_Q[] = array('question_type' => 3, 
                                 'question'=> 'Standard1- question3', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 5,
+                                'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
                                 );
 
     $STANDARD_SURVEY_1 = array('survey_form_id' => 2,
@@ -227,18 +240,21 @@ function getStandardSurveysArray(){
     /* Standard 2 */
                
     $STANDARD_SURVEY_2_Q = array();                           
-    $STANDARD_SURVEY_2_Q[] = array('question_type' => 4, 
+    $STANDARD_SURVEY_2_Q[] = array('question_type' => 1, 
                                 'question'=> 'Standard2- question1', 
-                                'question_number_of_answers' => 2
+                                'question_number_of_answers' => 3,
+                                'answers' => array('Yes', 'No', 'Not sure')
                                 );
                                 
     $STANDARD_SURVEY_2_Q[] = array('question_type' => 2, 
                                 'question'=> 'Standard2- question2', 
-                                'question_number_of_answers' => 0
+                                'question_number_of_answers' => 0,
+                                'answers' => array()
                                 );
-    $STANDARD_SURVEY_2_Q[] = array('question_type' => 5, 
+    $STANDARD_SURVEY_2_Q[] = array('question_type' => 1, 
                                 'question'=> 'Standard2- question3', 
-                                'question_number_of_answers' => 4
+                                'question_number_of_answers' => 3,
+                                'answers' => array('Yes', 'No', 'Not sure')
                                 );
                                 
     $STANDARD_SURVEY_2 = array('survey_form_id' => 3,
@@ -250,6 +266,20 @@ function getStandardSurveysArray(){
     
     
     return $SURVEYS_STD_RESULT;
+}
+
+/*
+*   Returns standard form by name
+*/
+function getStandardFormByName($name){
+    $forms = getStandardSurveysArray();
+    
+    foreach($forms as $f){
+        if($f['survey_form_name'] == $name){
+            return $f;
+        }       
+    }
+    return NULL;
 }
 
 /** 
@@ -310,5 +340,64 @@ function getStandardSurveyById($survey_form_id){
    }
    return json_encode($RESULT);
 }
+
+function download_send_headers($filename) {
+    // disable caching
+    $now = gmdate("D, d M Y H:i:s");
+    header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+    header("Cache-Control: max-age=0, no-cache, must-revalidate, proxy-revalidate");
+    header("Last-Modified: {$now} GMT");
+
+    // force download  
+    header("Content-Type: application/force-download");
+    header("Content-Type: application/octet-stream");
+    header("Content-Type: application/download");
+
+    // disposition / encoding on response body
+    header("Content-Disposition: attachment;filename={$filename}");
+    header("Content-Transfer-Encoding: binary");
+}
   
+function survey2csv(array $RESULTS){
+    
+   if(count($RESULTS) == 0)
+    return null;
+     
+   ob_start();
+   $out = fopen("php://output", 'w');
+   
+   fputcsv($out, array($RESULTS['apk_title']));
+   
+   $FORMS = $RESULTS['forms'];
+   
+   foreach($FORMS as $f) {
+        fputcsv($out, array($f['form_title']));
+        
+        $QUESTIONS = $f['questions'];
+        
+        foreach($QUESTIONS as $q){
+            fputcsv($out, array($q['question_title'], 'Type '. $q['question_type']));
+            
+            $ANSWERS = $q['answers'];
+            $t = $ANSWERS['titles'];
+            $c = $ANSWERS['counters'];
+            for($i=1; $i <= count($t); $i++){
+                if(!empty($c[$i])){
+                    fputcsv($out, array($t[$i-1], ' # of answers: '. $c[$i]));        
+                }else{
+                    fputcsv($out, array($t[$i-1]));        
+                }
+            }
+            
+            // unanswered
+            if(!empty($c[0])){
+                fputcsv($out, array('Unanswered', ' # of answers: '. $c[0]));        
+            }
+        }
+   }
+   
+   fclose($out);
+   return ob_get_clean();
+}  
+
 ?>

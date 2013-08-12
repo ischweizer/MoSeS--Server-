@@ -64,7 +64,11 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
             // find all answers
             question.parent().find('.survey_answer').each(function(answer_i, elem3){
                 var answer = $(this);
-                answers.push(answer.val());
+                if(answer.text().length != 0 && answer.val().length == 0){
+                    answers.push(answer.text());
+                }else{
+                    answers.push(answer.val());    
+                }
             });
             
             questions.push({'question_type':question_type,

@@ -338,7 +338,24 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                             
                             $db->exec($sql);
                             
-                            // no store of answers 
+                            $question_id = $db->lastInsertId();
+                            
+                            $answers = $question['answers'];
+                            
+                            // store answers in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                                    (questionid, text) 
+                                                    VALUES ";
+                            
+                            foreach($answers as $answer){
+                                // append answer values 
+                                $sql .=" (". $question_id .", '". $answer ."'),";       
+                            }
+                            
+                            // remove last ',' from sql string
+                            $sql = substr($sql, 0, -1);
+                            
+                            $db->exec($sql);
                          } 
                 
                          break;
@@ -361,7 +378,7 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                             
                             $db->exec($sql);
                             
-                            // no store of answers 
+                            // no store of answers
                          }              
                 
                          break;
@@ -384,7 +401,24 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                             
                             $db->exec($sql);
                             
-                            // no store of answers 
+                            $question_id = $db->lastInsertId();
+                            
+                            $answers = $question['answers'];
+                            
+                            // store answers in db
+                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                                    (questionid, text) 
+                                                    VALUES ";
+                            
+                            foreach($answers as $answer){
+                                // append answer values 
+                                $sql .=" (". $question_id .", '". $answer ."'),";       
+                            }
+                            
+                            // remove last ',' from sql string
+                            $sql = substr($sql, 0, -1);
+                            
+                            $db->exec($sql);
                          }
                 
                          break;

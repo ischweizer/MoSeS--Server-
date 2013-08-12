@@ -59,9 +59,9 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                                   '<div class="survey_question_container">';
                    
                    var answers_yes_no =   '<ul>'+
-                                          '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Yes</span></li>'+
-                                          '<li><input type="radio" disabled="disabled"><span class="survey_q_element">No</span></li>'+
-                                          '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Not sure</span></li>'+
+                                          '<li><input type="radio" disabled="disabled"><span class="survey_answer">Yes</span></li>'+
+                                          '<li><input type="radio" disabled="disabled"><span class="survey_answer">No</span></li>'+
+                                          '<li><input type="radio" disabled="disabled"><span class="survey_answer">Not sure</span></li>'+
                                           '</ul>';
                                           
                    var answers_text = '<ul>'+
@@ -69,11 +69,11 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                                       '</ul>';
                    
                    var answers_likert_scale = '<ul>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Disagree"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Disagree"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Neutral"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Agree"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Disagree"</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Disagree"</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Neutral"</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Agree"</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Agree"</span></li>'+
                                               '</ul>';
                   
                    $(data.content).each(function(i, question){
@@ -240,9 +240,9 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
         // YES/NO Question
         case 1: // compose all answers
                 var answers = '<ul>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Yes</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">No</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Not sure</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Yes</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">No</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Not sure</span></li>'+
                               '</ul>';
                  
                 content += answers; 
@@ -272,11 +272,11 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
         // Scale question        
         case 3: // compose all answers
                 var answers = '<ul>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Disagree"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Disagree"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Neutral"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Agree"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Disagree"</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Disagree"</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Neutral"</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Agree"</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Agree"</span></li>'+
                               '</ul>';
                  
                 content += answers;

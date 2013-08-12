@@ -188,9 +188,15 @@ include_once("./include/_menu.php");
                    }
                ?>
             </div>
-        <h5>This group has private apps: <?php echo $group_has_private_apks; ?></h5>
+        <?php if(!empty($apk_rows)){ ?><h5>This group has private apps: <?php echo $group_has_private_apks; ?></h5><?php } ?>
         <br>
         <h4>This group has <?php echo count($GROUP_UNIQUE_DEVICES); ?> unique device<?php echo (count($GROUP_UNIQUE_DEVICES) > 1 ? 's' : ''); ?>!</h4>
+        <?php
+          if(count($GROUP_UNIQUE_DEVICES) % 5 == 0){
+            echo '<h4>You have one more instant scientist possibility!</h4>';
+            echo '<button class="btn btn-success btnInstantScientist">Instant scientist</button>';
+          }  
+        ?>
         <div class="accordion" id="accordionFather2">
             <?php
                for($i=0; $i<count($GROUP_UNIQUE_DEVICES); $i++){
@@ -200,7 +206,7 @@ include_once("./include/_menu.php");
                 <div class="accordion-heading">
                   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFather2" href="#collapseDevices<?php echo $i; ?>">
                     <?php
-                       echo $DEVICE['modelname'].($DEVICE['uid'] == $_SESSION['USER_ID'] ? ' (yours)' : ''); 
+                       echo $DEVICE['modelname'].($DEVICE['uid'] == $_SESSION['USER_ID'] ? ' (yours)' : '');
                     ?>
                   </a>
                 </div>

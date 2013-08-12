@@ -3,7 +3,7 @@ $('[name="btnDownloadApp"]').click(function(e){
     e.preventDefault(); 
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
-    window.location.href = './apk/'+ p.find('[name="userhash"]').val() +'/'+ p.find('[name="apkhash"]').val() +'.apk';
+    location.href = './apk/'+ p.find('[name="userhash"]').val() +'/'+ p.find('[name="apkhash"]').val() +'.apk';
 });
 
 /* Confirm dialog */
@@ -81,6 +81,51 @@ $('.btnUpdateOK').click(function(e){
    /* Handling form data */ 
     var formData = new FormData($(this).parent().parent().parent().parent().parent().find('form')[0]);
 
+    /* Gather a JSON-Object for surveys */
+    var surveysJSON = {};
+    
+    // find all forms in a survey
+    $('.survey_form').each(function(survey_i, elem){
+        
+        var survey = $(this);
+        var survey_form_id = parseInt(survey.find('.survey_form_id').val());
+        var questions = [];
+
+        // iterate through all questions of one survey
+        survey.find('.survey_question').each(function(question_i, elem2){
+            
+            var question = $(this);
+            var answers = [];
+            
+            // find question type
+            var question_type = question.parent().find('.survey_question_type').val();
+            
+            // find all answers
+            question.parent().find('.survey_answer').each(function(answer_i, elem3){
+                var answer = $(this);
+                if(answer.text().length != 0 && answer.val().length == 0){
+                    answers.push(answer.text());
+                }else{
+                    answers.push(answer.val());    
+                }
+            });
+            
+            questions.push({'question_type':question_type,
+                            'question':question.val(),
+                            'answers':answers});
+            
+        }); 
+
+        // populate JSON object
+        surveysJSON[survey_i] = {'survey_form_id':survey_form_id,
+                                 'survey_form_questions':questions}; 
+    });
+    
+    // append created JSON object to form data
+    formData.append('survey_json', JSON.stringify(surveysJSON));
+    
+    /* ******************************** */
+    
     $.ajax({
         url: 'content_provider.php',  
         type: 'POST',
@@ -99,6 +144,7 @@ $('.btnUpdateOK').click(function(e){
         //beforeSend: beforeSendHandler,
         success: function(result){
             if(result == '1'){
+                /*
                 p.find('progress').hide();
                 p.find('[name="btnUpdateStudy"]').attr('disabled',false);
                 p.find('.btnUpdateOK').attr('disabled', false);
@@ -111,7 +157,42 @@ $('.btnUpdateOK').click(function(e){
                 p.find('[name="end_date_text"]').text(p.find('[name="end_date"]').val());
                 p.find('[name="description_text"]').text(p.find('[name="description"]').val()); 
                 p.find('[name="max_devices_number_text"]').text(p.find('[name="max_devices_number"]').val());
-                    
+                
+                // forming criterion
+                var startCriterion = $('[name="start_after_n_devices"]').val();                 
+                if(startCriterion.length != 0){
+                    var content = 'Commencement after '+ startCriterion +' user';
+                    if(startCriterion > 1){
+                        content += 's';
+                    }
+                    content += ' join';
+                    if(startCriterion > 1){
+                        content += '';
+                    }else{
+                        content += 's';
+                    }
+                    content += '.';
+                    startCriterion = content;
+                }
+                startCriterion += 'Commenced while creating '+ $('[name="apk_title"]').val() +'.';
+                
+                // setting starting criterion
+                p.find('[name="start_date_text"]').text(startCriterion);
+                       
+                // forming running time             
+                var runningTime = $('[name="running_time"]').val();
+                if(runningTime.length != 0){
+                    runningTime = 'The termination after '+ runningTime +' hours from the date of start.';
+                }else{
+                    runningTime = 'Terminated immediately after creating '+ $('[name="apk_title"]').val() +'.';
+                }
+                
+                // setting running time
+                p.find('[name="end_date_text"]').text(runningTime);
+                
+                // show joined devices string
+                p.find('[name="joined_devices_text"]').show();
+                
                 if(p.find('[name="setup_types"]').is(':checked')){
                    p.find('[name="allowed_join_text"]').text("This study is avalaible for everyone."); 
                 }else{
@@ -123,6 +204,11 @@ $('.btnUpdateOK').click(function(e){
                 }else{
                    p.find('[name="private_text"]').html("This study marked as <strong>public</strong>."); 
                 }
+                
+                // removing survey controls
+                p.parent().find('[name="survey_controls"]').remove();*/
+                
+                location.reload();
             }
         },
         //error: errorHandler,
@@ -154,6 +240,8 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.find('[name="max_devices_number_text"]').show();
    p.find('[name="allowed_join_text"]').show();
    p.find('[name="private_text"]').show();
+   // show joined devices string
+   p.find('[name="joined_devices_text"]').show();
    p.find('.survey_available_text').show();
    p.find('.surveyShowHide').show();
    p.find('.surveyRemove').show();
@@ -176,6 +264,16 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.parent().parent().find('[name="btnAddSurvey"]').hide();
    
    $(this).parent().parent().parent().parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
+});
+
+// special activities for cancel user study button
+$('.btnUpdateCancel').click(function(e){
+    e.preventDefault();
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+     
+    // removing survey controls if it was selected
+    p.parent().find('[name="survey_controls"]').remove();
 });
 
 $('[name="study_period"]').click(function(){
@@ -237,4 +335,10 @@ $('.surveyRemove').click(function(e){
               alert("Cannot remove user study survey! Try again later.");
           }
     });
+});
+
+$('.btnSurveyResultsExportCsv').click(function(e){
+    e.preventDefault();
+    
+    location.href = './export.php?id='+ $(this).val() +'&m=csv';
 });

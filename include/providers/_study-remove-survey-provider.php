@@ -6,11 +6,11 @@ include_once("./include/functions/dbconnect.php");
 $SURVEY_ID = trim($_POST['study_survey_remove']);
 
 /* 
-* Remove corresponding surveys 
+* Remove corresponding surveys and results 
 * 
 */
 
-// select answers
+// remove answers
 $survey_answers_sql = 'DELETE 
                      FROM '. $CONFIG['DB_TABLE']['STUDY_ANSWER'] .' 
                      WHERE questionid 
@@ -24,9 +24,10 @@ $survey_answers_sql = 'DELETE
                                  FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                                  WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'] .')))';
                                  
-// remove answers
 $db->exec($survey_answers_sql);
-                                
+
+
+// remove questions                    
 $survey_questions_sql = 'DELETE 
                        FROM '. $CONFIG['DB_TABLE']['STUDY_QUESTION'] .' 
                        WHERE formid 
@@ -37,9 +38,10 @@ $survey_questions_sql = 'DELETE
                                FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                                WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'] .'))';
                                
-// remove questions
 $db->exec($survey_questions_sql);
-                                 
+               
+                       
+// remove forms
 $survey_forms_sql = 'DELETE 
                    FROM '. $CONFIG['DB_TABLE']['STUDY_FORM'] .' 
                    WHERE surveyid 
@@ -47,15 +49,23 @@ $survey_forms_sql = 'DELETE
                        FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                        WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'] .')';
                        
-// remove forms
 $db->exec($survey_forms_sql);
-                                 
+
+                     
+// remove surveys            
 $survey_surveys_sql = 'DELETE 
                        FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
                        WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'];
                      
-// remove surveys
 $db->exec($survey_surveys_sql);
+
+
+// remove survey results
+$survey_results_sql = 'DELETE 
+                       FROM '. $CONFIG['DB_TABLE']['STUDY_RESULT'] .' 
+                       WHERE survey_id = '. $SURVEY_ID;
+                     
+$db->exec($survey_results_sql);
 
 die('1');        
 ?>

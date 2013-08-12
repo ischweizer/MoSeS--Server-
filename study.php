@@ -47,6 +47,10 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
        
        foreach($USER_APKS as $apk){
        
+           /*
+           *  Build up a survey array
+           */
+           
            $sql = "SELECT surveyid 
                    FROM ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
                    WHERE userid = ". $_SESSION["USER_ID"] ." AND apkid = ". $apk['apkid'];
@@ -106,8 +110,6 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                $SURVEY_BY_APK_ID[$apk['apkid']] = array();
            }
        } 
-       
-       //print_r($SURVEY_BY_APK_ID);  
        
        /**
        * *********************************************

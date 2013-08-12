@@ -33,21 +33,23 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
         ?>" class="accordion-body collapse">
       <div class="accordion-inner">
       <?php
-            $startCriterion = $APK['startcriterion'];
-            $startDate = (!empty($APK['startdate']) ? 
-                            $APK['startdate'] : 
-                            (!empty($startCriterion) ? 
-                            'Commencement after '. $startCriterion .' user'. 
-                            ($startCriterion > 1 ? 's' : '') .' join'. 
-                            ($startCriterion > 1 ? '' : 's') .'.' 
-                            : 'Commenced while creating '. $APK['apktitle'] .'.'));
-                            
+            $startDate = !empty($APK['startdate']) ? 
+                            $APK['startdate'] : ''; 
+           
+            $startCriterion = $APK['startcriterion'];                 
+            $startCriterion = !empty($startCriterion) ? 
+                                'Commencement after '. $startCriterion .' user'. 
+                                ($startCriterion > 1 ? 's' : '') .' join'. 
+                                ($startCriterion > 1 ? '' : 's') .'.' 
+                                : 'Commenced while creating '. $APK['apktitle'] .'.';
+            
+            $endDate = !empty($APK['enddate']) ? 
+                        $APK['enddate'] : ''; 
+                        
             $runningTime = $APK['runningtime'];
-            $endDate = (!empty($APK['enddate']) ? 
-                        $APK['enddate'] : 
-                        (!empty($runningTime) ? 
-                        'The termination after '. $runningTime .' from the date of start.' :
-                        'Terminated immediately after creating '. $APK['apktitle'] .'.')); 
+            $runningTime = !empty($runningTime) ? 
+                            'The termination after '. $runningTime .' hours from the date of start.' :
+                            'Terminated immediately after creating '. $APK['apktitle'] .'.'; 
                         
             $joinedDevices = 'There '. ($APK['participated_count'] < 2 ? 'is' : 'are') .' '.
                                        ($APK['participated_count'] == 0 ? 'no' : $APK['participated_count']) .' '.
@@ -83,40 +85,52 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                     <div class="control-group" name="study_period_text1" style="display: none;">
                         <label class="control-label"></label>
                         <div class="controls">
-                            <label><input type="radio" name="study_period" value="1" checked="checked"> Study period from date to date</label>
+                            <label><input type="radio" name="study_period" value="1"<?php 
+                                echo !empty($APK['startdate']) || !empty($APK['enddate']) ? ' checked="checked"' : '' ; 
+                                ?>> Study period from date to date</label>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Start: </label>
                         <div class="controls">
-                            <div name="start_date_text"><?php echo $startDate; ?></div>
-                            <input type="text" name="start_date" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $startDate; ?>" style="display: none;" />
+                            <div name="start_date_text"><?php echo !empty($APK['startdate']) ? $startDate : $startCriterion; ?></div>
+                            <input type="text" name="start_date" maxlength="50" placeholder="yyyy-mm-dd"<?php 
+                                echo !empty($APK['startdate']) || !empty($APK['enddate']) ? '' : ' disabled="disabled"'; ?> value="<?php echo $startDate; ?>" style="display: none;" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">End: </label>
                         <div class="controls">
-                            <div name="end_date_text"><?php echo $endDate; ?></div>
-                            <input type="text" name="end_date" maxlength="50" placeholder="yyyy-mm-dd" value="<?php echo $endDate; ?>" style="display: none;" />
+                            <div name="end_date_text"><?php echo !empty($APK['enddate']) ? $endDate : $runningTime; ?></div>
+                            <input type="text" name="end_date" maxlength="50" placeholder="yyyy-mm-dd"<?php 
+                                echo !empty($APK['startdate']) || !empty($APK['enddate']) ? '' : ' disabled="disabled"'; ?> value="<?php echo $endDate; ?>" style="display: none;" />
                         </div>
                     </div>
                     <div class="control-group" name="study_period_text2" style="display: none;">
                         <label class="control-label"></label>
                         <div class="controls">
-                            <label><input type="radio" name="study_period" value="2"> Study for minimum devices and running period</label>
+                            <label><input type="radio" name="study_period" value="2"<?php 
+                                echo !empty($APK['startcriterion']) || !empty($APK['runningtime']) ? ' checked="checked"' : '' ; 
+                                ?>> Study for minimum devices and running period</label>
                         </div>
                     </div>
                     <div class="control-group" name="start_after_n_devices_text" style="display: none;">
                         <label class="control-label">Minimum number of devices to start after: </label>
                         <div class="controls">
-                            <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" />
+                            <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number"<?php 
+                                echo !empty($APK['startcriterion']) || !empty($APK['runningtime']) ? ' value="'. $APK['startcriterion'] .'"' : ' disabled="disabled"' ; 
+                                ?> />
                         </div>
                     </div>
                     <div class="control-group" name="running_time_text" style="display: none;">
                         <label class="control-label">Running period:</label>
                         <div class="controls">
-                            <input type="text" name="running_time" maxlength="50" placeholder="Number" disabled="disabled" />
-                            <select name="running_time_value" disabled="disabled">
+                            <input type="text" name="running_time" maxlength="50" placeholder="Number"<?php 
+                                echo !empty($APK['startcriterion']) || !empty($APK['runningtime']) ? ' value="'. $APK['runningtime'] .'"' : ' disabled="disabled"' ; 
+                                ?> />
+                            <select name="running_time_value"<?php 
+                                echo !empty($APK['startcriterion']) || !empty($APK['runningtime']) ? '' : ' disabled="disabled"' ; 
+                                ?>>
                                 <option value="h">Hours</option>
                                 <option value="d">Days</option>
                                 <option value="m">Months</option>
@@ -250,32 +264,55 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                                                         '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'.
                                                                     '</ul>';
                                                                     
-                                             switch($question['question_type']){
+                                             switch(intval($question['question_type'])){
                                                  case 1: echo $answers_yes_no;
                                                          break;
                                                  case 2: echo $answers_text;
                                                          break;
                                                  case 3: echo $answers_likert_scale;
                                                          break;
-                                                 case 4: foreach($question['answers'] as $answer){
-                                                             echo '<ul style="list-style-type: none;">'.
+                                                 case 4: if(!empty($question['answers'])){
+                                                             foreach($question['answers'] as $answer){
+                                                                 echo '<ul style="list-style-type: none;">'.
+                                                                        '<li>'.
+                                                                            '<input type="checkbox" disabled="disabled">'.
+                                                                            '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                         '</li>'.
+                                                                      '</ul>';
+                                                             }
+                                                         }else{
+                                                             // if answers were empty!
+                                                             // TODO: insert standards for that type of answer
+                                                             /*echo '<ul style="list-style-type: none;">'.
                                                                     '<li>'.
                                                                         '<input type="checkbox" disabled="disabled">'.
                                                                         '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
                                                                      '</li>'.
-                                                                  '</ul>';
+                                                                  '</ul>';*/
+                                                                  
                                                          }
                                                          break;
-                                                 case 5: foreach($question['answers'] as $answer){
-                                                             echo '<ul style="list-style-type: none;">'.
+                                                 case 5: if(!empty($question['answers'])){
+                                                             foreach($question['answers'] as $answer){
+                                                                 echo '<ul style="list-style-type: none;">'.
+                                                                        '<li>'.
+                                                                            '<input type="radio" disabled="disabled">'.
+                                                                            '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                         '</li>'.
+                                                                      '</ul>';
+                                                             }
+                                                         }else{
+                                                             // if answers were empty!
+                                                             // TODO: insert standards for that type of answer
+                                                             /*ho '<ul style="list-style-type: none;">'.
                                                                     '<li>'.
                                                                         '<input type="radio" disabled="disabled">'.
                                                                         '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
                                                                      '</li>'.
-                                                                  '</ul>';
+                                                                  '</ul>';*/
                                                          }
                                                          break;
-                                                 default: 
+                                                 default: echo 'Something went wrong!'; 
                                              }
                                          }
                                      ?>
@@ -310,7 +347,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             <?php
             if($APK['ustudy_finished'] == 1){
                 ?>
-                <li><button class="btn" title="Survey results">Results</button></li>
+                <li><button class="btn btnSurveyResultsExportCsv" title="Survey results" value="<?php echo $survey['survey_id']; ?>">Results to CSV</button></li>
                 <?php
             }
             ?>
