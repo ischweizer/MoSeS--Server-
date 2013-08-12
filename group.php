@@ -188,7 +188,7 @@ include_once("./include/_menu.php");
                    }
                ?>
             </div>
-        <h5>This group has private apps: <?php echo $group_has_private_apks; ?></h5>
+        <?php if(!empty($apk_rows)){ ?><h5>This group has private apps: <?php echo $group_has_private_apks; ?></h5><?php } ?>
         <br>
         <h4>This group has <?php echo count($GROUP_UNIQUE_DEVICES); ?> unique device<?php echo (count($GROUP_UNIQUE_DEVICES) > 1 ? 's' : ''); ?>!</h4>
         <div class="accordion" id="accordionFather2">
