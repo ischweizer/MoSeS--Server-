@@ -42,8 +42,11 @@ if(isset($_POST['HTTP_JSON'])){
         
         $DBManager = new DBManager();
         $DBManager->connect($CONFIG['DB']['HOST'], $CONFIG['DB']['DBNAME'], $CONFIG['DB']['USER'], $CONFIG['DB']['PASSWORD']);
+        $message = $data->MESSAGE;
+        $logger->logInfo("api.php message=".$message);
+        $logger->logInfo("api.php apkID=".$data->APKID);
         
-        if($data->MESSAGE != null){
+        if($message != null){
         
             switch($data->MESSAGE){
             
@@ -107,24 +110,14 @@ if(isset($_POST['HTTP_JSON'])){
                     include_once(MOSES_HOME . "/include/events/change_device_id.php.inc");
                     break;
                 
-                case "QUESTIONNAIRES_REQUEST":
+                case "GET_SURVEY":
                     
                     include_once(MOSES_HOME . "/include/events/questionnaires_request.php.inc");
                     break;                
                 
-                case "QUESTION_REQUEST":
-                    
-                    include_once(MOSES_HOME . "/include/events/question_request.php.inc");
-                    break;
-                
                 case "ANSWER_QUESTIONNAIRE":
                     
                     include_once(MOSES_HOME . "/include/events/answer_questionnaire.php.inc");
-                    break;
-
-                case "GET_QUESTIONNAIRE":
-                    
-                    include_once(MOSES_HOME . "/include/events/get_questionnaire_info.php.inc");
                     break;
     
                 default:
