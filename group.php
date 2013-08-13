@@ -22,7 +22,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
 
     $CREATE = 0;
     
-    $sql = 'SELECT u.rgroup, rg.members 
+    $sql = 'SELECT u.rgroup, rg.members, rg.instant_scientists_counter 
             FROM '. $CONFIG['DB_TABLE']['USER'] .' u 
             LEFT JOIN '. $CONFIG['DB_TABLE']['RGROUP'] .' rg 
             ON u.rgroup=rg.name 
@@ -34,6 +34,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
     $group_members_array_ids = json_decode($row['members']);
     $group_members_count = count($group_members_array_ids);
     $groupname = $row['rgroup'];
+    $group_instant_scientists_counter = $row['instant_scientists_counter'];
+    print_r($group_instant_scientists_counter);
     $GROUP_MEMBERS = array();
     $group_device_count = 0;
     $group_has_private_apks = '';
@@ -192,7 +194,8 @@ include_once("./include/_menu.php");
         <br>
         <h4>This group has <?php echo count($GROUP_UNIQUE_DEVICES); ?> unique device<?php echo (count($GROUP_UNIQUE_DEVICES) > 1 ? 's' : ''); ?>!</h4>
         <?php
-          if(count($GROUP_UNIQUE_DEVICES) % 5 == 0){
+        // rules for instant scientist button
+          if(count($GROUP_UNIQUE_DEVICES) % 5 == 0 && (($group_members_count / 5)-1) == $group_instant_scientists_counter){
             echo '<h4>You have one more instant scientist possibility!</h4>';
             echo '<button class="btn btn-success btnInstantScientist">Instant scientist</button>';
           }  
