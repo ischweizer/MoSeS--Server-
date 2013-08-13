@@ -25,7 +25,7 @@
       <div class="navbar-inner">
           <ul class="nav">
             <li class="dropdown nav-menu1">
-                <a href="<?php echo dirname($_SERVER['PHP_SELF'])."/"; ?>">Home</a>
+                <a href="<?php echo dirname($_SERVER['PHP_SELF']); ?>">Home</a>
             </li><?php
             
                 if(isset($_SESSION["USER_LOGGED_IN"]) && $_SESSION["USER_LOGGED_IN"] == 1){
