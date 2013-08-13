@@ -60,6 +60,14 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             <form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8" id="updateAPKForm">
                 <fieldset>
                     Study ver. <?php echo $APK['apk_version']; ?> <br>
+                    <?php
+                        // this user study is FINISHED!
+                         if($APK['ustudy_finished'] == 1){
+                            ?>
+                            <h3 class="text-center" style="color: red">This user study is finished!</h3>
+                            <?php
+                         }
+                     ?>
                     <div class="control-group">
                         <label class="control-label">Study name: </label>
                         <div class="controls">
@@ -233,7 +241,12 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         ?>
                         <ul style="list-style-type: none;">
                             <li style="display: inline;"><button type="button" class="btn btn-link surveyShowHide">Show/Hide survey <i class="icon icon-chevron-right"></i></button></li>
-                            <li style="display: inline;"><button type="button" class="btn btn-link surveyRemove" value="<?php echo $survey['survey_id']; ?>">Remove survey <i class="icon icon-remove-sign"></i></button></li>
+                            <?php
+                                if($APK['ustudy_finished'] != 1){ 
+                                ?><li style="display: inline;"><button type="button" class="btn btn-link surveyRemove" value="<?php 
+                                        echo $survey['survey_id']; 
+                                ?>">Remove survey <i class="icon icon-remove-sign"></i></button></li><?php 
+                                    } ?>
                         </ul>
                         <?php
                         ?><hr class="survey_content" style="display: none;">
@@ -344,16 +357,26 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                 <?php
                     include_once('./include/_survey.php');        
                   }
+                
+                // check if user study already finished and sobotate hacker if he try still to send it
+                if($APK['ustudy_finished'] != 1){
+                    ?>
+                    <input type="hidden" name="study_update" value="6825">
+                    <?php
+                }   
                 ?>
-                <input type="hidden" name="study_update" value="6825">
                 <input type="hidden" name="apk_id" value="<?php echo $APK['apkid']; ?>">
                 <input type="hidden" name="userhash" value="<?php echo $APK['userhash']; ?>">
                 <input type="hidden" name="apkhash" value="<?php echo $APK['apkhash']; ?>">
             </form>
             <ul class="apk_control_buttons">
                 <li><button class="btn" name="btnDownloadApp" title="Download APP">Download</button></li>
-                <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
+                <?php 
+                    if($APK['ustudy_finished'] != 1){ 
+                        ?><li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
             <?php
+                    }
+                    
             if($APK['ustudy_finished'] == 1){
                 ?>
                 <li><button class="btn btnSurveyResultsExportCsv" title="Survey results" value="<?php echo $survey['survey_id']; ?>">Results to CSV</button></li>

@@ -11,8 +11,8 @@ $('[name="end_date"]').datepicker({ dateFormat: "yy-mm-dd" });
 /* ---------------- */
 
 $('[name="publishMethod"]').change(function(){
-    var value = parseInt($(this).val());
-    switch(value){
+    var method = parseInt($(this).val());
+    switch(method){
         case 1: $('[name="max_devices_number"]').attr('disabled', true); 
                break;
         case 2: $('[name="max_devices_number"]').attr('disabled', false);

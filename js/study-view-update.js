@@ -328,7 +328,7 @@ $('.surveyRemove').click(function(e){
     $.post("content_provider.php", { 'study_survey_remove': p.find('.surveyRemove').val(),
                                      'study_survey_remove_code': 4931})
         .done(function(result) {
-          if(result){
+          if(result && parseInt(result) == 1){
               p.find('.survey_content').remove();
               p.find('.surveyShowHide').remove();
               p.find('.surveyRemove').remove();

@@ -5,11 +5,29 @@ include_once("./include/functions/dbconnect.php");
     
 $SURVEY_ID = trim($_POST['study_survey_remove']);
 
+/*
+*   Check if this user study with this survey already finished -> return fail back.
+*/
+
+$sql = "SELECT apk.ustudy_finished
+        FROM ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." s, ". $CONFIG['DB_TABLE']['APK'] ." apk 
+        WHERE s.surveyid = ". $SURVEY_ID ." AND s.apkid = apk.apkid AND s.userid = apk.userid";
+
+$result = $db->query($sql);
+$row = $result->fetch();
+
+if(!empty($row)){
+   if($row['ustudy_finished'] == 1){
+       die('0');
+   } 
+}else{
+    die('0');
+}
+
 /* 
 * Remove corresponding surveys and results 
 * 
 */
-
 // remove answers
 $survey_answers_sql = 'DELETE 
                      FROM '. $CONFIG['DB_TABLE']['STUDY_ANSWER'] .' 

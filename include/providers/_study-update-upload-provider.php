@@ -13,7 +13,7 @@ $apkId = $_POST['apk_id'];
 /* check if that user can actually modify that APK */
     
 // restoring old data in case of new file
-$sql = "SELECT apkname, apkhash 
+$sql = "SELECT apkname, apkhash, ustudy_finished 
         FROM ". $CONFIG['DB_TABLE']['APK'] ." 
         WHERE userid = ". $_SESSION["USER_ID"] ." AND apkid = ". $apkId;
        
@@ -23,6 +23,11 @@ $row = $result->fetch();
 if(empty($row)){
     // that user can't access and modify the apk!
     die('-1');
+}
+
+// user study was already finished -> send fail back
+if($row['ustudy_finished'] == 1){
+    die('0');
 }
 
 $oldAPKName = $row['apkname'];
