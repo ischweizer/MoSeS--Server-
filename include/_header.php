@@ -12,7 +12,6 @@
 <meta name="keywords" content="">
 <meta name="revisit-after" content="15 days">
 <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="./css/datepicker.css" rel="stylesheet" media="screen">
 <link href="./css/style.css" rel="stylesheet" media="screen">
 <link href="./css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" media="screen">
 <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">

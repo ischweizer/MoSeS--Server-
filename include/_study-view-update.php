@@ -175,7 +175,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                     ? 
                                     '' : 
                                     'disabled="disabled"'); 
-                                    ?> maxlength="10" placeholder="Amount of invites to send" value="<?php echo $APK['restriction_device_number']; ?>" style="display: none;" />
+                                    ?> maxlength="10" placeholder="Amount of invites to send" value="<?php echo (!empty($APK['restriction_device_number']) && $APK['restriction_device_number'] != -1) ? $APK['restriction_device_number'] : ''; ?>" style="display: none;" />
                         </div>
                     </div>
                     <div name="private_text">
