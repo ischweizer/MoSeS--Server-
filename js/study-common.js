@@ -77,11 +77,11 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                                       '</ul>';
                    
                    var answers_likert_scale = '<ul>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Disagree"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Disagree"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Neutral"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Agree"</span></li>'+
-                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Agree"</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Strongly Disagree</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Disagree</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Neutral</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Agree</span></li>'+
+                                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Strongly Agree</span></li>'+
                                               '</ul>';
                   
                    $(data.content).each(function(i, question){
@@ -280,11 +280,11 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
         // Scale question        
         case 3: // compose all answers
                 var answers = '<ul>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Disagree"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Disagree"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Neutral"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Agree"</span></li>'+
-                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Agree"</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Strongly Disagree</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Disagree</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Neutral</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Agree</span></li>'+
+                              '<li><input type="radio" disabled="disabled"><span class="survey_answer">Strongly Agree</span></li>'+
                               '</ul>';
                  
                 content += answers;
