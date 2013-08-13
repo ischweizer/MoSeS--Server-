@@ -81,15 +81,16 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">Number of invitations:</label>
+        <label class="control-label"></label>
         <div class="controls">
-            <input type="number" name="max_devices_number" maxlength="10" placeholder="Number" value="10" />
+            <label><input type="radio" name="publishMethod" value="1" checked="checked">Publish to MoSeS (Public)</label>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label"></label>
         <div class="controls">
-            <label><input type="checkbox" name="setup_types" checked="checked">Publish to MoSeS</label>
+            <label><input type="radio" name="publishMethod" value="2">Ivites only study</label>
+            <input type="number" name="max_devices_number" disabled="disabled" maxlength="10" placeholder="Amount of invites to send" />
         </div>
     </div>
     <?php
@@ -98,7 +99,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="control-group">
         <label class="control-label"></label>
         <div class="controls">
-            <label><input type="checkbox" name="private">Make visible only to my group</label>
+            <label><input type="radio" name="publishMethod" value="3">Make visible only to my group (Private)</label>
         </div>
     </div>
     <?php

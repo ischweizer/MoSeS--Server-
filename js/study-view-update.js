@@ -59,6 +59,7 @@ $('[name="btnUpdateStudy"]').click(function(){
     p.find('[name="running_time_text"]').show();
     p.find('[name="description"]').show();
     p.find('[name="allowed_join"]').show();
+    p.find('[name="invites_only_install"]').show();
     p.find('[name="private_type"]').show();
     p.find('[name="btnAddSurvey"]').show();
     //p.find('[name="quests_select"]').show();
@@ -256,6 +257,7 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.find('[name="running_time_text"]').hide();
    p.find('[name="description"]').hide();
    p.find('[name="allowed_join"]').hide();
+   p.find('[name="invites_only_install"]').hide();
    p.find('[name="private_type"]').hide();
    //p.find('[name="quests_select"]').hide();
    p.find('[name="uploadFile"]').hide();

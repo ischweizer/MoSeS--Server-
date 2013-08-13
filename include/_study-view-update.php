@@ -145,28 +145,37 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                             <textarea rows="3" cols="20" name="description" placeholder="Add here some description about the study" style="display: none;"><?php echo $APK['description']; ?></textarea>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Number of invitations: </label>
-                        <div class="controls">
-                            <div name="max_devices_number_text"><?php echo $APK['restriction_device_number']; ?></div>
-                            <input type="number" name="max_devices_number" maxlength="10" placeholder="Number" value="<?php echo $APK['restriction_device_number']; ?>" style="display: none;" />
-                        </div>
-                    </div>
                     <div name="allowed_join_text">
                     <?php
-                        switch($APK['inviteinstall']){
-                            case '1': echo 'Only invited people can see this study!';
-                                    break;
-                            case '2': echo 'This study is avalaible for everyone.'; 
-                                    break;
-                            default: echo 'Something went wrong!';
+                        if(!empty($APK['restriction_device_number']) && $APK['inviteinstall'] == 1){
+                            echo 'Only invited people can see this study!';
+                        }
+                        
+                        if($APK['private'] == 1 && (empty($APK['restriction_device_number']) || $APK['inviteinstall'] != 1)){
+                            echo 'This study is private (only your group has access to it).';   
+                        }
+                        
+                        if($APK['private'] == 0 && $APK['inviteinstall'] != 1){
+                            echo 'This study is avalaible for everyone.';    
                         }
                     ?>
                     </div>
                     <div class="control-group" name="allowed_join" style="display: none;">
                         <label class="control-label"></label>
                         <div class="controls">
-                            <label><input type="checkbox" name="setup_types" checked="checked">Publish to MoSeS</label>
+                            <label><input type="radio" name="publishMethod" value="1" checked="checked">Publish to MoSeS (Public)</label>
+                        </div>
+                    </div>
+                    <div class="control-group" name="invites_only_install" style="display: none;">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <label><input type="radio" name="publishMethod" value="2" <?php echo (!empty($APK['restriction_device_number']) && $APK['inviteinstall'] == 1 ? 'checked="checked"' : ''); ?>>Ivites only study</label>
+                            <input type="number" name="max_devices_number" <?php 
+                                    echo (!empty($APK['restriction_device_number']) && $APK['inviteinstall'] == 1 
+                                    ? 
+                                    '' : 
+                                    'disabled="disabled"'); 
+                                    ?> maxlength="10" placeholder="Amount of invites to send" value="<?php echo $APK['restriction_device_number']; ?>" style="display: none;" />
                         </div>
                     </div>
                     <div name="private_text">
@@ -178,7 +187,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                     <div class="control-group" name="private_type" style="display: none;">
                         <label class="control-label"></label>
                         <div class="controls">
-                            <label><input type="checkbox" name="private" <?php echo ($APK['private'] == 1 ? 'checked="checked"' : ''); ?> />Make visible only to my group</label>
+                            <label><input type="radio" name="publishMethod" value="3" <?php echo ($APK['private'] == 1 ? 'checked="checked"' : ''); ?> />Make visible only to my group (Private)</label>
                         </div>
                     </div>
                     <?php 

@@ -2,13 +2,26 @@
 $('.dropdown').each(function(){
     $(this).removeClass('active');   
 });
-// add selection for this page
+// add menu selection for this page
 $('.nav-menu4').addClass('active');
 
 /* Datepicker format */
 $('[name="start_date"]').datepicker({ dateFormat: "yy-mm-dd" });
 $('[name="end_date"]').datepicker({ dateFormat: "yy-mm-dd" });
 /* ---------------- */
+
+$('[name="publishMethod"]').change(function(){
+    var value = parseInt($(this).val());
+    switch(value){
+        case 1: $('[name="max_devices_number"]').attr('disabled', true); 
+               break;
+        case 2: $('[name="max_devices_number"]').attr('disabled', false);
+               break;
+        case 3: $('[name="max_devices_number"]').attr('disabled', true);
+               break;
+        default: alert("Something went wrong with selecting publish method!");
+    }
+});
 
 $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();

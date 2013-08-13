@@ -111,11 +111,11 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     $radioButton = $_POST['study_period'];
     $startcriterion = NULL;
     $runningtime = NULL;
-    $private = (isset($_POST['private']) ? 1 : 0);
+    $private = (intval($_POST['publishMethod']) == 3 ? 1 : 0);
     $startdate = $_POST['start_date'];
     $enddate = $_POST['end_date'];        
-    $maxdevice = $_POST['max_devices_number'];
-    $inviteinstall = (isset($_POST['setup_types']) ? 1 : 0);
+    $maxdevice = (intval($_POST['publishMethod']) == 2 ? $_POST['max_devices_number'] : -1);
+    $inviteinstall = (intval($_POST['publishMethod']) == 2 ? 1 : 0);
     
     $SURVEY_FORMS_JSON = stripslashes(trim($_POST['survey_json']));
     // decode json to arrays instead of objects
