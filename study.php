@@ -191,7 +191,7 @@ include_once("./include/_confirm.php");
 include_once("./include/_login.php");
 include_once("./include/_footer.php");
 ?>
-<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
 <?php
 
 /* UPDATE AND VIEW PAGE */

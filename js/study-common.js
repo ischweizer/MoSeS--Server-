@@ -6,13 +6,8 @@ $('.dropdown').each(function(){
 $('.nav-menu4').addClass('active');
 
 /* Datepicker format */
-$('[name="start_date"]').datepicker({
-  format: 'yyyy-mm-dd'
-});
-
-$('[name="end_date"]').datepicker({
-  format: 'yyyy-mm-dd'
-});
+$('[name="start_date"]').datepicker({ dateFormat: "yy-mm-dd" });
+$('[name="end_date"]').datepicker({ dateFormat: "yy-mm-dd" });
 /* ---------------- */
 
 $('[name="btnAddSurvey"]').click(function(e){
