@@ -145,7 +145,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
     }else{
                       
        var content =  '<div class="row-fluid survey_form" style="border:2px solid #CCC;">'+
-                      '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +' survey</div>'+  
+                      '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +'</div>'+  
                       '<div class="span10" name="survey_body">'+
                       '<!--Body content-->'+
                       '<div class="survey_question_container">'+
