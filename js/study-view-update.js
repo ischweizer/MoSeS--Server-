@@ -207,7 +207,7 @@ $('.btnUpdateOK').click(function(e){
                 }
                 
                 // removing survey controls
-                p.parent().find('[name="survey_controls"]').remove();*/
+                p.parent().find('.survey_controls').remove();*/
                 
                 location.reload();
             }
@@ -275,7 +275,7 @@ $('.btnUpdateCancel').click(function(e){
     var p = $(this).parent().parent().parent();
      
     // removing survey controls if it was selected
-    p.parent().find('[name="survey_controls"]').remove();
+    p.parent().find('.survey_controls').remove();
 });
 
 $('[name="study_period"]').click(function(){

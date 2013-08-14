@@ -23,6 +23,12 @@ $('[name="publishMethod"]').change(function(){
     }
 });
 
+$('.scrollTo').click(function(e){
+    e.preventDefault();
+    
+    scrollToElement('.survey_controls');
+});
+
 $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();
     
@@ -31,19 +37,19 @@ $('[name="btnAddSurvey"]').click(function(e){
     $('.btnCreateOK').css('margin-top','4em');
     var createButton = $('.my_control-group_create').find('.controls').html();
     $('.my_control-group_create').remove();
-    $('[name="survey_controls"]').append(createButton);
+    $('.survey_controls').append(createButton);
     
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
     
-    p.find('[name="survey_controls"]').show();
+    p.find('.survey_controls').show();
     //p.find('[name="survey_container"]').hide();
     
     $(this).hide();
     
 });
 
-$('[name="survey_controls"]').on('click','.btnAddForm',function(e){
+$('.survey_controls').on('click','.btnAddForm',function(e){
     e.preventDefault();
     
     // get the parent of selected stuff
@@ -175,6 +181,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
         $('#content_appears_here').append(content);
     }
     
+    // scroll to inserted element
     scrollToElement($('.survey_form').last());
     
 });

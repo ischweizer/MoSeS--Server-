@@ -42,7 +42,7 @@ include_once("./include/_menu.php");
       <div class="span8 text-center" style="width: 400pt; height: 50pt; background-color: #EEE; float: none; margin: 0 auto;">
         <div style="margin: 50pt 0pt;">
             <a href="registration.php" class="btn btn-link" style="color: #ffa338; font-weight: bold; font-size: 20pt; margin-left: 15pt; margin-top: 12pt;">Sign up</a>
-            <a href="" id="scrollToTop"><i class="icon-chevron-up" style="float: right; margin-right: 15pt; margin-top: 20pt;"></i></a>
+            <a href="" class="scrollToTop"><i class="icon-chevron-up" style="float: right; margin-right: 15pt; margin-top: 20pt;"></i></a>
         </div>
       </div>
       <div class="span1"></div>

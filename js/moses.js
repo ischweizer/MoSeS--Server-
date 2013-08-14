@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     /* Scroll to TOP */
-    $('#scrollToTop').click(function () {
+    $('.scrollToTop').click(function () {
             $('body,html').animate({
                 scrollTop: 0
             }, 800);
