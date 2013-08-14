@@ -182,6 +182,17 @@ $(document).ready(function() {
     
 });
 
+function scrollToElement(selector, time, verticalOffset) {
+    time = typeof(time) != 'undefined' ? time : 1000;
+    verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+    element = $(selector);
+    offset = element.offset();
+    offsetTop = offset.top + verticalOffset;
+    $('html, body').animate({
+        scrollTop: offsetTop
+    }, time);
+}
+
 //Adjust height of dim overlay to fill screen when browser gets resized
 $(window).bind("resize", function(){
     $("#dim_back").css("height", $(window).innerHeight);

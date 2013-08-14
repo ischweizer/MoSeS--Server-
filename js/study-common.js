@@ -175,6 +175,8 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
         $('#content_appears_here').append(content);
     }
     
+    scrollToElement($('.survey_form').last());
+    
 });
 
 // on change question type in survey 
