@@ -27,7 +27,8 @@ $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();
     
     // move button create study to bottom of page
-    $('.btnCreateOK').css('margin-left','120pt');   // TODO: fix that to proper value
+    $('.btnCreateOK').css('margin-left','30%');   // TODO: fix that to proper value
+    $('.btnCreateOK').css('margin-top','4em');
     var createButton = $('.my_control-group_create').find('.controls').html();
     $('.my_control-group_create').remove();
     $('[name="survey_controls"]').append(createButton);
@@ -62,7 +63,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
 
                     var content = '<div class="row-fluid survey_form" style="border:2px solid #CCC;">'+
                                   '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +'</div>'+
-                                  '<div class="span10" name="survey_body">'+
+                                  '<div class="span10 survey_body">'+
                                   '<!--Body content-->'+
                                   '<div class="survey_question_container">';
                    
@@ -146,7 +147,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                       
        var content =  '<div class="row-fluid survey_form" style="border:2px solid #CCC;">'+
                       '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +'</div>'+  
-                      '<div class="span10" name="survey_body">'+
+                      '<div class="span10 survey_body">'+
                       '<!--Body content-->'+
                       '<div class="survey_question_container">'+
                       'Compose your questions below!<br>'+
@@ -161,7 +162,7 @@ $('[name="survey_controls"]').on('click','.btnAddForm',function(e){
                       '      </select>'+
                       '      <label class="survey_elements" style="display: none;">Number of answers:</label>'+
                       '      <input type="text" title="Number of answers" value="5" maxlength="2" style="width: 1.2em; display: none;">'+
-                      '      <button class="btn btn-success survey_elements btnAddQuestionOK">OK</button>'+
+                      '      <button class="btn btn-success survey_elements btnAddQuestionOK">Add question</button>'+
                       '    </div>'+
                       '  </div>'+
                       '</div>'+

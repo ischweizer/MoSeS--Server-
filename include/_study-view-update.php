@@ -257,7 +257,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                             ?>
                             <div class="row-fluid survey" style="border:2px solid #CCC;">
                               <div class="survey_name text-center"><?php echo $form['form_title']; ?></div>
-                                  <div class="span10" name="survey_body">
+                                  <div class="span10 survey_body">
                                     <!--Body content-->
                                     <div class="survey_question_container">
                                     <?php

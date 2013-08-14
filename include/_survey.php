@@ -11,7 +11,7 @@
      ?>
      <option value="9001">Custom form</option>
      </select></div>
-    <div class="span2"><button class="btn btn-success btnAddForm">ADD</button></div>
+    <div class="span2"><button class="btn btn-success btnAddForm">Add form</button></div>
   </div>
   <div id="content_appears_here"></div>
 </div>
