@@ -391,7 +391,7 @@ function survey2csv(array $RESULTS){
                 if(!empty($c[$i])){
                     fputcsv($out, array('Answer', $t[$i-1], $c[$i]));        
                 }else{
-                    fputcsv($out, array('Answer', $t[$i-1]));        
+                    fputcsv($out, array('Answer', $t[$i-1], 0));        
                 }
             }
             
