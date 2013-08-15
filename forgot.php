@@ -11,7 +11,7 @@ if(isset($_SESSION['USER_LOGGED_IN'])){
 include_once("./include/_header.php");
 ?>
   
-<title>Hauptseite von MoSeS - forgetful</title>
+<title>The Mobile Sensing System - Forgot your password</title>
 
 <?php  
    //Import of menu

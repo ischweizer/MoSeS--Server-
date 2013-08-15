@@ -46,7 +46,7 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
 
 ?>
   
-<title>Hauptseite von MoSeS - Registration</title>
+<title>The Mobile Sensing System - Registration</title>
 
 <?php  //Import of the menu
   include_once("./include/_menu.php");  

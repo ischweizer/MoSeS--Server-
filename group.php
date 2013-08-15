@@ -104,7 +104,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
 include_once("./include/_header.php");                   
 ?>
   
-<title>Hauptseite von MoSeS - Devices</title>
+<title>The Mobile Sensing System - Research group</title>
 
 <?php  //Import of the menu
 include_once("./include/_menu.php");

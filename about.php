@@ -6,7 +6,7 @@ include_once("./include/_header.php");
   
 ?>
   
-<title>Hauptseite von MoSeS - About</title>
+<title>The Mobile Sensing System - About the project</title>
 
 <?php  
 // import of menu
@@ -16,7 +16,7 @@ include_once("./include/_menu.php");
 <!-- Main Block -->
     <div class="hero-unit">
         <h2>About</h2>
-        <p>MoSeS offers researchers a platform for distribution of non-comercial Android apps, that are used for research purposes.</p>
+        <p>The Mobile Sensing System (MoSeS) offers researchers a platform for distribution of non-comercial Android apps, that are used for research purposes.</p>
         <br />
     </div>
     <!-- / Main Block -->

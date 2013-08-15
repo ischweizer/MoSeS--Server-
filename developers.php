@@ -6,7 +6,7 @@ include_once("./include/_header.php");
   
 ?>
   
-<title>Hauptseite von MoSeS - About</title>
+<title>The Mobile Sensing System - Developers information</title>
 
 <?php  
 // import of menu

@@ -47,7 +47,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] == 1){
 include_once("./include/_header.php");                   
 ?>
   
-<title>Hauptseite von MoSeS - Request a scientist account</title>
+<title>The Mobile Sensing System - Request a scientist account</title>
 
 <?php  //Import of the menu
 include_once("./include/_menu.php");

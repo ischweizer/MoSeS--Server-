@@ -30,7 +30,7 @@ if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
 include_once("./include/_header.php");                   
 ?>
   
-<title>Hauptseite von MoSeS - Devices</title>
+<title>The Mobile Sensing System - Admin panel</title>
 
 <?php  //Import of the menu
 include_once("./include/_menu.php");
