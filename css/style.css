@@ -72,9 +72,9 @@ div[name*='survey_container_'] {
 /* Study APK buttos */
 .apk_control_buttons {
     list-style-type: none;    
-    position: relative;
-    top: -340pt;
-    left: 450pt;
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
 
 .apk_control_buttons li {
