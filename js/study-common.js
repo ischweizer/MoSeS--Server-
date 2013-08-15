@@ -146,6 +146,8 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                          
                    $('#content_appears_here').append(content);
                    
+                   // scroll to inserted element
+                   scrollToElement($('.survey_form').last());
                 }   
         });
         
@@ -179,11 +181,10 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                       '</div>';
         
         $('#content_appears_here').append(content);
+        
+        // scroll to inserted element
+        scrollToElement($('.survey_form').last());
     }
-    
-    // scroll to inserted element
-    scrollToElement($('.survey_form').last());
-    
 });
 
 // on change question type in survey 
