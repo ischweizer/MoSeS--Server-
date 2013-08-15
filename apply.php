@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SESSION['GROUP_ID'] < 1){
-    header("Location: " . dirname($_SERVER['PHP_SELF'])."/");
+    header("Location: " . dirname($_SERVER['PHP_SELF']));
     exit;
 }
 

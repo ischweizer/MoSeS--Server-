@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN'])){
-    header("Location: " . dirname($_SERVER['PHP_SELF'])."/");   
+    header("Location: " . dirname($_SERVER['PHP_SELF']));   
     exit;
 }
     

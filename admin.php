@@ -4,7 +4,7 @@ session_start();
 
 if(!isset($_SESSION['USER_LOGGED_IN']))
     if(!(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES")){
-        header("Location: " . dirname($_SERVER['PHP_SELF'])."/");
+        header("Location: " . dirname($_SERVER['PHP_SELF']));
         exit;
     }
 
