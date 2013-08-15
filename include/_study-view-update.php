@@ -69,7 +69,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                          }
                      ?>
                     <div class="control-group">
-                        <label class="control-label">Study name: </label>
+                        <label class="control-label">APK title: </label>
                         <div class="controls">
                             <div name="study_title_text"><?php echo $APK['apktitle']; ?></div>
                             <input type="text" name="apk_title" value="<?php echo $APK['apktitle']; ?>" maxlength="50" placeholder="Study name" style="display: none;" />

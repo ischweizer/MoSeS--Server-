@@ -8,12 +8,12 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     exit;
 }
                               
-?><h2>Create user study</h2>
+?><h2>Create user study for APK</h2>
 <br>
 <form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8" id="createAPKForm">
 <fieldset>
     <div class="control-group">
-        <label class="control-label">Study name: </label>
+        <label class="control-label">APK title: </label>
         <div class="controls">
             <input type="text" name="apk_title" id="study_name" maxlength="50" placeholder="Study name" />
         </div>

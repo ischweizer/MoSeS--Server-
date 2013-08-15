@@ -140,7 +140,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
 include_once("./include/_header.php");                   
 ?>
   
-<title>Hauptseite von MoSeS - Studies</title>
+<title>Hauptseite von MoSeS - User study</title>
 
 <?php  //Import of the menu
 include_once("./include/_menu.php");
