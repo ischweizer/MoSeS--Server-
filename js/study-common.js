@@ -93,21 +93,25 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                   
                    $(data.content).each(function(i, question){
                        
-                        content += (i+1)+". "+ question.question +"<br>";
+                        content += '<div>';
+                        content += (i+1)+'. <span class="survey_question">'+ question.question +'</span><br>';
                         
                         // handle type of question's answers
                         switch(question.question_type){
                             
                             // YES/NO 
                             case 1: content += answers_yes_no;
+                                    content += '<input class="survey_question_type" type="hidden" value="1">';
                                     break;
                             
                             // Text        
                             case 2: content += answers_text; 
+                                    content += '<input class="survey_question_type" type="hidden" value="2">';
                                     break;
                             
                             // Scale        
                             case 3: content += answers_likert_scale;
+                                    content += '<input class="survey_question_type" type="hidden" value="3">';
                                     break;
                              
                             // Multiple choice        
@@ -119,7 +123,8 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                                                                      '</li>'; 
                                        }
                                        answers_multiple_choice += '</ul>';
-                                       content += answers_multiple_choice;  
+                                       content += answers_multiple_choice; 
+                                       content += '<input class="survey_question_type" type="hidden" value="4">'; 
                                     break;
                                     
                             // Single choice
@@ -131,11 +136,14 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                                                                  '</li>'; 
                                       }
                                       answers_single_choice += '</ul>';
-                                      content += answers_single_choice; 
+                                      content += answers_single_choice;
+                                      content += '<input class="survey_question_type" type="hidden" value="5">'; 
                                     break;
                                     
                             default: content += 'Something went wrong with displaying question type answers!<br>'; 
                         }
+                        
+                        content += '</div>';
                    });
                    
                    content += '</div>'+

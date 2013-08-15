@@ -51,7 +51,7 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
         var survey = $(this);
         var survey_form_id = parseInt(survey.find('.survey_form_id').val());
         var questions = [];
-
+        
         // iterate through all questions of one survey
         survey.find('.survey_question').each(function(question_i, elem2){
             
@@ -64,19 +64,25 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
             // find all answers
             question.parent().find('.survey_answer').each(function(answer_i, elem3){
                 var answer = $(this);
+                
                 if(answer.text().length != 0 && answer.val().length == 0){
                     answers.push(answer.text());
                 }else{
                     answers.push(answer.val());    
                 }
             });
-            
-            questions.push({'question_type':question_type,
-                            'question':question.val(),
-                            'answers':answers});
-            
-        }); 
 
+            if(question.text().length != 0 && question.val().length == 0){
+                questions.push({'question_type':question_type,
+                                'question':question.text(),
+                                'answers':answers});
+            }else{
+                questions.push({'question_type':question_type,
+                                'question':question.val(),
+                                'answers':answers});
+            }
+        }); 
+        
         // populate JSON object
         surveysJSON[survey_i] = {'survey_form_id':survey_form_id,
                                  'survey_form_questions':questions}; 

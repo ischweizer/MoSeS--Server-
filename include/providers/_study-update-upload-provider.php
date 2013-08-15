@@ -301,145 +301,42 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
             
             $form_id = $db->lastInsertId();
             
-            switch(intval($survey_form['survey_form_id'])){
-                
-                case 9001:  // loop through all questions in the form
-                            foreach($survey_form['survey_form_questions'] as $question){
+            // loop through all questions in the form
+            foreach($survey_form['survey_form_questions'] as $question){
 
-                                $question_type = intval($question['question_type']);
-                                $question_text = $question['question'];
-                                
-                                // store question in db
-                                $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
-                                                        (formid, type, text)
-                                                        VALUES 
-                                                        (". $form_id .", ". $question_type .", '". $question_text ."')";
-                                
-                                $db->exec($sql);
-                                
-                                $question_id = $db->lastInsertId();
-                                
-                                // store answers in db
-                                $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
-                                                        (questionid, text) 
-                                                        VALUES ";
-                                // loop through all answers in the question and append values                                                        
-                                foreach($question['answers'] as $answer){ 
-                                  $sql .=" (". $question_id .", '". $answer ."') ,";
-                                }
-                                // remove last ',' from sql string
-                                $sql = substr($sql, 0, -1);
-                                
-                                $db->exec($sql);
-                            }
+                $question_type = intval($question['question_type']);
+                $question_text = $question['question'];
                 
-                            break;
-                case 1:  
-                         $survey_array = getStandardSurveysArray();
-                         // SUS
-                         $survey_form = $survey_array[0];
-                         $survey_form_questions = $survey_form['content'];
-                         
-                         foreach($survey_form_questions as $question){
-                             
-                            $question_type = $question['question_type'];
-                            $question_text = $question['question'];
-                             
-                            // store question in db
-                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
-                                                    (formid, type, text)
-                                                    VALUES 
-                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
-                            
-                            $db->exec($sql);
-                            
-                            $question_id = $db->lastInsertId();
-                            
-                            $answers = $question['answers'];
-                            
-                            // store answers in db
-                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
-                                                    (questionid, text) 
-                                                    VALUES ";
-                            
-                            foreach($answers as $answer){
-                                // append answer values 
-                                $sql .=" (". $question_id .", '". $answer ."'),";       
-                            }
-                            
-                            // remove last ',' from sql string
-                            $sql = substr($sql, 0, -1);
-                            
-                            $db->exec($sql);
-                         } 
+                // store question in db
+                $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
+                                        (formid, type, text)
+                                        VALUES 
+                                        (". $form_id .", ". $question_type .", '". $question_text ."')";
                 
-                         break;
-                case 2:  
-                         $survey_array = getStandardSurveysArray();
-                         // Standard 1
-                         $survey_form = $survey_array[1];
-                         $survey_form_questions = $survey_form['content'];
-                         
-                         foreach($survey_form_questions as $question){
-                             
-                            $question_type = $question['question_type'];
-                            $question_text = $question['question'];
-                             
-                            // store question in db
-                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
-                                                    (formid, type, text)
-                                                    VALUES 
-                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
-                            
-                            $db->exec($sql);
-                            
-                            // no store of answers 
-                         }              
+                $db->exec($sql);
                 
-                         break;
-                case 3:  
-                         $survey_array = getStandardSurveysArray();
-                         // Standard 2
-                         $survey_form = $survey_array[2];
-                         $survey_form_questions = $survey_form['content'];
-                         
-                         foreach($survey_form_questions as $question){
-                             
-                            $question_type = $question['question_type'];
-                            $question_text = $question['question'];
-                             
-                            // store question in db
-                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
-                                                    (formid, type, text)
-                                                    VALUES 
-                                                    (". $form_id .", ". $question_type .", '". $question_text ."')";
-                            
-                            $db->exec($sql);
-                            
-                            $question_id = $db->lastInsertId();
-                            
-                            $answers = $question['answers'];
-                            
-                            // store answers in db
-                            $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
-                                                    (questionid, text) 
-                                                    VALUES ";
-                            
-                            foreach($answers as $answer){
-                                // append answer values 
-                                $sql .=" (". $question_id .", '". $answer ."'),";       
-                            }
-                            
-                            // remove last ',' from sql string
-                            $sql = substr($sql, 0, -1);
-                            
-                            $db->exec($sql);
-                         }
+                // save answers only for types 1,3,4,5, because 2 is text type
+                if($question_type != 2){
                 
-                         break;
-                            
-                default: die('6');  // wrong JSON                
-            }            
+                    $question_id = $db->lastInsertId();
+                    
+                    // store answers in db
+                    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                            (questionid, text) 
+                                            VALUES ";
+                                            
+                    // loop through all answers in the question and append values                                                        
+                    foreach($question['answers'] as $answer){ 
+                      $sql .=" (". $question_id .", '". $answer ."') ,";
+                    }
+                    // remove last ',' from sql string
+                    $sql = substr($sql, 0, -1);
+                    
+                    
+                    
+                    $db->exec($sql);
+                }
+            }
         } 
     }
     
