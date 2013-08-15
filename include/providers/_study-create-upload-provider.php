@@ -190,13 +190,13 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
         
         // converting time to milliseconds
         switch($_POST['running_time_value']){        
-            case 'h': $runningtime = intval($_POST['running_time'])*60*60*1000;   
+            case 'h': $runningtime = intval($_POST['running_time']);   
                     break;
-            case 'd': $runningtime = intval($_POST['running_time'])*24*60*60*1000;
+            case 'd': $runningtime = intval($_POST['running_time'])*24;
                     break;
-            case 'm': $runningtime = intval($_POST['running_time'])*30*24*60*60*1000;
+            case 'm': $runningtime = intval($_POST['running_time'])*30*24;
                     break;
-            case 'y': $runningtime = intval($_POST['running_time'])*12*30*24*60*60*1000;
+            case 'y': $runningtime = intval($_POST['running_time'])*12*30*24;
                     break;
         }
     }

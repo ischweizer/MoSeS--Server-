@@ -168,7 +168,7 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                       '      </select>'+
                       '      <label class="survey_elements" style="display: none;">Number of answers:</label>'+
                       '      <input type="text" title="Number of answers" value="5" maxlength="2" style="width: 1.2em; display: none;">'+
-                      '      <button class="btn btn-success survey_elements btnAddQuestionOK">Add question</button>'+
+                      '      <button class="btn survey_elements btnAddQuestionOK">Add question</button>'+
                       '    </div>'+
                       '  </div>'+
                       '</div>'+
