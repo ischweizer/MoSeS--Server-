@@ -226,9 +226,9 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                                 .", '". $notified_users ."'"
                                 .", '". $androidversion ."'"
                                 .", ". $USTUDY_FINISHED
-                                .", '". $startdate."'"
+                                .", ". (!empty($startdate) ? "'". $startdate ."'" : "NULL")
                                 .", ". $startcriterion
-                                .", '". $enddate."'"
+                                .", ". (!empty($enddate) ? "'". $enddate ."'" : 'NULL')
                                 .", '". $runningtime."'"
                                 .", '". $inviteinstall."' )";
                                 

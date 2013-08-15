@@ -240,8 +240,8 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
               private=". $private .", 
               description='". $APK_DESCRIPTION ."',".
               (!empty($startcriterion) ? 'startcriterion='.$startcriterion .',' : '')."
-              startdate=". ($startdate != NULL ? "'". $startdate ."'" : "NULL") .",
-              enddate=". ($enddate != NULL ? "'". $enddate ."'" : "NULL") .",
+              startdate=". (!empty($startdate) ? "'". $startdate ."'" : "NULL") .",
+              enddate=". (!empty($enddate) ? "'". $enddate ."'" : "NULL") .",
               restriction_device_number=". $maxDevices .",
               androidversion=". $APK_ANDROID_VERSION .",".
               (!empty($runningtime) ? 'runningtime='. $runningtime .',' : '')."
