@@ -168,19 +168,21 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
     * 1  finished
     */
     $USTUDY_FINISHED = 0;
-    if($radioButton == "1")
-    {
+    
+    if($radioButton == "1"){
+        
         $startcriterion = 0;
         $runningtime = NULL;
 
         // user study should be finished if the end date is today or in the past days
-        if($enddate != NULL && strtotime($enddate) <= strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000))))
-        {
+        if($enddate != NULL && strtotime($enddate) <= strtotime(date("Y-m-d", mktime(0, 0, 0, 0, 0, 0000)))){
             $USTUDY_FINISHED = 1;
         }
+        
     }
-    elseif($radioButton == "2")
-    {
+    
+    if($radioButton == "2"){
+        
         $startdate = NULL;
         $enddate = NULL;
         
