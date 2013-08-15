@@ -244,8 +244,8 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    // show joined devices string
    p.find('[name="joined_devices_text"]').show();
    p.find('.survey_available_text').show();
-   p.find('.surveyShowHide').show();
-   p.find('.surveyRemove').show();
+   p.parent().find('.surveyShowHide').show();
+   p.parent().find('.surveyRemove').show();
    //p.find('[name="quests"]').show();
    p.find('[name="progress"]').show();  
                  
