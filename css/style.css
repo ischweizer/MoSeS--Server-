@@ -35,6 +35,14 @@ div[name*='survey_container_'] {
     margin: 3em 1em 3em 1em;
 }
 
+.scrollTo {
+    cursor: pointer;
+    position: relative;
+    float: right;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
 .survey_elements {
     display: inline;
 }

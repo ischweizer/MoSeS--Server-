@@ -23,10 +23,10 @@ $('[name="publishMethod"]').change(function(){
     }
 });
 
-$('.scrollTo').click(function(e){
+$('#content_appears_here').on('click','.scrollTo',function(e){
     e.preventDefault();
     
-    scrollToElement('.survey_controls');
+    scrollToElement('#survey_select');
 });
 
 $('[name="btnAddSurvey"]').click(function(e){
@@ -147,6 +147,7 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                    });
                    
                    content += '</div>'+
+                              '<i class="icon icon-chevron-up scrollTo"></i>'+
                               '<input type="hidden" class="survey_form_id" value="'+ $('#survey_select :selected').val() +'">'+
                               '</div>'+
                               '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
