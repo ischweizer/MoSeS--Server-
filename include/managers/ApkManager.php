@@ -207,5 +207,33 @@ class ApkManager{
         return false;
         
     }
+    
+    /**
+     * Markes the userstudy as finished
+     *
+     * @param mixed $db the database
+     * @param mixed $apkTable the table name
+     * @param mixed $apkID the id of the apk whose user study should be marked as finished
+     * @param mixed $logger the logger
+     */
+    public static function markUserStudyAsFinished($db, $apkTable, $apkID, $logger){
+//     	$logger->logInfo("markUserStudyAsFinished() called");
+    	// checking if the apk exists
+    	$sql = "UPDATE ". $apkTable ." SET ustudy_finished=1 WHERE apkid = ". intval($apkID);
+    	$db->exec($sql);
+    }
+    
+    /**
+     * Inserts current timestamp to time_enough_participants
+     *
+     * @param mixed $db the database
+     * @param mixed $apkTable the table name
+     * @param mixed $apkID the id of the apk in whose row the timetamp should be updated
+     */
+    public static function insertTimestampToTimeEnoughParticipants($db, $apkTable, $apkID){
+    	$sql = "UPDATE ". $apkTable ." SET time_enough_participants=". time() ." WHERE apkid = ". intval($apkID);
+    	$db->exec($sql);
+    }
+    
 }
 ?>
