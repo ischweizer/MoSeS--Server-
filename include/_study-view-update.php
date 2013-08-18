@@ -22,7 +22,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="accordion-heading">
       <a class="accordion-toggle" name="study_title_link" data-toggle="collapse" data-parent="#accordionFather" href="#collapseStudies<?php echo $i; ?>">
         <?php
-           echo 'Study name: "'. $APK['apktitle'] .'"'; 
+           echo '#'. ($i+1) .' - Study name: "'. $APK['apktitle'] .'"'; 
         ?>
       </a>
     </div>
@@ -64,7 +64,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             ?>
             <form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8" id="updateAPKForm">
                 <fieldset>
-                    Study ver. <?php echo $APK['apk_version']; ?> <br>
+                    Study version <?php echo $APK['apk_version']; ?> <br>
                     <?php
                          $now = time(); 
                          // RUNNING User Study!
