@@ -52,7 +52,7 @@ class ApkManager{
     public static function getNonStudyAllApkRegardingMinAndroidVersion($db, $apkTable, $minAndroidVersion){
     
     	$sql = "SELECT *
-                FROM ". $apkTable ." WHERE private=0 AND androidversion<=".$minAndroidVersion;
+                FROM ". $apkTable ." WHERE private=0 AND ustudy_finished =0 AND androidversion<=".$minAndroidVersion;
     
     	$result = $db->query($sql);
     	$array = $result->fetchAll(PDO::FETCH_ASSOC);
