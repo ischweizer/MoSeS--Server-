@@ -381,7 +381,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                 <?php
             }
             
-            if($APK['ustudy_finished'] == 1 && !$study_running){
+            if((!$study_running && $APK['ustudy_finished'] != 1) || ($APK['ustudy_finished'] == 1 && !$study_running)){
             ?>
                 <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkid']; ?>">Remove</button></li>
                 <?php
