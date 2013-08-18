@@ -61,11 +61,23 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                 <fieldset>
                     Study ver. <?php echo $APK['apk_version']; ?> <br>
                     <?php
-                        // this user study is FINISHED!
-                         if($APK['ustudy_finished'] == 1){
+                         $now = time(); 
+                         // RUNNING User Study!
+                         if(!empty($startDate) && 
+                            !empty($endDate) && 
+                            $now >= strtotime($startDate) &&
+                            $now <= strtotime($endDate)){
                             ?>
-                            <h3 class="text-center" style="color: red">This user study is finished!</h3>
+                            <h3 class="text-center" style="color: green;">The User Study is running!</h3>
                             <?php
+                         }else{   
+                    
+                             // FINISHED User Study!
+                             if($APK['ustudy_finished'] == 1){
+                                ?>
+                                <h3 class="text-center" style="color: red;">This user study is finished!</h3>
+                                <?php
+                             }
                          }
                      ?>
                     <div class="control-group">
