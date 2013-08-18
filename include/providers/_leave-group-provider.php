@@ -50,5 +50,8 @@ else{
 }
 $db->exec($sql_update4); 
 
+// set group name in session
+$_SESSION['RGROUP'] = '';
+
 die($groupname);
 ?>

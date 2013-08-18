@@ -14,7 +14,7 @@ $('.btnInstantScientist').click(function(e){
        });
 });
 
-$('.btnLeaveGroup').click(function(){
+$('.btnLeaveGroup').click(function(e){
     
     e.preventDefault();
     
@@ -69,11 +69,13 @@ $('#btnCreateJoinGroup').click(function(e){
 
 function handleGroupServerAnswer(result){
     switch(result){
-        case '1':   $('.hero-unit').html('<h2 class="text-center">You successfully joined a group!</h2>'); 
+        case '1':   location.href = location.protocol + '//' + location.host + location.pathname;
+                    //$('.hero-unit').html('<h2 class="text-center">You successfully joined a group!</h2>'); 
                     break;
         case '2':   $('.hero-unit').html('<h2 class="text-center">Error: That name already exists!</h2>'); 
                     break;
-        case '3':   $('.hero-unit').html('<h2 class="text-center">You successfully created a group!</h2>');
+        case '3':   location.href = location.protocol + '//' + location.host + location.pathname;
+                    //$('.hero-unit').html('<h2 class="text-center">You successfully created a group!</h2>');
                     break;
         case '4':   $('.hero-unit').html('<h2 class="text-center">Error: Entered group doesn\'t exist!</h2>');
                     break;

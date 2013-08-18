@@ -16,8 +16,8 @@ $CREATE = 0;
 // user want to create or to join a group
 if(isset($_GET['m']) && $_GET['m'] == 'new'){
     
-   $CREATE = 1; 
-
+   $CREATE = 1;
+   
 }else{  
 
     $CREATE = 0;
@@ -113,6 +113,8 @@ include_once("./include/_menu.php");
     <div class="hero-unit">
         <?php
             if($CREATE == 1){
+                
+                if(empty($_SESSION["RGROUP"])){
                 ?><h2>Join to a research group or create one</h2>
                 <label class="radio">
                   <input type="radio" name="groupRadios" id="optionsRadios1" value="createGroup" checked>
@@ -130,13 +132,20 @@ include_once("./include/_menu.php");
                     <input type="password" class="input-block-level" placeholder="Password" id="group_password" name="group_password">
                 </label>
                 <button class="btn btn-success" id="btnCreateJoinGroup" value="<?php echo $_SESSION['USER_ID']; ?>">GO</button><?php
+                }
                 
-            }elseif(empty($GROUP_MEMBERS)){
+                if(!empty($_SESSION["RGROUP"])){
+                    ?><h2 class="text-center">You're already member of the "<?php echo $_SESSION["RGROUP"]; ?>" research group.</h2><?php        
+                }
+            }else{
+                            
+                if(empty($GROUP_MEMBERS)){
                  ?><h2 class="text-center">You're not a member of any research group.</h2><?php
-             }else{
+                 }
                  
+                 if(!empty($GROUP_MEMBERS)){
          ?>
-        <h2>You're member of group: <?php echo $groupname; ?></h2>
+        <h2>You're member of group "<?php echo $groupname; ?>"</h2>
         <button class="btn btn-danger btnLeaveGroup" value="<?php echo $_SESSION['USER_ID']; ?>">Leave group</button>
         <br>
         <h4>This group has <?php 
@@ -231,6 +240,7 @@ include_once("./include/_menu.php");
                ?>
             </div>
             <?php
+             }
                  } // end of else
              ?> 
     </div>

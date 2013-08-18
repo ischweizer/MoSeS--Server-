@@ -40,8 +40,8 @@ if(isset($_POST["email_login"]) &&
                     $_SESSION["USER_ID"] =   $row["userid"];
                     $_SESSION["GROUP_ID"] =  $row["usergroupid"];
                     $_SESSION["EMAIL"] =     $row["email"];
-                    //                     $_SESSION["LOGIN"] =     $row["login"];
                     $_SESSION["PASSWORD"] =  $row["password"];
+                    $_SESSION["RGROUP"] =    $row["rgroup"];
                     $_SESSION["FIRSTNAME"] = $row["firstname"];
                     $_SESSION["LASTNAME"] =  $row["lastname"];
             

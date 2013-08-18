@@ -35,6 +35,9 @@ if(isset($_REQUEST['createGroup'])){
         $db->exec($sql_newgroup);
         $db->exec($sql_update2);
         
+        // set group name in session
+        $_SESSION['RGROUP'] = $groupname;
+        
         $jcstatsus = 3;
         die($jcstatsus."");
     }
@@ -83,6 +86,9 @@ if(isset($_REQUEST['joinGroup'])){
                         WHERE name='".$groupname."'";
         
         $db->exec($sql_update3);
+        
+        // set group name in session
+        $_SESSION['RGROUP'] = $groupname;
         
         die($jcstatsus."");
     }else{
