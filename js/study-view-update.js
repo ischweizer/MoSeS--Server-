@@ -6,6 +6,27 @@ $('[name="btnDownloadApp"]').click(function(e){
     location.href = './apk/'+ p.find('[name="userhash"]').val() +'/'+ p.find('[name="apkhash"]').val() +'.apk';
 });
 
+/*
+* Update only survey
+*/
+$('.btnUpdateSurveyOnly').click(function(e){
+    e.preventDefault(); 
+    
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent(); 
+    
+    p.find('.txtUSWarning').append('<br>(You can only update a survey)');
+    
+    p.find('.surveyShowHide').hide();
+    p.find('.surveyRemove').hide();
+    
+    p.find('.btnUpdateOK').show();
+    p.find('.btnUpdateCancel').show();
+    p.find('[name="btnAddSurvey"]').show();
+    
+    $(this).attr('disabled',true);
+});
+
 /* Confirm dialog */
 $('.confirm-delete').click(function(e) {
     e.preventDefault();
@@ -31,7 +52,9 @@ $('.btnConfirmCancel, .close').click(function(){
 /* ------------------- */
 
 /* Showing form data */
-$('[name="btnUpdateStudy"]').click(function(){ 
+$('[name="btnUpdateStudy"]').click(function(e){ 
+    
+    e.preventDefault();
     
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
@@ -73,6 +96,8 @@ $('[name="btnUpdateStudy"]').click(function(){
 /* Handling of button send updated study to server and show changes */
 $('.btnUpdateOK').click(function(e){
    
+   e.preventDefault();
+    
    $(this).attr('disabled', true);
    /* ------------------------ */
    
@@ -220,8 +245,6 @@ $('.btnUpdateOK').click(function(e){
         contentType: false,
         processData: false
     });
-    
-    e.preventDefault();
 });
 
 /* Hide edit form data */

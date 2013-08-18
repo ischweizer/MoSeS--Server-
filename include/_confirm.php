@@ -5,7 +5,7 @@
       <h3>Remove of study</h3>
     </div>
     <div class="modal-body">
-      <p>You are about to remove this study. This procedure is irreversible!</p>
+      <p>You are about to remove this user study with ALL its results. This procedure is irreversible!</p>
       <p>Do you want to proceed?</p>
     </div>
     <div class="modal-footer">

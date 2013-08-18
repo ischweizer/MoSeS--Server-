@@ -23,10 +23,10 @@ $('[name="publishMethod"]').change(function(){
     }
 });
 
-$('#content_appears_here').on('click','.scrollTo',function(e){
+$('.content_appears_here').on('click','.scrollTo',function(e){
     e.preventDefault();
     
-    scrollToElement('#survey_select');
+    scrollToElement('.survey_controls');
 });
 
 $('[name="btnAddSurvey"]').click(function(e){
@@ -54,13 +54,14 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
     
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
+    var pForSurveySelect = $(this).parent().parent();
     
-    if(parseInt($('#survey_select :selected').val()) != 9001){
+    if(parseInt(pForSurveySelect.find('.survey_select :selected').val()) != 9001){
     
         /*
          * Requesting server for standard questions for a survey ID
          */
-        $.post("content_provider.php", { 'get_questions': $('#survey_select :selected').val(), 'get_questions_pwd' : 6767 })
+        $.post("content_provider.php", { 'get_questions': pForSurveySelect.find('.survey_select :selected').val(), 'get_questions_pwd' : 6767 })
             .done(function(result) {
                 
                 if(result){
@@ -68,7 +69,7 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                     var data = $.parseJSON(result);
 
                     var content = '<div class="row-fluid survey_form" style="border:2px solid #CCC;">'+
-                                  '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +'</div>'+
+                                  '<div class="survey_name text-center">'+ pForSurveySelect.find('.survey_select :selected').text() +'</div>'+
                                   '<div class="span10 survey_body">'+
                                   '<!--Body content-->'+
                                   '<div class="survey_question_container">';
@@ -148,12 +149,12 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                    
                    content += '</div>'+
                               '<i class="icon icon-chevron-up scrollTo"></i>'+
-                              '<input type="hidden" class="survey_form_id" value="'+ $('#survey_select :selected').val() +'">'+
+                              '<input type="hidden" class="survey_form_id" value="'+ pForSurveySelect.find('.survey_select :selected').val() +'">'+
                               '</div>'+
                               '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
                               '</div>';
                          
-                   $('#content_appears_here').append(content);
+                   p.find('.content_appears_here').append(content);
                    
                    // scroll to inserted element
                    scrollToElement($('.survey_form').last());
@@ -163,7 +164,7 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
     }else{
                       
        var content =  '<div class="row-fluid survey_form" style="border:2px solid #CCC;">'+
-                      '<div class="survey_name text-center">'+ $('#survey_select :selected').text() +'</div>'+  
+                      '<div class="survey_name text-center">'+ pForSurveySelect.find('.survey_select :selected').text() +'</div>'+  
                       '<div class="span10 survey_body">'+
                       '<!--Body content-->'+
                       '<div class="survey_question_container">'+
@@ -189,7 +190,7 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                       '<div class="span1"><button class="btn btn-danger btnRemoveSurvey">X</button></div>'+
                       '</div>';
         
-        $('#content_appears_here').append(content);
+        p.find('.content_appears_here').append(content);
         
         // scroll to inserted element
         scrollToElement($('.survey_form').last());
@@ -197,7 +198,7 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
 });
 
 // on change question type in survey 
-$('#content_appears_here').on('change','.survey_elements',function(e) {
+$('.content_appears_here').on('change','.survey_elements',function(e) {
     e.preventDefault();
     switch(parseInt($(this).val())){
         // YES/No question
@@ -230,14 +231,14 @@ $('#content_appears_here').on('change','.survey_elements',function(e) {
 });
 
 // remove whole survey
-$('#content_appears_here').on('click','.btnRemoveSurvey',function(e) {
+$('.content_appears_here').on('click','.btnRemoveSurvey',function(e) {
     e.preventDefault();
     $(this).parent().parent().remove();
     return false;
 });
 
 // remove question from survey
-$('#content_appears_here').on('click','.survey_remove_question',function(e){
+$('.content_appears_here').on('click','.survey_remove_question',function(e){
     e.preventDefault();
     $(this).parent().remove();
     return false; 
@@ -245,7 +246,7 @@ $('#content_appears_here').on('click','.survey_remove_question',function(e){
 
 /* SURVEY CONTROLS */
 
-$('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
+$('.content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     e.preventDefault();
     
     var parentForQCounter = $(this).parent().parent().parent().parent();
@@ -368,7 +369,7 @@ $('#content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     return false;
 });
 
-$('#content_appears_here').on('click', '.btnRemoveQuestion', function(e){
+$('.content_appears_here').on('click', '.btnRemoveQuestion', function(e){
     e.preventDefault();
     
     var parentForQCounter = $(this).parent().parent().parent().parent();
