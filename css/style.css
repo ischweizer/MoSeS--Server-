@@ -51,11 +51,11 @@ div[name*='survey_container_'] {
     margin: 1.5em 0;
 }
 
-#content_appears_here ul {
+.content_appears_here ul {
     list-style-type: none;
 }
 
-#content_appears_here span {
+.content_appears_here span {
     margin-left: 15px;
 }
 

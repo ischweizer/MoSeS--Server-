@@ -22,7 +22,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="accordion-heading">
       <a class="accordion-toggle" name="study_title_link" data-toggle="collapse" data-parent="#accordionFather" href="#collapseStudies<?php echo $i; ?>">
         <?php
-           echo 'Study name: "'. $APK['apktitle'] .'"'; 
+           echo '#'. ($i+1) .' - Study name: "'. $APK['apktitle'] .'"'; 
         ?>
       </a>
     </div>
@@ -55,17 +55,31 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                        ($APK['participated_count'] == 0 ? 'no' : $APK['participated_count']) .' '.
                                        ($APK['participated_count'] < 2 ? 'device' : 'devices') .' '.                           
                                         'currently joined to "'. $APK['apktitle'] .'".';
+                                        
+            $study_running = !empty($startDate) && 
+                            !empty($endDate) && 
+                            $now >= strtotime($startDate) &&
+                            $now <= strtotime($endDate);
       
             ?>
             <form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8" id="updateAPKForm">
                 <fieldset>
-                    Study ver. <?php echo $APK['apk_version']; ?> <br>
+                    Study version <?php echo $APK['apk_version']; ?> <br>
                     <?php
-                        // this user study is FINISHED!
-                         if($APK['ustudy_finished'] == 1){
+                         $now = time(); 
+                         // RUNNING User Study!
+                         if($study_running){
                             ?>
-                            <h3 class="text-center" style="color: red">This user study is finished!</h3>
+                            <h3 class="txtUSWarning text-center" style="color: green;">The User Study is running!</h3>
                             <?php
+                         }else{   
+                    
+                             // FINISHED User Study!
+                             if($APK['ustudy_finished'] == 1){
+                                ?>
+                                <h3 class="txtUSWarning text-center" style="color: red;">This user study is finished!</h3>
+                                <?php
+                             }
                          }
                      ?>
                     <div class="control-group">
@@ -269,9 +283,9 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                              $k++;
                                              
                                              $answers_yes_no =  '<ul style="list-style-type: none;">'.
-                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Yes</span></li>'.
-                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_q_element">No</span></li>'.
-                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_q_element">Not sure</span></li>'.
+                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_answer">Yes</span></li>'.
+                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_answer">No</span></li>'.
+                                                                    '<li><input type="radio" disabled="disabled"><span class="survey_answer">Not sure</span></li>'.
                                                                 '</ul>';
                                                                       
                                              $answers_text = '<ul style="list-style-type: none;">'.
@@ -279,11 +293,11 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                                              '</ul>';
                                                
                                              $answers_likert_scale = '<ul style="list-style-type: none;">'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Disagree"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Disagree"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Neutral"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Agree"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_q_element">"Strongly Agree"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Disagree"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Disagree"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Neutral"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Agree"</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Agree"</span></li>'.
                                                                     '</ul>';
                                                                     
                                              switch(intval($question['question_type'])){
@@ -302,16 +316,6 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                                                          '</li>'.
                                                                       '</ul>';
                                                              }
-                                                         }else{
-                                                             // if answers were empty!
-                                                             // TODO: insert standards for that type of answer
-                                                             /*echo '<ul style="list-style-type: none;">'.
-                                                                    '<li>'.
-                                                                        '<input type="checkbox" disabled="disabled">'.
-                                                                        '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
-                                                                     '</li>'.
-                                                                  '</ul>';*/
-                                                                  
                                                          }
                                                          break;
                                                  case 5: if(!empty($question['answers'])){
@@ -323,15 +327,6 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                                                          '</li>'.
                                                                       '</ul>';
                                                              }
-                                                         }else{
-                                                             // if answers were empty!
-                                                             // TODO: insert standards for that type of answer
-                                                             /*ho '<ul style="list-style-type: none;">'.
-                                                                    '<li>'.
-                                                                        '<input type="radio" disabled="disabled">'.
-                                                                        '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
-                                                                     '</li>'.
-                                                                  '</ul>';*/
                                                          }
                                                          break;
                                                  default: echo 'Something went wrong!'; 
@@ -348,17 +343,13 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         <?php
                     }
                 ?>
-                <?php
-                   // only include add survey feature if there was no survey already assigned to the user study 
-                  if(empty($survey)){  
-                ?>
                 <hr>
                 <button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
                 <?php
-                    include_once('./include/_survey.php');        
-                  }
+                    
+                    include("./include/_survey.php");        
                 
-                // check if user study already finished and sobotate hacker if he try still to send it
+                // check if user study already finished
                 if($APK['ustudy_finished'] != 1){
                     ?>
                     <input type="hidden" name="study_update" value="6825">
@@ -372,18 +363,30 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             <ul class="apk_control_buttons">
                 <li><button class="btn" name="btnDownloadApp" title="Download APP">Download</button></li>
                 <?php 
-                    if($APK['ustudy_finished'] != 1){ 
-                        ?><li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
+                    // only show if user study not running or finished 
+                    if($study_running){ 
+                        ?><li><button class="btn btnUpdateSurveyOnly" title="Update APP">Update</button></li>
             <?php
                     }
                     
+                    if($APK['ustudy_finished'] != 1 && !$study_running){ 
+                        ?>
+                        <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
+                        <?php
+                    }
+                        
             if($APK['ustudy_finished'] == 1){
                 ?>
                 <li><button class="btn btnSurveyResultsExportCsv" title="Survey results" value="<?php echo $survey['survey_id']; ?>">Results to CSV</button></li>
                 <?php
             }
+            
+            if((!$study_running && $APK['ustudy_finished'] != 1) || ($APK['ustudy_finished'] == 1 && !$study_running)){
             ?>
                 <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkid']; ?>">Remove</button></li>
+                <?php
+            }
+                ?>
             </ul>
       </div>
     </div>

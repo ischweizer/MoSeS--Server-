@@ -259,8 +259,83 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     * 
     * ****************************************************************/
     
-    /* if there are some selected surveys */
+    /* if there are some selected survey forms */
     if(!empty($SURVEY_FORMS_OBJ)){
+        
+        /*
+        *   DELETE ALL survey information and its results corresponding to selected APK and user id
+        */
+        
+        // SELECT surveyid by apkid and userid
+        $sql = "SELECT surveyid
+                 FROM ".$CONFIG['DB_TABLE']['STUDY_SURVEY']." 
+                 WHERE apkid=". $apkId ." AND userid = ". $_SESSION['USER_ID'];
+                             
+        $result = $db->query($sql);
+        $row = $result->fetch();
+        
+        $SURVEY_ID = $row['surveyid'];
+        
+        // remove answers
+        $survey_answers_sql = 'DELETE 
+                             FROM '. $CONFIG['DB_TABLE']['STUDY_ANSWER'] .' 
+                             WHERE questionid 
+                             IN (SELECT questionid 
+                                 FROM '. $CONFIG['DB_TABLE']['STUDY_QUESTION'] .' 
+                                 WHERE formid 
+                                 IN (SELECT formid 
+                                     FROM '. $CONFIG['DB_TABLE']['STUDY_FORM'] .' 
+                                     WHERE surveyid 
+                                     IN (SELECT surveyid 
+                                         FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
+                                         WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'] .')))';
+                                         
+        $db->exec($survey_answers_sql);
+
+
+        // remove questions                    
+        $survey_questions_sql = 'DELETE 
+                               FROM '. $CONFIG['DB_TABLE']['STUDY_QUESTION'] .' 
+                               WHERE formid 
+                               IN (SELECT formid 
+                                   FROM '. $CONFIG['DB_TABLE']['STUDY_FORM'] .' 
+                                   WHERE surveyid 
+                                   IN (SELECT surveyid 
+                                       FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
+                                       WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'] .'))';
+                                       
+        $db->exec($survey_questions_sql);
+                       
+                               
+        // remove forms
+        $survey_forms_sql = 'DELETE 
+                           FROM '. $CONFIG['DB_TABLE']['STUDY_FORM'] .' 
+                           WHERE surveyid 
+                           IN (SELECT surveyid 
+                               FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
+                               WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'] .')';
+                               
+        $db->exec($survey_forms_sql);
+
+                             
+        // remove surveys            
+        $survey_surveys_sql = 'DELETE 
+                               FROM '. $CONFIG['DB_TABLE']['STUDY_SURVEY'] .' 
+                               WHERE surveyid = '. $SURVEY_ID .' AND userid = '. $_SESSION['USER_ID'];
+                             
+        $db->exec($survey_surveys_sql);
+
+
+        // remove survey results
+        $survey_results_sql = 'DELETE 
+                               FROM '. $CONFIG['DB_TABLE']['STUDY_RESULT'] .' 
+                               WHERE survey_id = '. $SURVEY_ID;
+                             
+        $db->exec($survey_results_sql);
+        
+        /*
+        * ************************************************************************
+        */
         
         /* insert survey for user study */
         $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
