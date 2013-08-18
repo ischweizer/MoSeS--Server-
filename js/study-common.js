@@ -10,6 +10,13 @@ $('[name="start_date"]').datepicker({ dateFormat: "yy-mm-dd" });
 $('[name="end_date"]').datepicker({ dateFormat: "yy-mm-dd" });
 /* ---------------- */
 
+/* If not a number or less than 1 -> substitute with 1 in value */
+$('[name="start_after_n_devices"]').change(function(){
+    if(!isNumber($(this).val()) || $(this).val() < 1){
+        $(this).val('1');
+    }
+});
+
 $('[name="publishMethod"]').change(function(){
     var method = parseInt($(this).val());
     switch(method){

@@ -139,7 +139,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                     <div class="control-group" name="start_after_n_devices_text" style="display: none;">
                         <label class="control-label">Minimum number of devices to start after: </label>
                         <div class="controls">
-                            <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number"<?php 
+                            <input type="number" name="start_after_n_devices" maxlength="10" min="1" placeholder="Number"<?php 
                                 echo !empty($APK['startcriterion']) || !empty($APK['runningtime']) ? ' value="'. $APK['startcriterion'] .'"' : ' disabled="disabled"' ; 
                                 ?> />
                         </div>

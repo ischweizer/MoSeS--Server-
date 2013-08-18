@@ -35,7 +35,6 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
     $group_members_count = count($group_members_array_ids);
     $groupname = $row['rgroup'];
     $group_instant_scientists_counter = $row['instant_scientists_counter'];
-    print_r($group_instant_scientists_counter);
     $GROUP_MEMBERS = array();
     $group_device_count = 0;
     $group_has_private_apks = '';

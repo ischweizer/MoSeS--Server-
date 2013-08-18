@@ -25,13 +25,6 @@ function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-/* If not a number or less than 1 -> substitute with 1 in value */
-$('[name="start_after_n_devices"]').change(function(){
-    if(!isNumber($(this).val()) || $(this).val() < 1){
-        $(this).val('1');
-    }
-});
-
 $('.form-horizontal').on('click','.btnCreateOK',function(e){
    
    e.preventDefault();
