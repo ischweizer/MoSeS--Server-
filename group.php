@@ -136,7 +136,7 @@ include_once("./include/_menu.php");
                 <label>Enter password
                     <input type="password" class="input-block-level" placeholder="Password" id="group_password" name="group_password">
                 </label>
-                <button class="btn btn-success" id="btnCreateJoinGroup" value="<?php echo $_SESSION['USER_ID']; ?>">GO</button><?php
+                <button class="btn btn-success btnCreateJoinGroup" value="<?php echo $_SESSION['USER_ID']; ?>">GO</button><?php
                 }
                 
                 if(!empty($_SESSION["RGROUP"])){

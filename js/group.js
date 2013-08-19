@@ -18,6 +18,12 @@ $('.btnLeaveGroup').click(function(e){
     
     e.preventDefault();
     
+    var clickedButton = $(this);
+    
+    clickedButton.removeClass('btn-danger');
+    clickedButton.attr('disabled', true);
+    clickedButton.text('Working...');
+    
     $.ajax({
         type: "POST",
         url: 'content_provider.php',
@@ -26,11 +32,16 @@ $('.btnLeaveGroup').click(function(e){
             if(result){
                 $('.hero-unit').html('<h3 class="text-center">You left the group '+ result +'!</h3>');
             }
+        },
+        error: function(){
+            clickedButton.addClass('btn-danger');
+            clickedButton.attr('disabled', false);
+            clickedButton.text('Leave group');
         }
        });
 });
 
-$('#btnCreateJoinGroup').click(function(e){        
+$('.btnCreateJoinGroup').click(function(e){        
     
     e.preventDefault();
     
@@ -80,9 +91,9 @@ function handleGroupServerAnswer(result){
         case '4':   $('.hero-unit').html('<h2 class="text-center">Error: Entered group doesn\'t exist!</h2>');
                     break;
         default:    alert('Something went wrong! Try again later.');
-                    $('#btnCreateJoinGroup').addClass('btn-success');
-                    $('#btnCreateJoinGroup').attr('disabled', false);
-                    $('#btnCreateJoinGroup').text('OK');
+                    $('.btnCreateJoinGroup').addClass('btn-success');
+                    $('.btnCreateJoinGroup').attr('disabled', false);
+                    $('.btnCreateJoinGroup').text('GO');
                     break;
     }
 }

@@ -35,7 +35,7 @@ body {
     margin-top: -3em;
 }
 
-#btnCreateJoinGroup {
+.btnCreateJoinGroup {
     float: right;
 }
 
