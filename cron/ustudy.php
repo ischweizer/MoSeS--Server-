@@ -11,12 +11,13 @@
 
 // get all apks
 include_once('/home/dasense/moses/config.php');
-// 	include_once(MOSES_HOME."/include/functions/cronLogger.php");
+include_once(MOSES_HOME."/include/functions/cronLogger.php");
 include_once(MOSES_HOME. "/include/functions/dbconnect.php");
 include_once (MOSES_HOME."/include/managers/ApkManager.php");
 // 	include(MOSES_HOME."/cron/survey.php");
+echo "heelo";
 
-// 	$logger->logInfo(" ###################### STARTED USER STUDY CRONJOB ############################## ");
+$logger->logInfo(" ###################### STARTED USER STUDY CRONJOB ############################## ");
 
 $sql = "SELECT * FROM " .$CONFIG['DB_TABLE']['APK']. " WHERE ustudy_finished < 1";
 
@@ -169,7 +170,7 @@ foreach($rows as $row)
 // 	    }
 // 	}
 
-// 	$logger->logInfo(" ###################### USER STUDY CRONJOB FINISHED ############################## ");
+	$logger->logInfo(" ###################### USER STUDY CRONJOB FINISHED ############################## ");
 
 
 ?>
