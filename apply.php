@@ -57,17 +57,22 @@ include_once("./include/_menu.php");
     <!-- Main Block -->
     <div class="hero-unit">
         <?php
-        if($USER_PENDING == 0 && $USER_ACCEPTED == 0){
+        if($USER_ACCEPTED == 0 && $USER_PENDING == 0){
         ?>
             <h2 class="text-center">Sorry, but your application was rejected.</h2>
         <?php
         }else
-            if($USER_PENDING == 1 && $USER_ACCEPTED == 0){
+            if($USER_ACCEPTED == 0 && $USER_PENDING == 1){
             ?>
             <h2 class="text-center">Your application for a scientist is pending...</h2>
             <?php
             }else
-                if($USER_PENDING == -1 && $USER_ACCEPTED == -1){    
+                if($USER_ACCEPTED == 1 && $USER_PENDING == 0){
+                    ?>
+                    <h2 class="text-center">You were accepted for a scientist account!</h2>
+                    <?php       
+                }else
+                if($USER_ACCEPTED == -1 && $USER_PENDING == -1){    
                 ?>
                 <form class="form-horizontal apply_scientist_form" method="post" accept-charset="UTF-8">
                     <fieldset>

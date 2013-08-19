@@ -62,15 +62,6 @@
                     </li>
                 </ul>
             </li><?php
-                 }else{
-                     if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] == 1){
-                         // request a scientist account link
-                         ?>
-                         <li class="dropdown nav-menu5">
-                            <a href="apply.php">Apply as scientist</a>
-                        </li>
-                    <?php
-                     }
                  }
             }
                  ?>

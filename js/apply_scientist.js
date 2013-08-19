@@ -32,5 +32,3 @@ $('.btnApplyScientistSend').click(function(e){
 $('.dropdown').each(function(){
     $(this).removeClass('active');   
 });
-// add selection for this page
-$('.nav-menu5').addClass('active');
