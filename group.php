@@ -221,7 +221,7 @@ include_once("./include/_menu.php");
           if($group_instant_scientists_counter <= $users_want_promo_counter &&
              count($GROUP_UNIQUE_DEVICES) - 5*$group_instant_scientists_counter >= 5 && $_SESSION['GROUP_ID'] == 1){
                 echo '<h4>You have one more instant scientist possibility!</h4>';
-                echo '<button class="btn btn-success btnInstantScientist">Instant scientist</button>';
+                echo '<button class="btn btn-success btnInstantScientist">Instant scientist!</button>';
               }
         ?>
         <div class="accordion" id="accordionFather2">

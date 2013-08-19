@@ -29,6 +29,12 @@ body {
     clear: both;
 }
 
+.btnInstantScientist {
+    position: relative;
+    float: right;
+    margin-top: -3em;
+}
+
 #btnCreateJoinGroup {
     float: right;
 }

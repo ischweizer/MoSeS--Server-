@@ -8,7 +8,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     exit;
 }
                     
-?><h2>Studies</h2>
+?><h2>Your user studies</h2>
 <br>     
 <div class="accordion" id="accordionFather">
 <?php

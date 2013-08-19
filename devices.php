@@ -63,7 +63,7 @@ include_once("./include/_menu.php");
                      
                  }else{
              ?>
-            <h2>Devices</h2>
+            <h2>Your devices</h2>
             <table class="table table-striped">
               <thead>
                 <tr>
