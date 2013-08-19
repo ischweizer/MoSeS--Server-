@@ -1,6 +1,6 @@
 <?php
     include_once("klogger.php");
     
-    $logger = new KLogger("moses/log", KLogger::INFO);
+    $logger = new KLogger("log", KLogger::INFO);
 
 ?>

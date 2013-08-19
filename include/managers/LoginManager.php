@@ -125,5 +125,27 @@ class LoginManager{
         return ($timenow - $lastActivity <= $maxSessionTime) ? true : false;
     }
     
+    /**
+     * Returns the name of the group of the user with the specified id.
+     * @param unknown $logger the logger
+     * @param unknown $db the database
+     * @param unknown $userTable the name of the user table
+     * @param unknown $userId the id of the user whose group is queried
+     * @return name od the user's group or null if the user is not member of any group or no such user exists
+     */
+    public static function getGroupName($logger, $db, $userTable, $userId){
+    	$sql = "SELECT rgroup FROM ". $userTable ."
+                WHERE userid = ". $userId;
+    	
+    	$logger->logInfo("getGroupName() sql=".$sql);
+    	
+    	$result = $db->query($sql);
+    	$row = $result->fetch(PDO::FETCH_ASSOC);
+    	if(!empty($row))
+    		return $row['rgroup'];
+    	else
+    		return $row;
+    }
+    
 }
 ?>

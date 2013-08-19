@@ -14,6 +14,8 @@ include_once('/home/dasense/moses/config.php');
 include_once(MOSES_HOME."/include/functions/cronLogger.php");
 include_once(MOSES_HOME. "/include/functions/dbconnect.php");
 include_once (MOSES_HOME."/include/managers/ApkManager.php");
+include_once (MOSES_HOME."/include/managers/LoginManager.php");
+include_once (MOSES_HOME."/include/managers/HardwareManager.php");
 // 	include(MOSES_HOME."/cron/survey.php");
 echo "heelo";
 
@@ -29,7 +31,6 @@ foreach($rows as $row)
 {
 
 	$apkID = $row['apkid'];
-
 	$isInviteInstall = $row['inviteinstall']==1;
 	$isPrivate = $row['private']==1;
 	$startDate = $row['startdate'];
@@ -39,8 +40,10 @@ foreach($rows as $row)
 	$participatedCount = $row['participated_count'];
 	$timeEnoughParticipants = $row['time_enough_participants'];
 	$startCriterion = $row['startcriterion'];
+	$userdID = $row['userid'];
+	$androidVersion = intval($row['androidversion']);
 
-	if(!$isPrivate && !$isInviteInstall){
+	if($isPrivate || (!$isPrivate && !$isInviteInstall)){
 		// no need to send apk notifications, just look if the ustudy should be finished
 			
 		if(!empty($endDate)){
@@ -59,7 +62,7 @@ foreach($rows as $row)
 				else{
 					//a timestamp already exists, look if enough time has passed in order to mark the study as finished
 					$currentTime = time();
-					if($currentTime - $timeEnoughParticipants >= $runningTime*60)
+					if($currentTime - $timeEnoughParticipants >= $runningTime*60*60)
 						// enough time has passed, mark the user study as finished
 						ApkManager::markUserStudyAsFinished($db, $CONFIG['DB_TABLE']['APK'], $apkID, $logger);
 					
@@ -73,7 +76,17 @@ foreach($rows as $row)
 		}
 	}
 	else{
-		// second case, ustudy is private or it is inviteinstall
+		// second case, ustudy is invite only
+// 		if($isPrivate){
+// 			// notifications should only be sent to group members
+// 			$logger->logInfo("ustudy.php the study is private and will only be available for memebres of the group");
+// 			$groupName = LoginManager::getGroupName($logger, $db, $CONFIG['DB_TABLE']['USER'], $userdID);
+// 			$logger->logInfo("ustudy.php groupName=".$groupName);
+// 			if(!empty($groupName)){
+// 				$receivers = HardwareManager::getGCMRegistrationsFromGroup($db, $CONFIG['DB_TABLE']['HARDWARE'], $CONFIG['DB_TABLE']['RGROUP'], $androidVersion, $groupName, $logger);
+// 				GooglePushManager::googlePushSendUStudy($apkID, $receivers, $logger, $CONFIG);
+// 			}
+// 		}
 	}
 
 }

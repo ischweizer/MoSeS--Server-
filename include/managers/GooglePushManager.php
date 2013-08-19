@@ -17,14 +17,12 @@ class GooglePushManager
         $logger->logInfo("###########################googlePushSendUStudy##########################");
         
         $message = json_encode(array(
-        		'registration_id' => $GOOGLE_C2DM_ID,
-        		'collapse_key' => 'ck_' . $device_id,
-        		'data.MESSAGE' => "USERSTUDY",
-        		'data.APKID' => $apkid));
+        		'MESSAGE' => "USERSTUDY",
+        		'APKID' => $apkid));
         
         $response = GooglePushManager::sendMessage($logger, $CONFIG, $message, $targetDevices);
         
-        $logger->logInfo("RESPONSE");
+        $logger->logInfo("googlePushSendUStudy() RESPONSE");
         $logger->logInfo($response);
     }
     

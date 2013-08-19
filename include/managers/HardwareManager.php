@@ -301,6 +301,38 @@ class HardwareManager{
     }
     
     /**
+     * Returns an array of GCM registration ids of all devices that can install an apk
+     * with required android version and whose owners are members of the specified group.
+     * 
+     * @param mixed $db the database
+     * @param String $hardwareTable the name of the hardware table to search in
+     * @param String $androidVersion the lowest android version required by the apk
+     * @param String $rGroup select only hardware from this group
+     * @param mixed $logger the logger
+     */
+    public static function getGCMRegistrationsFromGroup($db, $hardwareTable, $rgroupTable, $androidVersion, $rGroup, $logger){
+    
+    	$return = array();
+    	$sql = "SELECT members FROM ".$rgroupTable. " WHERE name='".$rGroup."'";
+    	$result_members = $db->query($sql);
+    	$member_row = $result_members->fetch();
+    	$members = json_decode($member_row['members']);
+    	foreach($members as $member){
+    		// get for android version
+    		$sql = "SELECT c2dm
+                    FROM " .$hardwareTable. "
+                    WHERE androidversion >=".$androidVersion. " AND uid=".$member;
+    
+    		$result = $db->query($sql);
+    		$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+    		foreach($rows as $row)
+    			$return[] = $row['c2dm'];
+    	}
+    	
+    	return $return;
+    }
+    
+    /**
     * Returns the row from hw-table containing specified deviceID and userID
     */
     public static function getHardware($db, $hwTable, $deviceID, $userID, $logger){
