@@ -53,7 +53,7 @@ if($data->SESSIONID != null){
                          
                             $APK_JSON = array("ID" => $apk['apkid'],
                                               "NAME" => $apk['apktitle'],
-                                              "ANDVER" => json_decode($APK['androidversion']),
+                                              "ANDVER" => $apk['androidversion'],
                                               "DESCR" => $apk['description'],
                                               "STARTDATE" => $apk['startdate'],
                                               "ENDDATE" => $apk['enddate'],
