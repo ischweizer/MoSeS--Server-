@@ -11,19 +11,6 @@ include_once("./include/functions/func.php");
 include_once("./config.php");
 include_once("./include/functions/dbconnect.php");
                      
-/*
-    Remove device by its device id
-*/
-if(isset($_REQUEST['remove']) && !empty($_REQUEST['remove']) && is_numeric($_REQUEST['remove'])){
-    
-   // remove device entry from DB 
-   $sql = "DELETE FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ."  
-                  WHERE uid = ". $_SESSION['USER_ID'] . " 
-                  AND hwid = '". $_REQUEST['remove'] ."'";
-      
-   $db->exec($sql);
-}
-
 /**
 * Select all user devices
 */
@@ -83,7 +70,7 @@ include_once("./include/_menu.php");
                     echo "<td>". $device['devicename'] ."</td>";
                     echo "<td>". $device['modelname'] ."</td>";
                     echo "<td>". getAPILevel($device['androidversion']) ."</td>";
-                    echo '<td><a href="'. $_SERVER['PHP_SELF'] .'?remove='. $device['hwid'] .'" title="Remove device" class="btn btn-danger">Remove</a></td>';
+                    echo '<td><button class="btn btn-danger btnDeviceRemove" value="'. $device['hwid'] .'">Remove</button></td>';
                     echo "</tr>";
                     $i++;
                 }
@@ -180,5 +167,27 @@ include_once("./include/_footer.php");
     });
     // add selection for this page
     $('.nav-menu2').addClass('active');
+    
+    $('.btnDeviceRemove').click(function(e){
+        
+        e.preventDefault();
+        
+        var clickedButton = $(this);
+    
+        clickedButton.removeClass('btn-danger');
+        clickedButton.attr('disabled', true);
+        clickedButton.text('Working...');
+        
+        $.post("content_provider.php", { 'remove': $('.btnDeviceRemove').val(), 'device_remove_code' : 1112 })
+            .done(function(result) {
+                if(result && result == "1"){
+                    location.reload();
+                }else{
+                    clickedButton.addClass('btn-danger');
+                    clickedButton.attr('disabled', false);
+                    clickedButton.text('Remove');
+                }
+        });
+    });
     
 </script>

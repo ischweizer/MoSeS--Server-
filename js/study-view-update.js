@@ -38,6 +38,12 @@ $('.confirm-delete').click(function(e) {
 $('.btnConfirm').click(function(e){
     e.preventDefault(); 
     
+    var clickedButton = $(this);
+    
+    clickedButton.removeClass('btn-danger');
+    clickedButton.attr('disabled', true);
+    clickedButton.text('Working...');
+    
     // removing APK
     $.post("content_provider.php", { 'study_remove': $('.btnConfirm').val() })
         .done(function() {
@@ -97,6 +103,12 @@ $('[name="btnUpdateStudy"]').click(function(e){
 $('.btnUpdateOK').click(function(e){
    
    e.preventDefault();
+    
+   var clickedButton = $(this);
+    
+   clickedButton.removeClass('btn-success');
+   clickedButton.attr('disabled', true);
+   clickedButton.text('Working...'); 
     
    $(this).attr('disabled', true);
    /* ------------------------ */
@@ -243,7 +255,12 @@ $('.btnUpdateOK').click(function(e){
                 location.reload();
             }
         },
-        //error: errorHandler,
+        error: function(){
+            // enable button again
+            clickedButton.addClass('btn-success');
+            clickedButton.text('Send');
+            clickedButton.attr('disabled', false);
+        },
         // Form data
         data: formData,
         //Options to tell JQuery not to process data or worry about content-type

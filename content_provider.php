@@ -41,6 +41,17 @@ if(isset($_SESSION['USER_LOGGED_IN']) &&
     }
 }
 
+/*
+* Remove user device
+*/
+if(isset($_SESSION['USER_LOGGED_IN']) &&
+   isset($_POST['device_remove_code']) && $_POST['device_remove_code'] == 1112 &&
+   isset($_REQUEST['remove']) && !empty($_REQUEST['remove']) && is_numeric($_REQUEST['remove'])){
+       
+       include_once("./include/providers/_device-remove-provider.php");
+       exit;
+   }
+
 /**
 *  Survey remove from user study
 */ 

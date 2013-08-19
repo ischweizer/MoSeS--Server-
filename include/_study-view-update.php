@@ -244,7 +244,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         <label class="control-label"></label>
                         <div class="controls">
                             <button class="btn btnUpdateCancel" title="Cancel update!" style="display: none;">Cancel</button>
-                            <button class="btn btn-success btnUpdateOK" title="Upload changes" style="display: none; margin-left: 20pt;">OK</button>
+                            <button class="btn btn-success btnUpdateOK" title="Upload changes" style="display: none; margin-left: 20pt;">Send</button>
                         </div>
                     </div>
                 </fieldset>
