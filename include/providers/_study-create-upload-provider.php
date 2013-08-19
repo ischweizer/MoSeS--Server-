@@ -322,6 +322,16 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
                     
                     
                     $db->exec($sql);
+                }else{
+                    // special case for text answers
+                    $question_id = $db->lastInsertId();
+                    
+                    // store answers in db
+                    $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
+                                            (questionid, text) 
+                                            VALUES (". $question_id .", '')";
+                    
+                    $db->exec($sql);
                 }
             }            
         } 
