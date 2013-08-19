@@ -132,7 +132,7 @@ include_once("./include/_footer.php");
     * Pagination setup and query
     */
     var paging = {
-        'pages': <?php echo ((int)(count($USER_DEVICES) / 5)) + 1; ?>,
+        'pages': <?php echo ((int)(count($USER_DEVICES) / 5)); ?>,
         'pageMax': 5,
         'curPage': 1
     };

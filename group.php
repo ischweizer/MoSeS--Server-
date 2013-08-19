@@ -73,8 +73,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
              
              $tmp_unique_devices = array();
              foreach($user_devices as $device){
-                  if(!in_array($device['uniqueid'], $tmp_unique_devices)){
-                      $tmp_unique_devices[] = $device['uniqueid'];
+                  if(!in_array($device['deviceid'], $tmp_unique_devices)){
+                      $tmp_unique_devices[] = $device['deviceid'];
                       $GROUP_UNIQUE_DEVICES[] = $device;
                   }
              } 
