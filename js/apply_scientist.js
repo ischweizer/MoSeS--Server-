@@ -27,8 +27,3 @@ $('.btnApplyScientistSend').click(function(e){
         }
     });
 });
-
-// iterate through all menus and remove selection
-$('.dropdown').each(function(){
-    $(this).removeClass('active');   
-});

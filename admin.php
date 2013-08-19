@@ -14,7 +14,7 @@ if(isset($_SESSION["ADMIN_ACCOUNT"]) && $_SESSION["ADMIN_ACCOUNT"] == "YES"){
    
    $USERS_SCIENTIST_LIST = array();
    
-   $sql = "SELECT r.telephone, r.reason, u.hash, u.usergroupid, u.firstname, u.lastname, u.email 
+   $sql = "SELECT r.reason, u.hash, u.usergroupid, u.firstname, u.lastname, u.email 
            FROM ". $CONFIG['DB_TABLE']['REQUEST'] ." r, ". $CONFIG['DB_TABLE']['USER'] ." u 
            WHERE r.pending = 1 AND r.uid = u.userid";
            
@@ -52,7 +52,6 @@ include_once("./include/_menu.php");
                   <th>Surname</th>
                   <th>E-mail</th>
                   <th>Reason</th>
-                  <th>Telephone</th>
                   <th>Allow</th>
                   <th>Reject</th>
                 </tr>
@@ -68,7 +67,6 @@ include_once("./include/_menu.php");
                    echo '<td>'. $user['lastname'] .'</td>'; 
                    echo '<td>'. $user['email'] .'</td>'; 
                    echo '<td>'. $user['reason'] .'</td>'; 
-                   echo '<td>'. $user['telephone'] .'</td>'; 
                    echo '<td><button type="submit" class="btn btn-warning btnAllowAccess" value="'. $user['hash'] .'">Approve</button></td>'; 
                    echo '<td><button type="submit" class="btn btn-danger btnRejectAccess" value="'. $user['hash'] .'">Reject</button></td>'; 
                    echo '</tr>';
