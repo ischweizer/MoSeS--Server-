@@ -8,7 +8,7 @@ $('.btnInstantScientist').click(function(e){
         data: {'instantScientist': 7779},
         success: function(result){
             if(result == "1"){
-                $('.hero-unit').html('<h3 class="text-center">Congrats! You are now a scientist!</h3>');
+                location.reload();
             }
         }
        });

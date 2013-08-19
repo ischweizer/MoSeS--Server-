@@ -34,7 +34,8 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
     $group_members_array_ids = json_decode($row['members']);
     $group_members_count = count($group_members_array_ids);
     $groupname = $row['rgroup'];
-    $group_instant_scientists_counter = $row['instant_scientists_counter'];
+    $group_instant_scientists_counter = intval($row['instant_scientists_counter']);
+    $group_users_need_scientist_promotion = array();
     $GROUP_MEMBERS = array();
     $group_device_count = 0;
     $group_has_private_apks = '';
@@ -53,6 +54,10 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
          if(!empty($user_info)){
              $user_info['NUM_OF_DEVICES'] = 0;
              $GROUP_MEMBERS[] = $user_info;
+             // finding not scientists that want to be a scientist
+             if($user_info['usergroupid'] == 1){
+                 $group_users_need_scientist_promotion[] = $user_info;
+             }
          }
          
          /*
@@ -147,6 +152,14 @@ include_once("./include/_menu.php");
          ?>
         <h2>You're member of group "<?php echo $groupname; ?>"</h2>
         <button class="btn btn-danger btnLeaveGroup" value="<?php echo $_SESSION['USER_ID']; ?>">Leave group</button>
+        <?php
+            if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] == 1){
+                 // request a scientist account link
+                 ?>
+                 <a href="apply.php" class="btn btn-success btnApplyAsScientist">Upgrade to scientist</a>
+            <?php
+             }
+        ?>
         <br>
         <h4>This group has <?php 
                 echo $group_members_count > 1 ? $group_members_count.' members' : '1 member (you)' 
@@ -202,11 +215,14 @@ include_once("./include/_menu.php");
         <br>
         <h4>This group has <?php echo count($GROUP_UNIQUE_DEVICES); ?> unique device<?php echo (count($GROUP_UNIQUE_DEVICES) > 1 ? 's' : ''); ?>!</h4>
         <?php
-        // rules for instant scientist button
-          if(count($GROUP_UNIQUE_DEVICES) % 5 == 0 && (($group_members_count / 5)-1) == $group_instant_scientists_counter){
-            echo '<h4>You have one more instant scientist possibility!</h4>';
-            echo '<button class="btn btn-success btnInstantScientist">Instant scientist</button>';
-          }  
+          // rules for instant scientist button:
+          // first db entry for instant scientst should be less or equal to people that have possibility to upgrade a scientist account 
+          $users_want_promo_counter = count($GROUP_MEMBERS)-count($group_users_need_scientist_promotion);
+          if($group_instant_scientists_counter <= $users_want_promo_counter &&
+             count($GROUP_UNIQUE_DEVICES) - 5*$group_instant_scientists_counter >= 5 && $_SESSION['GROUP_ID'] == 1){
+                echo '<h4>You have one more instant scientist possibility!</h4>';
+                echo '<button class="btn btn-success btnInstantScientist">Instant scientist!</button>';
+              }
         ?>
         <div class="accordion" id="accordionFather2">
             <?php
@@ -217,7 +233,7 @@ include_once("./include/_menu.php");
                 <div class="accordion-heading">
                   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionFather2" href="#collapseDevices<?php echo $i; ?>">
                     <?php
-                       echo $DEVICE['modelname'].($DEVICE['uid'] == $_SESSION['USER_ID'] ? ' (yours)' : '');
+                       echo $DEVICE['devicename'].($DEVICE['uid'] == $_SESSION['USER_ID'] ? ' (yours)' : '');
                     ?>
                   </a>
                 </div>

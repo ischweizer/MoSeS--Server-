@@ -28,17 +28,19 @@ if(isset($_REQUEST['remove']) && !empty($_REQUEST['remove']) && is_numeric($_REQ
 * Select all user devices
 */
 $USER_DEVICES = array();
+$USER_DEVICES_COUNT = 0;
 
 $sql = 'SELECT * 
        FROM hardware 
-       WHERE uid = '. $_SESSION['USER_ID'] .' 
-       LIMIT 5';
+       WHERE uid = '. $_SESSION['USER_ID'];
                                
 $result = $db->query($sql);
 $devices = $result->fetchAll(PDO::FETCH_ASSOC);
   
 if(!empty($devices)){
-  $USER_DEVICES = $devices;
+  $USER_DEVICES_COUNT = count($devices); 
+  // we need only 5 on the first page
+  $USER_DEVICES = array_slice($devices, 0, 5);
 }
 
 //Import of the header  
@@ -61,7 +63,7 @@ include_once("./include/_menu.php");
                      
                  }else{
              ?>
-            <h2>Devices</h2>
+            <h2>Your devices</h2>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -89,9 +91,13 @@ include_once("./include/_menu.php");
                 ?>
               </tbody>
             </table>
-            <div id="page-selection" class="pagination pagination-centered"></div>
             <?php
-                 }
+            if($USER_DEVICES_COUNT > 5){
+                ?>
+                <div id="page-selection" class="pagination pagination-centered"></div>
+                <?php
+            }
+         }
             ?>
     </div>
     <!-- / Main Block -->
@@ -132,7 +138,7 @@ include_once("./include/_footer.php");
     * Pagination setup and query
     */
     var paging = {
-        'pages': <?php echo ((int)(count($USER_DEVICES) / 5)); ?>,
+        'pages': <?php echo ((int)(count($USER_DEVICES) / 5)+1); ?>,
         'pageMax': 5,
         'curPage': 1
     };
@@ -156,7 +162,7 @@ include_once("./include/_footer.php");
                 for(var i=0; i<result.length; ++i){
                     replaceRows += '<tr>';
                     replaceRows += '<td>' + (deviceNumber+i) + '</td>';
-                    replaceRows += '<td>' + result[i].deviceid + '</td>';
+                    replaceRows += '<td>' + result[i].devicename + '</td>';
                     replaceRows += '<td>' + result[i].modelname + '</td>';
                     replaceRows += '<td>' + API_VERSION[result[i].androidversion] + '</td>';
                     replaceRows += '<td><a href="devices.php?remove='+ result[i].hwid +'" title="Remove device" class="btn btn-danger">Remove</a></td>';

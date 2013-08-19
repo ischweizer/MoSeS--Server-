@@ -9,5 +9,8 @@
     
     $db->exec($sql);
     
+    // set session var to scientist level
+    $_SESSION['GROUP_ID'] = 2;
+    
     die('1');
 ?>

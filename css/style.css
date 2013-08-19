@@ -18,9 +18,21 @@ body {
     font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
 }
 
-#btnLeaveGroup {
-    float: right; 
-    margin-top: -30pt;
+.btnLeaveGroup, .btnApplyAsScientist {
+    position: relative;
+    float: right;
+    top: -3em;
+    margin: 0.5em 0;
+}
+
+.btnApplyAsScientist {
+    clear: both;
+}
+
+.btnInstantScientist {
+    position: relative;
+    float: right;
+    margin-top: -3em;
 }
 
 #btnCreateJoinGroup {

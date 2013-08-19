@@ -57,31 +57,30 @@ include_once("./include/_menu.php");
     <!-- Main Block -->
     <div class="hero-unit">
         <?php
-        if($USER_PENDING == 0 && $USER_ACCEPTED == 0){
+        if($USER_ACCEPTED == 0 && $USER_PENDING == 0){
         ?>
             <h2 class="text-center">Sorry, but your application was rejected.</h2>
         <?php
         }else
-            if($USER_PENDING == 1 && $USER_ACCEPTED == 0){
+            if($USER_ACCEPTED == 0 && $USER_PENDING == 1){
             ?>
             <h2 class="text-center">Your application for a scientist is pending...</h2>
             <?php
             }else
-                if($USER_PENDING == -1 && $USER_ACCEPTED == -1){    
+                if($USER_ACCEPTED == 1 && $USER_PENDING == 0){
+                    ?>
+                    <h2 class="text-center">You were accepted for a scientist account!</h2>
+                    <?php       
+                }else
+                if($USER_ACCEPTED == -1 && $USER_PENDING == -1){    
                 ?>
                 <form class="form-horizontal apply_scientist_form" method="post" accept-charset="UTF-8">
                     <fieldset>
                         <legend>Apply as scientist form</legend>
                         <div class="control-group">
-                            <label class="control-label">Telephone</label>
-                            <div class="controls">
-                                <input type="tel" name="telephone" maxlength="10"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
                             <label class="control-label">Reason (*)</label>
                             <div class="controls">
-                                <textarea cols="30" rows="10" name="reason" placeholder="Tell us, please, why you want a scientist account."></textarea>
+                                <textarea cols="30" rows="10" name="reason" placeholder="Please give us some details about yourself and your research" title="Please give us some details about yourself and your research"></textarea>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -89,7 +88,7 @@ include_once("./include/_menu.php");
                              <label class="control-label"></label>
                              <div class="controls">
                                 <input type="hidden" name="promo_sent" value="9325" />
-                                <button class="btn btn-success btnApplyScientistSend">Send</button>
+                                <button class="btn btn-success btnApplyScientistSend">Send application</button>
                             </div>
                         </div>
                     </fieldset>
