@@ -78,7 +78,7 @@ include_once("./include/_menu.php");
                 foreach($USER_DEVICES as $device){
                     echo "<tr>";
                     echo "<td>". $i ."</td>";
-                    echo "<td>". $device['deviceid'] ."</td>";
+                    echo "<td>". $device['devicename'] ."</td>";
                     echo "<td>". $device['modelname'] ."</td>";
                     echo "<td>". getAPILevel($device['androidversion']) ."</td>";
                     echo '<td><a href="'. $_SERVER['PHP_SELF'] .'?remove='. $device['hwid'] .'" title="Remove device" class="btn btn-danger">Remove</a></td>';
