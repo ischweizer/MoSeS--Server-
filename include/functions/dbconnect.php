@@ -1,5 +1,5 @@
 <?php
-include_once("config.php");
+include_once("/home/dasense/moses/config.php");
 
 $user = $CONFIG['DB']['USER'];    
 $pass = $CONFIG['DB']['PASSWORD'];    
