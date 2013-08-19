@@ -17,7 +17,7 @@ if(!empty($aRow))
 // update the tables
 $sql_update1 = "UPDATE ".$CONFIG['DB_TABLE']['USER']." 
                 SET rgroup='' 
-                WHERE userid=".$_SESSION['USER_ID'];
+                WHERE userid=". $_SESSION['USER_ID'];
                 
 $db->exec($sql_update1);
 
@@ -43,10 +43,11 @@ if(count($newMembers) == 0)
                     FROM ".$CONFIG['DB_TABLE']['RGROUP']." 
                     WHERE name='".$groupname."'";
 else{
+    
     $newMembers = json_encode($newMembers);
     $sql_update4 = "UPDATE ".$CONFIG['DB_TABLE']['RGROUP']." 
-                    SET members='".$newMembers."' 
-                    WHERE name='".$groupname."'";
+                    SET members='". $newMembers ."' ". ($_SESSION['GROUP_ID'] == 2 ? ", instant_scientists_counter = instant_scientists_counter - 1 " : "") ." 
+                    WHERE name='". $groupname ."'";
 }
 $db->exec($sql_update4); 
 
