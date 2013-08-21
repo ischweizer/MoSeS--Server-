@@ -10,7 +10,9 @@ $apiKey = $CONFIG['GPUSH']['GOOGLE_SERVER_KEY'];
 $registrationIDs = array( "APA91bGKFNXXLmU2s93TRjXVsDqq6LQPn0OQyYtYB37MVGdf1mhoc_3X8aq1TBrgEg4qYDTYw5f155s4VhA6ETmcVhXF2iRBTAevl69iS5wWvXc_AAET7YeKBfgv72yCvqafrzYR_tEwHN0_x1CELKK1bGwX1ZGOFE8n8KWVBpRT2vxeWJa640Q");
 
 // Message to be sent
-$message = "H A A L O  G U T E N  T A G";
+$message = json_encode(array(
+        		'MESSAGE' => "USERSTUDY",
+        		'APKID' => "362"));
 
 // Set POST variables
 $url = 'https://android.googleapis.com/gcm/send';

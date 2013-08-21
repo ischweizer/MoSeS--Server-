@@ -221,6 +221,35 @@ class HardwareManager{
     	return null;
     }
     
+    /**
+     * Returns the GCM registration id assigned to the provided hardwareid
+     *
+     * @param mixed $db the database
+     * @param string $hardwareTable the name of the hardware table
+     * @param string $hardwareID the hwid of the device
+     * @return the GCM registration id of the device with $hardwareID
+     * or null if gcm id does not exist
+     */
+    public static function getGCMRegistrationId($db, $hardwareTable, $hardwareID){
+    
+    	$sql = "SELECT c2dm
+                FROM ". $hardwareTable ."
+                WHERE hwid = ". $hardwareID;
+    
+    	$result = $db->query($sql);
+    	$row = $result->fetch(PDO::FETCH_ASSOC);
+    
+    	if(!empty($row)){
+    		$toBeReturned = $row['c2dm']; 
+    		if(empty($toBeReturned))
+    			return null;
+    		else
+    			return $toBeReturned;
+    	}
+    	else
+    		return null;
+    }
+    
     
 //     /** TO BE REMOVED, BECAUSE NO LONGER NEEDED
 //     * Changes the deviceID of a device

@@ -26,6 +26,25 @@ class GooglePushManager
         $logger->logInfo($response);
     }
     
+    /**
+     * Sends apkid of the new apk to all targetDevices
+     *
+     * @param String $apkid the id for the user study
+     * @param String $targetDevices array of HARDWARE ids of target devices
+     * @param logger the Logger
+     */
+    public static function googlePushSendUStudyToHardware($db, $apkid, $targetDevicesHWIds, $logger, $CONFIG){
+    	
+    	$targetDevices = array();
+    	foreach($targetDevicesHWIds as $hwid){
+    		$gcmId = HardwareManager::getGCMRegistrationId($db, $CONFIG['DB_TABLE']['HARDWARE'], $hwid);
+    		if(!empty($gcmId))
+    			$targetDevices[]=$gcmId;
+    	}
+    
+    	GooglePushManager::googlePushSendUStudy($apkid, $targetDevices, $logger, $CONFIG);
+    }
+    
     
     /**
     * Sends update messages about new apk to all $targetDevices
