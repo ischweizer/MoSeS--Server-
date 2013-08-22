@@ -29,7 +29,7 @@ if($data->SESSIONID != null){
 	else{
 		$return = array(
 				"MESSAGE" => "SURVEY_RESULT_RESPONSE",
-				"STATUS" => "SUCCESS");
+				"STATUS" => "INVALID_USER");
 	}
 
 }

@@ -212,7 +212,7 @@ class HardwareManager{
                 WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
     
     	$result = $db->query($sql);
-    	$row = $result->fetch();
+    	$row = $result->fetch(PDO::FETCH_ASSOC);
     	 
     	if(!empty($row)){
     		return $row['devicename'];
