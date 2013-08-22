@@ -9,12 +9,12 @@ if($data->SESSIONID != null){
 
 	include_once(MOSES_HOME . '/include/functions/dbconnect.php');
 	$userid = LoginManager::getLoggedInUser($db, $CONFIG['DB_TABLE']['ANDROID_SESSION'], $sessionID);
+    $apkid = $data->APKID;
 	if($userid != null){
 		foreach($data as $key => $value){
-			if($key != "SESSIONID" && $key != "MESSAGE"){
+			if($key != "SESSIONID" && $key != "MESSAGE" && $key != "APKID"){
 				$questionID = $key;
 				$answer = $value;
-                // TODO: $apkid parse
 				$temp = SurveyManager::getQuestionInformation($logger, $db, $CONFIG, $questionID);
 				$formID = $temp['formid'];
 				$surveyID = $temp['surveyid'];

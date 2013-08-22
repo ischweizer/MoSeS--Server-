@@ -161,12 +161,14 @@
        * @param unknown $answer the answer to the question
        */
       public static function insertAnswer($logger, $db, $resultTableName, $surveyID, $formID, $questionID, $answer){
-      	$sql = "INSERT INTO " . $resultTableName . 
+      	
+          $sql = "INSERT INTO " . $resultTableName . 
                         " (survey_id, form_id, question_id, result) 
                         VALUES 
                         ('". $surveyID ."', ". $formID . ", " . $questionID . ", '".$answer."')";
       	$logger->logInfo("SurveyManager:insertAnswer() sql=".$sql);
       	$db->exec($sql);
+        
       }
       
       
