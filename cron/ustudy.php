@@ -260,6 +260,7 @@ foreach($rows as $row){
 }
 
 $logger->logInfo(" ###################### USER STUDY CRONJOB FINISHED ############################## ");
-
+// strat the script for 
+include_once(MOSES_HOME."/cron/survey.php");
 
 ?>
