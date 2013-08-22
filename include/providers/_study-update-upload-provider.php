@@ -26,7 +26,7 @@ if(empty($row)){
 }
 
 // user study was already finished -> send fail back
-if($row['ustudy_finished'] == 1){
+if($row['ustudy_finished'] != 0){
     die('0');
 }
 

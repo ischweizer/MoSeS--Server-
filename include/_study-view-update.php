@@ -79,6 +79,12 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                                 ?>
                                 <h3 class="txtUSWarning text-center" style="color: red;">This user study is finished!</h3>
                                 <?php
+                             }else{
+                                 if($APK['ustudy_finished'] == 2){
+                                    ?>
+                                    <h3 class="txtUSWarning text-center" style="color: red;">This user study is finished!<br>(Survey results are available)</h3>
+                                    <?php
+                                 }
                              }
                          }
                      ?>
@@ -256,7 +262,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         <ul style="list-style-type: none;">
                             <li style="display: inline;"><button type="button" class="btn btn-link surveyShowHide">Show/Hide survey <i class="icon icon-chevron-right"></i></button></li>
                             <?php
-                                if($APK['ustudy_finished'] != 1){ 
+                                if($APK['ustudy_finished'] == 0){ 
                                 ?><li style="display: inline;"><button type="button" class="btn btn-link surveyRemove" value="<?php 
                                         echo $survey['survey_id']; 
                                 ?>">Remove survey <i class="icon icon-remove-sign"></i></button></li><?php 
@@ -349,8 +355,8 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                     
                     include("./include/_survey.php");        
                 
-                // check if user study already finished
-                if($APK['ustudy_finished'] != 1){
+                // check if user study already finished or running
+                if($APK['ustudy_finished'] == 0){
                     ?>
                     <input type="hidden" name="study_update" value="6825">
                     <?php
@@ -367,21 +373,21 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                     if($study_running){ 
                         ?><li><button class="btn btnUpdateSurveyOnly" title="Update APP">Update</button></li>
             <?php
-                    }
-                    
-                    if($APK['ustudy_finished'] != 1 && !$study_running){ 
-                        ?>
-                        <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
-                        <?php
+                    }else{
+                        if($APK['ustudy_finished'] == 0 && !$study_running){ 
+                            ?>
+                            <li><button class="btn" name="btnUpdateStudy" title="Update APP">Update</button></li>
+                            <?php
+                        }
                     }
                         
-            if($APK['ustudy_finished'] == 1){
+            if($APK['ustudy_finished'] == 2){
                 ?>
                 <li><button class="btn btnSurveyResultsExportCsv" title="Survey results" value="<?php echo $survey['survey_id']; ?>">Results to CSV</button></li>
                 <?php
             }
             
-            if((!$study_running && $APK['ustudy_finished'] != 1) || ($APK['ustudy_finished'] == 1 && !$study_running)){
+            if((!$study_running && $APK['ustudy_finished'] == 0) || (($APK['ustudy_finished'] == 1 || $APK['ustudy_finished'] == 2) && !$study_running)){
             ?>
                 <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkid']; ?>">Remove</button></li>
                 <?php
