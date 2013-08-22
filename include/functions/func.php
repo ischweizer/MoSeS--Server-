@@ -388,20 +388,16 @@ function survey2csv($RESULTS){
             $t = $ANSWERS['titles'];
             $c = $ANSWERS['counters'];
             if(!empty($t)){
-                for($i=1; $i <= count($t); $i++){
+                foreach($t as $a_id => $a_title){
                     if($q['question_type'] != 2){
-                        if(!empty($c[$i])){
-                            fputcsv($out, array('Answer', $t[$i-1], $c[$i]));        
+                        if(!empty($c[$a_id])){
+                            fputcsv($out, array('Answer', $a_title, $c[$a_id]));        
                         }else{
-                            fputcsv($out, array('Answer', $t[$i-1], 0));        
+                            fputcsv($out, array('Answer', $a_title, 0));        
                         }
                     }else{
                         // text questions
-                        if(!empty($ANSWERS['text_answers'])){
-                            foreach($ANSWERS['text_answers'] as $text_answer){
-                                fputcsv($out, array('Answer', $text_answer));      
-                            }
-                        }
+                        fputcsv($out, array('Answer', $a_title));
                     }
                 }
             }
