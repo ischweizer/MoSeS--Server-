@@ -22,6 +22,10 @@ include_once("./include/_menu.php");
             Every person with an Android device can contribute.
             Feel free to register and download moses client, it's easy!
         </p>
+        <a href="https://play.google.com/store/apps/details?id=de.da_sense.moses.client" style="float: right;">
+          <img alt="Get it on Google Play"
+               src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+        </a>
         <p>&nbsp;
         </p><?php
             if(!isset($_SESSION['USER_LOGGED_IN'])){    
