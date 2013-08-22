@@ -319,7 +319,7 @@ class ApkManager{
     */
     public static function incrementSurveySendCounter($db, $apkTable, $apkID, $logger){
         $sql = "UPDATE ". $apkTable ." 
-                SET survey_sent_count = survey_sent_count + 1 
+                SET survey_results_sent_count = survey_results_sent_count + 1 
                 WHERE apkid = ". intval($apkID);
         $db->exec($sql);
     }
