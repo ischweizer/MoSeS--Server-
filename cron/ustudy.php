@@ -9,7 +9,6 @@
 * 1  finished
 */
 
-// get all apks
 include_once('/home/dasense/moses/config.php');
 include_once(MOSES_HOME."/include/functions/cronLogger.php");
 include_once(MOSES_HOME. "/include/functions/dbconnect.php");
@@ -17,8 +16,6 @@ include_once (MOSES_HOME."/include/managers/ApkManager.php");
 include_once (MOSES_HOME."/include/managers/LoginManager.php");
 include_once (MOSES_HOME."/include/managers/HardwareManager.php");
 include_once (MOSES_HOME."/include/managers/GooglePushManager.php");
-// 	include(MOSES_HOME."/cron/survey.php");
-echo "heelo";
 
 $logger->logInfo(" ###################### STARTED USER STUDY CRONJOB ############################## ");
 
@@ -55,6 +52,7 @@ foreach($rows as $row){
 			}
 		}
 		else{
+			// enddate is empty, we have start criterion user study
 			if($PARTICIPATED_COUNT >= $startCriterion){
 				// we have enough devices, check the timestamp
 				if(empty($timeEnoughParticipants)){
@@ -89,6 +87,7 @@ foreach($rows as $row){
 					ApkManager::markUserStudyAsFinished($db, $CONFIG['DB_TABLE']['APK'], $apkID, $logger);
 				}
 				else{
+					// end date has not been reached yet, do not mark the ustudy as finished
 					if(time()>=strtotime($startDate)){
 						// check if enough devices have installed the apk, if not, send some more notifications
 						if($PARTICIPATED_COUNT < $RESTRICTION_USER_NUMBER){
@@ -148,8 +147,7 @@ foreach($rows as $row){
 							}
 						}
 						else{
-							// enough devices have installed it, mark the user study as finished
-							ApkManager::markUserStudyAsFinished($db, $CONFIG['DB_TABLE']['APK'], $apkID, $logger);
+							// enough devices have installed it, do not do anything, we are waiting for enddate to mark ustudy as finished
 						}
 					}
 			}

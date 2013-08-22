@@ -169,6 +169,32 @@
       	$db->exec($sql);
       }
       
+      
+      /**
+       * Queries the survey database and returns true if a survey for the given apk exists
+       * @param unknown $logger the logger
+       * @param unknown $db the database
+       * @param unknown $surveyTableName the name of the survey table
+       * @param unknown $apkID the if of the apk which is queried
+       * @return boolean true only if the user study with the given apkID has a survey attached
+       */
+      public static function hasSurvey($logger, $db, $surveyTableName, $apkID){
+      	$sql = "SELECT apkid FROM ".$surveyTableName." WHERE apkid=".$apkID;
+      	$logger->logInfo("SurveyManager:hasSurvey() sql=".$sql);
+      	$result = $db->query($sql);
+      	$row = $result->fetch(PDO::FETCH_ASSOC);
+      	if(empty($row)){
+      		$logger->logInfo("SurveyManager:hasSurvey() no survey found for apkID=".$apkID);
+      		return false;
+      	}
+      	else{
+      		$logger->logInfo("SurveyManager:hasSurvey() found survey for apkID=".$apkID);
+      		return true;
+      	}
+      }
+      
   }
+  
+  
     
 ?>

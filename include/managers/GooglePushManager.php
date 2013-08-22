@@ -70,6 +70,46 @@ class GooglePushManager
     }
     
     /**
+     * Sends notifications to specified devies about an available survey with the specified apkid
+     *
+     * @param String $apkid the id for the user study
+     * @param String $targetDevices array of String ids of target devices c2dm-ids
+     * @param logger the Logger
+     */
+    public static function sendSurveyAvailable($apkid, $targetDevices, $logger, $CONFIG){
+    
+    	$logger->logInfo("GooglePushManager::sendSurveyAvailable()");
+    
+    	$message = json_encode(array(
+    			'MESSAGE' => "QUEST",
+    			'APKID' => $apkid));
+    
+    	$response = GooglePushManager::sendMessage($logger, $CONFIG, $message, $targetDevices);
+    
+    	$logger->logInfo("GooglePushManager::sendSurveyAvailable() RESPONSE");
+    	$logger->logInfo($response);
+    }
+    
+    /**
+     * Sends notification about available survey for the specified apk to all targetDevices
+     *
+     * @param String $apkid the id for the user study
+     * @param String $targetDevices array of HARDWARE ids of target devices
+     * @param logger the Logger
+     */
+    public static function sendSurveyAvailableToHardware($db, $apkid, $targetDevicesHWIds, $logger, $CONFIG){
+    	 
+    	$targetDevices = array();
+    	foreach($targetDevicesHWIds as $hwid){
+    		$gcmId = HardwareManager::getGCMRegistrationId($db, $CONFIG['DB_TABLE']['HARDWARE'], $hwid);
+    		if(!empty($gcmId))
+    			$targetDevices[]=$gcmId;
+    	}
+    
+    	GooglePushManager::sendSurveyAvailable($apkid, $targetDevices, $logger, $CONFIG);
+    }
+    
+    /**
      * Sends a message using Google push services to receivers.
      * @param mixed $logger for logging purposes
      * @param array $CONFIG associciative array of the config file 

@@ -263,6 +263,22 @@ class ApkManager{
 		$sql = "UPDATE ". $apkTable ." SET ustudy_finished=1 WHERE apkid = ". intval($apkID);
 		$db->exec($sql);
 	}
+	
+	/**
+	 * Markes the userstudy as definitely finished (all devices have been notified about an
+	 * available survey if any)
+	 *
+	 * @param mixed $db the database
+	 * @param mixed $apkTable the table name
+	 * @param mixed $apkID the id of the apk whose user study should be marked as finished
+	 * @param mixed $logger the logger
+	 */
+	public static function markUserStudyAsDefinitelyFinished($db, $apkTable, $apkID, $logger){
+		//     	$logger->logInfo("markUserStudyAsFinished() called");
+		// checking if the apk exists
+		$sql = "UPDATE ". $apkTable ." SET ustudy_finished=2 WHERE apkid = ". intval($apkID);
+		$db->exec($sql);
+	}
 
 	/**
 	 * Inserts current timestamp to time_enough_participants
@@ -274,6 +290,28 @@ class ApkManager{
 	public static function insertTimestampToTimeEnoughParticipants($db, $apkTable, $apkID){
 		$sql = "UPDATE ". $apkTable ." SET time_enough_participants=". time() ." WHERE apkid = ". intval($apkID);
 		$db->exec($sql);
+	}
+	
+	/**
+	 * Returns an array containing hwids of all devices that have installed the specified APK
+	 * @param unknown $db the database
+	 * @param unknown $apkTableName the name of the apk table
+	 * @param unknown $apkID the id of the apk
+	 * @param unknown $logger the logger
+	 * @return multitype:|mixed an array containing the hwids of the devices; if no devices are found an empty array is returned
+	 */
+	public static function getParticipatedDevices($db, $apkTableName, $apkID, $logger){
+		$sql="SELECT installed_on FROM ".$apkTableName." WHERE apkid=".$apkID;
+		$result = $db->query($sql);
+		$row = $result->fetch(PDO::FETCH_ASSOC);
+		if(empty($row)){
+			$logger->logInfo("ApkManager::getParticipatedDevices() no participated devices found for apkID=".$apkID);
+			return array();
+		}
+		else{
+			$logger->logInfo("ApkManager::getParticipatedDevices() found participated devices for apkID=".$apkID);
+			return json_decode($row['installed_on']);
+		}
 	}
 
 }
