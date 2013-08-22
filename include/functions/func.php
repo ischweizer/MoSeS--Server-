@@ -364,7 +364,7 @@ function download_send_headers($filename) {
 /*
 *   Converts array with a survey to csv file and saves it for download
 */ 
-function survey2csv(array $RESULTS){
+function survey2csv($RESULTS){
     
    if(count($RESULTS) == 0)
     return null;
@@ -387,11 +387,22 @@ function survey2csv(array $RESULTS){
             $ANSWERS = $q['answers'];
             $t = $ANSWERS['titles'];
             $c = $ANSWERS['counters'];
-            for($i=1; $i <= count($t); $i++){
-                if(!empty($c[$i])){
-                    fputcsv($out, array('Answer', $t[$i-1], $c[$i]));        
-                }else{
-                    fputcsv($out, array('Answer', $t[$i-1], 0));        
+            if(!empty($t)){
+                for($i=1; $i <= count($t); $i++){
+                    if($q['question_type'] != 2){
+                        if(!empty($c[$i])){
+                            fputcsv($out, array('Answer', $t[$i-1], $c[$i]));        
+                        }else{
+                            fputcsv($out, array('Answer', $t[$i-1], 0));        
+                        }
+                    }else{
+                        // text questions
+                        if(!empty($ANSWERS['text_answers'])){
+                            foreach($ANSWERS['text_answers'] as $text_answer){
+                                fputcsv($out, array('Answer', $text_answer));      
+                            }
+                        }
+                    }
                 }
             }
             
@@ -401,6 +412,10 @@ function survey2csv(array $RESULTS){
             }
         }
    }
+   
+   // putting last info about participated users and results counters
+   fputcsv($out, array('Results number', $RESULTS['survey_results_sent_count']));
+   fputcsv($out, array('Number of participants', $RESULTS['participated_count']));
    
    fclose($out);
    return ob_get_clean();

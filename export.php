@@ -31,6 +31,7 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']) &&
         if(!empty($survey_results)){
             $RESULTS_ARRAY = array();
             
+            // select suited survey
             $sql = "SELECT userid, apkid 
                     FROM ". $CONFIG['DB_TABLE']['STUDY_SURVEY'] ." 
                     WHERE surveyid = ". $id;
@@ -38,17 +39,24 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']) &&
            $result = $db->query($sql);
            $survey = $result->fetch(PDO::FETCH_ASSOC);
             
-            // selecting APK title
-            $sql = "SELECT apktitle 
+            // selecting APK title, 
+            // participated count and 
+            // survey result sent count
+            $sql = "SELECT apktitle, participated_count, survey_results_sent_count 
                     FROM ". $CONFIG['DB_TABLE']['APK'] ." 
                     WHERE apkid = ". $survey['apkid'] ." AND userid = ". $survey['userid'];
                     
            $result = $db->query($sql);
-           $apk_title_r = $result->fetch(PDO::FETCH_ASSOC);
-           $apk_title = $apk_title_r['apktitle'];
+           $apk_res = $result->fetch(PDO::FETCH_ASSOC);
+           $apk_title = $apk_res['apktitle'];
+           $apk_participated_count = $apk_res['participated_count'];
+           $apk_survey_results_sent_count = $apk_res['survey_results_sent_count'];
            
            $RESULTS_ARRAY['apk_title'] = $apk_title;
+           $RESULTS_ARRAY['participated_count'] = $apk_participated_count;
+           $RESULTS_ARRAY['survey_results_sent_count'] = $apk_survey_results_sent_count;
            
+           // select all forms
            $sql = "SELECT title, formid 
                    FROM ". $CONFIG['DB_TABLE']['STUDY_FORM'] ." 
                    WHERE surveyid = ". $id;
@@ -71,7 +79,7 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']) &&
                   
                   $counter = array();
                   
-                  $sql = "SELECT text  
+                  $sql = "SELECT aid, text  
                           FROM ". $CONFIG['DB_TABLE']['STUDY_ANSWER'] ." 
                           WHERE questionid = ". $q['questionid'];
                             
@@ -80,19 +88,41 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']) &&
                   
                   $answers_array = array();
                   foreach($answers as $a){
-                      $answers_array[] = $a['text'];
+                      $answers_array[$a['aid']] = $a['text'];
                   }
                   
+                  // through all results
                   foreach($survey_results as $res){
-                    //for($i=0; $i < count($answers_array); $i++){
-                          if(intval($q['questionid']) == intval($res['question_id'])){
-                              if(empty($res['result']) || $res['result'] === '0'){
-                                $counter[0] = (empty($counter[0]) ? 1 : $counter[0]+1);
-                              }else{
+                      
+                      // if we found matched question id with the result question id
+                      if(intval($q['questionid']) == intval($res['question_id'])){
+                          
+                          // unanswered
+                          if(empty($res['result']) || $res['result'] === '0'){
+                            $counter[0] = (empty($counter[0]) ? 1 : $counter[0]+1);
+                          }else{
+                            // normal answers, numeric
+                            if(is_numeric($res['result'])){
+                                // increment counter
                                 $counter[$res['result']] = (empty($counter[$res['result']]) ? 1 : $counter[$res['result']]+1);       
-                              }
+                            }else{
+                                // miltiple choice question
+                                if(json_decode($res['result'])){
+                                    // multiple choice question
+                                    $ans = json_decode($res['result']);
+                                    foreach($ans as $a){
+                                        // increment counter
+                                        $counter[$a] = (empty($counter[$a]) ? 1 : $counter[$a]+1);   
+                                    }
+                                }else{
+                                    if($q['type'] == 2){
+                                        // text question
+                                        $answers_array[] = $res['result'];
+                                    }
+                                }
+                            }
                           }
-                      //}
+                      }
                   }
                   
                   $questions_array[] = array('question_title' => $q['text'],
@@ -106,7 +136,7 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']) &&
            }
            
            $RESULTS_ARRAY['forms'] = $forms_array;
-            
+           
            download_send_headers("survey_results_" . date("d.m.Y") . ".csv");
            echo survey2csv($RESULTS_ARRAY);   
         
