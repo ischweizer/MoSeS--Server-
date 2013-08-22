@@ -313,6 +313,16 @@ class ApkManager{
 			return json_decode($row['installed_on']);
 		}
 	}
+    
+    /**
+    *  Updates user study, set the counter+1 that a user has sent his survey to server
+    */
+    public static function incrementSurveySendCounter($db, $apkTable, $apkID, $logger){
+        $sql = "UPDATE ". $apkTable ." 
+                SET survey_sent_count = survey_sent_count + 1 
+                WHERE apkid = ". intval($apkID);
+        $db->exec($sql);
+    }
 
 }
 ?>

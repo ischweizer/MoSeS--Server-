@@ -14,11 +14,13 @@ if($data->SESSIONID != null){
 			if($key != "SESSIONID" && $key != "MESSAGE"){
 				$questionID = $key;
 				$answer = $value;
+                // TODO: $apkid parse
 				$temp = SurveyManager::getQuestionInformation($logger, $db, $CONFIG, $questionID);
 				$formID = $temp['formid'];
 				$surveyID = $temp['surveyid'];
 				$logger->logInfo("survey_result.php.inc temp=".print_r($temp, true));
 				SurveyManager::insertAnswer($logger, $db, $CONFIG['DB_TABLE']['STUDY_RESULT'], $surveyID, $formID, $questionID, $answer);
+                ApkManager::incrementSurveySendCounter($db, $CONFIG['DB_TABLE']['APK'], $apkid, $logger);
 			}
 		}
 
@@ -39,7 +41,5 @@ else{
 			"STATUS" => "INVALID_SESSION");
 }
 
-
-print(json_encode($return));
-
+echo json_encode($return);
 ?>
