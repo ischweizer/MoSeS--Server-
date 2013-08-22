@@ -195,6 +195,18 @@
       	}
       }
       
+      public static function hasSurveyWOLogger($db, $surveyTableName, $apkID){
+          $sql = "SELECT apkid FROM ".$surveyTableName." WHERE apkid=".$apkID;
+          $result = $db->query($sql);
+          $row = $result->fetch(PDO::FETCH_ASSOC);
+          if(empty($row)){
+              return false;
+          }
+          else{
+              return true;
+          }
+      }
+      
   }
   
   

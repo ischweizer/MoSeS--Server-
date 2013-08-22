@@ -7,6 +7,8 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     header("Location: " . dirname($_SERVER['PHP_SELF']));
     exit;
 }
+
+include_once("./include/managers/SurveyManager.php");
                     
 ?><h2>Your user studies</h2>
 <br>     
@@ -59,7 +61,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             $study_running = !empty($startDate) && 
                             !empty($endDate) && 
                             $now >= strtotime($startDate) &&
-                            $now <= strtotime($endDate);
+                            $now <= strtotime($endDate) && $APK['ustudy_finished'] == 0;
       
             ?>
             <form class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="UTF-8" id="updateAPKForm">
@@ -75,12 +77,12 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                          }else{   
                     
                              // FINISHED User Study!
-                             if($APK['ustudy_finished'] == 1){
+                             if($APK['ustudy_finished'] != 0 && !SurveyManager::hasSurveyWOLogger($db, $CONFIG['DB_TABLE']['STUDY_SURVEY'], $APK['apkid'])){
                                 ?>
                                 <h3 class="txtUSWarning text-center" style="color: red;">This user study is finished!</h3>
                                 <?php
                              }else{
-                                 if($APK['ustudy_finished'] == 2){
+                                 if($APK['ustudy_finished'] == 2 && SurveyManager::hasSurveyWOLogger($db, $CONFIG['DB_TABLE']['STUDY_SURVEY'], $APK['apkid'])){
                                     ?>
                                     <h3 class="txtUSWarning text-center" style="color: red;">This user study is finished!<br>(Survey results are available)</h3>
                                     <?php
@@ -381,13 +383,13 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
                         }
                     }
                         
-            if($APK['ustudy_finished'] == 2){
+            if($APK['ustudy_finished'] == 2 && SurveyManager::hasSurveyWOLogger($db, $CONFIG['DB_TABLE']['STUDY_SURVEY'], $APK['apkid'])){
                 ?>
                 <li><button class="btn btnSurveyResultsExportCsv" title="Survey results" value="<?php echo $survey['survey_id']; ?>">Results to CSV</button></li>
                 <?php
             }
             
-            if((!$study_running && $APK['ustudy_finished'] == 0) || (($APK['ustudy_finished'] == 1 || $APK['ustudy_finished'] == 2) && !$study_running)){
+            if((!$study_running && $APK['ustudy_finished'] == 0) || $APK['ustudy_finished'] == 1 || $APK['ustudy_finished'] == 2){
             ?>
                 <li><button class="btn btn-danger confirm-delete" title="Remove study" value="<?php echo $APK['apkid']; ?>">Remove</button></li>
                 <?php
