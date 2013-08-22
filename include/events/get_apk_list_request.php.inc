@@ -47,7 +47,8 @@ if($data->SESSIONID != null){
                      $json_array_return = array();
                      
 //                      $APKs = ApkManager::getNonStudyAllApkRegardingMinAndroidVersion($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $ANDROID_VERSION);
-                     $APKs = ApkManager::getAllApkRegardingMinAndroidVersion($logger, $DBManager->getDB(), $USERID, $CONFIG, $ANDROID_VERSION);
+//                      $APKs = ApkManager::getAllApkRegardingMinAndroidVersion($logger, $DBManager->getDB(), $USERID, $deviceID, $CONFIG, $ANDROID_VERSION);
+                     $APKs = ApkManager::getAllApkRegardingMinAndroidVersion($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
                                           
                      foreach($APKs as $apk){
                              

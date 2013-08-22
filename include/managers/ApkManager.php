@@ -61,7 +61,7 @@ class ApkManager{
 	}
 
 	/**
-	 * Returns all APKs in DB that can run on the specified android version by the given user.
+	 * Returns all APKs in DB that can run on the specified android version by the given user with the given device.
 	 *
 	 * @param mixed $db the database instance
 	 * @param $userId the user id
@@ -69,9 +69,9 @@ class ApkManager{
 	 * @param int $minAndroidVersion the minimal android version on which the apk should be runnable
 	 * @return array an array containing all apks that meet the requirements. If no such apks exist, an empty array is returned.
 	 */
-	public static function getAllApkRegardingMinAndroidVersion($logger, $db, $userId,$CONFIG, $minAndroidVersion){
+	public static function getAllApkRegardingMinAndroidVersion($logger, $db, $userId,$CONFIG, $deviceID, $minAndroidVersion){
 		$sql = "SELECT *
-				FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE private=0 AND ustudy_finished =0 AND androidversion<=".$minAndroidVersion;
+				FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE private=0 AND ustudy_finished =0 AND inviteinstall=0 AND androidversion<=".$minAndroidVersion;
 		 
 		$logger->logInfo("getAllApkRegardingMinAndroidVersion() sql=".$sql);
 
@@ -97,8 +97,43 @@ class ApkManager{
 				 
 			}
 		}
-
+		
+		$inviteOnlyApksForDevice = ApkManager::getAllInviteOnlyApkRegardingDeviceid($logger, $db, $userId, $deviceID, $CONFIG);
+		$array = array_merge_recursive($array, $inviteOnlyApksForDevice);
 		return $array;
+	}
+	
+	/**
+	 * Returns all invite only APKs in DB that can run on the device with the specified id.
+	 *
+	 * @param mixed $db the database instance
+	 * @param $userId the user id
+	 * @param mixed $apkTable the name of the apk table
+	 * @return array an array containing all apks that meet the requirements. If no such apks exist, an empty array is returned.
+	 */
+	public static function getAllInviteOnlyApkRegardingDeviceid($logger, $db, $userId, $deviceID, $CONFIG){
+		$sql = "SELECT * FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE inviteinstall=1 AND ustudy_finished =0";
+			
+		$logger->logInfo("getAllInviteOnlyApkRegardingDeviceid() sql=".$sql);
+	
+		$result = $db->query($sql);
+		$array = $result->fetchAll(PDO::FETCH_ASSOC);
+			
+		$toBeReturned = array();
+		$hardwareId = HardwareManager::getHardwareID($db, $CONFIG['DB_TABLE']['HARDWARE'], $userId, $deviceID);
+		foreach ($array as $apk){
+			// get devices that may install or have installed the apk
+			$pendingDevices = json_decode($apk['pending_devices']);
+			$installedOn = array();
+			$tempInstalledOn = $apk['installed_on'];
+			if(!empty($tempInstalledOn))
+				$installedOn = json_decode($tempInstalledOn);
+			if(in_array($hardwareId, $pendingDevices) || in_array($hardwareId, $installedOn))
+				$toBeReturned[]=$apk;
+			
+		}
+	
+		return $toBeReturned;
 	}
 
 
