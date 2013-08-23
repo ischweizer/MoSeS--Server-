@@ -39,7 +39,7 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
    }
    
    // error if study period from date to date selected and those are empty
-   if($('[name="study_period"]').val() == 1){
+   if($('[name="study_period"]:selected').val() == "1"){
        if($.trim($('[name="start_date"]').val()).length == 0){
            alert("Please enter start date.");
            return;
@@ -61,7 +61,7 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
    }
    
    // for minimum devices and running period
-   if($('[name="study_period"]').val() == 2){
+   if($('[name="study_period"]:selected').val() == "2"){
        
        var startAfter = $.trim($('[name="start_after_n_devices"]').val()); 
        if(startAfter.length == 0){
