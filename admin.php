@@ -78,7 +78,7 @@ include_once("./include/_menu.php");
         </form>
         <?php
         }else{
-                echo "<p>No pending requests.</p>";
+                echo "<p>No pending requests for a scientist.</p>";
             }
         ?>
     <hr>
