@@ -103,6 +103,77 @@ $('[name="btnUpdateStudy"]').click(function(e){
 $('.btnUpdateOK').click(function(e){
    
    e.preventDefault();
+   
+   /*************** CHECKS **************/
+   
+   // error if no title given
+   if($.trim($('[name="apk_title"]').val()).length == 0){
+       alert("Please enter the apk title.");
+       return;
+   }
+   
+   // error if study period from date to date selected and those are empty
+   if($('[name="study_period"]').val() == 1){
+       if($.trim($('[name="start_date"]').val()).length == 0){
+           alert("Please enter start date.");
+           return;
+       }
+       
+       if($.trim($('[name="end_date"]').val()).length == 0){
+           alert("Please enter end date.");
+           return;
+       }
+       
+       // TODO: fix it. not working
+       var startDate = $.datepicker.parseDate("yy-mm-dd", $('[name="start_date"]').val());
+       var endDate = $.datepicker.parseDate("yy-mm-dd", $('[name="end_date"]').val());
+       
+       if(startDate.getTime() - endDate.getTime() < 0){
+           alert("Start date is before end date!");
+           return;
+       }
+   }
+   
+   // for minimum devices and running period
+   if($('[name="study_period"]').val() == 2){
+       
+       var startAfter = $.trim($('[name="start_after_n_devices"]').val()); 
+       if(startAfter.length == 0){
+           alert("Please minimum devices to start after.");
+           return;
+       }
+       
+       var runningTime = $.trim($('[name="running_time"]').val());
+       if(runningTime.length == 0){
+           alert("Please enter running time.");
+           return;
+       }
+       
+       if(!isNumber(startAfter) || !isNumber(runningTime)){
+           alert("Please enter a number value.");
+           return;
+       }
+       
+       if(startAfter < 1){
+           alert("Please enter minimum start number greater or equal 1.");
+           return;
+       }
+       
+       if(runningTime < 1){
+           alert("Please enter running period greater or equal 1.");
+           return;
+       }
+   }
+   
+   // error if it not apk file
+   var filename = $.trim($('[name="file"]').val()).toLowerCase();
+   
+   if(filename.lastIndexOf('apk') != filename.length-3){
+       alert("Please select an APK file.");
+       return;
+   }
+   
+   /*******************************************/
     
    var clickedButton = $(this);
     

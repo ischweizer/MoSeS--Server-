@@ -194,6 +194,11 @@ include_once("./include/_footer.php");
 <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
 <?php
 
+/* COMMONS */
+?>
+<script src="js/study-common.js"></script>
+<?php
+
 /* UPDATE AND VIEW PAGE */
 if($CREATE == 0){
 ?>
@@ -205,6 +210,4 @@ if($CREATE == 0){
 <script src="js/study-create.js"></script>
 <?php
 }
-/* COMMONS */
 ?>
-<script src="js/study-common.js"></script>

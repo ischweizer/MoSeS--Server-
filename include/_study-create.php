@@ -15,7 +15,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="control-group">
         <label class="control-label">APK title: </label>
         <div class="controls">
-            <input type="text" name="apk_title" id="study_name" maxlength="50" placeholder="Study name" />
+            <input type="text" name="apk_title" maxlength="50" placeholder="Title" />
         </div>
     </div>
     <div class="control-group">
@@ -59,13 +59,13 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <div class="control-group">
         <label class="control-label">Minimum number of devices to start after: </label>
         <div class="controls">
-            <input type="number" name="start_after_n_devices" maxlength="10" placeholder="Number" disabled="disabled" min="1" />
+            <input type="number" name="start_after_n_devices" value="1" maxlength="10" placeholder="Number" disabled="disabled" min="1" />
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">Running period:</label>
         <div class="controls">
-            <input type="text" name="running_time" maxlength="50" placeholder="Number" disabled="disabled" />
+            <input type="number" name="running_time" value="1" maxlength="50" placeholder="Number" disabled="disabled" min="1" />
             <select name="running_time_value" disabled="disabled">
                 <option value="h">Hours</option>
                 <option value="d">Days</option>
@@ -106,7 +106,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
         }
      ?>
     <div class="control-group" name="uploadFile">
-        <label class="control-label">Select an APP: </label>
+        <label class="control-label">Select an APK: </label>
         <div class="controls">
             <input type="file" name="file">
         </div>
