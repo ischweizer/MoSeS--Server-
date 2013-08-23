@@ -415,6 +415,30 @@ function survey2csv($RESULTS){
    
    fclose($out);
    return ob_get_clean();
-}  
+} 
+
+/*
+*  Returns user access level title by its ID
+*/
+function getUserAccessLevelTitleById($levelID){
+    if(empty($levelID) || !is_numeric($levelID)){
+        return;
+    }
+  
+    $result = 'Not confirmed';
+    
+    switch($levelID){
+        case 0: $result = 'Not confirmed';
+                break;
+        case 1: $result = 'User';
+                break;
+        case 2: $result = 'Scientist';
+                break;
+        case 3: $result = 'Administrator';
+                break;
+        default: $result = 'Not confirmed';
+    }
+    return $result;
+} 
 
 ?>

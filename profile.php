@@ -7,24 +7,13 @@ if(!isset($_SESSION['USER_LOGGED_IN']) && $_SESSION["GROUP_ID"] == 0){
     exit;
 }
 
-include_once("./include/functions/dbconnect.php");
-
-$sql = "SELECT r.reason, u.hash, u.usergroupid, u.firstname, u.lastname, u.email 
-       FROM ". $CONFIG['DB_TABLE']['REQUEST'] ." r, ". $CONFIG['DB_TABLE']['USER'] ." u 
-       WHERE r.pending = 1 AND r.uid = u.userid";
-       
-$result = $db->query($sql);
-$array = $result->fetchAll(PDO::FETCH_ASSOC);
-  
-if(!empty($array)){
-  $USERS_SCIENTIST_LIST = $array;
-}
+include_once("./include/functions/func.php");
 
 //Import of the header  
 include_once("./include/_header.php");                   
 ?>
   
-<title>The Mobile Sensing System - Admin panel</title>
+<title>The Mobile Sensing System - Edit Your Profile</title>
 
 <?php  //Import of the menu
 include_once("./include/_menu.php");
@@ -36,6 +25,12 @@ include_once("./include/_menu.php");
         <form class="form-horizontal saveProfileForm" method="post" accept-charset="UTF-8">
             <fieldset>
                 <legend>Edit Your Profile</legend>
+                <div class="control-group">
+                    <label class="control-label">Access level</label>
+                    <div class="controls">
+                        <?php echo getUserAccessLevelTitleById($_SESSION["GROUP_ID"]); ?>
+                    </div>
+                </div>
                 <div class="control-group">
                     <label class="control-label">First name</label>
                     <div class="controls">
