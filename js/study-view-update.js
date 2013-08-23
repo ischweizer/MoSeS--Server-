@@ -165,14 +165,6 @@ $('.btnUpdateOK').click(function(e){
        }
    }
    
-   // error if it not apk file
-   var filename = $.trim($('[name="file"]').val()).toLowerCase();
-   
-   if(filename.lastIndexOf('apk') != filename.length-3){
-       alert("Please select an APK file.");
-       return;
-   }
-   
    /*******************************************/
     
    var clickedButton = $(this);

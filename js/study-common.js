@@ -33,7 +33,7 @@ $('[name="publishMethod"]').change(function(){
 $('.content_appears_here').on('click','.scrollTo',function(e){
     e.preventDefault();
     
-    scrollToElement('.survey_controls');
+    scrollToElement('.survey_select');
 });
 
 $('[name="btnAddSurvey"]').click(function(e){
