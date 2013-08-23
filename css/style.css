@@ -272,12 +272,12 @@ body {
     text-align:left; 
 }
 
-#btn_login, #btn_logout {
+.btn_login, .btnLoginProfileCtrl {
     float: right; 
     margin-top: 30pt;
 }
 
-#btn_login i, #btn_logout i {
+.btn_login i, .btn_profile i {
     margin-right: 5pt;
 }
 

@@ -33,7 +33,7 @@ $(document).ready(function() {
     $("#dim_back").css("height", $(document).height());
 
     //When the link that triggers the message is clicked fade in overlay/msgbox
-    $("#btn_login").click(function(){
+    $(".btn_login").click(function(){
         $("#dim_back").fadeIn();
         $('#login_error_message').hide(); // prevent all errors from showing on the lighbox
         $('input[type=email]').focus();

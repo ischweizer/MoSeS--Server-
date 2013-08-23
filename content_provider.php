@@ -4,6 +4,21 @@ session_start();
 include_once("./include/functions/func.php");
 
 /*
+*   Save user profile
+*/
+
+if(isset($_SESSION['USER_LOGGED_IN']) && 
+    isset($_POST['edit_profile_code']) && $_POST['edit_profile_code'] == 9950 &&
+    isset($_POST['firstname']) &&
+    isset($_POST['lastname']) &&
+    isset($_POST['password1']) &&
+    isset($_POST['password2'])){
+
+    include_once("./include/providers/_profile-edit-provider.php");
+    exit;
+}
+
+/*
 *   Instant scientist
 */
 

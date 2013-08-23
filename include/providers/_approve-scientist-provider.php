@@ -5,19 +5,19 @@
    $request = $_REQUEST['hash'];
        
    // update his request, set to not pending one              
-   $sql = "UPDATE request
+   $sql = "UPDATE ". $CONFIG['DB_TABLE']['REQUEST'] ."
              SET
              pending = 0, accepted = 1 
              WHERE
              uid = (SELECT userid 
-                     FROM user
+                     FROM ". $CONFIG['DB_TABLE']['USER'] ."
                      WHERE hash = '". $request ."')";
                         
     $db->exec($sql);
    
     // USER IS NOW IN A SCIENTIST GROUP
-    $sql = "UPDATE user 
-            SET usergroupid= 2 
+    $sql = "UPDATE ". $CONFIG['DB_TABLE']['USER'] ." 
+            SET usergroupid = 2 
             WHERE hash = '". $request ."'";
    
     $db->exec($sql);

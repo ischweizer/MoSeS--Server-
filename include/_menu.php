@@ -8,11 +8,14 @@
     <?php
         if(isset($_SESSION["USER_LOGGED_IN"]) && $_SESSION["USER_LOGGED_IN"] == 1){
     ?>
-    <a href="logout.php" class="btn" id="btn_logout"><i class="icon-user"></i>Logout</a>        
+    <div class="btnLoginProfileCtrl">
+        <a href="profile.php" class="btn btn_profile" title="User profile"><i class="icon-pencil"></i>Profile</a>        
+        <a href="logout.php" class="btn btn_logout" title="Logout"><i class="icon-off"></i></a> 
+    </div>
     <?php
         }else{   
     ?>
-    <a class="btn" id="btn_login"><i class="icon-user"></i>Login</a>
+    <a class="btn btn_login"><i class="icon-user"></i>Login</a>
     <?php
         }
     ?>
