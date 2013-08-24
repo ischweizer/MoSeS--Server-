@@ -48,7 +48,10 @@ if($data->SESSIONID != null)
         		$questionID = $question['questionid'];
         		$questionType = $question['type'];
         		$questionTitle = $question['text'];
-        		$return["SURVEY"][$formID][$questionID] = array("QUESTION_TYPE" => $questionType, "QUESTION_TITLE" => $questionTitle);
+                $questionMandatory = $question['mandatory'];
+        		$return["SURVEY"][$formID][$questionID] = array("QUESTION_TYPE" => $questionType, 
+                                                                "QUESTION_TITLE" => $questionTitle,
+                                                                "QUESTION_MANDATORY" => $questionMandatory);
         		
         		// =========== SETTING POSSIBLE ANSWER INFORMATION ================
         		$possibleAnswers = SurveyManager::getPossibleAnswers($db, $CONFIG['DB_TABLE']['STUDY_ANSWER'], $questionID);
