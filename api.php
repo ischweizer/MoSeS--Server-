@@ -102,7 +102,7 @@ if(isset($_POST['HTTP_JSON'])){
                 
                 case "C2DM":
                 
-                    include_once(MOSES_HOME . "/include/events/c2dm.php.inc");
+                    include_once(MOSES_HOME . "/include/events/gcm.php.inc");
                     break;
                 
                 case "CHANGE_DEVICE_ID":
