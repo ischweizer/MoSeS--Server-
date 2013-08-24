@@ -70,16 +70,31 @@ class ApkManager{
 	 * @return array an array containing all apks that meet the requirements. If no such apks exist, an empty array is returned.
 	 */
 	public static function getAllApkRegardingMinAndroidVersion($logger, $db, $userId,$CONFIG, $deviceID, $minAndroidVersion){
+		
+		$array = ApkManager::getPublicAPKs($logger, $db, $userId, $CONFIG, $deviceID, $minAndroidVersion);
+		 
+		$array=array_merge_recursive($array, ApkManager::getAllGroupAPKs($logger, $db, $userId, $CONFIG, $deviceID, $minAndroidVersion));
+		
+		$inviteOnlyApksForDevice = ApkManager::getAllInviteOnlyApkRegardingDeviceid($logger, $db, $userId, $deviceID, $CONFIG);
+		$array = array_merge_recursive($array, $inviteOnlyApksForDevice);
+		return $array;
+	}
+	
+	
+	public static function getPublicAPKs($logger, $db, $userId,$CONFIG, $deviceID, $minAndroidVersion){
 		$sql = "SELECT *
 				FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE private=0 AND ustudy_finished =0 AND inviteinstall=0 AND androidversion<=".$minAndroidVersion;
-		 
-		$logger->logInfo("getAllApkRegardingMinAndroidVersion() sql=".$sql);
-
+		
+		$logger->logInfo("getPublicAPKs() sql=".$sql);
+		
 		$result = $db->query($sql);
 		$array = $result->fetchAll(PDO::FETCH_ASSOC);
-		 
+		return $array;
+	}
+	
+	public static function getAllGroupAPKs($logger, $db, $userId,$CONFIG, $deviceID, $minAndroidVersion){
 		$groupName = LoginManager::getGroupName($logger, $db, $CONFIG['DB_TABLE']['USER'], $userId);
-		 
+		$array = array();
 		if(!empty($groupName)){
 			$sqlGroupMembers = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']." WHERE name='".$groupName."'";
 			$result2 = $db->query($sqlGroupMembers);
@@ -94,14 +109,12 @@ class ApkManager{
 					$rowsAPKs = $result3->fetchAll(PDO::FETCH_ASSOC);
 					$array = array_merge_recursive($array, $rowsAPKs);
 				}
-				 
+					
 			}
 		}
-		
-		$inviteOnlyApksForDevice = ApkManager::getAllInviteOnlyApkRegardingDeviceid($logger, $db, $userId, $deviceID, $CONFIG);
-		$array = array_merge_recursive($array, $inviteOnlyApksForDevice);
 		return $array;
 	}
+	
 	
 	/**
 	 * Returns all invite only APKs in DB that can run on the device with the specified id.
