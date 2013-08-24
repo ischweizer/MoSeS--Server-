@@ -50,11 +50,12 @@ if($data->SESSIONID != null){
 //                      $APKs = ApkManager::getAllApkRegardingMinAndroidVersion($logger, $DBManager->getDB(), $USERID, $deviceID, $CONFIG, $ANDROID_VERSION);
 //                      $APKs = ApkManager::getAllApkRegardingMinAndroidVersion($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
 
-                     $publicAPKs = ApkManager::getPublicAPKs($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
-                     $groupAPKs = ApkManager::getAllGroupAPKs($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
                      $inviteOnlyAPKs = ApkManager::getAllInviteOnlyApkRegardingDeviceid($logger, $DBManager->getDB(), $USERID, $deviceID, $CONFIG);
+                     $groupAPKs = ApkManager::getAllGroupAPKs($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
+                     $publicAPKs = ApkManager::getPublicAPKs($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
+                     
                                           
-                     foreach($publicAPKs as $apk){
+                     foreach(array_reverse($inviteOnlyAPKs) as $apk){
                              
                          
                             $APK_JSON = array("ID" => $apk['apkid'],
@@ -64,12 +65,12 @@ if($data->SESSIONID != null){
                                               "STARTDATE" => $apk['startdate'],
                                               "ENDDATE" => $apk['enddate'],
                                               "APKVERSION" => $apk['apk_version'],
-                            		          "BADGE" => "PUBLIC");
+                            		          "BADGE" => "INVITE");
                                               
                             $json_array_return[] = $APK_JSON; 
                      }
                      
-                     foreach($groupAPKs as $apk){
+                     foreach(array_reverse($groupAPKs) as $apk){
                      	 
                      	 
                      	$APK_JSON = array("ID" => $apk['apkid'],
@@ -84,7 +85,7 @@ if($data->SESSIONID != null){
                      	$json_array_return[] = $APK_JSON;
                      }
                      
-                     foreach($inviteOnlyAPKs as $apk){
+                     foreach(array_reverse($publicAPKs) as $apk){
                      	 
                      	 
                      	$APK_JSON = array("ID" => $apk['apkid'],
@@ -94,7 +95,7 @@ if($data->SESSIONID != null){
                      			"STARTDATE" => $apk['startdate'],
                      			"ENDDATE" => $apk['enddate'],
                      			"APKVERSION" => $apk['apk_version'],
-                     			"BADGE" => "INVITE");
+                     			"BADGE" => "PUBLIC");
                      
                      	$json_array_return[] = $APK_JSON;
                      }
