@@ -374,7 +374,9 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.find('[name="progress"]').hide();
    p.parent().parent().find('[name="btnAddSurvey"]').hide();
    
+   // enable update button
    $(this).parent().parent().parent().parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
+   $(this).parent().parent().parent().parent().parent().find('.btnUpdateSurveyOnly').attr('disabled',false);
 });
 
 // special activities for cancel user study button
