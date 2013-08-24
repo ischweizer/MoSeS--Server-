@@ -269,6 +269,7 @@ $('.content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     // Question field (common content for all questions)
     var content = '<span class="survey_question_number">'+(parseInt(parentForQCounter.find('.survey_form_questions_counter').val())+1)+'. </span> '+
                   '<input type="text" class="survey_question" placeholder="Your question here">'+
+                  '<label style="float: right;"><input type="checkbox" class="survey_question_mandatory" style="margin-right: 0.5em;">Mark as mandatory</label>'+
                   '<button class="btn btn-link btnRemoveQuestion">Remove question</button>'+
                   '<br>';
       

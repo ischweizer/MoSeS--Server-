@@ -292,13 +292,14 @@ if(is_uploaded_file($_FILES['file']['tmp_name'])
             foreach($survey_form['survey_form_questions'] as $question){
 
                 $question_type = intval($question['question_type']);
+                $question_mandatory = intval($question['question_mandatory']);
                 $question_text = $question['question'];
                 
                 // store question in db
                 $sql = "INSERT INTO ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
-                                        (formid, type, text)
+                                        (formid, type, text". ($question_mandatory == 1 ? ", mandatory" : "") .")
                                         VALUES 
-                                        (". $form_id .", ". $question_type .", '". $question_text ."')";
+                                        (". $form_id .", ". $question_type .", '". $question_text ."'". ($question_mandatory == 1 ? ", 1" : "") .")";
                 
                 $db->exec($sql);
                 

@@ -72,7 +72,7 @@ include_once("./include/managers/SurveyManager.php");
                          // RUNNING User Study!
                          if($study_running){
                             ?>
-                            <h3 class="txtUSWarning text-center" style="color: green;">The User Study is running!</h3>
+                            <h3 class="txtUSWarning text-center" style="color: green;">The User Study is running!<br>(You can only update a survey)</h3>
                             <?php
                          }else{   
                     
@@ -287,7 +287,7 @@ include_once("./include/managers/SurveyManager.php");
                                          
                                          $k=1;
                                          foreach($questions as $question){
-                                             echo $k .'. '. $question['question'] .'<br>';
+                                             echo $k .'. '. $question['question'] .'   '. ($question['question_mandatory'] == 1 ? '<span style="color:red;">Mandatory question!</span>' : '') .'<br>';
                                              $k++;
                                              
                                              $answers_yes_no =  '<ul style="list-style-type: none;">'.

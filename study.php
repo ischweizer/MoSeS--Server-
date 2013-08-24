@@ -71,7 +71,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                $forms_array = array();
                foreach($forms as $f){
                   
-                  $sql = "SELECT questionid, type, text  
+                  $sql = "SELECT questionid, type, text, mandatory  
                           FROM ". $CONFIG['DB_TABLE']['STUDY_QUESTION'] ." 
                           WHERE formid = ". $f['formid'];
                             
@@ -94,6 +94,7 @@ if(isset($_SESSION["GROUP_ID"]) && $_SESSION["GROUP_ID"] > 1){
                       }
                       
                       $questions_array[] = array('question_type' => $q['type'],
+                                                 'question_mandatory' => $q['mandatory'],
                                                  'question' => $q['text'],
                                                  'answers' => $answers_array);
                   }

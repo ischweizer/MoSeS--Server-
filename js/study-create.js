@@ -126,6 +126,12 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
             // find question type
             var question_type = question.parent().find('.survey_question_type').val();
             
+            // find mandatory question flag
+            var question_mandatory = 0; //default
+            if(question.parent().find('.survey_question_mandatory').is(':checked')){
+                question_mandatory = 1; 
+            }
+            
             // find all answers
             question.parent().find('.survey_answer').each(function(answer_i, elem3){
                 var answer = $(this);
@@ -139,10 +145,12 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
 
             if(question.text().length != 0 && question.val().length == 0){
                 questions.push({'question_type':question_type,
+                                'question_mandatory':question_mandatory,
                                 'question':question.text(),
                                 'answers':answers});
             }else{
                 questions.push({'question_type':question_type,
+                                'question_mandatory':question_mandatory,
                                 'question':question.val(),
                                 'answers':answers});
             }
