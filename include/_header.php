@@ -14,7 +14,7 @@
 <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="./css/style.css" rel="stylesheet" media="screen">
 <link href="./css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" media="screen">
-<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+<link rel="icon" href="./img/favicon.png" type="image/png" />
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
