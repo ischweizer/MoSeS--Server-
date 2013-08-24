@@ -83,12 +83,18 @@ class ApkManager{
 	
 	public static function getPublicAPKs($logger, $db, $userId,$CONFIG, $deviceID, $minAndroidVersion){
 		$sql = "SELECT *
-				FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE private=0 AND ustudy_finished =0 AND inviteinstall=0 AND androidversion<=".$minAndroidVersion;
+				FROM ". $CONFIG['DB_TABLE']['APK'] ." 
+                WHERE private=0 AND 
+                      ustudy_finished =0 AND 
+                      inviteinstall=0 AND 
+                      CURDATE() >= startdate AND 
+                      androidversion<=".$minAndroidVersion;
 		
-		$logger->logInfo("getPublicAPKs() sql=".$sql);
+        $logger->logInfo("getPublicAPKs() sql=".$sql);
 		
 		$result = $db->query($sql);
 		$array = $result->fetchAll(PDO::FETCH_ASSOC);
+
 		return $array;
 	}
 	
@@ -96,15 +102,21 @@ class ApkManager{
 		$groupName = LoginManager::getGroupName($logger, $db, $CONFIG['DB_TABLE']['USER'], $userId);
 		$array = array();
 		if(!empty($groupName)){
-			$sqlGroupMembers = "SELECT members FROM ".$CONFIG['DB_TABLE']['RGROUP']." WHERE name='".$groupName."'";
+			$sqlGroupMembers = "SELECT members 
+                                FROM ".$CONFIG['DB_TABLE']['RGROUP']." 
+                                WHERE name='".$groupName."'";
 			$result2 = $db->query($sqlGroupMembers);
 			$rowMembers = $result2->fetch(PDO::FETCH_ASSOC);
 			if(!empty($rowMembers)){
 				$members = json_decode($rowMembers['members']);
 				foreach($members as $member){
 					$sqlGetAPKsPublishedByUser = "SELECT *
-							FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE private=1 AND ustudy_finished =0
-									AND androidversion<=".$minAndroidVersion." AND userid=".$member;
+							                      FROM ". $CONFIG['DB_TABLE']['APK'] ." 
+                                                  WHERE private=1 AND 
+                                                        ustudy_finished =0 AND 
+                                                        androidversion<=".$minAndroidVersion." AND 
+                                                        CURDATE() >= startdate AND  
+                                                        userid=".$member;
 					$result3 = $db->query($sqlGetAPKsPublishedByUser);
 					$rowsAPKs = $result3->fetchAll(PDO::FETCH_ASSOC);
 					$array = array_merge_recursive($array, $rowsAPKs);
@@ -125,7 +137,11 @@ class ApkManager{
 	 * @return array an array containing all apks that meet the requirements. If no such apks exist, an empty array is returned.
 	 */
 	public static function getAllInviteOnlyApkRegardingDeviceid($logger, $db, $userId, $deviceID, $CONFIG){
-		$sql = "SELECT * FROM ". $CONFIG['DB_TABLE']['APK'] ." WHERE inviteinstall=1 AND ustudy_finished =0";
+		
+        $sql = "SELECT * 
+                FROM ". $CONFIG['DB_TABLE']['APK'] ." 
+                WHERE inviteinstall=1 AND 
+                      ustudy_finished =0";
 			
 		$logger->logInfo("getAllInviteOnlyApkRegardingDeviceid() sql=".$sql);
 	
