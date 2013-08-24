@@ -287,7 +287,7 @@ include_once("./include/managers/SurveyManager.php");
                                          
                                          $k=1;
                                          foreach($questions as $question){
-                                             echo $k .'. '. $question['question'] .'   '. ($question['question_mandatory'] == 1 ? '<span style="color:red;">Mandatory question!</span>' : '') .'<br>';
+                                             echo $k .'. '. $question['question'] .'   '. ($question['question_mandatory'] == 1 ? '<label style="float: right;"><input type="checkbox" class="survey_question_mandatory" checked="checked" disabled="disabled" style="margin-right: 0.5em;">Mandatory question</label>' : '') .'<br>';
                                              $k++;
                                              
                                              $answers_yes_no =  '<ul style="list-style-type: none;">'.
