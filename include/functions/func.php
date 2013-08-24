@@ -213,18 +213,21 @@ function getStandardSurveysArray(){
     /* Standard 1 */
 
     $STANDARD_SURVEY_1_Q = array();
-    $STANDARD_SURVEY_1_Q[] = array('question_type' => 1, 
+    $STANDARD_SURVEY_1_Q[] = array('question_type' => 1,
+                                'question_mandatory' => 1, 
                                 'question'=> 'Standard1- question1', 
                                 'question_number_of_answers' => 3,
                                 'answers' => array('Yes', 'No', 'Not sure')
                                 );
                                 
     $STANDARD_SURVEY_1_Q[] = array('question_type' => 2, 
+                                'question_mandatory' => 0,
                                 'question'=> 'Standard1- question2', 
                                 'question_number_of_answers' => 0,
                                 'answers' => array()
                                 );
     $STANDARD_SURVEY_1_Q[] = array('question_type' => 3, 
+                                'question_mandatory' => 0,
                                 'question'=> 'Standard1- question3', 
                                 'question_number_of_answers' => 5,
                                 'answers' => array('Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree')
@@ -241,17 +244,20 @@ function getStandardSurveysArray(){
                
     $STANDARD_SURVEY_2_Q = array();                           
     $STANDARD_SURVEY_2_Q[] = array('question_type' => 1, 
+                                'question_mandatory' => 0,
                                 'question'=> 'Standard2- question1', 
                                 'question_number_of_answers' => 3,
                                 'answers' => array('Yes', 'No', 'Not sure')
                                 );
                                 
     $STANDARD_SURVEY_2_Q[] = array('question_type' => 2, 
+                                'question_mandatory' => 0,
                                 'question'=> 'Standard2- question2', 
                                 'question_number_of_answers' => 0,
                                 'answers' => array()
                                 );
     $STANDARD_SURVEY_2_Q[] = array('question_type' => 1, 
+                                'question_mandatory' => 1,
                                 'question'=> 'Standard2- question3', 
                                 'question_number_of_answers' => 3,
                                 'answers' => array('Yes', 'No', 'Not sure')

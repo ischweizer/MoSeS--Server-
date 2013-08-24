@@ -5,8 +5,8 @@
     </div>
     <div class="span4 offset2"><select class="survey_select"><?php 
         
-     foreach($FORMS as $FORM){   
-        ?><option value="<?php echo $FORM['survey_form_id']; ?>"><?php echo $FORM['survey_form_name']; ?></option><?php
+     foreach($FORMS as $form){   
+        ?><option value="<?php echo $form['survey_form_id']; ?>"><?php echo $form['survey_form_name']; ?></option><?php
      }
      ?>
      <option value="9001">Custom form</option>

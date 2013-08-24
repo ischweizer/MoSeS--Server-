@@ -102,7 +102,11 @@ $('.survey_controls').on('click','.btnAddForm',function(e){
                    $(data.content).each(function(i, question){
                        
                         content += '<div>';
-                        content += (i+1)+'. <span class="survey_question">'+ question.question +'</span><br>';
+                        content += (i+1)+'. <span class="survey_question">'+ question.question +'</span>';
+                        if(question.question_mandatory == 1){
+                            content += '<label style="float: right;"><input type="checkbox" class="survey_question_mandatory" checked="checked" disabled="disabled" style="margin-right: 0.5em;">Mandatory question</label>';
+                        }
+                        content += '<br>';
                         
                         // handle type of question's answers
                         switch(question.question_type){
