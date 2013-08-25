@@ -112,7 +112,7 @@ if(isset($_POST['HTTP_JSON'])){
                 
                 case "GET_SURVEY":
                     
-                    include_once(MOSES_HOME . "/include/events/questionnaires_request.php.inc");
+                    include_once(MOSES_HOME . "/include/events/get_survey_request.php.inc");
                     break;                
                 
                 case "SURVEY_RESULT":
