@@ -6,7 +6,6 @@
 // user study is finished
 
 /* ustudy_finished encodings
- * -1  update
 * 0  user-study
 * 1  finished
 * 2 definitely finished and devices have been notified about a survey (if any)
@@ -51,4 +50,6 @@ foreach($rows as $row)
 	
 }
 $logger->logInfo(" ###################### SURVEY CRONJOB FINISHED ############################## ");
+// strat the script for sending of updates
+include_once(MOSES_HOME."/cron/update.php");
 ?>

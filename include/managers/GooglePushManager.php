@@ -91,6 +91,27 @@ class GooglePushManager
     }
     
     /**
+     * Sends notifications to specified devies about an available apk update with the specified apkid
+     *
+     * @param String $apkid the id for the user study
+     * @param String $targetDevices array of String ids of target devices c2dm-ids
+     * @param logger the Logger
+     */
+    public static function sendUpdateAvailable($apkid, $targetDevices, $logger, $CONFIG){
+    
+    	$logger->logInfo("GooglePushManager::sendUpdateAvailable()");
+    
+    	$message = json_encode(array(
+    			'MESSAGE' => "UPDATE",
+    			'APKID' => $apkid));
+    
+    	$response = GooglePushManager::sendMessage($logger, $CONFIG, $message, $targetDevices);
+    
+    	$logger->logInfo("GooglePushManager::sendUpdateAvailable() RESPONSE");
+    	$logger->logInfo($response);
+    }
+    
+    /**
      * Sends notification about available survey for the specified apk to all targetDevices
      *
      * @param String $apkid the id for the user study
@@ -106,7 +127,26 @@ class GooglePushManager
     			$targetDevices[]=$gcmId;
     	}
     
-    	GooglePushManager::sendSurveyAvailable($apkid, $targetDevices, $logger, $CONFIG);
+    	GooglePushManager::sendUpdateAvailable($apkid, $targetDevices, $logger, $CONFIG);
+    }
+    
+    /**
+     * Sends notification about available apk update for the specified apk to all targetDevices
+     *
+     * @param String $apkid the id for the user study
+     * @param String $targetDevices array of HARDWARE ids of target devices
+     * @param logger the Logger
+     */
+    public static function sendUpdateAvailableToHardware($db, $apkid, $targetDevicesHWIds, $logger, $CONFIG){
+    
+    	$targetDevices = array();
+    	foreach($targetDevicesHWIds as $hwid){
+    		$gcmId = HardwareManager::getGCMRegistrationId($db, $CONFIG['DB_TABLE']['HARDWARE'], $hwid);
+    		if(!empty($gcmId))
+    			$targetDevices[]=$gcmId;
+    	}
+    
+    	GooglePushManager::sendUpdateAvailable($apkid, $targetDevices, $logger, $CONFIG);
     }
     
     /**

@@ -4,7 +4,6 @@
 // this is a cronjob used for user studies
 
 /* ustudy_finished encodings
- * -1  update
 * 0  user-study
 * 1  finished
 */
@@ -260,7 +259,7 @@ foreach($rows as $row){
 }
 
 $logger->logInfo(" ###################### USER STUDY CRONJOB FINISHED ############################## ");
-// strat the script for 
+// strat the script for sending of surveys
 include_once(MOSES_HOME."/cron/survey.php");
 
 ?>

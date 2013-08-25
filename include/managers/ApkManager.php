@@ -87,7 +87,8 @@ class ApkManager{
                 WHERE private=0 AND 
                       ustudy_finished =0 AND 
                       inviteinstall=0 AND 
-                      CURDATE() >= startdate AND 
+                      (CURDATE() >= startdate OR startdate IS NULL)
+						AND 
                       androidversion<=".$minAndroidVersion;
 		
         $logger->logInfo("getPublicAPKs() sql=".$sql);
@@ -115,7 +116,7 @@ class ApkManager{
                                                   WHERE private=1 AND 
                                                         ustudy_finished =0 AND 
                                                         androidversion<=".$minAndroidVersion." AND 
-                                                        CURDATE() >= startdate AND  
+                                                        (CURDATE() >= startdate OR startdate IS NULL) AND  
                                                         userid=".$member;
 					$result3 = $db->query($sqlGetAPKsPublishedByUser);
 					$rowsAPKs = $result3->fetchAll(PDO::FETCH_ASSOC);
@@ -341,6 +342,19 @@ class ApkManager{
 		//     	$logger->logInfo("markUserStudyAsFinished() called");
 		// checking if the apk exists
 		$sql = "UPDATE ". $apkTable ." SET ustudy_finished=2 WHERE apkid = ". intval($apkID);
+		$db->exec($sql);
+	}
+	
+	/**
+	 * Demarks the "update available flag" of the apk in the database.
+	 *
+	 * @param mixed $db the database
+	 * @param mixed $apkTable the table name
+	 * @param mixed $apkID the id of the apk whose "update available flag" should be unset
+	 * @param mixed $logger the logger
+	 */
+	public static function demarkUpdateAvailable($db, $apkTable, $apkID, $logger){
+		$sql = "UPDATE ". $apkTable ." SET apk_updated=0 WHERE apkid = ". intval($apkID);
 		$db->exec($sql);
 	}
 
