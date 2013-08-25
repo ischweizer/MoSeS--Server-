@@ -246,7 +246,7 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
               androidversion=". $APK_ANDROID_VERSION .",".
               (!empty($runningtime) ? 'runningtime='. $runningtime .',' : '')."
               inviteinstall=". $inviteInstall .",
-              ustudy_finished=". $USTUDY_FINISHED ." 
+              ustudy_finished=". $USTUDY_FINISHED . ($FILE_WAS_UPLOADED ? ", apk_updated=1" : "") ."  
           WHERE apkid=". $apkId;
      
     //$logger->logInfo($sql);
@@ -275,7 +275,7 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
         $row = $result->fetch();
         
         $SURVEY_ID = $row['surveyid'];
-        
+        // FIRST DELETE OLD SURVEY, QUESTIONS, ETC
         // remove answers
         $survey_answers_sql = 'DELETE 
                              FROM '. $CONFIG['DB_TABLE']['STUDY_ANSWER'] .' 
