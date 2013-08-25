@@ -86,7 +86,7 @@ div[name*='survey_container_'] {
 /* ---------------------- */
 
 .control-label {
-    /*cursor: default;*/   
+    cursor: default;   
 }
 
 /* Study APK buttos */

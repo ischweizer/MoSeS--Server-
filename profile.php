@@ -44,6 +44,12 @@ include_once("./include/_menu.php");
                     </div>
                 </div>
                 <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <label style="cursor: default;">Change password</label>
+                    </div>
+                </div>
+                <div class="control-group">
                     <label class="control-label">Password</label>
                     <div class="controls">
                         <input type="password" name="password1" placeholder="Password">
