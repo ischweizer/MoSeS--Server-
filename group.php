@@ -73,7 +73,7 @@ if(isset($_GET['m']) && $_GET['m'] == 'new'){
          
          if(!empty($user_devices)){
              $group_device_count += count($user_devices);
-             $user_info['NUM_OF_DEVICES'] = $group_device_count;
+             $user_info['NUM_OF_DEVICES'] = count($user_devices);
              $GROUP_MEMBERS[count($GROUP_MEMBERS)-1] = $user_info;
              
              $tmp_unique_devices = array();
