@@ -15,6 +15,7 @@ $('.btnUpdateSurveyOnly').click(function(e){
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent(); 
     
+    p.find('.survey_content').hide();
     p.find('.surveyShowHide').hide();
     p.find('.surveyRemove').hide();
     
@@ -74,6 +75,7 @@ $('[name="btnUpdateStudy"]').click(function(e){
     p.find('[name="joined_devices_text"]').hide();
     p.find('.survey_available_text').hide();
     p.find('[name="private_text"]').hide();
+    p.find('.survey_content').hide();
     p.find('.surveyShowHide').hide();
     p.find('.surveyRemove').hide();
     //p.find('[name="quests"]').hide();  
