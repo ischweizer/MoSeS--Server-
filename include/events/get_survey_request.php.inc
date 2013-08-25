@@ -19,12 +19,14 @@ if($data->SESSIONID != null)
       $logger->logInfo("questionnaries_request.php.inc APKID PROVIDED BY THE CLIENT: ".$apkid);
       $db = $DBManager->getDB();
       $survey = SurveyManager::getSurvey($logger, $db, $CONFIG['DB_TABLE']['STUDY_SURVEY'], $apkid);
-      $return = array(
-      		"MESSAGE" => "GET_SURVEY_RESPONSE",
-      		"STATUS" => "SUCCESS",
-      		"APKID" => $apkid);
       
-      if(!empty($survey) && $survey != null){
+      if(!empty($survey)){
+          
+        $return = array(
+              "MESSAGE" => "GET_SURVEY_RESPONSE",
+              "STATUS" => "SUCCESS",
+              "APKID" => $apkid);
+          
         $logger->logInfo("##################### SURVEY REQUEST ################ SURVEY FOUND");
         
         // RECURSIVELY BUILD THE ANSWER CONTAINING THE SURVEY
@@ -103,6 +105,5 @@ else
       );
 } 
 
-print(json_encode($return));
-
+echo json_encode($return);
 ?>

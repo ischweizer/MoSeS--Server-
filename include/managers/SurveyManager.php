@@ -12,15 +12,24 @@
       * @param mixed $db
       * @param mixed $surveyTable the table containing the surveys
       * @param mixed $apkID
-      * @return mixed $row containing the the survey
+      * @return mixed $apk containing the the survey
       */
       public static function getSurvey($logger, $db, $surveyTable, $apkID){
-      	
-	     $sql = "SELECT * FROM ".$surveyTable." WHERE apkid=".$apkID;
-	     $logger->logInfo("SurveryManager::getSurvey(), sql=".$sql);
+          
+         $sql = "SELECT * 
+                 FROM ".$surveyTable." 
+                 WHERE apkid=".$apkID;
+                 
+         $logger->logInfo("SurveryManager::getSurvey(), sql=".$sql);
          $result = $db->query($sql);
-         $row = $result->fetch();
-         return $row;
+         $apk = $result->fetch(PDO::FETCH_ASSOC);
+         
+         // return survey only on user study finished
+         if($apk['ustudy_finished'] == 2){
+             return $apk;
+         }
+         
+         return null;
       }
       
       /**
@@ -32,11 +41,11 @@
        * @return mixed $rows containing forms for the specified $surveyID
        */
       public static function getForms($db, $formsTable, $surveyID){
-      	 
-      	$sql = "SELECT *  FROM ".$formsTable." WHERE surveyid=".$surveyID;
-      	$result = $db->query($sql);
-      	$rows = $result->fetchAll(PDO::FETCH_ASSOC);
-      	return $rows;
+           
+          $sql = "SELECT *  FROM ".$formsTable." WHERE surveyid=".$surveyID;
+          $result = $db->query($sql);
+          $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+          return $rows;
       }
       
       /**
@@ -49,10 +58,10 @@
        */
       public static function getQuestions($db, $questionsTable, $formID){
       
-      	$sql = "SELECT *  FROM ".$questionsTable." WHERE formid=".$formID;
-      	$result = $db->query($sql);
-      	$rows = $result->fetchAll(PDO::FETCH_ASSOC);
-      	return $rows;
+          $sql = "SELECT *  FROM ".$questionsTable." WHERE formid=".$formID;
+          $result = $db->query($sql);
+          $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+          return $rows;
       }
       
       /**
@@ -65,10 +74,10 @@
        */
       public static function getPossibleAnswers($db, $possibleAnswersTable, $questionID){
       
-      	$sql = "SELECT *  FROM ".$possibleAnswersTable." WHERE questionid=".$questionID;
-      	$result = $db->query($sql);
-      	$rows = $result->fetchAll(PDO::FETCH_ASSOC);
-      	return $rows;
+          $sql = "SELECT *  FROM ".$possibleAnswersTable." WHERE questionid=".$questionID;
+          $result = $db->query($sql);
+          $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+          return $rows;
       }
 
       /**
@@ -81,19 +90,19 @@
        * @return NULL|string
        */
       public static function getFormIdForQuestion($logger, $db, $CONFIG, $questionID){
-      	$sql = "SELECT formid  FROM ".$CONFIG['DB_TABLE']['STUDY_QUESTION']." WHERE questionid=".$questionID;
-      	$logger->logInfo("SurveyManager:getFormIdForQuestion() sql=".$sql);
-      	$result = $db->query($sql);
-      	$row = $result->fetch(PDO::FETCH_ASSOC);
-      	if($row == null || empty($row))
-      		return null;
-      	else{
-      		$formid = $row['formid'];
-      		if($formid == null || empty($formid))
-      			return null;
-      		else
-      			return $formid;
-      	}
+          $sql = "SELECT formid  FROM ".$CONFIG['DB_TABLE']['STUDY_QUESTION']." WHERE questionid=".$questionID;
+          $logger->logInfo("SurveyManager:getFormIdForQuestion() sql=".$sql);
+          $result = $db->query($sql);
+          $row = $result->fetch(PDO::FETCH_ASSOC);
+          if($row == null || empty($row))
+              return null;
+          else{
+              $formid = $row['formid'];
+              if($formid == null || empty($formid))
+                  return null;
+              else
+                  return $formid;
+          }
       }
       
       /**
@@ -106,19 +115,19 @@
        * @return NULL|string
        */
       public static function getSurveyIdForForm($logger, $db, $CONFIG, $formID){
-      	$sql = "SELECT surveyid  FROM ".$CONFIG['DB_TABLE']['STUDY_FORM']." WHERE formid=".$formID;
-      	$logger->logInfo("SurveyManager:getSurveyIdForQuestion() sql=".$sql);
-      	$result = $db->query($sql);
-      	$row = $result->fetch(PDO::FETCH_ASSOC);
-      	if($row == null || empty($row))
-      		return null;
-      	else{
-      		$surveyid = $row['surveyid'];
-      		if($surveyid == null || empty($surveyid))
-      			return null;
-      		else
-      			return $surveyid;
-      	}
+          $sql = "SELECT surveyid  FROM ".$CONFIG['DB_TABLE']['STUDY_FORM']." WHERE formid=".$formID;
+          $logger->logInfo("SurveyManager:getSurveyIdForQuestion() sql=".$sql);
+          $result = $db->query($sql);
+          $row = $result->fetch(PDO::FETCH_ASSOC);
+          if($row == null || empty($row))
+              return null;
+          else{
+              $surveyid = $row['surveyid'];
+              if($surveyid == null || empty($surveyid))
+                  return null;
+              else
+                  return $surveyid;
+          }
       }
       
       /**
@@ -131,24 +140,24 @@
        * @return NULL|array
        */
       public static function getQuestionInformation($logger, $db, $CONFIG, $questionID){
-      	$formid = SurveyManager::getFormIdForQuestion($logger, $db, $CONFIG, $questionID);
-      	if($formid == null){
-      		$logger->logInfo("SurveyManager:getQuestionInformation formid not found, returning null");
-      		return null;
-      	}
-      	else{
-      		$logger->logInfo("SurveyManager:getQuestionInformation formid=".$formid);
-      		$surveyid = SurveyManager::getSurveyIdForForm($logger, $db, $CONFIG, $formid);
-      		if($surveyid == null){
-      			$logger->logInfo("SurveyManager:getQuestionInformation surveyid not found, returning null");
-      			return null;
-      		}
-      		else{
-      			$logger->logInfo("SurveyManager:getQuestionInformation surveyid=".$surveyid);
-      			$arr = array("formid" => $formid, "surveyid" => $surveyid);
-      			return $arr;
-      		}
-      	}
+          $formid = SurveyManager::getFormIdForQuestion($logger, $db, $CONFIG, $questionID);
+          if($formid == null){
+              $logger->logInfo("SurveyManager:getQuestionInformation formid not found, returning null");
+              return null;
+          }
+          else{
+              $logger->logInfo("SurveyManager:getQuestionInformation formid=".$formid);
+              $surveyid = SurveyManager::getSurveyIdForForm($logger, $db, $CONFIG, $formid);
+              if($surveyid == null){
+                  $logger->logInfo("SurveyManager:getQuestionInformation surveyid not found, returning null");
+                  return null;
+              }
+              else{
+                  $logger->logInfo("SurveyManager:getQuestionInformation surveyid=".$surveyid);
+                  $arr = array("formid" => $formid, "surveyid" => $surveyid);
+                  return $arr;
+              }
+          }
       }
       
       /**
@@ -161,13 +170,13 @@
        * @param unknown $answer the answer to the question
        */
       public static function insertAnswer($logger, $db, $resultTableName, $surveyID, $formID, $questionID, $answer){
-      	
+          
           $sql = "INSERT INTO " . $resultTableName . 
                         " (survey_id, form_id, question_id, result) 
                         VALUES 
                         ('". $surveyID ."', ". $formID . ", " . $questionID . ", '".$answer."')";
-      	$logger->logInfo("SurveyManager:insertAnswer() sql=".$sql);
-      	$db->exec($sql);
+          $logger->logInfo("SurveyManager:insertAnswer() sql=".$sql);
+          $db->exec($sql);
         
       }
       
@@ -181,18 +190,18 @@
        * @return boolean true only if the user study with the given apkID has a survey attached
        */
       public static function hasSurvey($logger, $db, $surveyTableName, $apkID){
-      	$sql = "SELECT apkid FROM ".$surveyTableName." WHERE apkid=".$apkID;
-      	$logger->logInfo("SurveyManager:hasSurvey() sql=".$sql);
-      	$result = $db->query($sql);
-      	$row = $result->fetch(PDO::FETCH_ASSOC);
-      	if(empty($row)){
-      		$logger->logInfo("SurveyManager:hasSurvey() no survey found for apkID=".$apkID);
-      		return false;
-      	}
-      	else{
-      		$logger->logInfo("SurveyManager:hasSurvey() found survey for apkID=".$apkID);
-      		return true;
-      	}
+          $sql = "SELECT apkid FROM ".$surveyTableName." WHERE apkid=".$apkID;
+          $logger->logInfo("SurveyManager:hasSurvey() sql=".$sql);
+          $result = $db->query($sql);
+          $row = $result->fetch(PDO::FETCH_ASSOC);
+          if(empty($row)){
+              $logger->logInfo("SurveyManager:hasSurvey() no survey found for apkID=".$apkID);
+              return false;
+          }
+          else{
+              $logger->logInfo("SurveyManager:hasSurvey() found survey for apkID=".$apkID);
+              return true;
+          }
       }
       
       public static function hasSurveyWOLogger($db, $surveyTableName, $apkID){
