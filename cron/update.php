@@ -42,8 +42,8 @@ foreach($rows as $row){
 	
 	if(!empty($installedOn)){
 		GooglePushManager::sendSurveyAvailableToHardware($db, $APK_ID, $installedOn, $logger, $CONFIG);
-		ApkManager::demarkUpdateAvailable($db, $CONFIG['DB_TABLE']['APK'], $APK_ID, $logger);
 	}
+	ApkManager::demarkUpdateAvailable($db, $CONFIG['DB_TABLE']['APK'], $APK_ID, $logger);
 }
 
 $logger->logInfo(" ###################### UPDATE CRONJOB END ############################## ");
