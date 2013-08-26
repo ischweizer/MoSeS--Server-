@@ -28,7 +28,7 @@ if(isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
     // compose email to user
     $to = $EMAIL;
     $subject = "MoSeS: Please confirm your registration";
-    $from = "admin@moses.tk.informatik.tu-darmstadt.de";
+    $from = "developer@tk.informatik.tu-darmstadt.de";
     $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
     $message .= "Please follow this link to confirm your registration: ";
     $message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/registration.php" ."?confirm=". $CONFIRM_CODE;
