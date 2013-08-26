@@ -18,7 +18,7 @@ if($data->SESSIONID != null)
     {
       $logger->logInfo("questionnaries_request.php.inc APKID PROVIDED BY THE CLIENT: ".$apkid);
       $db = $DBManager->getDB();
-      $apk = ApkManager::getApk($db, $CONFIG['DB_TABLE']['STUDY_SURVEY'], $apkid, $logger);
+      $apk = ApkManager::getApk($db, $CONFIG['DB_TABLE']['STUDY_APK'], $apkid, $logger);
       $survey = SurveyManager::getSurvey($logger, $db, $CONFIG['DB_TABLE']['STUDY_SURVEY'], $apkid);
       
       if(!empty($survey) && $apk['ustudy_finished'] == 2){
