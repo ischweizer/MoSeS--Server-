@@ -29,11 +29,16 @@ if(isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
     $to = $EMAIL;
     $subject = "MoSeS: Please confirm your registration";
     $from = "developer@tk.informatik.tu-darmstadt.de";
-    $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
-    $message .= "Please follow this link to confirm your registration: ";
-    $message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/registration.php" ."?confirm=". $CONFIRM_CODE;
     
-    $headers = "From: $from";
+    $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
+    $message .= "Thank you for your registration with MoSeS - Mobile Sensing System.\n";
+    $message .= "Please follow this link to confirm your registration: \n";
+    $message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/registration.php" ."?confirm=". $CONFIRM_CODE;
+    $message .= "\n\n - MoSeS Team";
+    
+    $headers  = "From: $from\r\n";
+    $headers .= "Reply-To: $mailFrom\r\n";
+    $headers .= "X-Sender-IP: {$_SERVER['REMOTE_ADDR']}\r\n";
     $sent = mail($to, $subject, $message, $headers);
     
     // sending was successful?
