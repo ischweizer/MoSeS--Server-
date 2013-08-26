@@ -24,12 +24,7 @@
          $result = $db->query($sql);
          $apk = $result->fetch(PDO::FETCH_ASSOC);
          
-         // return survey only on user study finished
-         if($apk['ustudy_finished'] == 2){
-             return $apk;
-         }
-         
-         return null;
+         return $apk;
       }
       
       /**
