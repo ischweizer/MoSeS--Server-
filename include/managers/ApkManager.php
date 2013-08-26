@@ -182,8 +182,10 @@ class ApkManager{
 				FROM ". $apkTable ."
 						WHERE apkid = ". intval($apkID);
 
+        $logger->logInfo("getApk sql=".$sql);
+                        
 		$result = $db->query($sql);
-		$row = $result->fetch();
+		$row = $result->fetch(PDO::FETCH_ASSOC);
 		 
 		return $row;
 	}
