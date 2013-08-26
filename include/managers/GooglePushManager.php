@@ -127,7 +127,7 @@ class GooglePushManager
     			$targetDevices[]=$gcmId;
     	}
     
-    	GooglePushManager::sendUpdateAvailable($apkid, $targetDevices, $logger, $CONFIG);
+    	GooglePushManager::sendSurveyAvailable($apkid, $targetDevices, $logger, $CONFIG);
     }
     
     /**
