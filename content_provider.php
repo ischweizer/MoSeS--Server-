@@ -186,7 +186,8 @@ if(isset($_POST['isEmailUnique']) && !empty($_POST['isEmailUnique'])){
  * 		1 if the email was not unique
  * 		2 if there has been a problem sending the email (i.e. the mail server did not respond)
  */
-if(isset($_POST["submitted"]) && $_POST["submitted"] == "1"){
+if(isset($_POST["submitted"]) && $_POST["submitted"] == "1" &&
+   isset($_POST["url"])){
     
 	include_once("./include/providers/_registration-provider.php");
     exit;

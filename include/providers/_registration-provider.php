@@ -11,6 +11,7 @@ $FIRSTNAME = $_POST["firstname"];
 $LASTNAME = $_POST["lastname"];
 $EMAIL = $_POST["email"];
 $PASSWORD = $_POST["password"];
+$URL = $_POST["url"];
 $CUR_TIME = time();
 $CONFIRM_CODE = md5($EMAIL);
 if(isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
@@ -33,7 +34,7 @@ if(isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
     $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
     $message .= "Thank you for your registration with MoSeS - Mobile Sensing System.\n";
     $message .= "Please follow this link to confirm your registration: \n";
-    $message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/registration.php" ."?confirm=". $CONFIRM_CODE;
+    $message .= $URL ."?confirm=". $CONFIRM_CODE;
     $message .= "\n\n - MoSeS Team";
     
     $headers  = "From: $from\r\n";
