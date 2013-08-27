@@ -11,6 +11,13 @@ body {
     display: none;
 }
 
+/* Play Store center */
+
+.playStoreLink {
+    margin: 0 auto;
+    width: 15%;
+}
+
 /* --------------- */
 
 /* Hero unit tweak */
