@@ -5,6 +5,13 @@ body {
     height: 100%;
 }
 
+/* Logo */
+
+.masthead {
+    margin: 0 auto;
+    width: 40%;
+}
+
 /* Custom Dialog */
 
 .hide {
@@ -175,7 +182,6 @@ ul.nav li.dropdown:hover > ul.dropdown-menu{
 
 .tmp_special {
     margin-top: -25pt;
-    margin-right: 50pt;
     margin-bottom: 20pt;
     text-shadow: -1px -1px 0px #999, 1px 1px 0px #fff;
 }
