@@ -196,18 +196,6 @@ include_once("./include/managers/SurveyManager.php");
                             <label><input type="radio" name="publishMethod" value="1" checked="checked">Publish to MoSeS (Public)</label>
                         </div>
                     </div>
-                    <div class="control-group" name="invites_only_install" style="display: none;">
-                        <label class="control-label"></label>
-                        <div class="controls">
-                            <label><input type="radio" name="publishMethod" value="2" <?php echo (!empty($APK['restriction_device_number']) && $APK['inviteinstall'] == 1 ? 'checked="checked"' : ''); ?>>Ivites only study</label>
-                            <input type="number" name="max_devices_number" <?php 
-                                    echo (!empty($APK['restriction_device_number']) && $APK['inviteinstall'] == 1 
-                                    ? 
-                                    '' : 
-                                    'disabled="disabled"'); 
-                                    ?> maxlength="10" placeholder="Amount of invites to send" value="<?php echo (!empty($APK['restriction_device_number']) && $APK['restriction_device_number'] != -1) ? $APK['restriction_device_number'] : ''; ?>" style="display: none;" />
-                        </div>
-                    </div>
                     <div name="private_text">
                         This study marked as <strong><?php echo $APK['private'] == 1 ? 'private' : 'public'; ?>.</strong>
                     </div>
@@ -218,6 +206,18 @@ include_once("./include/managers/SurveyManager.php");
                         <label class="control-label"></label>
                         <div class="controls">
                             <label><input type="radio" name="publishMethod" value="3" <?php echo ($APK['private'] == 1 ? 'checked="checked"' : ''); ?> />Make visible only to my group (Private)</label>
+                        </div>
+                    </div>
+                    <div class="control-group" name="invites_only_install" style="display: none;">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <label><input type="checkbox" name="publishMethodInvite" <?php echo (!empty($APK['restriction_device_number']) && $APK['inviteinstall'] == 1 ? 'checked="checked"' : ''); ?>>Send invites</label>
+                            <input type="number" name="max_devices_number" <?php 
+                                    echo (!empty($APK['restriction_device_number']) && $APK['inviteinstall'] == 1 
+                                    ? 
+                                    '' : 
+                                    'disabled="disabled"'); 
+                                    ?> maxlength="10" placeholder="Amount of invites to send" value="<?php echo (!empty($APK['restriction_device_number']) && $APK['restriction_device_number'] != -1) ? $APK['restriction_device_number'] : ''; ?>" style="display: none;" />
                         </div>
                     </div>
                     <?php 

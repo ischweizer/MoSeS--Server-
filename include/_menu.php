@@ -21,8 +21,9 @@
     ?>
 
     <div class="masthead">
-    <h1 class="muted text-center tmp tmp2" style="font-size: 50pt; margin-top: 20pt; margin-bottom: 30pt;">MoSeS</h1>
-    <h5 class="muted text-center tmp tmp_special">Mobile Sensing System</h5>
+        <h1 class="muted text-center tmp tmp2" style="font-size: 50pt; margin-top: 20pt; margin-bottom: 30pt;">MoSeS</h1>
+        <h5 class="muted text-center tmp tmp_special">Mobile Sensing System</h5>
+    </div>
     
     <div class="navbar">
       <div class="navbar-inner">

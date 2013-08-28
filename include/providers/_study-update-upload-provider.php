@@ -427,40 +427,6 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     }
     
     /* **************************** */
-    
-//     ZM: this is no longer needed, cronjob does that now
-//     /*
-//     * PREPAIRING FOR GOOGLE PUSH 
-//     */
-//     if(!empty($row_installed_on)){
-        
-//       $row_installed_on =  $row_installed_on[0];
-//       $logger->logInfo("row_installed_on[0] = ".$row_installed_on);
-
-//       if(!empty($row_installed_on)){
-
-//         include_once(MOSES_HOME."/include/managers/GooglePushManager.php");
-        
-//         $targetDevices = array();
-//         $row_installed_on = substr($row_installed_on, 1);
-//         $row_installed_on = substr($row_installed_on, 0 , strlen($row_installed_on)-1);
-//         $row_installed_on = explode(",", $row_installed_on);
-        
-//           //Selecting all different apk in a hardware
-//         foreach($row_installed_on as $hardware_id){
-        
-//              $sql="SELECT * 
-//                    FROM ". $CONFIG['DB_TABLE']['HARDWARE'] ." 
-//                    WHERE hwid=".$hardware_id;
-                   
-//              $req=$db->query($sql);
-//              $row=$req->fetch();
-//              $targetDevices[] = $row['c2dm'];
-//         }
-//         GooglePushManager::googlePushSendUpdate($apkId, $targetDevices, $logger, $CONFIG);
-//       }
-//     }
-
     // success!
     die('1');
 }else{

@@ -86,13 +86,6 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
             <label><input type="radio" name="publishMethod" value="1" checked="checked">Publish to MoSeS (Public)</label>
         </div>
     </div>
-    <div class="control-group">
-        <label class="control-label"></label>
-        <div class="controls">
-            <label><input type="checkbox" name="publishMethodInvite">Send invites</label>
-            <input type="number" name="max_devices_number" disabled="disabled" maxlength="10" placeholder="Amount of invites to send" />
-        </div>
-    </div>
     <?php
         if(!empty($USER_RGROUP)){
     ?>
@@ -105,6 +98,13 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
     <?php
         }
      ?>
+    <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            <label><input type="checkbox" name="publishMethodInvite">Send invites</label>
+            <input type="number" name="max_devices_number" disabled="disabled" maxlength="10" placeholder="Amount of invites to send" />
+        </div>
+    </div> 
     <div class="control-group" name="uploadFile">
         <label class="control-label">Select an APK: </label>
         <div class="controls">
