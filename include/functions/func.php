@@ -426,8 +426,8 @@ function survey2csv($RESULTS){
    }
    
    // putting last info about participated users and results counters
-   fputcsv($out, array('Results number', $RESULTS['survey_results_sent_count']));
-   fputcsv($out, array('Number of participants', $RESULTS['participated_count']));
+   fputcsv($out, array('Number of participants (Answered)', $RESULTS['survey_results_sent_count']));
+   fputcsv($out, array('Number of participants (Total)', $RESULTS['participated_count']));
    
    fclose($out);
    return ob_get_clean();
