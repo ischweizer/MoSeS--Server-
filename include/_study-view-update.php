@@ -53,10 +53,11 @@ include_once("./include/managers/SurveyManager.php");
                             'The termination after '. $runningTime .' hours from the date of start.' :
                             'Terminated immediately after creating '. $APK['apktitle'] .'.'; 
                         
-            $joinedDevices = 'There '. ($APK['participated_count'] < 2 ? 'is' : 'are') .' '.
+            /*$joinedDevices = 'There '. ($APK['participated_count'] < 2 ? 'is' : 'are') .' '.
                                        ($APK['participated_count'] == 0 ? 'no' : $APK['participated_count']) .' '.
                                        ($APK['participated_count'] < 2 ? 'device' : 'devices') .' '.                           
-                                        'currently joined to "'. $APK['apktitle'] .'".';
+                                        'currently joined to "'. $APK['apktitle'] .'".';*/
+            $joinedDevices = 'Number of participants so far: <strong>'. $APK['participated_count'] .'</strong>';
                                         
             $study_running = !empty($startDate) && 
                             !empty($endDate) && 
