@@ -17,16 +17,11 @@ $('[name="start_after_n_devices"]').change(function(){
     }
 });
 
-$('[name="publishMethod"]').change(function(){
-    var method = parseInt($(this).val());
-    switch(method){
-        case 1: $('[name="max_devices_number"]').attr('disabled', true); 
-               break;
-        case 2: $('[name="max_devices_number"]').attr('disabled', false);
-               break;
-        case 3: $('[name="max_devices_number"]').attr('disabled', true);
-               break;
-        default: alert("Something went wrong with selecting publish method!");
+$('[name="publishMethodInvite"]').change(function(){
+    if($(this).is(':checked')){
+        $('[name="max_devices_number"]').attr('disabled', false);
+    }else{
+        $('[name="max_devices_number"]').attr('disabled', true);
     }
 });
 

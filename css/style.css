@@ -18,6 +18,11 @@ body {
     width: 15%;
 }
 
+input[name='publishMethodInvite'], input[name='publishMethod'], input[name='study_period'] {
+    margin-right: 0.5em;
+    margin-top: -0.02em;
+}
+
 /* --------------- */
 
 /* Hero unit tweak */
