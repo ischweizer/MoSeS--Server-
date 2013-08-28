@@ -31,6 +31,19 @@ include_once("./include/_menu.php");
                         <?php echo getUserAccessLevelTitleById($_SESSION["GROUP_ID"]); ?>
                     </div>
                 </div>
+                <?php
+                if(isset($_SESSION['GROUP_ID']) && $_SESSION['GROUP_ID'] == 1){
+                     // request a scientist account link
+                     ?>
+                     <div class="control-group">
+                        <div class="controls">
+                            <a href="apply.php" class="btn btn-success btnApplyAsScientist">Apply as scientist</a>
+                        </div>
+                    </div>
+                <?php
+                
+                 }
+                ?>
                 <div class="control-group">
                     <label class="control-label">First name</label>
                     <div class="controls">

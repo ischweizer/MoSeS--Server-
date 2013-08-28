@@ -37,15 +37,11 @@ input[name='publishMethodInvite'], input[name='publishMethod'], input[name='stud
     font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
 }
 
-.btnLeaveGroup, .btnApplyAsScientist {
+.btnLeaveGroup {
     position: relative;
     float: right;
     top: -3em;
     margin: 0.5em 0;
-}
-
-.btnApplyAsScientist {
-    clear: both;
 }
 
 .btnInstantScientist {
