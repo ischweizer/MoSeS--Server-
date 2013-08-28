@@ -149,9 +149,9 @@ if(!$FILE_WAS_UPLOADED || is_uploaded_file($_FILES['file']['tmp_name'])
     $USTUDY_FINISHED = 0;
     $startdate = $_POST['start_date'];
     $enddate = $_POST['end_date'];
-    $maxDevices = (intval($_POST['publishMethod']) == 2 ? $_POST['max_devices_number'] : -1);
-    $inviteInstall = (intval($_POST['publishMethod']) == 2 ? 1 : 0);
-    $private = (intval($_POST['publishMethod']) == 3 ? 1 : 0);
+    $maxDevices = $_POST['publishMethodInvite'] == "on" ? $_POST['max_devices_number'] : -1;
+    $inviteInstall = $_POST['publishMethodInvite'] == "on" ? 1 : 0;
+    $private = intval($_POST['publishMethod']) == 3 ? 1 : 0;
     $startcriterion = NULL;
     $runningtime = NULL;
     $radioButton = intval($_POST['study_period']);
