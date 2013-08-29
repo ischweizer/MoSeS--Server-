@@ -41,6 +41,14 @@ $('[name="btnAddSurvey"]').click(function(e){
     $('.my_control-group_create').remove();
     $('.survey_controls').append(createButton);
     
+    // move cancel and send buttons from update user study
+    $('.btnUpdateOK').css('margin-top','4em');
+    $('.btnUpdateCancel').css('margin-left','12em');   // TODO: fix that to proper value
+    $('.btnUpdateCancel').css('margin-top','4em');
+    var updateCancelButtons = $('.control-group-update').find('.controls').html();
+    $('.control-group-update').remove();
+    $('.survey_controls').append(updateCancelButtons);
+    
     // move progress bar aswell
     var progressBar = $('[name="progress"]').parent().html();
     $('[name="progress"]').parent().parent().remove();

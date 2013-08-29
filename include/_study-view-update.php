@@ -249,7 +249,7 @@ include_once("./include/managers/SurveyManager.php");
                             <progress name="progress" value="0" style="display: none;"></progress>
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group control-group-update">
                         <label class="control-label"></label>
                         <div class="controls">
                             <button class="btn btnUpdateCancel" title="Cancel update!" style="display: none;">Cancel</button>

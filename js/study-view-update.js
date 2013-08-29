@@ -105,28 +105,38 @@ $('.btnUpdateOK').click(function(e){
    e.preventDefault();
    
    /*************** CHECKS **************/
+   // defines for future use
+   var p = null;
+   
+   if($(this).parent().parent().prop("tagName") == "FIELDSET"){
+       // that button was transferred to the bottom
+       p = $(this).parent().parent();
+   }else{
+       // that button is on its starting place
+       p = $(this).parent().parent().parent();
+   }
    
    // error if no title given
-   if($.trim($('[name="apk_title"]').val()).length == 0){
+   if($.trim(p.find('[name="apk_title"]').val()).length == 0){
        alert("Please enter the apk title.");
        return;
    }
    
    // error if study period from date to date selected and those are empty
-   if($('[name="study_period"]:selected').val() == "1"){
-       if($.trim($('[name="start_date"]').val()).length == 0){
+   if(p.find('[name="study_period"]:selected').val() == "1"){
+       if($.trim(p.find('[name="start_date"]').val()).length == 0){
            alert("Please enter start date.");
            return;
        }
        
-       if($.trim($('[name="end_date"]').val()).length == 0){
+       if($.trim(p.find('[name="end_date"]').val()).length == 0){
            alert("Please enter end date.");
            return;
        }
        
        // TODO: fix it. not working
-       var startDate = $.datepicker.parseDate("yy-mm-dd", $('[name="start_date"]').val());
-       var endDate = $.datepicker.parseDate("yy-mm-dd", $('[name="end_date"]').val());
+       var startDate = $.datepicker.parseDate("yy-mm-dd", p.find('[name="start_date"]').val());
+       var endDate = $.datepicker.parseDate("yy-mm-dd", p.find('[name="end_date"]').val());
        
        if(startDate.getTime() - endDate.getTime() < 0){
            alert("Start date is before end date!");
@@ -135,15 +145,15 @@ $('.btnUpdateOK').click(function(e){
    }
    
    // for minimum devices and running period
-   if($('[name="study_period"]:selected').val() == "2"){
+   if(p.find('[name="study_period"]:selected').val() == "2"){
        
-       var startAfter = $.trim($('[name="start_after_n_devices"]').val()); 
+       var startAfter = $.trim(p.find('[name="start_after_n_devices"]').val()); 
        if(startAfter.length == 0){
            alert("Please minimum devices to start after.");
            return;
        }
        
-       var runningTime = $.trim($('[name="running_time"]').val());
+       var runningTime = $.trim(p.find('[name="running_time"]').val());
        if(runningTime.length == 0){
            alert("Please enter running time.");
            return;
@@ -176,17 +186,14 @@ $('.btnUpdateOK').click(function(e){
    $(this).attr('disabled', true);
    /* ------------------------ */
    
-   // get the parent of selected stuff
-   var p = $(this).parent().parent().parent();
-   
    /* Handling form data */ 
-    var formData = new FormData($(this).parent().parent().parent().parent().parent().find('form')[0]);
+    var formData = new FormData(p.parent().parent().find('form')[0]);
 
     /* Gather a JSON-Object for surveys */
     var surveysJSON = {};
     
     // find all forms in a survey
-    $('.survey_form').each(function(survey_i, elem){
+    p.parent().parent().find('.survey_form').each(function(survey_i, elem){
         
         var survey = $(this);
         var survey_form_id = parseInt(survey.find('.survey_form_id').val());
@@ -259,70 +266,6 @@ $('.btnUpdateOK').click(function(e){
         //beforeSend: beforeSendHandler,
         success: function(result){
             if(result == '1'){
-                /*
-                p.find('progress').hide();
-                p.find('[name="btnUpdateStudy"]').attr('disabled',false);
-                p.find('.btnUpdateOK').attr('disabled', false);
-                
-                // get all info from inputs and inline substitute with old one
-                p.parent().parent().parent().parent().find('[name="study_title_link"]').text(p.find('[name="apk_title"]').val());
-                p.find('[name="study_title_text"]').text(p.find('[name="apk_title"]').val());
-                p.find('[name="android_version_text"]').text(p.find('[name="android_version_select"] :selected').text());
-                p.find('[name="start_date_text"]').text(p.find('[name="start_date"]').val());
-                p.find('[name="end_date_text"]').text(p.find('[name="end_date"]').val());
-                p.find('[name="description_text"]').text(p.find('[name="description"]').val()); 
-                p.find('[name="max_devices_number_text"]').text(p.find('[name="max_devices_number"]').val());
-                
-                // forming criterion
-                var startCriterion = $('[name="start_after_n_devices"]').val();                 
-                if(startCriterion.length != 0){
-                    var content = 'Commencement after '+ startCriterion +' user';
-                    if(startCriterion > 1){
-                        content += 's';
-                    }
-                    content += ' join';
-                    if(startCriterion > 1){
-                        content += '';
-                    }else{
-                        content += 's';
-                    }
-                    content += '.';
-                    startCriterion = content;
-                }
-                startCriterion += 'Commenced while creating '+ $('[name="apk_title"]').val() +'.';
-                
-                // setting starting criterion
-                p.find('[name="start_date_text"]').text(startCriterion);
-                       
-                // forming running time             
-                var runningTime = $('[name="running_time"]').val();
-                if(runningTime.length != 0){
-                    runningTime = 'The termination after '+ runningTime +' hours from the date of start.';
-                }else{
-                    runningTime = 'Terminated immediately after creating '+ $('[name="apk_title"]').val() +'.';
-                }
-                
-                // setting running time
-                p.find('[name="end_date_text"]').text(runningTime);
-                
-                // show joined devices string
-                p.find('[name="joined_devices_text"]').show();
-                
-                if(p.find('[name="setup_types"]').is(':checked')){
-                   p.find('[name="allowed_join_text"]').text("This study is avalaible for everyone."); 
-                }else{
-                   p.find('[name="allowed_join_text"]').text("Only invited people can see this study!"); 
-                }
-                
-                if(p.find('[name="private"]').is(':checked')){
-                   p.find('[name="private_text"]').html("This study marked as <strong>private</strong>."); 
-                }else{
-                   p.find('[name="private_text"]').html("This study marked as <strong>public</strong>."); 
-                }
-                
-                // removing survey controls
-                p.parent().find('.survey_controls').remove();*/
-                
                 location.reload();
             }
         },
@@ -346,8 +289,16 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
  
     e.preventDefault();
     
-   // get the parent of selected stuff
-   var p = $(this).parent().parent().parent();
+   // defines for future use
+   var p = null;
+   
+   if($(this).parent().parent().prop("tagName") == "FIELDSET"){
+       // that button was transferred to the bottom
+       p = $(this).parent().parent();
+   }else{
+       // that button is on its starting place
+       p = $(this).parent().parent().parent();
+   }
    /* Hide and show form stuff */
    
    p.find('[name="study_title_text"]').show();
@@ -383,15 +334,23 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
    p.parent().parent().find('[name="btnAddSurvey"]').hide();
    
    // enable update button
-   $(this).parent().parent().parent().parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
-   $(this).parent().parent().parent().parent().parent().find('.btnUpdateSurveyOnly').attr('disabled',false);
+   p.parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
+   p.parent().parent().find('.btnUpdateSurveyOnly').attr('disabled',false);
 });
 
 // special activities for cancel user study button
 $('.btnUpdateCancel').click(function(e){
     e.preventDefault();
-    // get the parent of selected stuff
-    var p = $(this).parent().parent().parent();
+    // defines for future use
+   var p = null;
+   
+   if($(this).parent().parent().prop("tagName") == "FIELDSET"){
+       // that button was transferred to the bottom
+       p = $(this).parent().parent();
+   }else{
+       // that button is on its starting place
+       p = $(this).parent().parent().parent();
+   }
      
     // removing survey controls if it was selected
     p.parent().find('.survey_controls').remove();
