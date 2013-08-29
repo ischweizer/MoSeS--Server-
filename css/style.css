@@ -25,6 +25,11 @@ body {
     width: 15%;
 }
 
+progress[name="progress"], .btnCreateOK {
+    margin: 0 auto;
+    width: 30%;    
+}
+
 input[name='publishMethodInvite'], input[name='publishMethod'], input[name='study_period'] {
     margin-right: 0.5em;
     margin-top: -0.02em;

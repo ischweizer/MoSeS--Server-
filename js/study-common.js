@@ -35,11 +35,20 @@ $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();
     
     // move button create study to bottom of page
-    $('.btnCreateOK').css('margin-left','30%');   // TODO: fix that to proper value
+    $('.btnCreateOK').css('margin-left','10em');   // TODO: fix that to proper value
     $('.btnCreateOK').css('margin-top','4em');
     var createButton = $('.my_control-group_create').find('.controls').html();
     $('.my_control-group_create').remove();
     $('.survey_controls').append(createButton);
+    
+    // move progress bar aswell
+    var progressBar = $('[name="progress"]').parent().html();
+    $('[name="progress"]').parent().parent().remove();
+    $('.survey_controls').append(progressBar);
+    
+    //$('[name="progress"]').css('margin-left','10em');   // TODO: fix that to proper value
+    $('[name="progress"]').css('margin-top','2.5em');
+    $('[name="progress"]').css('float','right');
     
     // get the parent of selected stuff
     var p = $(this).parent().parent().parent();
