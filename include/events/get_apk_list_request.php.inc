@@ -52,8 +52,23 @@ if($data->SESSIONID != null){
 
                      $inviteOnlyAPKs = ApkManager::getAllInviteOnlyApkRegardingDeviceid($logger, $DBManager->getDB(), $USERID, $deviceID, $CONFIG);
                      $groupAPKs = ApkManager::getAllGroupAPKs($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
+                     $groupAPKsWithInvite = ApkManager::getAllGroupAPKsWithInvite($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
                      $publicAPKs = ApkManager::getPublicAPKs($logger, $DBManager->getDB(), $USERID, $CONFIG, $deviceID, $ANDROID_VERSION);
                      
+                     foreach(array_reverse($groupAPKsWithInvite) as $apk){
+                     	 
+                     	 
+                     	$APK_JSON = array("ID" => $apk['apkid'],
+                     			"NAME" => $apk['apktitle'],
+                     			"ANDVER" => $apk['androidversion'],
+                     			"DESCR" => $apk['description'],
+                     			"STARTDATE" => $apk['startdate'],
+                     			"ENDDATE" => $apk['enddate'],
+                     			"APKVERSION" => $apk['apk_version'],
+                     			"BADGE" => "INVITE GROUP");
+                     
+                     	$json_array_return[] = $APK_JSON;
+                     }
                                           
                      foreach(array_reverse($inviteOnlyAPKs) as $apk){
                              

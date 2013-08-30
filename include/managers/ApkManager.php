@@ -115,6 +115,7 @@ class ApkManager{
 							                      FROM ". $CONFIG['DB_TABLE']['APK'] ." 
                                                   WHERE private=1 AND 
                                                         ustudy_finished =0 AND 
+							                      		inviteinstall=0 AND 
                                                         androidversion<=".$minAndroidVersion." AND 
                                                         (CURDATE() >= startdate OR startdate IS NULL) AND  
                                                         userid=".$member;
@@ -126,6 +127,54 @@ class ApkManager{
 			}
 		}
 		return $array;
+	}
+	
+	public static function getAllGroupAPKsWithInvite($logger, $db, $userId,$CONFIG, $deviceID, $minAndroidVersion){
+		$groupName = LoginManager::getGroupName($logger, $db, $CONFIG['DB_TABLE']['USER'], $userId);
+		$array = array();
+		if(!empty($groupName)){
+			$sqlGroupMembers = "SELECT members
+                                FROM ".$CONFIG['DB_TABLE']['RGROUP']."
+                                WHERE name='".$groupName."'";
+			$result2 = $db->query($sqlGroupMembers);
+			$rowMembers = $result2->fetch(PDO::FETCH_ASSOC);
+			if(!empty($rowMembers)){
+				$members = json_decode($rowMembers['members']);
+				foreach($members as $member){
+					$sqlGetAPKsPublishedByUser = "SELECT *
+							                      FROM ". $CONFIG['DB_TABLE']['APK'] ."
+                                                  WHERE private=1 AND
+                                                        ustudy_finished =0 AND
+							                      		inviteinstall=1 AND
+                                                        androidversion<=".$minAndroidVersion." AND
+                                                        (CURDATE() >= startdate OR startdate IS NULL) AND
+                                                        userid=".$member;
+					$result3 = $db->query($sqlGetAPKsPublishedByUser);
+					$rowsAPKs = $result3->fetchAll(PDO::FETCH_ASSOC);
+					$array = array_merge_recursive($array, $rowsAPKs);
+				}
+					
+			}
+		}
+		
+		// the user should see only the private apks with invite, which he has already installed OR for which he has aquired a notification
+		$toBeReturned = array();
+		$hardwareId = HardwareManager::getHardwareID($db, $CONFIG['DB_TABLE']['HARDWARE'], $userId, $deviceID);
+		foreach ($array as $apk){
+			// get devices that may install or have installed the apk
+			$pendingDevices = json_decode($apk['pending_devices']);
+			$installedOn = array();
+			$tempInstalledOn = $apk['installed_on'];
+			if(!empty($tempInstalledOn))
+				$installedOn = json_decode($tempInstalledOn);
+			if(in_array($hardwareId, $pendingDevices) || in_array($hardwareId, $installedOn))
+				$toBeReturned[]=$apk;
+				
+		}
+		
+		return $toBeReturned;
+		
+		
 	}
 	
 	
@@ -142,7 +191,7 @@ class ApkManager{
         $sql = "SELECT * 
                 FROM ". $CONFIG['DB_TABLE']['APK'] ." 
                 WHERE inviteinstall=1 AND 
-                      ustudy_finished =0";
+                      ustudy_finished =0 AND private=0";
 			
 		$logger->logInfo("getAllInviteOnlyApkRegardingDeviceid() sql=".$sql);
 	
