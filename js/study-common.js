@@ -34,32 +34,33 @@ $('.content_appears_here').on('click','.scrollTo',function(e){
 $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();
     
+    // get the parent of selected stuff
+    var p = $(this).parent().parent().parent();
+    
     // move button create study to bottom of page
     $('.btnCreateOK').css('margin-left','10em');   // TODO: fix that to proper value
     $('.btnCreateOK').css('margin-top','4em');
     var createButton = $('.my_control-group_create').find('.controls').html();
     $('.my_control-group_create').remove();
     $('.survey_controls').append(createButton);
-    
+         
+    // UPDATE / VIEW user study                      
     // move cancel and send buttons from update user study
     $('.btnUpdateOK').css('margin-top','4em');
     $('.btnUpdateCancel').css('margin-left','12em');   // TODO: fix that to proper value
     $('.btnUpdateCancel').css('margin-top','4em');
-    var updateCancelButtons = $('.control-group-update').find('.controls').html();
-    $('.control-group-update').remove();
-    $('.survey_controls').append(updateCancelButtons);
+    var updateCancelButtons = $(this).parent().find('.controls:last').html();
+    $(this).parent().find('.control-group-update').remove();
+    $(this).parent().find('.survey_controls').append(updateCancelButtons);
     
     // move progress bar aswell
-    var progressBar = $('[name="progress"]').parent().html();
-    $('[name="progress"]').parent().parent().remove();
-    $('.survey_controls').append(progressBar);
+    var progressBar = $(this).find('[name="progress"]').parent().html();
+    $(this).find('[name="progress"]').parent().parent().remove();
+    $(this).parent().find('.survey_controls').append(progressBar);
     
     //$('[name="progress"]').css('margin-left','10em');   // TODO: fix that to proper value
-    $('[name="progress"]').css('margin-top','2.5em');
-    $('[name="progress"]').css('float','right');
-    
-    // get the parent of selected stuff
-    var p = $(this).parent().parent().parent();
+    $(this).find('[name="progress"]').css('margin-top','2.5em');
+    $(this).find('[name="progress"]').css('float','right');
     
     p.find('.survey_controls').show();
     //p.find('[name="survey_container"]').hide();

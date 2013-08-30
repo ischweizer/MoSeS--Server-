@@ -39,7 +39,8 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
    }
    
    // error if study period from date to date selected and those are empty
-   if($('[name="study_period"]:selected').val() == "1"){
+   if($('input[name="study_period"]:checked').val() == "1"){
+       
        if($.trim($('[name="start_date"]').val()).length == 0){
            alert("Please enter start date.");
            return;
@@ -50,19 +51,19 @@ $('.form-horizontal').on('click','.btnCreateOK',function(e){
            return;
        }
        
-       // TODO: fix it. not working
+       // start date is after end date
        var startDate = $.datepicker.parseDate("yy-mm-dd", $('[name="start_date"]').val());
        var endDate = $.datepicker.parseDate("yy-mm-dd", $('[name="end_date"]').val());
        
-       if(startDate.getTime() - endDate.getTime() < 0){
-           alert("Start date is before end date!");
+       if(startDate.getTime() - endDate.getTime() > 0){
+           alert("Start date can not be after the end date!");
            return;
        }
    }
    
    // for minimum devices and running period
-   if($('[name="study_period"]:selected').val() == "2"){
-       
+   if($('input[name="study_period"]:checked').val() == "2"){
+        
        var startAfter = $.trim($('[name="start_after_n_devices"]').val()); 
        if(startAfter.length == 0){
            alert("Please minimum devices to start after.");

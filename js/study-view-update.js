@@ -100,19 +100,19 @@ $('[name="btnUpdateStudy"]').click(function(e){
 });
 
 /* Handling of button send updated study to server and show changes */
-$('.btnUpdateOK').click(function(e){
+$('.form-horizontal').on('click','.btnUpdateOK',function(e){
    
    e.preventDefault();
    
    /*************** CHECKS **************/
    // defines for future use
    var p = null;
-   
-   if($(this).parent().parent().prop("tagName") == "FIELDSET"){
-       // that button was transferred to the bottom
-       p = $(this).parent().parent();
+
+   if($(this).parent().parent().parent().parent().prop("tagName") == "FORM"){
+       // add survey was NOT pressed. button is on starting position
+       p = $(this).parent().parent().parent().parent();
    }else{
-       // that button is on its starting place
+       // add survey WAS pressed. button is at the bottom
        p = $(this).parent().parent().parent();
    }
    
@@ -123,7 +123,7 @@ $('.btnUpdateOK').click(function(e){
    }
    
    // error if study period from date to date selected and those are empty
-   if(p.find('[name="study_period"]:selected').val() == "1"){
+   if(p.find('input[name="study_period"]:checked').val() == "1"){
        if($.trim(p.find('[name="start_date"]').val()).length == 0){
            alert("Please enter start date.");
            return;
@@ -134,18 +134,18 @@ $('.btnUpdateOK').click(function(e){
            return;
        }
        
-       // TODO: fix it. not working
+       // start date is after end date
        var startDate = $.datepicker.parseDate("yy-mm-dd", p.find('[name="start_date"]').val());
        var endDate = $.datepicker.parseDate("yy-mm-dd", p.find('[name="end_date"]').val());
        
-       if(startDate.getTime() - endDate.getTime() < 0){
-           alert("Start date is before end date!");
+       if(startDate.getTime() - endDate.getTime() > 0){
+           alert("Start date can not be after the end date!");
            return;
        }
    }
    
    // for minimum devices and running period
-   if(p.find('[name="study_period"]:selected').val() == "2"){
+   if(p.find('input[name="study_period"]:checked').val() == "2"){
        
        var startAfter = $.trim(p.find('[name="start_after_n_devices"]').val()); 
        if(startAfter.length == 0){
@@ -187,13 +187,13 @@ $('.btnUpdateOK').click(function(e){
    /* ------------------------ */
    
    /* Handling form data */ 
-    var formData = new FormData(p.parent().parent().find('form')[0]);
+    var formData = new FormData(p.parent().find('form')[0]);
 
     /* Gather a JSON-Object for surveys */
     var surveysJSON = {};
     
     // find all forms in a survey
-    p.parent().parent().find('.survey_form').each(function(survey_i, elem){
+    p.parent().find('.survey_form').each(function(survey_i, elem){
         
         var survey = $(this);
         var survey_form_id = parseInt(survey.find('.survey_form_id').val());
@@ -285,18 +285,18 @@ $('.btnUpdateOK').click(function(e){
 });
 
 /* Hide edit form data */
-$('.btnUpdateOK, .btnUpdateCancel').click(function(e){
+$('.form-horizontal').on('click','.btnUpdateOK, .btnUpdateCancel',function(e){
  
     e.preventDefault();
     
-   // defines for future use
+   // define for future use
    var p = null;
-   
-   if($(this).parent().parent().prop("tagName") == "FIELDSET"){
-       // that button was transferred to the bottom
-       p = $(this).parent().parent();
+
+   if($(this).parent().parent().parent().parent().prop("tagName") == "FORM"){
+       // add survey was NOT pressed. button is on starting position
+       p = $(this).parent().parent().parent().parent();
    }else{
-       // that button is on its starting place
+       // add survey WAS pressed. button is at the bottom
        p = $(this).parent().parent().parent();
    }
    /* Hide and show form stuff */
@@ -339,16 +339,16 @@ $('.btnUpdateOK, .btnUpdateCancel').click(function(e){
 });
 
 // special activities for cancel user study button
-$('.btnUpdateCancel').click(function(e){
+$('.form-horizontal').on('click','.btnUpdateCancel',function(e){    
     e.preventDefault();
-    // defines for future use
+    // define for future use
    var p = null;
-   
-   if($(this).parent().parent().prop("tagName") == "FIELDSET"){
-       // that button was transferred to the bottom
-       p = $(this).parent().parent();
+
+   if($(this).parent().parent().parent().parent().prop("tagName") == "FORM"){
+       // add survey was NOT pressed. button is on starting position
+       p = $(this).parent().parent().parent().parent();
    }else{
-       // that button is on its starting place
+       // add survey WAS pressed. button is at the bottom
        p = $(this).parent().parent().parent();
    }
      

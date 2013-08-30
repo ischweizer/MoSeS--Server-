@@ -198,7 +198,7 @@ include_once("./include/managers/SurveyManager.php");
                         </div>
                     </div>
                     <div name="private_text">
-                        This study marked as <strong><?php echo $APK['private'] == 1 ? 'private' : 'public'; ?>.</strong>
+                        This study is marked as <strong><?php echo $APK['private'] == 1 ? 'private' : 'public'; ?>.</strong>
                     </div>
                     <?php
                         if(!empty($USER_RGROUP)){
