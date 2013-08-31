@@ -1,4 +1,10 @@
-<div class="push"></div>
+<?php
+
+/*
+ * @author: Wladimir Schmidt
+ */                            
+
+ ?><div class="push"></div>
 </div>
 
 <div id="footer">

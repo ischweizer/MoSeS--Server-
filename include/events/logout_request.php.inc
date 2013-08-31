@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * @author: Zijad Maksuti
+ */
+
 $sessionID = '';
 
 /**
@@ -28,6 +32,6 @@ if($data->SESSIONID != null){
                     "STATUS" => "FAILURE");
 } 
 
-print(json_encode($return));
+echo json_encode($return);
 
 ?>

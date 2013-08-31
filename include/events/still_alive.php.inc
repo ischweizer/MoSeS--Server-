@@ -1,5 +1,9 @@
 <?php
-
+ 
+/*
+ * @author: Wladimir Schmidt
+ */ 
+ 
 $logger->logInfo("######## STILL ALIVE ARRIVED #############");
 
 $sessionID = '';

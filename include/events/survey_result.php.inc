@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * @author: Zijad Maksuti
+ */
+
 $logger->logInfo("############## SURVEY_RESULT ARRIVED ###############");
 $logger->logInfo(print_r($data, true));
 

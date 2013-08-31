@@ -1,4 +1,8 @@
 <?php
+ 
+/*
+ * @author: Wladimir Schmidt
+ */
   
 /**
 * Checks if string is a valid md5 hash

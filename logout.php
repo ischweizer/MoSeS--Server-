@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 // start the session
 session_start();
 // get the address of this site

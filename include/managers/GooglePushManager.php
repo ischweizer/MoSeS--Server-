@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ * @author: Sandra Christina Amend
+ */
+
 /**
 * This class manages the creation and dropping of tables
 */

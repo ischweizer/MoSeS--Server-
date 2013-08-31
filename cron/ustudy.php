@@ -1,5 +1,9 @@
-
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
 
 // this is a cronjob used for user studies
 

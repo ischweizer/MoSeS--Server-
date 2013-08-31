@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 //Starting the session
 session_start();
 //import of the header
@@ -17,7 +22,7 @@ include_once("./include/_menu.php");
     <div class="hero-unit" style="font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;">
         <h2>Impressum</h2>
         <p> 
-               Technische Universität Darmstadt<br>
+            Technische Universität Darmstadt<br>
             Telekooperation<br>
             Immanuel Schweizer <br>
             Hochschulstraße 10 <br>

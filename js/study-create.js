@@ -1,3 +1,8 @@
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 $('[name="study_period"]').click(function(){
     if($(this).is(':checked')){
         if($(this).val() == 1){

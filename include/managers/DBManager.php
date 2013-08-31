@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * @author: Zijad Maksuti
+ */
+
 /**
 * This class manages the creation and dropping of tables
 */

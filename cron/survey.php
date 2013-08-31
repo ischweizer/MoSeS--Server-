@@ -1,8 +1,10 @@
 <?php
+
 /**
- * @author Zijad Maksuti
+ * @author: Zijad Maksuti
  */
-// Cronjob for sending notifications about available surveys to client when 
+
+ // Cronjob for sending notifications about available surveys to client when 
 // user study is finished
 
 /* ustudy_finished encodings

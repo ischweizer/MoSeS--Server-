@@ -1,3 +1,8 @@
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 $('.btnApplyScientistSend').click(function(e){        
     
     e.preventDefault();

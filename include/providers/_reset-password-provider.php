@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 include_once("./config.php");
 include_once("./include/functions/dbconnect.php");
 include_once("./include/functions/logger.php");
@@ -9,6 +15,8 @@ $FIRSTNAME;
 $LASTNAME;
 $EMAIL = $_POST["email_for"];
 $CONFIRM_CODE = md5($EMAIL);
+$URL = $_POST["url"];
+
 if(!isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
 
     // the server knows the email, get the first and last name
@@ -21,12 +29,15 @@ if(!isEmailUnique($EMAIL, $CONFIG, $db, $logger)){
     // compose email to user
     $to = $EMAIL;
     $subject = "MoSeS: Password reset";
-    $from = "admin@moses.tk.informatik.tu-darmstadt.de";
+    $from = "developer@tk.informatik.tu-darmstadt.de";
     $message = "Hi, ". $FIRSTNAME ." ". $LASTNAME ."!\n";
-    $message .= "Please follow this link to enter a new password: ";
-    $message .= "http://". $_SERVER["SERVER_NAME"] . "/moses/forgot.php" ."?newpassword=". $CONFIRM_CODE;
-
-    $headers = "From: $from";
+    $message .= "Please follow this link to reset your password: \n";
+    $message .= $URL ."?newpassword=". $CONFIRM_CODE;
+    $message .= "\n\n - MoSeS Team";
+    
+    $headers  = "From: $from\r\n";
+    $headers .= "Reply-To: $mailFrom\r\n";
+    $headers .= "X-Sender-IP: {$_SERVER['REMOTE_ADDR']}\r\n";
     $sent = mail($to, $subject, $message, $headers);
 
     // sending was successful?

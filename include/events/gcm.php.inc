@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * @author: Zijad Maksuti
+ */
+
 $sessionID = '';
 
 /**

@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 // start the session
 session_start();
 
@@ -109,12 +115,12 @@ if(isset($_GET["confirm"]) && strlen(trim($_GET["confirm"])) == 32){
                      <div class="control-group">
                      	<label class="control-label"></label>
                      	<div class="controls">
-	                    	<input type="hidden" name="submitted" id="submitted" value="1" />
-                            <input type="hidden" name="url" value="<?php echo "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">
 	                    	<button type="submit" name="submit" id="submitButton" class="btn btn-success">Create account</button>
                     	</div>
                     </div>
                 </fieldset>
+                <input type="hidden" name="submitted" id="submitted" value="1" />
+                <input type="hidden" name="url" value="<?php echo "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">
             </form>
 
             <?php

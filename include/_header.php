@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+
+/*
+ * @author: Wladimir Schmidt
+ */                   
+
+ ?><!DOCTYPE html>
 <html lang="en">
 <head>
 <meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">

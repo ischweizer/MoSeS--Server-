@@ -1,8 +1,13 @@
+
+/*
+ * @author: Zijad Maksuti
+ * @author: Wladimir Schmidt
+ */
+
 /**
  * Validate the email entered by the user.
  * It has to look like an email.
- */
- 
+ */ 
 $("#forgotEmailForm").validate({
     rules:{
         email_for:{

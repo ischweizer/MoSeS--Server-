@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ */
+
 //Starting the session
 session_start();
 

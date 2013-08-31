@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 $logger->logInfo("############## GET APK INFO ARRIVED ###############");
 $logger->logInfo("SESSIONID PROVIDED BY THE CLIENT: ".$data->SESSIONID);
 

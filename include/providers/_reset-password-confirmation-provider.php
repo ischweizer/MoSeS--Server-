@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * @author: Zijad Maksuti
+ */
+
 include_once("./config.php");
 include_once("./include/functions/dbconnect.php");
 include_once("./include/functions/logger.php");

@@ -1,4 +1,10 @@
-<div class="container-fluid survey_controls" style="display: none;">
+<?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+                                                                        
+?><div class="container-fluid survey_controls" style="display: none;">
   <div class="row-fluid">
     <div class="span2">
     <label>Select forms -></label>

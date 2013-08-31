@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * @author: Zijad Maksuti
+ * @author: Wladimir Schmidt
+ */
+
 $logger->logInfo("############## QUESTIONNAIRES REQUEST ARRIVED ###############");
 $logger->logInfo("SESSIONID PROVIDED BY THE CLIENT: ".$data->SESSIONID);
 

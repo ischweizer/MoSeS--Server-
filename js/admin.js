@@ -1,3 +1,8 @@
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 // allow scientist
 $('.btnAllowAccess').click(function(e){        
     

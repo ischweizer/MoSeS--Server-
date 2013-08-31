@@ -1,4 +1,10 @@
-<!-- Custom confirm dialog -->
+<?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+                                  
+?><!-- Custom confirm dialog -->
 <div id="modal-from-dom" class="modal fade" style="display: none;">
     <div class="modal-header">
       <a href="#" class="close">&times;</a>

@@ -1,5 +1,10 @@
 <?php
   
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+  
 // SCRIPT USED FOR CLEANING OBSOLETE APKs from APK-Directory
 include_once('/home/dasense/moses/config.php');
 include_once(MOSES_HOME."/include/functions/cronLogger.php");

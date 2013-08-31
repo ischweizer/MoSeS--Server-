@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 // start the session
 session_start();
 
@@ -33,15 +39,7 @@ include_once("./include/_header.php");
   	 
   	// allow password change only if user is confirmed (prevents missuse)
   	if(!empty($row) && $row['confirmed'] != 0){
-  		 
-//   		$sql = "UPDATE ". $CONFIG['DB_TABLE']['USER'] ."
-//               SET confirmed=1, usergroupid=1
-//               WHERE userid=". $row["userid"];
-  
-//   		$db->exec($sql);
-  
   		$PASSWORD_RESET = true;
-  		 
   	}
   }
 ?>  
@@ -53,21 +51,21 @@ include_once("./include/_header.php");
 			  if(!$PASSWORD_RESET){
 ?>
 			<!-- Shown to the user when he has to enter his email address -->
-							<legend>Forgot your credentials? Your are on the right place!</legend>
-			                <div class="control-group">
-			                	<label for="email_for" class="control-label">Enter your Email here</label>
-			                    <div class="controls">
-			                    	<input type="email" name="email_for" id="email_for" maxlength="50" />
-			                    </div>
-							</div>
-							<div class="clear"></div>
-							<div class="control-group">
-								<label class="control-label"></label>
-								<div class="controls">
-			                    	<input type="hidden" name="submitted_forgot" id="submitted_forgot" value="1" />
-			                    	<button type="submit" name="submit" class="btn btn-success" id="button_forgot">Yes send me an email</button>
-			                    </div>
-							</div>
+			<legend>Forgot your credentials? Your are on the right place!</legend>
+			<div class="control-group">
+			    <label for="email_for" class="control-label">Enter your Email here</label>
+			    <div class="controls">
+			        <input type="email" name="email_for" id="email_for" maxlength="50" />
+			    </div>
+			</div>
+			<div class="clear"></div>
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+			        <input type="hidden" name="submitted_forgot" id="submitted_forgot" value="1" />
+			        <button type="submit" name="submit" class="btn btn-success" id="button_forgot">Yes send me an email</button>
+			    </div>
+			</div>
 
 <?php 
 }
@@ -92,7 +90,6 @@ else{
 				<div class="control-group">
 					<label class="control-label"></label>
 					<div class="controls">
-                    	<input type="hidden" name="reset_password" id="reset_password" value="<?php echo $_GET["newpassword"]; ?>" />
                     	<button type="reset" name="submit" class="btn btn-success" id="button_forgot">Change password</button>
                     </div>
 				</div>
@@ -100,6 +97,8 @@ else{
 }
 ?>
 		</fieldset>
+        <input type="hidden" name="reset_password" id="reset_password" value="<?php echo $_GET["newpassword"]; ?>" />
+        <input type="hidden" name="url" value="<?php echo "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>">
 		</form>
 		</div>
 		<br />

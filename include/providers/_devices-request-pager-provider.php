@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 include_once("./config.php");
 include_once("./include/functions/dbconnect.php");
 
@@ -20,7 +25,6 @@ if(!empty($devices)){
   $USER_DEVICES = $devices;
 }
 
-//$ar = array('modelname' => $_SESSION['USER_ID']);
 // return devices as json
 die(json_encode($USER_DEVICES));
 ?>

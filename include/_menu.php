@@ -1,4 +1,10 @@
-</head>
+<?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+           
+?></head>
 <body>
 
 <div class="wrap">

@@ -1,4 +1,8 @@
 
+/*
+ * @author: Wladimir Schmidt
+ */
+
 $('.btnInstantScientist').click(function(e){
     e.preventDefault();
     

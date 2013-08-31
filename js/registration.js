@@ -1,3 +1,9 @@
+
+/*
+ * @author: Zijad Maksuti
+ * @author: Wladimir Schmidt
+ */
+
 /**
  * Registration Form
  * Validation: Highlighting of empty fields or fields that are not filled correctly

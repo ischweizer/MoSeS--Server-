@@ -1,6 +1,10 @@
 <?php
 
 /*
+ * @author: Zijad Maksuti
+ */
+
+/*
 * Handling of CHANGE_DEVICE_ID messages
 */
 

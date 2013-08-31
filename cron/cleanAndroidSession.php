@@ -1,4 +1,8 @@
 <?php
+ 
+/*
+ * @author: Zijad Maksuti
+ */
   
 // SCRIPT USED FOR CLEANING OBSOLETE OUTDATED ANDROID SESSIONS
 include_once('/home/dasense/moses/config.php');

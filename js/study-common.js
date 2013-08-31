@@ -1,3 +1,8 @@
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 // iterate through all menus and remove selection
 $('.dropdown').each(function(){
     $(this).removeClass('active');   

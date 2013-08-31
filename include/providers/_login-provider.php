@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ */
+
 include_once("./config.php");
 //If the login exists
 if(isset($_POST["email_login"]) && 

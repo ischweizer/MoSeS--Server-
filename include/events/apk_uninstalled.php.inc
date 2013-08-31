@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 $logger->logInfo("############ APK UNINSTALLED ARRIVED #############");
 $logger->logInfo(print_r($data, true));
 
@@ -46,7 +51,6 @@ if($data->SESSIONID != null){
                        
                       LoginManager::updateSession($DBManager->getDB(), $CONFIG['DB_TABLE']['ANDROID_SESSION'], $TIME_NOW, $sessionID);
                       
-                      
                       // get hw-id
                       $userid = $row['userid'];
                       $sql_hw = "SELECT hwid FROM ".$CONFIG['DB_TABLE']['HARDWARE']. " WHERE uid=".$userid." AND deviceid='".$deviceID."'";
@@ -54,8 +58,6 @@ if($data->SESSIONID != null){
                       $result_hw =$db->query($sql_hw);
                       $row_hw = $result_hw->fetch();
                       $hwid = $row_hw['hwid'];
-                      
-                      
                       
                       ApkManager::decrementAPKUsage($DBManager->getDB(), $CONFIG['DB_TABLE']['APK'], $apkid, $hwid, $logger);
                    }

@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 $logger->logInfo("########### DOWNLOAD REQUEST ARRIVED ##############");
 
 $sessionID = '';

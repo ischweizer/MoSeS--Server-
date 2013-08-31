@@ -1,3 +1,8 @@
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 $(document).ready(function() {
     
     /* Scroll to TOP */

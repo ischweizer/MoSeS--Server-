@@ -1,7 +1,9 @@
 <?php
+
 /**
- * @author Zijad Maksuti
+ * @author: Zijad Maksuti
  */
+ 
 // Cronjob for sending notifications about available apk update to clients
 
 /* ustudy_finished encodings

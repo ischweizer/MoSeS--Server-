@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
+// resume session
 session_start();
 
 include_once("./include/functions/func.php");
@@ -201,7 +207,8 @@ if(isset($_POST["submitted"]) && $_POST["submitted"] == "1" &&
  * 		1 if the email provided by the user is unknown to the server
  * 		2 the server knows the email, but there has been a problem sending the email (i.e. the mail server did not respond)
  */
-if(isset($_POST["submitted_forgot"]) && $_POST["submitted_forgot"] == "1"){
+if(isset($_POST["submitted_forgot"]) && $_POST["submitted_forgot"] == "1" &&
+   isset($_POST["url"])){
 	
     include_once("./include/providers/_reset-password-provider.php");
     exit;

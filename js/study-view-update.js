@@ -1,3 +1,8 @@
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 /* Download handler */
 $('[name="btnDownloadApp"]').click(function(e){
     e.preventDefault(); 

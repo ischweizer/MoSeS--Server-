@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 include_once("./include/functions/func.php");
 include_once("./config.php");
 include_once("./include/functions/dbconnect.php");

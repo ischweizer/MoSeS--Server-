@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ * @author: Sandra Christina Amend
+ */
+
+/**
+* Class that manages APK (I promise!)
+*/
 class ApkManager{
 
 	public function __construct(){

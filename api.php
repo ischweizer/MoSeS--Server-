@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 //Starting session
 session_start();
 

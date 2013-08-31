@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 include_once("/home/dasense/moses/config.php");
 
 $user = $CONFIG['DB']['USER'];    

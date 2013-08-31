@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * @author: Wladimir Schmidt
+ * @author: Zijad Maksuti
+ */
+
 $sessionID = '';
 $logger->logInfo("##################### SETTING HARDWARE PARAMS ARRIVED ######################");
 
@@ -108,6 +113,6 @@ if($data->SESSIONID != null){
 			"STATUS" => "INVALID_SESSION");
 }
 
-print(json_encode($return));
+echo json_encode($return);
 
 ?>

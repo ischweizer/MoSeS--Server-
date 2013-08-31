@@ -1,3 +1,8 @@
+
+/*
+ * @author: Wladimir Schmidt
+ */
+
 // Send request to server to save user's profile
 $('.btnSaveProfile').click(function(e){        
     

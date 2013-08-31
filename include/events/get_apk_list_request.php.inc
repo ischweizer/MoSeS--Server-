@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * @author: Zijad Maksuti
+ * @author: Wladimir Schmidt
+ */
+
 $sessionID = '';
 
 $logger->logInfo("##################### GET_APK_LIST_REQUEST ARRIVED ##########");
