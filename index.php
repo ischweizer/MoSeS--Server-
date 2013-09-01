@@ -29,7 +29,7 @@ include_once("./include/_menu.php");
         </p>
         <p class="playStoreLink">
         <a href="https://play.google.com/store/apps/details?id=de.da_sense.moses.client" target="_blank">
-          <img alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+          <img alt="Android app on Google Play" title="Android app on Google Play" src="./img/google-play-badge.png" />
         </a>
         </p>
         <p>&nbsp;
