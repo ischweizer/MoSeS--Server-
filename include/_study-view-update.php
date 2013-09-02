@@ -419,6 +419,7 @@ include_once("./include/managers/SurveyManager.php");
                 ?>
                     <button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
                 <?php    
+                    include_once("./include/_survey.php");
                 }
                 
                 // check if user study already finished or running
