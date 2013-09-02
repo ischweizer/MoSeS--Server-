@@ -54,8 +54,8 @@ include_once("./include/managers/SurveyManager.php");
                         
             $runningTime = $APK['runningtime'];
             $runningTime = !empty($runningTime) ? 
-                            'The termination after '. $runningTime .' hours from the date of start.' :
-                            'Terminated immediately after creating '. $APK['apktitle'] .'.'; 
+                            'Finish is after '. $runningTime .' hours from the date of start.' :
+                            'Finished immediately after creating '. $APK['apktitle'] .'.'; 
                         
             /*$joinedDevices = 'There '. ($APK['participated_count'] < 2 ? 'is' : 'are') .' '.
                                        ($APK['participated_count'] == 0 ? 'no' : $APK['participated_count']) .' '.
@@ -262,7 +262,7 @@ include_once("./include/managers/SurveyManager.php");
                     </div>
                 </fieldset>
                 <?php
-                
+                         
                     // if user study got survey, show it! 
                     if(!empty($survey)){
                         ?>
@@ -277,12 +277,29 @@ include_once("./include/managers/SurveyManager.php");
                         </ul>
                         <?php
                         ?><hr class="survey_content" style="display: none;">
-                        <div class="survey_content" style="display: none;"><?php
-                        $forms = $survey['forms'];
+                        <div class="survey_content" style="display: none;">
+                        <div class="container-fluid survey_controls" style="display: none;">
+                          <div class="row-fluid">
+                            <div class="span2">
+                            <label>Select forms -></label>
+                            </div>
+                            <div class="span4 offset2"><select class="survey_select"><?php 
+                                
+                             foreach($FORMS as $form){   
+                                ?><option value="<?php echo $form['survey_form_id']; ?>"><?php echo $form['survey_form_name']; ?></option><?php
+                             }
+                             ?>
+                             <option value="9001">Custom form</option>
+                             </select></div>
+                            <div class="span2"><button class="btn btnAddForm">Add form</button></div>
+                          </div>
+                          <div class="content_appears_here">
+                        <?php
                         
+                        $forms = $survey['forms'];
                         foreach($forms as $form){
                             ?>
-                            <div class="row-fluid survey" style="border:2px solid #CCC;">
+                            <div class="row-fluid survey_form" style="border:2px solid #CCC;">
                               <div class="survey_name text-center"><?php echo $form['form_title']; ?></div>
                                   <div class="span10 survey_body">
                                     <!--Body content-->
@@ -292,75 +309,117 @@ include_once("./include/managers/SurveyManager.php");
                                          
                                          $k=1;
                                          foreach($questions as $question){
-                                             echo $k .'. '. $question['question'] .'   '. ($question['question_mandatory'] == 1 ? '<label style="float: right;"><input type="checkbox" class="survey_question_mandatory" checked="checked" disabled="disabled" style="margin-right: 0.5em;">Mandatory question</label>' : '') .'<br>';
+                                             echo '<div>';
+
+                                             echo '<span class="survey_question_number">'. $k .'. </span>'.
+                                                  '<span class="survey_question_text">'. $question['question'] .'</span>'.
+                                                  '<input type="text" class="survey_question" style="display: none;" placeholder="Your question here" value="'. $question['question'] .'">'.
+                                                  '<label class="survey_question_mandatory_text" style="float: right; display: none;"><input type="checkbox" style="margin-right: 0.5em;" class="survey_question_mandatory"'. ($question['question_mandatory'] == 1 ? 'checked="checked"' : '') .'>Mark as mandatory</label>'. 
+                                                  '<button class="btn btn-link btnRemoveQuestion" style="display: none;">Remove question</button>'.
+                                                  '<br>';
+                                                  
                                              $k++;
                                              
-                                             $answers_yes_no =  '<ul style="list-style-type: none;">'.
+                                             $answers_yes_no =  '<ul>'.
                                                                     '<li><input type="radio" disabled="disabled"><span class="survey_answer">Yes</span></li>'.
                                                                     '<li><input type="radio" disabled="disabled"><span class="survey_answer">No</span></li>'.
                                                                     '<li><input type="radio" disabled="disabled"><span class="survey_answer">Not sure</span></li>'.
                                                                 '</ul>';
                                                                       
-                                             $answers_text = '<ul style="list-style-type: none;">'.
+                                             $answers_text = '<ul>'.
                                                                 '<li><textarea cols="20" rows="3" disabled="disabled" placeholder="Answer will be here..."></textarea></li>'.
                                                              '</ul>';
                                                
-                                             $answers_likert_scale = '<ul style="list-style-type: none;">'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Disagree"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Disagree"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Neutral"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Agree"</span></li>'.
-                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">"Strongly Agree"</span></li>'.
+                                             $answers_likert_scale = '<ul>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">Strongly Disagree</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">Disagree</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">Neutral</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">Agree</span></li>'.
+                                                                        '<li><input type="radio" disabled="disabled"><span class="survey_answer">Strongly Agree</span></li>'.
                                                                     '</ul>';
                                                                     
                                              switch(intval($question['question_type'])){
-                                                 case 1: echo $answers_yes_no;
+                                                 case 1: echo $answers_yes_no .
+                                                              '<input type="hidden" value="1" class="survey_question_type">';
                                                          break;
-                                                 case 2: echo $answers_text;
+                                                 case 2: echo $answers_text .
+                                                              '<input type="hidden" value="2" class="survey_question_type">';
                                                          break;
-                                                 case 3: echo $answers_likert_scale;
+                                                 case 3: echo $answers_likert_scale .
+                                                              '<input type="hidden" value="3" class="survey_question_type">';
                                                          break;
                                                  case 4: if(!empty($question['answers'])){
+                                                             echo '<ul>';
                                                              foreach($question['answers'] as $answer){
-                                                                 echo '<ul style="list-style-type: none;">'.
-                                                                        '<li>'.
-                                                                            '<input type="checkbox" disabled="disabled">'.
-                                                                            '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
-                                                                         '</li>'.
-                                                                      '</ul>';
+                                                                 echo '<li>'.
+                                                                          '<input type="checkbox" disabled="disabled">'.
+                                                                          '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                      '</li>';
                                                              }
+                                                             echo '</ul>'.
+                                                                  '<input type="hidden" value="4" class="survey_question_type">';
                                                          }
                                                          break;
                                                  case 5: if(!empty($question['answers'])){
+                                                             echo '<ul>'; 
                                                              foreach($question['answers'] as $answer){
-                                                                 echo '<ul style="list-style-type: none;">'.
-                                                                        '<li>'.
-                                                                            '<input type="radio" disabled="disabled">'.
-                                                                            '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
-                                                                         '</li>'.
-                                                                      '</ul>';
+                                                                 echo '<li>'.
+                                                                          '<input type="radio" disabled="disabled">'.
+                                                                          '<span><input type="text" class="survey_answer" value="'. $answer .'" placeholder="Answer here" disabled="disabled"></span>'.
+                                                                      '</li>';
                                                              }
+                                                             echo '</ul>'.
+                                                                  '<input type="hidden" value="5" class="survey_question_type">'; 
                                                          }
                                                          break;
-                                                 default: echo 'Something went wrong!'; 
+                                                 default: echo ''; // something went wrong, hide it
                                              }
+                                             
+                                             echo '</div>';
                                          }
-                                     ?>
-                                    </div>                              
+                                         
+                                         // insert control panel for additional questions
+                                      ?><div style="display: none;">
+                                            <div class="survey_elements_container">
+                                                <select class="survey_elements">
+                                                    <option value="1">Yes/No question</option>
+                                                    <option value="2">Text question</option>
+                                                    <option value="3">Likert scale question</option>
+                                                    <option value="4">Multiple choice question</option>
+                                                    <option value="5">Single choice question</option>
+                                                </select> <label style="display: none;" class="survey_elements">Number of answers:</label>
+                                                <input type="text" style="width: 1.2em; display: none;" maxlength="2" value="5" title="Number of answers">
+                                                <button class="btn survey_elements btnAddQuestionOK">Add question</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="<?php echo count($questions); ?>" class="survey_form_questions_counter">
+                                    <input type="hidden" value="9001" class="survey_form_id">                              
+                                  </div>
+                                  <div class="span1" style="display: none;">
+                                    <button class="btn btn-danger btnRemoveSurvey">X</button>
                                   </div>
                               </div>
                             <?php                               
                         }
                         ?>
                         </div>
-                        <?php
+                    </div>
+                </div>
+                <?php
                     }
                 ?>
                 <hr>
-                <button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
                 <?php
-                    
-                    include("./include/_survey.php");        
+                if(!empty($survey)){
+                ?>
+                    <button class="btn" name="btnModifySurvey" value="" style="float: right; display: none;"><i class="icon-refresh"></i> Modify survey</button>
+                <?php    
+                }else{
+                ?>
+                    <button class="btn" name="btnAddSurvey" value="" style="float: right; display: none;"><i class="icon-plus-sign"></i> Add survey</button>
+                <?php    
+                }
                 
                 // check if user study already finished or running
                 if($APK['ustudy_finished'] == 0){

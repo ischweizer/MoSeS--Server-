@@ -39,7 +39,17 @@ $('.content_appears_here').on('click','.scrollTo',function(e){
 $('[name="btnAddSurvey"]').click(function(e){
     e.preventDefault();
     
-    // get the parent of selected stuff
+    // get the parent of selected button
+    var p = $(this).parent().parent().parent();
+    
+    p.find('.survey_controls').show();
+    
+});
+
+$('[name="btnAddSurvey"], [name="btnModifySurvey"]').click(function(e){
+    e.preventDefault();
+    
+    // get the parent of selected button
     var p = $(this).parent().parent().parent();
     
     // move button create study to bottom of page
@@ -66,9 +76,6 @@ $('[name="btnAddSurvey"]').click(function(e){
     //$('[name="progress"]').css('margin-left','10em');   // TODO: fix that to proper value
     $(this).find('[name="progress"]').css('margin-top','2.5em');
     $(this).find('[name="progress"]').css('float','right');
-    
-    p.find('.survey_controls').show();
-    //p.find('[name="survey_container"]').hide();
     
     $(this).hide();
     
@@ -274,10 +281,10 @@ $('.content_appears_here').on('click','.survey_remove_question',function(e){
 });
 
 /* SURVEY CONTROLS */
-
+// MAGIC. DO NOT TOUCH!
 $('.content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     e.preventDefault();
-    
+          
     var parentForQCounter = $(this).parent().parent().parent().parent();
     var quantity = parseInt($(this).parent().find(':text').val());
     var p = $(this).parent().parent().parent();
@@ -287,7 +294,7 @@ $('.content_appears_here').on('click', '.btnAddQuestionOK', function(e){
     $(this).parent().find(':text').hide();
     $(this).parent().find('label').hide();
     p.find(':last').html($(this).parent().parent().html());
-    
+          
     // Question field (common content for all questions)
     var content = '<span class="survey_question_number">'+(parseInt(parentForQCounter.find('.survey_form_questions_counter').val())+1)+'. </span> '+
                   '<input type="text" class="survey_question" placeholder="Your question here">'+

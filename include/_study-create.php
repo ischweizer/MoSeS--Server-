@@ -131,7 +131,7 @@ if(!isset($_SESSION['USER_LOGGED_IN']) || !isset($_SESSION['GROUP_ID']) || $_SES
 <hr>
 <button class="btn" name="btnAddSurvey" value="" style="float: right;"><i class="icon-plus-sign"></i> Add survey</button>
    <?php
-   include_once("./include/_survey.php");        
+   include("./include/_survey.php");        
    ?>
 <input name="study_create" type="hidden" value="2975">
 </form>

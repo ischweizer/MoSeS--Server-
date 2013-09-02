@@ -38,6 +38,10 @@ input[name='publishMethodInvite'], input[name='publishMethod'], input[name='stud
     margin-top: -0.02em;
 }
 
+.survey_answer {
+    margin-left: 0.5em;    
+}
+
 /* --------------- */
 
 /* Hero unit tweak */
@@ -70,7 +74,11 @@ div[name*='survey_container_'] {
     margin: 3em 1em 3em 1em;
 }
 
-button[name="btnAddSurvey"] {
+.survey_question_container ul {
+    list-style-type: none;
+}
+
+button[name="btnAddSurvey"], button[name="btnModifySurvey"] {
     margin-bottom: 1em;
 }
 

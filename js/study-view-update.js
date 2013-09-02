@@ -27,6 +27,7 @@ $('.btnUpdateSurveyOnly').click(function(e){
     p.find('.btnUpdateOK').show();
     p.find('.btnUpdateCancel').show();
     p.find('[name="btnAddSurvey"]').show();
+    p.find('[name="btnModifySurvey"]').show();
     
     $(this).attr('disabled',true);
 });
@@ -96,12 +97,34 @@ $('[name="btnUpdateStudy"]').click(function(e){
     p.find('[name="invites_only_install"]').show();
     p.find('[name="private_type"]').show();
     p.find('[name="btnAddSurvey"]').show();
-    //p.find('[name="quests_select"]').show();
+    p.find('[name="btnModifySurvey"]').show();
     p.find('[name="uploadFile"]').show();
     p.find('.btnUpdateOK').show();
     p.find('.btnUpdateCancel').show();
    
     $(this).attr('disabled',true);
+});
+
+// modify the survey
+$('[name="btnModifySurvey"]').click(function(e){
+    e.preventDefault();
+    
+    // get the parent of selected button
+    var p = $(this).parent();
+    
+    p.find('.survey_question_text').hide();
+    
+    p.find('.survey_content').show();
+    p.find('.survey_question').show();
+    p.find('.survey_question_mandatory_text').show();
+    p.find('.btnRemoveQuestion').show();
+    p.find('.survey_elements_container').parent().show();
+    p.find('.btnRemoveSurvey').parent().show();
+    p.find('.survey_controls').show();
+    p.find('.survey_controls > div:first-child').show();
+    
+    p.find('.survey_answer').attr('disabled', false);
+    
 });
 
 /* Handling of button send updated study to server and show changes */
@@ -337,6 +360,7 @@ $('.form-horizontal').on('click','.btnUpdateOK, .btnUpdateCancel',function(e){
    p.find('.btnUpdateCancel').hide();
    p.find('[name="progress"]').hide();
    p.parent().parent().find('[name="btnAddSurvey"]').hide();
+   p.parent().parent().find('[name="btnModifySurvey"]').hide();
    
    // enable update button
    p.parent().parent().find('[name="btnUpdateStudy"]').attr('disabled',false);
@@ -357,8 +381,19 @@ $('.form-horizontal').on('click','.btnUpdateCancel',function(e){
        p = $(this).parent().parent().parent();
    }
      
-    // removing survey controls if it was selected
-    p.parent().find('.survey_controls').remove();
+    // hide survey controls if it was selected
+    p.parent().find('.survey_controls').hide();
+    
+    p.find('.survey_question_text').show();
+    p.find('.survey_question').hide();                         
+    p.find('.survey_answer').attr('disabled',true);    
+    p.find('.survey_question_mandatory').attr('disabled',true);
+    p.find('.btnRemoveQuestion').hide();
+    p.find('.btnUpdateOK').hide();
+    p.find('.survey_elements_container').parent().hide();
+    p.find('.btnRemoveSurvey').parent().hide();
+    
+    location.reload();
 });
 
 $('[name="study_period"]').click(function(){
@@ -393,10 +428,13 @@ $('.surveyShowHide').click(function(e){
     
     if(p.find('.survey_content').is(':visible')){
         p.find('.survey_content').hide();
+        p.find('.survey_controls').hide();
         p.find('.surveyShowHide').find('i').addClass('icon-chevron-right');
         p.find('.surveyShowHide').find('i').removeClass('icon-chevron-down');
     }else{
         p.find('.survey_content').show();
+        p.find('.survey_controls').show();
+        p.find('.survey_controls > div:first-child').hide();
         p.find('.surveyShowHide').find('i').addClass('icon-chevron-down');
         p.find('.surveyShowHide').find('i').removeClass('icon-chevron-right');
     }
