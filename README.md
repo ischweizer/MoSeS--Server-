@@ -1,3 +1,4 @@
+==============
 MoSeS-Server
 ==============
 
@@ -21,7 +22,7 @@ Ibrahim Alyahya,
 Fehmi Belhadj,
 Florian Schnell.
 
-In the summer of 2013 Wladimir Schmidt and Zijad Maksuti started working on improving of MoSeS platform. 
+In the summer of 2013 Wladimir Schmidt and Zijad Maksuti started working on improving of MoSeS platform.
 
 The MoSeS project started and being developed under supervision of Smart Urban Networks's area head Dr. Immanuel Schweizer.
 
