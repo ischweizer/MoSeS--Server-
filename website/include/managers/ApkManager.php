@@ -96,7 +96,7 @@ class ApkManager{
 	 * @return array an array containing all apks that meet the requirements. If no such apks exist, an empty array is returned.
 	 */
 	public static function getAllApkRegardingMinAndroidVersion($logger, $db, $userId,$CONFIG, $deviceID, $minAndroidVersion){
-		
+		$logger->logInfo("getAllApkRegardingMinAndroidVersion() minAndroidVersion=".$minAndroidVersion);
 		$array = ApkManager::getPublicAPKs($logger, $db, $userId, $CONFIG, $deviceID, $minAndroidVersion);
 		 
 		$array=array_merge_recursive($array, ApkManager::getAllGroupAPKs($logger, $db, $userId, $CONFIG, $deviceID, $minAndroidVersion));

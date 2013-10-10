@@ -176,12 +176,15 @@ class HardwareManager{
     * @param mixed $hardwareTable
     * @param mixed $userID
     * @param mixed $deviceID
+    * @param mixed $logger the logger
     */
-    public static function getAndroidVersion($db, $hardwareTable, $userID, $deviceID){
+    public static function getAndroidVersion($db, $hardwareTable, $userID, $deviceID, $logger){
         
         $sql = "SELECT androidversion 
                 FROM ". $hardwareTable ." 
                 WHERE uid = ". $userID ." AND deviceid = '". $deviceID ."'";
+        
+        $logger->logInfo("getAndroidVersion() sql=".$sql);
                     
        $result = $db->query($sql);
        $row = $result->fetch();
